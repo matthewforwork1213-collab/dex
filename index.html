@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEX 프로토타입</title>
+<meta name="description" content="TetherMax DEX 캐시백 연동 — 프로토타입 V2.2 (2026-11-24 확정 문서 기준)">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1c2033;--sub:#5d6378;--line:#e2e5ee;--accent:#2f5bea}
+@media (prefers-color-scheme:dark){:root{--bg:#12141c;--card:#1b1e29;--ink:#eef0f6;--sub:#a3a8ba;--line:#2b2f3d;--accent:#7c9bff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+main{max-width:880px;margin:0 auto;padding:48px 16px 64px}
+h1{font-size:26px;margin:0 0 6px}
+.lead{color:var(--sub);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
+a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card h2{font-size:18px;margin:0 0 6px}
+.card p{margin:0;color:var(--sub);font-size:14px}
+.card .go{display:inline-block;margin-top:14px;color:var(--accent);font-weight:600}
+table{width:100%;border-collapse:collapse;margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+th{color:var(--sub);font-weight:600;width:34%}
+tr:last-child td,tr:last-child th{border-bottom:0}
+.note{color:var(--sub);font-size:13px;margin-top:20px}
+code{font-size:12px}
+</style>
+</head>
+<body>
+<main>
+<h1>TetherMax DEX 캐시백 연동 · 프로토타입 V2.2</h1>
+<p class="lead">2026-11-24 확정 문서(정책 · 요구사항정의서 · 기능명세서 · API스펙) 기준. 기능마다 API 결과 · 오류 · 빈 상태 · 권한 · 지연을 「화면 상태」로 나눴습니다.</p>
+<div class="grid">
+ <a class="card" href="prototype/user.html"><h2>사용자 화면</h2><p>기능 90개 · 화면 78 · 상태 301</p><span class="go">열기 →</span></a>
+ <a class="card" href="prototype/admin.html"><h2>백오피스</h2><p>기능 70개 · 화면 78 · 상태 309</p><span class="go">열기 →</span></a>
+</div>
+<table>
+ <tr><th>보는 법</th><td>상단 메뉴로 화면 묶음 → 둘째 줄에서 화면 → <b>화면 상태</b>에서 경우 선택. <b>변경점 표시</b>를 체크하면 근거(REQ · 미정 G-ID)</td></tr>
+ <tr><th>바로 열기</th><td><code>prototype/admin.html#ac/AC-3</code>처럼 주소 뒤에 <code>#그룹/화면</code></td></tr>
+ <tr><th>미정 표기</th><td><code>[내용 — 미정 G-nnn]</code>은 아직 정하지 않은 값 · 문구</td></tr>
+ <tr><th>기능별 대응표</th><td>저장소 <code>05.리포트/프로토타입_V2.2_기능별_화면상태표.md</code></td></tr>
+</table>
+<p class="note">주소 · 금액 · 회원 번호는 예시 값입니다. 백오피스는 데스크톱 전용 화면입니다.</p>
+</main>
+</body>
+</html>

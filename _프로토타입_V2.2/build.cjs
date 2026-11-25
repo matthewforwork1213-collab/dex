@@ -27,6 +27,8 @@ for(const [mode,input,output] of [['user','사용자화면_DEX영향도.html',`�
  html=html.replace(/\ball\(\);\s*<\/script>/,()=>code.replace(/<\/script/gi,'<\\/script')+'\nall();\n</script>');
  if(!html.includes('V21_READY'))throw Error('Bridge not inserted');
  fs.writeFileSync(path.join(dir,output),html);
+ // 배포(Vercel)용 고정 영문 경로: 저장소 루트 prototype/user.html · admin.html = 항상 최신 빌드
+ const pub=path.join(dir,'..','prototype');fs.mkdirSync(pub,{recursive:true});fs.writeFileSync(path.join(pub,mode+'.html'),html);
  const embedded=Array.from(html.matchAll(/data:[^;"']+;base64,([A-Za-z0-9+/=]+)/g),m=>crypto.createHash('sha256').update(m[1]).digest('hex'));
  manifest.push({mode,input,output,sourceHash,outputHash:crypto.createHash('sha256').update(html).digest('hex'),bytes:Buffer.byteLength(html),embeddedAssets:embedded});
 }
