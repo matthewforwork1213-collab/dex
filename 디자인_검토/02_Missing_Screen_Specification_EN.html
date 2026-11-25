@@ -1,0 +1,1370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEX Missing Screen Specification</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+:root{
+  --darkest:#212529; --dark:#343a40; --middark:#495057; --mid:#6c757d;
+  --border:#ced4da; --lborder:#dee2e6; --lbg:#e9ecef; --bg:#f8f9fa; --white:#fff;
+  --add:#e67700; --del:#c92a2a; --mod:#1971c2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Pretendard,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
+     color:var(--darkest);font-size:13px;line-height:1.55;-webkit-font-smoothing:antialiased}
+code{font-family:Consolas,monospace;font-size:.92em;background:var(--lbg);padding:1px 5px;border-radius:3px}
+s{color:var(--mid)}
+
+header{position:fixed;top:0;left:0;right:0;height:52px;background:var(--dark);z-index:1000;
+       display:flex;align-items:center;padding:0 18px;gap:14px;overflow-x:auto}
+header .brand{color:#fff;font-weight:700;font-size:14px;white-space:nowrap}
+header .tabs{display:flex;gap:3px}
+header button{background:none;border:0;color:#adb5bd;font:inherit;font-size:11.5px;padding:6px 9px;
+              border-radius:5px;cursor:pointer;white-space:nowrap}
+header button:hover{background:var(--middark);color:#fff}
+header button.on{background:#fff;color:var(--darkest);font-weight:600}
+main{padding:52px 0 70px}
+
+.cover{background:#fff;border-bottom:1px solid var(--lborder);padding:48px 40px}
+.cover h1{font-size:29px;letter-spacing:-.5px}
+.cover .sub{color:var(--mid);margin-top:9px;font-size:14px}
+.cover .meta{display:flex;gap:38px;margin-top:26px;flex-wrap:wrap}
+.cover .meta div span{display:block;color:var(--mid);font-size:11px;letter-spacing:.4px}
+.cover .meta div b{font-size:15px;font-weight:600}
+.legend{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;align-items:center;
+        background:var(--bg);border-radius:8px;padding:14px 18px;max-width:900px}
+.legend span{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--middark)}
+.swatch{width:26px;height:17px;border-radius:3px}
+.sw-add{border:2px dashed var(--add);background:rgba(230,119,0,.10)}
+.sw-del{border:2px dashed var(--del);background:rgba(201,42,42,.10)}
+.sw-mod{border:2px dashed var(--mod);background:rgba(25,113,194,.10)}
+.sw-new{border:1px solid var(--border);background:#fff}
+.note{margin-top:22px;background:var(--bg);border-left:3px solid var(--add);padding:14px 16px;
+      max-width:900px;font-size:12.5px;color:var(--middark)}
+.dl{margin-top:24px}
+.dl button{background:var(--dark);color:#fff;border:0;padding:9px 16px;border-radius:6px;
+           font:inherit;font-size:12px;cursor:pointer}
+
+.screen-section{position:relative;z-index:1;padding:32px 40px;border-bottom:1px solid var(--lborder)}
+.grid{display:grid;grid-template-columns:1fr 400px;gap:24px;align-items:start}
+@media(max-width:1150px){.grid{grid-template-columns:1fr}}
+.meta-box{background:#fff;border:1px solid var(--lborder);border-radius:8px;padding:15px 18px;margin-bottom:16px}
+.meta-box .top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.badge{display:inline-block;font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600}
+.b-dark{background:var(--dark);color:#fff}
+.b-out{background:transparent;border:1px solid var(--border);color:var(--mid)}
+.b-new{background:#fff4e6;border:1px solid #ffd8a8;color:var(--add)}
+.b-mod{background:#e7f5ff;border:1px solid #a5d8ff;color:var(--mod)}
+.meta-box h2{font-size:17px;margin-top:8px}
+.meta-box p{color:var(--middark);margin-top:6px;max-width:760px}
+.crumb{color:var(--mid);font-size:11.5px}
+.basis{margin-top:9px;font-size:12px;color:var(--middark);background:var(--bg);
+       border-radius:5px;padding:7px 11px;display:inline-block}
+
+.wire{background:#fff;border:1px solid var(--lborder);border-radius:8px;padding:16px;overflow:visible}
+.shot{position:relative;line-height:0;border:1px solid var(--lborder);border-radius:6px;overflow:hidden}
+.shot.tall{max-width:390px;margin:0 auto}
+.shot img{width:100%;display:block}
+.pair{display:grid;grid-template-columns:1fr;gap:14px}
+.pairlbl{font-size:12px;font-weight:700;padding:7px 11px;border-radius:6px;margin-bottom:7px}
+.pl-no{background:#fff0f0;color:var(--del);border:1px solid #ffc9c9}
+.pl-ok{background:#ebfbee;color:#2b8a3e;border:1px solid #b2f2bb}
+.mark{position:absolute;border-radius:4px;z-index:50}
+.mark.add{border:2px dashed var(--add);background:rgba(230,119,0,.10)}
+.mark.del{border:2px dashed var(--del);background:rgba(201,42,42,.12)}
+.mark.mod{border:2px dashed var(--mod);background:rgba(25,113,194,.10)}
+.mark.no{border:3px solid var(--del);background:rgba(201,42,42,.18)}
+.mark.no > i{background:var(--del);width:26px;height:26px;font-size:15px;top:-13px;left:-13px}
+.mark.no > u{color:var(--del);font-size:12px;font-weight:800;bottom:-11px}
+.mark > i{position:absolute;top:-10px;left:-10px;width:20px;height:20px;border-radius:50%;
+          color:#fff;font-style:normal;font-size:11px;font-weight:700;display:flex;
+          align-items:center;justify-content:center;z-index:60;box-shadow:0 0 0 2px #fff;line-height:1}
+.mark.r > i{left:auto;right:-10px}
+.mark.add > i{background:var(--add)} .mark.del > i{background:var(--del)} .mark.mod > i{background:var(--mod)}
+.mark > u{position:absolute;bottom:-9px;right:-2px;font-size:10px;font-weight:700;
+          text-decoration:none;background:#fff;padding:1px 6px;border-radius:9px;line-height:1.5;
+          white-space:nowrap;box-shadow:0 0 0 1px currentColor}
+.mark.add > u{color:var(--add)} .mark.del > u{color:var(--del)} .mark.mod > u{color:var(--mod)}
+
+.ind{position:relative}
+.ind > i{position:absolute;top:-9px;left:-9px;width:19px;height:19px;border-radius:50%;background:var(--add);color:#fff;font-style:normal;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:50;box-shadow:0 0 0 2px #fff;line-height:1}
+.addon{margin-top:16px;border:1px dashed var(--add);border-radius:7px;padding:14px;background:#fffaf4}
+.addon .cap{font-size:11px;font-weight:700;color:var(--add);letter-spacing:.3px;margin-bottom:10px}
+.frame{border:1px solid var(--border);border-radius:6px;background:#fff}
+.frame .bar{background:var(--lbg);border-bottom:1px solid var(--border);padding:7px 11px;
+            font-size:11px;color:var(--middark);display:flex;justify-content:space-between}
+.frame .body{padding:14px}
+.col{display:flex;flex-direction:column;gap:9px}
+.row{display:flex;gap:9px;align-items:center}
+.lbl{font-size:10.5px;color:var(--mid);letter-spacing:.3px}
+.fld{border:1px solid var(--border);border-radius:5px;padding:8px 11px;color:var(--mid);font-size:12px;background:#fff}
+.btn{background:var(--dark);color:#fff;border-radius:5px;padding:8px 14px;text-align:center;font-size:12px}
+.btn.ghost{background:#fff;color:var(--middark);border:1px solid var(--border)}
+.card{border:1px solid var(--lborder);border-radius:6px;padding:11px;background:#fff}
+.kv{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--lborder)}
+.kv:last-child{border-bottom:0}
+.big{font-size:20px;font-weight:700}
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.tbl th{background:var(--lbg);text-align:left;padding:6px 9px;border:1px solid var(--lborder);font-weight:600;color:var(--middark)}
+.tbl td{padding:6px 9px;border:1px solid var(--lborder);color:var(--middark)}
+.tbl tr:nth-child(even) td{background:var(--bg)}
+.stat{flex:1;border:1px solid var(--lborder);border-radius:6px;padding:10px}
+.stat span{display:block;font-size:10.5px;color:var(--mid)} .stat b{font-size:16px}
+.chip{border:1px solid var(--border);border-radius:14px;padding:3px 10px;font-size:11px;color:var(--mid)}
+.chip.on{background:var(--dark);color:#fff;border-color:var(--dark)}
+.ghostbox{border:1px dashed var(--border);border-radius:6px;padding:16px;text-align:center;color:var(--mid);font-size:12px}
+.hr{height:1px;background:var(--lborder);margin:10px 0}
+
+.desc{position:sticky;top:64px;max-height:calc(100vh - 84px);overflow-y:auto;background:#fff;
+      border:1px solid var(--lborder);border-radius:8px}
+.desc h3{font-size:12px;padding:11px 15px;border-bottom:1px solid var(--lborder);color:var(--middark)}
+.desc table{width:100%;border-collapse:collapse}
+.desc td{padding:9px 12px;border-bottom:1px solid var(--lborder);vertical-align:top;font-size:12px;color:var(--middark)}
+.desc td.n{width:28px;font-weight:700;text-align:center}
+.desc td.w{width:128px;color:var(--darkest);font-weight:600}
+.desc tr:last-child td{border-bottom:0}
+.flag{color:var(--del);font-weight:600}
+.n-add{color:var(--add)} .n-del{color:var(--del)} .n-mod{color:var(--mod)}
+
+@page{size:landscape}
+@media print{
+  header,.dl{display:none} body{background:#fff} main{padding:0}
+  .screen-section{page-break-before:always;border:0}
+  .desc{position:static;max-height:none}
+}
+</style>
+</head>
+<body>
+<header><div class="brand">DEX Missing Screen Specification</div><div class="tabs" id="tabs"></div></header>
+<main>
+<section class="cover">
+  <h1>DEX Missing Screen Specification</h1>
+  <div class="sub">Covers <b>screens missing from Figma</b>. Changes to existing screens are in the comment guide.</div>
+  <div class="meta">
+    <div><span>Date</span><b>2026-10-23</b></div>
+    <div><span>Basis</span><b>Confirmed DEX policies + existing status dictionary</b></div>
+    <div><span>Source</span><b>UI UX Design · actual DEX page screens</b></div>
+    <div><span>Length</span><b>7 boards</b></div>
+  </div>
+  <div class="legend">
+    <span><i class="swatch sw-add"></i> <b>Add</b> — missing from existing screens</span>
+    <span><i class="swatch sw-del"></i> <b>Remove</b> — excluded by confirmed policy</span>
+    <span><i class="swatch sw-mod"></i> <b>Change</b> — values or copy to update</span>
+    <span><i class="swatch" style="border:3px solid var(--del);background:rgba(201,42,42,.18)"></i> <b>Not applicable</b> — the route itself does not apply</span>
+  </div>
+  <div class="note">
+    <b>How to read</b> — Images show <b>actual screens currently in Figma</b>. Dashed boxes identify areas to change.
+    Numbers match the description table on the right. An orange box below an image shows <b>only the block to insert at that position</b>.<br><br>
+    <b>Terminology</b> — Use <b>cashback</b> in English. The Korean originals distinguish the legacy Korean term from the approved Korean term; both are translated as <b>cashback</b> here. References to Korean wording changes are explained explicitly. Prototype reference images are English renders of <code>사용자화면_DEX_V2.1.html</code>, including English translations for Korean text remaining in EN mode. Original Figma screenshots are retained for comparison.<br><br><b>Contents</b> — Seven items where <b>the screen itself is missing from Figma or the route differs</b>.
+    Copy, state, and value changes to existing screens are <b>all in <code>01_Figma_Comment_Guide_EN.html</code></b>,
+    <b>with no overlap with this document.</b>
+  </div>
+  <div class="dl"><button onclick="window.print()">Save as PDF (landscape)</button></div>
+</section>
+<div id="screens"></div>
+</main>
+
+<script>
+const S = [
+  {
+    "id": "N-1",
+    "tab": "N-1 Guest Withdrawal",
+    "group": "Missing Screens",
+    "kind": "new",
+    "name": "Guest DEX withdrawal — a completely different flow",
+    "crumb": "My Cashback (dedicated guest page) › Withdraw › CAPTCHA › Done",
+    "basis": "Base — <b>the existing My Cashback guest page</b>. <span class=\"flag\">This is not the Cashback Hub.</span>",
+    "why": "<b>First, correct the entry route.</b> Guests do not enter the Cashback Hub, so <b>the hub’s withdrawal popup, Confirm modal, and completion modal do not apply.</b><br><br>Guests use the <b>dedicated My Cashback page</b>: <b>Withdraw → CAPTCHA → Done</b>. There are no modals.",
+    "pair": [
+      {
+        "img": "base/DW1.png",
+        "lbl": "no",
+        "cap": "❌ This route does not exist for guests — Cashback Hub withdrawal popup",
+        "marks": [
+          {
+            "n": "✕",
+            "k": "no",
+            "l": 29,
+            "t": 4.5,
+            "w": 42,
+            "h": 73,
+            "cap": "Not applicable to guests"
+          }
+        ]
+      },
+      {
+        "img": "base/v21_en/E4.png",
+        "lbl": "ok",
+        "cap": "✅ Lookup — V2.1 Cashback Lookup by Wallet Address. Select an exchange and enter a wallet address",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Wallet address is the sole identifier",
+            "l": 10,
+            "t": 55.5,
+            "w": 79.5,
+            "h": 8.5
+          }
+        ]
+      },
+      {
+        "img": "base/v21_en/NM.png",
+        "lbl": "ok",
+        "cap": "✅ Withdrawal — V2.1 Wallet Cashback Withdrawal. One wallet, full amount only",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Account identifier",
+            "l": 15,
+            "t": 46.5,
+            "w": 36,
+            "h": 9
+          },
+          {
+            "k": "mod",
+            "n": 2,
+            "cap": "Amount breakdown",
+            "l": 15,
+            "t": 51,
+            "w": 70,
+            "h": 25
+          },
+          {
+            "k": "add",
+            "n": 3,
+            "cap": "Withdraw",
+            "l": 11,
+            "t": 76,
+            "w": 78,
+            "h": 7.5
+          }
+        ]
+      },
+      {
+        "img": "base/NONMEMBER.png",
+        "lbl": "ok",
+        "cap": "✅ Withdrawal — existing My Cashback guest page. Withdraw directly here",
+        "marks": [
+          {
+            "n": 1,
+            "k": "mod",
+            "l": 4,
+            "t": 11.5,
+            "w": 26,
+            "h": 5.5,
+            "cap": "UID → wallet address"
+          },
+          {
+            "n": 2,
+            "k": "mod",
+            "l": 4,
+            "t": 33,
+            "w": 26,
+            "h": 9,
+            "cap": "DEX amount breakdown"
+          },
+          {
+            "n": 3,
+            "k": "add",
+            "l": 4,
+            "t": 51.5,
+            "w": 26,
+            "h": 5.5,
+            "cap": "Withdraw → CAPTCHA"
+          },
+          {
+            "n": 4,
+            "k": "mod",
+            "l": 4,
+            "t": 60.5,
+            "w": 26,
+            "h": 20,
+            "cap": "Settlement schedule"
+          }
+        ]
+      }
+    ],
+    "addon": "<div class=\"cap\">Guest withdrawal — all steps</div>\n <div class=\"frame\"><div class=\"bar\"><span>Comparison with members</span><span></span></div>\n <div class=\"body\"><table class=\"tbl\">\n <tr><th>Step</th><th>Member (Cashback Hub)</th><th>Guest (My Cashback)</th></tr>\n <tr><td>Entry</td><td>Hub DEX panel · My Cashback · Home</td><td><b>My Cashback page only</b></td></tr>\n <tr><td>Withdrawal popup</td><td>Yes <code>DW1</code></td><td><b>No</b></td></tr>\n <tr><td>Confirm modal</td><td>Yes <code>DW2</code></td><td><b>No</b></td></tr>\n <tr><td>CAPTCHA</td><td>Yes <code>DW3</code></td><td><b>Yes — the only step</b></td></tr>\n <tr><td>Verified</td><td>Yes <code>DW4</code></td><td><b>No</b></td></tr>\n <tr><td>Email code</td><td>Yes <code>DW5</code></td><td><b>No</b></td></tr>\n <tr><td>Google OTP</td><td>Yes <code>PE3</code></td><td><b>No</b></td></tr>\n <tr><td>Completion modal</td><td>Yes <code>DW6</code></td><td><b>No — request submitted directly</b></td></tr>\n </table><div class=\"ghostbox\" style=\"margin-top:10px;font-size:11.5px\"><b>Withdraw → CAPTCHA → Done.</b> No other screens in between.</div></div></div>",
+    "rows": [
+      [
+        "✕",
+        "del",
+        "This route does not apply",
+        "<span class=\"flag\">The withdrawal popup shown above cannot appear for guests.</span> Guests do not enter the Cashback Hub. There is no need to design a guest withdrawal popup, Confirm modal, or completion modal."
+      ],
+      [
+        1,
+        "mod",
+        "Account identifier",
+        "Guest CEX uses <code>UID 99969145</code>, while <b>DEX uses a wallet address</b>. The exchange logo and name also change to the DEX."
+      ],
+      [
+        2,
+        "mod",
+        "Amount breakdown",
+        "<b>Reuse the existing rows</b>: requestable cashback · cumulative cashback · exchange cashback · event rewards · available to withdraw · minimum withdrawal 10 USDT. <b>All rows needed for DEX already exist.</b>"
+      ],
+      [
+        3,
+        "add",
+        "Withdraw",
+        "<b>Withdraw → CAPTCHA → Done.</b> No intermediate modals. <b>Only withdrawal of the full maximum amount</b> is allowed; do not add an amount input.<br><br>Note: full-amount withdrawal is an abuse prevention measure. Wallet addresses are public on-chain information, so a third party can initiate a withdrawal, but the destination is that same wallet and repeated withdrawals cannot be used to burn gas."
+      ],
+      [
+        4,
+        "mod",
+        "Cashback timeline",
+        "The times for <code>Trading starts → Cutoff → Update</code> <b>differ by DEX</b>: Lighter weekly (Monday) · ApeX hourly · EdgeX daily · Aster daily. Rewrite <i>\"Updates may vary by up to one hour\"</i> to reflect DEX schedules."
+      ]
+    ]
+  },
+  {
+    "id": "N-2",
+    "tab": "N-2 Calculator",
+    "group": "Missing Screens",
+    "kind": "new",
+    "name": "Cashback Calculator — combine CEX and DEX exchange selection",
+    "crumb": "Cashback Calculator › Exchange selection",
+    "basis": "Base — <b>the exchange selection step</b> in the existing calculator. The Summary results page <b>needs no changes.</b>",
+    "why": "<b>The funnel already exists.</b> This task <b>adds DEX to the exchange selection step</b>.<br><br>Currently, one grid contains 11 CEXs. <b>Show CEX and DEX together by default</b>, with <b><code>CEX</code> / <code>DEX</code> chips matching the exchange selector in the linking modal</b>.",
+    "pair": [
+      {
+        "img": "base/CALC_PICK.png",
+        "lbl": "no",
+        "cap": "The calculator’s exchange selection step today &mdash; one grid of 11 CEXs",
+        "marks": [
+          {"n": 1, "k": "add", "l": 11.9, "t": 8, "w": 66.5, "h": 5.8, "cap": "Add CEX / DEX chips"},
+          {"n": 2, "k": "mod", "l": 11.4, "t": 12.8, "w": 67.6, "h": 35.2, "cap": "Include all four DEXs"}
+        ]
+      },
+      {
+        "img": "base/CMP_CHIPS.png",
+        "lbl": "ok",
+        "cap": "✅ Nothing new to draw &mdash; <b>the compare table just below on the same page</b> already uses these chips (new in Figma 2.0, <code>DEXs · Table · Empty</code>)",
+        "marks": [
+          {"n": 2, "k": "add", "l": 1, "t": 22.5, "w": 46, "h": 7.5, "cap": "\"from the calculator above\" &mdash; it sits directly below"},
+          {"n": 1, "k": "add", "l": 1, "t": 46.5, "w": 34.5, "h": 8.5, "cap": "Lift these chips up to position ①"}
+        ]
+      }
+    ],
+    "addon": "<div class=\"cap\">Chips for position ① · Combined grid for position ②</div>\n <div class=\"frame\"><div class=\"bar\"><span>Exchange selection (extend existing step)</span><span>Add</span></div>\n <div class=\"body col\"><div style=\"font-size:14px;font-weight:600;text-align:center\">First, which exchange do you use most often?</div>\n <div class=\"row\" style=\"justify-content:center\"><span class=\"chip on\">All</span><span class=\"chip\">CEX</span><span class=\"chip\" style=\"color:var(--add);border-color:var(--add)\">DEX</span></div>\n <div class=\"ghostbox\" style=\"font-size:11.5px\">Default: <b>All</b> — CEX and DEX appear together in one grid</div>\n <div class=\"hr\"></div><div class=\"lbl\">Combined grid (default state)</div>\n <div class=\"row\" style=\"flex-wrap:wrap\"><span class=\"chip\">Bitget 77%</span><span class=\"chip\">Bybit 64%</span><span class=\"chip\">Toobit 60%</span><span class=\"chip\">OKX 55%</span><span class=\"chip\">WOO X Pro 93%</span><span class=\"chip\">Gate 75%</span><span class=\"chip\" style=\"color:var(--add);border-color:var(--add)\">Lighter</span><span class=\"chip\" style=\"color:var(--add);border-color:var(--add)\">ApeX</span><span class=\"chip\" style=\"color:var(--add);border-color:var(--add)\">EdgeX</span><span class=\"chip\" style=\"color:var(--add);border-color:var(--add)\">Aster</span></div></div></div>",
+    "rows": [
+      [
+        1,
+        "add",
+        "CEX / DEX chips",
+        "<span class=\"flag\">Currently missing.</span> <b>The same pattern already exists in two places.</b><br>① <b>DEX Landing</b> — this Figma file already contains a <code>filter (All / Exchanges / DEXs)</code> frame. <b>Use that filter.</b><br>② The linking modal’s exchange selector (<code>L1 Select a DEX</code>, <code>LW-2</code>) is described as <i>\"search, Popular partners, <b>All / CEX / DEX chips</b>, DEX filter on\"</i>. <b>Reuse those chips.</b><br><br>The default is <b>All</b>."
+      ],
+      [
+        2,
+        "mod",
+        "Tile grid",
+        "<b>Show CEX and DEX together by default</b>. Include DEXs <b>in the same grid</b>: Lighter · ApeX · EdgeX · Aster. <b>Display order follows the back office</b>. Exclude DEX tiles when the <code>Visibility</code> or <code>Linking enabled</code> flag is off."
+      ]
+    ]
+  },
+  {
+    "id": "N-4",
+    "tab": "N-4 None Withdrawable",
+    "group": "Missing Screens",
+    "kind": "new",
+    "name": "Withdrawal — when no account is eligible",
+    "crumb": "Withdrawal › No eligible accounts",
+    "basis": "Base — <b>the current live withdrawal screen</b>. Per-account unavailability guidance <b>already exists</b>. Only the <b>all-unavailable state</b> is missing.",
+    "why": "The live screen already <b>separates Available / Unavailable per account and states how much more cashback each unavailable account needs</b>. This does not need a new design.<br><br><span class=\"flag\">Only one state is missing: <b>every account in the list is Unavailable.</b></span> Current designs always have <b>at least one eligible account</b>.<br><br>With the matching formula, <b>little cashback and many event rewards can leave no withdrawable amount</b>. Users will ask, <b>\"The total exceeds 10 USDT, so why can’t I withdraw?\"</b>",
+    "pair": [
+      {
+        "img": "base/WD_LIST.png",
+        "lbl": "no",
+        "cap": "Current live screen — per-account guidance already exists; only the all-unavailable state is missing",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Identifier",
+            "l": 14.5,
+            "t": 18,
+            "w": 26,
+            "h": 4.2
+          },
+          {
+            "k": "add",
+            "n": 2,
+            "cap": "Existing guidance",
+            "l": 4.5,
+            "t": 42,
+            "w": 85,
+            "h": 5.2
+          },
+          {
+            "k": "add",
+            "n": 3,
+            "cap": "Disable when all unavailable",
+            "l": 4.5,
+            "t": 90.8,
+            "w": 85,
+            "h": 4.8
+          }
+        ]
+      },
+      {
+        "img": "base/v21_en/DW0.png",
+        "lbl": "ok",
+        "cap": "✅ Reference for ③④ — V2.1 Withdraw, all unavailable. Event rewards are 20 USDT, but cashback is 0",
+        "marks": [
+          {
+            "k": "add",
+            "n": 3,
+            "cap": "0 accounts · 0.00",
+            "l": 10,
+            "t": 16.5,
+            "w": 80,
+            "h": 25
+          },
+          {
+            "k": "add",
+            "n": 4,
+            "cap": "Matching guidance",
+            "l": 11,
+            "t": 83,
+            "w": 78,
+            "h": 9
+          },
+          {
+            "k": "del",
+            "n": 1,
+            "cap": "Show full address",
+            "l": 14,
+            "t": 40,
+            "w": 50,
+            "h": 5
+          }
+        ]
+      }
+    ],
+    "rows": [
+      [
+        1,
+        "mod",
+        "① Identifier — wallet address for DEX",
+        "The account card currently shows <code>Bitget</code> / <code>UID 1432873105</code>. A DEX card must show <b>the full wallet address</b> in the same position: <code>Lighter</code> / <code>0x52908400098527886E0F7030069857D2E4169EE7</code>.<br><br><span class=\"flag\">Full, unmasked addresses are confirmed policy.</span> The 42 characters <b>will not fit on one line at the current card width</b>. Define wrapping behavior.<br><br>Keep CEX cards <b>as they are</b>."
+      ],
+      [
+        2,
+        "add",
+        "② Existing guidance — change the assessment unit only",
+        "<b>No new design is needed.</b> The screen already says:<br><code>You can withdraw if you receive an additional 5.00 USDT in exchange Cashback.</code><br><br>Each card also separates <code>Exchange Cashback</code> / <code>Event Reward</code>, <b>which directly explains the matching formula</b>.<br><br>Only the assessment unit changes: <span class=\"flag\">DEX eligibility is assessed <b>per wallet address, rather than per UID</b>.</span> Two wallets on the same exchange mean <b>two cards, assessed independently</b>."
+      ],
+      [
+        3,
+        "add",
+        "③ All unavailable — missing state",
+        "There is no state where <b>every card is Unavailable</b>. Three elements are needed:<br>· Top total: <code>Total Available Cashback 0.00 USDT</code><br>· Bottom <code>Confirm Withdraw</code> button <b>disabled</b><br>· <span class=\"flag\">Disabling the button alone will still generate support requests.</span> Include <b>one line explaining why</b><br><br>Suggested copy (English translation of Korean proposal): <code>No accounts are eligible for withdrawal. You can withdraw once you earn another 5.00 USDT in cashback.</code>"
+      ],
+      [
+        4,
+        "add",
+        "④ Matching guidance",
+        "Include: <b>\"Event rewards are matched 1:1 with cashback in the same account. The minimum withdrawal is 10 USDT per account.\"</b><br><br>Support-confirmed baseline examples (cashback / event rewards): <code>10/0</code> eligible · <b><code>0/10</code> ineligible</b> · <code>5/5</code> eligible · <b><code>1/9</code> ineligible</b>.<br><br>The current screen actually has <span class=\"flag\">a card with 2261 USDT in event rewards that cannot be withdrawn</span>. This needs an explanation to prevent support requests."
+      ]
+    ]
+  },
+  {
+    "id": "N-5",
+    "tab": "N-5 Unclaimed Balance",
+    "group": "Missing Screens",
+    "kind": "new",
+    "name": "Linking — reuse the existing block for unclaimed cashback",
+    "crumb": "Linking › Failure / On hold",
+    "basis": "Base — <b>the existing CEX <code>Unable to Link UID Yet</code> screen</b>. Keep the layout and <b>change the copy only</b>.",
+    "why": "Confirmed (<code>B-5</code> / <code>H-4</code>): <b>unclaimed cashback of 10 USDT or more blocks linking itself</b> (<code>FAILED_NEED_RECEIVE</code>). This applies <b>across all exchanges</b>.<br><br>This state is <b>missing</b> from the six DEX failure / on-hold states in Figma: <code>L8</code> no referral · <code>L9</code> already in use · <code>L12</code> verification limit · <code>L13</code> support · <code>L14</code> already added · <code>L15</code> wallet limit.<br><br><b>This screen is still required.</b> <code>FAILED_NEED_RECEIVE</code> checks <b>cashback accrued on TetherMax and not yet withdrawn</b>, not money the exchange pays the trader &mdash; which is why the modal's CTA is <code>Withdraw</code>. Under V2 all cashback accrues on TetherMax and is paid by TetherMax, so <b>the condition still fires even with the trader rate set to 0%</b>.<br><br><span class='flag'>The &quot;ApeX breaks on day one&quot; rationale is now weaker.</span> That rationale rested on <b>legacy unclaimed balances in the ApeX Rewards Center</b>, and <b>setting the trader rate to 0% stops any further accrual</b> &mdash; the new-policy document states that <i>&quot;the claim dependency disappears under the new structure&quot;</i>.<br><br>Existing balances remain, but <b>how to handle them is still undecided</b> (tracked separately), and linking those balances to this error code was <b>a proposal, not a confirmed decision</b>. <b>No change to the design work &mdash; only the priority drops.</b>",
+    "pair": [
+      {
+        "img": "base/LINKBLOCK.png",
+        "tall": 1,
+        "lbl": "ok",
+        "cap": "✅ Existing CEX screen — connect this same screen to the DEX linking route",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 2,
+            "cap": "UID appears twice",
+            "l": 13,
+            "t": 48,
+            "w": 74,
+            "h": 11
+          }
+        ]
+      }
+    ],
+    "rows": [
+      [
+        1,
+        "add",
+        "Reuse the existing screen",
+        "<b>No new layout is needed.</b> Connect the existing <code>Unable to Link UID Yet</code> screen to <b>the DEX wallet linking failure route too</b>.<br><br>Keep the components (warning icon · title · guidance · <code>Withdraw</code> · <code>Need help? Contact Support</code>) and placement. <b>Change only the copy</b>, as in item 2."
+      ],
+      [
+        2,
+        "mod",
+        "Copy — both title and body",
+        "<span class=\"flag\">DEX uses wallets, but both the title and body say <code>UID</code>.</span><br><br>· Title: <code>Unable to Link <b>UID</b> Yet</code><br>· Body: <code>… before linking your <b>UID</b>.</code><br><br><b>Recommendation: one shared set of copy.</b> This block applies <b>across all exchanges</b> (confirmed <code>H-4</code>), and linking limits use <b>trading accounts across CEX and DEX</b>, so use the same term here.<br><br>English: <code>Unable to Link Account Yet</code> / <code>Please withdraw your accumulated cashback before linking your account.</code><br>Korean proposal (English translation): <code>You cannot link yet</code> / <code>Please claim your accumulated cashback first.</code> Use <b>conversational Korean sentence endings</b> from the existing status dictionary.<br><br>Note: if CEX and DEX copy are separated, use <b>wallet</b> for DEX."
+      ],
+      [
+        3,
+        "add",
+        "Add to DEX failure states",
+        "Add <b>one state</b> to <code>GROUP-LABEL · C · FAILURES</code>, where <code>L8</code>–<code>L15</code> are collected. This is the missing item in that list."
+      ]
+    ]
+  },
+  {
+    "id": "N-6",
+    "tab": "N-6 Duplicate Pending",
+    "group": "Missing Screens",
+    "kind": "new",
+    "name": "Linking — pending state after a duplicate wallet is submitted",
+    "crumb": "Linking › Being checked",
+    "basis": "Base — <b>our V2.1 prototype, Link &gt; Checking Link</b>.",
+    "why": "Figma has <code>L9 Wallet already in use</code> (used by another person) and <code>L14 Wallet already added</code> (already added by this member), but <b>no state for a duplicate submitted and awaiting handling</b>.<br><br>Ownership claims are out of scope, so <b>duplicates go through support</b>.<br><br><b>Confirmed 2026-10-27 &mdash; a wallet whose linking has not completed is treated as if it does not exist.</b> It enters neither the balance nor the withdrawal. Item 4 below sets the scope.",
+    "pair": [
+      {
+        "img": "base/v21_en/PENDING.png",
+        "lbl": "ok",
+        "cap": "✅ Our V2.1 prototype, Link > Checking Link — no elapsed time is shown",
+        "marks": [
+          {
+            "k": "add",
+            "n": 1,
+            "cap": "Title",
+            "l": 10,
+            "t": 8.5,
+            "w": 78,
+            "h": 6
+          },
+          {
+            "k": "add",
+            "n": 2,
+            "cap": "This line only; no elapsed time",
+            "l": 10,
+            "t": 17,
+            "w": 80,
+            "h": 11.5
+          }
+        ]
+      }
+    ],
+    "rows": [
+      [
+        1,
+        "add",
+        "Pending guidance",
+        "V2.1 copy (English translation): <b>\"We’re checking your wallet link / We’ll let you know the result after confirming the exchange’s referral attribution records.\"</b>"
+      ],
+      [
+        2,
+        "add",
+        "Do not show elapsed time",
+        "<b>Do not display a duration.</b><br><br>Confirmed <code>A-07</code>: the settlement file Lighter provides has <b>masked wallet addresses</b>. When <b>two or more masked addresses collide</b>, the owner cannot be determined, so the wallet is held and resolved by <b>the weekly CSV (Monday)</b> &mdash; hence <b>up to 7 days</b>.<br><br><span class=\"flag\">Saying \"up to 7 days\" makes users think every case takes 7 days.</span> Without a collision it finishes immediately, which is why V2.1 omits the duration too."
+      ],
+      [
+        3,
+        "add",
+        "Row on Home",
+        "Also provide <b>the row that remains in Home’s Linked Accounts list</b> after the modal closes. Reuse <code>manual_link_pending</code> (<b>\"We’re trying to link your account\"</b>, Home priority 2, counts toward the limit). Show <code>-</code> for the amount."
+      ],
+      [
+        4,
+        "add",
+        "Excluded from withdrawal and balance",
+        "<b>Confirmed &mdash; a wallet that has not finished linking is treated as non-existent.</b> It therefore appears in none of the following.<br>&middot; The account list on the withdrawal screen (it cannot be selected)<br>&middot; The total cashback balance<br>&middot; The <code>N accounts</code> count<br>&middot; Aggregate screens such as Cashback Summary and Ranking<br><br><b>One exception &mdash; it does consume a wallet slot.</b> The existing <code>manual_link_pending</code> state counts toward the limit (item 3). If the limit fills while a wallet is pending, <code>L15 Wallet limit reached</code> appears.<br><br><span class=\"flag\">Do not hide the row itself.</span> If it disappears from Home the member will try to link the same wallet again and hit <code>L14 Wallet already added</code>, which is more confusing. <b>Show it, but do not count it.</b>"
+      ]
+    ]
+  },
+  {
+    "id": "N-7",
+    "tab": "N-7 Four Other Screens",
+    "group": "Missing Screens",
+    "kind": "new",
+    "name": "Four existing screen types missing DEX support",
+    "crumb": "Global League · Events · Maxboard · Withdrawal Feed",
+    "basis": "Base — <b>existing Figma screens</b> (Global League / Events). DEX Maxboard and Withdrawal Feed screens are missing from both Figma and our side.",
+    "why": "These findings come from <b>a page-by-page review of existing screens outside the DEX page</b>. The following four types <b>require DEX support under confirmed policy but have not been updated</b>.<br><br>Global League and Events <b>already have screens but omit DEX</b>; Maxboard and Withdrawal Feed <b>lack a DEX definition</b>.<br><br><span class=\"flag\">Benefits Details and Coupons have many changes, so they are covered separately in <b>N-8 / N-9</b>.</span>",
+    "pair": [
+      {
+        "img": "base/LEAGUE.png",
+        "lbl": "no",
+        "cap": "① Global League — current Figma. Team creation uses \"linked UIDs\", excluding DEX wallets",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Copy",
+            "l": 36.5,
+            "t": 66.5,
+            "w": 19.5,
+            "h": 11.5
+          }
+        ]
+      },
+      {
+        "img": "base/v21_en/FEED.png",
+        "lbl": "ok",
+        "cap": "✅ ④ Withdrawal Feed — V2.1 Guest Home. CEX and DEX share one table (except address masking)",
+        "marks": [
+          {
+            "k": "add",
+            "n": 4,
+            "cap": "Reuse this table",
+            "l": 5,
+            "t": 33,
+            "w": 90,
+            "h": 55
+          },
+          {
+            "k": "del",
+            "n": 4,
+            "cap": "Show full address",
+            "r": 1,
+            "l": 8,
+            "t": 56,
+            "w": 14,
+            "h": 4.5
+          }
+        ]
+      },
+      {
+        "img": "base/EVENTS.png",
+        "lbl": "no",
+        "cap": "② Events — current Figma. The exchange filter has only CEX and omits all four DEXs",
+        "marks": [
+          {
+            "k": "add",
+            "n": 2,
+            "cap": "Add all four DEXs",
+            "r": 1,
+            "l": 1.5,
+            "t": 21.5,
+            "w": 24,
+            "h": 27
+          },
+          {
+            "k": "mod",
+            "n": 2,
+            "cap": "Tab",
+            "l": 19,
+            "t": 7,
+            "w": 14,
+            "h": 7.5
+          }
+        ]
+      }
+    ],
+    "rows": [
+      [
+        1,
+        "mod",
+        "① Global League — copy",
+        "<b>The screen already exists, but its copy assumes CEX only.</b><br><br>Team creation unavailable dialog: <i>\"… the cumulative cashback total of <b>linked UIDs</b> … the recent cashback total of <b>linked UIDs</b> …\"</i><br><br>Confirmed (<code>B-3</code>): <b>DEX cashback counts toward team creation eligibility</b>. Replace <code>\"linked UIDs\"</code> with <b>wording covering both CEX UIDs and DEX wallets</b>. Use <b>trading accounts</b>, consistently with <code>N-5</code>.<br><br>Also review <code>When user does not have any linked UID</code>. <span class=\"flag\">Members with only DEX wallets currently fall into this state.</span><br><br>Receiving account selection must <b>also include DEX wallets</b> (currently only CEX UIDs, such as <code>Bitget · ****6789</code>).<br><br>Note: league scoring is <b>1 USDT commission cashback = 1 point</b>; event and invitation rewards are excluded."
+      ],
+      [
+        2,
+        "add",
+        "② Events — exchange filter",
+        "<span class=\"flag\">The exchange filter contains only CEX</span> (<code>All Exchanges / OKX / HTX …</code>). <b>Add all four DEXs.</b><br><br>Apply the confirmed <b>grouped dropdown rule</b>: scope options <b><code>All</code> / <code>All CEX</code> / <code>All DEX</code></b> at the top, followed by <b><code>CEX</code> / <code>DEX</code> group headers</b>. <b>A selector limited to one exchange provides no way to select All DEX.</b><br><br>Badge rule: <b>omit badges when an identifier or group header is visible</b>. This filter has group headers, so <b>use headers without badges</b>.<br><br>The <code>Exchange Events</code> tab must also <b>show DEX events</b>; DEX receives event rewards under confirmed policy."
+      ],
+      [
+        3,
+        "add",
+        "③ Maxboard",
+        "Maxboard displays <b>bingo boards registered by an admin for a single exchange</b>. <b>Users do not select the exchange</b>, and exchanges without registered boards never appear.<br><br>Confirmed (<code>O-2</code>): <b>initial targets are ApeX / EdgeX / Aster</b>. Lighter is excluded this time because it settles weekly.<br><br>Design <b>the display when a DEX board is registered</b>: participant accounts use a CEX UID or <b>a DEX wallet address</b>, and progress is based on <b>DEX cashback</b>. The remaining template matches CEX.<br><br><span class=\"flag\">Note: our V2.1 Maxboard incorrectly lets the user choose an exchange. Do not use it as a reference.</span>"
+      ],
+      [
+        4,
+        "add",
+        "④ Live withdrawal feed",
+        "Confirmed: the withdrawal feed appears on <b>both Guest Home and Service Introduction</b>. <b>DEX support is missing in Figma.</b><br><br><b>The reference image below shows the required design.</b> Columns: <code>Trading Account · Exchange · Cashback · Withdrawal Time · Status</code>, with <code>DEX</code> / <code>CEX</code> badges beside exchange names. CEX and DEX appear <b>together in one chronological table</b>.<br><br><span class=\"flag\">Do not copy the image’s <code>****9EE7</code> masking.</span> Confirmed policy requires <b>full wallet addresses</b>. Keep existing CEX identifier masking.<br><br>Note: the <b>Trading Account</b> column already matches the terminology defined in <code>N-11</code>."
+      ],
+      [
+        5,
+        "mod",
+        "Reviewed; no changes needed",
+        "Also reviewed, but <b>no changes are required</b>:<br>· <b>Points</b> (<code>[MAX-659]</code>) — confirmed (<code>R-2</code>): points apply to DEX, but <b>nothing on this screen branches by exchange</b>. Only the admin side changes, so <b>no screen changes</b><br>· <b>Exchange List</b> (<code>[MAX-22]</code>) — the DEX list already exists as <code>OC Guest, partner list view</code> on the DEX page and <code>filter (All / Exchanges / DEXs)</code> on Landing"
+      ]
+    ]
+  },
+  {
+    "id": "N-8",
+    "tab": "N-8 Benefits Details",
+    "group": "Existing Screen Changes",
+    "kind": "mod",
+    "name": "Benefits Details — DEX eligibility is unclear for three rewards",
+    "crumb": "Benefits › Reward details (3 USDT for linking a UID · 10 USDT for first withdrawal · Cashback Challenge)",
+    "basis": "Base — <b>six actual Benefits Details screens in Figma</b> (three each in Korean and English). Dashed boxes identify changes.",
+    "why": "<b>DEX eligibility differs by reward, but the screens do not explain it.</b><br>· <b>3 USDT for linking a UID</b> — <b>CEX only</b> (issued for the first CEX link)<br>· <b>10 USDT for first withdrawal</b> — <b>CEX and DEX</b><br>· <b>Cashback Challenge</b> — <b>CEX only</b><br><br>All three currently look alike, so <b>members with only DEX wallets may expect to qualify</b>. The Korean screens also use <b>the legacy Korean term for cashback</b> rather than <b>the approved Korean term</b>: <b>eight occurrences</b> across these screens (① two · ② one · ③ five). Both terms are translated as <b>cashback</b> in this English document.",
+    "pair": [
+      {
+        "img": "base/BEN_UID_KO.png",
+        "lbl": "no",
+        "cap": "① 3 USDT for linking a UID (Korean) — CEX only, but not labeled",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Copy",
+            "l": 33,
+            "t": 18,
+            "w": 34,
+            "h": 9
+          },
+          {
+            "k": "add",
+            "n": 2,
+            "cap": "Add row",
+            "l": 14.7,
+            "t": 80.7,
+            "w": 69,
+            "h": 12.8
+          },
+          {
+            "k": "add",
+            "n": 3,
+            "cap": "Add notice",
+            "l": 14.7,
+            "t": 96,
+            "w": 69,
+            "h": 3.4
+          }
+        ]
+      },
+      {
+        "img": "base/BEN_UID_EN.png",
+        "lbl": "no",
+        "cap": "① 3 USDT for linking a UID (English) — matching areas use matching numbers",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Copy",
+            "l": 33.7,
+            "t": 19.6,
+            "w": 33,
+            "h": 8.3
+          },
+          {
+            "k": "add",
+            "n": 2,
+            "cap": "Add row",
+            "l": 15.9,
+            "t": 80.5,
+            "w": 65.5,
+            "h": 11.9
+          },
+          {
+            "k": "add",
+            "n": 3,
+            "cap": "Add notice",
+            "l": 15.9,
+            "t": 95,
+            "w": 65.5,
+            "h": 3
+          }
+        ]
+      },
+      {
+        "img": "base/BEN_FW_KO.png",
+        "lbl": "no",
+        "cap": "② 10 USDT for first withdrawal (Korean) — DEX is eligible, but this is unstated",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 4,
+            "cap": "Copy",
+            "l": 31.9,
+            "t": 31.3,
+            "w": 36.3,
+            "h": 10.6
+          },
+          {
+            "k": "add",
+            "n": 5,
+            "cap": "Add row",
+            "l": 21.1,
+            "t": 52.6,
+            "w": 57.7,
+            "h": 17.2
+          }
+        ]
+      },
+      {
+        "img": "base/BEN_FW_EN.png",
+        "lbl": "no",
+        "cap": "② 10 USDT for first withdrawal (English)",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 4,
+            "cap": "Copy",
+            "l": 30.5,
+            "t": 32,
+            "w": 39.2,
+            "h": 12
+          },
+          {
+            "k": "add",
+            "n": 5,
+            "cap": "Add row",
+            "l": 13.6,
+            "t": 55.4,
+            "w": 68,
+            "h": 18.1
+          }
+        ]
+      },
+      {
+        "img": "base/BEN_CH_KO.png",
+        "lbl": "no",
+        "cap": "③ Cashback Challenge (Korean) — CEX only, unlabeled, with five legacy Korean cashback terms",
+        "marks": [
+          {
+            "k": "add",
+            "n": 6,
+            "cap": "Badge position",
+            "r": 1,
+            "l": 18,
+            "t": 7.9,
+            "w": 15.8,
+            "h": 11.8
+          },
+          {
+            "k": "mod",
+            "n": 7,
+            "cap": "Copy",
+            "l": 33.8,
+            "t": 11.2,
+            "w": 33.8,
+            "h": 6.6
+          },
+          {
+            "k": "mod",
+            "n": 8,
+            "cap": "Terms",
+            "l": 17.6,
+            "t": 75.5,
+            "w": 65,
+            "h": 18.4
+          }
+        ]
+      },
+      {
+        "img": "base/BEN_CH_EN.png",
+        "lbl": "no",
+        "cap": "③ Cashback Challenge (English) — already uses Cashback; only badge and guidance are needed",
+        "marks": [
+          {
+            "k": "add",
+            "n": 6,
+            "cap": "Badge position",
+            "r": 1,
+            "l": 18,
+            "t": 7.7,
+            "w": 15.8,
+            "h": 11.5
+          },
+          {
+            "k": "mod",
+            "n": 7,
+            "cap": "Copy",
+            "l": 33.8,
+            "t": 10.9,
+            "w": 33.8,
+            "h": 6.4
+          },
+          {
+            "k": "mod",
+            "n": 8,
+            "cap": "Terms",
+            "l": 17.6,
+            "t": 74.4,
+            "w": 65,
+            "h": 19.2
+          }
+        ]
+      }
+    ],
+    "rows": [
+      [
+        1,
+        "mod",
+        "① Title / subtitle — specify CEX UID and update Korean terminology",
+        "This reward is <b>issued only for the first CEX link</b>. Current wording <b>suggests any exchange qualifies</b>.<br><br><b>Korean UI (English translations)</b><br>Current: <code>Link a UID to get cashback</code> / <code>Link your UID to earn cashback and receive 3 USDT.</code><br>Proposed: <code>Link a <b>CEX UID</b> to get <b>cashback</b></code> / <code>Link a <b>CEX exchange UID</b> to earn <b>cashback</b> and receive 3 USDT.</code><br>Also replace the two legacy Korean cashback terms with the approved term.<br><br><b>English UI</b><br>Current: <code>Link UID to Get Cashback</code> / <code>Link your UID to start earning cashback and receive 3 USDT.</code><br>Proposed: <code>Link a <b>CEX</b> UID to Get Cashback</code> / <code>Link a <b>CEX exchange</b> UID to start earning cashback and receive 3 USDT.</code>"
+      ],
+      [
+        2,
+        "add",
+        "② Reward details — add Eligible Exchanges",
+        "Add <b>one row</b> to the table. The current rows (reward amount · payment type · eligible recipients) <b>do not identify eligible exchanges</b>.<br><br>Korean proposal (English translation): <code>Eligible exchanges</code> / <code>CEX only</code><br>English: <code>Eligible Exchanges</code> / <code>CEX only</code><br><br>Note: add this row to <b>all three rewards</b>; only the value changes."
+      ],
+      [
+        3,
+        "add",
+        "③ Bottom notice — exclude DEX wallet links",
+        "The only current notice says <code>This reward can be claimed only once per account.</code> Add <b>one line in the same area</b>.<br><br>Korean proposal (English translation): <code>Linking a DEX wallet does not qualify for this reward.</code><br>English: <code>Linking a DEX wallet does not qualify for this reward.</code><br><br><span class=\"flag\">Without this line, members linking a DEX wallet will expect 3 USDT and contact support.</span>"
+      ],
+      [
+        4,
+        "mod",
+        "④ First withdrawal — update Korean cashback terminology only",
+        "This reward <b>also supports DEX</b>. Do not add wording that narrows the eligible exchange type.<br><br><b>Korean UI</b><br>Replace the legacy cashback term with the approved term in <code>Withdraw your first cashback to receive a 10 USDT coupon.</code> The English meaning is unchanged.<br><br><b>English UI</b>: <code>Withdraw your first cashback to receive a 10 USDT coupon.</code> <b>Keep as is.</b>"
+      ],
+      [
+        5,
+        "add",
+        "⑤ First withdrawal — Eligible Exchanges = CEX and DEX",
+        "Add a row in the same position as ②, with a different value.<br>Korean proposal (English translation): <code>Eligible exchanges</code> / <code>CEX and DEX</code><br>English: <code>Eligible Exchanges</code> / <code>CEX and DEX</code><br><br><b>The existing notice already defines eligibility</b>: <code>This reward can be claimed only once per account.</code> Thus, it is <b>once per member account even with multiple linked DEX wallets</b>. No additional rule is needed. Keep this sentence to <b>avoid implying once per wallet</b>."
+      ],
+      [
+        6,
+        "add",
+        "⑥ Challenge — CEX only badge",
+        "Add a <b>CEX only badge</b> in the empty space to the left of the blue box, following the placement rule used for ① and ②.<br>Korean proposal (English translation): <code>CEX only</code> · English: <code>CEX only</code><br><br>Add <b>one line at the top of the terms</b>.<br>Korean proposal (English translation): <code>Only CEX exchange UIDs can join this challenge. Cashback from DEX wallets is not counted.</code><br>English: <code>Only CEX exchange UIDs can join this challenge. Cashback from DEX wallets is not counted.</code>"
+      ],
+      [
+        7,
+        "mod",
+        "⑦ Challenge title / subtitle — update Korean cashback terminology",
+        "<b>Korean UI</b><br>Replace the legacy Korean cashback term with the approved term in both:<br><code>Reach your cashback goal!</code> / <code>Cashback history is updated daily at 13:00.</code><br>The English translations are the same before and after the terminology update.<br><br><b>English UI</b>: <code>Unlock Your Cashback Goal!</code> <b>Keep as is.</b>"
+      ],
+      [
+        8,
+        "mod",
+        "⑧ Challenge terms — three Korean terminology changes",
+        "<b>Keep UID unchanged.</b> This challenge is CEX only, so <b>UID is correct</b>. Only the Korean cashback terminology changes.<br><br>Replace the legacy Korean cashback term with the approved term in <b>three places</b> in the terms (<b>five total</b> including the title and subtitle):<br>· <code>… even if linked to another TetherMax account, it may not count toward the <b>cashback</b> challenge.</code><br>· <code>From 19:30 to 21:30, due to <b>cashback</b> challenge amount updates …</code><br>· <code>When the UID has an issue, even if <b>cashback</b> activity occurs …</code><br><b>The English Terms need no changes.</b>"
+      ]
+    ]
+  },
+  {
+    "id": "N-9",
+    "tab": "N-9 Coupons",
+    "group": "Existing Screen Changes",
+    "kind": "mod",
+    "name": "Coupons — account selection and completion assume UIDs only",
+    "crumb": "Coupons › Use Coupon › Select Account › Complete",
+    "basis": "Base — <b>the actual coupon use flow in Figma</b> (account selection → selected → complete). Dashed boxes identify changes.",
+    "why": "Confirmed (<code>P-2</code>): <b>coupons can be used on DEX too</b>. However, account selection shows <b>only CEX UIDs</b>, and both the title and completion screen <b>assume a UID</b>.<br><br><span class=\"flag\">There is one exception: only the <code>LINK UID</code> coupon (3 USDT for the first link) excludes DEX wallets.</span> This is because <b>linking a DEX wallet does not issue that coupon</b>. The <b>account list therefore depends on coupon type</b>.",
+    "pair": [
+      {
+        "img": "base/CP_UID.png",
+        "lbl": "no",
+        "cap": "Coupon use flow — current Figma. The left two screens are account selection; the right screen is completion",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Title",
+            "r": 1,
+            "l": 5.5,
+            "t": 25.1,
+            "w": 25.7,
+            "h": 7.9
+          },
+          {
+            "k": "add",
+            "n": 2,
+            "cap": "Add DEX wallet rows",
+            "r": 1,
+            "l": 5.5,
+            "t": 38.9,
+            "w": 25.7,
+            "h": 24.2
+          },
+          {
+            "k": "mod",
+            "n": 4,
+            "cap": "Copy",
+            "l": 70,
+            "t": 37.3,
+            "w": 26.7,
+            "h": 5.1
+          },
+          {
+            "k": "mod",
+            "n": 3,
+            "cap": "UID label",
+            "l": 76,
+            "t": 44.2,
+            "w": 20.5,
+            "h": 11.5
+          }
+        ]
+      }
+    ],
+    "rows": [
+      [
+        1,
+        "mod",
+        "① Title — do not use UID",
+        "DEX wallets are also in this list, so <b>UID is not a suitable term</b>.<br><br>English<br>Current: <code>Select a UID to apply this coupon</code><br>Proposed: <code>Select an account to apply this coupon</code><br><br>Korean proposal (English translation): <code>Select an account to apply this coupon.</code><br><br>Keep the subtitle <code>Once applied, it cannot be changed.</code> <b>in both languages</b>."
+      ],
+      [
+        2,
+        "add",
+        "② Account list — add DEX wallet rows",
+        "Currently there are only <b>three CEX UID rows</b>, such as <code>Bybit UID 123456789</code>. Add <b>DEX wallet rows to the same list</b>.<br><br>· Left logo: <b>DEX logo</b> (Lighter · ApeX · EdgeX · Aster)<br>· Right text: <b>full wallet address</b>. <span class=\"flag\">Confirmed: <b>do not mask it</b>.</span> Keep CEX UID rows as they are<br>· If an address cannot fit on one line, define <b>wrapping or truncation behavior</b>; the current row height is insufficient<br><br>Use the confirmed <b>grouping rule</b>: UIDs under a <code>CEX</code> group header; wallets under a <code>DEX</code> group header. <b>Group headers remove the need for row badges.</b><br><br><b>Exception — <code>LINK UID</code> coupon</b><br>Only this coupon <b>excludes DEX wallets</b>. <b>All other coupons</b> in the background list, including <code>FIRST CASHBACK</code> and <code>INVITATION REWARD</code>, <b>show DEX wallets</b>."
+      ],
+      [
+        3,
+        "mod",
+        "③ Completion — UID row label does not fit DEX",
+        "The completion table currently uses <code>Exchange / UID / Amount</code>. <b>A DEX selection has no UID.</b><br><br>· DEX label: English <code>Wallet</code> / Korean label meaning <code>Wallet address</code><br>· Value: <b>full wallet address</b><br>· CEX: keep <code>UID</code> / <code>474634459</code><br><br>The <b>row label changes by exchange type</b>. Text length varies greatly, so <b>review wrapping as well</b>."
+      ],
+      [
+        4,
+        "mod",
+        "④ Completion copy — withdrawal condition missing",
+        "Current: <code>Event rewards can be withdrawn together with your cashback.</code><br><br><span class=\"flag\">This sounds as if event rewards can always be withdrawn together. In fact, only the portion matched by earned cashback can be withdrawn.</span><br><br>Confirmed formula: <b>withdrawable amount = cashback + MIN(event rewards, cashback)</b>. With <b>0 cashback, event rewards alone cannot be withdrawn</b>.<br><br>Proposed<br>English: <code>Event rewards can be withdrawn only up to the amount of cashback you have earned.</code><br>Korean proposal (English translation): <code>You can withdraw event rewards together with cashback only up to the amount of cashback you have earned.</code><br><br>Note: for DEX, assess this <b>per wallet address</b>, equivalent to per-UID assessment for CEX."
+      ]
+    ]
+  },
+  {
+    "id": "N-10",
+    "tab": "N-10 Cashback Summary",
+    "group": "Existing Screen Changes",
+    "kind": "mod",
+    "name": "Cashback Summary (Calendar) — selection assumes CEX UIDs throughout",
+    "crumb": "Cashback Summary › Exchange / Account / Type filters › Calendar › Daily history",
+    "basis": "Base — <b>three current live Cashback Summary screens</b>. Dashed boxes identify changes.",
+    "why": "The screen has <b>three related filter controls</b> (exchange · account · type), but <b>all assume CEX UIDs</b>.<br><br>· The exchange list <b>omits all four DEXs</b><br>· Counts use <code>(14 UIDs)</code>, although <b>DEX has no UID</b><br>· Daily history <b>prints a UID</b>, e.g. <code>OKX 617755618866586639</code><br>· The Korean screen uses <b>the legacy cashback term</b> rather than <b>the approved Korean term</b>",
+    "pair": [
+      {
+        "img": "base/CAL_MAIN.png",
+        "lbl": "no",
+        "cap": "Cashback Summary — all three left filters and daily history assume CEX",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Three filters",
+            "l": 3,
+            "t": 5,
+            "w": 29.9,
+            "h": 21.3
+          },
+          {
+            "k": "mod",
+            "n": 4,
+            "cap": "Wallet address display",
+            "l": 39,
+            "t": 83.6,
+            "w": 54.1,
+            "h": 8.2
+          }
+        ]
+      },
+      {
+        "img": "base/CAL_DROP.png",
+        "tall": 1,
+        "lbl": "no",
+        "cap": "Exchange dropdown — only four CEXs; counts use UIDs",
+        "marks": [
+          {
+            "k": "add",
+            "n": 1,
+            "cap": "Four DEXs + group headers",
+            "l": 2.4,
+            "t": 21.9,
+            "w": 95.5,
+            "h": 76.3
+          }
+        ]
+      },
+      {
+        "img": "base/CAL_TYPE.png",
+        "tall": 1,
+        "lbl": "no",
+        "cap": "Account selection and type filter — Select 1 selects a UID; the type uses legacy Korean cashback wording",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 2,
+            "cap": "Wallet selection",
+            "l": 2.9,
+            "t": 23.7,
+            "w": 94.3,
+            "h": 10.2
+          },
+          {
+            "k": "mod",
+            "n": 3,
+            "cap": "Terminology",
+            "l": 2.9,
+            "t": 39.5,
+            "w": 94.3,
+            "h": 56.9
+          }
+        ]
+      }
+    ],
+    "rows": [
+      [
+        1,
+        "mod",
+        "① Exchange dropdown — four DEXs and group headers",
+        "The current list is <code>All Exchanges / Bitget (14 UIDs) / HTX (4 UIDs) / Toobit (1 UID) / WOO X Pro (1 UID)</code>. <b>CEX only.</b><br><br>Apply the confirmed <b>grouped dropdown rule</b>: scope options <b><code>All</code> / <code>All CEX</code> / <code>All DEX</code></b> at the top, followed by <b><code>CEX</code> / <code>DEX</code> group headers</b>. <b>No row badges are needed because headers are present.</b><br><br><span class=\"flag\">The count unit does not fit DEX.</span> <code>(14 UIDs)</code> counts UIDs, but <b>DEX has no UIDs</b>.<br>Proposal: use the Korean equivalent of <code>Lighter (2 wallets)</code> for DEX; English <code>Lighter (2 wallets)</code>. Keep CEX rows <b>as they are</b>."
+      ],
+      [
+        2,
+        "mod",
+        "② Account selection — the selected item changes",
+        "The second dropdown <b>selects accounts within an exchange</b>. CEX should show <b>a UID list</b>; DEX should show <b>a wallet list</b>.<br><br>· DEX wallet rows show <b>the full address</b>; <span class=\"flag\">no masking, as confirmed</span><br>· A 42-character address <b>will not fit on one line at the current width</b>. Define wrapping or truncation behavior<br>· Empty-state copy such as <code>Select 1</code> must <b>work for both UIDs and wallets</b>"
+      ],
+      [
+        3,
+        "mod",
+        "③ Type filter — update Korean cashback terminology",
+        "The legacy Korean cashback term appears <b>twice</b>, in the dropdown and an item:<br>· <code>All cashback types</code> — replace the legacy Korean term with the approved term<br>· <code>Cashback</code> item — make the same Korean terminology update<br><br>Keep <code>Event Rewards</code> and <code>Withdrawal Amount</code> <b>unchanged</b>.<br><br><b>All three types also occur for DEX.</b> The type list itself does not change."
+      ],
+      [
+        4,
+        "mod",
+        "④ Daily history — exchange plus identifier",
+        "A current entry shows <code>Futures trading cashback</code> / <code>OKX 617755618866586639</code>.<br><br>· Update the Korean term for cashback in <code>Futures trading cashback</code><br>· The second line uses <b>exchange name + identifier</b>. For DEX, replace the UID with <b>the full wallet address</b>: all <b>42 characters</b>, rather than <code>Lighter 0x7a3F9c2B…</code><br>· <span class=\"flag\">It will not fit at the current line length.</span> Define wrapping using the same rule as ②"
+      ],
+      [
+        5,
+        "mod",
+        "Related work — avoid duplication",
+        "· <b>DEX data delay</b> is covered separately in Figma comment <code>S-7</code>. <b>Implement once if shared</b><br>· The DEX page separately contains English <b>DEX Cashback Summary</b> screens <code>CS1–CS6</code>. <span class=\"flag\">Confirm whether they replace this screen or both remain.</span> If they replace it, merge this board’s requirements there"
+      ]
+    ]
+  },
+  {
+    "id": "N-11",
+    "tab": "N-11 UID Wording",
+    "group": "Existing Screen Changes",
+    "kind": "mod",
+    "name": "Uses of UID — full inventory and replacement copy",
+    "crumb": "Invitation Rewards · Partner Hub · Withdrawal Confirmation · Other",
+    "basis": "Base — <b>three actual Figma screens</b>. Dashed boxes identify changes.",
+    "why": "DEX uses <b>wallet addresses and has no UID</b>. Screens still use <code>UID</code> in many places, producing <b>copy that makes no sense for members with only linked DEX wallets</b>.<br><br><span class=\"flag\">One rule applies: <b>keep <code>UID</code> on CEX-only screens; replace it where DEX is also supported.</b></span><br><br>Standardize on <b>English <code>Account</code> and the Korean term meaning Trading Account</b>. This covers <b>both CEX UIDs and DEX wallet addresses</b>.",
+    "pair": [
+      {
+        "img": "base/INV_WD.png",
+        "lbl": "no",
+        "cap": "Invitation reward withdrawal — modal title, list, and left registration table all assume UIDs",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 1,
+            "cap": "Title",
+            "l": 39.5,
+            "t": 29.5,
+            "w": 21,
+            "h": 8.5
+          },
+          {
+            "k": "add",
+            "n": 2,
+            "cap": "Add DEX wallets",
+            "l": 39.5,
+            "t": 40,
+            "w": 21,
+            "h": 25
+          },
+          {
+            "k": "mod",
+            "n": 3,
+            "cap": "Registration status",
+            "r": 1,
+            "l": 0.8,
+            "t": 46.5,
+            "w": 24.5,
+            "h": 9.5
+          }
+        ]
+      },
+      {
+        "img": "base/v21_en/IF8.png",
+        "lbl": "ok",
+        "cap": "✅ Reference for ①② — V2.1 Select Account to Receive Invitation Rewards. Title and group headers are correct (except address masking)",
+        "marks": [
+          {
+            "k": "add",
+            "n": 1,
+            "cap": "Select account",
+            "l": 13,
+            "t": 8,
+            "w": 75,
+            "h": 10
+          },
+          {
+            "k": "add",
+            "n": 2,
+            "cap": "Group headers + DEX rows",
+            "l": 17.5,
+            "t": 57,
+            "w": 72,
+            "h": 18
+          },
+          {
+            "k": "del",
+            "n": 2,
+            "cap": "Show full address",
+            "l": 26,
+            "t": 69,
+            "w": 42,
+            "h": 4.5
+          }
+        ]
+      },
+      {
+        "img": "base/PH_UIDS.png",
+        "lbl": "no",
+        "cap": "Partner Hub — referred member’s linked accounts modal. Change wording without separate CEX / DEX counts",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 4,
+            "cap": "Title and count",
+            "l": 34.5,
+            "t": 58.5,
+            "w": 38,
+            "h": 8
+          },
+          {
+            "k": "mod",
+            "n": 5,
+            "cap": "List rows",
+            "l": 34.5,
+            "t": 66,
+            "w": 38,
+            "h": 24.5
+          }
+        ]
+      },
+      {
+        "img": "base/WD_CONF.png",
+        "tall": 1,
+        "lbl": "no",
+        "cap": "Withdrawal confirmation dialog — bottom guidance includes UID",
+        "marks": [
+          {
+            "k": "mod",
+            "n": 6,
+            "cap": "Guidance",
+            "l": 8.5,
+            "t": 76.5,
+            "w": 83.5,
+            "h": 10.5
+          }
+        ]
+      }
+    ],
+    "rows": [
+      [
+        1,
+        "mod",
+        "① Invitation reward withdrawal modal",
+        "Current: <code>Select a <b>UID</b> to withdraw referral rewards</code><br>Proposed: <code>Select an <b>account</b> to withdraw referral rewards</code><br>Korean proposal (English translation): <code>Select an account to receive invitation rewards.</code><br><br>Confirmed: <b>DEX referrals also generate invitation rewards</b>. This modal supports DEX, so the wording must change.<br><br><b>Our V2.1 prototype already uses this wording</b>: title <code>Select an account to receive invitation rewards</code>. Follow the ✅ image above."
+      ],
+      [
+        2,
+        "add",
+        "② Receiving accounts — add DEX wallets",
+        "Currently, there are only <b>three CEX UID rows</b>, such as <code>Bybit UID 123456789</code>.<br><br>· Add DEX wallet rows to <b>the same list</b> (logo + <b>full wallet address</b>)<br>· Use the confirmed grouping rule: <code>CEX</code> / <code>DEX</code> <b>group headers</b>. With headers, <b>omit row badges</b><br>· The current row height cannot fit 42 address characters. Define wrapping behavior"
+      ],
+      [
+        3,
+        "mod",
+        "③ Exchange registration status table",
+        "This is the table on the left of the same screen.<br>Current: <code>Exchange <b>UID</b> Registration Status</code> / column <code>No. of Registered <b>UIDs</b></code><br>Proposed: <code>Exchange <b>Account</b> Registration Status</code> / <code>No. of Registered <b>Accounts</b></code><br>Korean proposals (English translations): <code>Exchange account registration status</code> / <code>Number of registered accounts</code><br><br>The table must also <b>include rows for all four DEXs</b>. Currently it lists only CEXs: Bitget, BingX, Binance, Bybit, etc."
+      ],
+      [
+        4,
+        "mod",
+        "④ Partner Hub — linked accounts modal",
+        "<span class=\"flag\">Do not change this into a table counting CEX and DEX separately. Change the wording only.</span><br><br>Current: title <code>Linked <b>UIDs</b></code> / count <code>5 <b>UIDs</b></code><br>Proposed: <code>Linked <b>Accounts</b></code> / <code>5 <b>accounts</b></code><br>Korean proposals (English translations): <code>Linked accounts</code> / <code>5</code><br><br>A referred member with only DEX wallets appears <b>in the same list in the same way</b>.<br><br><b>The same modal in our V2.1 prototype already does this</b>: title <code>Linked Accounts</code>, subtitle <code>TUID 9900690902 · 3 accounts</code>, then a <code>CEX</code> group header. <b>It counts accounts.</b>"
+      ],
+      [
+        5,
+        "mod",
+        "⑤ Modal list rows",
+        "The current row shows <code>Binance</code> / <code>*******7C92</code>, with <b>masking</b>.<br><br>· Keep <b>CEX UID rows as they are</b><br>· Show <b>the full address for DEX wallet rows only</b>, as confirmed<br>· Keep amount formatting (<code>+61.89 USDT</code>) <b>unchanged</b>"
+      ],
+      [
+        6,
+        "mod",
+        "⑥ Withdrawal confirmation guidance",
+        "Current: <code>To change the withdrawal exchange or <b>UID</b> for invitation rewards, please contact support.</code><br>Proposed: <code>To change the withdrawal exchange or <b>account</b> for invitation rewards, please contact support.</code><br>Korean proposal (English translation): <code>To change the exchange or account receiving invitation rewards, please contact support.</code>"
+      ],
+      [
+        7,
+        "mod",
+        "Already covered elsewhere — avoid duplication",
+        "The same rule applies, but <b>these are already covered in their respective boards or comments</b>. Do not duplicate work here.<br>· <b>Linking block</b>: <code>Unable to Link UID Yet</code> → board <code>N-5</code><br>· <b>Coupons</b>: <code>Select a UID to apply this coupon</code> → board <code>N-9</code><br>· <b>Global League</b>: <code>the cumulative cashback total of linked UIDs</code> → board <code>N-7</code> ①<br>· <b>Cashback Summary</b>: account selection <code>Select 1</code> → board <code>N-10</code> ②<br>· <b>Linking limit copy</b> → Figma comment <code>S-2</code>"
+      ],
+      [
+        8,
+        "mod",
+        "Keep unchanged",
+        "<b>UID is correct on CEX-only screens. Keep it unchanged.</b><br>· <b>Cashback Challenge</b> — CEX only. Keep all three uses of <code>UID</code> in the terms (board <code>N-8</code> ⑧)<br>· <b>3 USDT for linking a UID</b> — issued only for the first CEX link, so keep <code>UID</code> (board <code>N-8</code> ①)<br>· <b><code>LINK UID</code> coupon in Coupons</b> — keep the name"
+      ]
+    ]
+  }
+];
+
+const KIND={mod:["b-mod","Existing screen changes"],new:["b-new","New, based on an existing screen"],wire:["b-out","New, without a base screen"]};
+const tabs=document.getElementById("tabs"), wrap=document.getElementById("screens");
+S.forEach(s=>{
+  const b=document.createElement("button");
+  b.textContent=s.tab; b.dataset.id=s.id;
+  b.onclick=()=>document.getElementById("sec-"+s.id).scrollIntoView({behavior:"smooth",block:"start"});
+  tabs.appendChild(b);
+
+  const shot = (img, marks, id, narrow) =>
+    `<div class="shot${narrow?" tall":""}"><img src="${img}" alt="${id}">`
+    + (marks||[]).map(m=>`<div class="mark ${m.k}${m.r?" r":""}" style="left:${m.l}%;top:${m.t}%;width:${m.w}%;height:${m.h}%"><i>${m.n}</i><u>${m.cap}</u></div>`).join("")
+    + `</div>`;
+  const visual = s.pair
+    ? `<div class="pair">` + s.pair.map(p =>
+        `<div><div class="pairlbl pl-${p.lbl}">${p.cap}</div>${shot(p.img,p.marks,s.id,p.tall)}</div>`).join("")
+      + `</div>` + (s.addon?`<div class="addon">${s.addon}</div>`:"")
+    : s.img
+    ? shot(s.img, s.marks, s.id) + (s.addon?`<div class="addon">${s.addon}</div>`:"")
+    : s.wire;
+
+  const sec=document.createElement("section");
+  sec.className="screen-section"; sec.id="sec-"+s.id;
+  sec.innerHTML=`
+    <div class="meta-box">
+      <div class="top">
+        <span class="badge b-dark">${s.id}</span>
+        <span class="badge ${KIND[s.kind][0]}">${KIND[s.kind][1]}</span>
+        <span class="badge b-out">${s.group}</span>
+        <span class="crumb">${s.crumb}</span>
+      </div>
+      <h2>${s.name}</h2>
+      <p>${s.why}</p>
+      <div class="basis">${s.basis}</div>
+    </div>
+    <div class="grid">
+      <div class="wire">${visual}</div>
+      <div class="desc">
+        <h3>DESCRIPTION — ${s.id}</h3>
+        <table>${s.rows.map(r=>`<tr><td class="n n-${r[1]==='wire'?'add':r[1]}">${r[0]}</td><td class="w">${r[2]}</td><td>${r[3]}</td></tr>`).join("")}</table>
+      </div>
+    </div>`;
+  wrap.appendChild(sec);
+});
+
+const secs=[...document.querySelectorAll(".screen-section")], btns=[...tabs.querySelectorAll("button")];
+function spy(){let cur=secs[0];for(const el of secs){if(el.getBoundingClientRect().top<=140)cur=el;}
+  btns.forEach(b=>b.classList.toggle("on","sec-"+b.dataset.id===cur.id));}
+window.addEventListener("scroll",spy,{passive:true}); spy();
+</script>
+</body>
+</html>

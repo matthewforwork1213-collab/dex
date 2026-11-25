@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>테더맥스 DEX 연동 · 슬라이드 기획안 및 목업</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f5f7fb; --surface:#ffffff; --surface2:#eef2fa; --ink:#0e1a2f; --muted:#5b6780; --line:#d5dcea;
+  --blue:#0a31c9; --blue-soft:#e3e9ff; --dex:#0f7a55; --dex-soft:#dcf5ea; --warn:#a85d00; --warn-soft:#fff0d6;
+  --bad:#b3261e; --bad-soft:#fde4e1;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1220; --surface:#141c2f; --surface2:#1b2540; --ink:#e8edf8; --muted:#9aa7c2; --line:#2a3656;
+    --blue:#7d95ff; --blue-soft:#1c2a63; --dex:#4fd4a0; --dex-soft:#0f3a2c; --warn:#ffb85c; --warn-soft:#3b2a0c;
+    --bad:#ff8a80; --bad-soft:#41191a; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1220; --surface:#141c2f; --surface2:#1b2540; --ink:#e8edf8; --muted:#9aa7c2; --line:#2a3656;
+  --blue:#7d95ff; --blue-soft:#1c2a63; --dex:#4fd4a0; --dex-soft:#0f3a2c; --warn:#ffb85c; --warn-soft:#3b2a0c;
+  --bad:#ff8a80; --bad-soft:#41191a; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7;font-size:16px;word-break:keep-all}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+header.top h1{font-size:clamp(28px,5vw,46px);line-height:1.2;margin:0 0 14px;font-weight:900;letter-spacing:-.02em}
+header.top p{margin:0;color:var(--muted);max-width:68ch}
+.status{display:inline-block;margin-bottom:16px;padding:3px 12px;border-radius:99px;background:var(--warn-soft);color:var(--warn);font-weight:700;font-size:13px}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+nav.toc a{padding:6px 14px;border:1px solid var(--line);border-radius:99px;color:var(--ink);text-decoration:none;font-size:14px;background:var(--surface)}
+nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--blue);color:var(--blue);outline:none}
+section{padding:48px 0 8px}
+h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 6px;font-weight:900;letter-spacing:-.01em}
+h3{font-size:19px;margin:34px 0 10px;font-weight:700}
+.lead{color:var(--muted);margin:0 0 22px;max-width:72ch}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px}
+.card h4{margin:0 0 6px;font-size:16px;font-weight:700}
+.card p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.65}
+.card ul{margin:8px 0 0;padding-left:18px;font-size:14.5px;color:var(--muted)}
+.card li{margin:3px 0}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;margin-right:6px;vertical-align:1px}
+.t-kr{background:var(--blue-soft);color:var(--blue)}
+.t-en{background:var(--dex-soft);color:var(--dex)}
+.t-req{background:var(--warn-soft);color:var(--warn)}
+.file{border-left:5px solid var(--blue)}
+.file.en{border-left-color:var(--dex)}
+.file.req{border-left-color:var(--warn)}
+.file .no{font-weight:900;font-size:13px;color:var(--muted)}
+
+.diagram{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto}
+.diagram svg{min-width:860px;width:100%;height:auto;display:block}
+.legend{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:6px;counter-reset:s}
+.legend li{counter-increment:s;padding-left:34px;position:relative;font-size:14.5px}
+.legend li::before{content:counter(s);position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;line-height:1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .legend li::before{color:#0c1220}}
+
+.slides{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.slide{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.slide svg{display:block;width:100%;height:auto;background:var(--surface2);border-bottom:1px solid var(--line)}
+.slide .meta{padding:12px 14px 14px;font-size:13.5px}
+.slide .meta b{display:block;font-size:14.5px;margin-bottom:4px}
+.slide .meta .why{color:var(--ink)}
+.slide .meta .what{color:var(--muted);margin-top:5px}
+.slide .meta em{font-style:normal;font-weight:700;color:var(--blue)}
+
+/* svg theming */
+svg .bx{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+svg .bxA{fill:var(--blue-soft);stroke:var(--blue);stroke-width:1.4}
+svg .bxD{fill:var(--dex-soft);stroke:var(--dex);stroke-width:1.4}
+svg .bxW{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.4}
+svg .dash{stroke-dasharray:5 4}
+svg .tt{fill:var(--ink);font-weight:700}
+svg .ts{fill:var(--muted)}
+svg .ln{stroke:var(--ink);stroke-width:1.6;fill:none}
+svg .lnM{stroke:var(--muted);stroke-width:1.4;fill:none}
+svg .lbl{fill:var(--muted)}
+svg .acc{fill:var(--blue)}
+svg .ph{fill:var(--line)}
+svg .phA{fill:var(--blue);opacity:.85}
+
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:700}
+.tbl{overflow-x:auto}
+.tbl table{min-width:640px}
+.note{border-left:4px solid var(--warn);background:var(--warn-soft);padding:14px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:15px}
+.note.bad{border-left-color:var(--bad);background:var(--bad-soft)}
+.note b{font-weight:700}
+.q{counter-reset:q;padding:0;list-style:none;display:grid;gap:10px}
+.q li{counter-increment:q;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px 12px 48px}
+.q li::before{content:counter(q);position:absolute;left:14px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--warn);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center}
+footer{padding:40px 0 60px;color:var(--muted);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<!-- shared marker defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="currentColor" style="color:var(--ink)"/>
+    </marker>
+    <marker id="ahm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="currentColor" style="color:var(--muted)"/>
+    </marker>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <span class="status">초안 · 확인용 — 슬라이드 제작 전 단계</span>
+    <h1>테더맥스 DEX 연동<br>슬라이드 기획안과 목업</h1>
+    <p>Apex · Lighter · Aster · EdgeX 4개 DEX에 보낼 요청 자료 4종과, 내부 공표용 국문·영문 2종을 만들기 전에 각 파일의 구성, 화면 목업, 기획 의도를 먼저 확인하는 문서입니다. 2026-10-20 기준.</p>
+    <nav class="toc" aria-label="목차">
+      <a href="#overview">1. 6개 파일 한눈에</a>
+      <a href="#story">2. 공통 스토리라인</a>
+      <a href="#flow">3. 핵심 플로우 도식</a>
+      <a href="#req">4. DEX 요청 자료 4종</a>
+      <a href="#internal">5. 내부 공표용 국문·영문</a>
+      <a href="#check">6. 확정된 사항</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="overview">
+  <h2>1. 6개 파일 한눈에</h2>
+  <p class="lead">요청 자료는 받는 쪽이 “우리가 뭘 해야 하는지”를 한 번에 이해하는 것이 목표이고, 내부 공표용은 팀 전체가 “구조가 바뀌었다”는 사실과 영향 범위를 공유하는 것이 목표입니다.</p>
+  <div class="grid g3">
+    <div class="card file req"><span class="no">파일 1</span><h4><span class="tag t-req">요청</span>Lighter 요청서</h4><p>8장 · 영문 · 수신: Lighter 개발·BD팀</p></div>
+    <div class="card file req"><span class="no">파일 2</span><h4><span class="tag t-req">요청</span>ApeX 요청서</h4><p>8장 · 영문 · 수신: ApeX 개발·BD팀</p></div>
+    <div class="card file req"><span class="no">파일 3</span><h4><span class="tag t-req">요청</span>EdgeX 요청서</h4><p>8장 · 영문 · 수신: EdgeX 개발·BD팀</p></div>
+    <div class="card file req"><span class="no">파일 4</span><h4><span class="tag t-req">요청</span>Aster 요청서</h4><p>8장 · 영문 · 수신: Aster 개발·BD팀</p></div>
+    <div class="card file"><span class="no">파일 5</span><h4><span class="tag t-kr">국문</span>내부 공표용</h4><p>12장 · 전 팀 공유 · 구조, 영향 범위, 결정 사항</p></div>
+    <div class="card file en"><span class="no">파일 6</span><h4><span class="tag t-en">영문</span>내부 공표용</h4><p>12장 · 해외 팀원(러시아어·베트남어·인도네시아어권 포함) 공유용 · 국문과 같은 구성</p></div>
+  </div>
+  <div class="note"><b>가정한 것.</b> 요청서 4종은 해외 DEX가 받는 문서라 영문으로 만드는 것으로 가정했습니다. 6개 파일을 “요청서 4 + 내부 공표용 국문·영문 2”로 해석했습니다. 다르면 알려주세요.</div>
+</section>
+
+<section id="story">
+  <h2>2. 공통 스토리라인과 기획 의도</h2>
+  <p class="lead">6개 파일 모두 같은 뼈대를 씁니다. 읽는 사람만 다르고, 같은 도식이 반복되어야 “같은 구조 이야기”로 읽힙니다.</p>
+  <div class="grid g2">
+    <div class="card"><h4>① 전제조건을 먼저, 숨기지 않고</h4><p>테더맥스는 DEX의 현재 “자동화된 페이백” 구조의 고객 페이백 비율을 0%로 두고, 커미션을 전액 테더맥스 지갑으로 받고, API를 지원받아야 연동이 가능합니다. 이 세 가지를 요청서 4번째 장에서 한 장에 못 박습니다.</p></div>
+    <div class="card"><h4>② 도식이 본문, 글은 보조</h4><p>플로우는 모든 파일에서 도식으로 보여줍니다. 장마다 도식 1개, 문장은 도식을 읽는 방법만 짧게 적습니다.</p></div>
+    <div class="card"><h4>③ 지갑에 이름을 붙여 고정</h4><p>A지갑(커미션 정산 지갑)과 B지갑(페이백 전용 지갑)을 색으로 고정합니다. A는 파랑, B는 같은 파랑 계열의 진한 톤, DEX는 초록으로 모든 장에서 같게 씁니다.</p></div>
+    <div class="card"><h4>④ 요청은 “필수 / 차선” 두 단계로</h4><p>API 항목은 필수와 차선을 나눠서 상대가 최소 범위부터 승낙할 수 있게 합니다. 차선 중 거래 종목·거래량은 글로벌리그·맥스보드 같은 이벤트 활용에 필요하다는 이유를 함께 적습니다.</p></div>
+  </div>
+</section>
+
+<section id="flow">
+  <h2>3. 핵심 플로우 도식 (6개 파일 공통 마스터)</h2>
+  <p class="lead">아래 도식이 모든 파일의 기준입니다. 요청서에서는 윗줄(돈의 흐름)만 먼저 보여주고 아랫줄(데이터의 흐름)을 다음 장에서 붙이며, 내부 공표용에서는 한 장에 함께 씁니다.</p>
+  <div class="diagram" id="masterFlow"></div>
+  <ol class="legend">
+    <li>테더맥스 레퍼럴로 가입한 고객이 DEX에서 거래하고, DEX는 커미션 전액을 테더맥스 A지갑(커미션 정산 지갑)으로 지급합니다. 고객 페이백 비율은 DEX 백오피스에서 0%로 설정합니다.</li>
+    <li>DEX가 API로 전일자 커미션 원장을 지정 시각에 제공하고, 테더맥스가 수령합니다.</li>
+    <li>원장을 기반으로 A지갑에서 B지갑(페이백 전용)으로 수동 리밸런싱합니다. 전일 기준 페이백 예상 금액만큼 옮깁니다.</li>
+    <li>고객이 앱·웹에서 자신의 잔액을 확인하고, 10 USDT 이상 쌓이면 출금을 신청합니다.</li>
+    <li>B지갑에 보관한 가스비와 출금 금액으로, 자동화된 출금 절차가 고객 지갑에 송금합니다.</li>
+    <li>출금 전·후 금액 변동값을 API로 테더맥스 플랫폼(쿠폰, 출금 화면, 페이백 랭킹, 글로벌리그, 실시간 출금 노출, 고객 랭킹)에 반영합니다.</li>
+  </ol>
+</section>
+
+<section id="req">
+  <h2>4. DEX 요청 자료 4종 (파일 1~4)</h2>
+  <p class="lead">4개 파일은 8장 구성이 같고, 7번째 장만 DEX마다 다릅니다. 받는 쪽이 읽는 순서는 “우리는 누구인가 → 어떻게 일하는가 → 무엇을 해달라는가 → 어떤 데이터인가 → 언제까지인가”입니다.</p>
+  <div class="slides" id="reqSlides"></div>
+
+  <h3>7번째 장 — DEX별 맞춤 장 (첨부 자료에서 확인된 사실 기준)</h3>
+  <p class="lead">같은 요청이라도 DEX마다 걸리는 지점이 다릅니다. 요청서를 보내기 전에 각 DEX에 사실 확인이 필요한 부분을 함께 적었습니다.</p>
+  <div class="grid g2">
+    <div class="card file req"><h4>Lighter</h4>
+      <p>주 1회(월요일) 정산, USDC, Plus·Premium 계정만 캐시백 발생, 어뷰징 심사 후 지급</p>
+      <ul>
+        <li>정산이 주 단위여도 <b>일자별 원장</b>을 달라는 요청</li>
+        <li>보류·미지급 건의 상태값 포함 요청</li>
+        <li>Standard 계정(수수료 0%)은 커미션이 없다는 점 확인</li>
+      </ul></div>
+    <div class="card file req"><h4>ApeX</h4>
+      <p>시간당 정산, USDT, Rewards Center에서 직접 “받기” 후 3단계를 거쳐야 출금</p>
+      <ul>
+        <li>사용자 수령 단계 없이 <b>A지갑으로 직접 지급</b>되는지 확인</li>
+        <li>수령·미수령 상태 구분 필드 요청</li>
+        <li>시간 단위 기록을 일 단위로 집계해 제공 요청</li>
+      </ul></div>
+    <div class="card file req"><h4>EdgeX</h4>
+      <p>일 1회(00:00 UTC) 정산, USDC, 선물 계정 증거금에 섞여 입금, 출금가능 잔액 제공은 거부</p>
+      <ul>
+        <li>회원당 일 1건 원장과 <b>지급 식별 ID</b> 요청</li>
+        <li>A지갑으로 지급 시 증거금 혼입 문제가 없는지 확인</li>
+        <li>잔액 조회가 아닌 “지급 원장” 중심으로 요청해 거부 이슈 회피</li>
+      </ul></div>
+    <div class="card file req"><h4>Aster</h4>
+      <p>일 1회 정산(00:00 산정, 09:00 공개, 익일 지급), 수수료 낸 자산 그대로 지급, 레퍼럴 365일 후 만료</p>
+      <ul>
+        <li><b>365일 갱신 방식</b> 확정 답변 요청 (현재 문의 중)</li>
+        <li>지급 자산이 가변이므로 USDT 환산값 필드 요청</li>
+        <li>지급 자산·네트워크 명시 요청</li>
+      </ul></div>
+  </div>
+  <div class="note">위 내용은 첨부하신 정리 문서 기준입니다. 정산 지갑 구조(A지갑 직접 수취)로 바뀌면 달라지는 부분이 있어서, 요청서에는 “현재 이해한 내용”으로 적고 DEX가 정정할 수 있게 하겠습니다.</div>
+</section>
+
+<section id="internal">
+  <h2>5. 내부 공표용 국문·영문 (파일 5, 6)</h2>
+  <p class="lead">12장 구성입니다. 앞 4장은 “무엇이 바뀌는가”, 가운데 4장은 “어떻게 돌아가는가”, 뒤 4장은 “무엇을 정해야 하는가”입니다. 임원·팀 리드는 2장과 12장만 읽어도 판단이 되도록 구성했습니다.</p>
+  <div class="slides" id="intSlides"></div>
+
+  <h3>영문 파일(파일 6)에서 달라지는 점</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>구분</th><th>국문 (파일 5)</th><th>영문 (파일 6)</th></tr></thead>
+    <tbody>
+      <tr><td>지갑 명칭</td><td>A지갑 · B지갑</td><td>Commission Wallet (Wallet A) · Payback Wallet (Wallet B)</td></tr>
+      <tr><td>핵심 용어</td><td>페이백 · 커미션 원장 · 리밸런싱</td><td>Payback · Commission Ledger · Rebalancing</td></tr>
+      <tr><td>글자 수</td><td>기준</td><td>약 20~30% 길어지므로 도식 라벨은 2줄 여유를 둡니다</td></tr>
+      <tr><td>날짜·시각</td><td>2026-10-20 · UTC 병기</td><td>Oct 20, 2026 · UTC 기준 통일</td></tr>
+      <tr><td>도식</td><td>동일</td><td>동일 (라벨만 번역, 레이아웃 변경 없음)</td></tr>
+      <tr><td>용어 설명</td><td>필요한 곳에만 영문 병기</td><td>한국 내부 용어(맥스보드 등)는 처음 한 번 설명을 붙입니다</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="check">
+  <h2>6. 확정된 사항</h2>
+  <p class="lead">확인 요청에 대한 답변을 반영해 6개 파일 모두 아래 기준으로 제작합니다.</p>
+
+  
+
+  <ol class="q">
+    
+    <li><b>최소 출금액.</b> 10 USDT 이상부터 출금 신청하는 기준을 유지합니다. 요청서와 내부 공표용 모두 이 기준으로 씁니다.</li>
+    <li><b>원장은 일 단위.</b> Lighter(주 1회)와 ApeX(시간당)처럼 정산 주기가 달라도, 4개 DEX 모두에 “전일 기준, 일 단위” 원장을 요청합니다.</li>
+    <li><b>원장 갱신 시각.</b> 00:00 UTC 기준으로 유지합니다. 타임라인 장에 UTC 기준으로 명시합니다.</li>
+    <li><b>표기.</b> 표지와 본문에는 서비스명 “테더맥스”만 쓰고, 도메인은 넣지 않습니다.</li>
+    <li><b>일정.</b> 연동 목표는 11월 초중순, 런칭은 12월 초입니다. 요청서 8번째 장과 내부 공표용 12번째 장 타임라인에 반영했습니다.</li>
+  </ol>
+</section>
+
+</main>
+
+<footer><div class="wrap">이 문서는 슬라이드 제작 전 확인용 기획안입니다. 승인해주시면 6개 파일 순서대로 슬라이드를 제작합니다.</div></footer>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+
+  /* ---------- helpers ---------- */
+  function box(x,y,w,h,title,sub,cls,fs,fss){
+    fs=fs||13; fss=fss||11;
+    var s='<rect class="'+(cls||'bx')+'" x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="8"/>';
+    if(sub){
+      s+='<text class="tt" x="'+(x+w/2)+'" y="'+(y+h/2-4)+'" text-anchor="middle" font-size="'+fs+'">'+title+'</text>';
+      s+='<text class="ts" x="'+(x+w/2)+'" y="'+(y+h/2+14)+'" text-anchor="middle" font-size="'+fss+'">'+sub+'</text>';
+    }else{
+      s+='<text class="tt" x="'+(x+w/2)+'" y="'+(y+h/2+4)+'" text-anchor="middle" font-size="'+fs+'">'+title+'</text>';
+    }
+    return s;
+  }
+  function arrow(x1,y1,x2,y2,dash,muted){
+    return '<line class="'+(muted?'lnM':'ln')+(dash?' dash':'')+'" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" marker-end="url(#'+(muted?'ahm':'ah')+')"/>';
+  }
+  function lab(x,y,t,fs){return '<text class="lbl" x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+(fs||11)+'">'+t+'</text>';}
+
+  /* ---------- master flow ---------- */
+  var m='<svg viewBox="0 0 1100 340" role="img" aria-label="DEX 연동 핵심 플로우: 거래, 커미션 전액 A지갑 수취, API 원장, A에서 B지갑 리밸런싱, 고객 출금, 플랫폼 반영">';
+  m+='<text class="tt" x="20" y="24" font-size="13">돈의 흐름</text>';
+  m+=box(20,40,150,76,'트레이더 거래','테더맥스 레퍼럴 가입','bx');
+  m+=box(230,40,150,76,'DEX','고객 페이백 비율 0%','bxD');
+  m+=box(440,40,170,76,'A지갑','커미션 100% 수취','bxA');
+  m+=box(680,40,170,76,'B지갑','페이백 전용 · 가스비 보관','bxA');
+  m+=box(910,40,170,76,'고객 지갑','자동 출금 (EVM)','bx');
+  m+=arrow(170,78,228,78)+lab(199,70,'수수료');
+  m+=arrow(380,78,438,78)+lab(409,70,'전액');
+  m+=arrow(610,78,678,78)+lab(644,60,'수동 리밸런싱',10)+lab(644,72,'전일 기준 예상액',10);
+  m+=arrow(850,78,908,78)+lab(879,60,'10 USDT',10)+lab(879,72,'이상 신청',10);
+  m+='<text class="acc" x="95" y="134" text-anchor="middle" font-size="12" font-weight="700">1</text>';
+  m+='<text class="acc" x="525" y="134" text-anchor="middle" font-size="12" font-weight="700">3</text>';
+  m+='<text class="acc" x="995" y="134" text-anchor="middle" font-size="12" font-weight="700">4 · 5</text>';
+  m+='<line x1="20" y1="168" x2="1080" y2="168" class="lnM dash"/>';
+  m+='<text class="tt" x="20" y="196" font-size="13">데이터의 흐름</text>';
+  m+=box(230,214,150,76,'커미션 원장 API','전일 기준 · 지정 시각','bxD');
+  m+=box(440,214,200,76,'테더맥스 시스템','고객별 잔액 계산','bxA');
+  m+=box(720,214,360,76,'플랫폼 화면·기능에 반영','쿠폰 · 출금 화면 · 페이백 랭킹 · 글로벌리그 · 실시간 출금 · 고객 랭킹','bx',13,10.5);
+  m+=arrow(305,116,305,212,true)+lab(330,170,'');
+  m+=arrow(380,252,438,252)+lab(409,244,'수령');
+  m+=arrow(640,252,718,252)+lab(679,244,'반영');
+  m+=arrow(765,116,765,212,true,true)+lab(822,172,'출금 전·후 변동값',11);
+  m+='<text class="acc" x="305" y="310" text-anchor="middle" font-size="12" font-weight="700">2</text>';
+  m+='<text class="acc" x="900" y="310" text-anchor="middle" font-size="12" font-weight="700">6</text>';
+  m+='</svg>';
+  document.getElementById('masterFlow').innerHTML=m;
+
+  /* ---------- slide thumbnails ---------- */
+  var W=320,H=180;
+  function head(t){return '<text class="tt" x="16" y="26" font-size="12">'+t+'</text>';}
+  function mini(x,y,w,h,t,cls){return box(x,y,w,h,t,'',cls||'bx',9);}
+  var K={
+    cover:function(t,a){
+      return '<rect class="phA" x="0" y="0" width="10" height="'+H+'"/>'+
+        '<text class="tt" x="30" y="76" font-size="17">'+t+'</text>'+
+        '<text class="ts" x="30" y="100" font-size="11">'+(a&&a[0]||'')+'</text>'+
+        '<rect class="ph" x="30" y="128" width="90" height="6" rx="3"/><rect class="ph" x="30" y="142" width="60" height="6" rx="3"/>'+
+        '<rect class="bxA" x="236" y="124" width="64" height="30" rx="6"/><text class="tt" x="268" y="143" text-anchor="middle" font-size="10">A · B</text>';
+    },
+    flow:function(t,a){
+      var s=head(t),n=a.length,w=62,g=(W-32-n*w)/(n-1);
+      for(var i=0;i<n;i++){
+        var x=16+i*(w+g);
+        s+=box(x,70,w,52,a[i][0],'',a[i][1]||'bx',9);
+        if(i<n-1)s+=arrow(x+w,96,x+w+g-2,96);
+      }
+      s+='<rect class="ph" x="16" y="144" width="200" height="6" rx="3"/><rect class="ph" x="16" y="156" width="140" height="6" rx="3"/>';
+      return s;
+    },
+    compare:function(t,a){
+      return head(t)+
+        box(16,48,128,96,a[0],'','bx',10)+
+        box(176,48,128,96,a[1],'','bxD',10)+
+        arrow(146,96,174,96)+
+        '<rect class="ph" x="16" y="156" width="150" height="6" rx="3"/>';
+    },
+    cards:function(t,a){
+      var s=head(t),n=a.length,g=8,w=(W-32-(n-1)*g)/n;
+      for(var i=0;i<n;i++){
+        var x=16+i*(w+g);
+        s+='<rect class="bx" x="'+x+'" y="48" width="'+w+'" height="104" rx="8"/>';
+        s+='<rect class="phA" x="'+(x+8)+'" y="58" width="22" height="22" rx="5"/>';
+        s+='<text class="tt" x="'+(x+8)+'" y="100" font-size="9.5">'+a[i]+'</text>';
+        s+='<rect class="ph" x="'+(x+8)+'" y="112" width="'+(w-16)+'" height="5" rx="2.5"/><rect class="ph" x="'+(x+8)+'" y="123" width="'+(w-30)+'" height="5" rx="2.5"/>';
+      }
+      return s;
+    },
+    table:function(t,a){
+      var s=head(t),cols=a[0],rows=a[1],cw=(W-32)/cols,rh=24;
+      for(var r=0;r<rows;r++){
+        for(var c=0;c<cols;c++){
+          var cls=r===0?'bxA':(c===0?'bx':'bx');
+          s+='<rect class="'+cls+'" x="'+(16+c*cw)+'" y="'+(42+r*rh)+'" width="'+cw+'" height="'+rh+'"/>';
+          if(r>0&&c>0)s+='<rect class="ph" x="'+(16+c*cw+8)+'" y="'+(42+r*rh+9)+'" width="'+(cw-22)+'" height="5" rx="2.5"/>';
+        }
+      }
+      return s;
+    },
+    hub:function(t,a){
+      var s=head(t),cx=160,cy=104;
+      var pos=[[16,40],[116,36],[216,40],[16,128],[116,132],[216,128]];
+      s+=box(112,88,96,34,a[0],'','bxD',10);
+      for(var i=1;i<a.length;i++){
+        var p=pos[i-1];
+        s+='<line class="lnM" x1="'+cx+'" y1="'+cy+'" x2="'+(p[0]+44)+'" y2="'+(p[1]+(p[1]>cy?0:22))+'"/>';
+        s+=box(p[0],p[1],88,24,a[i],'','bx',9);
+      }
+      return s;
+    },
+    list:function(t,a){
+      var s=head(t);
+      for(var i=0;i<a.length;i++){
+        s+='<circle class="acc" cx="24" cy="'+(56+i*28)+'" r="4"/>';
+        s+='<text class="tt" x="38" y="'+(60+i*28)+'" font-size="10">'+a[i]+'</text>';
+      }
+      return s;
+    },
+    timeline:function(t,a){
+      var s=head(t),n=a.length,g=(W-60)/(n-1);
+      s+='<line class="lnM" x1="30" y1="92" x2="'+(W-30)+'" y2="92"/>';
+      for(var i=0;i<n;i++){
+        var x=30+i*g;
+        s+='<circle class="acc" cx="'+x+'" cy="92" r="6"/>';
+        s+='<text class="tt" x="'+x+'" y="'+(i%2?122:70)+'" text-anchor="middle" font-size="9.5">'+a[i]+'</text>';
+      }
+      s+='<rect class="ph" x="16" y="156" width="160" height="6" rx="3"/>';
+      return s;
+    },
+    split:function(t,a){
+      return head(t)+
+        '<rect class="bxD" x="16" y="44" width="136" height="104" rx="8"/><text class="tt" x="28" y="64" font-size="10">'+a[0]+'</text>'+
+        '<rect class="ph" x="28" y="76" width="100" height="5" rx="2.5"/><rect class="ph" x="28" y="88" width="84" height="5" rx="2.5"/><rect class="ph" x="28" y="100" width="92" height="5" rx="2.5"/>'+
+        '<rect class="bxW" x="168" y="44" width="136" height="104" rx="8"/><text class="tt" x="180" y="64" font-size="10">'+a[1]+'</text>'+
+        '<rect class="ph" x="180" y="76" width="100" height="5" rx="2.5"/><rect class="ph" x="180" y="88" width="84" height="5" rx="2.5"/><rect class="ph" x="180" y="100" width="92" height="5" rx="2.5"/>';
+    }
+  };
+
+  function renderSlides(id,list,pfx){
+    var h='';
+    list.forEach(function(s,i){
+      var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+s.t+' 목업">'+K[s.k](s.t,s.a)+'</svg>';
+      h+='<article class="slide">'+svg+'<div class="meta"><b>'+(i+1)+'. '+s.t+'</b>'+
+        '<div class="why"><em>기획 의도</em> '+s.why+'</div>'+
+        '<div class="what">'+s.what+'</div></div></article>';
+    });
+    document.getElementById(id).innerHTML=h;
+  }
+
+  var AB=[['트레이더','bx'],['DEX','bxD'],['A지갑','bxA'],['B지갑','bxA'],['고객','bx']];
+
+  var req=[
+    {t:'표지: 테더맥스 × DEX 연동 제안',k:'cover',a:['API Integration Proposal'],
+     why:'첫 장에서 “제안서”임을 분명히 하고, 파트너로 대하는 톤을 잡습니다.',what:'DEX 로고 + 테더맥스 로고, 제안 제목, 날짜, 담당자 연락처 (서비스명은 “테더맥스”만 표기, 도메인 미기재)'},
+    {t:'지금 테더맥스는 이렇게 일합니다',k:'flow',a:[['트레이더','bx'],['CEX','bx'],['테더맥스','bxA'],['페이백','bx']],
+     why:'상대가 우리 사업을 10초 안에 이해하게 합니다. 이미 CEX와 쓰고 있는 방식이라는 신뢰도 줍니다.',what:'CEX 레퍼럴 → 커미션 → 고객 페이백 도식 1개, 제휴 거래소 수 등 한 줄 소개'},
+    {t:'DEX에 제안하는 구조',k:'flow',a:AB,
+     why:'돈이 A→B→고객으로 가는 모양을 먼저 보여줘서 “DEX는 돈을 보낼 필요가 없다”는 점을 이해시킵니다.',what:'마스터 도식의 윗줄(돈의 흐름) 확대. 지갑별 역할을 도식 아래 한 줄씩'},
+    {t:'DEX에 요청하는 3가지',k:'cards',a:['페이백 0%','커미션 100%','원장 API'],
+     why:'이 문서의 핵심 장입니다. 전제조건 세 가지를 같은 크기 카드로 나란히 놓아 빠뜨리지 않게 합니다.',what:'① 백오피스에서 고객 페이백 비율 0% ② 커미션 전액을 테더맥스 A지갑으로 ③ API 지원. 세 가지가 모두 충족되어야 연동 가능하다는 문구'},
+    {t:'API 명세: 필수와 차선',k:'table',a:[3,6],
+     why:'필수는 최소선, 차선은 이벤트 활용 범위로 나눠서 상대가 단계별로 승낙할 수 있게 합니다.',what:'필수: 지갑 주소, 거래 타입(스팟/퍼페추얼), 지불 수수료, 테더맥스 커미션, 가입 레퍼럴 코드 / 차선: UID·AID, 거래 종목·거래량, 네트워크(EVM)'},
+    {t:'언제, 어떻게 제공하는가',k:'timeline',a:['전일 24시간 거래','00:00 UTC 일 마감','원장 갱신','테더맥스 수령','A→B 이체'],
+     why:'“전일 24시간 데이터를 다음날 정해진 시각에 조회”라는 요청을 시간 순서로 보여줘서 개발 일정 추정이 쉽게 합니다.',what:'UTC 기준 타임라인. 일 단위 원장을 00:00 UTC 기준으로 갱신'},
+    {t:'[DEX별 맞춤] 확인하고 싶은 점',k:'split',a:['현재 이해한 구조','확인 요청 사항'],
+     why:'각 DEX의 정산 방식을 우리가 이미 파악했다는 점을 보여주고, 정정이나 확인을 요청합니다. 4개 파일에서 이 장만 다릅니다.',what:'왼쪽: Lighter 주1회·ApeX 시간당·EdgeX 일1회·Aster 일1회+365일 만료 등 / 오른쪽: 요청 3가지'},
+    {t:'다음 단계',k:'timeline',a:['요청 확인','명세 협의','연동 11월 초중순','설정 반영','런칭 12월 초'],
+     why:'상대가 다음에 할 일과 목표 일정(연동 11월 초중순, 런칭 12월 초)을 한눈에 알게 합니다.',what:'5단계 타임라인, 양측 담당자, 회신 요청 문구'}
+  ];
+
+  var intl=[
+    {t:'표지: DEX 연동 구조 공표',k:'cover',a:['내부 공표용 · 2026-10-20'],
+     why:'전 팀에 공식 안내하는 문서임을 분명히 합니다.',what:'제목, 날짜, 작성 부서, 열람 대상'},
+    {t:'한눈에: 핵심 3가지',k:'list',a:['구조가 바뀝니다 (직접 입금 → A/B지갑)','4개 DEX가 API를 지원해야 연동됩니다','결정이 필요한 항목이 남아 있습니다'],
+     why:'임원과 팀 리드가 이 장만 읽어도 판단할 수 있게 합니다.',what:'핵심 3줄 + 숫자 3개 (연동 DEX 4곳, 결정 필요 항목 수, 영향 화면 수)'},
+    {t:'CEX와 DEX는 어떻게 다른가',k:'compare',a:'CEX · 테더맥스 금고 경유|DEX · A/B지갑 경유'.split('|'),
+     why:'기존 구조와 새 구조를 좌우로 놓아 “뭐가 같고 뭐가 달라지는지”를 바로 보이게 합니다.',what:'좌: 거래소→테더맥스 금고→출금 / 우: DEX→A지갑→B지갑→고객. 달라지는 점 3줄'},
+    {t:'신규 DEX 서비스 구조 (6단계)',k:'flow',a:AB,
+     why:'모든 파일의 기준이 되는 마스터 도식입니다. 돈의 흐름과 데이터의 흐름을 한 장에 같이 보여줍니다.',what:'3장의 마스터 도식 전체, 번호별 설명 6줄'},
+    {t:'A지갑 → B지갑 리밸런싱',k:'flow',a:[['원장 수령','bxD'],['예상액 계산','bxA'],['A→B 이체','bxA'],['잔액 확인','bx']],
+     why:'수동 운영이 들어가는 구간이라 담당자와 시점을 분명히 해야 합니다.',what:'전일 기준 예상 페이백 금액 이체, 담당·검수 단계, B지갑 가스비 보관 기준'},
+    {t:'API 데이터가 닿는 화면',k:'hub',a:['출금 전·후 API','쿠폰','출금 화면','페이백 랭킹','글로벌리그','실시간 출금'],
+     why:'백엔드·프론트·마케팅이 각자 어느 화면이 영향받는지 한 장에서 확인하게 합니다.',what:'가운데 API 허브 + 6개 화면. 각 화면에서 반영되는 값 한 줄씩'},
+    {t:'API 명세',k:'table',a:[3,6],
+     why:'개발팀과 DEX 측에 보내는 명세와 같은 표를 써서 내부 해석이 갈리지 않게 합니다.',what:'필수 5개, 차선 3개 항목과 용도. 요청서 5장과 동일 표'},
+    {t:'4개 DEX 비교',k:'table',a:[5,6],
+     why:'정산 주기·통화·특이사항이 서로 다르다는 점을 한 번에 비교합니다.',what:'Lighter / ApeX / EdgeX / Aster × 정산 주기, 통화, 지급 위치, DEX 내 출금 단계, 지급 검증, 특이 리스크'},
+    {t:'DEX별 주의할 리스크',k:'cards',a:['Lighter','ApeX','EdgeX','Aster'],
+     why:'가장 큰 기한 리스크(Aster 365일 만료)가 묻히지 않게 따로 강조합니다.',what:'Lighter Standard 계정 0%·어뷰징 보류 / ApeX 받기 필요 / EdgeX 잔액 제공 거부 / Aster 365일 갱신 미확정'},
+    {t:'화면·기능 영향 범위',k:'split',a:['반드시 포함','제외'],
+     why:'화면·기능별로 DEX를 포함할지 제외할지 기준(돈의 방향)을 한 장에서 정리합니다.',what:'포함: 연동 현황, 누적액, 내역, 비회원 조회, 알림 / 제외: 이벤트 리워드 지급, 쿠폰 사용 대상 등'},
+    {t:'백오피스·하드코딩·번역',k:'list',a:['하드코딩 10건은 백오피스로 이관','번역 키 101개 별도 일정 필요','디자인 보완 6건 (비교표 DEX 행 등)'],
+     why:'운영팀이 “배포 없이 바꿀 수 있는 값”과 “개발이 필요한 값”을 구분해 알게 합니다.',what:'요율·파트너 수·노출 순서 등 항목별 처리 방법과 담당'},
+    {t:'결정 사항과 다음 일정',k:'timeline',a:['요청서 발송','DEX 회신','연동 11월 초중순','화면 반영','런칭 12월 초'],
+     why:'마지막 장에서 “누가 무엇을 언제까지 결정하는가”를 명확히 합니다.',what:'결정 필요 항목 목록, 담당자, 단계별 일정(연동 목표 11월 초중순, 런칭 12월 초)'}
+  ];
+
+  renderSlides('reqSlides',req);
+  renderSlides('intSlides',intl);
+})();
+</script>
+</body>
+</html>

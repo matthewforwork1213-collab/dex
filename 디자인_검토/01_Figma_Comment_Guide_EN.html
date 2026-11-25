@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figma Comment Guide</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+:root{
+  --darkest:#212529;--dark:#343a40;--middark:#495057;--mid:#6c757d;
+  --border:#ced4da;--lborder:#dee2e6;--lbg:#e9ecef;--bg:#f8f9fa;--white:#fff;
+  --red:#c92a2a;--orange:#e67700;--yellow:#a37b00;--blue:#1971c2;--green:#2b8a3e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Pretendard,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
+     color:var(--darkest);font-size:13.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+code{font-family:Consolas,monospace;font-size:.9em;background:var(--lbg);padding:1px 5px;border-radius:3px}
+
+header{position:sticky;top:0;background:var(--dark);z-index:100;padding:11px 24px;
+       display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header .brand{color:#fff;font-weight:700;font-size:15px}
+header .f{display:flex;gap:5px;flex-wrap:wrap}
+header button{background:none;border:1px solid #555;color:#adb5bd;font:inherit;font-size:12px;
+              padding:5px 11px;border-radius:14px;cursor:pointer}
+header button:hover{border-color:#888;color:#fff}
+header button.on{background:#fff;color:var(--darkest);border-color:#fff;font-weight:600}
+header .count{color:#adb5bd;font-size:12px;margin-left:auto}
+
+.wrap{max-width:1080px;margin:0 auto;padding:28px 24px 80px}
+.intro{background:#fff;border:1px solid var(--lborder);border-radius:10px;padding:26px 28px;margin-bottom:26px}
+.intro h1{font-size:25px;letter-spacing:-.4px}
+.intro .sub{color:var(--mid);margin-top:7px}
+.how{margin-top:20px;background:var(--bg);border-radius:8px;padding:16px 18px}
+.how > b{display:block;margin-bottom:8px}
+.how ol{margin-left:18px}
+.how li{margin:3px 0;color:var(--middark)}
+.tally{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.tally div{flex:1;min-width:120px;border:1px solid var(--lborder);border-radius:8px;padding:11px 13px}
+.tally span{display:block;font-size:11px;color:var(--mid)}
+.tally b{font-size:19px}
+.warn{margin-top:18px;border-left:3px solid var(--orange);background:#fff8f0;padding:13px 16px;
+      font-size:12.5px;color:var(--middark)}
+
+.sec{margin:30px 0 12px;display:flex;align-items:baseline;gap:10px}
+.sec h2{font-size:16px}
+.sec span{color:var(--mid);font-size:12px}
+
+.card{background:#fff;border:1px solid var(--lborder);border-radius:10px;margin-bottom:14px;overflow:hidden}
+.card.red{border-left:4px solid var(--red)}
+.card.orange{border-left:4px solid var(--orange)}
+.card.yellow{border-left:4px solid var(--yellow)}
+.chead{padding:15px 20px;cursor:pointer;display:flex;gap:12px;align-items:flex-start}
+.chead:hover{background:var(--bg)}
+.pill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;white-space:nowrap;flex-shrink:0}
+.p-red{background:#fff0f0;color:var(--red);border:1px solid #ffc9c9}
+.p-orange{background:#fff4e6;color:var(--orange);border:1px solid #ffd8a8}
+.p-yellow{background:#fff9db;color:var(--yellow);border:1px solid #ffe8a1}
+.ctitle{flex:1}
+.ctitle b{font-size:14.5px;display:block}
+.ctitle .loc{font-size:12px;color:var(--mid);margin-top:4px}
+.ctitle .loc em{font-style:normal;color:var(--middark);font-weight:600}
+.arrow{color:var(--mid);font-size:12px;flex-shrink:0;padding-top:2px}
+.cbody{display:none;padding:0 20px 20px;border-top:1px solid var(--lborder)}
+.card.open .cbody{display:block}
+.card.open .arrow{transform:rotate(90deg)}
+.arrow{transition:transform .15s}
+
+.why{margin:16px 0;color:var(--middark)}
+.why b{color:var(--darkest)}
+.why .q{color:var(--red);font-weight:600}
+.shotbox{margin:14px 0;border:1px solid var(--lborder);border-radius:7px;overflow:hidden;position:relative;line-height:0;max-width:560px}
+.shotbox img{width:100%;display:block}
+.shotbox .hl{position:absolute;border:2px dashed var(--orange);background:rgba(230,119,0,.12);border-radius:4px}
+.v3box{margin:14px 0}
+.v3lbl{font-size:12px;font-weight:700;color:#2b8a3e;background:#ebfbee;border:1px solid #b2f2bb;border-radius:6px;padding:7px 11px;margin-bottom:7px}
+.shotcap{font-size:11px;color:var(--mid);padding:6px 10px;background:var(--bg);line-height:1.5}
+
+.copybox{border:1px solid var(--border);border-radius:8px;background:var(--bg);overflow:hidden}
+.copybox .bar{display:flex;justify-content:space-between;align-items:center;
+              padding:8px 12px;background:var(--lbg);border-bottom:1px solid var(--border)}
+.copybox .bar span{font-size:11.5px;color:var(--middark);font-weight:600}
+.copybox button{background:var(--dark);color:#fff;border:0;padding:5px 13px;border-radius:5px;
+                font:inherit;font-size:11.5px;cursor:pointer}
+.copybox button.ok{background:var(--green)}
+.copybox pre{padding:14px 16px;white-space:pre-wrap;word-break:break-word;
+             font-family:Pretendard,sans-serif;font-size:12.5px;color:var(--darkest);line-height:1.65}
+
+.toolbar{display:flex;gap:8px;margin-bottom:16px}
+.toolbar button{background:#fff;border:1px solid var(--border);border-radius:7px;padding:7px 14px;
+                font:inherit;font-size:12px;cursor:pointer;color:var(--middark)}
+.toolbar button:hover{border-color:var(--mid)}
+.done{opacity:.45}
+.chk{flex-shrink:0;width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;
+     cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;
+     color:#fff;margin-top:2px}
+.chk.on{background:var(--green);border-color:var(--green)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Figma Comment Guide</div>
+  <div class="f" id="filters"></div>
+  <div class="count" id="count"></div>
+</header>
+
+<div class="wrap">
+<div class="intro">
+  <h1>Figma Comment Guide</h1>
+  <div class="sub">Follow this guide to find each screen and paste the corresponding comment.</div>
+
+  <div class="how">
+    <b>How to add comments in Figma</b>
+    <ol>
+      <li>Open the Figma file <code>UI UX Design</code> → select <b>DEX</b> in the left page list</li>
+      <li>Press <b>C</b> to enter comment mode (or click the speech bubble icon at the top left)</li>
+      <li>Find the frame listed under <b>Comment location</b> on each card below and click it</li>
+      <li>Click <b>Copy</b>, paste into the comment field with <b>Ctrl+V</b> → send</li>
+      <li>After posting, check the square on the left of the card to mark it complete</li>
+    </ol>
+  </div>
+
+  <div class="tally" id="tally"></div>
+
+  <div class="warn">
+    <b>Finding a frame</b> — Paste the exact frame name into <b>Search (magnifying glass)</b> at the top of Figma to jump to it.
+    Example: <code>SCREEN-LABEL · H5 Signed in, DEX wallet linked</code><br><br>
+    <b>Terminology</b> — Use <b>cashback</b> in English. The Korean originals distinguish the legacy Korean term from the approved Korean term; both are translated as <b>cashback</b> here. References to Korean wording changes are explained explicitly. Prototype reference images are English renders of <code>사용자화면_DEX_V2.1.html</code>, including English translations for Korean text remaining in EN mode. Original Figma screenshots are retained for comparison.<br><br><b>Comment bodies are plain text.</b> Figma comments do not support bold or code formatting, so formatting symbols are omitted. Copied text will appear exactly as shown.
+  </div>
+</div>
+
+<div class="toolbar">
+  <button onclick="openAll(true)">Expand all</button>
+  <button onclick="openAll(false)">Collapse all</button>
+  <button onclick="resetChk()">Reset checks</button>
+</div>
+
+<div id="list"></div>
+</div>
+
+<script>
+const D = [
+  {
+    "id": "C-1",
+    "sev": "red",
+    "grp": "Cashback Hub",
+    "src": "Policy",
+    "t": "The DEX panel is missing an event reward row",
+    "sec": "DEX — Cashback Hub Web [Selected Design]",
+    "fr": "SCREEN-LABEL · H5 Signed in, DEX wallet linked  ·  H8 EdgeX wallet linked  ·  DW1 Withdraw popup",
+    "why": "The DEX panel currently shows only exchange cashback: <b>Total available cashback = Total exchange cashback</b>. The CEX tab explains <code>available = exchange + event reward</code>, but <b>the DEX tab has no such row.</b><br><br>Confirmed policy grants <b>event rewards to DEX users too</b>, and the withdrawable amount follows <b>a matching formula, rather than simple addition</b>. <span class=\"q\">Getting this wrong means showing users the wrong balance.</span>",
+    "img": "base/H5.png",
+    "hl": [
+      {
+        "l": 51,
+        "t": 54.5,
+        "w": 40.5,
+        "h": 6.5
+      }
+    ],
+    "cap": "Add an event reward row in the orange highlighted area",
+    "v3": "base/v21_en/DW1.png",
+    "v3cap": "Withdrawal list — three rows for cashback, event rewards, and withdrawable amount, plus matching guidance",
+    "txt": "[Confirmed policy update] The DEX panel is missing an event reward row\n\nThe DEX tab currently shows the same value for Total available cashback and Total exchange cashback. It includes exchange cashback only.\nThe CEX tab explains \"available = exchange + event reward\", but the DEX tab has no such row.\n\nConfirmed on 2026-10-23: DEX users receive event rewards too.\n\nThe withdrawable amount is not a simple sum.\n  Withdrawable amount = cashback + MIN(event rewards, cashback)\nThe event reward portion eligible for withdrawal cannot exceed the cashback amount.\n\nRequired rows (in both the hub panel and the withdrawal popup)\n  1) Exchange cashback\n  2) Event rewards\n  3) Withdrawable amount (after matching) - may differ from 1+2\n\nThe same applies to Total Available Cashback in the withdrawal popup (DW1). It currently equals Exchange Cashback, but must show the amount after matching.\n\nAdditional states required\n  · When event rewards exceed cashback: explain that only part can be withdrawn\n  · When cashback is 0 and only event rewards remain: withdrawable amount is 0\n\nReference — Our V2.1 prototype, Withdrawal > Withdrawal List, already uses this structure.\n  Each account has three rows: Cashback / Event Rewards / Available to Withdraw. Below them: \"Event rewards are matched 1:1 with cashback in the same account. The minimum withdrawal is 10 USDT per account.\"\n  Example: Bitget cashback 5.00 + event rewards 232.00 → available to withdraw 10.00 (after matching)"
+  },
+  {
+    "id": "S-11",
+    "sev": "orange",
+    "grp": "Cashback Hub",
+    "src": "Policy",
+    "t": "No state for multiple wallets on the same DEX",
+    "sec": "DEX — Cashback Hub Web",
+    "fr": "SCREEN-LABEL · H5 Signed in, DEX wallet linked",
+    "why": "The withdrawal popup (<code>BW1</code>) shows six wallets, but there is no <b>hub card state for multiple wallets on the same DEX</b>. CEX already has a pattern such as <code>Bitget +1</code>.",
+    "txt": "[Missing state] No card state for multiple wallets on the same DEX\n\nThe withdrawal popup BW1 shows six wallets, but the hub DEX card does not show how multiple wallets on the same DEX are displayed.\n\nCEX already uses a +N pattern such as \"Bitget +1\" / \"****123456 +1\".\nDEX cards also need both single-wallet and multiple-wallet states."
+  },
+  {
+    "id": "C-8",
+    "sev": "red",
+    "grp": "Withdrawal",
+    "src": "Policy",
+    "t": "Remove the screen that blocks new requests during processing",
+    "sec": "DEX — Withdraw, on TetherMax (main flow) Web [Light]",
+    "fr": "SCREEN-LABEL · PS2 Pending withdrawal",
+    "why": "Confirmed: <b>new withdrawal requests are not blocked while another is processing.</b> A DEX request sends separate transfers to multiple wallets, each progressing independently, so <b>a rule that blocks everything whenever any transfer is processing does not apply.</b>",
+    "txt": "[Removal request] Screen blocking new withdrawal requests during processing\n\nConfirmed: new requests are not blocked while a withdrawal is processing.\n\nKeep the cards visible during processing, then show success or failure when processing completes. A dedicated blocking screen is unnecessary.\n\nReason: a DEX withdrawal request sends separate transfers to multiple wallets, and each transfer progresses independently. A rule that blocks everything whenever any transfer is processing does not apply."
+  },
+  {
+    "id": "B-1",
+    "sev": "red",
+    "grp": "Withdrawal",
+    "src": "Baseline",
+    "t": "Missing balance deduction state (funds)",
+    "sec": "DEX — Withdraw, on TetherMax (main flow) Web [Light]",
+    "fr": "SCREEN-LABEL · DW6 Request sent  (also PW8 / BW4 / SW3)",
+    "why": "One of the seven existing withdrawal states is <b><code>withdrawal_pre_deducted</code> — deduct assets upon successful verification</b>. The baseline has been assessed as <b>applicable to V2 DEX as well</b>.<br><br>However, no screen shows <b>the reduced balance immediately after a request</b>. Without a visible deduction, <b>users may request the same amount again.</b>",
+    "txt": "[Missing state - funds] Balance deduction is not reflected on screen\n\nOf the seven existing withdrawal states, withdrawal_pre_deducted (deduct assets upon successful verification) also applies to V2 DEX.\n\nHowever, no screen shows the reduced balance immediately after a request.\n\nIf the deduction is not visible, users may try to request the same amount again. DEX transfers are asynchronous and can take longer, making this risk greater than for CEX.\n\nRequired\n  · Hub / My Cashback balances decrease immediately after the request\n  · Copy explaining the reduction (e.g., \"The amount requested for withdrawal is excluded from your balance until the result is confirmed.\")"
+  },
+  {
+    "id": "B-2",
+    "sev": "red",
+    "grp": "Withdrawal",
+    "src": "Baseline",
+    "t": "Missing balance restoration state after failure (funds)",
+    "sec": "DEX — Withdraw, on TetherMax (main flow) Web [Light]",
+    "fr": "SCREEN-LABEL · PE6 Payout failed  (also PE5 Payout delayed)",
+    "why": "The baseline defines <b><code>withdrawal_refunded</code> — restore the balance on failure</b>. The current screen has <b>no restoration notice</b>, leaving users unsure what happens to the deducted amount.<br><br>The screen notes also say <i>\"Delayed and failed copy waits for PM\"</i>, so <b>the copy is still missing.</b>",
+    "txt": "[Missing state - funds] No balance restoration notice after failure\n\nThe baseline withdrawal state withdrawal_refunded restores the balance on failure.\nPE6 Payout failed currently has no restoration notice. Users cannot tell what happens to the deducted amount.\n\nImportant: gas fees are not recovered through a refund.\nUsers must see their full withdrawal amount restored; TetherMax absorbs the gas cost. Do not subtract gas from the restored amount.\n\nThe screen notes also say \"Delayed and failed copy waits for PM\". The copy is still missing.\nCopy is needed for five types of on-chain withdrawal failure:\n  Invalid address / insufficient gas / network congestion / node error / insufficient balance"
+  },
+  {
+    "id": "B-13",
+    "sev": "orange",
+    "grp": "Withdrawal",
+    "src": "Baseline",
+    "t": "Show fee coverage text instead of a fee amount",
+    "sec": "DEX — Withdraw, on TetherMax (main flow) Web [Light]",
+    "fr": "SCREEN-LABEL · DW1 Withdraw popup  (including Network fee: TBC in DW3)",
+    "img": "base/DW1.png",
+    "hl": [
+      {
+        "l": 31.9,
+        "t": 59.4,
+        "w": 36.2,
+        "h": 3.2
+      }
+    ],
+    "cap": "Network fee row — keep the row and replace the amount with coverage text",
+    "why": "The <code>Network fee</code> row currently says <code>TBC</code>. Confirmed: <b>TetherMax covers the full fee</b>, so no amount needs to be shown. <b>Keep the row and replace the amount with explanatory text.</b><br><br>The <code>FIRST PASS NOTES</code> frame still says <i>\"Still open: network fee (who pays, shown as TBC)\"</i>, although <b>this has been decided.</b>",
+    "txt": "[Change request] Replace the gas fee amount with coverage text\n\nThe Network fee row currently says TBC.\n\nConfirmed: TetherMax covers the full network fee. Users receive exactly the amount requested.\n\nKeep the row and replace the amount with text such as:\n  Network fee     Fully covered by TetherMax\n\nThe FIRST PASS NOTES frame still says \"Still open: network fee (who pays, shown as TBC)\". This is already confirmed, so please update the notes too."
+  },
+  {
+    "id": "B-10",
+    "sev": "orange",
+    "grp": "Withdrawal",
+    "src": "Baseline",
+    "t": "Pending is used without a qualifier",
+    "sec": "DEX — Withdraw / Link / Hub",
+    "fr": "SCREEN-LABEL · PS2 Pending withdrawal  (including L11 and Accruing this week)",
+    "why": "The existing system has <b>no standalone <code>Pending</code> status</b>. It always uses a qualifier, such as <code>vip_application_pending</code> or <code>otp_unlink_email_pending</code>. DEX partner terminology also varies (Lighter: <code>Accruing</code>; ApeX: <code>Pending</code>), increasing confusion.",
+    "txt": "[Naming convention] Pending is used without a qualifier\n\nThe existing TetherMax system has no standalone Pending status. A qualifier is always included:\n  vip_application_pending / otp_unlink_email_pending / duplicate_uid_pending_merge / tp_retroactive_pending / league_p4_pending\n\nCurrently mixed together\n  · PS2 Pending withdrawal\n  · L11 Checking your referral (pending)\n  · Accruing this week\n\nDEX partner terminology also varies (Lighter = Accruing, ApeX = Pending), increasing confusion.\n\nPlease standardize on a domain prefix plus a qualifier.\n  Examples: settlement_accruing / settlement_pending_payout\n\nReference — Our V2.1 prototype uses \"Processing / Success / Failed\" and never Pending alone."
+  },
+  {
+    "id": "C-2",
+    "sev": "red",
+    "grp": "Cashback Summary",
+    "src": "Policy",
+    "t": "\"Event rewards are CEX only\" is incorrect",
+    "sec": "DEX — Cashback Summary Web [Light]",
+    "fr": "SCREEN-LABEL · CS3 Event reward day",
+    "why": "The screen description says <i>\"Event reward rows show the event name and the CEX UID. <b>Event rewards are CEX only.</b>\"</i> <span class=\"q\">The confirmed policy has changed — DEX users receive event rewards too.</span>",
+    "v3": "base/v21_en/CS3.png",
+    "v3cap": "Cashback history — includes a DEX event reward credit row",
+    "txt": "[Conflict with confirmed policy] Event rewards are CEX only is incorrect\n\nThe screen description says:\n\"Event reward rows show the event name and the CEX UID (CS-4). Event rewards are CEX only.\"\n\nThe confirmed policy has changed. DEX users receive event rewards too.\n\nRequired changes\n  · Event reward rows must include DEX\n  · Identify DEX accounts by wallet address, rather than CEX UID\n    Confirmed: display the full wallet address without masking.\n    Keep existing CEX UID masking.\n\nReference — Our V2.1 prototype, Cashback History, includes \"Lighter · General event reward credited · 20.00 USDT\". DEX users receive event rewards too."
+  },
+  {
+    "id": "S-5",
+    "sev": "orange",
+    "grp": "Cashback Summary",
+    "src": "Policy",
+    "t": "The exchange filter is missing group and scope selection",
+    "sec": "DEX — Cashback Summary Web [Light]",
+    "fr": "SCREEN-LABEL · CS6 Filter dropdowns",
+    "why": "Only <code>All Accounts</code> / <code>All Types</code> are currently available. Confirmed: filters covering both groups need <b>All / All CEX / All DEX</b> scope selection.",
+    "v3": "base/v21_en/CS3.png",
+    "v3cap": "Cashback history — exchange type and exchange filters above the calendar",
+    "txt": "[Missing state] The exchange filter is missing group and scope selection\n\nOnly All Accounts / All Types are currently available.\n\nConfirmed: filters covering both groups need these scope options:\n  All / All CEX / All DEX\n\nAlso apply the definition of \"Unlinked\":\nUnlinked = a member with no linked account on either CEX or DEX.\n\nImportant: an existing saved \"All CEX\" target must not automatically expand to include DEX. That would silently broaden the meaning of the saved target.\n\nReference — Our V2.1 prototype, Cashback History, already has \"Exchange type: All / CEX / DEX\" chips. Please use the same approach."
+  },
+  {
+    "id": "S-6",
+    "sev": "orange",
+    "grp": "Cashback Summary",
+    "src": "Policy",
+    "t": "The PRD flags a mismatch between calendar and daily totals",
+    "sec": "DEX — Cashback Summary Web [Light]",
+    "fr": "SCREEN-LABEL · CS1 Month view",
+    "why": "The PRD explicitly identifies a <b>design inconsistency</b>: <i>\"day 26 reads +37.40 USDT while its day list nets +17.40 USDT (design to align)\"</i>.",
+    "txt": "[Please verify] Calendar total and daily list total do not match\n\nThe PRD states:\n\"day 26 reads +37.40 USDT while its day list nets +17.40 USDT (design to align)\"\n\nPlease verify that these match in the final version.\nIf the calendar and daily list totals differ, users will contact support immediately."
+  },
+  {
+    "id": "S-7",
+    "sev": "orange",
+    "grp": "Cashback Summary",
+    "src": "Policy",
+    "t": "Cashback Summary has no DEX data delay state",
+    "sec": "DEX — Cashback Summary Web [Light]",
+    "fr": "SCREEN-LABEL · CS1 Month view  (including CS2–CS5)",
+    "why": "The hub has <code>H6 DEX data delayed</code>, but <b>Cashback Summary has no equivalent state</b>. Lighter settles weekly, so <b>days with no reported data are routine.</b>",
+    "v3": "base/v21_en/H6.png",
+    "v3cap": "Data delayed — separately explains that the confirmed balance remains withdrawable during delays",
+    "txt": "[Missing state] No DEX data delay state in Cashback Summary\n\nThe hub has H6 DEX data delayed, but Cashback Summary has no equivalent state.\n\nLighter settles once a week (Monday), so days with no reported data are routine in the summary.\nDistinguish \"Not yet calculated\" from \"0\".\n\nReference — Our V2.1 prototype, Home > Data Delayed, shows:\n  \"Updates to newly earned cashback are delayed. Your existing confirmed balance is unchanged and remains available for withdrawal.\"\n  Please use the same approach in the summary to distinguish \"Not yet calculated\" from \"0\"."
+  },
+  {
+    "id": "C-3",
+    "sev": "red",
+    "grp": "Invite Friends",
+    "src": "Policy",
+    "t": "Invitation rewards are marked as CEX only",
+    "sec": "DEX — Invite Friends Web [Light]",
+    "fr": "SCREEN-LABEL · IF8 / IF9 / IF10 Withdraw, select a CEX UID  +  IF11 UID Link Required",
+    "why": "The description says <i>\"Withdraw lists <b>only CEX UIDs</b>\"</i>, and the section says <i>\"<b>Invitation Rewards are CEX only</b>; DEX trading earns the inviter nothing\"</i>. <span class=\"q\">This directly conflicts with confirmed policy.</span>",
+    "txt": "[Conflict with confirmed policy] Invitation rewards are marked as CEX only\n\nThe current design says:\n  · \"Withdraw lists only CEX UIDs (IF-6)\"\n  · \"Invitation Rewards are CEX only; DEX trading earns the inviter nothing\"\n\nThis directly conflicts with confirmed policy.\nDEX referrals also earn invitation rewards, and DEX wallets are treated the same as CEX UIDs.\n\nRequired changes\n  1) Include DEX wallets in the receiving account lists in IF8–IF10\n  2) IF11 UID Link Required - a DEX wallet alone is sufficient to receive rewards, so this blocking condition does not apply\n  3) Invitation rewards are generated when the referred member withdraws\n     (Existing formula: referred member's withdrawal amount × exchange margin × reward rate)"
+  },
+  {
+    "id": "C-4",
+    "sev": "red",
+    "grp": "Partner Hub",
+    "src": "Policy",
+    "t": "\"Invite rewards stay CEX only\" is incorrect",
+    "sec": "DEX — Partner Hub Web [Light]",
+    "fr": "SCREEN-LABEL · PH1 Dashboard  /  PH2 Linked Accounts modal",
+    "why": "The section says <i>\"<b>Invite rewards stay CEX only</b>; DEX wallets are listed and counted but earn the inviter nothing\"</i>. This is the same issue as <code>C-3</code>.",
+    "txt": "[Conflict with confirmed policy] Invite rewards stay CEX only is incorrect\n\nThe section description says:\n\"Invite rewards stay CEX only; DEX wallets are listed and counted but earn the inviter nothing\"\n\nThis counts DEX wallets without granting rewards, but confirmed policy makes DEX eligible for invitation rewards too.\nThis is the same issue as IF8–IF11."
+  },
+  {
+    "id": "B-7",
+    "sev": "orange",
+    "grp": "Partner Hub",
+    "src": "Baseline",
+    "t": "Missing referred member activity states",
+    "sec": "DEX — Partner Hub Web [Light]",
+    "fr": "SCREEN-LABEL · PH1 Dashboard  /  PH2 Linked Accounts modal",
+    "why": "The baseline has assessed <code>subaccount_active</code> / <code>_idle</code> (7–21 days) / <code>_inactive</code> (21+ days) as <b>directly applicable to DEX</b>. <b>Reuse these existing states.</b>",
+    "txt": "[Apply existing states] Missing referred member activity states\n\nThese states are already defined in the baseline and have been assessed as directly applicable to DEX:\n  subaccount_active     - active within 7 days\n  subaccount_idle       - 7–21 days\n  subaccount_inactive   - 21 days or more\n\nPH1 / PH2 do not distinguish referred member activity states. Please reuse the existing states."
+  },
+  {
+    "id": "S-8",
+    "sev": "orange",
+    "grp": "Cashback Ranking",
+    "src": "Policy",
+    "t": "Missing ranking eligibility threshold and reward guidance",
+    "sec": "DEX — Cashback Ranking Web [Light]",
+    "fr": "SCREEN-LABEL · RK1 Ranking, rows  (including RK2 / RK3)",
+    "why": "① Confirmed: <b>cashback of at least 0.01 USDT qualifies for the ranking</b>. ② Confirmed: <b>ranking rewards are paid as event rewards</b>, so the matching formula applies.",
+    "v3": "base/v21_en/RK2.png",
+    "v3cap": "Cashback ranking — CEX UID and DEX wallet rows in one table",
+    "txt": "[Missing state] Ranking eligibility threshold and reward payment guidance are missing\n\n1) Eligibility threshold\nConfirmed: cashback of at least 0.01 USDT qualifies. Guidance is needed when the threshold is not met.\n\n2) Reward payment\nConfirmed: ranking rewards are paid as event rewards.\nThe matching formula therefore applies, and ranking rewards alone cannot be withdrawn. Explain this to users.\n\n3) Ranking basis\nRank by cashback amount, not trading volume. Please check that no \"trading volume\" wording remains.\n\nReference — Our V2.1 prototype, Ranking > My Rank, includes:\n  All exchange types / CEX / DEX chips, with CEX UIDs and DEX wallets in one ranking table,\n  and a note below: \"Cashback below 0.01 USDT is not included in the ranking.\""
+  },
+  {
+    "id": "C-5",
+    "sev": "red",
+    "grp": "Linking",
+    "src": "Policy",
+    "t": "Remove the Lighter Standard warning screen",
+    "sec": "DEX — Link, all states and detail page entry Web [Light]",
+    "fr": "SCREEN-LABEL · L10 Lighter Standard account  (+ L11 description)",
+    "why": "The description says <i>\"Non-blocking warning: Standard accounts pay no fees, so no cashback.\"</i> Confirmed <code>D-6</code>: <b>show neither a warning nor a block.</b><br><br><span class=\"q\">Keeping the warning makes the <code>account_tier</code> API mandatory again, turning the Lighter partner response back into a launch blocker.</span>",
+    "v3": "base/v21_en/L10.png",
+    "v3cap": "Link trading account — link directly without a Standard warning",
+    "txt": "[Removal request] Lighter Standard warning screen\n\nThe description says \"Non-blocking warning: Standard accounts pay no fees, so no cashback.\"\n\nConfirmed D-6: show neither a warning nor a block. Link Lighter Standard accounts just like other wallets.\n\nRemove L10 from the current scope.\nAlso remove \"or the Lighter account is Standard\" from the L11 Checking your referral description.\n\nReason: this warning requires account_tier, but we changed the account_tier API from required to optional. Keeping the warning would make the Lighter partner response a launch blocker again.\n\nReference — Our V2.1 prototype, Link > Link Trading Account, has no Standard warning.\n  It simply says \"For DEX, just enter your wallet address\". Exchange Details (V2.1 Lighter Cashback) also only explains:\n  \"Cashback applies to Premium and Plus accounts. Standard accounts can also be linked.\" There is no block or warning modal."
+  },
+  {
+    "id": "S-2",
+    "sev": "orange",
+    "grp": "Linking",
+    "src": "Policy",
+    "t": "Linking limit copy reads as if it applies only to DEX",
+    "sec": "DEX — Link, all states and detail page entry Web [Light]",
+    "fr": "SCREEN-LABEL · L15 Wallet limit reached",
+    "why": "Confirmed: a single linking limit applies to <b>the total number of trading accounts across CEX and DEX</b>. Existing onboarding rules also <b>do not disclose the limit calculation to users</b>.",
+    "txt": "[Change request] Linking limit copy\n\nConfirmed: CEX and DEX do not have separate linking limits. One limit applies to the member's total number of trading accounts.\n\nRequired changes\n  · Do not make the copy read as a \"DEX wallet limit\". Use \"trading accounts\"\n  · Accounts being checked (Processing) also count toward the limit. Reflect that in the copy\n\nReference: existing onboarding rules do not disclose the limit formula to users.\nThe existing modal is specified as \"You can link up to {number of exchanges × 3} UIDs\", with the formula hidden and only the resulting number shown.\nPlease also check that this copy follows the same rule.\n\nReference — Our V2.1 prototype's Linking Limit description says:\n  \"One linking limit applies across CEX and DEX. Accounts being checked also count toward the total.\"\n  Please write the copy on that basis."
+  },
+  {
+    "id": "C-9",
+    "sev": "orange",
+    "grp": "Linking",
+    "src": "Policy",
+    "t": "The first DEX link flow advertises a coupon",
+    "sec": "DEX — Link stories on home (S3, S4) Web [Light]",
+    "fr": "SCREEN-LABEL · S3-1 Home, nothing linked",
+    "why": "The description includes <i>\"checklist with the <b>3 USDT first-link coupon</b>\"</i>. Confirmed: <b>coupons can be used on DEX, but issuance is limited to the first CEX link</b>.",
+    "v3": "base/v21_en/CP1.png",
+    "v3cap": "Use coupon — receiving accounts include a DEX wallet (Lighter)",
+    "txt": "[Change request] Coupon issuance guidance in the first DEX link flow\n\nThe description says \"Total Cashback Balance 0 USDT, checklist with the 3 USDT first-link coupon (LW-26, LW-30)\".\n\nConfirmed: the 3 USDT first-link coupon can be used on DEX, but it is issued only for the first CEX link.\n\nRemove the coupon issuance guidance from the first DEX link flow.\nKeep the ability to use an already-held coupon on DEX.\n\nReference — Our V2.1 prototype, Coupons > Use Coupon, includes a DEX wallet (Lighter) among receiving accounts.\n  Usage includes DEX; issuance is limited to the first CEX link."
+  },
+  {
+    "id": "B-3",
+    "sev": "red",
+    "grp": "Home Lists",
+    "src": "Baseline",
+    "t": "Remove the status chip on the Aster row",
+    "sec": "DEX — Link stories on home (S3, S4) Web [Light]",
+    "fr": "SCREEN-LABEL · S4-6 Back on home, new row  (including S4-1)",
+    "why": "A <b>light-blue pill still containing the placeholder <code>Chip</code></b> appears below the Aster row. <b>It appears intended to show Aster’s remaining binding period.</b><br><br><span class=\"q\">If so, policy has changed and this is no longer needed — continuous binding has been confirmed.</span>",
+    "img": "base/HOME_LINKED.png",
+    "hl": [
+      {
+        "l": 16.6,
+        "t": 57.6,
+        "w": 5.2,
+        "h": 4.2
+      }
+    ],
+    "cap": "Light-blue pill below the Aster row — remove this chip",
+    "txt": "[Removal request] Status chip on the Aster row\n\nA light-blue pill below the Aster row still contains the placeholder \"Chip\". Aster is the only row with this chip.\n\nIt appears intended to show the remaining Aster binding period (365-day binding).\nIf so, policy has changed and it is no longer needed. Continuous binding has been confirmed.\n\nPlease remove the chip.\n\nAlso remove the following based on the same premise:\n  · Hub H9 Aster referral expiring\n  · Hub H10 Aster referral expired\n    (8 frames across web / mobile / dark mode)\n  · Expiration guidance in DEX Details\n\nIf it was intended for another purpose, please let us know. We will specify the copy."
+  },
+  {
+    "id": "B-5",
+    "sev": "orange",
+    "grp": "Home Lists",
+    "src": "Baseline",
+    "t": "No handling for more than 10 wallets",
+    "sec": "DEX — Link stories on home / Withdraw",
+    "fr": "SCREEN-LABEL · S4-1 Home with linked accounts  (including BW1)",
+    "why": "Baseline display rule: <b>when there are 11 or more UID entries, show only 10 until Show more is clicked.</b> <code>BW1</code> only shows up to six.",
+    "txt": "[Missing state] No Show more behavior for lists with 11 or more wallets\n\nBaseline display rule: when there are 11 or more UID entries, show only 10 until \"Show more\" is clicked.\n\nBW1 Withdraw popup only shows up to six wallets and has no handling for larger lists.\nThe linking limit readily allows more than 10 wallets.\n\nApply the same rule to the Linked Accounts list on Home.\n\nNote: our V2.1 prototype is also missing this behavior. We will add it on our side too."
+  },
+  {
+    "id": "B-4",
+    "sev": "orange",
+    "grp": "Home Lists",
+    "src": "Baseline",
+    "t": "No display priority when states overlap",
+    "sec": "DEX — Cashback Hub Web",
+    "fr": "SCREEN-LABEL · H6 DEX data delayed  (together with H7 Balance did not load)",
+    "why": "The baseline has only <b>one global priority rule: the seven UID states</b>. <b>Data delay, balance loading failure, and linking in progress</b> can occur on one card simultaneously, but no display priority is defined.",
+    "v3": "base/v21_en/H6.png",
+    "v3cap": "Data delayed — explains that the confirmed balance remains withdrawable during delays",
+    "txt": "[Rule needed] No priority defined when states overlap\n\nThere is no rule for what to display when H6 data delayed + H7 balance loading failure + linking pending (link attempt in progress) occur together.\n\nLighter settles weekly, so delay periods are long. During that period, a balance lookup can fail or another wallet on the same exchange may be pending. These states do overlap in practice.\n\nThe baseline has only one global priority rule: the seven UID states.\nPlease extend it using the same format (integer priority 1..n).\n\nThe existing convention is to show only the highest-priority state. (My Portfolio also shows only one failure card.)\n\nReference — Our V2.1 prototype, Home > Data Delayed, shows only the delay message:\n  \"Updates to newly earned cashback are delayed. Your existing confirmed balance is unchanged and remains available for withdrawal.\"\n  Note: V2.1 also has no rule for overlapping states. We need to define this rule together."
+  },
+  {
+    "id": "S-9",
+    "sev": "orange",
+    "grp": "DEX Details",
+    "src": "Policy",
+    "t": "Missing review eligibility and badge conditions",
+    "sec": "DEX — DEX detail Web [Light]",
+    "fr": "SCREEN-LABEL · D3 FAQ, reviews and terms",
+    "why": "Confirmed <code>D-5</code>: reviews require <b>a successfully linked account</b>; <b>Processing never qualifies</b>. Confirmed <code>D-4</code>: <b>show ✓ Verified once linked.</b>",
+    "v3": "base/v21_en/D2.png",
+    "v3cap": "Reviews — includes the empty state, Verified badge, and eligibility guidance",
+    "txt": "[Missing state] Review eligibility and badge conditions are missing\n\n1) Review eligibility\nConfirmed D-5: writing a review requires a successfully linked account on the exchange.\nProcessing never qualifies. A review-disabled state is needed.\n\n2) Verified badge\nConfirmed D-4: show \"✓ Verified\" once linking is complete. Cashback history and ownership verification are not conditions.\n\n3) No empty state for zero reviews.\n\nReference — Our V2.1 prototype, Exchange Details > Reviews, has all three:\n  \"No reviews yet\" empty state / \"My review author badge ✓ Verified\" / \"Members with a successfully linked account can write a review\""
+  },
+  {
+    "id": "B-6",
+    "sev": "red",
+    "grp": "DEX Details",
+    "src": "Baseline",
+    "t": "Missing the three member status branches",
+    "sec": "DEX — DEX detail Web [Light]",
+    "fr": "SCREEN-LABEL · D1 Key features  (including D2 / D3)",
+    "why": "The baseline has assessed <code>exchange_guest</code> / <code>member_unlinked</code> / <code>member_linked</code> as <b>immediately reusable for DEX Details</b>. <b>Reuse these existing states</b>, but the branches are missing.",
+    "v3": "base/v21_en/D1.png",
+    "v3cap": "Lighter Details — Link / Withdraw actions change based on member status",
+    "txt": "[Apply existing states] DEX Details is missing the three member status branches\n\nThese states are already defined in the baseline and have been assessed as immediately reusable for DEX Details:\n  exchange_guest    - guest\n  member_unlinked   - member, no linked account\n  member_linked     - member, linking complete\n\nD1–D3 do not branch by member status. All three states are required, together with:\n  · Review eligibility - only successfully linked accounts qualify (Processing does not)\n  · ✓ Verified badge - shown once linking is complete\n\nReference — Our V2.1 prototype, Exchange Details > Lighter Cashback, changes the Link / Withdraw / View Reviews actions based on the member's status."
+  },
+  {
+    "id": "S-10",
+    "sev": "orange",
+    "grp": "DEX Overview",
+    "src": "Policy",
+    "t": "Missing the state with no DEXs to display",
+    "sec": "DEX — DEX overview Web",
+    "fr": "SCREEN-LABEL · OA Guest, DEX overview (keys)  (both web and mobile)",
+    "why": "An overflow state for eight partners exists, but there are no states for <b>zero visible DEXs</b> or <b>a particular DEX under maintenance</b>. These will occur because admins can disable the flags.",
+    "txt": "[Missing state] DEX Overview has no empty or maintenance state\n\nAn overflow state for eight partners exists, but the following are missing:\n  · Zero DEXs available to display\n  · A particular DEX under maintenance / temporarily unavailable for linking\n\nThese states will occur because admins can turn off visibility and linking flags.\n\nOne more state is missing on mobile:\n  Web has \"OA 8 partner DEXs, overflow\", but mobile DEX Overview has no equivalent.\n  Web has 3 states + 1 overflow state = 4, while mobile has only 3.\n  Mobile is narrower, so overflow happens sooner than on web."
+  },
+  {
+    "id": "B-8",
+    "sev": "yellow",
+    "grp": "DEX Overview",
+    "src": "Baseline",
+    "t": "No behavior defined for configuration lookup failure",
+    "sec": "DEX — DEX overview Web",
+    "fr": "SCREEN-LABEL · OA Guest, DEX overview (keys)",
+    "why": "The baseline includes <code>fail_safe_off</code> — <b>turn everything OFF if configuration lookup fails</b> — and <b>recommends inheriting this for DEX visibility flags</b>.",
+    "txt": "[Inherit existing pattern] No behavior defined for configuration lookup failure\n\nThere is no rule for showing or hiding DEXs if the admin visibility / linking configuration lookup fails.\n\nThe baseline already has the same pattern: the WOOX promotion configuration fail-safe turns everything OFF on lookup failure.\nWe recommend inheriting it for DEX visibility flags.\n\nThe default should be hidden. Exposing an exchange that cannot be linked during a lookup failure causes users to attempt linking and fail."
+  },
+  {
+    "id": "C-6",
+    "sev": "red",
+    "grp": "Ownership Verification",
+    "src": "Policy",
+    "t": "Out of scope for this release (14 screens)",
+    "sec": "DEX — Ownership verification Web [Light]",
+    "fr": "GROUP-LABEL · B · OWNERSHIP VERIFICATION PAGE  (O3–O16)",
+    "why": "Confirmed <code>A-16</code> (2026-10-20): <b>DEX wallet ownership claims are excluded from this release</b> and replaced by a support route. <span class=\"q\">Of the section’s 34 frames, 14 screens are out of scope.</span>",
+    "v3": "base/v21_en/OWN2.png",
+    "v3cap": "Wallet already in use — the current prototype directs users to support",
+    "txt": "[Scope clarification] Ownership verification is out of scope for this release\n\nConfirmed A-16 (2026-10-20): DEX wallet ownership claims are excluded from this release and replaced by a support route.\n\nOnly O2 Ownership claim unavailable is in scope in this section. O3–O16 (14 screens) are out of scope.\nPlease retain them for a future release rather than deleting them.\n\nRelated changes\n  · Replace \"Verify Ownership\" on O1 Wallet already in use with support guidance\n  · Remove the ownership entry point from O0 Home, link another wallet\n  · Check ownership prompts on link failure screens (L9 Wallet already in use, S3-F4, S4-F3)\n\nThank you for the work already done. This resulted from the late scope decision.\n\nReference — Our V2.1 prototype, Ownership / Portfolio Exclusions, matches the current scope:\n  \"DEX does not support ownership verification, transfer requests, or My Portfolio. Account corrections and unlinking are handled by the backend after a support request.\"\n  This single guidance screen is sufficient in place of O3–O16."
+  },
+  {
+    "id": "C-7",
+    "sev": "red",
+    "grp": "Quiz",
+    "src": "Policy",
+    "t": "Quiz rewards are shown as claimed to an exchange",
+    "sec": "Quiz Module page with Decentralised Trading",
+    "fr": "Signed In, Module 5  /  Quiz 5",
+    "why": "The screen says <i>\"Quiz rewards only, <b>claimed to an exchange</b>\"</i>. Confirmed: quiz rewards are <b>credited to the TetherMax balance as event rewards</b>.",
+    "txt": "[Conflict with confirmed policy] Quiz rewards are shown as claimed to an exchange\n\nThe screen says \"Quiz rewards only, claimed to an exchange\".\n\nConfirmed: quiz rewards are credited to the TetherMax balance as event rewards. They are not claimed to an exchange.\n\nThe matching formula therefore applies.\nQuiz rewards alone cannot be withdrawn, and the reward portion eligible for withdrawal cannot exceed cashback. Include this in the reward guidance.\n\nReference: quiz support has been confirmed (reversing the previous assessment that the feature was unavailable).\n\nNote: our V2.1 prototype still says \"Quizzes and early settlement are currently unavailable\". We will update it on our side too."
+  },
+  {
+    "id": "B-16",
+    "sev": "orange",
+    "grp": "Global",
+    "src": "Baseline",
+    "t": "Web dark mode is limited to Hub, Overview, and Details",
+    "sec": "All sections",
+    "fr": "Post on any frame and label it \"Dark mode scope\"",
+    "why": "The baseline calls for a new DEX status chip system while specifying <b>dark mode</b> as one of <b>two items to inherit</b>.",
+    "txt": "[Scope clarification] Dark mode coverage\n\nDark mode is one of the two baseline items DEX must inherit.\n\nCurrently available\n  · Mobile: Hub / DEX Overview / DEX Details\n  · Desktop: Landing / Service Introduction\n\nMissing\n  All web screens for Withdrawal / Linking / Cashback Summary / Ranking / Invite Friends / Partner Hub\n\nPlease define the scope of dark mode coverage."
+  },
+  {
+    "id": "B-17",
+    "sev": "yellow",
+    "grp": "Global",
+    "src": "Baseline",
+    "t": "No Korean screens are available for copy review",
+    "sec": "All sections",
+    "fr": "Post on any frame and label it \"Korean version location\"",
+    "why": "All DEX sections are in English. One baseline inheritance item is <b>conversational Korean sentence endings</b>, but there are no Korean screens to review.",
+    "v3": "base/v21_en/LKD.png",
+    "v3cap": "Linked account details — English rendering of the V2.1 copy reference",
+    "txt": "[Please confirm] Where the Korean DEX version will live\n\nAll DEX sections are in English, so we cannot review the Korean copy.\n\nConversational Korean sentence endings are one of the baseline items to inherit.\n  Examples (English translations): \"We're checking ownership\" / \"Linking failed\" / \"The account has been unlinked\"\n\nFor status labels in particular, the Korean wording itself defines the state.\n\nThe file has a separate KO Polishing page. Please decide where the Korean DEX version will live.\n\nReference — Every screen in our V2.1 prototype is in Korean and can be used as a copy reference."
+  },
+  {
+    "id": "S-14",
+    "sev": "orange",
+    "grp": "Global",
+    "src": "Policy",
+    "t": "Mobile covers only three screen types",
+    "sec": "Mobile",
+    "fr": "Any ROWLABEL frame in the Mobile section",
+    "why": "Mobile has only <b>Hub / DEX Overview / DEX Details</b>. Withdrawal and linking are <b>features with a higher mobile usage share</b>.",
+    "txt": "[Scope clarification] Mobile coverage\n\nMobile has only Hub / DEX Overview / DEX Details.\n\nAvailable on web but missing on mobile\n  · Withdrawal (39 screens) - all DW / PW / HW / PS / PE / BW / SW\n  · Linking (18 screens) - L0–L17\n  · Linking stories (S3 / S4 series)\n  · Cashback Summary (CS1–CS6)\n  · Cashback Ranking (RK1–RK3)\n  · Invite Friends (IF1–IF11)\n  · Partner Hub (PH1 / PH2)\n  · Pre-login Landing / Service Introduction - desktop only\n\nWithdrawal and linking have a higher mobile usage share, so they are high priority."
+  }
+];
+
+/* ── render ── */
+const SEV={red:["p-red","🔴 Conflict"],orange:["p-orange","🟠 Missing"],yellow:["p-yellow","🟡 Review"]};
+const list=document.getElementById("list");
+let filter="all";
+
+function render(){
+  list.innerHTML="";
+  const items=D.filter(d=>filter==="all"||(filter==="red"&&d.sev==="red")
+    ||(filter==="orange"&&d.sev==="orange")||(filter==="yellow"&&d.sev==="yellow")
+    ||(filter==="Policy"&&d.src==="Policy")||(filter==="Baseline"&&d.src==="Baseline"));
+  let last=null;
+  items.forEach(d=>{
+    if(d.grp!==last){
+      last=d.grp;
+      const h=document.createElement("div");
+      h.className="sec";
+      h.innerHTML=`<h2>${d.grp}</h2><span>${items.filter(x=>x.grp===d.grp).length} items</span>`;
+      list.appendChild(h);
+    }
+    const c=document.createElement("div");
+    c.className="card "+d.sev;
+    if(localStorage.getItem("fc_en_"+d.id)==="1") c.classList.add("done");
+    const shot = (d.img ? `<div class="shotbox"><img src="${d.img}" alt="">`
+      + (d.hl||[]).map(h=>`<div class="hl" style="left:${h.l}%;top:${h.t}%;width:${h.w}%;height:${h.h}%"></div>`).join("")
+      + `</div><div class="shotcap">Current Figma — ${d.cap||""}</div>` : "")
+      + (d.v3 ? `<div class="v3box"><div class="v3lbl">✅ Our V2.1 prototype — reference implementation</div>`
+      + `<div class="shotbox" style="border-color:#b2f2bb"><img src="${d.v3}" alt=""></div>`
+      + `<div class="shotcap" style="background:#ebfbee;color:#2b8a3e">${d.v3cap||""}</div></div>` : "");
+    c.innerHTML=`
+      <div class="chead">
+        <div class="chk ${localStorage.getItem("fc_en_"+d.id)==="1"?"on":""}" data-id="${d.id}">✓</div>
+        <span class="pill ${SEV[d.sev][0]}">${SEV[d.sev][1]} ${d.id}</span>
+        <div class="ctitle">
+          <b>${d.t}</b>
+          <div class="loc">Comment location — <em>${d.fr}</em><br>Section: ${d.sec}</div>
+        </div>
+        <div class="arrow">▶</div>
+      </div>
+      <div class="cbody">
+        <div class="why">${d.why||""}</div>
+        ${shot}
+        <div class="copybox">
+          <div class="bar"><span>Text to paste into a Figma comment</span><button>Copy</button></div>
+          <pre></pre>
+        </div>
+      </div>`;
+    c.querySelector("pre").textContent=d.txt;
+    c.querySelector(".chead").onclick=e=>{
+      if(e.target.classList.contains("chk")) return;
+      c.classList.toggle("open");
+    };
+    c.querySelector(".chk").onclick=()=>{
+      const on=localStorage.getItem("fc_en_"+d.id)==="1";
+      localStorage.setItem("fc_en_"+d.id,on?"0":"1");
+      render();
+    };
+    c.querySelector(".copybox button").onclick=ev=>{
+      const b=ev.target;
+      const copy=t=>{try{return navigator.clipboard.writeText(t);}catch(e){return Promise.reject(e);}};
+      copy(d.txt).catch(()=>{
+        const ta=document.createElement("textarea");
+        ta.value=d.txt; document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); ta.remove();
+      }).finally(()=>{
+        b.textContent="Copied"; b.classList.add("ok");
+        setTimeout(()=>{b.textContent="Copy"; b.classList.remove("ok");},1400);
+      });
+    };
+    list.appendChild(c);
+  });
+  const done=D.filter(d=>localStorage.getItem("fc_en_"+d.id)==="1").length;
+  document.getElementById("count").textContent=`${items.length} shown · Completed ${done}/${D.length}`;
+}
+
+const FILTERS=[["all","All"],["red","🔴 Conflict"],["orange","🟠 Missing"],["yellow","🟡 Review"],
+               ["Policy","Confirmed policy"],["Baseline","Existing state baseline"]];
+const fb=document.getElementById("filters");
+FILTERS.forEach(([k,label])=>{
+  const b=document.createElement("button");
+  b.textContent=label+(k==="all"?` (${D.length})`:` (${D.filter(d=>d.sev===k||d.src===k).length})`);
+  b.onclick=()=>{filter=k;[...fb.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");render();};
+  if(k==="all")b.classList.add("on");
+  fb.appendChild(b);
+});
+
+const T=[["🔴 Conflict","red"],["🟠 Missing","orange"],["🟡 Review","yellow"]];
+document.getElementById("tally").innerHTML =
+  T.map(([l,k])=>`<div><span>${l}</span><b>${D.filter(d=>d.sev===k).length} items</b></div>`).join("")
+  + `<div><span>Confirmed policy</span><b>${D.filter(d=>d.src==="Policy").length} items</b></div>`
+  + `<div><span>Existing state baseline</span><b>${D.filter(d=>d.src==="Baseline").length} items</b></div>`;
+
+function openAll(v){document.querySelectorAll(".card").forEach(c=>c.classList.toggle("open",v));}
+function resetChk(){D.forEach(d=>localStorage.removeItem("fc_en_"+d.id));render();}
+render();
+</script>
+</body>
+</html>

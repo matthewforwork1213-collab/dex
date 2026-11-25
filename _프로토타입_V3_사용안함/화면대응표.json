@@ -1,0 +1,432 @@
+[
+  {
+    "mode": "user",
+    "key": "home/S4",
+    "title": "회원 · 연동 있음"
+  },
+  {
+    "mode": "user",
+    "key": "home/EXP",
+    "title": "Aster 귀속 만료"
+  },
+  {
+    "mode": "user",
+    "key": "home/LKD",
+    "title": "연동 계정 상세"
+  },
+  {
+    "mode": "user",
+    "key": "home/PUBLIC",
+    "title": "비회원 홈"
+  },
+  {
+    "mode": "user",
+    "key": "hub/H1-CEX",
+    "title": "게스트 · CEX 탭"
+  },
+  {
+    "mode": "user",
+    "key": "hub/H1-DEX",
+    "title": "게스트 · DEX 탭"
+  },
+  {
+    "mode": "user",
+    "key": "hub/H5",
+    "title": "회원 · DEX 연동"
+  },
+  {
+    "mode": "user",
+    "key": "hub/H6",
+    "title": "데이터 지연"
+  },
+  {
+    "mode": "user",
+    "key": "lnd/LND1",
+    "title": "DEX 소개"
+  },
+  {
+    "mode": "user",
+    "key": "lnd/LND2",
+    "title": "DEX 거래소 목록"
+  },
+  {
+    "mode": "user",
+    "key": "lnd/QZ",
+    "title": "범위 제외 · 현재 기능 없음"
+  },
+  {
+    "mode": "user",
+    "key": "link/L0",
+    "title": "거래소 선택"
+  },
+  {
+    "mode": "user",
+    "key": "link/L1",
+    "title": "DEX 선택"
+  },
+  {
+    "mode": "user",
+    "key": "link/L3",
+    "title": "주소 입력"
+  },
+  {
+    "mode": "user",
+    "key": "link/L7",
+    "title": "연동 완료"
+  },
+  {
+    "mode": "user",
+    "key": "link/L8",
+    "title": "레퍼럴 아님 · 차단"
+  },
+  {
+    "mode": "user",
+    "key": "link/L10",
+    "title": "Standard 계정"
+  },
+  {
+    "mode": "user",
+    "key": "link/E4",
+    "title": "게스트 · 통합 목록"
+  },
+  {
+    "mode": "user",
+    "key": "link/PENDING",
+    "title": "연동 확인 중"
+  },
+  {
+    "mode": "user",
+    "key": "own/O1",
+    "title": "이미 사용중인 지갑"
+  },
+  {
+    "mode": "user",
+    "key": "own/CMP",
+    "title": "CEX와 비교"
+  },
+  {
+    "mode": "user",
+    "key": "own/OWN2",
+    "title": "소유권·포트폴리오 제외"
+  },
+  {
+    "mode": "user",
+    "key": "rule/R1",
+    "title": "출금 · 통합"
+  },
+  {
+    "mode": "user",
+    "key": "rule/R2",
+    "title": "적용 지점"
+  },
+  {
+    "mode": "user",
+    "key": "wd/DW1",
+    "title": "출금 목록"
+  },
+  {
+    "mode": "user",
+    "key": "wd/DW0",
+    "title": "출금 가능 없음"
+  },
+  {
+    "mode": "user",
+    "key": "wd/DW2",
+    "title": "신청 완료"
+  },
+  {
+    "mode": "user",
+    "key": "wd/DW3",
+    "title": "출금 신청 공유"
+  },
+  {
+    "mode": "user",
+    "key": "wd/NM",
+    "title": "비회원 출금"
+  },
+  {
+    "mode": "user",
+    "key": "wd/AUTH",
+    "title": "출금 인증"
+  },
+  {
+    "mode": "user",
+    "key": "wd/RESULT",
+    "title": "계정별 결과"
+  },
+  {
+    "mode": "user",
+    "key": "hist/CS3",
+    "title": "캘린더"
+  },
+  {
+    "mode": "user",
+    "key": "hist/TZ",
+    "title": "집계 기준"
+  },
+  {
+    "mode": "user",
+    "key": "bnf/LIST",
+    "title": "혜택 목록"
+  },
+  {
+    "mode": "user",
+    "key": "bnf/UIDM",
+    "title": "UID 연동 미션"
+  },
+  {
+    "mode": "user",
+    "key": "exd/D1",
+    "title": "Lighter 상세"
+  },
+  {
+    "mode": "user",
+    "key": "exd/D2",
+    "title": "리뷰"
+  },
+  {
+    "mode": "user",
+    "key": "rk/RK2",
+    "title": "내 순위"
+  },
+  {
+    "mode": "user",
+    "key": "ch/CH1",
+    "title": "챌린지 게이지"
+  },
+  {
+    "mode": "user",
+    "key": "ch/CH2",
+    "title": "수령 계정 선택"
+  },
+  {
+    "mode": "user",
+    "key": "lg/LG1",
+    "title": "팀 리그"
+  },
+  {
+    "mode": "user",
+    "key": "mb/MB1",
+    "title": "빙고판"
+  },
+  {
+    "mode": "user",
+    "key": "ph/PH1",
+    "title": "대시보드"
+  },
+  {
+    "mode": "user",
+    "key": "ph/PH2",
+    "title": "하위 계정"
+  },
+  {
+    "mode": "user",
+    "key": "ph/PH3",
+    "title": "연동된 UID 모달"
+  },
+  {
+    "mode": "user",
+    "key": "inv/IF8",
+    "title": "리워드 출금"
+  },
+  {
+    "mode": "user",
+    "key": "cp/CP1",
+    "title": "쿠폰 사용"
+  },
+  {
+    "mode": "user",
+    "key": "etc/EML",
+    "title": "이메일 템플릿"
+  },
+  {
+    "mode": "user",
+    "key": "etc/BST",
+    "title": "부스트 · CEX 전용"
+  },
+  {
+    "mode": "user",
+    "key": "etc/EVT",
+    "title": "이벤트 목록"
+  },
+  {
+    "mode": "user",
+    "key": "etc/FEED",
+    "title": "실시간 출금 피드"
+  },
+  {
+    "mode": "user",
+    "key": "etc/TERM",
+    "title": "약관"
+  },
+  {
+    "mode": "user",
+    "key": "etc/TP",
+    "title": "포인트 적립 내역"
+  },
+  {
+    "mode": "user",
+    "key": "etc/ABOUT",
+    "title": "서비스 소개"
+  },
+  {
+    "mode": "user",
+    "key": "etc/PARTNERS",
+    "title": "공식 파트너 캐러셀"
+  },
+  {
+    "mode": "user",
+    "key": "pending/LIST",
+    "title": "남은 확인 사항"
+  },
+  {
+    "mode": "admin",
+    "key": "ex/EX-1",
+    "title": "거래소 리스트"
+  },
+  {
+    "mode": "admin",
+    "key": "ex/EX-2",
+    "title": "거래소 설정"
+  },
+  {
+    "mode": "admin",
+    "key": "ex/EX-3",
+    "title": "소유확인 가이드 슬라이드"
+  },
+  {
+    "mode": "admin",
+    "key": "ex/EX-4",
+    "title": "래퍼럴 · 마진율"
+  },
+  {
+    "mode": "admin",
+    "key": "ex/EX-5",
+    "title": "이벤트 관리"
+  },
+  {
+    "mode": "admin",
+    "key": "ex/EX-6",
+    "title": "거래소 가이드 상세"
+  },
+  {
+    "mode": "admin",
+    "key": "ex/EX-7",
+    "title": "거래소 순위 수정"
+  },
+  {
+    "mode": "admin",
+    "key": "ac/AC-1",
+    "title": "계정 리스트"
+  },
+  {
+    "mode": "admin",
+    "key": "ac/AC-2",
+    "title": "소유 확인 심사"
+  },
+  {
+    "mode": "admin",
+    "key": "ac/AC-3",
+    "title": "수동 연동"
+  },
+  {
+    "mode": "admin",
+    "key": "mb/MB-1",
+    "title": "회원 리스트"
+  },
+  {
+    "mode": "admin",
+    "key": "mb/MB-4",
+    "title": "회원 연동 계정 모달"
+  },
+  {
+    "mode": "admin",
+    "key": "pa/MB-3",
+    "title": "제휴사 목록"
+  },
+  {
+    "mode": "admin",
+    "key": "pa/MB-2",
+    "title": "제휴사 등록 모달"
+  },
+  {
+    "mode": "admin",
+    "key": "pa/MB-5",
+    "title": "제휴사 하부 내역"
+  },
+  {
+    "mode": "admin",
+    "key": "pb/PB-1",
+    "title": "전체 내역"
+  },
+  {
+    "mode": "admin",
+    "key": "sd/SD-1",
+    "title": "수동 푸시 대상"
+  },
+  {
+    "mode": "admin",
+    "key": "sd/SD-2",
+    "title": "이메일 캠페인 대상"
+  },
+  {
+    "mode": "admin",
+    "key": "sd/SD-3",
+    "title": "이벤트 안내 이메일 전송"
+  },
+  {
+    "mode": "admin",
+    "key": "cp/CP-1",
+    "title": "수동 쿠폰 발송"
+  },
+  {
+    "mode": "admin",
+    "key": "iv/IV-1",
+    "title": "출금 트리 - 초대 보상"
+  },
+  {
+    "mode": "admin",
+    "key": "pt/PT-1",
+    "title": "포인트 관리"
+  },
+  {
+    "mode": "admin",
+    "key": "lg/LG-1",
+    "title": "글로벌 리그 생성"
+  },
+  {
+    "mode": "admin",
+    "key": "bd/LG-2",
+    "title": "맥스보드 빙고판 생성"
+  },
+  {
+    "mode": "admin",
+    "key": "nw/NW-1",
+    "title": "예상 페이백 계산기"
+  },
+  {
+    "mode": "admin",
+    "key": "nw/NW-2",
+    "title": "소개 카드 편집"
+  },
+  {
+    "mode": "admin",
+    "key": "nw/NW-3",
+    "title": "상세 콘텐츠 편집"
+  },
+  {
+    "mode": "admin",
+    "key": "nw/NW-4",
+    "title": "통합 연동 한도"
+  },
+  {
+    "mode": "admin",
+    "key": "api/MAP",
+    "title": "공용 데이터 연결"
+  },
+  {
+    "mode": "admin",
+    "key": "pending/LIST",
+    "title": "남은 확인 사항"
+  }
+]

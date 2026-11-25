@@ -1,0 +1,726 @@
+{
+ "user": {
+  "total": 859,
+  "found": 741,
+  "missing": [
+   [
+    "페이백",
+    "REQ-001,REQ-713,REQ-646,REQ-655,REQ-400"
+   ],
+   [
+    "페이백 내역",
+    "REQ-001"
+   ],
+   [
+    "페이백 랭킹",
+    "REQ-001"
+   ],
+   [
+    "페이백 챌린지",
+    "REQ-001"
+   ],
+   [
+    "거래소 UID 연동하기",
+    "REQ-054"
+   ],
+   [
+    "All / CEX / DEX",
+    "REQ-055"
+   ],
+   [
+    "Exchange Type",
+    "REQ-057,REQ-358,REQ-467"
+   ],
+   [
+    "All Exchanges (N)",
+    "REQ-124"
+   ],
+   [
+    "Search Results (N)",
+    "REQ-124"
+   ],
+   [
+    "전체 / 중앙화 거래소 / 탈중앙화 거래소",
+    "REQ-124"
+   ],
+   [
+    "업데이트(UTC)",
+    "REQ-095,REQ-459"
+   ],
+   [
+    "Upgrade on Lighter",
+    "REQ-116"
+   ],
+   [
+    "Upgrade to Plus or Premium…",
+    "REQ-116"
+   ],
+   [
+    "(우선순위 1) · 안내",
+    "REQ-728"
+   ],
+   [
+    "(DEX·축약 주소,",
+    "REQ-728,REQ-729"
+   ],
+   [
+    "행을 누르면",
+    "REQ-729"
+   ],
+   [
+    "(그 행 제거) ·",
+    "REQ-729"
+   ],
+   [
+    "(인증 화면, 쿨다운 적용). 재청구가 거절되면",
+    "REQ-729"
+   ],
+   [
+    "(심사자 사유 그대로) +",
+    "REQ-729"
+   ],
+   [
+    "최대 페이백",
+    "REQ-713"
+   ],
+   [
+    "출금 가능한 UID가 없습니다",
+    "REQ-139"
+   ],
+   [
+    "No UIDs are eligible to claim.",
+    "REQ-139"
+   ],
+   [
+    "출금 가능 페이백",
+    "REQ-150"
+   ],
+   [
+    "거래소 페이백을 5.00 USDT 더 받으면…",
+    "REQ-150"
+   ],
+   [
+    "거래소 페이백",
+    "REQ-150"
+   ],
+   [
+    "TetherMax 내 UID",
+    "REQ-289"
+   ],
+   [
+    "Your UID on TetherMax",
+    "REQ-289"
+   ],
+   [
+    "거래 집계 중 → 지급 대기 → 지급 처리 중 → 지급 완료",
+    "REQ-289"
+   ],
+   [
+    "거래 집계 → 거래소 정산 확인 → 테더맥스 확인 → 캐시백 반영 완료",
+    "REQ-289"
+   ],
+   [
+    "연동된 3개 UID 합산 · 매일 09:00 KST 갱신",
+    "REQ-290"
+   ],
+   [
+    "거래 계정 · 거래소 · 캐시백 · 출금 시각 · 상태",
+    "REQ-285"
+   ],
+   [
+    "Search for your exchange and UID on the TetherMax homepage…",
+    "REQ-711"
+   ],
+   [
+    "Paid to your TetherMax balance    Minimum 10 USDT",
+    "REQ-292"
+   ],
+   [
+    "Default Exchange",
+    "REQ-295"
+   ],
+   [
+    "Per day $0.19",
+    "REQ-317"
+   ],
+   [
+    "신청 가능한 캐시백",
+    "REQ-306"
+   ],
+   [
+    "Paid … withdraw from {min} USDT",
+    "REQ-309"
+   ],
+   [
+    "지갑을 붙여넣기만 하세요",
+    "REQ-309"
+   ],
+   [
+    "Swap",
+    "REQ-315"
+   ],
+   [
+    "Stack",
+    "REQ-315"
+   ],
+   [
+    "Chart",
+    "REQ-315"
+   ],
+   [
+    "trading fee rebate",
+    "REQ-315"
+   ],
+   [
+    "magnific_*",
+    "REQ-316"
+   ],
+   [
+    "(DEX 칩에서는",
+    "REQ-312"
+   ],
+   [
+    "제외 전 열 정렬(재선택 시 역순) · 행 끝",
+    "REQ-312"
+   ],
+   [
+    "→ 귀속 새 탭 · 계산기 값 변경 시 전 행 재계산 · 모바일은 카드. DEX 4행 포함, 구성은 게시된 레코드에서 자동 생성. Lighter Standard의",
+    "REQ-312"
+   ],
+   [
+    ", 카드 뷰는 평점 생략(0 표시 아님). 거래소 목록(",
+    "REQ-313"
+   ],
+   [
+    "Your DEX account, paid by the DEX",
+    "REQ-327"
+   ],
+   [
+    "On the DEX, no TetherMax minimum",
+    "REQ-327"
+   ],
+   [
+    "+ 경고 박스",
+    "REQ-360"
+   ],
+   [
+    ". 펼침 상태와 무관하게 게시 항목 전부 FAQPage 구조화 데이터 출력. 질문 없는 구역은 렌더하지 않는다. 첫 질문",
+    "REQ-350"
+   ],
+   [
+    "— 「you withdraw it」를 자동 지급 기준으로 다시 써야 함 출금 답변에 원본의",
+    "REQ-361"
+   ],
+   [
+    "탭·「10 USDT 이상인 지갑 전부」 표현을 쓰지 않는다. 기존",
+    "REQ-361"
+   ],
+   [
+    "🔒 후기를 남기려면 거래소 UID 연동이 필요합니다",
+    "REQ-352"
+   ],
+   [
+    ". EdgeX 설명",
+    "REQ-363"
+   ],
+   [
+    ". Aster 설명(Solana 언급 제거)",
+    "REQ-363"
+   ],
+   [
+    ". ApeX 설명",
+    "REQ-363"
+   ],
+   [
+    "Lighter (1 wallet)",
+    "REQ-365"
+   ],
+   [
+    "모든 UID",
+    "REQ-366,REQ-378"
+   ],
+   [
+    "챌린지 리워드",
+    "REQ-367"
+   ],
+   [
+    "모든 페이백 유형",
+    "REQ-367"
+   ],
+   [
+    "All Cashback Types",
+    "REQ-378"
+   ],
+   [
+    "Exchange Cashback · Bitget UID … · +25.00 USDT",
+    "REQ-371"
+   ],
+   [
+    "선물 거래 캐시백",
+    "REQ-371"
+   ],
+   [
+    "BTC Prediction Reward · Lighter {지갑 주소} · +2.00 USDT",
+    "REQ-371"
+   ],
+   [
+    "Claim Amount · {partner} {UID 또는 지갑 주소} · −{amount} USDT",
+    "REQ-371"
+   ],
+   [
+    "전체 / CEX / DEX",
+    "REQ-379,REQ-455"
+   ],
+   [
+    "), 행에 금액 없음. 빈 상태",
+    "REQ-383"
+   ],
+   [
+    "Monthly Top Trader Rewards",
+    "REQ-384"
+   ],
+   [
+    "화면 N-7",
+    "REQ-391"
+   ],
+   [
+    "_for_ind_{n}",
+    "REQ-394"
+   ],
+   [
+    "BatchResult",
+    "REQ-640"
+   ],
+   [
+    "eligibleUids[].uid",
+    "REQ-649"
+   ],
+   [
+    "이벤트 리워드는 지급되지 않아요",
+    "REQ-655"
+   ],
+   [
+    "ResetReason",
+    "REQ-656"
+   ],
+   [
+    "ParticipantStatus",
+    "REQ-656"
+   ],
+   [
+    "EligibilityState",
+    "REQ-656"
+   ],
+   [
+    "entries[].uid",
+    "REQ-656"
+   ],
+   [
+    "UID만 등록하면",
+    "REQ-651"
+   ],
+   [
+    "적용 거래소 / Eligible Exchanges",
+    "REQ-396"
+   ],
+   [
+    "CEX 전용 / CEX only",
+    "REQ-396"
+   ],
+   [
+    "First-link coupon claimed to a DEX wallet … Rejected",
+    "REQ-397"
+   ],
+   [
+    "it can never be credited to a DEX wallet address",
+    "REQ-397"
+   ],
+   [
+    "Awaiting UID",
+    "REQ-397"
+   ],
+   [
+    "Select a UID to apply this coupon",
+    "REQ-403"
+   ],
+   [
+    "In order to use a coupon, ‘UID binding’ must be completed with at least one exchange.",
+    "REQ-404"
+   ],
+   [
+    "You've received {n} USDT as a reward!",
+    "REQ-405"
+   ],
+   [
+    "…withdrawn together with your cashback.",
+    "REQ-405"
+   ],
+   [
+    "이슈 UID인 상태에서는 캐시백 내역이 발생해도…",
+    "REQ-410"
+   ],
+   [
+    "Account > Boost",
+    "REQ-439"
+   ],
+   [
+    "Bitget Boost",
+    "REQ-439"
+   ],
+   [
+    "Exchange UID Registration Status",
+    "REQ-420"
+   ],
+   [
+    "No. of Registered UIDs",
+    "REQ-420"
+   ],
+   [
+    "내가 초대한 친구가 UID를 연동했어요",
+    "REQ-424"
+   ],
+   [
+    "Point > 친구초대 > 초대 리워드",
+    "REQ-433"
+   ],
+   [
+    "Exchange UIDs",
+    "REQ-426"
+   ],
+   [
+    "Lighter 12 wallets",
+    "REQ-426,REQ-434"
+   ],
+   [
+    "trading-generated cashback",
+    "REQ-429"
+   ],
+   [
+    "Invite Rewards are only earned on centralised exchange cashback. Sub-accounts trading on DEXs do not generate Invite Rewards.",
+    "REQ-429"
+   ],
+   [
+    "DEX wallets earn you no Invite Rewards.",
+    "REQ-429"
+   ],
+   [
+    "Invite rewards stay CEX only…",
+    "REQ-429"
+   ],
+   [
+    "ApeX 9 wallets",
+    "REQ-434"
+   ],
+   [
+    "Landing → Choose platform → Trading profile → Calculating → What You're Missing Out On → Summary",
+    "REQ-453"
+   ],
+   [
+    "Cashback, Events, Benefits, Calculator, Newsletters, Points",
+    "REQ-465"
+   ],
+   [
+    "Top Popular",
+    "REQ-475"
+   ],
+   [
+    "All Partner",
+    "REQ-475"
+   ],
+   [
+    "Home, Events, Benefits, Exchange, Points",
+    "REQ-469"
+   ],
+   [
+    "거래소 이벤트 / 테더맥스 이벤트 / 신규 거래소 추가 / 거래소 지원 종료 / 업데이트 소식 / 점검 / 신규 서비스 / 안내",
+    "REQ-473"
+   ],
+   [
+    "user_id + email + exp + purpose",
+    "REQ-473"
+   ],
+   [
+    "Please check your email",
+    "REQ-154"
+   ],
+   [
+    "Leave Feedback",
+    "REQ-167"
+   ],
+   [
+    "Your withdrawal is being processed.",
+    "REQ-173"
+   ],
+   [
+    "Guest Manual Cashback",
+    "REQ-177"
+   ],
+   [
+    "H9 Expiring",
+    "REQ-304"
+   ],
+   [
+    "H10 Expired",
+    "REQ-304"
+   ],
+   [
+    "Withdraw on Lighter",
+    "REQ-304"
+   ],
+   [
+    "Paid to your EdgeX account",
+    "REQ-304"
+   ],
+   [
+    "On the way",
+    "REQ-304"
+   ]
+  ],
+  "violations": [
+   [
+    "Get Cashback",
+    "REQ-005"
+   ],
+   [
+    "cashback credited",
+    "REQ-005"
+   ],
+   [
+    "Withdraw",
+    "REQ-005,REQ-108"
+   ],
+   [
+    "Pending",
+    "REQ-007,REQ-180"
+   ],
+   [
+    "Active",
+    "REQ-008"
+   ],
+   [
+    "부호 + 이익 색, 출금 등 음수는",
+    "REQ-024"
+   ],
+   [
+    "강조할 거래소",
+    "REQ-030"
+   ],
+   [
+    "Your withdrawal request was sent",
+    "REQ-180"
+   ],
+   [
+    "Manage",
+    "REQ-112"
+   ],
+   [
+    "거래소의 귀속 내역 확인 후 연동 결과를 알려드릴게요.",
+    "REQ-100"
+   ],
+   [
+    "캐시백은 Premium과 Plus 계정에 적용됩니다. Standard 계정은 캐시백이 쌓이지 않아요.",
+    "REQ-116"
+   ],
+   [
+    "Wallet Already in Use",
+    "REQ-724"
+   ],
+   [
+    "Network fee",
+    "REQ-143"
+   ],
+   [
+    "Sent",
+    "REQ-164"
+   ],
+   [
+    "No cashback yet",
+    "REQ-273"
+   ],
+   [
+    "Unavailable",
+    "REQ-273"
+   ],
+   [
+    "UP TO {n}%",
+    "REQ-297"
+   ],
+   [
+    "Lighter pays every Monday. Not in the totals above.",
+    "REQ-303"
+   ],
+   [
+    "paste your address",
+    "REQ-328"
+   ],
+   [
+    "Browse by tag",
+    "REQ-362"
+   ],
+   [
+    "trading volume",
+    "REQ-384"
+   ],
+   [
+    "CEX 전용",
+    "REQ-399"
+   ],
+   [
+    "Invite Rewards are always paid in USDT.",
+    "REQ-429"
+   ],
+   [
+    "Trusted by 0 users",
+    "REQ-454"
+   ],
+   [
+    "Hourly",
+    "REQ-459"
+   ],
+   [
+    "Every hour",
+    "REQ-459"
+   ],
+   [
+    "Destination",
+    "REQ-459"
+   ],
+   [
+    "Restart",
+    "REQ-459"
+   ],
+   [
+    "Avg. Cashback",
+    "REQ-466"
+   ],
+   [
+    "Live Campaigns",
+    "REQ-466"
+   ],
+   [
+    "Rating",
+    "REQ-466"
+   ],
+   [
+    "Cancel",
+    "REQ-152"
+   ],
+   [
+    "Share",
+    "REQ-172"
+   ]
+  ]
+ },
+ "admin": {
+  "total": 523,
+  "found": 514,
+  "missing": [
+   [
+    "· 배너 2장). 유형",
+    "REQ-532"
+   ],
+   [
+    "전송대상: N명",
+    "REQ-596"
+   ],
+   [
+    "), 모든 탭 정보 필수 —",
+    "REQ-619"
+   ],
+   [
+    "최대 10자 ·",
+    "REQ-619"
+   ],
+   [
+    "최대 30자 ·",
+    "REQ-619"
+   ],
+   [
+    "최대 4자(초과 입력 거부) ·",
+    "REQ-619"
+   ],
+   [
+    ")는 소수 둘째 자리까지 축약·반올림, 모든 화면 동일(",
+    "REQ-621"
+   ],
+   [
+    "정수, 음수·소수·0 불가, 최대보다 작음) ·",
+    "REQ-627"
+   ],
+   [
+    "정수, 최소보다 큼, 최대 1조). 계산식",
+    "REQ-627"
+   ]
+  ],
+  "violations": [
+   [
+    "Hourly",
+    "REQ-459"
+   ],
+   [
+    "Every hour",
+    "REQ-459"
+   ],
+   [
+    "Destination",
+    "REQ-459"
+   ],
+   [
+    "Restart",
+    "REQ-459"
+   ],
+   [
+    "None",
+    "REQ-496"
+   ],
+   [
+    "출금 딥링크",
+    "REQ-518"
+   ],
+   [
+    "Test connection",
+    "REQ-517"
+   ],
+   [
+    "초대 리워드 대상 아님",
+    "REQ-545"
+   ],
+   [
+    "Wallet Already in Use",
+    "REQ-553"
+   ],
+   [
+    "Restore link",
+    "REQ-563"
+   ],
+   [
+    "Exchange List",
+    "REQ-564"
+   ],
+   [
+    "Reopen",
+    "REQ-576"
+   ],
+   [
+    "{요율}",
+    "REQ-612"
+   ],
+   [
+    "up to 80%",
+    "REQ-612"
+   ],
+   [
+    "Remove",
+    "REQ-614"
+   ],
+   [
+    "Reconciliation",
+    "REQ-578"
+   ],
+   [
+    "Coupon > First Link Coupon",
+    "REQ-594"
+   ]
+  ]
+ }
+}

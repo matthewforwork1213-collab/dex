@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TetherMax Ranking Prototype</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+:root{
+  --bg:#F7F8FA;--card:#fff;--line:#E5E8EC;--line2:#EEF0F3;--text:#16191F;--sub:#5A616E;--muted:#8B92A0;
+  --primary:#0A35C8;--primary-h:#082CA8;--soft:#EEF2F6;
+  --gold:#F2A100;--gold-line:#F6DC8C;--silver:#4A5160;--silver-line:#D3DAE2;--bronze:#9C7449;--bronze-line:#E6CFB7;
+  --green:#15803D;--warn:#C2410C;--warn-bg:#FFF4EC;
+  --k-new:#7C3AED;--k-chg:#E11D74;--k-com:#0284C7;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:#CBD2DB;display:flex;flex-direction:column;height:100dvh;overflow:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;color:inherit}
+a{cursor:pointer}
+
+/* ---------- prototype bar (not part of product) ---------- */
+.pbar{flex:none;background:#0F1420;color:#E6E9EF;display:flex;align-items:center;gap:14px;padding:8px 14px;font-size:12.5px;overflow-x:auto;white-space:nowrap;z-index:50;scrollbar-width:thin}
+.pb-brand{display:flex;align-items:center;gap:8px;font-weight:700}
+.pb-tag{background:var(--k-new);color:#fff;border-radius:6px;padding:3px 8px;font-size:12px}
+.pb-group{display:flex;align-items:center;gap:6px}
+.pb-label{color:#8D96A8}
+.seg{display:inline-flex;background:#1E2534;border-radius:8px;padding:2px}
+.seg button{background:none;border:0;color:#C6CCD8;padding:5px 10px;border-radius:6px;font-size:12.5px}
+.seg button.on{background:#fff;color:#0F1420;font-weight:600}
+.pb-sel{background:#1E2534;color:#fff;border:1px solid #2C3546;border-radius:8px;padding:5px 8px;font:inherit}
+.pb-sep{width:1px;height:22px;background:#2C3546;flex:none}
+.pb-links{display:flex;gap:2px}
+.pb-links a{color:#9AA3B5;text-decoration:none;padding:4px 8px;border-radius:6px}
+.pb-links a.on{color:#fff;background:#1E2534;font-weight:600}
+.pb-btn{background:#1E2534;border:1px solid #2C3546;color:#fff;border-radius:8px;padding:5px 10px;font-size:12.5px}
+.pb-btn b{display:inline-block;min-width:18px;margin-left:4px;background:var(--k-new);border-radius:9px;padding:0 5px;font-size:11px}
+.pb-chk{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.pb-lang{margin-left:auto;padding-left:14px}
+
+/* ---------- stage ---------- */
+.stage{flex:1;min-height:0;position:relative;display:flex;justify-content:center;align-items:stretch}
+.app{position:relative;width:100%;height:100%;overflow:hidden;background:var(--bg);container-type:inline-size;container-name:app}
+.stage.mobile{align-items:center}
+.stage.mobile .app{width:390px;height:min(844px,calc(100% - 40px));border-radius:30px;box-shadow:0 0 0 9px #1B1F27,0 30px 60px rgba(0,0,0,.35)}
+.scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden}
+.overlay{position:absolute;inset:0;pointer-events:none;z-index:20}
+.overlay>*{pointer-events:auto}
+
+/* ---------- header ---------- */
+.gnb{height:72px;display:flex;align-items:center;padding:0 40px;gap:44px;background:var(--bg)}
+.logo{display:flex;align-items:center;gap:5px;color:var(--primary);font-weight:800;font-size:24px;letter-spacing:-.4px;text-decoration:none}
+.logo svg{width:36px;height:18px}
+.gnb nav{display:flex;gap:34px;font-size:17px;font-weight:500}
+.gnb nav a{color:var(--text);text-decoration:none}
+.gnb .icons{margin-left:auto;display:flex;gap:30px;color:#2A2F38}
+.ic{width:24px;height:24px;display:block}
+.mhead{display:none;height:56px;align-items:center;justify-content:space-between;padding:0 16px}
+.langbtn{position:relative;display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:0;color:inherit;font-size:14px;font-weight:600}
+.langbtn span{min-width:20px;text-align:left}
+.langbtn.m{color:#5B616C}
+.langbtn.m .ic{width:22px;height:22px}
+.iconbtn{background:none;border:0;padding:8px;margin-left:-8px;color:#5B616C;display:inline-flex}
+
+/* ---------- event page ---------- */
+.ev{max-width:960px;margin:0 auto;padding:40px 24px 64px}
+.hero{text-align:center;padding-top:20px}
+.hero .trophy{width:250px;height:184px;margin:0 auto 30px;display:block}
+.hero h1{font-size:23px;font-weight:700;margin:0 0 14px;letter-spacing:-.2px}
+.hero p{margin:0;color:var(--sub);font-size:17px;line-height:1.5}
+.hero .hl{color:var(--primary);font-size:29px;font-weight:800;margin-top:10px;letter-spacing:-.3px}
+.hnote{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:#EEF2FF;color:var(--primary);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;border:0;border-radius:4px;height:48px;padding:0 24px;font-size:16px;font-weight:500}
+.btn:hover{background:var(--primary-h)}
+.btn.block{width:100%;display:flex}
+.btn.sm{height:40px;padding:0 18px;font-size:15px}
+.link-cta{margin:28px auto 0;width:344px;display:flex}
+.sticky-cta{display:none}
+
+.prizes{margin-top:26px;display:flex;flex-direction:column;gap:8px}
+.prow{position:relative;display:flex;align-items:center;gap:12px;min-height:54px;border:1px solid var(--line);border-radius:4px;background:#fff;padding:8px 18px 8px 62px}
+.prow.r1{background:linear-gradient(90deg,#FFF5D9,#FFFCF3 55%,#fff);border-color:var(--gold-line)}
+.prow.r2{background:linear-gradient(90deg,#ECF0F5,#F7F9FB 55%,#fff);border-color:var(--silver-line)}
+.prow.r3{background:linear-gradient(90deg,#F5ECE3,#FBF7F3 55%,#fff);border-color:var(--bronze-line)}
+.prow.t10{padding-left:18px;min-height:42px}
+.mclip{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.medal{position:absolute;left:0;bottom:-6px;width:54px;height:58px}
+.pl{font-size:15.5px;font-weight:600}
+.r1 .pl{color:var(--gold)}.r2 .pl{color:var(--silver)}.r3 .pl{color:var(--bronze)}
+.t10 .pl{font-weight:500;font-size:14px}
+.pamt{margin-left:auto;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.pamt .v{font-size:14px;font-weight:700;white-space:nowrap}
+.pamt .v small{font-size:10.5px;font-weight:500;margin-left:3px}
+.pamt .v .upto{font-size:11.5px;font-weight:500;color:var(--sub);margin-right:4px}
+.pamt .s{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.prow.off{background:#FAFBFC}.prow.off .pl,.prow.off .v{color:var(--muted);font-weight:500}
+.fnote{font-size:12px;color:var(--muted);margin:8px 2px 0}
+
+.info{display:flex;gap:10px;background:#F1F5FF;border:1px solid #DCE5FF;border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.55;color:#2B3A67;margin-top:10px}
+.info svg{flex:none;margin-top:1px}
+
+.card{position:relative;background:#fff;border-radius:12px;padding:24px 20px;margin-top:28px}
+.card h3{font-size:17px;font-weight:600;margin:0}
+.card .cs{font-size:13.5px;color:var(--sub);margin:6px 0 0}
+.empty{text-align:center;padding:72px 20px}
+.empty b{display:block;font-size:16px;font-weight:600}
+.empty span{display:block;font-size:13.5px;color:var(--sub);margin-top:6px}
+.ulist{margin-top:10px}
+.uitem{padding:12px 0}
+.uitem+.uitem{border-top:1px solid var(--line2)}
+.urow{display:flex;align-items:center;gap:12px}
+.ulogo{flex:none;display:block}
+.uname{font-size:14.5px;font-weight:500}
+.uuid{font-size:12px;color:var(--sub);margin-top:1px;display:flex;align-items:center;gap:6px}
+.uright{margin-left:auto;text-align:right;padding-left:8px}
+.rk{font-size:14.5px;font-weight:500;white-space:nowrap}
+.rk-sub{font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap}
+.rk-sub.warn{color:var(--warn)}
+.est{color:var(--primary);font-weight:700}
+.card-foot{display:flex;justify-content:flex-end;margin-top:6px;padding-top:12px;border-top:1px solid var(--line2)}
+.tlink{background:none;border:0;color:var(--primary);font-size:13.5px;font-weight:600;padding:4px 0;display:inline-flex;align-items:center;gap:2px;text-decoration:none}
+.tlink svg{width:16px;height:16px}
+.listfoot{font-size:12px;color:var(--muted);margin:10px 0 0}
+
+.details{position:relative;background:var(--soft);border-radius:12px;padding:24px 20px;margin-top:28px}
+.details h3{font-size:16.5px;font-weight:600;margin:0 0 16px}
+.drow{position:relative;display:flex;justify-content:space-between;gap:16px;font-size:13.5px;padding:7px 0}
+.drow span:first-child{color:var(--sub);flex:none}
+.drow span:last-child{text-align:right;font-weight:500}
+
+.tc{position:relative;background:#fff;border-radius:12px;margin-top:28px;padding:0 20px}
+.tc summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:22px 0;font-size:18px;font-weight:600;cursor:pointer}
+.tc summary::-webkit-details-marker{display:none}
+.tc ul{margin:0;padding:0 0 22px 22px;color:#3B414C;font-size:15px;line-height:1.75}
+.tc li{position:relative}
+.tc li::marker{color:var(--muted)}
+.chev{width:22px;height:22px;color:#6B717C;transition:transform .2s;flex:none}
+details[open]>summary .chev{transform:rotate(180deg)}
+
+.tbl-wrap{overflow-x:auto;margin-top:12px}
+.ptable{width:100%;border-collapse:collapse;font-size:13.5px}
+.ptable th{font-weight:500;color:var(--muted);text-align:right;padding:8px 6px;border-bottom:1px solid var(--line);font-size:12.5px;white-space:nowrap}
+.ptable th:first-child,.ptable td:first-child{text-align:left}
+.ptable td{padding:10px 6px;text-align:right;border-bottom:1px solid var(--line2);font-weight:600;white-space:nowrap}
+.ptable tr:last-child td{border-bottom:0}
+.ptable .muted{color:var(--muted);font-weight:500}
+.exn{display:inline-flex;align-items:center;gap:8px;font-weight:500}
+.exn-multi{display:flex;flex-direction:column;gap:6px}
+
+/* footer */
+.foot{background:#fff;padding:48px 70px 40px;margin-top:24px}
+.foot-top{display:flex;gap:40px}
+.foot-l{flex:1}
+.foot-l .logo{margin-bottom:22px}
+.foot-cols{display:flex;gap:60px}
+.foot-col h4{font-size:17px;font-weight:600;margin:0 0 22px}
+.foot-col a{display:block;color:var(--sub);text-decoration:none;font-size:16px;margin-bottom:14px}
+.livechat{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;border:0;border-radius:3px;height:40px;padding:0 18px;font-size:15px}
+.mail{display:inline-flex;align-items:center;gap:8px;font-size:15px;margin-left:16px}
+.foot hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+.socials{display:flex;gap:22px;color:#1F232A}
+.copy{font-size:13px;margin-top:36px}
+
+/* ---------- home ---------- */
+.home{max-width:1180px;margin:0 auto;padding:28px 24px 64px;display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start}
+.hcol{display:flex;flex-direction:column;gap:16px}
+.hcard{position:relative;background:#fff;border-radius:10px;padding:20px;box-shadow:0 1px 3px rgba(16,24,40,.06);border:0;text-align:left;width:100%}
+.bal{display:flex;align-items:center;gap:14px}
+.bal-t{flex:1}
+.bal-t b{display:block;font-size:19px;font-weight:600}
+.bal-t span{font-size:13.5px;color:var(--sub)}
+.hc-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.hc-h b{font-size:17px;font-weight:600}
+.lrow{display:flex;align-items:center;gap:12px;padding:10px 0}
+.gdot{width:7px;height:7px;border-radius:50%;background:#16A34A;display:inline-block}
+.hc-empty{font-size:13.5px;color:var(--muted);padding:12px 0}
+.hc-more{display:flex;align-items:center;gap:8px;color:var(--sub);font-size:13.5px;border-top:1px solid var(--line2);padding-top:14px;margin-top:8px}
+.entry{display:flex;align-items:center;gap:12px}
+.entry-ic{width:40px;height:40px;border-radius:10px;background:#FFF5D9;display:flex;align-items:center;justify-content:center;flex:none}
+.entry-t{flex:1}
+.entry-t b{display:block;font-size:15px;font-weight:600}
+.entry-t span{font-size:12.5px;color:var(--sub)}
+.hmain h2{font-size:26px;font-weight:700;margin:6px 0 18px}
+.hmain h2+.evgrid{margin-bottom:36px}
+.evgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.evc{position:relative;background:#fff;border-radius:10px;padding:18px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+.evimg{height:170px;border-radius:6px;background:radial-gradient(circle at 80% 70%,#21445A,#0B0F1A 65%);color:#fff;padding:16px 20px;font-weight:600;font-size:19px;line-height:1.4;position:relative;overflow:hidden}
+.evimg .tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.55);font-size:12px;font-weight:500;padding:3px 8px;border-radius:4px;margin-bottom:10px}
+.evimg.gold{background:radial-gradient(circle at 80% 70%,#5A4512,#14100A 65%)}
+.evrow{display:flex;justify-content:space-between;margin:14px 0 10px;font-size:15px;color:var(--sub)}
+.evrow b{color:var(--text);font-weight:500}
+.evstat{display:inline-block;background:#F1F2F4;color:var(--sub);font-size:12.5px;border-radius:4px;padding:3px 7px;margin-bottom:14px}
+
+/* ---------- drawer ---------- */
+.dim{position:absolute;inset:0;background:rgba(17,20,28,.5);animation:fade .2s}
+.drawer{position:absolute;top:0;right:0;bottom:0;width:520px;max-width:100%;background:var(--bg);overflow-y:auto;animation:slide .25s ease-out;padding:22px 24px 40px;display:flex;flex-direction:column}
+@keyframes slide{from{transform:translateX(40px);opacity:0}}
+@keyframes fade{from{opacity:0}}
+.dhead{text-align:center;margin-top:10px}
+.mbadge{display:inline-block;background:var(--primary);color:#fff;font-size:14px;font-weight:500;border-radius:999px;padding:3px 12px}
+.mbadge.grey{background:#E4E7EC;color:var(--sub)}
+.dhead h2{font-size:26px;font-weight:700;margin:20px 0 8px}
+.dhead p{color:var(--sub);font-size:16px;margin:0}
+.tabs{position:relative;display:flex;background:#E9ECF0;border-radius:10px;padding:4px;margin:26px 0 16px}
+.tabs button{flex:1;border:0;background:none;padding:9px;border-radius:8px;font-size:14.5px;color:var(--sub);font-weight:500}
+.tabs button.on{background:#fff;color:var(--text);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.dcard{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:10px;box-shadow:0 1px 3px rgba(16,24,40,.04)}
+.dcard .uname{font-size:17px;font-weight:600}
+.dcard .uuid{font-size:14px}
+.dempty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--sub);font-size:16px;gap:16px;padding:40px 10px}
+.mgroup{font-size:13px;font-weight:600;color:var(--sub);margin:14px 2px 8px}
+.pr-amt{font-size:18px;font-weight:700;white-space:nowrap}
+.pr-amt small{font-size:11px;font-weight:500;margin-left:3px}
+.pr-amt.muted{color:var(--muted)}
+.pr-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line2);font-size:12.5px;color:var(--sub)}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.chip.paid{background:#E9F7EF;color:var(--green)}
+.chip.none{background:#F1F2F4;color:#6B7280}
+.chip.full{background:#EEF2FF;color:var(--primary)}
+.wd{flex-basis:100%;color:var(--warn)}
+.dfoot{font-size:12.5px;color:var(--muted);text-align:center;margin:10px 0 0}
+
+/* progress (proposal 2) */
+.prog{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);position:relative}
+.prog-t{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;font-size:12px;color:var(--sub);margin-bottom:7px}
+.prog-t b{color:var(--text);font-weight:600}
+.bar{height:6px;background:#E9ECF0;border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--primary);border-radius:9px}
+.bar.done i{background:#16A34A}
+.ok{color:var(--green);font-weight:600}
+
+/* ---------- dialog ---------- */
+.dlg-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;pointer-events:none!important}
+.dlg{position:relative;pointer-events:auto;background:#fff;border-radius:6px;width:320px;max-width:100%;max-height:100%;overflow-y:auto;padding:28px 22px 16px;box-shadow:0 20px 40px rgba(0,0,0,.2);text-align:center;animation:pop .2s ease-out}
+@keyframes pop{from{transform:scale(.96);opacity:0}}
+.tw{position:relative;display:flex;justify-content:center;margin-bottom:12px}
+.tsingle{width:160px;height:100px;display:block}
+.dlg h3{font-size:18px;font-weight:500;margin:0}
+.dsub{position:relative;font-size:13px;color:var(--sub);margin:6px 0 16px}
+.dl{text-align:left}
+.dl>div{position:relative;display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:7px 0}
+.dl span{color:var(--sub)}
+.dl b{font-weight:600;text-align:right}
+.dl .prize b{color:var(--primary);font-size:14px}
+.dnote{position:relative;font-size:12px;line-height:1.5;text-align:left;background:#F5F7FA;border-radius:6px;padding:9px 11px;margin-top:8px;color:#3B414C}
+.dnote.warn{background:var(--warn-bg);color:#9A3412}
+.dnote.ok{background:#ECFDF3;color:#166534}
+.pager{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;font-size:12.5px;color:var(--sub)}
+.pager button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:#fff;line-height:1}
+.dlg .btn{height:40px;margin-top:16px;font-size:14px}
+.tlink.center{margin:8px auto 0;display:flex;justify-content:center;position:relative}
+.proto-msg{pointer-events:auto;background:#0F1420;color:#fff;padding:16px 18px;border-radius:10px;font-size:13.5px;line-height:1.6;max-width:320px;text-align:center}
+
+/* proposal-specific shared bits */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px;position:relative}
+.how-i{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;display:flex;gap:10px}
+.how-n{flex:none;width:22px;height:22px;border-radius:50%;background:#EEF2FF;color:var(--primary);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.how-i b{font-size:13.5px;font-weight:600;display:block}
+.how-i p{margin:3px 0 0;font-size:12.5px;color:var(--sub);line-height:1.5}
+.qbar{margin-top:30px;position:relative}
+.qhead{position:relative;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--sub);margin-bottom:12px}
+.qbadge{background:var(--primary);color:#fff;border-radius:999px;padding:3px 11px;font-size:13px;font-weight:600}
+.chips{position:relative;display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip-ex{flex:none;display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px 6px 7px;font-size:13.5px;font-weight:500;position:relative}
+.chip-ex.on{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary) inset;color:var(--primary);font-weight:600}
+.chip-ex .dot{width:6px;height:6px;border-radius:50%;background:#16A34A;display:inline-block}
+.noprize{position:relative;border:1px dashed var(--line);background:#fff;border-radius:6px;padding:26px 20px;text-align:center}
+.noprize b{display:block;font-size:15px;font-weight:600}
+.noprize span{display:block;font-size:13px;color:var(--sub);margin-top:6px}
+.allx{position:relative;background:#fff;border-radius:8px;margin-top:10px;padding:0 16px;border:1px solid var(--line)}
+.allx summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:13px 0;font-size:14px;font-weight:600;cursor:pointer;color:var(--primary)}
+.allx summary::-webkit-details-marker{display:none}
+.allx .tbl-wrap{margin:0 0 12px}
+
+/* ---------- notes ---------- */
+.has-pin{position:relative}
+.noted{outline:1.5px dashed rgba(124,58,237,.55);outline-offset:3px}
+.noted[data-kind="chg"]{outline-color:rgba(225,29,116,.55)}
+.noted[data-kind="com"]{outline-color:rgba(2,132,199,.6)}
+.pin{position:absolute;top:-10px;left:-10px;z-index:15;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--k-new);color:#fff!important;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff;cursor:pointer;border:0;line-height:1;font-family:inherit;text-align:center}
+.pin.k-chg{background:var(--k-chg)}.pin.k-com{background:var(--k-com)}
+.pin.static{position:static;flex:none;box-shadow:none}
+.tc li>.pin{left:-36px;top:3px}
+.rk-sub>.pin,.pr-meta span>.pin,.drow>.pin{left:-27px;top:-2px}
+.drow>.pin{left:-24px;top:5px}
+.flash{animation:flash 1.4s}
+@keyframes flash{0%,100%{background-color:inherit}25%,60%{box-shadow:0 0 0 6px rgba(124,58,237,.35)}}
+.npanel{position:absolute;right:16px;bottom:16px;width:360px;max-height:min(75%,620px);background:#fff;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.28);display:flex;flex-direction:column;z-index:40;font-size:13px;color:var(--text)}
+.npanel[hidden]{display:none}
+.np-h{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line)}
+.np-h button{border:0;background:none;font-size:16px;color:var(--sub)}
+.np-sum{padding:12px 14px;background:#F8F7FF;font-size:12.5px;line-height:1.6;color:#3B3560;border-bottom:1px solid var(--line)}
+.np-legend{display:flex;gap:12px;padding:8px 14px;font-size:11.5px;color:var(--sub)}
+.np-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.np-list{overflow-y:auto;padding:0 6px 8px}
+.np-item{display:flex;gap:10px;padding:9px 8px;border-radius:8px;cursor:pointer;line-height:1.5}
+.np-item:hover{background:#F5F3FF}
+.np-empty{padding:14px;color:var(--muted)}
+.toast{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);background:#0F1420;color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;z-index:60;white-space:nowrap}
+@media (max-width:600px){.npanel{left:8px;right:8px;width:auto;bottom:8px}}
+
+/* ---------- responsive (container = app width) ---------- */
+@container app (max-width:760px){
+  .gnb{padding:0 16px;height:60px}
+  .gnb nav{display:none}
+  .gnb .icons{gap:18px}
+  .logo{font-size:20px}
+  .gnb.ev-mode{display:none}
+  .mhead.ev-mode{display:flex}
+  .ev{padding:0 16px 40px}
+  .hero{padding-top:6px}
+  .hero .trophy{width:220px;height:162px;margin-bottom:24px}
+  .hero h1{font-size:18px}
+  .hero p{font-size:15px}
+  .hero .hl{font-size:24px}
+  .link-cta{display:none}
+  .sticky-cta{display:block;position:absolute;left:0;right:0;bottom:0;padding:14px 16px 18px;background:linear-gradient(rgba(247,248,250,0),var(--bg) 35%)}
+  .prow{padding-left:58px;padding-right:14px}
+  .prow.t10{padding-left:16px}
+  .pl{font-size:14px}
+  .card,.details,.tc{margin-top:20px}
+  .card{padding:22px 18px}
+  .tc summary{font-size:17px}
+  .tc ul{font-size:14px}
+  .foot{padding:32px 18px 110px}
+  .foot-top{flex-direction:column;gap:28px}
+  .foot-cols{flex-direction:column;gap:12px}
+  .mail{margin:16px 0 0;display:flex}
+  .home{grid-template-columns:1fr;padding:16px}
+  .evgrid{grid-template-columns:1fr}
+  .hmain h2{font-size:21px}
+  .drawer{width:100%;padding:14px 16px 32px}
+  .dim{display:none}
+  .dhead h2{font-size:24px}
+  .how{grid-template-columns:1fr}
+  .qbar{margin-top:24px}
+}
+</style>
+</head>
+<body>
+<div class="pbar" id="pbar"></div>
+<div class="stage" id="stage">
+  <div class="app" id="app">
+    <div class="scroll" id="scroll"></div>
+    <div class="overlay" id="overlay"></div>
+  </div>
+  <div class="npanel" id="npanel" hidden></div>
+</div>
+<script>
+/* ================= common data & helpers ================= */
+const $ = s => document.querySelector(s);
+const STATE = { overlay:null, user:'multi', frame:'auto', notes:true, panel:false, tab:'now', pg:0, lang:'en' };
+/* i18n: 기존 키는 TetherMax 언어팩(ko/en) 문구 사용, 신규 문구는 언어팩 톤에 맞춰 작성 */
+const T = (en, ko) => STATE.lang === 'ko' ? ko : en;
+const KO = () => STATE.lang === 'ko';
+const MONTH_NOW = '2026-10', LAST = '2026-09';
+const MN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const monthName = m => KO() ? `${m.split('-')[0]}년 ${+m.split('-')[1]}월` : MN[+m.split('-')[1]-1] + ' ' + m.split('-')[0];
+const monthOnly = m => KO() ? `${+m.split('-')[1]}월` : MN[+m.split('-')[1]-1];
+const issueDate = m => KO() ? `${(+m.split('-')[1]) % 12 + 1}월 5일` : MS[(+m.split('-')[1]) % 12] + ' 5';
+/* 확정일: 매월 1일 (이번 달 10월분 → 11월 1일) */
+const confirmDate = () => T('November 1', '11월 1일');
+/* 상위 10% 지급 최소 참여자 수 — 40 vs 41 운영 확인 필요. 40 = 내림 기준 4등이 처음 생기는 인원 */
+const TOP10_MIN = 40;
+const CAP = {1:100, 2:50, 3:20, top10:10}, MINP = {1:10, 2:5, 3:3};
+const lbl = r => T({1:'1st place Prize', 2:'2nd place Prize', 3:'3rd place Prize', top10:'Within top 10 %'}[r], {1:'1등', 2:'2등', 3:'3등', top10:'상위 10% 이내'}[r]);
+
+/* C = commission rate, P = payback rate (both vs. user trading fee) */
+const EX = {
+  binance:{name:'Binance',  C:50, P:20,  bg:'#1E2026'},
+  bitget: {name:'Bitget',   C:70, P:54,  bg:'#00E5F0'},
+  bybit:  {name:'Bybit',    C:50, P:30,  bg:'#17181E'},
+  okx:    {name:'OKX',      C:65, P:30,  bg:'#000000'},
+  lbank:  {name:'LBank',    C:80, P:65,  bg:'#F5B400'},
+  blofin: {name:'BloFin',   C:55, P:50,  bg:'#000000'},
+  kucoin: {name:'KuCoin',   C:75, P:65,  bg:'#23AF91'},
+  zoomex: {name:'Zoomex',   C:90, P:50,  bg:'#1F5BFF'},
+  woox:   {name:'WOO X Pro',C:90, P:100, bg:'#141414'},
+};
+const inelig = k => EX[k].C <= EX[k].P;
+
+const USERS = {
+  none:  {label:'UID 미연동', labelEn:'UID not linked', linked:false, uids:[], past:[]},
+  single:{label:'UID 1개 (Binance 1등)', labelEn:'1 UID (Binance 1st)', linked:true,
+    uids:[{ex:'binance',uid:'1222787462',rank:1,cb:420.5,n:1840}],
+    past:[{m:'2026-09',ex:'binance',uid:'1222787462',rank:2,cb:300,n:1795},
+          {m:'2026-08',ex:'binance',uid:'1222787462',rank:1,cb:510,n:1702}]},
+  multi: {label:'UID 여러 개', labelEn:'Multiple UIDs', linked:true,
+    uids:[{ex:'binance',uid:'1222787462',rank:1,cb:420.5,n:1840},
+          {ex:'bitget', uid:'7605865687',rank:'top10',cb:210,n:3012},
+          {ex:'kucoin', uid:'2551438201',rank:2,cb:18,n:4},
+          {ex:'zoomex', uid:'6620193847',rank:3,cb:6.2,n:7},
+          {ex:'okx',    uid:'5129043378',rank:3,cb:20,n:640},
+          {ex:'lbank',  uid:'7720485519',rank:'top10',cb:30,n:38},
+          {ex:'woox',   uid:'3390218745',rank:1,cb:900,n:12},
+          {ex:'bybit',  uid:'0854793917',rank:null,cb:12.4,n:2210}],
+    past:[{m:'2026-09',ex:'binance',uid:'1222787462',rank:2,cb:300,n:1795},
+          {m:'2026-09',ex:'bitget', uid:'7605865687',rank:'top10',cb:210,n:2950},
+          {m:'2026-09',ex:'blofin', uid:'4410928371',rank:1,cb:140,n:9},
+          {m:'2026-09',ex:'kucoin', uid:'2551438201',rank:1,cb:22,n:5},
+          {m:'2026-09',ex:'zoomex', uid:'6620193847',rank:1,cb:7,n:6},
+          {m:'2026-09',ex:'okx',    uid:'5129043378',rank:3,cb:18,n:610},
+          {m:'2026-08',ex:'binance',uid:'1222787462',rank:1,cb:510,n:1702},
+          {m:'2026-08',ex:'woox',   uid:'3390218745',rank:1,cb:650,n:9}]},
+  empty: {label:'연동 O · 이번 달 대상 없음', labelEn:'Linked · no ranking this month', linked:true, uids:[], past:[],
+    linkedList:[{ex:'bitget',uid:'7605865687'},{ex:'bybit',uid:'0854793917'}]},
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => Number.isInteger(n) ? n.toLocaleString('en-US') : n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const rankLabel = r => r===1?T('1st place','1등'):r===2?T('2nd place','2등'):r===3?T('3rd place','3등'):r==='top10'?T('Top 10%','상위 10%'):'–';
+/* 순위 옆 '현재 순위 기준' 금액 표기 (제안 2·3) */
+const atRank = amount => T(`<span class="est">${amount} USDT</span> at current rank`, `현재 순위 기준 <span class="est">${amount} USDT</span>`);
+const N = (kind, text) => ` data-note="${esc(text)}" data-kind="${kind}"`;
+let ONCE = new Set();
+const NO = (key, kind, text) => { if (ONCE.has(key)) return ''; ONCE.add(key); return N(kind, text); };
+
+/* ---------- icons ---------- */
+const I = {
+  logo:'<svg viewBox="0 0 40 20"><path d="M11 3.5a6.5 6.5 0 1 0 0 13c3.6 0 5.6-2.6 9-6.5s5.4-6.5 9-6.5a6.5 6.5 0 1 1 0 13c-3.6 0-5.6-2.6-9-6.5S14.6 3.5 11 3.5z" fill="none" stroke="currentColor" stroke-width="4.2"/></svg>',
+  bell:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>',
+  user:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><circle cx="12" cy="10" r="3.4" fill="#F7F8FA"/><path d="M5.5 18.5c1.4-2.4 3.8-3.6 6.5-3.6s5.1 1.2 6.5 3.6" fill="#F7F8FA"/></svg>',
+  sun:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+  globe:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c3 3 3 16 0 19M12 2.5c-3 3-3 16 0 19"/></svg>',
+  back:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 12H4M10 6l-6 6 6 6"/></svg>',
+  chevD:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>',
+  chevR:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>',
+  info:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A35C8" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>',
+  plus:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6B717C" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M12 8v8M8 12h8"/></svg>',
+  head:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5" fill="#fff"/><rect x="17" y="13" width="4" height="6" rx="1.5" fill="#fff"/></svg>',
+  copy:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="8" y="8" width="12" height="13" rx="1.5"/><path d="M5 16V4h11"/></svg>',
+};
+const SOCIAL = [
+  '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8" fill="currentColor"/></svg>',
+  '<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="7" r="1.8"/><circle cx="12" cy="7" r="1.8"/><circle cx="18" cy="7" r="1.8"/><circle cx="12" cy="13" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>',
+  '<svg width="34" height="34" viewBox="0 0 24 24"><rect x="1.5" y="5" width="21" height="14" rx="4" fill="currentColor"/><path d="M10 9v6l5-3z" fill="#fff"/></svg>',
+  '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l7.5 10L3.5 21M21 3l-7 8M9 3h-6l12 18h6z"/></svg>',
+  '<svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M2 11.5L21.5 3l-3.3 18-6.4-4.8-3.3 3.2.4-4.9L17 7.6 7 13.2z"/></svg>',
+];
+
+function logo(k, s = 40) {
+  const e = EX[k]; let g = '';
+  switch (k) {
+    case 'binance': g = '<g fill="#F0B90B" transform="translate(20 20) rotate(45)"><rect x="-3" y="-3" width="6" height="6"/><rect x="-11" y="-3" width="4.5" height="6"/><rect x="6.5" y="-3" width="4.5" height="6"/><rect x="-3" y="-11" width="6" height="4.5"/><rect x="-3" y="6.5" width="6" height="4.5"/></g>'; break;
+    case 'bitget': g = '<path d="M15 11h9l-6.5 9H8.5zM25 29h-9l6.5-9h9z" fill="#0B0B0B"/>'; break;
+    case 'bybit': g = '<text x="20" y="23.2" text-anchor="middle" font-size="8.6" font-weight="800" fill="#fff" font-family="Arial,sans-serif">BYB<tspan fill="#F7A600">I</tspan>T</text>'; break;
+    case 'okx': g = '<g fill="#fff"><rect x="11" y="11" width="6" height="6"/><rect x="23" y="11" width="6" height="6"/><rect x="17" y="17" width="6" height="6"/><rect x="11" y="23" width="6" height="6"/><rect x="23" y="23" width="6" height="6"/></g>'; break;
+    case 'blofin': g = '<text x="20" y="27" text-anchor="middle" font-size="19" font-weight="900" fill="#fff" font-family="Arial,sans-serif">B</text><path d="M14 26l10-10" stroke="#FF8A00" stroke-width="2.6"/>'; break;
+    default: g = `<text x="20" y="26.5" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,sans-serif">${e.name[0]}</text>`;
+  }
+  return `<svg class="ulogo" width="${s}" height="${s}" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="${e.bg}"/>${g}</svg>`;
+}
+
+/* ---------- trophy / medal art (stand-ins for existing image assets) ---------- */
+let UIDN = 0;
+const METAL = { gold:['#FFF1B0','#F2C230','#B98300'], silver:['#FFFFFF','#C9D0D8','#7D8794'], bronze:['#FFE0C8','#E09A6A','#9A5530'] };
+function grads(id) {
+  return Object.entries(METAL).map(([k, c]) => `<linearGradient id="${id}${k}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c[0]}"/><stop offset=".5" stop-color="${c[1]}"/><stop offset="1" stop-color="${c[2]}"/></linearGradient>`).join('')
+    + `<linearGradient id="${id}txt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F5F9"/><stop offset=".55" stop-color="#8E9BB0"/><stop offset="1" stop-color="#4D5A70"/></linearGradient>`
+    + `<linearGradient id="${id}plate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D5DDE8"/><stop offset="1" stop-color="#6E7C92"/></linearGradient>`;
+}
+function cup(x, y, s, kind, id) {
+  const f = `url(#${id}${kind})`;
+  return `<g transform="translate(${x} ${y}) scale(${s})">
+    <path d="M22 16C6 16 6 44 30 48" fill="none" stroke="${f}" stroke-width="5"/><path d="M78 16C94 16 94 44 70 48" fill="none" stroke="${f}" stroke-width="5"/>
+    <path d="M18 6H82V26C82 54 68 68 50 70C32 68 18 54 18 26Z" fill="${f}"/><ellipse cx="50" cy="6" rx="32" ry="4" fill="${METAL[kind][2]}" opacity=".5"/>
+    <path d="M30 14C30 40 36 56 46 64" stroke="#fff" stroke-opacity=".6" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <rect x="45" y="70" width="10" height="14" fill="${f}"/><path d="M34 84H66L70 96H30Z" fill="${f}"/></g>`;
+}
+function trophyHero(label = '100 USDT') {
+  const id = 't' + (++UIDN);
+  return `<svg class="trophy" viewBox="0 0 260 190" aria-hidden="true"><defs>${grads(id)}</defs>
+    ${cup(30,42,.78,'silver',id)}${cup(152,48,.74,'bronze',id)}${cup(80,8,1,'gold',id)}
+    <path d="M30 150H230L238 172H22Z" fill="url(#${id}plate)"/><rect x="98" y="126" width="64" height="28" rx="2" fill="#5B8FD6" opacity=".55"/>
+    <text x="130" y="161" text-anchor="middle" font-size="44" font-weight="900" fill="url(#${id}txt)" stroke="#2F3A4C" stroke-width="1.6" font-family="'Arial Black',Arial,sans-serif" letter-spacing="-1">${label}</text></svg>`;
+}
+function trophySingle(rank, amount) {
+  const id = 't' + (++UIDN);
+  if (rank === 'top10') return `<svg class="tsingle" viewBox="0 0 160 100"><defs>${grads(id)}</defs><text x="80" y="62" text-anchor="middle" font-size="36" font-weight="900" fill="url(#${id}txt)" stroke="#2F3A4C" stroke-width="1.2" font-family="'Arial Black',Arial,sans-serif" letter-spacing="-1">Top 10%</text></svg>`;
+  const kind = rank === 1 ? 'gold' : rank === 2 ? 'silver' : 'bronze';
+  const label = `${fmt(amount)} USDT`, fs = label.length > 8 ? 22 : 26;
+  return `<svg class="tsingle" viewBox="0 0 160 100"><defs>${grads(id)}</defs>${cup(42,0,.76,kind,id)}
+    <path d="M18 80H142L148 94H12Z" fill="url(#${id}plate)"/>
+    <text x="80" y="91" text-anchor="middle" font-size="${fs}" font-weight="900" fill="url(#${id}txt)" stroke="#2F3A4C" stroke-width="1" font-family="'Arial Black',Arial,sans-serif" letter-spacing="-.5">${label}</text></svg>`;
+}
+function medal(rank) {
+  const id = 'm' + (++UIDN);
+  const c = {1:['#FFE27A','#F5A700','#C77800'], 2:['#F4F6F9','#AEB7C2','#76808D'], 3:['#F5C9A4','#C9834F','#8E5229']}[rank];
+  return `<svg class="medal" viewBox="0 0 54 58"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c[0]}"/><stop offset=".6" stop-color="${c[1]}"/><stop offset="1" stop-color="${c[2]}"/></linearGradient></defs>
+    <circle cx="26" cy="40" r="18" fill="url(#${id})"/><circle cx="26" cy="40" r="12.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2"/>
+    <text x="26" y="46" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" stroke="${c[2]}" stroke-width=".6" font-family="Arial,sans-serif">${rank}</text>
+    <path d="M16 6l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="${c[1]}"/><path d="M42 13l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z" fill="${c[1]}"/>
+    <path d="M7 25l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" fill="${c[1]}"/></svg>`;
+}
+
+/* ---------- building blocks used by proposals ---------- */
+const amt = (v, upto) => `${upto ? `<span class="upto">${T('Up to','최대')}</span>` : ''}<b>${v}</b><small>USDT</small>`;
+function prizeRow({rank, label, amount, sub, note = '', off}) {
+  const cls = rank === 'top10' ? 't10' : 'r' + rank;
+  return `<div class="prow ${cls}${off ? ' off' : ''}"${note}>${rank !== 'top10' ? `<div class="mclip">${medal(rank)}</div>` : ''}
+    <span class="pl">${label || lbl(rank)}</span><div class="pamt"><div class="v">${amount}</div>${sub ? `<div class="s">${sub}</div>` : ''}</div></div>`;
+}
+const info = (html, note = '') => `<div class="info"${note}>${I.info}<div>${html}</div></div>`;
+/* 상위 10%는 참여자 TOP10_MIN명 이상일 때만 활성화 — 미만이면 'Top 10%' 자체를 표시하지 않음 */
+const top10Off = x => x.rank === 'top10' && x.n < TOP10_MIN;
+const top10OffRight = () => `<div class="rk">–</div><div class="rk-sub"${NO('t10off','chg','상위 10%는 참여자 40명 이상 거래소에서만 활성화. 미만이면 상위 10%여도 “Top 10%”로 표시하지 않고 순위 밖과 동일하게 처리 (인원 조건은 비노출)')}>${T('Outside prize range','수상 범위 밖')}</div>`;
+const unranked = () => `<div class="rk">–</div><div class="rk-sub"${NO('unr','com','기존 “–”만 있어 의미가 불분명 → “Outside prize range” 보조 문구 추가')}>${T('Outside prize range','수상 범위 밖')}</div>`;
+const ineligRight = x => `<div class="rk">${rankLabel(x.rank)}</div><div class="rk-sub warn"${NO('inelig','new','요율상 마진이 0 이하인 거래소(P ≥ C)는 월중에도 “이번 달 상금 없음”을 미리 안내')}>${T('No prizes this month','이번 달 상금 없음')}</div>`;
+function lockNote(e, r, inDialog) {
+  return '';   // 리뷰 결정: 출금 가능액(1:1 매칭) 안내는 사용자에게 노출하지 않음
+  if (!r.paid || e.cb >= r.amount) return '';
+  const t = T(`Withdrawable with your cashback: <b>${fmt(e.cb)}</b> of ${fmt(r.amount)} USDT (1:1 matching)`, `페이백과 1:1로 출금 가능: <b>${fmt(e.cb)}</b> / ${fmt(r.amount)} USDT`);
+  const n = NO('lock' + (inDialog ? 'd' : ''), 'new', '기존 1:1 매칭 출금 규칙 때문에 출금할 수 없는 금액을 투명하게 표기 (노출 여부 결정 필요)');
+  return inDialog ? `<div class="dnote warn"${n}>${t}</div>` : `<span class="wd"${n}>${t}</span>`;
+}
+
+/* 랭킹 갱신 시각: 00:01 UTC 를 사용자 현지 시간으로 변환해 표기 */
+const updTime = () => { const d = new Date(Date.UTC(2026, 9, 19, 0, 1)); return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; };
+const updText = () => T(`Rankings are updated daily at ${updTime()} (local time)`, `랭킹은 매일 ${updTime()}(현지 시간)에 업데이트됩니다`);
+
+/* ---------- shared copy (Reward Details / Terms) ---------- */
+const DROW = {
+  method:  () => ({l:T('Payment method','지급 유형'), v:T('Event Reward','이벤트 리워드')}),
+  issued:  () => ({l:T('Issued to','지급 대상'), v:T('Ranked UID','순위에 든 UID'), k:'chg', n:'“내 쿠폰” → 순위에 든 UID에 이벤트 리워드로 지급 (쿠폰 아님). 언어팩 “이벤트 리워드는 순위에 든 UID에 지급돼요” 기준'}),
+  part:    () => ({l:T('Participation','참여'), v:T('Every Month','매월')}),
+  confirm: () => ({l:T('Prize confirmed','상금 확정'), v:T('1st of the following month','다음 달 1일'), k:'new', n:'확정 시점 안내: 매월 1일 확정'}),
+};
+const TERM = {
+  period: () => ({t:T('Applies only to cashback paid from the 1st day to the last day of each month (UTC).','매월 1일에서 말일까지(UTC 기준) 페이백 지급된 사항에 대해서만 적용됩니다.'), k:'chg', n:'오탈자 수정: “from the 1st place” → “from the 1st day”'}),
+  elig:   () => ({t:T('This event is open to traders who have cashback history in that month.','해당 월에 페이백 내역이 있는 트레이더님들을 대상으로 진행하는 이벤트입니다.')}),
+  basis:  () => ({t:T('Rankings are calculated per exchange, based on each UID referred to the TetherMax account.','순위 산정 기준은 테더맥스 계정에 연동된 각각의 UID 기준이며, 거래소별로 산정됩니다.')}),
+  pay:    () => ({t:T('Prizes are confirmed on the 1st of the following month and paid within 5 days. Prizes already paid are not changed retroactively.','상금은 다음 달 1일에 확정되며 5일 이내 지급됩니다. 이미 지급된 상금은 소급하여 변경되지 않습니다.'), k:'chg', n:'확정 시점 명시: 매월 1일 확정 → 5일 이내 지급, 소급 변경 없음'}),
+  wd:     () => ({t:T('Prizes can be withdrawn together with your cashback, matched 1:1 (minimum withdrawal 10 USDT).','이벤트 리워드는 페이백 출금 시 페이백 금액과 1:1로 함께 출금할 수 있습니다. (최소 출금 10 USDT)'), k:'new', n:'기존 출금 규칙(1:1 매칭, 합계 10 USDT 이상)을 약관에 명시'}),
+  one:    () => ({t:T('Only one prize per member per exchange each month, even with multiple UIDs.','여러 UID를 연동한 경우에도 회원당 거래소별로 매월 1회만 수상할 수 있습니다.'), k:'new', n:'1인 1수상(회원번호 기준) — 적용 여부·승계 여부 결정 필요'}),
+  multi:  () => ({t:T('Since each exchange processes it individually, you can receive rewards from more than one exchange.','거래소마다 개별로 진행하기 때문에 두 개 이상의 거래소에서 리워드를 받을 수 있습니다.')}),
+  change: () => ({t:T('This benefit may change at any time depending on our circumstances.','본 혜택은 당사의 사정에 따라 언제든 변경될 수 있습니다.')}),
+  some:   () => ({t:T('Some exchanges may not award prizes in a given month.','일부 거래소는 해당 월 상금이 지급되지 않을 수 있습니다.'), k:'new', n:'거래소 마진 ≤ 0인 달은 1~3등·상위 10% 전부 미지급'}),
+};
+
+/* ---------- page parts ---------- */
+function header() {
+  const nav = [T('Exchanges','거래소'), T('Events','이벤트'), T('Benefits','혜택'), T('Cashback Preview','페이백 미리보기'), T('Point','포인트')];
+  return `<header class="gnb ev-mode"><a class="logo" onclick="scrollTopApp()">${I.logo}TetherMax</a>
+    <nav>${nav.map(x => `<a>${x}</a>`).join('')}</nav>
+    <div class="icons">${I.bell}${I.user}${I.sun}${I.globe}</div></header>
+    <div class="mhead ev-mode"><button class="iconbtn" onclick="toast(T('Back (outside prototype scope)','뒤로 가기 (프로토타입 범위 밖)'))" aria-label="Back">${I.back}</button></div>`;
+}
+function footer() {
+  return `<footer class="foot"><div class="foot-top"><div class="foot-l"><a class="logo">${I.logo}TetherMax</a>
+    <div><button class="livechat">${I.head}${T('Live Chat','실시간 상담')}</button><span class="mail">support@tethermax.io ${I.copy}</span></div></div>
+    <div class="foot-cols"><div class="foot-col"><h4>${T('Company','회사')}</h4><a>${T('About TetherMax','TetherMax 소개')}</a><a>${T('Notices','공지사항')}</a><a>${T('Affiliate Partner Inquiry','제휴 파트너 문의')}</a></div>
+    <div class="foot-col"><h4>${T('Legal','약관 및 정책')}</h4><a>${T('Privacy Policy','개인정보처리방침')}</a><a>${T('Terms of Service','이용약관')}</a></div></div></div>
+    <hr><div class="socials">${SOCIAL.join('')}</div><div class="copy">© 2026 TetherMax. All rights reserved.</div></footer>`;
+}
+
+function eventPage(u) {
+  return `<main class="ev">
+    <section class="hero"><div>${trophyHero()}</div>
+      <h1>${T('Monthly Top Trader Rewards','이달의 우수 트레이더, 특별 보상을 받아가세요')}</h1>
+      <p>${T('Top traders each month earn exclusive rewards based on trading activity.','매달 우수 트레이더에게 특별 보상을 드립니다.')}</p>
+      <div class="hl">${T('Up to 100 USDT','최대 100 USDT')}</div>${P.heroNote ? P.heroNote() : ''}
+      ${u.linked ? '' : `<button class="btn link-cta" onclick="toast(T('Go to Link UID (outside prototype scope)','UID 연동 화면으로 이동 (프로토타입 범위 밖)'))">${T('Link UID','UID 연동')}</button>`}
+    </section>
+    ${P.beforePrizes ? P.beforePrizes(u) : ''}
+    <div class="prizes">${P.prizeRows(u)}</div>
+    ${P.afterPrizes ? P.afterPrizes(u) : ''}
+    ${rankingCard(u)}
+    ${P.extraSections ? P.extraSections(u) : ''}
+    ${rewardDetails()}
+    ${terms()}
+  </main>`;
+}
+function uitem(x, wrapCls) {
+  return `<div class="${wrapCls}"><div class="urow">${logo(x.ex, wrapCls === 'dcard' ? 40 : 36)}
+    <div><div class="uname">${EX[x.ex].name}</div><div class="uuid">UID ${x.uid}</div></div>
+    <div class="uright">${!x.rank ? unranked() : top10Off(x) ? top10OffRight() : (inelig(x.ex) && P.inelInMonth !== false ? ineligRight(x) : P.rankRight(x))}</div></div>
+    ${x.rank && !top10Off(x) && P.rankBelow && !inelig(x.ex) ? P.rankBelow(x) : ''}</div>`;
+}
+function pastBtn() {
+  return `<div class="card-foot"><button class="tlink" onclick="openDrawer('past')"${NO('pastlink','com','지난달 수상 결과 재확인 진입점. 현재는 홈 팝업 1회 노출 후 다시 볼 방법이 없음')}>${T('Past results','지난 결과')} ${I.chevR}</button></div>`;
+}
+function rankingCard(u) {
+  if (!u.linked) return `<section class="card"><div class="empty"><b>${T('No Ranking Available','랭킹 없음')}</b><span>${T('Link your UID to view your ranking','랭킹을 보려면 UID를 연동하세요')}</span></div></section>`;
+  if (!u.uids.length) return `<section class="card"><div class="empty"${N('com','UID는 연동했지만 이번 달 페이백이 없는 경우 안내 문구 분리 (기존엔 미연동과 구분 없음)')}><b>${T('No Ranking Yet','아직 랭킹이 없어요')}</b><span>${T('Earn cashback this month to join the ranking.','이번 달 페이백이 발생하면 랭킹에 참여할 수 있어요.')}</span></div>${pastBtn()}</section>`;
+  return `<section class="card"><h3>${T(`Your ${monthOnly(MONTH_NOW)} Cashback Ranking`, `${monthOnly(MONTH_NOW)} 페이백 랭킹`)}</h3>
+    <p class="cs"${NO('upd','chg','랭킹 갱신 시각을 사용자 현지 시간으로 표기 (00:01 UTC → 예: 한국 09:01). 기존엔 페이지 “00:01”, 드로어 “00:01 UTC”로 달랐음')}>${updText()}</p>
+    <div class="ulist">${u.uids.map(x => uitem(x, 'uitem')).join('')}</div>
+    ${P.listFoot ? `<p class="listfoot">${P.listFoot()}</p>` : ''}
+    ${pastBtn()}</section>`;
+}
+function rewardDetails() {
+  return `<section class="details"><h3>${T('Reward Details','보상 상세 정보')}</h3>${P.details().map(d => `<div class="drow"${d.n ? N(d.k, d.n) : ''}><span>${d.l}</span><span>${d.v}</span></div>`).join('')}</section>`;
+}
+function terms() {
+  const open = $('#app').clientWidth > 760;
+  return `<details class="tc"${open ? ' open' : ''}><summary>${T('Terms &amp; Conditions','이용 약관')} ${I.chevD}</summary>
+    <ul>${P.terms().map(t => `<li${t.n ? N(t.k, t.n) : ''}>${t.t}</li>`).join('')}</ul></details>`;
+}
+
+function drawer(u) {
+  const now = STATE.tab === 'now';
+  let body;
+  if (now) {
+    body = u.uids.length
+      ? u.uids.map(x => uitem(x, 'dcard')).join('') + (P.listFoot ? `<p class="dfoot">${P.listFoot()}</p>` : '')
+      : `<div class="dempty">${T('There are currently no eligible UIDs for ranking.','현재 랭킹 확인이 가능한 UID가 없어요')}${u.linked ? '' : `<button class="btn sm" onclick="toast(T('Go to Link UID (outside prototype scope)','UID 연동 화면으로 이동 (프로토타입 범위 밖)'))">${T('Link UID','UID 연동')}</button>`}</div>`;
+  } else body = pastList(u);
+  return `<div class="dim" onclick="closeOverlay()"></div><aside class="drawer">
+    <div><button class="iconbtn" onclick="closeOverlay()" aria-label="Back">${I.back}</button></div>
+    <div class="dhead">${now ? `<span class="mbadge">${monthName(MONTH_NOW)}</span>` : `<span class="mbadge grey">${T('All results','전체 결과')}</span>`}
+      <h2>${T('My Cashback Ranking','나의 페이백 랭킹은?')}</h2><p${NO('upd','chg','랭킹 갱신 시각을 사용자 현지 시간으로 표기 (00:01 UTC → 예: 한국 09:01)')}>${updText()}</p></div>
+    <div class="tabs"${N('com','탭 추가: This Month / Past Results. 기존엔 빈 상태일 때 헤더까지 사라졌으나, 헤더·탭은 유지하고 목록 영역만 빈 상태 처리')}><button class="${now ? 'on' : ''}" onclick="setTab('now')">${T('This Month','이번 달')}</button><button class="${now ? '' : 'on'}" onclick="setTab('past')">${T('Past Results','지난 결과')}</button></div>
+    ${body}</aside>`;
+}
+function pastList(u) {
+  if (!u.past.length) return `<div class="dempty">${T('No past results yet.','아직 지난 결과가 없어요.')}</div>`;
+  const months = [...new Set(u.past.map(e => e.m))];
+  return months.map(m => `<div class="mgroup">${monthName(m)}</div>` + u.past.filter(e => e.m === m).map(e => {
+    const r = P.pastPrize(e);
+    return `<div class="dcard"${NO('pastcard','com','지난 결과 카드: 순위 · 확정 상금 · 지급 상태 · 사유. 팝업을 놓쳐도 여기서 재확인')}><div class="urow">${logo(e.ex, 40)}
+      <div><div class="uname">${EX[e.ex].name}</div><div class="uuid">UID ${e.uid}</div></div>
+      <div class="uright">${r.paid ? `<div class="pr-amt">${fmt(r.amount)}<small>USDT</small></div>` : '<div class="pr-amt muted">–</div>'}<div class="rk-sub">${rankLabel(e.rank)}</div></div></div>
+      <div class="pr-meta">${r.paid ? `<span class="chip paid">${T('Paid','지급 완료')} · ${issueDate(e.m)}</span>` : `<span class="chip none">${T('Not awarded','미지급')}</span>`}
+        <span${r.note || ''}>${r.reason}</span>${P.pastExtra ? P.pastExtra(e, r) : ''}</div></div>`;
+  }).join('')).join('');
+}
+
+function popup(u) {
+  const wins = u.past.filter(e => e.m === LAST && P.pastPrize(e).paid);
+  if (!wins.length) return `<div class="dim"></div><div class="dlg-wrap"><div class="proto-msg">${T(`[Prototype] This user state has no winning results for ${monthName(LAST)}.<br>Change ‘User’ at the top to <b>1 UID</b> or <b>Multiple UIDs</b>.`, `[프로토타입] 이 사용자 상태에는 ${monthName(LAST)} 수상 내역이 없습니다.<br>상단 ‘사용자’를 <b>UID 1개</b> 또는 <b>UID 여러 개</b>로 바꿔보세요.`)}<br><br><button class="pb-btn" onclick="closeOverlay()">${T('Close','닫기')}</button></div></div>`;
+  const i = Math.min(STATE.pg, wins.length - 1), e = wins[i], r = P.pastPrize(e);
+  return `<div class="dim"></div><div class="dlg-wrap"><div class="dlg">
+    <div class="tw"${NO('trophy','chg','트로피 이미지 속 금액이 고정(100/50/20)이라, 실제 지급액으로 바뀌도록 금액 텍스트를 이미지와 분리')}>${trophySingle(e.rank, r.amount)}</div>
+    <h3>${T('Cashback Ranking Reward','페이백 랭킹 보상')}</h3>
+    <p class="dsub"${NO('dsub','chg','문구 변경: “지난달 랭킹 확인” → 상금이 확정·지급되었음을 명확히')}>${T(`Your ${monthName(LAST)} prize has been issued`, `${monthName(LAST)} 랭킹 보상이 지급되었어요`)}</p>
+    <div class="dl"><div><span>${T('Exchange','거래소')}</span><b>${EX[e.ex].name}</b></div><div><span>UID</span><b>${e.uid}</b></div>
+      <div><span>${T('Ranking','랭킹')}</span><b>${rankLabel(e.rank)}</b></div>
+      <div class="prize"${NO('prize','new','상금 행 추가: 거래소·수상자마다 금액이 달라지므로 실제 지급액을 명시')}><span>${T('Prize','상금')}</span><b>${fmt(r.amount)} USDT</b></div></div>
+    ${P.popupNote ? P.popupNote(e, r) : ''}
+    ${wins.length > 1 ? `<div class="pager"${NO('pager','com','여러 거래소에서 수상하면 한 팝업에서 넘겨보기')}><button onclick="pgMove(-1)" ${i === 0 ? 'disabled' : ''}>‹</button><span>${i + 1} / ${wins.length}</span><button onclick="pgMove(1)" ${i === wins.length - 1 ? 'disabled' : ''}>›</button></div>` : ''}
+    <button class="btn block" onclick="closeOverlay()">${T('Close','닫기')}</button>
+    <button class="tlink center" onclick="openDrawer('past')"${NO('dlglink','com','팝업은 1회만 노출되므로 다시 볼 수 있는 위치(My Cashback Ranking › Past Results)로 바로가기')}>${T('View in Past Results','지난 결과에서 보기')} ${I.chevR}</button>
+  </div></div>`;
+}
+
+/* ================= 제안 1 · 거래소 마진 연동 예산형 ================= */
+/* settled prizes per exchange: [1st, 2nd, 3rd, top10] (null = margin ≤ 0, not awarded) */
+const SETTLE = {
+  '2026-09': {binance:[100,50,20,10], bitget:[100,50,20,10], okx:[100,50,20,10], lbank:[100,50,20,0], blofin:[53,5,3,0], kucoin:[10,5,3,0], zoomex:[10,5,3,0], woox:null},
+  '2026-08': {binance:[100,50,20,10], bitget:[100,50,20,10], lbank:[100,50,20,0], blofin:[88,5,3,0], kucoin:[10,5,3,0], zoomex:[10,5,3,0], woox:null},
+};
+const P = {
+  no: 1,
+  title: '거래소 마진 연동 예산형',
+  titleEn: 'Exchange margin–linked budget',
+  summaryEn: '<b>Core</b> · Each exchange\'s monthly prize budget is 10% of its margin, filled 1st → 2nd → 3rd (min. 10/5/3 guaranteed on exchanges with margin > 0). Amounts are unknown until settlement, so the screens consistently show <b>“maximum · confirmed on the 1st of next month · some exchanges may not award prizes”</b>, and the <b>confirmed amount</b> appears in the winner popup and Past Results.',
+  summary: '<b>핵심</b> · 거래소 마진의 10%를 월 상금 한도로 두고 1→2→3등 순으로 채움(마진 > 0인 거래소는 최소 10/5/3 보장). 월 정산 전에는 금액을 알 수 없으므로 화면은 <b>“최대 금액 · 다음 달 1일 확정 · 일부 거래소 미지급 가능”</b>을 일관되게 안내하고, <b>확정 금액</b>은 수상 팝업과 지난 결과에서 보여줌.',
+  prizeRows() {
+    return [
+      prizeRow({rank:1, amount:amt(100,1), note:N('chg','고정 금액 → “최대 금액” 표기. 거래소 정산 결과(마진의 10% 한도)에 따라 최대 이하로 조정. 최소 상금(10/5/3)은 마진 > 0인 거래소에만 적용되므로 상금표에는 표기하지 않고 약관에서 조건과 함께 안내')}),
+      prizeRow({rank:2, amount:amt(50,1)}),
+      prizeRow({rank:3, amount:amt(20,1)}),
+      prizeRow({rank:'top10', amount:amt(10), sub:T('Subject to settlement','정산 결과에 따라 지급'), note:N('chg','상위 10%: 참여자 40명 이상 + 1~3등 지급 후 남은 예산이 전원 지급 가능할 때만 각 10 USDT (부분 지급 없음) — 사용자 화면에는 참여자 수 조건 비노출')}),
+    ].join('');
+  },
+  afterPrizes() {
+    return info(T('Final prizes are confirmed for each exchange on the 1st of the following month, after the monthly cashback settlement, and may be lower than the maximum. Some exchanges may not award prizes in a given month.',
+                  '최종 상금은 월별 페이백 정산 후 다음 달 1일에 거래소별로 확정되며, 최대 금액보다 적을 수 있습니다. 일부 거래소는 해당 월 상금이 지급되지 않을 수 있습니다.'),
+      N('new','상금 결정 방식 고지: 다음 달 1일 확정 · 최대 이하로 조정 가능 · 일부 거래소 미지급 가능 (조건 없는 “최소 보장” 표현은 삭제)'));
+  },
+  rankRight(x) {
+    const sub = x.rank === 'top10' ? T('10 USDT if awarded','지급 시 10 USDT') : T(`Up to ${CAP[x.rank]} USDT`, `최대 ${CAP[x.rank]} USDT`);
+    return `<div class="rk">${rankLabel(x.rank)}</div><div class="rk-sub"${NO('upto','new','순위 옆에 받을 수 있는 최대 상금 표기. 예산형은 월중 확정 금액을 알 수 없음')}>${sub}</div>`;
+  },
+  listFoot: () => T(`Prizes are confirmed on ${confirmDate()}.`, `상금은 ${confirmDate()}에 확정됩니다.`),
+  details: () => [
+    {l:T('Prize amount','보상 금액'), v:T('Up to 100 USDT · varies by exchange','최대 100 USDT · 거래소별 상이'), k:'new', n:'상금 금액 항목 추가: 거래소별로 달라짐을 명시'},
+    DROW.method(), DROW.issued(), DROW.part(), DROW.confirm(),
+  ],
+  terms: () => [
+    TERM.period(), TERM.elig(), TERM.basis(),
+    {t:T('Prizes for each exchange are confirmed after the monthly cashback settlement and may be adjusted below the maximum (1st up to 100, 2nd up to 50, 3rd up to 20 USDT). On exchanges that award prizes for the month, 1st–3rd place receive at least 10 / 5 / 3 USDT.',
+         '상금은 월별 페이백 정산 후 거래소별로 확정되며, 최대 금액(1등 100, 2등 50, 3등 20 USDT) 이하로 조정될 수 있습니다. 해당 월 상금을 지급하는 거래소에서는 1~3등이 최소 10 / 5 / 3 USDT를 받습니다.'), k:'new', n:'예산형 상금 산정 원칙 명시. 최소 상금은 “해당 월 상금을 지급하는 거래소(마진 > 0)”라는 조건과 함께 안내'},
+    {t:T('The top 10% prize (10 USDT each) may not be awarded depending on the exchange and the settlement result. 1st–3rd place winners are excluded.',
+         '상위 10% 상금(1인 10 USDT)은 거래소 및 정산 결과에 따라 지급되지 않을 수 있습니다. 1~3등 수상자는 제외됩니다.'), k:'chg', n:'상위 10% 조건: 참여자 40명 + 예산 충족, 1~3등 중복 제외 — 사용자 화면에는 참여자 수 조건 비노출'},
+    TERM.some(), TERM.pay(), TERM.multi(), TERM.change(),
+  ],
+  pastPrize(e) {
+    const t = SETTLE[e.m] && SETTLE[e.m][e.ex];
+    if (!t) return {paid:false, reason:T('This exchange did not award prizes this month','이 거래소는 이번 달 상금이 지급되지 않았어요'), note:NO('r-none','new','마진 ≤ 0으로 미지급된 경우 사유 표기')};
+    const none = T('Not awarded on this exchange this month','이 거래소는 이번 달 해당 상금이 없어요');
+    if (e.rank === 'top10' && e.n < TOP10_MIN) return {paid:false, reason:none};
+    const idx = e.rank === 'top10' ? 3 : e.rank - 1, a = t[idx], max = [100,50,20,10][idx];
+    if (!a) return {paid:false, reason:none};
+    if (a === max) return {paid:true, amount:a, max, reason:T('Maximum prize','최대 상금')};
+    const isMin = a === [10,5,3][idx];
+    return {paid:true, amount:a, max, adjusted:true,
+      reason: isMin ? T(`Minimum guaranteed prize (max ${max})`, `최소 보장 상금 (최대 ${max})`) : T(`Adjusted by exchange settlement (max ${max})`, `거래소 정산에 따라 조정 (최대 ${max})`),
+      note: NO('r-adj','new','최대보다 적게 지급된 경우 사유 표기 (정산 조정 / 최소 보장)')};
+  },
+  pastExtra: (e, r) => lockNote(e, r, false),
+  popupNote(e, r) {
+    return (r.adjusted ? `<div class="dnote"${NO('adjd','new','조정된 상금일 때 사유와 최대 금액 안내')}>${T(`This prize was adjusted based on ${EX[e.ex].name}'s monthly settlement (max ${r.max} USDT).`, `${EX[e.ex].name} 월별 정산 결과에 따라 조정된 상금입니다. (최대 ${r.max} USDT)`)}</div>` : '')
+      + lockNote(e, r, true);
+  },
+};
+
+/* ================= runtime ================= */
+let NOTES = [];
+const VIEWS = () => [['event', T('Event page','이벤트 페이지')], ['drawer', T('Ranking drawer','랭킹 드로어')], ['popup', T('Winner popup','수상 팝업')]];
+const curView = () => STATE.overlay || 'event';
+
+function renderBar() {
+  const seg = (key, opts, cur) => opts.map(([v, l]) => `<button class="${cur === v ? 'on' : ''}" onclick="${key}('${v}')">${l}</button>`).join('');
+  $('#pbar').innerHTML = `
+    <div class="pb-brand"><span class="pb-tag">${T('Proposal','제안')} ${P.no}</span>${T(P.titleEn, P.title)}</div>
+    <div class="pb-links">${[1,2,3].map(n => `<a href="제안${n}_프로토타입.html?lang=${STATE.lang}" class="${n === P.no ? 'on' : ''}">${T('Proposal','제안')} ${n}</a>`).join('')}</div>
+    <span class="pb-sep"></span>
+    <div class="pb-group"><span class="pb-label">${T('Screen','화면')}</span><div class="seg">${seg('setView', VIEWS(), curView())}</div></div>
+    <div class="pb-group"><span class="pb-label">${T('User','사용자')}</span><select class="pb-sel" onchange="setUser(this.value)">${Object.entries(USERS).map(([k, v]) => `<option value="${k}"${k === STATE.user ? ' selected' : ''}>${T(v.labelEn, v.label)}</option>`).join('')}</select></div>
+    <div class="pb-group"><span class="pb-label">${T('Frame','프레임')}</span><div class="seg">${seg('setFrame', [['auto', T('Responsive','반응형')], ['mobile', T('Mobile 390','모바일 390')]], STATE.frame)}</div></div>
+    <span class="pb-sep"></span>
+    <label class="pb-chk"><input type="checkbox" ${STATE.notes ? 'checked' : ''} onchange="STATE.notes=this.checked;applyNotes()">${T('Show changes','변경점 표시')}</label>
+    <button class="pb-btn" onclick="togglePanel()">${T('Change list','변경점 목록')}<b id="ncount">0</b></button>
+    <div class="pb-group pb-lang"><span class="pb-label">${T('Language','언어')}</span><div class="seg">${seg('setLang', [['en','EN'],['ko','KO']], STATE.lang)}</div></div>`;
+}
+
+function render(resetScroll) {
+  ONCE = new Set();
+  const u = USERS[STATE.user], sc = $('#scroll'), top = sc.scrollTop;
+  document.documentElement.lang = STATE.lang;
+  $('#stage').classList.toggle('mobile', STATE.frame === 'mobile');
+  renderBar();
+  sc.innerHTML = header() + eventPage(u) + footer();
+  let ov = '';
+  if (STATE.overlay === 'drawer') ov = drawer(u);
+  else if (STATE.overlay === 'popup') ov = popup(u);
+  else if (!u.linked) ov = `<div class="sticky-cta"><button class="btn block" onclick="toast(T('Go to Link UID (outside prototype scope)','UID 연동 화면으로 이동 (프로토타입 범위 밖)'))">${T('Link UID','UID 연동')}</button></div>`;
+  $('#overlay').innerHTML = ov;
+  sc.scrollTop = resetScroll ? 0 : top;
+  requestAnimationFrame(applyNotes);
+}
+
+function applyNotes() {
+  const app = $('#app');
+  app.querySelectorAll('.pin').forEach(p => p.remove());
+  app.querySelectorAll('.noted').forEach(e => e.classList.remove('noted'));
+  NOTES = [...app.querySelectorAll('[data-note]')].filter(e => e.getClientRects().length)
+    .map((el, i) => ({el, n: i + 1, kind: el.dataset.kind, text: el.dataset.note}));
+  const c = $('#ncount'); if (c) c.textContent = NOTES.length;
+  if (STATE.notes) NOTES.forEach(o => {
+    if (getComputedStyle(o.el).position === 'static') o.el.classList.add('has-pin');
+    o.el.classList.add('noted');
+    const b = document.createElement('span');
+    b.className = 'pin k-' + o.kind; b.textContent = o.n; b.title = o.text;
+    b.onclick = ev => { ev.stopPropagation(); ev.preventDefault(); STATE.panel = true; renderPanel(o.n); };
+    o.el.appendChild(b);
+  });
+  renderPanel();
+}
+function renderPanel(active) {
+  const p = $('#npanel'); p.hidden = !STATE.panel; if (!STATE.panel) return;
+  const kindName = {new:T('New','신규'), chg:T('Changed','변경'), com:T('Common','공통 개선')};
+  const vname = VIEWS().find(v => v[0] === curView())[1];
+  p.innerHTML = `<div class="np-h"><b>${T('Changes','변경점')} · ${vname} (${NOTES.length})</b><button onclick="togglePanel()" aria-label="${T('Close','닫기')}">✕</button></div>
+    <div class="np-sum">${T(P.summaryEn, P.summary)}</div>
+    <div class="np-legend"><span><i style="background:var(--k-new)"></i>${kindName.new}</span><span><i style="background:var(--k-chg)"></i>${kindName.chg}</span><span><i style="background:var(--k-com)"></i>${T('Common (all 3 proposals)','공통 개선 (3개 제안 공통)')}</span></div>
+    <div class="np-list">${NOTES.map(o => `<div class="np-item" id="np${o.n}" onclick="focusNote(${o.n})" style="${active === o.n ? 'background:#F5F3FF' : ''}"><span class="pin static k-${o.kind}">${o.n}</span><div><b style="font-weight:600">[${kindName[o.kind]}]</b> ${esc(o.text)}</div></div>`).join('') || `<div class="np-empty">${T('No changes to show in this state. Try another user state.','이 화면 상태에는 표시할 변경점이 없습니다. 사용자 상태를 바꿔보세요.')}</div>`}</div>`;
+  if (active) { const it = $('#np' + active); it && it.scrollIntoView({block:'nearest'}); }
+}
+function focusNote(n) {
+  const o = NOTES.find(x => x.n === n); if (!o) return;
+  o.el.scrollIntoView({behavior:'smooth', block:'center'});
+  o.el.classList.remove('flash'); void o.el.offsetWidth; o.el.classList.add('flash');
+  renderPanel(n);
+}
+function togglePanel() { STATE.panel = !STATE.panel; renderPanel(); }
+
+/* ---------- actions ---------- */
+function setView(v) {
+  STATE.pg = 0; STATE.tab = 'now';
+  STATE.overlay = v === 'event' ? null : v;
+  render(v === 'event');
+}
+function setLang(l) { STATE.lang = l; setTitle(); render(); }
+function toggleLang() { setLang(STATE.lang === 'ko' ? 'en' : 'ko'); }
+function scrollTopApp() { closeOverlayOnly(); $('#scroll').scrollTo({top:0, behavior:'smooth'}); }
+function closeOverlayOnly() { if (STATE.overlay) { STATE.overlay = null; render(); } }
+function setUser(k) { STATE.user = k; STATE.pg = 0; render(); }
+function setFrame(f) { STATE.frame = f; render(); }
+function setTab(t) { STATE.tab = t; render(); }
+function openDrawer(tab) { STATE.overlay = 'drawer'; STATE.tab = tab; render(); }
+function closeOverlay() { STATE.overlay = null; render(); }
+function pgMove(d) { STATE.pg = Math.max(0, STATE.pg + d); render(); }
+function toast(msg) {
+  const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
+  $('#stage').appendChild(t); setTimeout(() => t.remove(), 2200);
+}
+
+try { const q = new URLSearchParams(location.search).get('lang'); if (q === 'ko' || q === 'en') STATE.lang = q; } catch (e) {}
+const setTitle = () => { document.title = T(`Proposal ${P.no} · ${P.titleEn} — TetherMax Ranking Prototype`, `제안 ${P.no} · ${P.title} — TetherMax 랭킹 프로토타입`); };
+setTitle();
+render(true);
+let roT; new ResizeObserver(() => { clearTimeout(roT); roT = setTimeout(applyNotes, 150); }).observe($('#app'));
+</script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+{
+  "status": "PASS",
+  "totals": {
+    "pages": 556,
+    "feedback_annotations": 131,
+    "unique_comment_bodies": 53,
+    "hangul_hits": 0,
+    "non_url_payback_hits": 0,
+    "translation_mismatches": 0
+  },
+  "all_original_pdfs_unchanged": true,
+  "all_original_feedback_annotations_preserved": true,
+  "all_translations_match_reviewed_english_text": true,
+  "all_original_requirement_ids_preserved": true,
+  "page_text_checked_with": [
+    "pypdf",
+    "PDFium"
+  ],
+  "body_changes_limited_to_cashback_terminology_grammar_and_romanized_name": true,
+  "edited_pages": 14,
+  "edited_text_regions": 19,
+  "visual_check": "All 19 before/after text crops inspected; pixels outside edited regions are identical on all 14 edited pages.",
+  "terminology": "cashback only for product terminology. /payback is retained solely as the literal existing URL path.",
+  "files": [
+    {
+      "file": "[Review] PRD-Cashback Integration (DEX Partner APIs)-231026-030235.pdf",
+      "pages": 31,
+      "feedback_annotations": 13,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "d1db3fefdbdc9d0ae8590a078d8618192e8c8a15dd67a8cb61d3be64cc800c73",
+      "original_sha256": "7b7c4188313e16104b40b21b5a22b4b094897fc300d25a8932f990bc410fa0a7",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX Backoffice PRD - As a TetherMax admin & content operator, I would like to administrate and manage the Decentralised Exchanges via the Backoffice [MAX-1270]-231026-030236.pdf",
+      "pages": 14,
+      "feedback_annotations": 4,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "4acf7ab41886437e001c545aa7e933a674956d453a0029b13b201926ffd12f34",
+      "original_sha256": "87bcedab195343e5a6a366519265267d2ded477395bce6f59e91ff1848f6b8c8",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX Backoffice PRD_ Edge Cases and Error Handling-231026-030257.pdf",
+      "pages": 30,
+      "feedback_annotations": 8,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "6512717c796005fe1e2009b24eca1dcf65e6a26dd5ffa690bb2db8fba11da618",
+      "original_sha256": "5c93d2c1d7625134edeb70f18ceaaa41f2667128704fe886c0b84414f6c4c192",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX Backoffice PRD_ Functional Requirements Part 1, Classification, Priority and Landing Content-231026-030304.pdf",
+      "pages": 50,
+      "feedback_annotations": 20,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "d3d5d9b55cf96eb3b11705a960955c8784cfe10342f4f8193895dda3d985a62f",
+      "original_sha256": "308a5013892c7e13cd7331eac4005bba545b4794b9c610173df68a790f4eb427",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX Backoffice PRD_ Functional Requirements Part 2, Linking, Settlement and Messaging-231026-030259.pdf",
+      "pages": 94,
+      "feedback_annotations": 17,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "c7ad3d7d4590d47479c6f8ca0b2bdb48c55a06787928d8062d5224c0185988e0",
+      "original_sha256": "b965c356a6124d6b1bb629ae798c47d01a400b045b5b409e13479987901dd080",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX Backoffice PRD_ Functional Requirements Part 3, DEX Landing Page Listings, Edit Landing Content, Detailed Content and Cashback Landing page-231026-030254.pdf",
+      "pages": 20,
+      "feedback_annotations": 4,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "77032105233fc645b5a681b2021f5ee66d50af11329dfdd87d487e65ac3605cb",
+      "original_sha256": "f5991fe7a542e00cb70fbcf87ea13b4016cfb8843784d3924a9abac54f939d1a",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX Backoffice PRD_ Functional Requirements Part 4, Broker Content Editors-231026-030303.pdf",
+      "pages": 14,
+      "feedback_annotations": 2,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "f286189e06e8b64810ae21e956197b8d8640ff0aef1bdf79091d1a24a3a4227f",
+      "original_sha256": "7768f8da2bb9b8f5fd8cc54a437ddc659110b5d1a1ace71c2f486402f3a11b19",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX PRD - [MAX-1267]-231026-030216.pdf",
+      "pages": 40,
+      "feedback_annotations": 0,
+      "preserved_url_identifier_occurrences": 1,
+      "sha256": "a129ff0242c5e98e14bdbc04af71cba01f00fe3e6918854f7400a12a9b8d6482",
+      "original_sha256": "65562d98553a1a6e8f08a8c614783c2f90e9d73317d9f611c66060938eea6f8a",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Edge Cases and Error Handling-231026-030245.pdf",
+      "pages": 68,
+      "feedback_annotations": 8,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "b2e06aa64aef873971d7512fcb8a1c912ace9dc6f5274a6a0ebfcc94cc3fe210",
+      "original_sha256": "71c23bec9454d0d09b1e12897d15ca6c7fb6520832c73459f5bb439626bae936",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, DEX Pages and Cross Cutting-231026-030226.pdf",
+      "pages": 54,
+      "feedback_annotations": 6,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "7500175b3a250c642c4cde5a1f9ba4adca48ae84adfa41049a8691318de1bc96",
+      "original_sha256": "78d2c3bf2c8ad71a256c93c85ced91d1870ef65d9ba454e901dabfc122a9a809",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Hub and Navigation-231026-030217.pdf",
+      "pages": 41,
+      "feedback_annotations": 14,
+      "preserved_url_identifier_occurrences": 7,
+      "sha256": "b16c62fd32997703b6bf6419635d9bd4b9af727fa2c214c00ee1e526f0f53aaa",
+      "original_sha256": "4bb62e63a8f7684ddf1d52f321a7f903f8c48f9e7b880a2838c43622d0017ba4",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Learn and Earn Quiz Module-231026-030220.pdf",
+      "pages": 6,
+      "feedback_annotations": 2,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "d36661862ff763d80437ba4528624667fb891dcdb9abee1e794e5c240accf886",
+      "original_sha256": "1671f8e4b4fec373db659073b8288edaec2d53da4a9383f567e85bc8d23155ee",
+      "checks_passed": true
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Service Flows_ Linking, Ownership, Withdrawals, Cashback Summary and Ranking-231026-030244.pdf",
+      "pages": 94,
+      "feedback_annotations": 33,
+      "preserved_url_identifier_occurrences": 0,
+      "sha256": "9581c9541186ccfe2e9b30895c882b3250a6ddb8d14e39a7d792726e15674cb4",
+      "original_sha256": "aca5e0ee1a2d4a8a18554d0ed48ff457ea889888fbe42d5f3bd4fcbed9ddc919",
+      "checks_passed": true
+    }
+  ],
+  "render_checks": [
+    {
+      "file": "[Review] PRD-Cashback Integration (DEX Partner APIs)-231026-030235.pdf",
+      "page": 4,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-Cashback Integration (DEX Partner APIs)-231026-030235.pdf",
+      "page": 11,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-Cashback Integration (DEX Partner APIs)-231026-030235.pdf",
+      "page": 31,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX Backoffice PRD_ Edge Cases and Error Handling-231026-030257.pdf",
+      "page": 28,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD - [MAX-1267]-231026-030216.pdf",
+      "page": 23,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, DEX Pages and Cross Cutting-231026-030226.pdf",
+      "page": 31,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, DEX Pages and Cross Cutting-231026-030226.pdf",
+      "page": 37,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Service Flows_ Linking, Ownership, Withdrawals, Cashback Summary and Ranking-231026-030244.pdf",
+      "page": 5,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Service Flows_ Linking, Ownership, Withdrawals, Cashback Summary and Ranking-231026-030244.pdf",
+      "page": 24,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Service Flows_ Linking, Ownership, Withdrawals, Cashback Summary and Ranking-231026-030244.pdf",
+      "page": 28,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Service Flows_ Linking, Ownership, Withdrawals, Cashback Summary and Ranking-231026-030244.pdf",
+      "page": 45,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Service Flows_ Linking, Ownership, Withdrawals, Cashback Summary and Ranking-231026-030244.pdf",
+      "page": 46,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Service Flows_ Linking, Ownership, Withdrawals, Cashback Summary and Ranking-231026-030244.pdf",
+      "page": 49,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    },
+    {
+      "file": "[Review] PRD-DEX PRD_ Functional Requirements, Service Flows_ Linking, Ownership, Withdrawals, Cashback Summary and Ranking-231026-030244.pdf",
+      "page": 51,
+      "outside_edited_text_regions_pixel_identical": true,
+      "outside_difference_bbox": null
+    }
+  ],
+  "all_original_USDT_USDC_amounts_and_units_preserved": true,
+  "confirmed_dates_preserved": true
+}

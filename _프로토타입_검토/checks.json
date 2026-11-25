@@ -1,0 +1,22 @@
+[
+  {
+    "name": "user",
+    "file": "사용자화면_DEX영향도.html",
+    "sha256": "5417ffe4153a5e816e86e0ba682a711f48955c7a07be47cdbb6c65ce4ab0ee0e",
+    "pages": 18,
+    "states": 49,
+    "cases": 392,
+    "renderErrors": [],
+    "brokenNext": []
+  },
+  {
+    "name": "admin",
+    "file": "백오피스_DEX영향도.html",
+    "sha256": "2625b2ac948e20ab42ca32849a5ef289724e8a53736c4557f01af9cd0a20d42c",
+    "pages": 12,
+    "states": 28,
+    "cases": 224,
+    "renderErrors": [],
+    "brokenNext": []
+  }
+]

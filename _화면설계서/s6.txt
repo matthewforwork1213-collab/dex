@@ -1,0 +1,78 @@
+이 경고를 영구히 봅니다.| 정상 상태인데 오류처럼 보입니다. 분리안이면 DEX 탭에서는 이 경고를 띄우지 않습니다.|
+ |
+ |일괄 출금 버튼이 DEX에서는 성립하지 않습니다.| CEX는 선택된 UID 전부를 한 번에 출금 요청하지만, DEX는 카드마다 각각 새 탭을 여는 개별 동작입니다. 하나의 버튼으로 묶을 수 없습니다.|
+ |
+|
+
+|
+|
+ |
+ |SCR-006|
+ |출금하기 &gt; |DEX 리다이렉트 다이얼로그|
+ |신규|
+ |
+ |DEX로 보내기 직전의 확인 화면. 새 탭 차단 시 대체 경로가 필요합니다.|
+ |근거|05 · 4-2, 4-4|
+ |딥링크|ApeX만 확정|
+ |
+ |
+
+ |
+ |
+ |
+
+ |
+ |Lighter로 이동|
+ |
+ |DEX|Lighter|
+ |Wallet|0x7a3F…51e9|
+ |Exchange Cashback|128.40 USDT|
+ |
+ |새 탭으로 Lighter가 열립니다. 거기서 같은 지갑을 연결해 출금하세요. 테더맥스는 지갑 연결이나 서명을 절대 요구하지 않습니다.|
+ |
+ |Cancel|
+ |Go to Lighter|
+ |
+ |
+
+ |
+ |새 탭이 차단된 경우|
+ |Your browser blocked the new tab.|Allow pop-ups for TetherMax, or select "Open Lighter" to open it now.|
+ |Open Lighter|
+ |다이얼로그를 닫지 않고 주 버튼만 교체합니다. 직접 클릭이므로 브라우저가 허용합니다.|
+ |
+
+ |
+ |복귀 후|
+ |토스트 — Lighter opened in a new tab|
+ |
+ |Back from Lighter?|
+ If you withdrew on Lighter, it can take a few minutes for the latest figures to show here.
+ |Exchange Cashback is what you have earned, so it doesn't go down when you withdraw.|
+ |
+ |
+ |
+ |
+ |
+
+ |
+ |DESCRIPTION|
+ |
+ |No|구분|내용|
+ |1|신규|3행 고정 — DEX · Wallet(마스킹) · Exchange Cashback(USDT).|
+ |2|주의|각주에 |"테더맥스는 지갑 연결·서명을 요구하지 않는다"|를 반드시 넣습니다. 피싱 경계선입니다.|
+ |3|신규|확정 버튼은 |Go to {DEX}|입니다. |「출금」이 아닙니다.| 1차 버튼(SCR-005)과 이름을 맞춰야 합니다.|
+ |4|신규|새 탭 차단 대체 경로.| 다이얼로그를 닫지 않고 주 버튼을 |Open {DEX}|로 교체합니다.|
+ |5|신규|토스트 표시. |출금 드로어는 뒤에 그대로 열려 있습니다.|
+ |6|주의|적립액은 출금해도 줄지 않습니다.| 테더맥스는 DEX에서 일어난 출금을 볼 수 없습니다. 금액은 DEX의 다음 데이터 갱신 때만 바뀝니다.|
+ |
+ |딥링크가 없으면 이 화면이 뜨지 않습니다.| 현재 |ApeX만 확정|(|omni.apex.exchange/rewards|)이고 Lighter·EdgeX·Aster는 미정입니다. 딥링크 미설정 시 버튼 자체를 렌더하지 않기로 돼 있어, |3곳은 현재 상태로는 출금 안내 기능이 성립하지 않습니다.|
+ |EdgeX는 목적지 선택이 특히 중요합니다.| 캐시백이 증거금에 섞여 잔액 화면에서는 찾을 수 없습니다. |거래내역 화면|으로 보내야 |TRANSFER_IN| 기록을 확인할 수 있습니다.|
+ |
+|
+
+|
+
+ 
+|
+|

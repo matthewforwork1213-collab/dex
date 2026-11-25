@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2062" height="1947" viewBox="0 0 2062 1947">
+<title>지갑 소유권 · 업로드와 심사</title>
+<rect x="0" y="0" width="2062" height="1947" rx="0" fill="#e9eef4" stroke="none"/>
+<text x="36" y="50" font-family="Inter, Malgun Gothic, sans-serif" font-size="32" font-weight="700" fill="#112945">지갑 소유권 · 업로드와 심사</text>
+<text x="36" y="85" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#36506b">API-025 · 026  /  REQ-723~733</text>
+<text x="36" y="117" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">상단은 API 조건, 흰색 영역은 사용자 표시, 하단은 후속 동작입니다. 금액·날짜·주소는 예시입니다.</text>
+<text x="36" y="142" font-family="Inter, Malgun Gothic, sans-serif" font-size="14" font-weight="400" fill="#41566a">기존 화면의 해당 영역에 적용합니다. 독립 출금 페이지·회원 출금 신청 동작은 제외합니다. G 번호는 정책 확인 항목입니다.</text>
+<g id="S3_01">
+<rect x="36" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">입력 화면</text>
+<text x="54" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">O3~O5 · 신청 가능, 파일 없음</text>
+<rect x="54" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Ownership Verification</text>
+<text x="70" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="70" y="336" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Upload your screen recording</text>
+<text x="70" y="358" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">MP4 or MOV (max. 100MB)</text>
+<rect x="70" y="440" width="137" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="82" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Choose recording</text>
+<rect x="215" y="440" width="100" height="27" rx="5" fill="#eceef1" stroke="none"/>
+<text x="227" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#747e88">Submit Claim</text>
+<text x="54" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">3단계 녹화 가이드. 선택 전 제출 비활성. 지갑 상태·주소</text>
+<text x="54" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">복사·뒤로 가기.</text>
+</g>
+<g id="S3_02">
+<rect x="538" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">처리 중</text>
+<text x="556" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">O6 · 업로드 중</text>
+<rect x="556" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Uploading File</text>
+<text x="572" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">ownership.mp4 · 48.2 MB</text>
+<text x="572" y="336" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Do not close this window.</text>
+<rect x="572" y="440" width="100" height="27" rx="5" fill="#eceef1" stroke="none"/>
+<text x="584" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#747e88">Submit Claim</text>
+<text x="556" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">탭 종료·연결 단절 시 업로드 폐기, 신청 0건.</text>
+</g>
+<g id="S3_03">
+<rect x="1040" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">입력 화면</text>
+<text x="1058" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">O7 · 업로드 완료</text>
+<rect x="1058" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Upload Recording</text>
+<text x="1074" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">ownership.mp4 · 48.2 MB · Complete</text>
+<text x="1074" y="336" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Some events may be restricted during the claim period.</text>
+<text x="1074" y="355" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Existing coupons cannot be transferred.</text>
+<rect x="1074" y="440" width="100" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="1086" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Replace file</text>
+<rect x="1182" y="440" width="100" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1194" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Submit Claim</text>
+<text x="1058" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">교체 → 파일 재선택. 제출 → O10. Cancel로 돌아오면 이 파일</text>
+<text x="1058" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">유지.</text>
+</g>
+<g id="S3_04">
+<rect x="1542" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1560" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">O8 · 400 VALIDATION_ERROR / 업로드 실패</text>
+<rect x="1560" y="256" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1574" y="270" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1590" y="300" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Upload Failed</text>
+<text x="1590" y="328" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We couldn't upload your file. Please try again or</text>
+<text x="1590" y="347" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">select a different file.</text>
+<rect x="1590" y="426" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1602" y="444" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">OK</text>
+<text x="1560" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">형식이 MP4/MOV가 아니거나 100MB 초과. OK → 빈 카드로</text>
+<text x="1560" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">복귀.</text>
+</g>
+<g id="S3_05">
+<rect x="36" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="54" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">O9 · 500 INTERNAL_ERROR / 검사 실패</text>
+<rect x="54" y="689" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="68" y="703" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="84" y="733" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Something Went Wrong</text>
+<text x="84" y="761" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">An unexpected error occurred. Please try again.</text>
+<rect x="84" y="859" width="132" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="96" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Contact Support</text>
+<rect x="224" y="859" width="85" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="236" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Try again</text>
+<text x="54" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">문의 → 고객센터. 재시도 → 업로드 재시작. 신청 미생성.</text>
+</g>
+<g id="S3_06">
+<rect x="538" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="556" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">O10 · 제출 확인</text>
+<rect x="556" y="689" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="570" y="703" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="586" y="733" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Submit this claim?</text>
+<text x="586" y="761" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="586" y="783" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Our team will review your recording and verify</text>
+<text x="586" y="802" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">ownership. This action cannot be undone after</text>
+<text x="586" y="821" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">submission.</text>
+<rect x="586" y="859" width="76" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="598" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Cancel</text>
+<rect x="670" y="859" width="100" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="682" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Submit Claim</text>
+<text x="556" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">Cancel → O7 파일 유지. 확정 → 한 번만 신청, 홈 소유 확인중.</text>
+<text x="556" y="979" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">웹·모바일 동일.</text>
+</g>
+<g id="S3_07">
+<rect x="1040" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">PROCESSING · O11</text>
+<rect x="1058" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Ownership verification in progress</text>
+<text x="1074" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="1074" y="769" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">2 min elapsed · Available cashback –</text>
+<text x="1058" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">홈 우선순위 1. 10분 내 결정 없으면 자동 실패.</text>
+</g>
+<g id="S3_08">
+<rect x="1542" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1560" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">APPROVED · O12</text>
+<rect x="1560" y="689" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1574" y="703" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1590" y="733" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Ownership Verification Complete</text>
+<text x="1590" y="761" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your wallet ownership has been successfully</text>
+<text x="1590" y="780" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">verified.</text>
+<rect x="1590" y="859" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1602" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">OK</text>
+<text x="1560" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">신청자 홈 연동 완료·실제 금액 표시. 이전 보유자 행은</text>
+<text x="1560" y="979" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">DISPLACED.</text>
+</g>
+<g id="S3_09">
+<rect x="36" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="54" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">REJECTED · O13</text>
+<rect x="54" y="1122" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="68" y="1136" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="84" y="1166" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Ownership Verification Unsuccessful</text>
+<text x="84" y="1194" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We were unable to verify your wallet ownership.</text>
+<text x="84" y="1213" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Please review your submission and try again.</text>
+<rect x="84" y="1292" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="96" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">OK</text>
+<text x="54" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">홈 실패 행, 금액 –. 재신청 접근 가능. 10분 만료도 실패로 표시.</text>
+</g>
+<g id="S3_10">
+<rect x="538" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="556" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">DISPLACED · O14</text>
+<rect x="556" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet unlinked</text>
+<text x="572" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This wallet has been unlinked. Tap to verify ownership</text>
+<text x="572" y="1199" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">and reclaim it.</text>
+<rect x="572" y="1306" width="93" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="1324" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View wallet</text>
+<text x="556" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">이전 보유자에게 표시. 행 선택 → O15.</text>
+</g>
+<g id="S3_11">
+<rect x="1040" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1058" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">DISPLACED 행 선택 · O15</text>
+<rect x="1058" y="1122" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1072" y="1136" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1088" y="1166" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Verify Ownership to Reclaim This Wallet</text>
+<text x="1088" y="1194" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="1088" y="1216" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This wallet was unlinked after another user</text>
+<text x="1088" y="1235" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">verified ownership.</text>
+<rect x="1088" y="1292" width="115" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="1100" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Remove Wallet</text>
+<rect x="1211" y="1292" width="180" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1223" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Submit Wallet Ownership</text>
+<text x="1058" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">행 제거는 이전 보유자의 이 행에만 적용. 재신청은 쿨다운</text>
+<text x="1058" y="1412" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">재검사.</text>
+</g>
+<g id="S3_12">
+<rect x="1542" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1560" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">REJECTED · 재청구 · O16</text>
+<rect x="1560" y="1122" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1574" y="1136" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1590" y="1166" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Ownership Verification Unsuccessful</text>
+<text x="1590" y="1194" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Reason from review: The full wallet address is not</text>
+<text x="1590" y="1213" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">visible in the recording.</text>
+<rect x="1590" y="1292" width="115" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="1602" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Remove Wallet</text>
+<rect x="1713" y="1292" width="152" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1725" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Apply for Ownership</text>
+<text x="1560" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">서버 reason 원문 표시. 왼쪽은 해당 행 제거, 오른쪽은 재신청</text>
+<text x="1560" y="1412" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">가능 여부 재확인.</text>
+</g>
+<g id="S3_13">
+<rect x="36" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="54" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 INTEGRATION_MAX_COUNT_OVER · 소유권</text>
+<rect x="54" y="1555" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="68" y="1569" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="84" y="1599" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Trading account limit reached</text>
+<text x="84" y="1627" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">You can link up to 12 trading accounts.</text>
+<rect x="84" y="1725" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="96" y="1743" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Close</text>
+<text x="54" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">현재 한도 표시. 신청 생성 금지. 소유 확인중·실패 행도 한도</text>
+<text x="54" y="1845" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">점유.</text>
+</g>
+<g id="S3_14">
+<rect x="538" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="556" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 진행 중 신청 · 동일 신청 연타</text>
+<rect x="556" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Review in progress</text>
+<text x="572" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your recording has already been submitted.</text>
+<rect x="572" y="1739" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to Home</text>
+<text x="556" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">기존 신청 상태 조회. 중복 신청 0건. 실제 제한 코드 G-434.</text>
+</g>
+<g id="S3_15">
+<rect x="1040" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="1058" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 · 타인의 확인 중 지갑 / G-435</text>
+<rect x="1058" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Ownership Verification</text>
+<text x="1074" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Eligibility is being checked.</text>
+<text x="1058" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">정책 보류. 이 경우 허용/차단이 확정되기 전 기존 CEX 규칙 확인.</text>
+<text x="1058" y="1845" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">별도 확정 코드로 구현하지 않는다.</text>
+</g>
+</svg>

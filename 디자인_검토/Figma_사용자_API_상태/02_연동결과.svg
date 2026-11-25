@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2062" height="1947" viewBox="0 0 2062 1947">
+<title>지갑 연동 · 결과와 복귀</title>
+<rect x="0" y="0" width="2062" height="1947" rx="0" fill="#e9eef4" stroke="none"/>
+<text x="36" y="50" font-family="Inter, Malgun Gothic, sans-serif" font-size="32" font-weight="700" fill="#112945">지갑 연동 · 결과와 복귀</text>
+<text x="36" y="85" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#36506b">API-007 · 008  /  REQ-088~107 · 720~724</text>
+<text x="36" y="117" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">상단은 API 조건, 흰색 영역은 사용자 표시, 하단은 후속 동작입니다. 금액·날짜·주소는 예시입니다.</text>
+<text x="36" y="142" font-family="Inter, Malgun Gothic, sans-serif" font-size="14" font-weight="400" fill="#41566a">기존 화면의 해당 영역에 적용합니다. 독립 출금 페이지·회원 출금 신청 동작은 제외합니다. G 번호는 정책 확인 항목입니다.</text>
+<g id="S2_01">
+<rect x="36" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">처리 중</text>
+<text x="54" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">제출 직후 · 응답 대기</text>
+<rect x="54" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Processing Your Wallet</text>
+<text x="70" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your wallet address is being processed. You'll be</text>
+<text x="70" y="333" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">notified once linking is complete.</text>
+<rect x="70" y="440" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to Home</text>
+<text x="54" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">최소 1초 표시. 이중 제출 방지.</text>
+</g>
+<g id="S2_02">
+<rect x="538" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="556" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">201 LINKED · prelinkTransferredAmount=0</text>
+<rect x="556" y="256" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="570" y="270" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="586" y="300" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet Linked</text>
+<text x="586" y="328" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your EdgeX wallet address has been linked.</text>
+<rect x="586" y="426" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="598" y="444" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to Home</text>
+<text x="556" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">홈 새 행 0.00 USDT · 성공 토스트. DEX 첫 연동으로 LINK UID 쿠폰</text>
+<text x="556" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">발급 안 함.</text>
+</g>
+<g id="S2_03">
+<rect x="1040" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1058" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">201 LINKED · 이관액 4.00</text>
+<rect x="1058" y="256" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1072" y="270" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1088" y="300" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet Linked</text>
+<text x="1088" y="328" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your EdgeX wallet address has been linked.</text>
+<text x="1088" y="350" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Available cashback 4.00 USDT</text>
+<rect x="1088" y="426" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1100" y="444" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to Home</text>
+<text x="1058" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">이관된 실제 잔액으로 홈 행 갱신. accrualStartsAt 사용.</text>
+</g>
+<g id="S2_04">
+<rect x="1542" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="1560" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">201 PROCESSING / PARTNER_LOOKUP</text>
+<rect x="1560" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Checking your referral</text>
+<text x="1576" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We’ll notify you once your exchange confirms your</text>
+<text x="1576" y="333" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">referral.</text>
+<rect x="1576" y="440" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to Home</text>
+<text x="1560" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">파트너 타임아웃·429·5xx·마스킹 충돌·계정 식별 불확실 → 홈</text>
+<text x="1560" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">확인 중, 금액 –. 시간 약속 없음.</text>
+</g>
+<g id="S2_05">
+<rect x="36" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="54" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">201 PROCESSING / PRELINK_PAYOUT</text>
+<rect x="54" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet linking in progress</text>
+<text x="70" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Existing cashback is being sent to this wallet before</text>
+<text x="70" y="766" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">linking completes.</text>
+<rect x="70" y="873" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="891" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to Home</text>
+<text x="54" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">연동 전 매칭액 ≥ 최소액. 지갑 점유, 합계 제외. 송금 완료 시</text>
+<text x="54" y="979" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">자동 LINKED.</text>
+</g>
+<g id="S2_06">
+<rect x="538" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="556" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">비동기 PRELINK_PAYOUT_FAILED</text>
+<rect x="556" y="689" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="570" y="703" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="586" y="733" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet linking unsuccessful</text>
+<text x="586" y="761" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We couldn’t complete the transfer required to</text>
+<text x="586" y="780" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">link this wallet.</text>
+<rect x="586" y="859" width="76" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="598" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Close</text>
+<rect x="670" y="859" width="132" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="682" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Contact Support</text>
+<text x="556" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">연동 실패. 금액은 연동 전 잔액으로 복원. 확정 전 카피 G-426.</text>
+</g>
+<g id="S2_07">
+<rect x="1040" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1058" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 FAILED_NOT_FOUND_UID</text>
+<rect x="1058" y="689" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1072" y="703" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1088" y="733" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Not a TetherMax referral</text>
+<text x="1088" y="761" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Only wallets that joined EdgeX through</text>
+<text x="1088" y="780" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">TetherMax’s referral link can be linked.</text>
+<rect x="1088" y="859" width="76" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="1100" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Close</text>
+<rect x="1172" y="859" width="92" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1184" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Join EdgeX</text>
+<text x="1058" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">신청 행 생성 없음. Close는 입력 유지. 귀속 URL 있을 때만 외부</text>
+<text x="1058" y="979" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">가입 제공.</text>
+</g>
+<g id="S2_08">
+<rect x="1542" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1560" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 FAILED_ALREADY_INTEGRATION · O1</text>
+<rect x="1560" y="689" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1574" y="703" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1590" y="733" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet Already in Use</text>
+<text x="1590" y="761" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="1590" y="783" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This wallet address is already linked to another</text>
+<text x="1590" y="802" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">account.</text>
+<rect x="1590" y="859" width="168" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="1602" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Try a different wallet</text>
+<rect x="1766" y="859" width="133" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1778" y="877" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Verify Ownership</text>
+<text x="1560" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">다른 지갑 → 입력 비움·포커스. 인증 → 같은 DEX·주소 O3. 하단</text>
+<text x="1560" y="979" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">고객센터 링크.</text>
+</g>
+<g id="S2_09">
+<rect x="36" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="54" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 FAILED_RECENT_POSSESSION · O2</text>
+<rect x="54" y="1122" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="68" y="1136" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="84" y="1166" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Ownership Claim Unavailable</text>
+<text x="84" y="1194" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This wallet address was recently verified by</text>
+<text x="84" y="1213" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">another user. Ownership claims will be available</text>
+<text x="84" y="1232" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">after 30 days.</text>
+<rect x="84" y="1292" width="76" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="96" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Close</text>
+<rect x="168" y="1292" width="168" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="180" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Try a different wallet</text>
+<text x="54" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">마지막 승인 후 30일. Close 입력 유지, 다른 지갑은 입력 비움.</text>
+<text x="54" y="1412" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">신청 0건.</text>
+</g>
+<g id="S2_10">
+<rect x="538" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="556" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 FAILED_MY_INTEGRATION</text>
+<rect x="556" y="1122" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="570" y="1136" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="586" y="1166" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">You've Already Added This Wallet</text>
+<text x="586" y="1194" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This wallet address is already linked to your</text>
+<text x="586" y="1213" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">account. No further action is needed.</text>
+<rect x="586" y="1292" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="598" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Close</text>
+<text x="556" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">같은 DEX·본인 지갑. 대소문자·앞뒤 공백 차이 포함.</text>
+</g>
+<g id="S2_11">
+<rect x="1040" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1058" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 LINK_REJECTED</text>
+<rect x="1058" y="1122" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1072" y="1136" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1088" y="1166" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Unable to Link Wallet</text>
+<text x="1088" y="1194" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We were unable to link this wallet address. Please</text>
+<text x="1088" y="1213" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">contact our support team for assistance.</text>
+<rect x="1088" y="1292" width="132" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1100" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Contact Support</text>
+<text x="1058" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">그 밖의 확정 거절. 거래소·주소 유지.</text>
+</g>
+<g id="S2_12">
+<rect x="1542" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="1560" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">Lighter Standard · 운영 보류 시 비노출</text>
+<rect x="1560" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Standard account</text>
+<text x="1576" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Standard accounts have no trading fees and do not</text>
+<text x="1576" y="1199" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">earn trading cashback.</text>
+<rect x="1576" y="1306" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="1324" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Close</text>
+<text x="1560" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">Lighter 온보딩 재개 및 실제 계정 유형 조건에만 적용.</text>
+</g>
+<g id="S2_13">
+<rect x="36" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">LINKED · cashbackShownFrom 값 있음</text>
+<rect x="54" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Cashback history</text>
+<text x="70" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Cashback shown from 12 May 2026.</text>
+<text x="54" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">180일 수집 경계에서 서버가 보낸 날짜를 로컬 표시. null이면 이</text>
+<text x="54" y="1845" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">안내 숨김.</text>
+</g>
+<g id="S2_14">
+<rect x="538" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="556" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 IDEMPOTENCY_KEY_REUSED</text>
+<rect x="556" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Details have changed</text>
+<text x="572" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Review your wallet address before continuing.</text>
+<rect x="572" y="1739" width="115" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Review details</text>
+<text x="556" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">다른 본문에 같은 키 사용. 현재 신청 상태 조회 후 수정본만 새</text>
+<text x="556" y="1845" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">요청.</text>
+</g>
+<g id="S2_15">
+<rect x="1040" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="1058" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 CONCURRENT_REQUEST · 이중 클릭</text>
+<rect x="1058" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Checking your request</text>
+<text x="1074" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your previous request is being checked.</text>
+<text x="1058" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">기존 결과 재조회. 같은 제출은 한 번만 기록.</text>
+</g>
+</svg>

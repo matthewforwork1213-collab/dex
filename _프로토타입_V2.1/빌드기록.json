@@ -1,0 +1,24 @@
+[
+  {
+    "mode": "user",
+    "input": "사용자화면_DEX영향도.html",
+    "output": "사용자화면_DEX_V2.1.html",
+    "sourceHash": "5417ffe4153a5e816e86e0ba682a711f48955c7a07be47cdbb6c65ce4ab0ee0e",
+    "outputHash": "7b12f1e6597448bbc14e59d062fc5e3a0fcb16b163c3820cd3be5193ea2247dd",
+    "bytes": 2275375,
+    "embeddedAssets": [
+      "ab5e4c99539fa8538d4b49ec363434b8234b08cc2375b11bb33638cc4545c6df"
+    ]
+  },
+  {
+    "mode": "admin",
+    "input": "백오피스_DEX영향도.html",
+    "output": "백오피스_DEX_V2.1.html",
+    "sourceHash": "2625b2ac948e20ab42ca32849a5ef289724e8a53736c4557f01af9cd0a20d42c",
+    "outputHash": "a11f38302cb64610eaf67ce8487dde8e053506a79b5eb918a641cbf6abb3b213",
+    "bytes": 2198684,
+    "embeddedAssets": [
+      "ab5e4c99539fa8538d4b49ec363434b8234b08cc2375b11bb33638cc4545c6df"
+    ]
+  }
+]

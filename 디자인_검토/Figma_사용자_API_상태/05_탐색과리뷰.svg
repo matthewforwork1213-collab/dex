@@ -1,0 +1,331 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2062" height="3246" viewBox="0 0 2062 3246">
+<title>탐색·계산기·거래소 상세와 리뷰</title>
+<rect x="0" y="0" width="2062" height="3246" rx="0" fill="#e9eef4" stroke="none"/>
+<text x="36" y="50" font-family="Inter, Malgun Gothic, sans-serif" font-size="32" font-weight="700" fill="#112945">탐색·계산기·거래소 상세와 리뷰</text>
+<text x="36" y="85" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#36506b">API-001~005 · 015 · 022  /  REQ-285 · 295~296 · 313 · 323~324 · 332 · 338 · 350~358</text>
+<text x="36" y="117" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">상단은 API 조건, 흰색 영역은 사용자 표시, 하단은 후속 동작입니다. 금액·날짜·주소는 예시입니다.</text>
+<text x="36" y="142" font-family="Inter, Malgun Gothic, sans-serif" font-size="14" font-weight="400" fill="#41566a">기존 화면의 해당 영역에 적용합니다. 독립 출금 페이지·회원 출금 신청 동작은 제외합니다. G 번호는 정책 확인 항목입니다.</text>
+<g id="S5_01">
+<rect x="36" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">200 AVAILABLE / 정상</text>
+<rect x="54" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">EdgeX</text>
+<text x="70" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Decentralised exchange</text>
+<text x="70" y="336" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Trading cashback available</text>
+<rect x="70" y="440" width="103" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Get Started</text>
+<text x="54" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">운영 귀속 URL을 새 탭으로 연다. URL null이면 버튼을 숨긴다.</text>
+</g>
+<g id="S5_02">
+<rect x="538" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="556" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">200 venues=[]</text>
+<rect x="556" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">No DEX partners are available</text>
+<text x="572" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Check back here for partner updates.</text>
+<text x="556" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">정상 조회 0곳일 때만 노출. 목록·배너 자리의 빈 공간 제거.</text>
+</g>
+<g id="S5_03">
+<rect x="1040" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">200 MAINTENANCE</text>
+<rect x="1058" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Temporarily under maintenance</text>
+<text x="1074" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Partner information is available. Linking is temporarily</text>
+<text x="1074" y="333" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">paused.</text>
+<rect x="1074" y="440" width="100" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View details</text>
+<text x="1058" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">유지보수 파트너의 신규 연동 진입 차단.</text>
+</g>
+<g id="S5_04">
+<rect x="1542" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1560" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">200 LINK_UNAVAILABLE / 연동 불가</text>
+<rect x="1560" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Linking unavailable</text>
+<text x="1576" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Linking is currently unavailable for this exchange.</text>
+<rect x="1576" y="440" width="100" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View details</text>
+<text x="1560" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">국가 노출 제한 대상은 조회 결과에서 제외. 기존 관계는 정책</text>
+<text x="1560" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">예외를 따른다.</text>
+</g>
+<g id="S5_05">
+<rect x="36" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="54" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-001 503 SERVICE_UNAVAILABLE</text>
+<rect x="54" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Partners couldn’t load</text>
+<text x="70" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Please try loading the exchange list again.</text>
+<rect x="70" y="873" width="85" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="891" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Try again</text>
+<text x="54" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">조회 실패는 파트너 0곳 판정 금지. 같은 목록 재요청.</text>
+</g>
+<g id="S5_06">
+<rect x="538" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="556" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-003 503 SERVICE_UNAVAILABLE</text>
+<rect x="556" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Exchange information unavailable</text>
+<text x="572" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We couldn’t load the DEX overview.</text>
+<rect x="572" y="873" width="85" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="891" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Try again</text>
+<text x="556" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">실패한 랜딩 콘텐츠 재조회. 파트너가 없다는 문구를 쓰지 않는다.</text>
+</g>
+<g id="S5_07">
+<rect x="1040" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">metrics.stale=true · 24시간 이내</text>
+<rect x="1058" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">24H trading volume</text>
+<text x="1074" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">$42,500,000</text>
+<text x="1074" y="769" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Source: DefiLlama, as of 09:00.</text>
+<rect x="1074" y="873" width="100" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="891" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View details</text>
+<text x="1058" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">마지막 캐시·로컬 기준 시각 유지. 예시값을 실제값으로 고정</text>
+<text x="1058" y="979" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">금지.</text>
+</g>
+<g id="S5_08">
+<rect x="1542" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1560" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">metrics=null · 24시간 초과</text>
+<rect x="1560" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">EdgeX</text>
+<text x="1576" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Decentralised exchange</text>
+<text x="1576" y="769" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Trading cashback available</text>
+<rect x="1576" y="873" width="100" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="891" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View details</text>
+<text x="1560" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">지표와 기준시각 숨김. 카드 본체 유지. 미게시 배너는 영역 높이</text>
+<text x="1560" y="979" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">0.</text>
+</g>
+<g id="S5_09">
+<rect x="36" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">rating.count &lt; 20</text>
+<rect x="54" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Exchange rating</text>
+<text x="70" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Rating –</text>
+<rect x="70" y="1306" width="100" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="1324" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View details</text>
+<text x="54" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">20개부터 실제 평점·개수. 카드 뷰는 조건에 따라 평점 생략.</text>
+</g>
+<g id="S5_10">
+<rect x="538" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="556" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-002 partners=[] / upToRate=null</text>
+<rect x="556" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Cashback estimate unavailable</text>
+<text x="572" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">No eligible partner rates are available for this route.</text>
+<text x="556" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">수수료·캐시백율 미입력 파트너 제외. 탭 처리 G-143.</text>
+</g>
+<g id="S5_11">
+<rect x="1040" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1058" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-002 503 SERVICE_UNAVAILABLE</text>
+<rect x="1058" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Estimate unavailable</text>
+<text x="1074" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We couldn’t load the rates for this estimate.</text>
+<rect x="1074" y="1306" width="85" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="1324" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Try again</text>
+<text x="1058" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">0달러·대체 하드코딩 금지. 문구 시안 G-144.</text>
+</g>
+<g id="S5_12">
+<rect x="1542" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="1560" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">estimate 가정 보기</text>
+<rect x="1560" y="1122" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="1574" y="1136" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="1590" y="1166" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">How this works</text>
+<text x="1590" y="1194" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Trading fees and cashback use the selected</text>
+<text x="1590" y="1213" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">partner’s rates.</text>
+<rect x="1590" y="1292" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1602" y="1310" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Close</text>
+<text x="1560" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">계산기 슬라이더 값·선택 파트너 유지.</text>
+</g>
+<g id="S5_13">
+<rect x="36" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">exchange_guest / API-004</text>
+<rect x="54" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Get cashback with EdgeX</text>
+<text x="70" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Sign in or create an account to link a wallet.</text>
+<rect x="70" y="1739" width="76" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="82" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Sign up</text>
+<rect x="154" y="1739" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="166" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Log in</text>
+<text x="54" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">게스트 조회 없음. 외부 Get Started는 유효 귀속 URL일 때 제공.</text>
+</g>
+<g id="S5_14">
+<rect x="538" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="556" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">exchange_member_unlinked</text>
+<rect x="556" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Link your EdgeX wallet</text>
+<text x="572" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Link a trading account to access member features.</text>
+<rect x="572" y="1739" width="104" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Link Account</text>
+<text x="556" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">선택한 거래소의 주소 입력으로 진입.</text>
+</g>
+<g id="S5_15">
+<rect x="1040" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">exchange_member_linked</text>
+<rect x="1058" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Your linked account</text>
+<text x="1074" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<rect x="1074" y="1739" width="89" height="27" rx="5" fill="#eceef1" stroke="none"/>
+<text x="1086" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#747e88">Auto Claim</text>
+<rect x="1171" y="1739" width="120" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1183" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Write a Review</text>
+<text x="1058" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">지급 버튼 무반응. 해당 거래소 연동 완료 회원만 리뷰 작성.</text>
+</g>
+<g id="S5_16">
+<rect x="1542" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="1560" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-004 404 NOT_FOUND</text>
+<rect x="1560" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Exchange unavailable</text>
+<text x="1576" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This exchange page is unavailable.</text>
+<rect x="1576" y="1739" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Explore DEXs</text>
+<text x="1560" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">없는·비게시 슬러그. 오프보딩 301은 아래 상태.</text>
+</g>
+<g id="S5_17">
+<rect x="36" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">301 · 오프보딩된 상세 주소</text>
+<rect x="54" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Decentralised Exchanges</text>
+<text x="70" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Our partner DEXs</text>
+<rect x="70" y="2172" width="137" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="2190" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Explore partners</text>
+<text x="54" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">자동으로 DEX 랜딩 이동. 별도 오류 모달 없음.</text>
+</g>
+<g id="S5_18">
+<rect x="538" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="556" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">terms=null 또는 FAQ 게시 항목 없음</text>
+<rect x="556" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">FAQs</text>
+<text x="572" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">General Partnership</text>
+<text x="556" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">약관 비게시 시 약관 섹션 숨김. 질문 없는 구역 미렌더.</text>
+</g>
+<g id="S5_19">
+<rect x="1040" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="1058" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">published reviews=0</text>
+<rect x="1058" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Global Reviews (0)</text>
+<text x="1074" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">No reviews yet.</text>
+<text x="1058" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">샘플 리뷰 미표시. 히스토그램·AI 빈 상태 세부 정책 G-169.</text>
+</g>
+<g id="S5_20">
+<rect x="1542" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1560" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">리뷰 검토 중</text>
+<rect x="1560" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">This review is under moderation</text>
+<text x="1576" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">It was flagged and is hidden while our team checks it</text>
+<text x="1576" y="2065" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">against the review guidelines.</text>
+<text x="1560" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">검토 중 제목·본문 숨김. 기존 D3 공유.</text>
+</g>
+<g id="S5_21">
+<rect x="36" y="2335" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="2360" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">입력 화면</text>
+<text x="54" y="2385" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-022 · 연동 완료 / 리뷰 작성</text>
+<rect x="54" y="2421" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="2451" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Write a review</text>
+<text x="70" y="2479" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Overall experience ☆ ☆ ☆ ☆ ☆</text>
+<text x="70" y="2501" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Cashback earning ☆ ☆ ☆ ☆ ☆</text>
+<text x="70" y="2523" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Cashback withdrawal ☆ ☆ ☆ ☆ ☆</text>
+<text x="70" y="2545" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your review 0 / 1,000</text>
+<rect x="70" y="2605" width="76" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="82" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Cancel</text>
+<rect x="154" y="2605" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="166" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Submit review</text>
+<text x="54" y="2668" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="2691" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">기존 CEX 작성 폼 재사용. 동일 회원 상세당 최상위 댓글 1개.</text>
+</g>
+<g id="S5_22">
+<rect x="538" y="2335" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="2360" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="556" y="2385" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">403 REVIEW_NOT_ELIGIBLE</text>
+<rect x="556" y="2421" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="2451" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Link a trading account to write a review</text>
+<text x="572" y="2479" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Only a linked account on this exchange can post a</text>
+<text x="572" y="2498" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">review.</text>
+<rect x="572" y="2605" width="104" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Link Account</text>
+<text x="556" y="2668" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="2691" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">작성 중 자격 상실 또는 확인 중. 리뷰 목록 열람은 가능.</text>
+</g>
+<g id="S5_23">
+<rect x="1040" y="2335" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="2360" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="2385" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">201 리뷰 등록 / verified=true</text>
+<rect x="1058" y="2421" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="2451" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Review posted</text>
+<text x="1074" y="2479" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">✓ Verified</text>
+<text x="1074" y="2501" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your review has been submitted.</text>
+<rect x="1074" y="2605" width="126" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to reviews</text>
+<text x="1058" y="2668" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="2691" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">리뷰 목록 갱신. 검토 상태가 있으면 원문 노출 규칙 적용.</text>
+</g>
+<g id="S5_24">
+<rect x="1542" y="2335" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="2360" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1560" y="2385" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-015 503 SERVICE_UNAVAILABLE</text>
+<rect x="1560" y="2421" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="2451" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Recent payouts couldn’t load</text>
+<text x="1576" y="2479" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Please try again in a moment.</text>
+<rect x="1576" y="2605" width="85" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Try again</text>
+<text x="1560" y="2668" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="2691" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">게스트 홈·서비스 소개에서 피드만 재조회. 실패 지급 행 추가</text>
+<text x="1560" y="2711" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">금지.</text>
+</g>
+<g id="S5_25">
+<rect x="36" y="2768" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="2793" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="2818" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-015 200 · SENT</text>
+<rect x="54" y="2854" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="2884" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Recent payouts</text>
+<text x="70" y="2912" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX · DEX 35.00 USDT</text>
+<text x="70" y="2934" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Sent 09:00</text>
+<text x="54" y="3101" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="3124" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">성공 건만 시간순. DEX 전체 주소, CEX 마스킹. 넓이에 맞춰 원본</text>
+<text x="54" y="3144" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">셀 활용.</text>
+</g>
+<g id="S5_26">
+<rect x="538" y="2768" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="2793" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="556" y="2818" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-015 200 · data=[]</text>
+<rect x="556" y="2854" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="2884" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Recent payouts</text>
+<text x="572" y="2912" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">No completed payouts to show.</text>
+<text x="556" y="3101" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="3124" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">정상 빈 목록. 실패·진행·결과 불명 건은 피드에 포함하지</text>
+<text x="556" y="3144" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">않는다.</text>
+</g>
+</svg>

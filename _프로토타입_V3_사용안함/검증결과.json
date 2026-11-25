@@ -1,0 +1,600 @@
+{
+  "method": "Offline VM and generated HTML. No browser / DOM layout verification.",
+  "total": 148,
+  "passed": 148,
+  "failed": [],
+  "results": [
+    {
+      "name": "user JavaScript syntax",
+      "pass": true
+    },
+    {
+      "name": "user render home/S4",
+      "pass": true
+    },
+    {
+      "name": "user render home/EXP",
+      "pass": true
+    },
+    {
+      "name": "user render home/LKD",
+      "pass": true
+    },
+    {
+      "name": "user render home/PUBLIC",
+      "pass": true
+    },
+    {
+      "name": "user render hub/H1-CEX",
+      "pass": true
+    },
+    {
+      "name": "user render hub/H1-DEX",
+      "pass": true
+    },
+    {
+      "name": "user render hub/H5",
+      "pass": true
+    },
+    {
+      "name": "user render hub/H6",
+      "pass": true
+    },
+    {
+      "name": "user render lnd/LND1",
+      "pass": true
+    },
+    {
+      "name": "user render lnd/LND2",
+      "pass": true
+    },
+    {
+      "name": "user render lnd/QZ",
+      "pass": true
+    },
+    {
+      "name": "user render link/L0",
+      "pass": true
+    },
+    {
+      "name": "user render link/L1",
+      "pass": true
+    },
+    {
+      "name": "user render link/L3",
+      "pass": true
+    },
+    {
+      "name": "user render link/L7",
+      "pass": true
+    },
+    {
+      "name": "user render link/L8",
+      "pass": true
+    },
+    {
+      "name": "user render link/L10",
+      "pass": true
+    },
+    {
+      "name": "user render link/E4",
+      "pass": true
+    },
+    {
+      "name": "user render link/PENDING",
+      "pass": true
+    },
+    {
+      "name": "user render own/O1",
+      "pass": true
+    },
+    {
+      "name": "user render own/CMP",
+      "pass": true
+    },
+    {
+      "name": "user render own/OWN2",
+      "pass": true
+    },
+    {
+      "name": "user render rule/R1",
+      "pass": true
+    },
+    {
+      "name": "user render rule/R2",
+      "pass": true
+    },
+    {
+      "name": "user render wd/DW1",
+      "pass": true
+    },
+    {
+      "name": "user render wd/DW0",
+      "pass": true
+    },
+    {
+      "name": "user render wd/DW2",
+      "pass": true
+    },
+    {
+      "name": "user render wd/DW3",
+      "pass": true
+    },
+    {
+      "name": "user render wd/NM",
+      "pass": true
+    },
+    {
+      "name": "user render wd/AUTH",
+      "pass": true
+    },
+    {
+      "name": "user render wd/RESULT",
+      "pass": true
+    },
+    {
+      "name": "user render hist/CS3",
+      "pass": true
+    },
+    {
+      "name": "user render hist/TZ",
+      "pass": true
+    },
+    {
+      "name": "user render bnf/LIST",
+      "pass": true
+    },
+    {
+      "name": "user render bnf/UIDM",
+      "pass": true
+    },
+    {
+      "name": "user render exd/D1",
+      "pass": true
+    },
+    {
+      "name": "user render exd/D2",
+      "pass": true
+    },
+    {
+      "name": "user render rk/RK2",
+      "pass": true
+    },
+    {
+      "name": "user render ch/CH1",
+      "pass": true
+    },
+    {
+      "name": "user render ch/CH2",
+      "pass": true
+    },
+    {
+      "name": "user render lg/LG1",
+      "pass": true
+    },
+    {
+      "name": "user render mb/MB1",
+      "pass": true
+    },
+    {
+      "name": "user render ph/PH1",
+      "pass": true
+    },
+    {
+      "name": "user render ph/PH2",
+      "pass": true
+    },
+    {
+      "name": "user render ph/PH3",
+      "pass": true
+    },
+    {
+      "name": "user render inv/IF8",
+      "pass": true
+    },
+    {
+      "name": "user render cp/CP1",
+      "pass": true
+    },
+    {
+      "name": "user render etc/EML",
+      "pass": true
+    },
+    {
+      "name": "user render etc/BST",
+      "pass": true
+    },
+    {
+      "name": "user render etc/EVT",
+      "pass": true
+    },
+    {
+      "name": "user render etc/FEED",
+      "pass": true
+    },
+    {
+      "name": "user render etc/TERM",
+      "pass": true
+    },
+    {
+      "name": "user render etc/TP",
+      "pass": true
+    },
+    {
+      "name": "user render etc/ABOUT",
+      "pass": true
+    },
+    {
+      "name": "user render etc/PARTNERS",
+      "pass": true
+    },
+    {
+      "name": "user render pending/LIST",
+      "pass": true
+    },
+    {
+      "name": "user preserves original routes",
+      "pass": true
+    },
+    {
+      "name": "user all static action routes exist",
+      "pass": true
+    },
+    {
+      "name": "admin JavaScript syntax",
+      "pass": true
+    },
+    {
+      "name": "admin render ex/EX-1",
+      "pass": true
+    },
+    {
+      "name": "admin render ex/EX-2",
+      "pass": true
+    },
+    {
+      "name": "admin render ex/EX-3",
+      "pass": true
+    },
+    {
+      "name": "admin render ex/EX-4",
+      "pass": true
+    },
+    {
+      "name": "admin render ex/EX-5",
+      "pass": true
+    },
+    {
+      "name": "admin render ex/EX-6",
+      "pass": true
+    },
+    {
+      "name": "admin render ex/EX-7",
+      "pass": true
+    },
+    {
+      "name": "admin render ac/AC-1",
+      "pass": true
+    },
+    {
+      "name": "admin render ac/AC-2",
+      "pass": true
+    },
+    {
+      "name": "admin render ac/AC-3",
+      "pass": true
+    },
+    {
+      "name": "admin render mb/MB-1",
+      "pass": true
+    },
+    {
+      "name": "admin render mb/MB-4",
+      "pass": true
+    },
+    {
+      "name": "admin render pa/MB-3",
+      "pass": true
+    },
+    {
+      "name": "admin render pa/MB-2",
+      "pass": true
+    },
+    {
+      "name": "admin render pa/MB-5",
+      "pass": true
+    },
+    {
+      "name": "admin render pb/PB-1",
+      "pass": true
+    },
+    {
+      "name": "admin render sd/SD-1",
+      "pass": true
+    },
+    {
+      "name": "admin render sd/SD-2",
+      "pass": true
+    },
+    {
+      "name": "admin render sd/SD-3",
+      "pass": true
+    },
+    {
+      "name": "admin render cp/CP-1",
+      "pass": true
+    },
+    {
+      "name": "admin render iv/IV-1",
+      "pass": true
+    },
+    {
+      "name": "admin render pt/PT-1",
+      "pass": true
+    },
+    {
+      "name": "admin render lg/LG-1",
+      "pass": true
+    },
+    {
+      "name": "admin render bd/LG-2",
+      "pass": true
+    },
+    {
+      "name": "admin render nw/NW-1",
+      "pass": true
+    },
+    {
+      "name": "admin render nw/NW-2",
+      "pass": true
+    },
+    {
+      "name": "admin render nw/NW-3",
+      "pass": true
+    },
+    {
+      "name": "admin render nw/NW-4",
+      "pass": true
+    },
+    {
+      "name": "admin render api/MAP",
+      "pass": true
+    },
+    {
+      "name": "admin render pending/LIST",
+      "pass": true
+    },
+    {
+      "name": "admin preserves original routes",
+      "pass": true
+    },
+    {
+      "name": "admin all static action routes exist",
+      "pass": true
+    },
+    {
+      "name": "Keccak-256 known empty digest",
+      "pass": true
+    },
+    {
+      "name": "EIP-55 valid mixed checksum",
+      "pass": true
+    },
+    {
+      "name": "EIP-55 invalid mixed checksum rejected",
+      "pass": true
+    },
+    {
+      "name": "zero wallet rejected",
+      "pass": true
+    },
+    {
+      "name": "wallet trims outer whitespace",
+      "pass": true
+    },
+    {
+      "name": "wallet rejects internal whitespace",
+      "pass": true
+    },
+    {
+      "name": "matching total is 161.68",
+      "pass": true
+    },
+    {
+      "name": "matching shortage is 5",
+      "pass": true
+    },
+    {
+      "name": "matching floor 2 decimals",
+      "pass": true
+    },
+    {
+      "name": "small display boundary .01",
+      "pass": true
+    },
+    {
+      "name": "ranking boundary .01 retains precision",
+      "pass": true
+    },
+    {
+      "name": "normal member link creates selected DEX only",
+      "pass": true
+    },
+    {
+      "name": "same wallet can link separate DEX",
+      "pass": true
+    },
+    {
+      "name": "duplicate link prevented",
+      "pass": true
+    },
+    {
+      "name": "Standard not blocked or warned",
+      "pass": true
+    },
+    {
+      "name": "CEX link uses UID without wallet",
+      "pass": true
+    },
+    {
+      "name": "manual / delayed link not falsely successful",
+      "pass": true
+    },
+    {
+      "name": "member requires captcha and OTP/email",
+      "pass": true
+    },
+    {
+      "name": "common password security restriction blocks DEX",
+      "pass": true
+    },
+    {
+      "name": "common email security restriction blocks DEX",
+      "pass": true
+    },
+    {
+      "name": "member request uses correct three items and total",
+      "pass": true
+    },
+    {
+      "name": "partial success deducts only successful accounts",
+      "pass": true
+    },
+    {
+      "name": "result resolution cannot pay twice",
+      "pass": true
+    },
+    {
+      "name": "member email is one receipt then final result per account",
+      "pass": true
+    },
+    {
+      "name": "unknown result remains pending without re-send CTA",
+      "pass": true
+    },
+    {
+      "name": "unknown result cannot be resubmitted",
+      "pass": true
+    },
+    {
+      "name": "unknown result does not create intermediate email",
+      "pass": true
+    },
+    {
+      "name": "guest single wallet request and no email",
+      "pass": true
+    },
+    {
+      "name": "request result retains original account context",
+      "pass": true
+    },
+    {
+      "name": "no cross-account minimum pooling",
+      "pass": true
+    },
+    {
+      "name": "challenge and UID reward reject DEX server-side mock",
+      "pass": true
+    },
+    {
+      "name": "general coupon accepts DEX",
+      "pass": true
+    },
+    {
+      "name": "carousel has API-fed CEX and DEX entries",
+      "pass": true
+    },
+    {
+      "name": "home and service introduction include same mixed feed",
+      "pass": true
+    },
+    {
+      "name": "feed suppresses non-successful withdrawals",
+      "pass": true
+    },
+    {
+      "name": "feed error and empty states actionable",
+      "pass": true
+    },
+    {
+      "name": "point list contains all DEX and unset values",
+      "pass": true
+    },
+    {
+      "name": "points four fields save and reload; no implicit zero",
+      "pass": true
+    },
+    {
+      "name": "point blank input treated as zero",
+      "pass": true
+    },
+    {
+      "name": "featured selector is single exchange, DEX accepted",
+      "pass": true
+    },
+    {
+      "name": "Affiliate payout prohibits DEX",
+      "pass": true
+    },
+    {
+      "name": "manual approval without ledger prohibited",
+      "pass": true
+    },
+    {
+      "name": "manual approval works with ledger evidence",
+      "pass": true
+    },
+    {
+      "name": "calculator invalid ranges rejected",
+      "pass": true
+    },
+    {
+      "name": "Lighter board blocked without daily ledger",
+      "pass": true
+    },
+    {
+      "name": "event campaign DEX rejected for CEX-only rewards",
+      "pass": true
+    },
+    {
+      "name": "DEX campaign has exchange choices instead of amount values",
+      "pass": true
+    },
+    {
+      "name": "content editors preserve original groups and media count",
+      "pass": true
+    },
+    {
+      "name": "content draft survives reload and preview escapes HTML",
+      "pass": true
+    },
+    {
+      "name": "combined quota counts CEX DEX and Processing",
+      "pass": true
+    },
+    {
+      "name": "shared card appears after acceptance in request order",
+      "pass": true
+    },
+    {
+      "name": "last four masking with private address expansion",
+      "pass": true
+    },
+    {
+      "name": "data delay retains existing balances and withdraw entry",
+      "pass": true
+    },
+    {
+      "name": "guest not subject to member security lock",
+      "pass": true
+    },
+    {
+      "name": "Verified review badge requires completed linking",
+      "pass": true
+    },
+    {
+      "name": "original files unchanged",
+      "pass": true
+    }
+  ]
+}

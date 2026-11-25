@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figma 댓글 가이드</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+:root{
+  --darkest:#212529;--dark:#343a40;--middark:#495057;--mid:#6c757d;
+  --border:#ced4da;--lborder:#dee2e6;--lbg:#e9ecef;--bg:#f8f9fa;--white:#fff;
+  --red:#c92a2a;--orange:#e67700;--yellow:#a37b00;--blue:#1971c2;--green:#2b8a3e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Pretendard,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
+     color:var(--darkest);font-size:13.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+code{font-family:Consolas,monospace;font-size:.9em;background:var(--lbg);padding:1px 5px;border-radius:3px}
+
+header{position:sticky;top:0;background:var(--dark);z-index:100;padding:11px 24px;
+       display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header .brand{color:#fff;font-weight:700;font-size:15px}
+header .f{display:flex;gap:5px;flex-wrap:wrap}
+header button{background:none;border:1px solid #555;color:#adb5bd;font:inherit;font-size:12px;
+              padding:5px 11px;border-radius:14px;cursor:pointer}
+header button:hover{border-color:#888;color:#fff}
+header button.on{background:#fff;color:var(--darkest);border-color:#fff;font-weight:600}
+header .count{color:#adb5bd;font-size:12px;margin-left:auto}
+
+.wrap{max-width:1080px;margin:0 auto;padding:28px 24px 80px}
+.intro{background:#fff;border:1px solid var(--lborder);border-radius:10px;padding:26px 28px;margin-bottom:26px}
+.intro h1{font-size:25px;letter-spacing:-.4px}
+.intro .sub{color:var(--mid);margin-top:7px}
+.how{margin-top:20px;background:var(--bg);border-radius:8px;padding:16px 18px}
+.how > b{display:block;margin-bottom:8px}
+.how ol{margin-left:18px}
+.how li{margin:3px 0;color:var(--middark)}
+.tally{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.tally div{flex:1;min-width:120px;border:1px solid var(--lborder);border-radius:8px;padding:11px 13px}
+.tally span{display:block;font-size:11px;color:var(--mid)}
+.tally b{font-size:19px}
+.warn{margin-top:18px;border-left:3px solid var(--orange);background:#fff8f0;padding:13px 16px;
+      font-size:12.5px;color:var(--middark)}
+
+.sec{margin:30px 0 12px;display:flex;align-items:baseline;gap:10px}
+.sec h2{font-size:16px}
+.sec span{color:var(--mid);font-size:12px}
+
+.card{background:#fff;border:1px solid var(--lborder);border-radius:10px;margin-bottom:14px;overflow:hidden}
+.card.red{border-left:4px solid var(--red)}
+.card.orange{border-left:4px solid var(--orange)}
+.card.yellow{border-left:4px solid var(--yellow)}
+.chead{padding:15px 20px;cursor:pointer;display:flex;gap:12px;align-items:flex-start}
+.chead:hover{background:var(--bg)}
+.pill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;white-space:nowrap;flex-shrink:0}
+.p-red{background:#fff0f0;color:var(--red);border:1px solid #ffc9c9}
+.p-orange{background:#fff4e6;color:var(--orange);border:1px solid #ffd8a8}
+.p-yellow{background:#fff9db;color:var(--yellow);border:1px solid #ffe8a1}
+.ctitle{flex:1}
+.ctitle b{font-size:14.5px;display:block}
+.ctitle .loc{font-size:12px;color:var(--mid);margin-top:4px}
+.ctitle .loc em{font-style:normal;color:var(--middark);font-weight:600}
+.arrow{color:var(--mid);font-size:12px;flex-shrink:0;padding-top:2px}
+.cbody{display:none;padding:0 20px 20px;border-top:1px solid var(--lborder)}
+.card.open .cbody{display:block}
+.card.open .arrow{transform:rotate(90deg)}
+.arrow{transition:transform .15s}
+
+.why{margin:16px 0;color:var(--middark)}
+.why b{color:var(--darkest)}
+.why .q{color:var(--red);font-weight:600}
+.shotbox{margin:14px 0;border:1px solid var(--lborder);border-radius:7px;overflow:hidden;position:relative;line-height:0;max-width:560px}
+.shotbox img{width:100%;display:block}
+.shotbox .hl{position:absolute;border:2px dashed var(--orange);background:rgba(230,119,0,.12);border-radius:4px}
+.v3box{margin:14px 0}
+.v3lbl{font-size:12px;font-weight:700;color:#2b8a3e;background:#ebfbee;border:1px solid #b2f2bb;border-radius:6px;padding:7px 11px;margin-bottom:7px}
+.shotcap{font-size:11px;color:var(--mid);padding:6px 10px;background:var(--bg);line-height:1.5}
+
+.copybox{border:1px solid var(--border);border-radius:8px;background:var(--bg);overflow:hidden}
+.copybox .bar{display:flex;justify-content:space-between;align-items:center;
+              padding:8px 12px;background:var(--lbg);border-bottom:1px solid var(--border)}
+.copybox .bar span{font-size:11.5px;color:var(--middark);font-weight:600}
+.copybox button{background:var(--dark);color:#fff;border:0;padding:5px 13px;border-radius:5px;
+                font:inherit;font-size:11.5px;cursor:pointer}
+.copybox button.ok{background:var(--green)}
+.copybox pre{padding:14px 16px;white-space:pre-wrap;word-break:break-word;
+             font-family:Pretendard,sans-serif;font-size:12.5px;color:var(--darkest);line-height:1.65}
+
+.toolbar{display:flex;gap:8px;margin-bottom:16px}
+.toolbar button{background:#fff;border:1px solid var(--border);border-radius:7px;padding:7px 14px;
+                font:inherit;font-size:12px;cursor:pointer;color:var(--middark)}
+.toolbar button:hover{border-color:var(--mid)}
+.done{opacity:.45}
+.chk{flex-shrink:0;width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;
+     cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;
+     color:#fff;margin-top:2px}
+.chk.on{background:var(--green);border-color:var(--green)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Figma 댓글 가이드</div>
+  <div class="f" id="filters"></div>
+  <div class="count" id="count"></div>
+</header>
+
+<div class="wrap">
+<div class="intro">
+  <h1>Figma 댓글 가이드</h1>
+  <div class="sub">어느 화면에 무엇을 붙여넣을지, 그대로 따라 하시면 됩니다</div>
+
+  <div class="how">
+    <b>Figma에서 댓글 다는 법</b>
+    <ol>
+      <li>Figma 파일 <code>UI UX Design</code> → 좌측 페이지 목록에서 <b>DEX</b> 선택</li>
+      <li>키보드 <b>C</b> 를 누르면 댓글 모드가 됩니다 (또는 좌상단 말풍선 아이콘)</li>
+      <li>아래 카드의 <b>달 위치</b> 에 적힌 프레임을 찾아 그 위를 클릭</li>
+      <li><b>복사</b> 버튼을 누르고 댓글 칸에 <b>Ctrl+V</b> → 전송</li>
+      <li>다 붙였으면 카드 왼쪽 네모를 체크해 표시를 남기세요</li>
+    </ol>
+  </div>
+
+  <div class="tally" id="tally"></div>
+
+  <div class="warn">
+    <b>프레임 찾는 요령</b> — Figma 상단 <b>돋보기(검색)</b> 에 프레임 이름을 그대로 붙여넣으면 바로 이동합니다.
+    예: <code>SCREEN-LABEL · H5 Signed in, DEX wallet linked</code><br><br>
+    <b>용어</b> — 공식 한국어 용어는 <b>「캐시백」</b> 입니다(영문 <code>cashback</code>). 다만 <b>저희 프로토타입 V2.1 와 기존 화면은 아직 「페이백」</b> 으로 돼 있어, 그 화면을 가리키거나 인용한 부분은 <b>찾으시기 쉽도록 원문 그대로</b> 두었습니다. 저희 쪽도 교체 예정입니다.<br><br><b>댓글 본문은 평문입니다.</b> Figma 댓글은 굵은 글씨·코드 표시를 지원하지 않아서 기호 없이 썼습니다. 복사하면 보이는 그대로 들어갑니다.
+  </div>
+</div>
+
+<div class="toolbar">
+  <button onclick="openAll(true)">전체 펼치기</button>
+  <button onclick="openAll(false)">전체 접기</button>
+  <button onclick="resetChk()">체크 초기화</button>
+</div>
+
+<div id="list"></div>
+</div>
+
+<script>
+const D = [
+
+/* ─────────── 허브 ─────────── */
+{id:"C-1",sev:"red",grp:"캐시백 허브",src:"정책",
+ t:"DEX 패널에 이벤트 리워드 줄이 없습니다",
+ sec:"DEX — Cashback Hub Web [Selected Design]",
+ fr:"SCREEN-LABEL · H5 Signed in, DEX wallet linked  ·  H8 EdgeX wallet linked  ·  DW1 Withdraw popup",
+ why:"지금 DEX 패널은 <b>Total available cashback = Total exchange cashback</b> 으로 거래소 캐시백만 있습니다. CEX 탭 설명에는 <code>available = exchange + event reward</code> 가 있는데 <b>DEX 탭에는 그 줄이 아예 없습니다.</b><br><br>확정 정책에서 <b>DEX에도 이벤트 리워드를 지급</b>하기로 했고, 출금 가능액은 <b>단순 합산이 아니라 매칭 공식</b>을 거칩니다. <span class='q'>이게 틀리면 사용자에게 보이는 금액 자체가 틀립니다.</span>",
+ img:"base/H5.png",hl:[{l:51,t:54.5,w:40.5,h:6.5}],
+ cap:"주황 박스 자리에 이벤트 리워드 줄이 들어가야 합니다",
+ v3:"base/v21/DW1.png",v3cap:"출금 목록 — 페이백 / 이벤트 리워드 / 출금 가능 세 줄이 있고, 매칭 안내 문구까지 있습니다",
+ txt:`[확정 정책 반영 요청] DEX 패널에 이벤트 리워드 줄이 없습니다
+
+지금 DEX 탭은 Total available cashback 과 Total exchange cashback 이 같은 값입니다. 거래소 캐시백만 있습니다.
+CEX 탭 설명에는 "available = exchange + event reward" 가 있는데 DEX 탭에는 그 줄이 없습니다.
+
+2026-10-23 확정: DEX에도 이벤트 리워드를 지급합니다.
+
+그리고 출금 가능액은 단순 합산이 아닙니다.
+  출금 가능액 = 캐시백 + MIN(이벤트 리워드, 캐시백)
+이벤트 리워드는 캐시백 금액을 넘을 수 없습니다.
+
+필요한 줄 구성 (허브 패널과 출금 팝업 양쪽 모두)
+  1) 거래소 캐시백
+  2) 이벤트 리워드
+  3) 출금 가능액 (매칭 적용 후) - 1+2 와 다를 수 있습니다
+
+출금 팝업(DW1)의 Total Available Cashback 도 같습니다. 지금은 Exchange Cashback 과 같은 값인데, 매칭 적용 후 금액이어야 합니다.
+
+추가로 필요한 상태
+  · 이벤트 리워드가 캐시백보다 클 때 "일부만 출금할 수 있습니다" 안내
+  · 캐시백이 0이고 이벤트 리워드만 있을 때 출금 가능액 0
+
+참고 — 저희 프로토타입 V2.1 『출금 > 출금 목록』 화면에 이 구성이 그대로 있습니다.
+  계정마다 페이백 / 이벤트 리워드 / 출금 가능 세 줄이 있고, 아래에 "이벤트 리워드는 같은 계정의 페이백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다." 안내가 붙어 있습니다.
+  예: Bitget 페이백 5.00 + 이벤트 리워드 232.00 → 출금 가능 10.00 (매칭 적용 결과)`},
+
+{id:"S-11",sev:"orange",grp:"캐시백 허브",src:"정책",
+ t:"같은 DEX에 지갑이 여러 개일 때가 없습니다",
+ sec:"DEX — Cashback Hub Web",
+ fr:"SCREEN-LABEL · H5 Signed in, DEX wallet linked",
+ why:"출금 팝업(<code>BW1</code>)에는 지갑 6개가 그려져 있는데, <b>허브 카드에서 같은 DEX에 지갑이 여러 개일 때</b> 어떻게 보이는지가 없습니다. CEX 쪽에는 <code>Bitget +1</code> 같은 패턴이 이미 있습니다.",
+ txt:`[상태 누락] 같은 DEX에 지갑이 여러 개일 때의 카드 상태가 없습니다
+
+출금 팝업 BW1 에는 지갑 6개가 그려져 있는데, 허브 DEX 카드에서 같은 DEX에 지갑이 여러 개일 때 어떻게 보이는지가 없습니다.
+
+CEX 쪽에는 "Bitget +1" / "****123456 +1" 같은 +N 패턴이 이미 있습니다.
+DEX 카드에도 단수 / 복수 두 상태가 필요합니다.`},
+
+{id:"C-8",sev:"red",grp:"출금",src:"정책",
+ t:"처리 중 재신청 차단 화면은 삭제합니다",
+ sec:"DEX — Withdraw, on TetherMax (main flow) Web [Light]",
+ fr:"SCREEN-LABEL · PS2 Pending withdrawal",
+ why:"확정: <b>처리 중 재신청을 막지 않습니다.</b> DEX는 한 번의 신청이 여러 지갑에 각각 송금되고 건마다 독립적으로 진행되므로, <b>\"하나라도 처리 중이면 막는다\"는 규칙 자체가 성립하지 않습니다.</b>",
+ txt:`[삭제 요청] 처리 중 재신청 차단 화면
+
+확정: 처리 중 재신청을 막지 않습니다.
+
+처리 중에는 카드를 그대로 두고, 처리가 끝나면 성공·실패 결과를 표시합니다. 처리 중 전용 차단 화면은 필요 없습니다.
+
+이유: DEX는 한 번의 신청이 여러 지갑에 각각 송금되고 각 건이 독립적으로 진행됩니다. "하나라도 처리 중이면 막는다" 는 규칙 자체가 성립하지 않습니다.`},
+
+{id:"B-1",sev:"red",grp:"출금",src:"기준선",
+ t:"선차감 상태가 없습니다 (돈 관련)",
+ sec:"DEX — Withdraw, on TetherMax (main flow) Web [Light]",
+ fr:"SCREEN-LABEL · DW6 Request sent  (PW8 / BW4 / SW3 도 동일)",
+ why:"기존 출금 상태 7종 중 <b><code>withdrawal_pre_deducted</code> — 인증 성공 시 자산을 먼저 차감</b>합니다. <b>DEX에도 그대로 적용됩니다.</b><br><br>그런데 <b>신청 직후 잔액이 줄어든 상태</b>가 어느 화면에도 없습니다. 선차감이 화면에 안 보이면 <b>사용자가 같은 금액을 또 신청합니다.</b>",
+ txt:`[상태 누락 - 돈 관련] 선차감 상태가 화면에 없습니다
+
+기존 출금 상태 7종 중 withdrawal_pre_deducted (인증 성공 시 자산 선차감) 는 V2 DEX에도 그대로 적용됩니다.
+
+그런데 신청 직후 잔액이 줄어든 상태가 어느 화면에도 없습니다.
+
+선차감이 화면에 보이지 않으면 사용자가 같은 금액을 또 신청하려 합니다. DEX는 송금이 비동기라 처리 시간이 길어 CEX보다 위험합니다.
+
+필요한 것
+  · 신청 직후 허브 / My Cashback 의 잔액이 즉시 줄어든 상태
+  · 줄어든 이유를 설명하는 문구 (예: 출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다)`},
+
+{id:"B-2",sev:"red",grp:"출금",src:"기준선",
+ t:"실패 시 잔액 복원 상태가 없습니다 (돈 관련)",
+ sec:"DEX — Withdraw, on TetherMax (main flow) Web [Light]",
+ fr:"SCREEN-LABEL · PE6 Payout failed  (PE5 Payout delayed 도 함께)",
+ why:"기존 테더맥스에 <b><code>withdrawal_refunded</code> — 실패 시 잔액 복원</b> 상태가 이미 있습니다. 지금 화면에 <b>복원 안내가 없습니다.</b> 선차감된 금액이 어떻게 되는지 사용자가 알 수 없습니다.<br><br>그리고 화면 설명에 <i>\"Delayed and failed copy waits for PM\"</i> 이라고 적혀 있어 <b>문구가 아직 비어 있습니다.</b>",
+ txt:`[상태 누락 - 돈 관련] 실패 시 잔액 복원이 없습니다
+
+기존 테더맥스의 출금 상태 withdrawal_refunded 는 실패 시 잔액을 복원합니다.
+지금 PE6 Payout failed 에 복원 안내가 없습니다. 선차감된 금액이 어떻게 되는지 사용자가 알 수 없습니다.
+
+중요: 가스비는 환불로 회수되지 않습니다.
+사용자에게는 출금액 전액이 복원된 것으로 보여야 하고, 가스는 테더맥스 손실입니다. 복원 금액에서 가스를 빼면 안 됩니다.
+
+그리고 이 화면 설명에 "Delayed and failed copy waits for PM" 이라고 돼 있습니다. 문구가 아직 비어 있습니다.
+온체인 출금 실패 유형 5종에 대응하는 문구가 필요합니다.
+  잘못된 주소 / 가스 부족 / 체인 혼잡 / 노드 오류 / 잔액 부족`},
+
+{id:"B-13",sev:"orange",grp:"출금",src:"기준선",
+ t:"가스비를 금액이 아니라 문구로 표기합니다",
+ sec:"DEX — Withdraw, on TetherMax (main flow) Web [Light]",
+ fr:"SCREEN-LABEL · DW1 Withdraw popup  (DW3 의 Network fee: TBC 포함)",
+ img:"base/DW1.png",hl:[{l:31.9,t:59.4,w:36.2,h:3.2}],
+ cap:"Network fee 줄 — 줄은 두고 금액만 문구로 바꿉니다",
+ why:"<code>Network fee</code> 줄에 값이 <code>TBC</code> 로 들어가 있습니다. 확정: <b>테더맥스가 전액 부담</b>이므로 금액을 보여줄 필요가 없습니다. <b>줄은 그대로 두고 금액 대신 문구</b>로 바꿉니다.<br><br>그리고 <code>FIRST PASS NOTES</code> 프레임에 <i>\"Still open: network fee (who pays, shown as TBC)\"</i> 가 남아 있는데 <b>이미 확정된 사항</b>입니다.",
+ txt:`[수정 요청] 가스비 표기를 금액이 아니라 문구로
+
+Network fee 줄에 값이 TBC 로 들어가 있습니다.
+
+확정: 네트워크 수수료는 테더맥스가 전액 부담합니다. 사용자는 신청한 금액을 그대로 받습니다.
+
+줄은 그대로 두시고, 금액 대신 아래처럼 표기해 주십시오.
+  Network fee     테더맥스가 전액 부담
+
+그리고 FIRST PASS NOTES 프레임에 "Still open: network fee (who pays, shown as TBC)" 가 남아 있습니다. 이미 확정된 사항이니 노트도 같이 갱신해 주세요.`},
+
+{id:"B-10",sev:"orange",grp:"출금",src:"기준선",
+ t:"Pending 을 단독으로 쓰고 있습니다",
+ sec:"DEX — Withdraw / Link / Hub",
+ fr:"SCREEN-LABEL · PS2 Pending withdrawal  (L11, Accruing this week 포함)",
+ why:"기존 체계에 <b><code>Pending</code> 단독 상태값이 없습니다.</b> 항상 수식어와 함께 씁니다 — <code>vip_application_pending</code>, <code>otp_unlink_email_pending</code> 등. DEX는 파트너마다 용어가 달라(Lighter <code>Accruing</code>, ApeX <code>Pending</code>) 더 혼란스럽습니다.",
+ txt:`[명명 규칙] Pending 을 단독으로 쓰고 있습니다
+
+기존 테더맥스 체계에 Pending 단독 상태값이 없습니다. 항상 수식어와 함께 씁니다.
+  vip_application_pending / otp_unlink_email_pending / duplicate_uid_pending_merge / tp_retroactive_pending / league_p4_pending
+
+지금 섞여 있는 것
+  · PS2 Pending withdrawal
+  · L11 Checking your referral (pending)
+  · Accruing this week
+
+DEX 쪽은 파트너마다 용어가 달라서 (Lighter = Accruing, ApeX = Pending) 더 혼란스럽습니다.
+
+도메인 접두 + 수식어로 통일해 주세요.
+  예) settlement_accruing / settlement_pending_payout
+
+참고 — 저희 프로토타입 V2.1 는 "처리 중 / 성공 / 실패" 로 씁니다. Pending 을 단독으로 쓰지 않습니다.`},
+
+/* ─────────── 캐시백 요약 ─────────── */
+{id:"C-2",sev:"red",grp:"캐시백 요약",src:"정책",
+ t:"\"Event rewards are CEX only\" 가 틀렸습니다",
+ sec:"DEX — Cashback Summary Web [Light]",
+ fr:"SCREEN-LABEL · CS3 Event reward day",
+ why:"화면 설명에 <i>\"Event reward rows show the event name and the CEX UID. <b>Event rewards are CEX only.</b>\"</i> 라고 적혀 있습니다. <span class='q'>확정 정책이 뒤집혔습니다 — DEX에도 이벤트 리워드를 지급합니다.</span>",
+ v3:"base/v21/CS3.png",v3cap:"페이백 내역 — DEX 이벤트 리워드 적립 행이 있습니다",
+ txt:`[확정 정책과 충돌] Event rewards are CEX only 가 틀렸습니다
+
+이 화면 설명에 이렇게 적혀 있습니다.
+"Event reward rows show the event name and the CEX UID (CS-4). Event rewards are CEX only."
+
+확정 정책이 뒤집혔습니다. DEX에도 이벤트 리워드를 지급합니다.
+
+고쳐야 할 것
+  · 이벤트 리워드 행에 DEX도 나와야 합니다
+  · 계정 표기가 CEX UID 가 아니라 DEX 지갑 주소입니다
+    확정: 지갑 주소는 화면에 전체를 그대로 노출합니다. 마스킹하지 않습니다.
+    CEX UID 마스킹은 지금 그대로 두시면 됩니다.
+
+참고 — 저희 프로토타입 V2.1 『페이백 내역』 에 "Lighter · 일반 이벤트 리워드 적립 · 20.00 USDT" 행이 있습니다. DEX도 이벤트 리워드를 받습니다.`},
+
+{id:"S-5",sev:"orange",grp:"캐시백 요약",src:"정책",
+ t:"거래소 필터에 그룹·범위 선택이 없습니다",
+ sec:"DEX — Cashback Summary Web [Light]",
+ fr:"SCREEN-LABEL · CS6 Filter dropdowns",
+ why:"지금 <code>All Accounts</code> / <code>All Types</code> 두 개뿐입니다. 확정: 두 그룹을 모두 가진 필터에는 <b>전체 / CEX 전체 / DEX 전체</b> 범위 선택이 필요합니다.",
+ v3:"base/v21/CS3.png",v3cap:"페이백 내역 — 거래소 유형 전체 / CEX / DEX 칩이 있습니다",
+ txt:`[상태 누락] 거래소 필터에 그룹·범위 선택이 없습니다
+
+지금 All Accounts / All Types 두 개뿐입니다.
+
+확정: 두 그룹을 모두 가진 필터에는 아래 범위 선택이 필요합니다.
+  전체 / CEX 전체 / DEX 전체
+
+그리고 "미연동" 의 정의도 반영돼야 합니다.
+미연동 = CEX·DEX 어디에도 연동 계정이 없는 회원
+
+중요: 기존에 저장된 "CEX 전체" 대상이 DEX까지 자동 확장되면 안 됩니다. 저장된 대상의 의미가 조용히 넓어집니다.
+
+참고 — 저희 프로토타입 V2.1 『페이백 내역』 화면에 "거래소 유형: 전체 / CEX / DEX" 칩이 이미 있습니다. 같은 방식이면 됩니다.`},
+
+{id:"S-6",sev:"orange",grp:"캐시백 요약",src:"정책",
+ t:"달력 합계와 일별 합계가 어긋난다고 PRD가 적어 뒀습니다",
+ sec:"DEX — Cashback Summary Web [Light]",
+ fr:"SCREEN-LABEL · CS1 Month view",
+ why:"PRD에 <i>\"day 26 reads +37.40 USDT while its day list nets +17.40 USDT (design to align)\"</i> 라고 <b>PRD가 직접 적어 둔 디자인 충돌</b>입니다.",
+ txt:`[확인 요청] 달력 합계와 일별 목록 합계가 어긋납니다
+
+PRD에 이렇게 적혀 있습니다.
+"day 26 reads +37.40 USDT while its day list nets +17.40 USDT (design to align)"
+
+최종본에서 맞춰졌는지 확인해 주세요.
+달력 합계와 일별 목록 합계가 어긋나면 CS 문의가 바로 들어옵니다.`},
+
+{id:"S-7",sev:"orange",grp:"캐시백 요약",src:"정책",
+ t:"DEX 데이터 지연 상태가 요약에는 없습니다",
+ sec:"DEX — Cashback Summary Web [Light]",
+ fr:"SCREEN-LABEL · CS1 Month view  (CS2~CS5 포함)",
+ why:"허브에는 <code>H6 DEX data delayed</code> 가 있는데 <b>캐시백 요약에는 같은 상태가 없습니다.</b> Lighter는 주 1회 정산이라 <b>비는 날이 일상적으로 생깁니다.</b>",
+ v3:"base/v21/H6.png",v3cap:"데이터 지연 — 지연 중에도 확정 잔액은 그대로 출금 가능하다고 분리해 안내합니다",
+ txt:`[상태 누락] 캐시백 요약에 DEX 데이터 지연 상태가 없습니다
+
+허브에는 H6 DEX data delayed 가 있는데 캐시백 요약에는 같은 상태가 없습니다.
+
+Lighter는 주 1회(월요일) 정산이라 요약 화면에서 비는 날이 일상적으로 생깁니다.
+"아직 집계되지 않음" 과 "0원" 을 구분해서 보여줘야 합니다.
+
+참고 — 저희 프로토타입 V2.1 『홈 > 데이터 지연』 화면이 지연 상태입니다.
+  "신규 적립 내역 반영이 지연되고 있습니다. 기존 확정 잔액은 그대로이며 출금할 수 있어요."
+  요약 화면에도 같은 방식으로 "아직 집계되지 않음" 과 "0원" 을 구분해 주시면 됩니다.`},
+
+/* ─────────── 친구 초대 / 파트너 허브 ─────────── */
+{id:"C-3",sev:"red",grp:"친구 초대",src:"정책",
+ t:"초대 리워드가 CEX 전용으로 돼 있습니다",
+ sec:"DEX — Invite Friends Web [Light]",
+ fr:"SCREEN-LABEL · IF8 / IF9 / IF10 Withdraw, select a CEX UID  +  IF11 UID Link Required",
+ why:"설명에 <i>\"Withdraw lists <b>only CEX UIDs</b>\"</i>, 섹션 설명에 <i>\"<b>Invitation Rewards are CEX only</b>; DEX trading earns the inviter nothing\"</i> 으로 돼 있습니다. <span class='q'>확정 정책과 정면으로 어긋납니다.</span>",
+ txt:`[확정 정책과 충돌] 초대 리워드가 CEX 전용으로 돼 있습니다
+
+지금 이렇게 돼 있습니다.
+  · "Withdraw lists only CEX UIDs (IF-6)"
+  · "Invitation Rewards are CEX only; DEX trading earns the inviter nothing"
+
+확정 정책과 정면으로 어긋납니다.
+DEX 초대에도 초대 리워드가 발생하고, DEX 지갑을 CEX UID와 동일하게 취급합니다.
+
+고쳐야 할 것
+  1) IF8~IF10 수령 계정 목록에 DEX 지갑도 포함
+  2) IF11 UID Link Required - DEX 지갑만 있어도 수령할 수 있으므로 이 차단 조건 자체가 성립하지 않습니다
+  3) 초대 리워드는 하위 회원이 출금해야 발생합니다
+     (기존 산식: 하위 출금액 x 거래소 마진 x 리워드 비율)`},
+
+{id:"C-4",sev:"red",grp:"파트너 허브",src:"정책",
+ t:"\"Invite rewards stay CEX only\" 가 틀렸습니다",
+ sec:"DEX — Partner Hub Web [Light]",
+ fr:"SCREEN-LABEL · PH1 Dashboard  /  PH2 Linked Accounts modal",
+ why:"섹션 설명에 <i>\"<b>Invite rewards stay CEX only</b>; DEX wallets are listed and counted but earn the inviter nothing\"</i> 으로 돼 있습니다. <code>C-3</code> 과 같은 사유입니다.",
+ txt:`[확정 정책과 충돌] Invite rewards stay CEX only 가 틀렸습니다
+
+섹션 설명이 이렇습니다.
+"Invite rewards stay CEX only; DEX wallets are listed and counted but earn the inviter nothing"
+
+DEX 지갑이 집계만 되고 리워드는 못 받는 구조인데, 확정 정책에서는 DEX도 초대 리워드 대상입니다.
+IF8~IF11 과 같은 건입니다.`},
+
+{id:"B-7",sev:"orange",grp:"파트너 허브",src:"기준선",
+ t:"하위 회원 활동 상태 구분이 없습니다",
+ sec:"DEX — Partner Hub Web [Light]",
+ fr:"SCREEN-LABEL · PH1 Dashboard  /  PH2 Linked Accounts modal",
+ why:"하위 회원이 <b>최근에 거래했는지를 3단계로 나누는 상태값이 기존 테더맥스에 이미 있습니다</b> — <code>subaccount_active</code>(7일 이내) / <code>subaccount_idle</code>(7~21일) / <code>subaccount_inactive</code>(21일 이상). <b>DEX 하위 회원에도 그대로 쓰시면 되고 새로 만들 것이 없습니다.</b>",
+ txt:`[기존 상태값 적용] 하위 회원 활동 상태 구분이 없습니다
+
+기존 테더맥스에 이미 있는 상태값입니다. DEX 하위 회원에도 그대로 쓰시면 됩니다.
+  subaccount_active     - 7일 이내 활동
+  subaccount_idle       - 7~21일
+  subaccount_inactive   - 21일 이상
+
+PH1 / PH2 에 하위 회원의 활동 상태 구분이 없습니다. 새로 만들 필요 없이 기존 것을 가져다 쓰시면 됩니다.`},
+
+/* ─────────── 랭킹 ─────────── */
+{id:"S-8",sev:"orange",grp:"캐시백 랭킹",src:"정책",
+ t:"참여 하한과 리워드 지급 안내가 없습니다",
+ sec:"DEX — Cashback Ranking Web [Light]",
+ fr:"SCREEN-LABEL · RK1 Ranking, rows  (RK2 / RK3 포함)",
+ why:"① 확정: <b>캐시백 0.01 USDT 이상이면 참여 대상</b>입니다. ② 확정: <b>랭킹 리워드는 이벤트 리워드로 지급</b>되므로 매칭 공식 적용 대상입니다.",
+ v3:"base/v21/RK2.png",v3cap:"페이백 랭킹 — 전체 / CEX / DEX 칩과 하한 안내",
+ txt:`[상태 누락] 랭킹에 참여 하한과 리워드 지급 방식 안내가 없습니다
+
+1) 참여 하한
+확정: 캐시백 0.01 USDT 이상이면 참여 대상입니다. 하한에 못 미칠 때의 안내가 필요합니다.
+
+2) 리워드 지급 방식
+확정: 랭킹 리워드는 이벤트 리워드로 지급합니다.
+따라서 매칭 공식 적용 대상이고, 랭킹 리워드만으로는 출금할 수 없습니다. 그 안내가 필요합니다.
+
+3) 랭킹 기준
+캐시백 금액 기준입니다. 거래량 기준이 아닙니다. 문구에 trading volume 이 남아 있지 않은지 확인해 주세요.
+
+참고 — 저희 프로토타입 V2.1 『랭킹 > 내 순위』 화면에 있습니다.
+  거래소 유형 전체 / CEX / DEX 칩이 있고, CEX UID 와 DEX 지갑이 한 순위표에 섞여 있으며,
+  하단에 "페이백 0.01 USDT 미만은 순위에 포함되지 않습니다." 안내가 붙어 있습니다.`},
+
+/* ─────────── 연동 ─────────── */
+{id:"C-5",sev:"red",grp:"연동",src:"정책",
+ t:"Lighter Standard 경고 화면은 삭제합니다",
+ sec:"DEX — Link, all states and detail page entry Web [Light]",
+ fr:"SCREEN-LABEL · L10 Lighter Standard account  (+ L11 설명문)",
+ why:"설명이 <i>\"Non-blocking warning: Standard accounts pay no fees, so no cashback.\"</i> 입니다. 확정 <code>D-6</code>: <b>경고도 차단도 하지 않습니다.</b><br><br><span class='q'>경고를 유지하면 <code>account_tier</code> API가 다시 필수가 되어 Lighter 파트너 회신이 출시 블로커로 돌아옵니다.</span>",
+ v3:"base/v21/L10.png",v3cap:"거래 계정 연동 — Standard 경고 없이 그냥 연동합니다",
+ txt:`[삭제 요청] Lighter Standard 경고 화면
+
+이 화면 설명이 "Non-blocking warning: Standard accounts pay no fees, so no cashback." 입니다.
+
+확정 D-6: 경고도 차단도 하지 않습니다. Lighter Standard 계정도 다른 지갑과 똑같이 연동합니다.
+
+L10 화면을 이번 범위에서 빼 주세요.
+그리고 L11 Checking your referral 설명에 있는 "or the Lighter account is Standard" 문구도 삭제 대상입니다.
+
+이유: 이 경고를 띄우려면 account_tier 를 알아야 하는데, 저희가 account_tier API 를 필수에서 선택으로 내렸습니다. 경고를 유지하면 Lighter 파트너 회신이 다시 출시 블로커가 됩니다.
+
+참고 — 저희 프로토타입 V2.1 『연동 > 거래 계정 연동』 화면에는 Standard 경고가 없습니다.
+  "DEX는 지갑 주소만 입력하면 됩니다" 로 끝이고, 거래소 상세(V2.1 『Lighter 페이백』)에도
+  "페이백은 Premium·Plus 계정에 적용됩니다. Standard 계정도 연동할 수 있어요." 로 안내만 합니다. 차단도 경고 모달도 없습니다.`},
+
+{id:"S-2",sev:"orange",grp:"연동",src:"정책",
+ t:"연동 한도 문구가 DEX 전용처럼 읽힙니다",
+ sec:"DEX — Link, all states and detail page entry Web [Light]",
+ fr:"SCREEN-LABEL · L15 Wallet limit reached",
+ why:"확정: 연동 한도는 <b>CEX·DEX를 분리하지 않고 거래 계정 총 개수</b>로 하나를 적용합니다. 그리고 기존 온보딩 규칙은 <b>한도 수치를 사용자에게 공개하지 않습니다.</b>",
+ txt:`[수정 요청] 연동 한도 문구
+
+확정: 연동 한도는 CEX·DEX를 분리하지 않습니다. 회원의 거래 계정 총 개수로 하나의 한도를 적용합니다.
+
+고쳐야 할 것
+  · 문구가 "DEX 지갑 한도" 처럼 읽히면 안 됩니다. "거래 계정" 기준이어야 합니다
+  · 확인 중(Processing) 상태인 건도 한도를 점유합니다. 그 점이 문구에 드러나야 합니다
+
+참고: 기존 온보딩 규칙상 한도 산식을 사용자에게 공개하지 않습니다.
+기존 모달 문구는 "UID 연동은 최대 {거래소 개수 X 3}개까지 가능해요" 로, 산식은 숨기고 결과 숫자만 보여줍니다.
+이 문구가 같은 규칙을 따르는지도 함께 봐 주세요.
+
+참고 — 저희 프로토타입 V2.1 『연동 한도』 설명에 이렇게 적혀 있습니다.
+  "CEX·DEX를 합쳐 하나의 연동 한도를 적용합니다. 확인 중 계정도 총 개수에 포함합니다."
+  문구를 이 기준으로 써 주시면 됩니다.`},
+
+{id:"C-9",sev:"orange",grp:"연동",src:"정책",
+ t:"DEX 첫 연동에 쿠폰 획득 안내가 있습니다",
+ sec:"DEX — Link stories on home (S3, S4) Web [Light]",
+ fr:"SCREEN-LABEL · S3-1 Home, nothing linked",
+ why:"설명에 <i>\"checklist with the <b>3 USDT first-link coupon</b>\"</i> 가 있습니다. 확정: <b>쿠폰 사용은 DEX에서도 가능하지만 발급은 CEX 첫 연동만</b> 해당합니다.",
+ v3:"base/v21/CP1.png",v3cap:"쿠폰 사용 — 수령 계정에 DEX 지갑(Lighter)도 들어 있습니다",
+ txt:`[수정 요청] DEX 첫 연동 경로의 쿠폰 획득 안내
+
+이 화면 설명에 "Total Cashback Balance 0 USDT, checklist with the 3 USDT first-link coupon (LW-26, LW-30)" 가 있습니다.
+
+확정: 첫 연동 3 USDT 쿠폰은 사용은 DEX에서도 가능하지만, 발급은 CEX 첫 연동만 해당합니다.
+
+DEX 첫 연동 경로에서는 쿠폰 획득 안내를 빼 주세요.
+이미 보유한 쿠폰을 DEX에서 쓰는 것은 그대로 둡니다.
+
+참고 — 저희 프로토타입 V2.1 『쿠폰함 > 쿠폰 사용』 화면에서는 수령 계정에 DEX 지갑(Lighter)도 들어 있습니다.
+  사용은 DEX 포함, 발급만 CEX 첫 연동이라는 뜻입니다.`},
+
+{id:"B-3",sev:"red",grp:"홈 목록",src:"기준선",
+ t:"Aster 행의 상태 칩은 빼 주세요",
+ sec:"DEX — Link stories on home (S3, S4) Web [Light]",
+ fr:"SCREEN-LABEL · S4-6 Back on home, new row  (S4-1 포함)",
+ why:"Aster 행 아래에 <b>연파랑 알약 안에 <code>Chip</code> 이라는 글자</b>가 그대로 보입니다. <b>Aster 잔여 기간을 표시하려던 자리로 보입니다.</b><br><br><span class='q'>그렇다면 정책이 바뀌어 더 이상 필요하지 않습니다 — 바인딩이 연속으로 유지되는 것으로 확정됐습니다.</span>",
+ img:"base/HOME_LINKED.png",hl:[{l:16.6,t:57.6,w:5.2,h:4.2}],
+ cap:"Aster 행 아래의 연파랑 알약 — 이 칩을 빼 주시면 됩니다",
+ txt:`[제거 요청] Aster 행의 상태 칩
+
+Aster 행 아래에 연파랑 알약이 있고, 그 안에 "Chip" 이라는 글자가 그대로 보입니다. 칩이 달린 행은 Aster 하나뿐입니다.
+
+Aster 잔여 기간(365일 바인딩)을 표시하려던 자리로 보입니다.
+그렇다면 정책이 바뀌어 더 이상 필요하지 않습니다. 바인딩이 연속으로 유지되는 것으로 확정됐습니다.
+
+칩을 빼 주십시오.
+
+같은 전제에서 함께 빠지는 것
+  · 허브 H9 Aster referral expiring
+  · 허브 H10 Aster referral expired
+    (웹 / 모바일 / 다크 합쳐 8프레임)
+  · DEX 상세의 만료 안내
+
+다른 용도로 두신 것이라면 알려주십시오. 넣을 문구를 저희가 정하겠습니다.`},
+
+{id:"B-5",sev:"orange",grp:"홈 목록",src:"기준선",
+ t:"지갑이 11개를 넘을 때 처리가 없습니다",
+ sec:"DEX — Link stories on home / Withdraw",
+ fr:"SCREEN-LABEL · S4-1 Home with linked accounts  (BW1 포함)",
+ why:"기존 테더맥스의 목록 표시 규칙입니다 — <b>UID 항목이 11개 이상이면 더보기 클릭 전까지 10개만 노출.</b> <code>BW1</code> 은 6개까지만 그려져 있습니다.",
+ txt:`[상태 누락] 지갑이 11개를 넘을 때의 더보기 처리가 없습니다
+
+기존 테더맥스의 목록 표시 규칙입니다. UID 항목이 11개 이상이면 "더보기" 클릭 전까지 10개만 노출합니다.
+
+BW1 Withdraw popup 은 6개까지만 그려져 있고, 11개를 넘을 때 처리가 없습니다.
+연동 한도상 지갑 수는 충분히 11개를 넘습니다.
+
+홈 Linked Accounts 목록에도 같은 규칙이 적용돼야 합니다.
+
+※ 저희 프로토타입 V2.1 에도 이 처리가 없습니다. 저희 쪽도 같이 채우겠습니다.`},
+
+{id:"B-4",sev:"orange",grp:"홈 목록",src:"기준선",
+ t:"상태가 겹칠 때 무엇을 보여줄지 없습니다",
+ sec:"DEX — Cashback Hub Web",
+ fr:"SCREEN-LABEL · H6 DEX data delayed  (H7 Balance did not load 와 함께)",
+ why:"<b>상태가 여러 개 겹쳤을 때 무엇을 먼저 보여줄지</b> 정한 규칙이 기존 테더맥스에 <b>UID 7단계 하나뿐</b>입니다. <b>데이터 지연 · 잔액 로드 실패 · 연동 대기</b>는 한 카드에서 동시에 일어날 수 있는데, 무엇을 먼저 보여줄지가 없습니다.",
+ v3:"base/v21/H6.png",v3cap:"데이터 지연 — 지연 중에도 확정 잔액은 그대로 출금 가능하다고 안내합니다",
+ txt:`[규칙 필요] 상태가 겹칠 때의 우선순위가 없습니다
+
+H6 데이터 지연 + H7 잔액 로드 실패 + 연동 대기(연동 시도중) 가 동시에 발생할 때 무엇을 보여줄지 정의가 없습니다.
+
+Lighter는 주 1회 정산이라 지연 구간이 길고, 그 사이에 잔액 조회가 실패하거나 같은 거래소에 대기 중인 지갑이 있을 수 있습니다. 실제로 겹칩니다.
+
+기존 테더맥스에서 무엇을 먼저 보여줄지 정한 규칙은 UID 7단계 하나뿐입니다.
+같은 형식(정수 priority 1..n)으로 확장해 주세요.
+
+기존 관행상 "최우선 1개만 표시" 가 맞습니다. (My Portfolio 실패 카드도 1개만 표시합니다)
+
+참고 — 저희 프로토타입 V2.1 『홈 > 데이터 지연』 화면은 지연 상태의 문구만 보여줍니다.
+  "신규 적립 내역 반영이 지연되고 있습니다. 기존 확정 잔액은 그대로이며 출금할 수 있어요."
+  ※ 다만 V2.1 에도 상태가 겹칠 때의 우선순위 규칙은 없습니다. 이 규칙은 저희와 같이 정해야 합니다.`},
+
+/* ─────────── 상세 / 개요 ─────────── */
+{id:"S-9",sev:"orange",grp:"DEX 상세",src:"정책",
+ t:"리뷰 작성 자격과 배지 조건이 없습니다",
+ sec:"DEX — DEX detail Web [Light]",
+ fr:"SCREEN-LABEL · D3 FAQ, reviews and terms",
+ why:"확정 <code>D-5</code>: 리뷰는 <b>연동 완료여야 작성</b>할 수 있고 <b>확인 중에는 절대 자격을 주지 않습니다.</b> 확정 <code>D-4</code>: <b>연동 완료면 ✓ Verified 배지.</b>",
+ v3:"base/v21/D2.png",v3cap:"리뷰 — 빈 상태 · Verified 배지 · 작성 자격 안내가 모두 있습니다",
+ txt:`[상태 누락] 리뷰 작성 자격과 배지 조건이 없습니다
+
+1) 작성 자격
+확정 D-5: 리뷰는 해당 거래소 계정이 "연동 완료" 여야 작성할 수 있습니다.
+확인 중(Processing) 상태에는 절대 자격을 주지 않습니다. 작성 불가 상태가 필요합니다.
+
+2) Verified 배지
+확정 D-4: 연동 완료면 "✓ Verified" 를 표시합니다. 캐시백 이력이나 소유권 인증은 조건이 아닙니다.
+
+3) 리뷰 0건(빈 상태) 이 없습니다.
+
+참고 — 저희 프로토타입 V2.1 『거래소 상세 > 리뷰』 화면에 세 가지가 다 있습니다.
+  "아직 작성된 리뷰가 없습니다" 빈 상태 / "내 리뷰 작성자 표시 ✓ Verified" / "연동 완료 계정이 있는 회원이 작성할 수 있습니다"`},
+
+{id:"B-6",sev:"red",grp:"DEX 상세",src:"기준선",
+ t:"회원 상태 3분기가 없습니다",
+ sec:"DEX — DEX detail Web [Light]",
+ fr:"SCREEN-LABEL · D1 Key features  (D2 / D3 포함)",
+ why:"지금 <code>D1</code>~<code>D3</code> 는 <b>누가 보든 같은 화면</b>입니다. 그런데 <b>세 종류의 사용자가 서로 다른 것을 봐야</b> 합니다.<br>· <b>비회원</b> — 가입 유도<br>· <b>회원인데 이 거래소를 연동 안 함</b> — 연동하기<br>· <b>회원이고 연동 완료</b> — 출금하기 · 리뷰 쓰기<br><br>이 3분기는 <b>기존 테더맥스 CEX 상세 화면에 이미 있습니다</b> (<code>exchange_guest</code> / <code>member_unlinked</code> / <code>member_linked</code>). <b>그대로 가져다 쓰시면 되고 새로 만들 것이 없습니다.</b>",
+ v3:"base/v21/D1.png",v3cap:"Lighter 상세 — 회원 상태에 따라 연동하기 / 출금하기가 갈립니다",
+ txt:`[기존 상태값 적용] DEX 상세에 회원 상태 3분기가 없습니다
+
+아래 3상태는 기존 테더맥스 CEX 상세 화면에 이미 있습니다. DEX 상세에 그대로 쓰시면 됩니다.
+  exchange_guest    - 비회원
+  member_unlinked   - 회원, 미연동
+  member_linked     - 회원, 연동 완료
+
+D1~D3 에 회원 상태별 분기가 없습니다. 세 상태가 필요하고, 여기에 아래가 붙습니다.
+  · 리뷰 작성 자격 - 연동 완료만 작성 가능 (확인 중은 불가)
+  · ✓ Verified 배지 - 연동 완료면 표시
+
+참고 — 저희 프로토타입 V2.1 『거래소 상세 > Lighter 페이백』 화면입니다. 상태에 따라 연동하기·출금하기·리뷰 보기가 갈립니다.`},
+
+{id:"S-10",sev:"orange",grp:"DEX 개요",src:"정책",
+ t:"노출할 DEX가 0개일 때가 없습니다",
+ sec:"DEX — DEX overview Web",
+ fr:"SCREEN-LABEL · OA Guest, DEX overview (keys)  (웹·모바일 양쪽)",
+ why:"8개 파트너 오버플로는 있는데 <b>노출할 DEX가 0개</b>일 때, <b>특정 DEX가 점검 중</b>일 때의 상태가 없습니다. 어드민에서 플래그를 끌 수 있으므로 반드시 생깁니다.",
+ txt:`[상태 누락] DEX 개요의 빈 상태·점검 중 상태가 없습니다
+
+8개 파트너 오버플로는 있는데 아래가 없습니다.
+  · 노출할 DEX가 0개일 때
+  · 특정 DEX가 점검 중 / 일시 연동 불가일 때
+
+어드민에서 노출여부·연동가능 플래그를 끌 수 있으므로 반드시 생기는 상태입니다.
+
+그리고 모바일에 한 가지가 더 빠져 있습니다.
+  웹에는 "OA 8 partner DEXs, overflow"(파트너 8곳일 때의 오버플로) 상태가 있는데,
+  모바일 DEX 개요에는 그 상태가 없습니다. 웹 3종 + 오버플로 1종 = 4종인데 모바일은 3종뿐입니다.
+  모바일은 폭이 좁아 오버플로가 웹보다 빨리 발생합니다.`},
+
+{id:"B-8",sev:"yellow",grp:"DEX 개요",src:"기준선",
+ t:"설정 조회 실패 시 동작이 없습니다",
+ sec:"DEX — DEX overview Web",
+ fr:"SCREEN-LABEL · OA Guest, DEX overview (keys)",
+ why:"기존 테더맥스에 <b>설정 조회가 실패하면 전부 숨김</b>으로 처리하는 방식이 이미 있습니다 (<code>fail_safe_off</code>). <b>DEX 노출 설정도 같게 가면 됩니다.</b>",
+ txt:`[기존 방식 적용] 설정 조회 실패 시 동작이 없습니다
+
+어드민의 노출여부 / 연동가능 조회가 실패했을 때 DEX를 노출할지 숨길지가 없습니다.
+
+기존 테더맥스에 같은 방식이 이미 있습니다. WOOX 프로모 설정의 fail-safe - 설정 조회 실패 시 전부 OFF.
+DEX 노출 설정에도 같게 적용하시면 됩니다.
+
+기본값은 숨김이어야 합니다. 조회 실패 중에 연동 불가 거래소를 노출하면 사용자가 연동을 시도하다 실패합니다.`},
+
+/* ─────────── 소유권 / 퀴즈 ─────────── */
+{id:"C-6",sev:"red",grp:"소유권 인증",src:"정책",
+ t:"이번 릴리스 범위 밖입니다 (14화면)",
+ sec:"DEX — Ownership verification Web [Light]",
+ fr:"GROUP-LABEL · B · OWNERSHIP VERIFICATION PAGE  (O3~O16)",
+ why:"확정 <code>A-16</code> (2026-10-20): <b>DEX 지갑 소유권 신청은 이번 릴리스에서 제외</b>하고 고객센터 경로로 대체합니다. <span class='q'>이 섹션 34프레임 중 14화면이 범위 밖입니다.</span>",
+ v3:"base/v21/OWN2.png",v3cap:"DEX 계정 지원 범위 — 소유권 비지원을 한 화면으로 안내합니다",
+ txt:`[범위 확인 요청] 소유권 인증은 이번 릴리스 범위 밖입니다
+
+확정 A-16 (2026-10-20): DEX 지갑 소유권 신청은 이번 릴리스에서 제외하고 고객센터 경로로 대체합니다.
+
+이 섹션에서 이번 범위인 것은 O2 Ownership claim unavailable 하나뿐이고, O3~O16 (14화면) 은 범위 밖입니다.
+지우지 마시고 다음 릴리스용으로 보관해 주세요.
+
+함께 고쳐야 할 것
+  · O1 Wallet already in use 의 "Verify Ownership" 버튼 -> 고객센터 문의 안내로 교체
+  · O0 Home, link another wallet 의 소유권 진입점 제거
+  · 연동 실패 화면(L9 Wallet already in use, S3-F4, S4-F3)의 소유권 유도 문구도 확인
+
+먼저 작업해 주신 것은 감사합니다. 범위 확정이 늦어 생긴 일입니다.
+
+참고 — 저희 프로토타입 V2.1 『소유권·포트폴리오 제외』 화면이 이번 범위입니다.
+  "DEX는 소유권 인증·이전 신청과 마이포트폴리오를 지원하지 않습니다. 계정 정정·해제는 CS 문의 접수 후 백엔드에서 처리합니다."
+  O3~O16 대신 이 안내 한 화면이면 됩니다.`},
+
+{id:"C-7",sev:"red",grp:"퀴즈",src:"정책",
+ t:"퀴즈 보상을 거래소로 청구하게 돼 있습니다",
+ sec:"Quiz Module page with Decentralised Trading",
+ fr:"Signed In, Module 5  /  Quiz 5",
+ why:"화면에 <i>\"Quiz rewards only, <b>claimed to an exchange</b>\"</i> 로 돼 있습니다. 확정: 퀴즈 보상은 <b>이벤트 리워드로 테더맥스 잔액에 적립</b>됩니다.",
+ txt:`[확정 정책과 충돌] 퀴즈 보상을 거래소로 청구하게 돼 있습니다
+
+화면에 "Quiz rewards only, claimed to an exchange" 로 돼 있습니다.
+
+확정: 퀴즈 보상은 이벤트 리워드로 테더맥스 잔액에 적립됩니다. 거래소로 청구하는 구조가 아닙니다.
+
+따라서 매칭 공식 적용 대상입니다.
+퀴즈 보상만으로는 출금할 수 없고, 캐시백 금액을 넘을 수 없습니다. 보상 안내 문구에 이 점이 들어가야 합니다.
+
+참고: 퀴즈는 지원하는 것으로 확정됐습니다 (이전 "없는 기능" 판단을 뒤집었습니다).
+
+※ 저희 프로토타입 V2.1 도 아직 "퀴즈·선정산은 현재 없는 기능입니다" 로 남아 있습니다. 저희 쪽도 같이 고치겠습니다.`},
+
+/* ─────────── 전역 ─────────── */
+{id:"B-16",sev:"orange",grp:"전역",src:"기준선",
+ t:"웹 다크모드가 허브·개요·상세에만 있습니다",
+ sec:"전 섹션",
+ fr:"임의의 프레임 하나에 달고 '다크모드 범위' 라고 적어 주세요",
+ why:"DEX는 상태 표시를 새로 만들지만, <b>기존 테더맥스에서 그대로 가져가야 할 것이 2가지</b> 있습니다. 그중 하나가 <b>다크모드</b>입니다.",
+ txt:`[범위 확인] 다크모드 커버리지
+
+기존 테더맥스에서 DEX가 그대로 가져가야 할 2가지 중 하나가 다크모드입니다.
+
+지금 다크모드가 있는 것
+  · 모바일 : 허브 / DEX 개요 / DEX 상세
+  · 데스크톱 : 랜딩 / 서비스 소개
+
+없는 것
+  웹의 출금 / 연동 / 캐시백 요약 / 랭킹 / 친구 초대 / 파트너 허브 전부
+
+다크모드를 어디까지 만들지 범위를 정해 주세요.`},
+
+{id:"B-17",sev:"yellow",grp:"전역",src:"기준선",
+ t:"한국어 화면이 없어 문구 검수를 못 합니다",
+ sec:"전 섹션",
+ fr:"임의의 프레임 하나에 달고 '한국어본 위치' 라고 적어 주세요",
+ why:"DEX 섹션이 전부 영문입니다. 기존 테더맥스에서 그대로 가져가야 할 2가지 중 첫째가 <b>한국어 구어체 종결형</b>(「~이에요 / ~했어요」)인데, <b>검수할 한국어 화면이 없습니다.</b>",
+ v3:"base/v21/LKD.png",v3cap:"저희 프로토타입은 전부 한국어입니다 — 문구 기준으로 쓰실 수 있습니다",
+ txt:`[확인 요청] DEX 한국어본을 어디에 둘지
+
+DEX 섹션이 전부 영문이라 한국어 문구를 검수할 수 없습니다.
+
+기존 테더맥스에서 그대로 가져가야 할 항목 중 하나가 한국어 구어체 종결형입니다.
+  소유 확인중이에요 / 연동에 실패했어요 / 연동 해제되었어요
+
+특히 상태 라벨은 한국어 문구가 곧 상태 정의입니다.
+
+파일에 KO Polishing 페이지가 따로 있는데, DEX 한국어본을 어디에 둘지 정해 주세요.
+
+참고 — 저희 프로토타입 V2.1 는 전 화면이 한국어입니다. 문구 기준으로 참고하시면 됩니다.`},
+
+{id:"S-14",sev:"orange",grp:"전역",src:"정책",
+ t:"모바일이 3종뿐입니다",
+ sec:"Mobile",
+ fr:"섹션 Mobile 안의 아무 ROWLABEL 프레임",
+ why:"모바일은 <b>허브 · DEX 개요 · DEX 상세</b> 3종뿐입니다. 출금과 연동은 <b>모바일 비중이 더 높은 기능</b>입니다.",
+ txt:`[범위 확인] 모바일 커버리지
+
+모바일은 허브 / DEX 개요 / DEX 상세 3종뿐입니다.
+
+웹에만 있고 모바일이 없는 것
+  · 출금 (39화면) - DW / PW / HW / PS / PE / BW / SW 전부
+  · 연동 (18화면) - L0 ~ L17
+  · 연동 스토리 (S3 / S4 계열)
+  · 캐시백 요약 (CS1 ~ CS6)
+  · 캐시백 랭킹 (RK1 ~ RK3)
+  · 친구 초대 (IF1 ~ IF11)
+  · 파트너 허브 (PH1 / PH2)
+  · 프리로그인 랜딩 / 서비스 소개 - 데스크톱만 있습니다
+
+출금과 연동은 모바일 비중이 더 높은 기능이라 우선순위가 높습니다.`},
+];
+
+/* ── render ── */
+const SEV={red:["p-red","🔴 충돌"],orange:["p-orange","🟠 누락"],yellow:["p-yellow","🟡 확인"]};
+const list=document.getElementById("list");
+let filter="all";
+
+function render(){
+  list.innerHTML="";
+  const items=D.filter(d=>filter==="all"||(filter==="red"&&d.sev==="red")
+    ||(filter==="orange"&&d.sev==="orange")||(filter==="yellow"&&d.sev==="yellow")
+    ||(filter==="정책"&&d.src==="정책")||(filter==="기준선"&&d.src==="기준선"));
+  let last=null;
+  items.forEach(d=>{
+    if(d.grp!==last){
+      last=d.grp;
+      const h=document.createElement("div");
+      h.className="sec";
+      h.innerHTML=`<h2>${d.grp}</h2><span>${items.filter(x=>x.grp===d.grp).length}건</span>`;
+      list.appendChild(h);
+    }
+    const c=document.createElement("div");
+    c.className="card "+d.sev;
+    if(localStorage.getItem("fc_"+d.id)==="1") c.classList.add("done");
+    const shot = (d.img ? `<div class="shotbox"><img src="${d.img}" alt="">`
+      + (d.hl||[]).map(h=>`<div class="hl" style="left:${h.l}%;top:${h.t}%;width:${h.w}%;height:${h.h}%"></div>`).join("")
+      + `</div><div class="shotcap">지금 Figma — ${d.cap||""}</div>` : "")
+      + (d.v3 ? `<div class="v3box"><div class="v3lbl">✅ 저희 프로토타입 V2.1 — 이렇게 되어야 합니다</div>`
+      + `<div class="shotbox" style="border-color:#b2f2bb"><img src="${d.v3}" alt=""></div>`
+      + `<div class="shotcap" style="background:#ebfbee;color:#2b8a3e">${d.v3cap||""}</div></div>` : "");
+    c.innerHTML=`
+      <div class="chead">
+        <div class="chk ${localStorage.getItem("fc_"+d.id)==="1"?"on":""}" data-id="${d.id}">✓</div>
+        <span class="pill ${SEV[d.sev][0]}">${SEV[d.sev][1]} ${d.id}</span>
+        <div class="ctitle">
+          <b>${d.t}</b>
+          <div class="loc">달 위치 — <em>${d.fr}</em><br>섹션: ${d.sec}</div>
+        </div>
+        <div class="arrow">▶</div>
+      </div>
+      <div class="cbody">
+        <div class="why">${d.why||""}</div>
+        ${shot}
+        <div class="copybox">
+          <div class="bar"><span>Figma 댓글에 붙여넣을 내용</span><button>복사</button></div>
+          <pre></pre>
+        </div>
+      </div>`;
+    c.querySelector("pre").textContent=d.txt;
+    c.querySelector(".chead").onclick=e=>{
+      if(e.target.classList.contains("chk")) return;
+      c.classList.toggle("open");
+    };
+    c.querySelector(".chk").onclick=()=>{
+      const on=localStorage.getItem("fc_"+d.id)==="1";
+      localStorage.setItem("fc_"+d.id,on?"0":"1");
+      render();
+    };
+    c.querySelector(".copybox button").onclick=ev=>{
+      const b=ev.target;
+      const copy=t=>{try{return navigator.clipboard.writeText(t);}catch(e){return Promise.reject(e);}};
+      copy(d.txt).catch(()=>{
+        const ta=document.createElement("textarea");
+        ta.value=d.txt; document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); ta.remove();
+      }).finally(()=>{
+        b.textContent="복사됨"; b.classList.add("ok");
+        setTimeout(()=>{b.textContent="복사"; b.classList.remove("ok");},1400);
+      });
+    };
+    list.appendChild(c);
+  });
+  const done=D.filter(d=>localStorage.getItem("fc_"+d.id)==="1").length;
+  document.getElementById("count").textContent=`${items.length}건 표시 · 완료 ${done}/${D.length}`;
+}
+
+const FILTERS=[["all","전체"],["red","🔴 충돌"],["orange","🟠 누락"],["yellow","🟡 확인"],
+               ["정책","확정 정책 기준"],["기준선","기존 상태값 기준"]];
+const fb=document.getElementById("filters");
+FILTERS.forEach(([k,label])=>{
+  const b=document.createElement("button");
+  b.textContent=label+(k==="all"?` (${D.length})`:` (${D.filter(d=>d.sev===k||d.src===k).length})`);
+  b.onclick=()=>{filter=k;[...fb.children].forEach(x=>x.classList.remove("on"));b.classList.add("on");render();};
+  if(k==="all")b.classList.add("on");
+  fb.appendChild(b);
+});
+
+const T=[["🔴 충돌","red"],["🟠 누락","orange"],["🟡 확인","yellow"]];
+document.getElementById("tally").innerHTML =
+  T.map(([l,k])=>`<div><span>${l}</span><b>${D.filter(d=>d.sev===k).length}건</b></div>`).join("")
+  + `<div><span>확정 정책 기준</span><b>${D.filter(d=>d.src==="정책").length}건</b></div>`
+  + `<div><span>기존 상태값 기준</span><b>${D.filter(d=>d.src==="기준선").length}건</b></div>`;
+
+function openAll(v){document.querySelectorAll(".card").forEach(c=>c.classList.toggle("open",v));}
+function resetChk(){D.forEach(d=>localStorage.removeItem("fc_"+d.id));render();}
+render();
+</script>
+</body>
+</html>

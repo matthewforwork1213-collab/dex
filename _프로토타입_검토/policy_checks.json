@@ -1,0 +1,116 @@
+{
+  "scope": "오프라인 HTML 생성 결과·경로 설정·소스 정합성 검사. 브라우저 클릭/레이아웃 검증 아님.",
+  "passed": 8,
+  "failed": 9,
+  "checks": [
+    {
+      "name": "회원 출금 합계",
+      "result": "FAIL",
+      "actual": {
+        "displayed": "41.68",
+        "eligible_rows": [
+          10.0,
+          31.68,
+          120.0
+        ]
+      },
+      "expected": 161.68
+    },
+    {
+      "name": "비회원 출금 경로 격리",
+      "result": "FAIL",
+      "actual": "wd/DW1",
+      "expected": "비회원 단일 지갑 경로"
+    },
+    {
+      "name": "DEX 매칭 부족액 안내",
+      "result": "FAIL",
+      "actual": "Lighter 0x7a3F…c51E9 출금 불가 거래소 페이백을 10.00 USDT 더 받으면 출금할 수 있어요. 거래소 페이백 0.00 USDT 이벤트 리워드 20.00 USDT 출금하기",
+      "expected": "A=0, B=20이면 A 5 추가 시 10 출금 가능"
+    },
+    {
+      "name": "계산기 지급 주체",
+      "result": "FAIL",
+      "actual": "Lighter 계정으로 지급돼요",
+      "expected": "테더맥스 잔액으로 적립"
+    },
+    {
+      "name": "DEX 챌린지 제외",
+      "result": "FAIL",
+      "actual": "페이백 챌린지 리워드 Lighter",
+      "expected": "DEX 내역에 챌린지 리워드 없음"
+    },
+    {
+      "name": "DEX 초대 리워드 적용",
+      "result": "FAIL",
+      "actual": "DEX 지갑은 초대 리워드 대상이 아닙니다",
+      "expected": "DEX도 대상"
+    },
+    {
+      "name": "DEX 소유확인 가이드 제외",
+      "result": "FAIL",
+      "actual": "Lighter + 녹화 안내",
+      "expected": "CEX 전용 또는 DEX 선택 시 해당 섹션 비활성"
+    },
+    {
+      "name": "DEX 미출금 잔액 의미",
+      "result": "FAIL",
+      "actual": "Lighter 누적 120.00 / 남은 - / 받아간 40.00",
+      "expected": "DEX도 미출금 잔액 표시"
+    },
+    {
+      "name": "제휴사 고정 지급 계정 CEX 전용",
+      "result": "FAIL",
+      "actual": "DEX 4곳 표시",
+      "expected": "어드민 Affiliate 지급 계정은 CEX만"
+    },
+    {
+      "name": "제외 정책 유지 own/O1",
+      "result": "PASS",
+      "actual": "해당 항목 없음",
+      "expected": "없음"
+    },
+    {
+      "name": "제외 정책 유지 ch/CH2",
+      "result": "PASS",
+      "actual": "해당 항목 없음",
+      "expected": "없음"
+    },
+    {
+      "name": "제외 정책 유지 etc/BST",
+      "result": "PASS",
+      "actual": "해당 항목 없음",
+      "expected": "없음"
+    },
+    {
+      "name": "Standard 차단 없음",
+      "result": "PASS",
+      "actual": "다음 버튼, 경고 없음",
+      "expected": "연동 허용"
+    },
+    {
+      "name": "일반 쿠폰 DEX 포함",
+      "result": "PASS",
+      "actual": "Lighter 선택 행",
+      "expected": "DEX 선택 가능"
+    },
+    {
+      "name": "일반 초대 출금 DEX 포함",
+      "result": "PASS",
+      "actual": "Lighter 선택 행",
+      "expected": "DEX 선택 가능"
+    },
+    {
+      "name": "계산기 요율 중복 입력 제거",
+      "result": "PASS",
+      "actual": "슬라이더 최소·최대만",
+      "expected": "요율은 거래소 레코드 참조"
+    },
+    {
+      "name": "한도 미결정 유지",
+      "result": "PASS",
+      "actual": "한도 ?",
+      "expected": "임의 숫자 확정 금지"
+    }
+  ]
+}

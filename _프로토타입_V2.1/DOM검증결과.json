@@ -1,0 +1,967 @@
+{
+  "method": "Offline JSDOM, no external resources, no network, no visual layout verification",
+  "total": 93,
+  "passed": 93,
+  "failed": [],
+  "runtimeErrors": [],
+  "surfaces": [
+    {
+      "mode": "user",
+      "key": "home/S4",
+      "buttons": 9,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "home/EXP",
+      "buttons": 1,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "home/LKD",
+      "buttons": 3,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "home/PUBLIC",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "hub/H1-CEX",
+      "buttons": 4,
+      "forms": 0,
+      "inputs": 4,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "hub/H1-DEX",
+      "buttons": 5,
+      "forms": 0,
+      "inputs": 4,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "hub/H5",
+      "buttons": 2,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "hub/H6",
+      "buttons": 2,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "lnd/LND1",
+      "buttons": 4,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "lnd/LND2",
+      "buttons": 4,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/L0",
+      "buttons": 22,
+      "forms": 0,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/L1",
+      "buttons": 19,
+      "forms": 0,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/L3",
+      "buttons": 14,
+      "forms": 1,
+      "inputs": 3,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/L7",
+      "buttons": 13,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/L8",
+      "buttons": 14,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/L10",
+      "buttons": 14,
+      "forms": 1,
+      "inputs": 3,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/E4",
+      "buttons": 2,
+      "forms": 1,
+      "inputs": 3,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/PENDING",
+      "buttons": 13,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/GUIDE",
+      "buttons": 12,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "link/ERROR",
+      "buttons": 14,
+      "forms": 1,
+      "inputs": 3,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "own/O1",
+      "buttons": 13,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "wd/DW1",
+      "buttons": 13,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "wd/DW0",
+      "buttons": 13,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "wd/DW2",
+      "buttons": 14,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "wd/DW3",
+      "buttons": 14,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "wd/NM",
+      "buttons": 6,
+      "forms": 1,
+      "inputs": 3,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "hist/CS3",
+      "buttons": 34,
+      "forms": 0,
+      "inputs": 2,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "bnf/LIST",
+      "buttons": 5,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "bnf/UIDM",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "exd/D1",
+      "buttons": 1,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "exd/D2",
+      "buttons": 1,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "rk/RK2",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "ch/CH1",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "ch/CH2",
+      "buttons": 3,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "lg/LG1",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "mb/MB1",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "ph/PH1",
+      "buttons": 2,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "ph/PH2",
+      "buttons": 2,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "ph/PH3",
+      "buttons": 5,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "inv/IF8",
+      "buttons": 3,
+      "forms": 1,
+      "inputs": 2,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "cp/CP1",
+      "buttons": 3,
+      "forms": 1,
+      "inputs": 2,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "etc/BST",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "etc/EVT",
+      "buttons": 3,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "etc/FEED",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "etc/TP",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "user",
+      "key": "etc/ABOUT",
+      "buttons": 7,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ex/EX-1",
+      "buttons": 7,
+      "forms": 0,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ex/EX-2",
+      "buttons": 4,
+      "forms": 0,
+      "inputs": 25,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ex/EX-3",
+      "buttons": 2,
+      "forms": 0,
+      "inputs": 4,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ex/EX-4",
+      "buttons": 1,
+      "forms": 0,
+      "inputs": 2,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ex/EX-5",
+      "buttons": 3,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ex/EX-6",
+      "buttons": 2,
+      "forms": 0,
+      "inputs": 4,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ex/EX-7",
+      "buttons": 8,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ac/AC-1",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ac/AC-2",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "ac/AC-3",
+      "buttons": 2,
+      "forms": 1,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "mb/MB-1",
+      "buttons": 1,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "mb/MB-4",
+      "buttons": 3,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "pa/MB-3",
+      "buttons": 2,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "pa/MB-2",
+      "buttons": 4,
+      "forms": 1,
+      "inputs": 3,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "pa/MB-5",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "pb/PB-1",
+      "buttons": 0,
+      "forms": 0,
+      "inputs": 1,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "sd/SD-1",
+      "buttons": 1,
+      "forms": 1,
+      "inputs": 6,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "sd/SD-2",
+      "buttons": 1,
+      "forms": 1,
+      "inputs": 6,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "sd/SD-3",
+      "buttons": 1,
+      "forms": 1,
+      "inputs": 6,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "cp/CP-1",
+      "buttons": 1,
+      "forms": 1,
+      "inputs": 7,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "iv/IV-1",
+      "buttons": 3,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "pt/PT-1",
+      "buttons": 8,
+      "forms": 0,
+      "inputs": 0,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "lg/LG-1",
+      "buttons": 1,
+      "forms": 1,
+      "inputs": 4,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "bd/LG-2",
+      "buttons": 1,
+      "forms": 1,
+      "inputs": 2,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "nw/NW-1",
+      "buttons": 11,
+      "forms": 1,
+      "inputs": 53,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "nw/NW-2",
+      "buttons": 43,
+      "forms": 1,
+      "inputs": 147,
+      "unwired": []
+    },
+    {
+      "mode": "admin",
+      "key": "nw/NW-3",
+      "buttons": 52,
+      "forms": 1,
+      "inputs": 151,
+      "unwired": []
+    }
+  ],
+  "results": [
+    {
+      "name": "user starts with actual parsed DOM",
+      "pass": true
+    },
+    {
+      "name": "user DOM home/S4",
+      "pass": true
+    },
+    {
+      "name": "user DOM home/EXP",
+      "pass": true
+    },
+    {
+      "name": "user DOM home/LKD",
+      "pass": true
+    },
+    {
+      "name": "user DOM home/PUBLIC",
+      "pass": true
+    },
+    {
+      "name": "user DOM hub/H1-CEX",
+      "pass": true
+    },
+    {
+      "name": "user DOM hub/H1-DEX",
+      "pass": true
+    },
+    {
+      "name": "user DOM hub/H5",
+      "pass": true
+    },
+    {
+      "name": "user DOM hub/H6",
+      "pass": true
+    },
+    {
+      "name": "user DOM lnd/LND1",
+      "pass": true
+    },
+    {
+      "name": "user DOM lnd/LND2",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/L0",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/L1",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/L3",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/L7",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/L8",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/L10",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/E4",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/PENDING",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/GUIDE",
+      "pass": true
+    },
+    {
+      "name": "user DOM link/ERROR",
+      "pass": true
+    },
+    {
+      "name": "user DOM own/O1",
+      "pass": true
+    },
+    {
+      "name": "user DOM wd/DW1",
+      "pass": true
+    },
+    {
+      "name": "user DOM wd/DW0",
+      "pass": true
+    },
+    {
+      "name": "user DOM wd/DW2",
+      "pass": true
+    },
+    {
+      "name": "user DOM wd/DW3",
+      "pass": true
+    },
+    {
+      "name": "user DOM wd/NM",
+      "pass": true
+    },
+    {
+      "name": "user DOM hist/CS3",
+      "pass": true
+    },
+    {
+      "name": "user DOM bnf/LIST",
+      "pass": true
+    },
+    {
+      "name": "user DOM bnf/UIDM",
+      "pass": true
+    },
+    {
+      "name": "user DOM exd/D1",
+      "pass": true
+    },
+    {
+      "name": "user DOM exd/D2",
+      "pass": true
+    },
+    {
+      "name": "user DOM rk/RK2",
+      "pass": true
+    },
+    {
+      "name": "user DOM ch/CH1",
+      "pass": true
+    },
+    {
+      "name": "user DOM ch/CH2",
+      "pass": true
+    },
+    {
+      "name": "user DOM lg/LG1",
+      "pass": true
+    },
+    {
+      "name": "user DOM mb/MB1",
+      "pass": true
+    },
+    {
+      "name": "user DOM ph/PH1",
+      "pass": true
+    },
+    {
+      "name": "user DOM ph/PH2",
+      "pass": true
+    },
+    {
+      "name": "user DOM ph/PH3",
+      "pass": true
+    },
+    {
+      "name": "user DOM inv/IF8",
+      "pass": true
+    },
+    {
+      "name": "user DOM cp/CP1",
+      "pass": true
+    },
+    {
+      "name": "user DOM etc/BST",
+      "pass": true
+    },
+    {
+      "name": "user DOM etc/EVT",
+      "pass": true
+    },
+    {
+      "name": "user DOM etc/FEED",
+      "pass": true
+    },
+    {
+      "name": "user DOM etc/TP",
+      "pass": true
+    },
+    {
+      "name": "user DOM etc/ABOUT",
+      "pass": true
+    },
+    {
+      "name": "admin starts with actual parsed DOM",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ex/EX-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ex/EX-2",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ex/EX-3",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ex/EX-4",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ex/EX-5",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ex/EX-6",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ex/EX-7",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ac/AC-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ac/AC-2",
+      "pass": true
+    },
+    {
+      "name": "admin DOM ac/AC-3",
+      "pass": true
+    },
+    {
+      "name": "admin DOM mb/MB-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM mb/MB-4",
+      "pass": true
+    },
+    {
+      "name": "admin DOM pa/MB-3",
+      "pass": true
+    },
+    {
+      "name": "admin DOM pa/MB-2",
+      "pass": true
+    },
+    {
+      "name": "admin DOM pa/MB-5",
+      "pass": true
+    },
+    {
+      "name": "admin DOM pb/PB-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM sd/SD-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM sd/SD-2",
+      "pass": true
+    },
+    {
+      "name": "admin DOM sd/SD-3",
+      "pass": true
+    },
+    {
+      "name": "admin DOM cp/CP-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM iv/IV-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM pt/PT-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM lg/LG-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM bd/LG-2",
+      "pass": true
+    },
+    {
+      "name": "admin DOM nw/NW-1",
+      "pass": true
+    },
+    {
+      "name": "admin DOM nw/NW-2",
+      "pass": true
+    },
+    {
+      "name": "admin DOM nw/NW-3",
+      "pass": true
+    },
+    {
+      "name": "withdrawal preview goes directly to V2 application completion",
+      "pass": true
+    },
+    {
+      "name": "guest withdrawal opens independently without member authentication",
+      "pass": true
+    },
+    {
+      "name": "point rates save by actual form submission",
+      "pass": true
+    },
+    {
+      "name": "legacy exchange save remains attached to the edited exchange",
+      "pass": true
+    },
+    {
+      "name": "pending account is never labelled withdrawable",
+      "pass": true
+    },
+    {
+      "name": "ledger review scenarios stay outside admin preview; approval still validates ledger",
+      "pass": true
+    },
+    {
+      "name": "dynamic form submit buttons use V2 button styling",
+      "pass": true
+    },
+    {
+      "name": "benefit buttons route by their own row",
+      "pass": true
+    },
+    {
+      "name": "DEX list filter includes all four partners",
+      "pass": true
+    },
+    {
+      "name": "selected DEX carries to detail and review",
+      "pass": true
+    },
+    {
+      "name": "CEX-only coupon setting does not restrict an email campaign",
+      "pass": true
+    },
+    {
+      "name": "history calendar and rows use the same ledger",
+      "pass": true
+    },
+    {
+      "name": "legacy guide content persists after leaving the page",
+      "pass": true
+    },
+    {
+      "name": "V2 order dialog retains native save without invented product buttons",
+      "pass": true
+    },
+    {
+      "name": "member accounts opens as a modal over an inert member list without quota UI",
+      "pass": true
+    },
+    {
+      "name": "member modal closes by button, Escape and backdrop and restores member list focus",
+      "pass": true
+    },
+    {
+      "name": "unapproved quota screen is not in design navigation",
+      "pass": true
+    },
+    {
+      "name": "no runtime exceptions from rendered DOM or events",
+      "pass": true
+    }
+  ]
+}

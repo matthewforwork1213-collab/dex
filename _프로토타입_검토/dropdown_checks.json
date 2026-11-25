@@ -1,0 +1,23 @@
+[
+  {
+    "name": "user",
+    "test": "파트너 변경",
+    "label": "ApeX ▾",
+    "stateChanged": false,
+    "meaning": "선택 표시만 바뀌고 화면 상태 S는 유지됨. 요율·목록·결과 동기화 없음."
+  },
+  {
+    "name": "admin",
+    "test": "파트너 변경",
+    "label": "ApeX ▾",
+    "stateChanged": false,
+    "meaning": "선택 표시만 바뀌고 화면 상태 S는 유지됨. 요율·목록·결과 동기화 없음."
+  },
+  {
+    "name": "admin",
+    "test": "CEX 전용에서 제외된 DEX 선택",
+    "label": "DEX ▾",
+    "accepted": true,
+    "meaning": "제외 스타일만 있고 이벤트 핸들러에 선택 차단 조건 없음."
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "source": "_프로토타입_V2.1/사용자화면_DEX_V2.1.html",
+  "language": "en",
+  "method": "Offline HTML/CSS rendering with WeasyPrint 70.0; no browser or external resources. Remaining Korean UI strings translated in capture copies only.",
+  "terminology": "cashback",
+  "captures": [
+    {
+      "name": "CP1",
+      "route": "cp/CP1",
+      "pages": 1,
+      "width": 940,
+      "height": 1166
+    },
+    {
+      "name": "CS3",
+      "route": "hist/CS3",
+      "pages": 1,
+      "width": 878,
+      "height": 1956
+    },
+    {
+      "name": "D1",
+      "route": "exd/D1",
+      "pages": 1,
+      "width": 1206,
+      "height": 2159
+    },
+    {
+      "name": "D2",
+      "route": "exd/D2",
+      "pages": 1,
+      "width": 1674,
+      "height": 2664
+    },
+    {
+      "name": "DW0",
+      "route": "wd/DW0",
+      "pages": 1,
+      "width": 938,
+      "height": 1353
+    },
+    {
+      "name": "DW1",
+      "route": "wd/DW1",
+      "pages": 1,
+      "width": 938,
+      "height": 2269
+    },
+    {
+      "name": "E4",
+      "route": "link/E4",
+      "pages": 1,
+      "width": 878,
+      "height": 1216
+    },
+    {
+      "name": "FEED",
+      "route": "etc/FEED",
+      "pages": 1,
+      "width": 1206,
+      "height": 1236
+    },
+    {
+      "name": "H6",
+      "route": "hub/H6",
+      "pages": 1,
+      "width": 1298,
+      "height": 1014
+    },
+    {
+      "name": "IF8",
+      "route": "inv/IF8",
+      "pages": 1,
+      "width": 940,
+      "height": 1224
+    },
+    {
+      "name": "L10",
+      "route": "link/L10",
+      "pages": 1,
+      "width": 938,
+      "height": 1141
+    },
+    {
+      "name": "LKD",
+      "route": "home/LKD",
+      "pages": 1,
+      "width": 1614,
+      "height": 1954
+    },
+    {
+      "name": "NM",
+      "route": "wd/NM",
+      "pages": 1,
+      "width": 878,
+      "height": 1306
+    },
+    {
+      "name": "OWN2",
+      "route": "own/O1",
+      "pages": 1,
+      "width": 938,
+      "height": 1080
+    },
+    {
+      "name": "PENDING",
+      "route": "link/PENDING",
+      "pages": 1,
+      "width": 938,
+      "height": 1080
+    },
+    {
+      "name": "RK2",
+      "route": "rk/RK2",
+      "pages": 1,
+      "width": 878,
+      "height": 1077
+    }
+  ]
+}

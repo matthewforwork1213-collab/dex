@@ -1,0 +1,1128 @@
+{
+  "method": "Offline JSDOM structure, computed CSS and interaction verification. Not a browser screenshot/layout verification.",
+  "total": 176,
+  "passed": 176,
+  "failed": [],
+  "inventory": [
+    {
+      "mode": "user",
+      "route": "link/L0",
+      "state": "normal",
+      "title": "거래소 계정 연동하기"
+    },
+    {
+      "mode": "user",
+      "route": "link/L1",
+      "state": "normal",
+      "title": "거래소 계정 연동하기"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "normal",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "normal",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "pending",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "manual",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "referral",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "other",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "limit",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "repeat",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "failure",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L3",
+      "state": "invalid",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L7",
+      "state": "normal",
+      "title": "지갑이 연동되었어요"
+    },
+    {
+      "mode": "user",
+      "route": "link/L8",
+      "state": "normal",
+      "title": "연동할 수 없는 지갑"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "normal",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "normal",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "pending",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "manual",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "referral",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "other",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "limit",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "repeat",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "failure",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/L10",
+      "state": "invalid",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/PENDING",
+      "state": "normal",
+      "title": "지갑 연동을 확인하고 있어요"
+    },
+    {
+      "mode": "user",
+      "route": "link/GUIDE",
+      "state": "normal",
+      "title": "지갑 주소 찾는 방법"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "normal",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "normal",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "pending",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "manual",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "referral",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "other",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "limit",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "repeat",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "failure",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "link/ERROR",
+      "state": "invalid",
+      "title": "거래 계정 연동"
+    },
+    {
+      "mode": "user",
+      "route": "own/O1",
+      "state": "normal",
+      "title": "이미 사용 중인 지갑"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW1",
+      "state": "normal",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW1",
+      "state": "normal",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW1",
+      "state": "password",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW1",
+      "state": "email",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW0",
+      "state": "normal",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW0",
+      "state": "normal",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW0",
+      "state": "password",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW0",
+      "state": "email",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW2",
+      "state": "normal",
+      "title": "페이백 출금 신청이 완료되었어요"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW3",
+      "state": "normal",
+      "title": "161.68 USDT 출금을 신청했어요"
+    },
+    {
+      "mode": "user",
+      "route": "wd/NM",
+      "state": "normal",
+      "title": "지갑 페이백 출금"
+    },
+    {
+      "mode": "user",
+      "route": "ch/CH2",
+      "state": "normal",
+      "title": "보상을 받을 계정 선택"
+    },
+    {
+      "mode": "user",
+      "route": "lg/LG1",
+      "state": "picker",
+      "title": "참가할 계정 선택"
+    },
+    {
+      "mode": "user",
+      "route": "lg/LG1",
+      "state": "noaccount",
+      "title": "참가할 수 있는 거래 계정이 없어요"
+    },
+    {
+      "mode": "user",
+      "route": "ph/PH3",
+      "state": "normal",
+      "title": "연동된 계정"
+    },
+    {
+      "mode": "user",
+      "route": "inv/IF8",
+      "state": "normal",
+      "title": "초대 리워드를 받을 계정 선택"
+    },
+    {
+      "mode": "user",
+      "route": "inv/IF8",
+      "state": "normal",
+      "title": "초대 리워드를 받을 계정 선택"
+    },
+    {
+      "mode": "user",
+      "route": "inv/IF8",
+      "state": "selected",
+      "title": "초대 리워드를 받을 계정 선택"
+    },
+    {
+      "mode": "user",
+      "route": "cp/CP1",
+      "state": "normal",
+      "title": "사용할 계정 선택"
+    },
+    {
+      "mode": "user",
+      "route": "cp/CP1",
+      "state": "normal",
+      "title": "사용할 계정 선택"
+    },
+    {
+      "mode": "user",
+      "route": "cp/CP1",
+      "state": "selected",
+      "title": "사용할 계정 선택"
+    },
+    {
+      "mode": "admin",
+      "route": "ex/EX-4",
+      "state": "normal",
+      "title": "래퍼럴 계정 마진 수정"
+    },
+    {
+      "mode": "admin",
+      "route": "ex/EX-4",
+      "state": "normal",
+      "title": "래퍼럴 계정 마진 수정"
+    },
+    {
+      "mode": "admin",
+      "route": "ex/EX-7",
+      "state": "normal",
+      "title": "거래소 순위 수정"
+    },
+    {
+      "mode": "admin",
+      "route": "mb/MB-4",
+      "state": "normal",
+      "title": "연동 계정"
+    },
+    {
+      "mode": "admin",
+      "route": "pa/MB-2",
+      "state": "normal",
+      "title": "제휴사 등록"
+    },
+    {
+      "mode": "admin",
+      "route": "pt/PT-1",
+      "state": "manage",
+      "title": "관리 · Lighter"
+    },
+    {
+      "mode": "admin",
+      "route": "pt/PT-1",
+      "state": "featured",
+      "title": "강조할 거래소"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW1",
+      "state": "normal",
+      "title": "출금하기"
+    },
+    {
+      "mode": "user",
+      "route": "wd/DW1",
+      "state": "normal",
+      "title": "출금하기"
+    },
+    {
+      "mode": "admin",
+      "route": "pa/MB-2",
+      "state": "normal",
+      "title": "제휴사 등록"
+    },
+    {
+      "mode": "admin",
+      "route": "pa/MB-2",
+      "state": "normal",
+      "title": "제휴사 등록"
+    }
+  ],
+  "results": [
+    {
+      "name": "user home/S4 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 unlinked overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 guest overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD low overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD processing overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC loading overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC empty overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC error overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 pending overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 manual overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 referral overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 other overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 limit overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 repeat overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 failure overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 invalid overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 pending overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 manual overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 referral overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 other overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 limit overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 repeat overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 failure overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 invalid overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 pending overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 manual overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 referral overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 other overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 limit overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 repeat overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 failure overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 invalid overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR pending overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR manual overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR referral overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR other overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR limit overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR repeat overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR failure overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR invalid overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 password overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 email overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 password overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 email overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 empty overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 picker overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 noaccount overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 selected overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 selected overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 used overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED loading overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED empty overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED error overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT loading overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT empty overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT error overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "link form input persists through change annotations inside modal",
+      "pass": true
+    },
+    {
+      "name": "coupon account choice remains live inside the modal",
+      "pass": true
+    },
+    {
+      "name": "user Tab and Shift+Tab stay inside active modal",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 closed overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 noledger overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 approved overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 rejected overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 manage overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 featured overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 preview overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 normal overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 preview overlays all dialogs",
+      "pass": true
+    },
+    {
+      "name": "affiliate modal is on partner list and closes by Escape",
+      "pass": true
+    },
+    {
+      "name": "point modal closes without losing saved rates and can be reopened",
+      "pass": true
+    },
+    {
+      "name": "margin close preserves its list and state control reopens dialog",
+      "pass": true
+    },
+    {
+      "name": "admin Tab and Shift+Tab stay inside active modal",
+      "pass": true
+    },
+    {
+      "name": "user actual GNB clicks open modal when URL changes are restricted: file:///C:/prototype.html",
+      "pass": true
+    },
+    {
+      "name": "user direct screen renderer returns the modal rather than an inline card: file:///C:/prototype.html",
+      "pass": true
+    },
+    {
+      "name": "user modal closes through actual button with restricted history: file:///C:/prototype.html",
+      "pass": true
+    },
+    {
+      "name": "user actual GNB clicks open modal when URL changes are restricted: https://preview.invalid/",
+      "pass": true
+    },
+    {
+      "name": "user direct screen renderer returns the modal rather than an inline card: https://preview.invalid/",
+      "pass": true
+    },
+    {
+      "name": "user modal closes through actual button with restricted history: https://preview.invalid/",
+      "pass": true
+    },
+    {
+      "name": "admin actual GNB clicks open modal when URL changes are restricted: file:///C:/prototype.html",
+      "pass": true
+    },
+    {
+      "name": "admin direct screen renderer returns the modal rather than an inline card: file:///C:/prototype.html",
+      "pass": true
+    },
+    {
+      "name": "admin modal closes through actual button with restricted history: file:///C:/prototype.html",
+      "pass": true
+    },
+    {
+      "name": "admin actual GNB clicks open modal when URL changes are restricted: https://preview.invalid/",
+      "pass": true
+    },
+    {
+      "name": "admin direct screen renderer returns the modal rather than an inline card: https://preview.invalid/",
+      "pass": true
+    },
+    {
+      "name": "admin modal closes through actual button with restricted history: https://preview.invalid/",
+      "pass": true
+    },
+    {
+      "name": "no modal runtime exceptions",
+      "pass": true
+    }
+  ]
+}

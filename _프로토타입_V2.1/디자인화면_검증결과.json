@@ -1,0 +1,2529 @@
+{
+  "method": "Offline JSDOM screen/state/dropdown/hash audit; no browser visual verification",
+  "total": 630,
+  "passed": 630,
+  "failed": [],
+  "errors": [],
+  "results": [
+    {
+      "name": "user removes guessed flow navigation while retaining independent screen tabs",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko state unlinked",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko state guest",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en state unlinked",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en state guest",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko state low",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko state processing",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en state normal",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en state low",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en state processing",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko state loading",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko state empty",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko state error",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en state normal",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en state loading",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en state empty",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en state error",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state pending",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state manual",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state referral",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state other",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state limit",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state repeat",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state failure",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko state invalid",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state pending",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state manual",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state referral",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state other",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state limit",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state repeat",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state failure",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en state invalid",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state pending",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state manual",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state referral",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state other",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state limit",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state repeat",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state failure",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko state invalid",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state pending",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state manual",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state referral",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state other",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state limit",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state repeat",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state failure",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en state invalid",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state pending",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state manual",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state referral",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state other",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state limit",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state repeat",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state failure",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko state invalid",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state pending",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state manual",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state referral",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state other",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state limit",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state repeat",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state failure",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en state invalid",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state pending",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state manual",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state referral",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state other",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state limit",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state repeat",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state failure",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko state invalid",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state normal",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state pending",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state manual",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state referral",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state other",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state limit",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state repeat",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state failure",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en state invalid",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko state password",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko state email",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en state password",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en state email",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko state password",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko state email",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en state password",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en state email",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 ko state empty",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 en state empty",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko state picker",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko state noaccount",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en state picker",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en state noaccount",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 ko state selected",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 en state selected",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko state selected",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko state used",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en state normal",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en state selected",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en state used",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko state loading",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko state empty",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko state error",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en state normal",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en state loading",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en state empty",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en state error",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko state normal",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko state loading",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko state empty",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko state error",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en product UI only",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en state normal",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en state loading",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en state empty",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en state error",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "user dropdowns contain no development annotations",
+      "pass": true
+    },
+    {
+      "name": "benefit list excludes redundant DEX support notice but keeps its benefit cards",
+      "pass": true
+    },
+    {
+      "name": "screen catalog excludes auth, final result and reference docs",
+      "pass": true
+    },
+    {
+      "name": "account detail has V2 balance/timeline and no added navigation buttons",
+      "pass": true
+    },
+    {
+      "name": "account detail CSS separates cards, progress and action while preserving V2 columns",
+      "pass": true
+    },
+    {
+      "name": "league overview and account picker are separate and use participant language",
+      "pass": true
+    },
+    {
+      "name": "invited member accounts use V2 modal with no account management actions",
+      "pass": true
+    },
+    {
+      "name": "challenge picker is distinct from challenge progress and excludes DEX",
+      "pass": true
+    },
+    {
+      "name": "incomplete challenge uses V2 gauge without an invented claim action",
+      "pass": true
+    },
+    {
+      "name": "membership and review empty states are available without modifying account data",
+      "pass": true
+    },
+    {
+      "name": "low balance detail is isolated from saved account balances",
+      "pass": true
+    },
+    {
+      "name": "completion opens with no previous request and only close/share actions",
+      "pass": true
+    },
+    {
+      "name": "wallet completion opens with no previous wallet input",
+      "pass": true
+    },
+    {
+      "name": "guest withdrawal opens directly; home carousel absent; about carousel present",
+      "pass": true
+    },
+    {
+      "name": "coupon and invite retain V2 cancel/confirm action labels",
+      "pass": true
+    },
+    {
+      "name": "admin removes guessed flow navigation while retaining independent screen tabs",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 ko state closed",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 en state normal",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 en state closed",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko state noledger",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko state approved",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko state rejected",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en state normal",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en state noledger",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en state approved",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en state rejected",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko state manage",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko state featured",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en state normal",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en state manage",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en state featured",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 ko state preview",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 en state normal",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 en state preview",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 ko product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 ko state normal",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 ko state preview",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 ko never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 ko excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 en product UI only",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 en state normal",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 en state preview",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 en never restores flow strip",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 en excludes reviewer chrome when unchecked",
+      "pass": true
+    },
+    {
+      "name": "admin dropdowns contain no development annotations",
+      "pass": true
+    },
+    {
+      "name": "administrator modal and preview states reset when moving to other screens",
+      "pass": true
+    },
+    {
+      "name": "fresh file hash wd/DW2 needs no prior input",
+      "pass": true
+    },
+    {
+      "name": "fresh file hash wd/DW3 needs no prior input",
+      "pass": true
+    },
+    {
+      "name": "fresh file hash link/L7 needs no prior input",
+      "pass": true
+    },
+    {
+      "name": "fresh file hash wd/NM needs no prior input",
+      "pass": true
+    },
+    {
+      "name": "fresh file hash cp/CP1 needs no prior input",
+      "pass": true
+    },
+    {
+      "name": "fresh file hash inv/IF8 needs no prior input",
+      "pass": true
+    },
+    {
+      "name": "no runtime errors",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+ko/기본  on=Decentralised Exchange  토글=2  브로커=없음  DEX필드=N  CEX필드=N
+ko/cex  on=Centralised Exchange  토글=2  브로커=없음  DEX필드=N  CEX필드=N
+ko/dex  on=Decentralised Exchange  토글=2  브로커=없음  DEX필드=N  CEX필드=N
+en/기본  on=Decentralised Exchange  토글=2  브로커=없음  DEX필드=N  CEX필드=N
+en/cex  on=Centralised Exchange  토글=2  브로커=없음  DEX필드=N  CEX필드=N
+en/dex  on=Decentralised Exchange  토글=2  브로커=없음  DEX필드=N  CEX필드=N
+EXTYPE 선택지 = 전체 / CEX / DEX

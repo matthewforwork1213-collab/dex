@@ -1,0 +1,1856 @@
+{
+  "method": "Offline JSDOM: generated DOM, script execution and policy checks. Not browser layout testing.",
+  "total": 462,
+  "passed": 462,
+  "failed": [],
+  "results": [
+    {
+      "name": "user complete script startup",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko null",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en null",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en cex",
+      "pass": true
+    },
+    {
+      "name": "user home/S4 en dex",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP ko null",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP ko cex",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP ko dex",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP en null",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP en cex",
+      "pass": true
+    },
+    {
+      "name": "user home/EXP en dex",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko null",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko cex",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD ko dex",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en null",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en cex",
+      "pass": true
+    },
+    {
+      "name": "user home/LKD en dex",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko null",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko cex",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC ko dex",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en null",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en cex",
+      "pass": true
+    },
+    {
+      "name": "user home/PUBLIC en dex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX ko null",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX ko cex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX ko dex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX en null",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX en cex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-CEX en dex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX ko null",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX ko cex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX ko dex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX en null",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX en cex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H1-DEX en dex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 ko null",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 en null",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 en cex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H5 en dex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 ko null",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 en null",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 en cex",
+      "pass": true
+    },
+    {
+      "name": "user hub/H6 en dex",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 en null",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 ko null",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 en null",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 en cex",
+      "pass": true
+    },
+    {
+      "name": "user lnd/LND2 en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 en null",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L0 en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 en null",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en null",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L3 en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 en null",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L7 en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 en null",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L8 en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en null",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/L10 en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en null",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/E4 en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING en null",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/PENDING en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE en null",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/GUIDE en dex",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko null",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko cex",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR ko dex",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en null",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en cex",
+      "pass": true
+    },
+    {
+      "name": "user link/ERROR en dex",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 en null",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user own/O1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en null",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko null",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en null",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW0 en dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 ko null",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 en null",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 en cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW2 en dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 ko null",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 en null",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 en cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/DW3 en dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM ko null",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM ko cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM ko dex",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM en null",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM en cex",
+      "pass": true
+    },
+    {
+      "name": "user wd/NM en dex",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 ko null",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 en null",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 en cex",
+      "pass": true
+    },
+    {
+      "name": "user hist/CS3 en dex",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST ko null",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST ko cex",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST ko dex",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST en null",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST en cex",
+      "pass": true
+    },
+    {
+      "name": "user bnf/LIST en dex",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM ko null",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM ko cex",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM ko dex",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM en null",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM en cex",
+      "pass": true
+    },
+    {
+      "name": "user bnf/UIDM en dex",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 en null",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user exd/D1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 ko null",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 en null",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 en cex",
+      "pass": true
+    },
+    {
+      "name": "user exd/D2 en dex",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 ko null",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 en null",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 en cex",
+      "pass": true
+    },
+    {
+      "name": "user rk/RK2 en dex",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 en null",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 ko null",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 en null",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 en cex",
+      "pass": true
+    },
+    {
+      "name": "user ch/CH2 en dex",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en null",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user lg/LG1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 en null",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user mb/MB1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 en null",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 ko null",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 en null",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 en cex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH2 en dex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 ko null",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 en null",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 en cex",
+      "pass": true
+    },
+    {
+      "name": "user ph/PH3 en dex",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 ko null",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 en null",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 en cex",
+      "pass": true
+    },
+    {
+      "name": "user inv/IF8 en dex",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko null",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en null",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en cex",
+      "pass": true
+    },
+    {
+      "name": "user cp/CP1 en dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST ko null",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST ko cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST ko dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST en null",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST en cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/BST en dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT ko null",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT ko cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT ko dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT en null",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT en cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/EVT en dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko null",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED ko dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en null",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/FEED en dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP ko null",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP ko cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP ko dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP en null",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP en cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/TP en dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko null",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT ko dex",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en null",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en cex",
+      "pass": true
+    },
+    {
+      "name": "user etc/ABOUT en dex",
+      "pass": true
+    },
+    {
+      "name": "user original font data preserved",
+      "pass": true
+    },
+    {
+      "name": "user top GNB structure retained",
+      "pass": true
+    },
+    {
+      "name": "user rendered action destinations exist",
+      "pass": true
+    },
+    {
+      "name": "admin complete script startup",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-2 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-3 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-4 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-5 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-6 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ex/EX-7 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-2 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en null",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin ac/AC-3 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 en null",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin mb/MB-4 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 en null",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-3 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 en null",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-2 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 en null",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin pa/MB-5 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin pb/PB-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 en null",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-2 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 en null",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin sd/SD-3 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin cp/CP-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin iv/IV-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin pt/PT-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin lg/LG-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 en null",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin bd/LG-2 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 en null",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-1 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 en null",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-2 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 ko null",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 ko cex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 ko dex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 en null",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 en cex",
+      "pass": true
+    },
+    {
+      "name": "admin nw/NW-3 en dex",
+      "pass": true
+    },
+    {
+      "name": "admin original font data preserved",
+      "pass": true
+    },
+    {
+      "name": "admin top GNB structure retained",
+      "pass": true
+    },
+    {
+      "name": "admin rendered action destinations exist",
+      "pass": true
+    },
+    {
+      "name": "withdrawal total and native card shape",
+      "pass": true
+    },
+    {
+      "name": "calculator keeps V2 receipt layout and real controls",
+      "pass": true
+    },
+    {
+      "name": "full V2 exchange fields retained",
+      "pass": true
+    },
+    {
+      "name": "member partial success and per-account mail",
+      "pass": true
+    },
+    {
+      "name": "nonmember single wallet and no member security lock",
+      "pass": true
+    },
+    {
+      "name": "combined quota includes processing",
+      "pass": true
+    },
+    {
+      "name": "small display .01 and last four masking",
+      "pass": true
+    },
+    {
+      "name": "point management has four DEX and four saved rates",
+      "pass": true
+    },
+    {
+      "name": "CEX-only reward rejects DEX, general reward accepts it",
+      "pass": true
+    },
+    {
+      "name": "V2 source files preserved",
+      "pass": true
+    },
+    {
+      "name": "all viewer NEXT and flow routes exist",
+      "pass": true
+    },
+    {
+      "name": "no retired policy text appears in current screens",
+      "pass": true
+    },
+    {
+      "name": "home and service introduction share feed; carousel belongs to service introduction",
+      "pass": true
+    },
+    {
+      "name": "CEX receipt calculations follow selected exchange",
+      "pass": true
+    },
+    {
+      "name": "DEX receipt and comparison update together",
+      "pass": true
+    },
+    {
+      "name": "DEX overview preserves V2 tiles with distinct API partners",
+      "pass": true
+    }
+  ]
+}

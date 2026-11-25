@@ -1,0 +1,209 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2062" height="2380" viewBox="0 0 2062 2380">
+<title>캐시백 요약·캘린더·랭킹</title>
+<rect x="0" y="0" width="2062" height="2380" rx="0" fill="#e9eef4" stroke="none"/>
+<text x="36" y="50" font-family="Inter, Malgun Gothic, sans-serif" font-size="32" font-weight="700" fill="#112945">캐시백 요약·캘린더·랭킹</text>
+<text x="36" y="85" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#36506b">API-012 · 013 · 014  /  REQ-368~386</text>
+<text x="36" y="117" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">상단은 API 조건, 흰색 영역은 사용자 표시, 하단은 후속 동작입니다. 금액·날짜·주소는 예시입니다.</text>
+<text x="36" y="142" font-family="Inter, Malgun Gothic, sans-serif" font-size="14" font-weight="400" fill="#41566a">기존 화면의 해당 영역에 적용합니다. 독립 출금 페이지·회원 출금 신청 동작은 제외합니다. G 번호는 정책 확인 항목입니다.</text>
+<g id="S6_01">
+<rect x="36" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">입력 화면</text>
+<text x="54" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">필터 선택 / Search 전</text>
+<rect x="54" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Cashback Summary</text>
+<text x="70" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">All Exchanges ▾ All Accounts ▾</text>
+<text x="70" y="336" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Trading Cashback ☑ Event Reward ☑</text>
+<rect x="70" y="440" width="76" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="82" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Reset</text>
+<rect x="154" y="440" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="166" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Search</text>
+<text x="54" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">Search 전에 기존 결과 유지. 적용 시 월 카드·달력·일별 목록</text>
+<text x="54" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">함께 갱신.</text>
+</g>
+<g id="S6_02">
+<rect x="538" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="556" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">EXCHANGE_CASHBACK / CREDITED</text>
+<rect x="556" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Exchange Cashback</text>
+<text x="572" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="572" y="336" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">+25.00 USDT</text>
+<text x="556" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">게시된 적립 원장만 합산. 회원 로컬 기준 날짜.</text>
+</g>
+<g id="S6_03">
+<rect x="1040" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">EVENT_REWARD</text>
+<rect x="1058" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Event Reward</text>
+<text x="1074" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Coupon reward +3.00 USDT</text>
+<text x="1058" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">해당 계정 이벤트 적립. 거래 생성 캐시백·랭킹에서 제외.</text>
+</g>
+<g id="S6_04">
+<rect x="1542" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1560" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">WITHDRAWAL</text>
+<rect x="1560" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Claim Amount</text>
+<text x="1576" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="1576" y="336" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">−20.00 USDT</text>
+<text x="1560" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">자동 지급 출금 행. tx 해시나 수동 출금 링크 비노출.</text>
+</g>
+<g id="S6_05">
+<rect x="36" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">WITHDRAWAL_RETURNED</text>
+<rect x="54" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Withdrawal returned</text>
+<text x="70" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="70" y="769" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">+20.00 USDT</text>
+<text x="54" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">서버가 복원 행을 준 날 표시. 명칭·상세 G-113.</text>
+</g>
+<g id="S6_06">
+<rect x="538" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="556" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">dexPendingDates / DATA_PENDING</text>
+<rect x="556" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">DEX data pending</text>
+<text x="572" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">CEX cashback received +25.00 USDT</text>
+<text x="572" y="769" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">DEX entries are pending.</text>
+<text x="556" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">미도착 DEX를 0으로 계산하지 않는다. 확정 CEX 건만 합산.</text>
+</g>
+<g id="S6_07">
+<rect x="1040" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="1058" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">collection.status=DEGRADED</text>
+<rect x="1058" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Data delayed</text>
+<text x="1074" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Last updated 09:00</text>
+<text x="1074" y="769" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Amounts reflect the last confirmed update.</text>
+<text x="1058" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">지연에서 복구되면 해당 월·일·잔액·랭킹을 재조회.</text>
+</g>
+<g id="S6_08">
+<rect x="1542" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1560" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">ACCRUING_ESTIMATE / 기능 플래그</text>
+<rect x="1560" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Accruing this week (estimate)</text>
+<text x="1576" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Estimated amount 3.10 USDT</text>
+<text x="1560" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">플래그 켜진 경우만. 확정 잔액·랭킹 합계 제외.</text>
+</g>
+<g id="S6_09">
+<rect x="36" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">WITHHELD</text>
+<rect x="54" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Withheld</text>
+<text x="70" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Settlement is on hold.</text>
+<text x="54" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">보류 금액을 지급 가능액에 포함하지 않는다. 상세 enum G-059.</text>
+</g>
+<g id="S6_10">
+<rect x="538" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="556" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">UNDER_MINIMUM</text>
+<rect x="556" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Under minimum</text>
+<text x="572" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">The settlement amount is below the minimum.</text>
+<text x="556" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">거래소 정산 표시. 회원의 개별 자동 지급 버튼과 분리.</text>
+</g>
+<g id="S6_11">
+<rect x="1040" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">PENDING</text>
+<rect x="1058" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Pending settlement</text>
+<text x="1074" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Settlement is pending.</text>
+<text x="1058" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">확정 전 수치 합산 제외. CREDITED로 갱신되면 원장 기준 적용.</text>
+</g>
+<g id="S6_12">
+<rect x="1542" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="1560" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">월 활동 없음</text>
+<rect x="1560" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Monthly total cashback</text>
+<text x="1576" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">There is no cashback history for this month.</text>
+<text x="1576" y="1202" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">No cashback activity yet.</text>
+<text x="1560" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">달력은 기존 월 유지. 월 카드와 일별 목록 각각 빈 상태.</text>
+</g>
+<g id="S6_13">
+<rect x="36" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="54" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">선택일 또는 필터 결과 없음</text>
+<rect x="54" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Daily activity</text>
+<text x="70" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">No cashback activity yet.</text>
+<rect x="70" y="1739" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Reset filters</text>
+<text x="54" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">날짜만 빈 경우 월 합계 유지. 필터 초기화는 전체 조건 복원.</text>
+</g>
+<g id="S6_14">
+<rect x="538" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="556" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-013 dailyOnly / 시간별 자료</text>
+<rect x="556" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Daily cashback</text>
+<text x="572" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">10 Nov +4.00 USDT</text>
+<text x="572" y="1635" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">11 Nov +1.40 USDT</text>
+<text x="556" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">dailyOnly는 placedOn 거래일에, 시각 있는 자료는 회원 로컬</text>
+<text x="556" y="1845" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">날짜에 표시.</text>
+</g>
+<g id="S6_15">
+<rect x="1040" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-014 rank=3</text>
+<rect x="1058" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">My Cashback Ranking</text>
+<text x="1074" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9 3rd</text>
+<text x="1074" y="1635" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Rankings are updated daily at 00:01.</text>
+<text x="1058" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">본인 순위 행에 금액 없음. 유형 필터 ALL/CEX/DEX.</text>
+</g>
+<g id="S6_16">
+<rect x="1542" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1560" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">rank=null · notRankedNotice=true</text>
+<rect x="1560" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">My Cashback Ranking</text>
+<text x="1576" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9 –</text>
+<text x="1576" y="1635" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Accounts below 0.01 USDT are not ranked.</text>
+<text x="1560" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">0.009 제외·0.010 포함. 확인 중 계정 제외.</text>
+</g>
+<g id="S6_17">
+<rect x="36" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="54" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">mine=[]</text>
+<rect x="54" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">My Cashback Ranking</text>
+<text x="70" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">There are currently no eligible accounts for ranking.</text>
+<text x="70" y="2068" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Accounts below 0.01 USDT are not ranked.</text>
+<text x="54" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">순위 밖인 보유 계정과 후보 자체 0개를 구분한다.</text>
+</g>
+<g id="S6_18">
+<rect x="538" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="556" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">400 VALIDATION_ERROR · month/tz</text>
+<rect x="556" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Check the selected month</text>
+<text x="572" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Choose a valid month to reload your history.</text>
+<rect x="572" y="2172" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="2190" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Select month</text>
+<text x="556" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">정상 필터로 복구. API-014는 month, API-012·013은 month·tz.</text>
+</g>
+</svg>

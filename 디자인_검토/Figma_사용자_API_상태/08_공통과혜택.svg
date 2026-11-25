@@ -1,0 +1,358 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2062" height="3246" viewBox="0 0 2062 3246">
+<title>공통 응답과 혜택 화면의 연결 상태</title>
+<rect x="0" y="0" width="2062" height="3246" rx="0" fill="#e9eef4" stroke="none"/>
+<text x="36" y="50" font-family="Inter, Malgun Gothic, sans-serif" font-size="32" font-weight="700" fill="#112945">공통 응답과 혜택 화면의 연결 상태</text>
+<text x="36" y="85" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#36506b">공통 HTTP · API-016 · 017 · 021 · MB-API-002~005</text>
+<text x="36" y="117" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">상단은 API 조건, 흰색 영역은 사용자 표시, 하단은 후속 동작입니다. 금액·날짜·주소는 예시입니다.</text>
+<text x="36" y="142" font-family="Inter, Malgun Gothic, sans-serif" font-size="14" font-weight="400" fill="#41566a">기존 화면의 해당 영역에 적용합니다. 독립 출금 페이지·회원 출금 신청 동작은 제외합니다. G 번호는 정책 확인 항목입니다.</text>
+<g id="S8_01">
+<rect x="36" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="54" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">401 UNAUTHORIZED · 보호 화면</text>
+<rect x="54" y="256" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="68" y="270" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="84" y="300" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Log in to continue</text>
+<text x="84" y="328" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Sign in to view your account.</text>
+<rect x="84" y="426" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="96" y="444" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Log in</text>
+<text x="54" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">원래 위치 보관. 연동·퀴즈는 입력 보존 확정. 비공개 잔액·계정</text>
+<text x="54" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">정보 숨김.</text>
+</g>
+<g id="S8_02">
+<rect x="538" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="556" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">400 VALIDATION_ERROR / exchangeType 또는 scope</text>
+<rect x="556" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Check your filters</text>
+<text x="572" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Choose an available exchange filter.</text>
+<rect x="572" y="440" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Reset filters</text>
+<text x="556" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">API-001·021. 유효한 값으로 다시 조회. 정상 0건 처리 금지.</text>
+</g>
+<g id="S8_03">
+<rect x="1040" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="1058" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">404 NOT_FOUND / 소유하지 않은 리소스</text>
+<rect x="1058" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Page unavailable</text>
+<text x="1074" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We couldn't find this item.</text>
+<rect x="1074" y="440" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Go back</text>
+<text x="1058" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">남의 지갑·쿠폰 정보를 노출하지 않는다. 리소스별 상위</text>
+<text x="1058" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">목록으로.</text>
+</g>
+<g id="S8_04">
+<rect x="1542" y="170" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="195" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1560" y="220" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">429 RATE_LIMITED</text>
+<rect x="1560" y="256" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="286" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Please try again later</text>
+<text x="1576" y="314" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Requests are temporarily limited.</text>
+<rect x="1576" y="440" width="76" height="27" rx="5" fill="#eceef1" stroke="none"/>
+<text x="1588" y="458" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#747e88">Retry</text>
+<text x="1560" y="503" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="526" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">Retry-After까지 재요청 방지. 퍼즐 검증 횟수 제한은 별도</text>
+<text x="1560" y="546" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">상태.</text>
+</g>
+<g id="S8_05">
+<rect x="36" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="54" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">500 INTERNAL_ERROR 또는 503 SERVICE_UNAVAILABLE</text>
+<rect x="54" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Something went wrong</text>
+<text x="70" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">We couldn’t load this information.</text>
+<rect x="70" y="873" width="85" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="891" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Try again</text>
+<text x="54" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">실패한 영역 재시도. 제출은 기존 성공 여부부터 재조회, 수치</text>
+<text x="54" y="979" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">0으로 대체 금지.</text>
+</g>
+<g id="S8_06">
+<rect x="538" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">입력 화면</text>
+<text x="556" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-016 locked=false · 연동 완료 후보</text>
+<rect x="556" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Select a trading account</text>
+<text x="572" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<rect x="572" y="873" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="891" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Confirm</text>
+<text x="556" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">리그 대상 거래소의 완료 계정만. 후보가 비면 연동 진입 안내.</text>
+</g>
+<g id="S8_07">
+<rect x="1040" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="1058" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-016 200 · 후보 0개</text>
+<rect x="1058" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">No eligible accounts</text>
+<text x="1074" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Link an account on the league exchange to participate.</text>
+<rect x="1074" y="873" width="104" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="891" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Link Account</text>
+<text x="1058" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">확인 중·다른 거래소 계정 제외.</text>
+</g>
+<g id="S8_08">
+<rect x="1542" y="603" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="628" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1560" y="653" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-016 locked=true · P1~P3</text>
+<rect x="1560" y="689" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="719" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Participation account</text>
+<text x="1576" y="747" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="1576" y="769" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Account selection is locked.</text>
+<text x="1560" y="936" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="959" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">변경 제어 비활성. 수령 계정 제약 G-187.</text>
+</g>
+<g id="S8_09">
+<rect x="36" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="54" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-016 404 NOT_FOUND</text>
+<rect x="54" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">League unavailable</text>
+<text x="70" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This league could not be found.</text>
+<rect x="70" y="1306" width="126" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="1324" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to leagues</text>
+<text x="54" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">기존 리그 목록으로 복귀.</text>
+</g>
+<g id="S8_10">
+<rect x="538" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="556" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-017 200 · credited=EVENT_REWARD</text>
+<rect x="556" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Coupon applied</text>
+<text x="572" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Event reward +3.00 USDT</text>
+<text x="572" y="1202" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<rect x="572" y="1306" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="1324" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View coupons</text>
+<text x="556" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">연동 완료 DEX에 보유 LINK UID 쿠폰 사용 가능. 발급은 CEX 최초</text>
+<text x="556" y="1412" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">연동만.</text>
+</g>
+<g id="S8_11">
+<rect x="1040" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1058" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 COUPON_ACCOUNT_NOT_ELIGIBLE</text>
+<rect x="1058" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Choose another account</text>
+<text x="1074" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Choose a linked account that is eligible for this</text>
+<text x="1074" y="1199" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">coupon.</text>
+<rect x="1074" y="1306" width="125" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="1324" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Choose account</text>
+<text x="1058" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">확인 중·이슈 계정 제외. 쿠폰 미사용 유지.</text>
+</g>
+<g id="S8_12">
+<rect x="1542" y="1036" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1061" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1560" y="1086" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-017 409 CONCURRENT_REQUEST</text>
+<rect x="1560" y="1122" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="1152" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Coupon already used</text>
+<text x="1576" y="1180" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your coupon status has been updated.</text>
+<rect x="1576" y="1306" width="107" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="1324" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View coupons</text>
+<text x="1560" y="1369" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="1392" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">이미 사용된 쿠폰 재적용 금지. 404는 보유 쿠폰 목록으로 복귀.</text>
+</g>
+<g id="S8_13">
+<rect x="36" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="54" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-021 · ALL/CEX/DEX/거래소</text>
+<rect x="54" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Events</text>
+<text x="70" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Exchange filter DEX</text>
+<text x="70" y="1635" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX · DEX</text>
+<rect x="70" y="1739" width="92" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View event</text>
+<text x="54" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">scope 변경 시 결과 교체. 성공 빈 배열은 빈 목록, 400은 필터</text>
+<text x="54" y="1845" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">복구.</text>
+</g>
+<g id="S8_14">
+<rect x="538" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="556" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">API-021 200 · data=[]</text>
+<rect x="556" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">No events available</text>
+<text x="572" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">There are no events for this filter.</text>
+<rect x="572" y="1739" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Reset filters</text>
+<text x="556" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">전체 범위 재조회. DEX 이벤트를 CEX 이벤트로 대체하지 않는다.</text>
+</g>
+<g id="S8_15">
+<rect x="1040" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">MB-API-002 · batchDelayed=true</text>
+<rect x="1058" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Board update delayed</text>
+<text x="1074" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your latest activity is still being processed.</text>
+<text x="1058" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">기존 기록 유지. 합계 0으로 초기화 금지.</text>
+</g>
+<g id="S8_16">
+<rect x="1542" y="1469" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1494" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">빈 화면</text>
+<text x="1560" y="1519" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">404 BOARD_NOT_FOUND</text>
+<rect x="1560" y="1555" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="1585" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Board unavailable</text>
+<text x="1576" y="1613" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This board could not be found.</text>
+<rect x="1576" y="1739" width="122" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="1757" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Back to boards</text>
+<text x="1560" y="1802" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="1825" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">MB-API-002·003·005 공통.</text>
+</g>
+<g id="S8_17">
+<rect x="36" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">입력 화면</text>
+<text x="54" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">MB-API-003 NOT_REGISTERED / eligibleUids</text>
+<rect x="54" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Choose your wallet</text>
+<text x="70" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<rect x="70" y="2172" width="81" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="2190" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Continue</text>
+<text x="54" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">동일 DEX·완료·자격 충족 지갑만 선택 가능. 후보 0이면 연동</text>
+<text x="54" y="2278" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">안내.</text>
+</g>
+<g id="S8_18">
+<rect x="538" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">모달</text>
+<text x="556" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">400 CONFIRMATION_REQUIRED</text>
+<rect x="556" y="1988" width="448" height="221" rx="8" fill="#dce2eb" stroke="none"/>
+<rect x="570" y="2002" width="420" height="193" rx="12" fill="white" stroke="none"/>
+<text x="586" y="2032" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Confirm participation wallet</text>
+<text x="586" y="2060" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<text x="586" y="2082" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Confirm this wallet for the board.</text>
+<rect x="586" y="2158" width="76" height="27" rx="5" fill="#f0f4fa" stroke="none"/>
+<text x="598" y="2176" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#173358">Cancel</text>
+<rect x="670" y="2158" width="76" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="682" y="2176" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Confirm</text>
+<text x="556" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">확정해야 confirmed=true. 취소하면 선택값 유지.</text>
+</g>
+<g id="S8_19">
+<rect x="1040" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">카드 · 목록 행</text>
+<text x="1058" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">201 PARTICIPATING / ALREADY_PARTICIPATING</text>
+<rect x="1058" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Participating</text>
+<text x="1074" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">EdgeX 0x7a3f…51e9</text>
+<rect x="1074" y="2172" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="2190" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View my board</text>
+<text x="1058" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">중복이면 기존 참여 조회. 새 참여·보상 중복 생성 금지.</text>
+</g>
+<g id="S8_20">
+<rect x="1542" y="1902" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="1927" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="1560" y="1952" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 PARTICIPATION_RESET / RESET</text>
+<rect x="1560" y="1988" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="2018" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Participation reset</text>
+<text x="1576" y="2046" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your previous participation has been reset.</text>
+<rect x="1576" y="2172" width="92" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="2190" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View board</text>
+<text x="1560" y="2235" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="2258" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">OWNERSHIP_TRANSFER 또는 ISSUE_UID 사유. 신규 소유자에게</text>
+<text x="1560" y="2278" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">승계 없음.</text>
+</g>
+<g id="S8_21">
+<rect x="36" y="2335" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="2360" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="54" y="2385" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">FORFEITED · 집계 후 지급 전 소유권 이전</text>
+<rect x="54" y="2421" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="2451" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Reward forfeited</text>
+<text x="70" y="2479" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This participation is no longer eligible for a reward.</text>
+<rect x="70" y="2605" width="92" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View board</text>
+<text x="54" y="2668" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="2691" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">지급 완료 이후에는 이력 보존. 소멸·초기화 시점 구분.</text>
+</g>
+<g id="S8_22">
+<rect x="538" y="2335" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="2360" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">상태 안내</text>
+<text x="556" y="2385" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">409 PHASE_NOT_PARTICIPATION</text>
+<rect x="556" y="2421" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="2451" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Registration is closed</text>
+<text x="572" y="2479" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Wallet registration is unavailable in this phase.</text>
+<rect x="572" y="2605" width="92" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View board</text>
+<text x="556" y="2668" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="2691" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">서버의 현재 보드 단계 다시 조회. 강제 등록 없음.</text>
+</g>
+<g id="S8_23">
+<rect x="1040" y="2335" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="2360" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1058" y="2385" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">MB-API-004 409 CONCURRENT_REQUEST</text>
+<rect x="1058" y="2421" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="2451" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Checking registration</text>
+<text x="1074" y="2479" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Your last registration is being checked.</text>
+<rect x="1074" y="2605" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">View my board</text>
+<text x="1058" y="2668" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="2691" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">상태 재조회. 등록 성공 시 기존 참여 표시.</text>
+</g>
+<g id="S8_24">
+<rect x="1542" y="2335" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="2360" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1560" y="2385" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 UID_NOT_LINKED</text>
+<rect x="1560" y="2421" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="2451" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Link this wallet first</text>
+<text x="1576" y="2479" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Only fully linked wallets can join this board.</text>
+<rect x="1576" y="2605" width="104" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="2623" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Link Account</text>
+<text x="1560" y="2668" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="2691" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">미연동·확인 중 모두 제외.</text>
+</g>
+<g id="S8_25">
+<rect x="36" y="2768" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="54" y="2793" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="54" y="2818" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 UID_EXCHANGE_MISMATCH</text>
+<rect x="54" y="2854" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="70" y="2884" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Choose a wallet on this exchange</text>
+<text x="70" y="2912" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This wallet is linked to a different exchange.</text>
+<rect x="70" y="3038" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="82" y="3056" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Choose wallet</text>
+<text x="54" y="3101" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="54" y="3124" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">주소가 같아도 다른 DEX면 제외.</text>
+</g>
+<g id="S8_26">
+<rect x="538" y="2768" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="556" y="2793" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="556" y="2818" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 UID_REGISTERED_TOO_EARLY</text>
+<rect x="556" y="2854" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="572" y="2884" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet registration date is ineligible</text>
+<text x="572" y="2912" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">Choose a wallet that meets this board’s registration</text>
+<text x="572" y="2931" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">date.</text>
+<rect x="572" y="3038" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="584" y="3056" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Choose wallet</text>
+<text x="556" y="3101" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="556" y="3124" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">서버 eligibilityRule 사용. 최초 등록일 정의 G-314.</text>
+</g>
+<g id="S8_27">
+<rect x="1040" y="2768" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1058" y="2793" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1058" y="2818" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 UID_ALREADY_PARTICIPATED</text>
+<rect x="1058" y="2854" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1074" y="2884" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet already participated</text>
+<text x="1074" y="2912" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This wallet has already been used for this board.</text>
+<rect x="1074" y="3038" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1086" y="3056" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Choose wallet</text>
+<text x="1058" y="3101" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1058" y="3124" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">참여 이력 있는 지갑 제외.</text>
+</g>
+<g id="S8_28">
+<rect x="1542" y="2768" width="484" height="415" rx="12" fill="#f7f9fc" stroke="#cbd6e2"/>
+<text x="1560" y="2793" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="700" fill="#4d6480">인라인 오류</text>
+<text x="1560" y="2818" font-family="Inter, Malgun Gothic, sans-serif" font-size="16" font-weight="600" fill="#102c52">422 UID_ISSUE_DESIGNATED</text>
+<rect x="1560" y="2854" width="448" height="221" rx="8" fill="#fff" stroke="none"/>
+<text x="1576" y="2884" font-family="Inter, Malgun Gothic, sans-serif" font-size="19" font-weight="700" fill="#141e2b">Wallet unavailable</text>
+<text x="1576" y="2912" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#37465b">This wallet is ineligible for participation.</text>
+<rect x="1576" y="3038" width="111" height="27" rx="5" fill="#174cc9" stroke="none"/>
+<text x="1588" y="3056" font-family="Inter, Malgun Gothic, sans-serif" font-size="13" font-weight="600" fill="#fff">Choose wallet</text>
+<text x="1560" y="3101" font-family="Inter, Malgun Gothic, sans-serif" font-size="12" font-weight="700" fill="#49647d">동작 · 복귀</text>
+<text x="1560" y="3124" font-family="Inter, Malgun Gothic, sans-serif" font-size="15" font-weight="400" fill="#182338">이슈 지정 지갑 제외. 기존 UID 처리 재사용.</text>
+</g>
+</svg>

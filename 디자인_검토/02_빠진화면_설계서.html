@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEX 없는 화면 설계서</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+:root{
+  --darkest:#212529; --dark:#343a40; --middark:#495057; --mid:#6c757d;
+  --border:#ced4da; --lborder:#dee2e6; --lbg:#e9ecef; --bg:#f8f9fa; --white:#fff;
+  --add:#e67700; --del:#c92a2a; --mod:#1971c2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Pretendard,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
+     color:var(--darkest);font-size:13px;line-height:1.55;-webkit-font-smoothing:antialiased}
+code{font-family:Consolas,monospace;font-size:.92em;background:var(--lbg);padding:1px 5px;border-radius:3px}
+s{color:var(--mid)}
+
+header{position:fixed;top:0;left:0;right:0;height:52px;background:var(--dark);z-index:1000;
+       display:flex;align-items:center;padding:0 18px;gap:14px;overflow-x:auto}
+header .brand{color:#fff;font-weight:700;font-size:14px;white-space:nowrap}
+header .tabs{display:flex;gap:3px}
+header button{background:none;border:0;color:#adb5bd;font:inherit;font-size:11.5px;padding:6px 9px;
+              border-radius:5px;cursor:pointer;white-space:nowrap}
+header button:hover{background:var(--middark);color:#fff}
+header button.on{background:#fff;color:var(--darkest);font-weight:600}
+main{padding:52px 0 70px}
+
+.cover{background:#fff;border-bottom:1px solid var(--lborder);padding:48px 40px}
+.cover h1{font-size:29px;letter-spacing:-.5px}
+.cover .sub{color:var(--mid);margin-top:9px;font-size:14px}
+.cover .meta{display:flex;gap:38px;margin-top:26px;flex-wrap:wrap}
+.cover .meta div span{display:block;color:var(--mid);font-size:11px;letter-spacing:.4px}
+.cover .meta div b{font-size:15px;font-weight:600}
+.legend{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;align-items:center;
+        background:var(--bg);border-radius:8px;padding:14px 18px;max-width:900px}
+.legend span{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--middark)}
+.swatch{width:26px;height:17px;border-radius:3px}
+.sw-add{border:2px dashed var(--add);background:rgba(230,119,0,.10)}
+.sw-del{border:2px dashed var(--del);background:rgba(201,42,42,.10)}
+.sw-mod{border:2px dashed var(--mod);background:rgba(25,113,194,.10)}
+.sw-new{border:1px solid var(--border);background:#fff}
+.note{margin-top:22px;background:var(--bg);border-left:3px solid var(--add);padding:14px 16px;
+      max-width:900px;font-size:12.5px;color:var(--middark)}
+.dl{margin-top:24px}
+.dl button{background:var(--dark);color:#fff;border:0;padding:9px 16px;border-radius:6px;
+           font:inherit;font-size:12px;cursor:pointer}
+
+.screen-section{position:relative;z-index:1;padding:32px 40px;border-bottom:1px solid var(--lborder)}
+.grid{display:grid;grid-template-columns:1fr 400px;gap:24px;align-items:start}
+@media(max-width:1150px){.grid{grid-template-columns:1fr}}
+.meta-box{background:#fff;border:1px solid var(--lborder);border-radius:8px;padding:15px 18px;margin-bottom:16px}
+.meta-box .top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.badge{display:inline-block;font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600}
+.b-dark{background:var(--dark);color:#fff}
+.b-out{background:transparent;border:1px solid var(--border);color:var(--mid)}
+.b-new{background:#fff4e6;border:1px solid #ffd8a8;color:var(--add)}
+.b-mod{background:#e7f5ff;border:1px solid #a5d8ff;color:var(--mod)}
+.meta-box h2{font-size:17px;margin-top:8px}
+.meta-box p{color:var(--middark);margin-top:6px;max-width:760px}
+.crumb{color:var(--mid);font-size:11.5px}
+.basis{margin-top:9px;font-size:12px;color:var(--middark);background:var(--bg);
+       border-radius:5px;padding:7px 11px;display:inline-block}
+
+.wire{background:#fff;border:1px solid var(--lborder);border-radius:8px;padding:16px;overflow:visible}
+.shot{position:relative;line-height:0;border:1px solid var(--lborder);border-radius:6px;overflow:hidden}
+.shot.tall{max-width:390px;margin:0 auto}
+.shot img{width:100%;display:block}
+.pair{display:grid;grid-template-columns:1fr;gap:14px}
+.pairlbl{font-size:12px;font-weight:700;padding:7px 11px;border-radius:6px;margin-bottom:7px}
+.pl-no{background:#fff0f0;color:var(--del);border:1px solid #ffc9c9}
+.pl-ok{background:#ebfbee;color:#2b8a3e;border:1px solid #b2f2bb}
+.mark{position:absolute;border-radius:4px;z-index:50}
+.mark.add{border:2px dashed var(--add);background:rgba(230,119,0,.10)}
+.mark.del{border:2px dashed var(--del);background:rgba(201,42,42,.12)}
+.mark.mod{border:2px dashed var(--mod);background:rgba(25,113,194,.10)}
+.mark.no{border:3px solid var(--del);background:rgba(201,42,42,.18)}
+.mark.no > i{background:var(--del);width:26px;height:26px;font-size:15px;top:-13px;left:-13px}
+.mark.no > u{color:var(--del);font-size:12px;font-weight:800;bottom:-11px}
+.mark > i{position:absolute;top:-10px;left:-10px;width:20px;height:20px;border-radius:50%;
+          color:#fff;font-style:normal;font-size:11px;font-weight:700;display:flex;
+          align-items:center;justify-content:center;z-index:60;box-shadow:0 0 0 2px #fff;line-height:1}
+.mark.r > i{left:auto;right:-10px}
+.mark.add > i{background:var(--add)} .mark.del > i{background:var(--del)} .mark.mod > i{background:var(--mod)}
+.mark > u{position:absolute;bottom:-9px;right:-2px;font-size:10px;font-weight:700;
+          text-decoration:none;background:#fff;padding:1px 6px;border-radius:9px;line-height:1.5;
+          white-space:nowrap;box-shadow:0 0 0 1px currentColor}
+.mark.add > u{color:var(--add)} .mark.del > u{color:var(--del)} .mark.mod > u{color:var(--mod)}
+
+.ind{position:relative}
+.ind > i{position:absolute;top:-9px;left:-9px;width:19px;height:19px;border-radius:50%;background:var(--add);color:#fff;font-style:normal;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:50;box-shadow:0 0 0 2px #fff;line-height:1}
+.addon{margin-top:16px;border:1px dashed var(--add);border-radius:7px;padding:14px;background:#fffaf4}
+.addon .cap{font-size:11px;font-weight:700;color:var(--add);letter-spacing:.3px;margin-bottom:10px}
+.frame{border:1px solid var(--border);border-radius:6px;background:#fff}
+.frame .bar{background:var(--lbg);border-bottom:1px solid var(--border);padding:7px 11px;
+            font-size:11px;color:var(--middark);display:flex;justify-content:space-between}
+.frame .body{padding:14px}
+.col{display:flex;flex-direction:column;gap:9px}
+.row{display:flex;gap:9px;align-items:center}
+.lbl{font-size:10.5px;color:var(--mid);letter-spacing:.3px}
+.fld{border:1px solid var(--border);border-radius:5px;padding:8px 11px;color:var(--mid);font-size:12px;background:#fff}
+.btn{background:var(--dark);color:#fff;border-radius:5px;padding:8px 14px;text-align:center;font-size:12px}
+.btn.ghost{background:#fff;color:var(--middark);border:1px solid var(--border)}
+.card{border:1px solid var(--lborder);border-radius:6px;padding:11px;background:#fff}
+.kv{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--lborder)}
+.kv:last-child{border-bottom:0}
+.big{font-size:20px;font-weight:700}
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.tbl th{background:var(--lbg);text-align:left;padding:6px 9px;border:1px solid var(--lborder);font-weight:600;color:var(--middark)}
+.tbl td{padding:6px 9px;border:1px solid var(--lborder);color:var(--middark)}
+.tbl tr:nth-child(even) td{background:var(--bg)}
+.stat{flex:1;border:1px solid var(--lborder);border-radius:6px;padding:10px}
+.stat span{display:block;font-size:10.5px;color:var(--mid)} .stat b{font-size:16px}
+.chip{border:1px solid var(--border);border-radius:14px;padding:3px 10px;font-size:11px;color:var(--mid)}
+.chip.on{background:var(--dark);color:#fff;border-color:var(--dark)}
+.ghostbox{border:1px dashed var(--border);border-radius:6px;padding:16px;text-align:center;color:var(--mid);font-size:12px}
+.hr{height:1px;background:var(--lborder);margin:10px 0}
+
+.desc{position:sticky;top:64px;max-height:calc(100vh - 84px);overflow-y:auto;background:#fff;
+      border:1px solid var(--lborder);border-radius:8px}
+.desc h3{font-size:12px;padding:11px 15px;border-bottom:1px solid var(--lborder);color:var(--middark)}
+.desc table{width:100%;border-collapse:collapse}
+.desc td{padding:9px 12px;border-bottom:1px solid var(--lborder);vertical-align:top;font-size:12px;color:var(--middark)}
+.desc td.n{width:28px;font-weight:700;text-align:center}
+.desc td.w{width:128px;color:var(--darkest);font-weight:600}
+.desc tr:last-child td{border-bottom:0}
+.flag{color:var(--del);font-weight:600}
+.n-add{color:var(--add)} .n-del{color:var(--del)} .n-mod{color:var(--mod)}
+
+@page{size:landscape}
+@media print{
+  header,.dl{display:none} body{background:#fff} main{padding:0}
+  .screen-section{page-break-before:always;border:0}
+  .desc{position:static;max-height:none}
+}
+</style>
+</head>
+<body>
+<header><div class="brand">DEX 없는 화면 설계서</div><div class="tabs" id="tabs"></div></header>
+<main>
+<section class="cover">
+  <h1>DEX 없는 화면 설계서</h1>
+  <div class="sub">Figma에 <b>없는 화면</b>만 담았습니다. 기존 화면의 수정은 댓글 가이드에 있습니다</div>
+  <div class="meta">
+    <div><span>작성일</span><b>2026-10-23</b></div>
+    <div><span>기준</span><b>DEX 확정 정책 + 기존 상태 사전</b></div>
+    <div><span>바탕</span><b>UI UX Design · DEX 페이지 실제 화면</b></div>
+    <div><span>분량</span><b>7보드</b></div>
+  </div>
+  <div class="legend">
+    <span><i class="swatch sw-add"></i> <b>추가</b> — 기존 화면에 없던 것</span>
+    <span><i class="swatch sw-del"></i> <b>삭제</b> — 확정 정책상 빼야 하는 것</span>
+    <span><i class="swatch sw-mod"></i> <b>수정</b> — 값·문구를 고쳐야 하는 것</span>
+    <span><i class="swatch" style="border:3px solid var(--del);background:rgba(201,42,42,.18)"></i> <b>해당 없음</b> — 이 경로 자체가 성립하지 않는 것</span>
+  </div>
+  <div class="note">
+    <b>읽는 법</b> — 사진은 <b>지금 Figma에 실제로 그려져 있는 화면</b>입니다. 그 위의 점선 상자가 바꿔야 할 자리이고,
+    번호는 우측 설명표와 1:1로 맞습니다. 사진 아래 주황 박스가 있으면 <b>그 자리에 들어갈 블록</b>만 따로 그린 것입니다.<br><br>
+    <b>용어</b> — 공식 한국어 용어는 <b>「캐시백」</b> 입니다(영문 <code>cashback</code>). 다만 <b>저희 프로토타입 V2.1 와 기존 화면은 아직 「페이백」</b> 으로 돼 있어, 그 화면을 가리키거나 인용한 부분은 <b>찾으시기 쉽도록 원문 그대로</b> 두었습니다. 저희 쪽도 교체 예정입니다.<br><br><b>이 문서에 담긴 것</b> — Figma에 <b>화면 자체가 없거나 경로가 다른 것</b> 7건입니다.
+    기존 화면의 문구·상태·값 수정은 <b>전부 <code>01_피그마_댓글_가이드.html</code></b> 에 있고,
+    <b>이 문서와 겹치지 않습니다.</b>
+  </div>
+  <div class="dl"><button onclick="window.print()">PDF로 저장 (가로)</button></div>
+</section>
+<div id="screens"></div>
+</main>
+
+<script>
+const S = [
+
+{id:"N-1", tab:"N-1 비회원출금", group:"없는 화면", kind:"new",
+ name:"비회원 DEX 출금 — 경로가 완전히 다릅니다",
+ crumb:"나의 페이백 (비회원 전용 페이지) › 출금하기 › 캡차 › 끝",
+ basis:"바탕 — <b>기존 「나의 페이백」 비회원 페이지</b>. <span class='flag'>캐시백 허브가 아닙니다.</span>",
+ why:"<b>먼저 경로부터 바로잡아야 합니다.</b> 비회원은 캐시백 허브에 들어오지 않습니다. 따라서 <b>허브의 출금 팝업·Confirm 모달·완료 모달이 전부 성립하지 않습니다.</b><br><br>비회원은 <b>「나의 페이백」 전용 페이지</b>에서 <b>`출금하기` → 캡차 → 끝</b> 입니다. 모달이 없습니다.",
+ pair:[
+  {img:"base/DW1.png", lbl:"no", cap:"❌ 이 경로는 비회원에 없습니다 — 캐시백 허브의 출금 팝업",
+   marks:[{n:"✕",k:"no",l:29.0,t:4.5,w:42.0,h:73.0,cap:"비회원 해당 없음"}]},
+  {img:"base/v21/E4.png", lbl:"ok", cap:"✅ 조회 — V2.1 『지갑 주소로 페이백 조회』. 거래소를 고르고 지갑 주소를 넣습니다", marks:[{k:"mod",n:1,cap:"식별자는 지갑 주소 하나",l:10.0,t:55.5,w:79.5,h:8.5}]},
+  {img:"base/v21/NM.png", lbl:"ok", cap:"✅ 출금 — V2.1 『지갑 페이백 출금』. 단일 지갑 · 전액 일괄", marks:[{k:"mod",n:1,cap:"계정 식별자",l:15.0,t:46.5,w:36.0,h:9.0},{k:"mod",n:2,cap:"금액 구성",l:15.0,t:59.5,w:70.0,h:24.0},{k:"add",n:3,cap:"출금하기",l:11.0,t:89.0,w:78.0,h:7.0}]},
+  {img:"base/NONMEMBER.png", lbl:"ok", cap:"✅ 출금 — 기존 「나의 페이백」 비회원 페이지. 여기서 바로 출금합니다",
+   marks:[
+    {n:1,k:"mod",l:4.0,t:11.5,w:26.0,h:5.5,cap:"UID → 지갑 주소"},
+    {n:2,k:"mod",l:4.0,t:33.0,w:26.0,h:9.0,cap:"DEX 금액 구성"},
+    {n:3,k:"add",l:4.0,t:51.5,w:26.0,h:5.5,cap:"출금하기 → 캡차"},
+    {n:4,k:"mod",l:4.0,t:60.5,w:26.0,h:20.0,cap:"정산 주기"},
+   ]},
+ ],
+ addon:`<div class="cap">비회원 출금 — 전체 단계</div>
+ <div class="frame"><div class="bar"><span>회원 대비</span><span></span></div>
+ <div class="body">
+  <table class="tbl">
+   <tr><th>단계</th><th>회원 (캐시백 허브)</th><th>비회원 (나의 페이백)</th></tr>
+   <tr><td>진입</td><td>허브 DEX 패널 · My Cashback · 홈</td><td><b>「나의 페이백」 페이지 하나</b></td></tr>
+   <tr><td>출금 팝업</td><td>O <code>DW1</code></td><td><b>X — 없음</b></td></tr>
+   <tr><td>Confirm 모달</td><td>O <code>DW2</code></td><td><b>X — 없음</b></td></tr>
+   <tr><td>캡차</td><td>O <code>DW3</code></td><td><b>O — 유일한 단계</b></td></tr>
+   <tr><td>Verified</td><td>O <code>DW4</code></td><td><b>X</b></td></tr>
+   <tr><td>이메일 코드</td><td>O <code>DW5</code></td><td><b>X</b></td></tr>
+   <tr><td>Google OTP</td><td>O <code>PE3</code></td><td><b>X</b></td></tr>
+   <tr><td>완료 모달</td><td>O <code>DW6</code></td><td><b>X — 바로 신청 접수</b></td></tr>
+  </table>
+  <div class="ghostbox" style="margin-top:10px;font-size:11.5px">
+   <b>출금하기 → 캡차 → 끝.</b> 그 사이에 아무 화면도 없습니다</div>
+ </div></div>`,
+ rows:[
+  ["✕","del","이 경로 자체가 없습니다","<span class='flag'>위 사진의 출금 팝업은 비회원에게 나올 수 없습니다.</span> 비회원은 캐시백 허브에 들어오지 않습니다. 팝업·Confirm 모달·완료 모달을 비회원용으로 그리실 필요가 없습니다."],
+  [1,"mod","계정 식별자","비회원 CEX는 <code>UID 99969145</code> 인데 <b>DEX는 지갑 주소</b>입니다. 거래소 로고·이름도 DEX 로 바뀝니다."],
+  [2,"mod","금액 구성","<b>줄 구성은 그대로 쓰면 됩니다</b> — 신청 가능한 캐시백 · 누적 캐시백 · 거래소 캐시백 · 이벤트 리워드 · 출금 가능 · 최소 출금 금액 10 USDT. <b>이미 DEX에 필요한 줄이 다 있습니다.</b>"],
+  [3,"add","출금하기","<b>`출금하기` → 캡차 → 끝</b> 입니다. 중간 모달이 없습니다. <b>최대 금액 일괄 출금만</b> 가능하므로 금액 입력 칸을 두지 마십시오.<br><br>※ 전액만 나가는 것이 어뷰징 방어 장치입니다 — 지갑 주소는 온체인 공개 정보라 제3자가 출금을 걸 수 있지만, 목적지가 그 지갑 자신이고 반복 출금으로 가스를 소모시킬 수 없습니다."],
+  [4,"mod","페이백 타임라인","<code>거래 시작 → 마감 시간 → 업데이트</code> 의 시각이 <b>DEX마다 다릅니다.</b> Lighter 주 1회(월) · ApeX 시간당 · EdgeX 일 1회 · Aster 일 1회. <i>\"업데이트는 최대 1시간까지 차이가 날 수 있습니다\"</i> 문구도 DEX 기준으로 다시 써야 합니다."],
+ ]},
+
+{id:"N-2", tab:"N-2 계산기", group:"없는 화면", kind:"new",
+ name:"캐시백 계산기 — 거래소 선택을 CEX·DEX 통합으로",
+ crumb:"캐시백 계산기 › 거래소 선택 단계",
+ basis:"바탕 — 기존 계산기의 <b>거래소 선택 단계</b>. 결과(Summary) 페이지는 <b>고칠 것이 없습니다.</b>",
+ why:"<b>퍼널 자체는 이미 있습니다.</b> 새로 만들 게 아니라 <b>거래소 선택 단계에 DEX를 들이는 작업</b>입니다.<br><br>지금은 CEX 11곳만 한 그리드에 있습니다. <b>기본을 CEX·DEX 통합 노출</b>로 하고, <b>연동 모달의 거래소 셀렉터와 같은 방식으로 <code>CEX</code>·<code>DEX</code> 칩</b>을 붙여 주십시오.",
+ pair:[
+  {img:"base/CALC_PICK.png", lbl:"no", cap:"지금 계산기의 거래소 선택 단계 — CEX 11곳만 한 그리드에 있습니다",
+   marks:[{n:1,k:"add",l:11.9,t:8.0,w:66.5,h:5.8,cap:"CEX / DEX 칩 추가"},
+          {n:2,k:"mod",l:11.4,t:12.8,w:67.6,h:35.2,cap:"DEX 4곳 통합"}]},
+  {img:"base/CMP_CHIPS.png", lbl:"ok", cap:"✅ 새로 그릴 것이 없습니다 — <b>같은 페이지 바로 아래 비교표</b>가 이미 이 칩을 쓰고 있습니다 (Figma 2.0 신규 · <code>DEXs · Table · Empty</code>)",
+   marks:[{n:2,k:"add",l:1.0,t:22.5,w:46.0,h:7.5,cap:"「from the calculator above」 — 계산기 바로 아래입니다"},
+          {n:1,k:"add",l:1.0,t:46.5,w:34.5,h:8.5,cap:"이 칩을 ① 자리로 올리면 됩니다"}]},
+ ],
+ addon:`<div class="cap">① 자리에 들어갈 칩 · ② 통합된 그리드</div>
+ <div class="frame"><div class="bar"><span>거래소 선택 (기존 단계 확장)</span><span>추가</span></div>
+ <div class="body col">
+   <div style="font-size:14px;font-weight:600;text-align:center">먼저, 가장 자주 사용하는 거래소는 어디인가요?</div>
+   <div class="row" style="justify-content:center">
+     <span class="chip on">전체</span><span class="chip">CEX</span><span class="chip" style="color:var(--add);border-color:var(--add)">DEX</span>
+   </div>
+   <div class="ghostbox" style="font-size:11.5px">기본값은 <b>전체</b> — CEX·DEX 가 한 그리드에 섞여 보입니다</div>
+   <div class="hr"></div>
+   <div class="lbl">통합 그리드 (기본 상태)</div>
+   <div class="row" style="flex-wrap:wrap">
+     <span class="chip">Bitget 77%</span><span class="chip">Bybit 64%</span><span class="chip">Toobit 60%</span>
+     <span class="chip">OKX 55%</span><span class="chip">WOO X Pro 93%</span><span class="chip">Gate 75%</span>
+     <span class="chip" style="color:var(--add);border-color:var(--add)">Lighter</span>
+     <span class="chip" style="color:var(--add);border-color:var(--add)">ApeX</span>
+     <span class="chip" style="color:var(--add);border-color:var(--add)">EdgeX</span>
+     <span class="chip" style="color:var(--add);border-color:var(--add)">Aster</span>
+   </div>
+ </div></div>`,
+ rows:[
+  [1,"add","CEX / DEX 칩","<span class='flag'>지금 없습니다.</span> <b>기존에 같은 패턴이 두 군데나 있습니다.</b><br>① <b>DEX 랜딩</b> — 같은 Figma 에 <code>filter (All / Exchanges / DEXs)</code> 프레임이 이미 있습니다. <b>바로 그 필터입니다.</b><br>② <b>같은 페이지의 비교표</b> — <b>Figma 2.0 에 새로 들어온 <code>Compare, empty search states</code> 섹션</b>(12장)이 <code>Centralised Exchanges</code> · <code>Decentralised Exchanges</code> · <code>Brokers</code> 칩을 이미 쓰고 있습니다. 부제가 <i>「from the calculator above」</i> 이므로 <b>계산기 바로 아래입니다.</b> <span class='flag'>한 페이지 안에서 위아래가 서로 다른 방식이 됩니다.</span><br>③ 연동 모달의 거래소 셀렉터(<code>L1 Select a DEX</code>, <code>LW-2</code>)가 <i>\"search, Popular partners, <b>All / CEX / DEX chips</b>, DEX filter on\"</i> 입니다. <b>그 칩을 그대로 가져다 쓰시면 됩니다.</b><br><br>기본값은 <b>전체</b>입니다."],
+  [2,"mod","타일 그리드","<b>기본은 CEX·DEX 통합 노출</b>입니다. DEX를 따로 떼어 놓지 않고 <b>같은 그리드에 섞어</b> 보여 주십시오. Lighter · ApeX · EdgeX · Aster 네 곳이 들어가고, <b>노출 순서는 백오피스</b>를 따릅니다. <code>노출여부</code>·<code>연동가능</code> 플래그가 꺼진 DEX 는 타일에서 빠집니다."],
+ ]},
+
+{id:"N-4", tab:"N-4 전부 출금불가", group:"없는 화면", kind:"new",
+ name:"출금 — 출금 가능한 계정이 하나도 없을 때",
+ crumb:"출금 › 전부 출금 불가",
+ basis:"바탕 — <b>지금 운영 중인 출금 화면</b>. 계정별 불가 안내는 <b>이미 들어가 있습니다.</b> 없는 것은 <b>전부 불가일 때</b> 뿐입니다.",
+ why:"실제 출금 화면을 보면 <b>계정마다 Available / Unavailable 을 나누고, 불가인 계정에는 얼마가 더 필요한지까지 적고 있습니다.</b> 새로 만들 것이 아닙니다.<br><br><span class='flag'>없는 것은 하나뿐입니다 — <b>목록의 모든 계정이 Unavailable 인 경우.</b></span> 지금은 <b>항상 하나는 출금 가능한 상태</b>로만 그려져 있습니다.<br><br>매칭 공식 때문에 <b>캐시백이 적고 이벤트 리워드만 많으면 출금 가능액이 0</b> 이 됩니다. 사용자에게는 <b>\"합쳐서 10 USDT 넘는데 왜 안 되냐\"</b> 가 됩니다.",
+ pair:[
+  {img:"base/WD_LIST.png", lbl:"no", cap:"지금 운영 화면 — 계정별 불가 안내는 이미 있습니다. 전부 불가인 경우만 없습니다",
+   marks:[{k:"mod",n:1,cap:"식별자",l:14.5,t:18.0,w:26.0,h:4.2},
+          {k:"add",n:2,cap:"이미 있는 안내",l:4.5,t:42.0,w:85.0,h:5.2},
+          {k:"add",n:3,cap:"전부 불가면 여기가 비활성",l:4.5,t:90.8,w:85.0,h:4.8}]},
+  {img:"base/v21/DW0.png", lbl:"ok", cap:"✅ ③④ 의 정답 — V2.1 『출금하기』 전부 불가. 이벤트 리워드 20 USDT 인데 캐시백이 0이라 막힌 경우입니다",
+   marks:[{k:"add",n:3,cap:"0개 계정 · 0.00",l:10.0,t:16.5,w:80.0,h:25.0},{k:"add",n:4,cap:"얼마가 더 필요한지",l:14.0,t:86.5,w:68.0,h:4.0},{k:"del",n:1,cap:"주소는 전체 노출",l:14.0,t:52.0,w:34.0,h:4.5}]},
+ ],
+ rows:[
+  [1,"mod","① 식별자 — DEX 는 지갑 주소","계정 카드가 <code>Bitget</code> / <code>UID 1432873105</code> 입니다. DEX 카드는 같은 자리에 <b>지갑 주소 전체</b>가 들어갑니다 — <code>Lighter</code> / <code>0x52908400098527886E0F7030069857D2E4169EE7</code>.<br><br><span class='flag'>확정 사항이라 마스킹하지 않습니다.</span> 42자라 <b>지금 카드 폭에 한 줄로 들어가지 않습니다.</b> 줄바꿈 처리를 정해 주십시오.<br><br>CEX 카드는 <b>지금 그대로</b>입니다."],
+
+  [2,"add","② 불가 안내는 이미 있습니다 — 판정 단위만 바꿉니다","<b>새로 디자인할 것이 없습니다.</b> 지금 화면에 이미 이렇게 적혀 있습니다.<br><code>You can withdraw if you receive an additional 5.00 USDT in exchange Cashback.</code><br><br>그리고 카드마다 <code>Exchange Cashback</code> / <code>Event Reward</code> 를 나눠 보여 주고 있습니다. <b>매칭 공식을 그대로 설명하는 구조</b>입니다.<br><br>바꿀 것은 하나입니다 — <span class='flag'>DEX 는 이 판정을 <b>UID 가 아니라 지갑 주소 단위</b>로 합니다.</span> 같은 거래소에 지갑이 2개면 <b>카드도 2장이고 따로 판정</b>됩니다."],
+
+  [3,"add","③ 전부 불가일 때 — 이것이 없습니다","목록의 <b>모든 카드가 Unavailable</b> 인 경우가 지금 없습니다. 필요한 것은 셋입니다.<br>· 상단 합계가 <code>Total Available Cashback 0.00 USDT</code><br>· 하단 <code>Confirm Withdraw</code> <b>비활성</b><br>· <span class='flag'>버튼만 죽이면 CS 문의가 그대로 들어옵니다.</span> <b>왜 막혔는지 한 줄</b>이 같이 있어야 합니다<br><br>문구 제안 — <code>출금 가능한 계정이 없어요. 캐시백 5.00 USDT 가 더 쌓이면 출금할 수 있어요.</code>"],
+
+  [4,"add","④ 매칭 안내","<b>「이벤트 리워드는 같은 계정의 캐시백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다.」</b> 안내가 같이 있어야 합니다.<br><br>고객센터와 확정한 예시 — <code>10/0</code> 가능 · <b><code>0/10</code> 불가</b> · <code>5/5</code> 가능 · <b><code>1/9</code> 불가</b> (캐시백 / 이벤트 리워드).<br><br><span class='flag'>이벤트 리워드가 2261 USDT 인데 출금이 안 되는 카드</span>가 지금 화면에 실제로 있습니다. 이 경우를 설명하지 못하면 문의가 들어옵니다."],
+ ]},
+
+{id:"N-5", tab:"N-5 미수령차단", group:"없는 화면", kind:"new",
+ name:"연동 — 미수령 잔액 차단은 기존 화면을 그대로 씁니다",
+ crumb:"연동 › 실패 · 보류 상태",
+ basis:"바탕 — <b>기존 CEX 의 <code>Unable to Link UID Yet</code> 화면</b>. 레이아웃은 그대로, <b>문구만 바꿉니다.</b>",
+ why:"확정(<code>B-5</code>·<code>H-4</code>): <b>미수령 캐시백이 10 USDT 이상이면 연동 자체가 차단</b>됩니다(<code>FAILED_NEED_RECEIVE</code>). <b>전 거래소 공통</b>입니다.<br><br>Figma 의 DEX 실패·보류 상태 6종(<code>L8</code> 미추천 · <code>L9</code> 사용 중 · <code>L12</code> 인증 한도 · <code>L13</code> 고객센터 · <code>L14</code> 이미 추가 · <code>L15</code> 지갑 한도)에 <b>이 상태가 빠져 있습니다.</b><br><br><b>이 화면은 그대로 필요합니다.</b> <code>FAILED_NEED_RECEIVE</code> 가 보는 것은 <b>거래소가 트레이더에게 주는 돈이 아니라, 테더맥스에 쌓인 미출금 캐시백</b>입니다 — 모달의 CTA 가 <code>Withdraw</code> 인 이유입니다. V2 는 캐시백을 전부 테더맥스가 쌓아 테더맥스가 지급하므로 <b>트레이더 요율을 0% 로 두어도 이 조건은 그대로 발생합니다.</b><br><br><span class='flag'>다만 「ApeX 에서 바로 터진다」 는 근거는 약해졌습니다.</span> 그 근거는 <b>ApeX Rewards Center 의 기존 미수령 잔액</b>이었는데, <b>트레이더 지급 요율 0% 설정으로 신규 적립이 끊깁니다.</b> 신규방침 문서도 <i>「claim 의존이 신규 구조에서 사라짐」</i> 이라고 적고 있습니다.<br><br>이미 쌓인 잔액은 남지만 <b>처리 방침이 아직 미정</b>이고(별도 안건), 그 잔액이 이 에러 코드로 이어진다는 것도 <b>확정이 아니라 제안</b>이었습니다. <b>화면 작업에는 영향이 없습니다 — 우선순위만 내려갑니다.</b>",
+ pair:[
+  {img:"base/LINKBLOCK.png", tall:1, lbl:"ok", cap:"✅ 기존 CEX 화면 — 이 화면을 DEX 연동 경로에도 그대로 연결하면 됩니다", marks:[{k:"mod",n:2,cap:"UID 가 2곳",l:13.0,t:48.0,w:74.0,h:11.0}]},
+ ],
+ rows:[
+  [1,"add","기존 화면 재사용","<b>레이아웃은 새로 그릴 것이 없습니다.</b> 기존 <code>Unable to Link UID Yet</code> 화면을 <b>DEX 지갑 연동 실패 경로에도 연결</b>해 주십시오.<br><br>구성 요소(경고 아이콘 · 제목 · 안내 문구 · <code>Withdraw</code> · <code>Need help? Contact Support</code>)와 배치는 그대로 두고, <b>문구만 바꿉니다</b> — 아래 2번."],
+  [2,"mod","문구 — 제목·본문 둘 다","<span class='flag'>DEX는 UID가 아니라 지갑입니다. 그런데 제목과 본문 양쪽에 <code>UID</code> 가 들어 있습니다.</span><br><br>· 제목 <code>Unable to Link <b>UID</b> Yet</code><br>· 본문 <code>… before linking your <b>UID</b>.</code><br><br><b>권고 — 한 벌로 통일</b>합니다. 이 차단은 <b>전 거래소 공통</b>(확정 <code>H-4</code>)이고, 연동 한도도 <b>CEX·DEX를 합쳐 「거래 계정」 기준</b>으로 쓰기로 했으므로 문구도 같은 말을 쓰는 것이 맞습니다.<br><br>영문 — <code>Unable to Link Account Yet</code> / <code>Please withdraw your accumulated cashback before linking your account.</code><br>한국어 — <code>아직 연동할 수 없어요</code> / <code>쌓여 있는 캐시백을 먼저 받아 주세요.</code> (기존 상태 사전의 <b>구어체 종결형</b>)<br><br>※ CEX·DEX 문구를 나누실 거라면 DEX 쪽은 <b>지갑</b> 기준으로 써 주십시오."],
+  [3,"add","DEX 실패 상태 목록에 추가","<code>L8</code>~<code>L15</code> 가 모인 <code>GROUP-LABEL · C · FAILURES</code> 에 이 상태를 <b>한 칸 추가</b>해 주십시오. 지금 그 목록에만 없습니다."],
+ ]},
+
+{id:"N-6", tab:"N-6 중복대기", group:"없는 화면", kind:"new",
+ name:"연동 — 지갑 중복이 접수된 뒤의 대기 상태",
+ crumb:"연동 › 확인 중",
+ basis:"바탕 — <b>저희 프로토타입 V2.1 『연동 &gt; 연동 확인 중』</b> 을 쓰시면 됩니다.",
+ why:"Figma 에는 <code>L9 Wallet already in use</code>(타인 사용 중)와 <code>L14 Wallet already added</code>(본인 이미 추가)가 있는데, <b>중복이 접수되어 처리 대기 중인 상태가 없습니다.</b><br><br>소유권 신청이 이번 범위에서 빠졌으므로 <b>중복은 고객센터로 갑니다.</b><br><br><b>확정(2026-10-27) — 연동이 완료되지 않은 지갑은 없는 것으로 취급합니다.</b> 잔액에도 출금에도 들어가지 않습니다. 아래 ④ 가 그 범위입니다.",
+ pair:[
+  {img:"base/v21/PENDING.png", lbl:"ok", cap:"✅ 저희 프로토타입 V2.1 『연동 > 연동 확인 중』 — 경과 시간을 적지 않습니다", marks:[{k:"add",n:1,cap:"제목",l:8.5,t:36.5,w:42.0,h:4.5},{k:"add",n:2,cap:"경과 시간 없이 이 한 줄만",l:8.5,t:44.0,w:82.5,h:10.0}]},
+ ],
+ rows:[
+  [1,"add","대기 안내","V2.1 문구 — <b>「지갑 연동을 확인하고 있어요 / 거래소의 귀속 내역 확인 후 연동 결과를 알려드릴게요.」</b>"],
+  [2,"add","경과 시간 미표시","<b>시간을 적지 않습니다.</b><br><br>확정 <code>A-07</code>: Lighter 가 주는 정산 파일은 <b>지갑 주소가 마스킹</b>돼 있습니다. <b>마스킹된 주소가 2건 이상 겹치면</b> 누구 것인지 가릴 수 없어 보류되고, <b>주간 CSV(월요일)로 확정</b>됩니다. 그래서 <b>최장 7일</b>입니다.<br><br><span class='flag'>「최장 7일」이라고 적으면 전부 7일 걸리는 줄 압니다.</span> 겹치지 않으면 바로 끝납니다. 그래서 V2.1 도 시간을 적지 않습니다."],
+  [3,"add","홈 목록의 행","모달을 닫은 뒤 <b>홈 Linked Accounts 에 남는 행</b>도 필요합니다. 기존 상태값 <code>manual_link_pending</code>(<b>연동 시도중이에요</b>, 홈 우선순위 2, 한도 소모 O)을 그대로 쓰시면 됩니다. 금액 자리는 <code>-</code> 입니다."],
+  [4,"add","출금·잔액에서 제외","<b>확정 — 연동 미완료 지갑은 없는 것으로 봅니다.</b> 따라서 다음 네 곳 어디에도 들어가지 않습니다.<br>· 출금 화면의 계정 목록 (고를 수 없습니다)<br>· 총 캐시백 잔액 합계<br>· <code>N개 계정</code> 카운트<br>· 캐시백 요약·랭킹 등 집계 화면<br><br><b>딱 한 군데는 예외입니다 — 지갑 한도는 소모합니다.</b> 기존 상태값 <code>manual_link_pending</code> 이 「한도 소모 O」 이기 때문입니다(③). 보류 중에 한도가 차면 <code>L15 Wallet limit reached</code> 가 뜹니다.<br><br><span class='flag'>행 자체는 숨기지 마십시오.</span> 홈에서 사라지면 사용자가 같은 지갑을 다시 연동하려 하고, 그때는 <code>L14 Wallet already added</code> 가 떠서 더 혼란스럽습니다. <b>보이되, 세지 않습니다.</b>"],
+ ]},
+
+{id:"N-7", tab:"N-7 미반영 4종", group:"없는 화면", kind:"new",
+ name:"DEX 반영분이 없는 기존 화면 4종",
+ crumb:"글로벌리그 · 이벤트 페이지 · 맥스보드 · 출금 피드",
+ basis:"바탕 — <b>기존 Figma 화면</b>(글로벌리그 · 이벤트 페이지). 맥스보드·출금 피드는 Figma 에도 저희 쪽에도 화면이 없습니다.",
+ why:"DEX 페이지 밖에 있는 기존 화면들을 <b>Figma 페이지 단위로 전수 확인</b>한 결과입니다. 아래 4종은 <b>확정 정책에 DEX 반영이 들어 있는데 반영돼 있지 않습니다.</b><br><br>글로벌리그·이벤트 페이지는 <b>화면은 있고 DEX가 빠진 것</b>이고, 맥스보드·출금 피드는 <b>DEX 쪽 정의 자체가 없습니다.</b><br><br><span class='flag'>혜택 상세와 쿠폰함은 고칠 곳이 많아 <b>N-8 · N-9 로 따로 뺐습니다.</b></span>",
+ pair:[
+  {img:"base/LEAGUE.png", lbl:"no", cap:"① 글로벌리그 — 지금 Figma. 팀 생성 조건이 \"linked UIDs\" 기준이라 DEX 지갑이 빠져 있습니다",
+   marks:[{k:"mod",n:1,cap:"문구",l:36.5,t:66.5,w:19.5,h:11.5}]},
+  {img:"base/v21/FEED.png", lbl:"ok", cap:"✅ ④ 출금 피드 — V2.1 게스트 홈. CEX·DEX 가 한 표에 섞입니다 (주소 마스킹만 예외)",
+   marks:[{k:"add",n:4,cap:"이 표를 그대로",l:6.5,t:45.0,w:87.0,h:45.0},{k:"del",n:4,cap:"주소는 전체 노출",r:1,l:8.5,t:53.0,w:13.5,h:5.0}]},
+  {img:"base/EVENTS.png", lbl:"no", cap:"② 이벤트 페이지 — 지금 Figma. 거래소 필터에 CEX만 있고 DEX 4곳이 없습니다",
+   marks:[{k:"add",n:2,cap:"DEX 4곳 추가",r:1,l:1.5,t:21.5,w:24.0,h:27.0},
+          {k:"mod",n:2,cap:"탭",l:19.0,t:7.0,w:14.0,h:7.5}]},
+ ],
+ rows:[
+  [1,"mod","① 글로벌리그 — 문구 수정","<b>화면은 이미 있습니다. 문구가 CEX 전용으로 돼 있습니다.</b><br><br>팀 생성 불가 다이얼로그 — <i>\"… the cumulative cashback total of <b>linked UIDs</b> … the recent cashback total of <b>linked UIDs</b> …\"</i><br><br>확정(<code>B-3</code>): <b>팀 생성 자격 금액에 DEX 캐시백도 합산</b>합니다. <code>\"linked UIDs\"</code> 를 <b>CEX UID와 DEX 지갑을 모두 포함하는 표현</b>으로 바꿔야 합니다. <code>N-5</code> 와 같이 <b>「거래 계정」</b> 으로 맞추시면 일관됩니다.<br><br>같이 봐야 하는 상태 — <code>When user does not have any linked UID</code>. <span class='flag'>DEX 지갑만 연동한 회원이 지금은 이 상태로 떨어집니다.</span><br><br>수령 계정 선택에도 <b>DEX 지갑이 들어가야</b> 합니다 (지금은 <code>Bitget · ****6789</code> 처럼 CEX UID 만).<br><br>※ 리그 점수는 <b>1 USDT 커미션 캐시백 = 1점</b>이고 이벤트·초대 리워드는 제외입니다."],
+
+  [2,"add","② 이벤트 페이지 — 거래소 필터","<span class='flag'>거래소 필터에 CEX만 있습니다</span>(<code>모든 거래소 / OKX / HTX …</code>). <b>DEX 4곳이 들어가야</b> 합니다.<br><br>확정된 <b>그룹 드롭다운 규칙</b>을 그대로 적용합니다 — 상단에 범위 선택 <b><code>전체</code> / <code>CEX 전체</code> / <code>DEX 전체</code></b>, 그 아래 <b><code>CEX</code>·<code>DEX</code> 그룹 헤더</b>. <b>단일 선택이면 「DEX 전체」를 고를 방법이 없습니다.</b><br><br>배지 규칙 — <b>식별자가 보이거나 그룹 헤더가 있으면 배지를 붙이지 않습니다.</b> 이 필터는 그룹 헤더가 있으므로 <b>배지 없이 헤더만</b> 씁니다.<br><br><code>거래소 이벤트</code> 탭에도 <b>DEX 이벤트가 나와야</b> 합니다 — 확정상 DEX도 이벤트 리워드를 받습니다."],
+
+  [3,"add","③ 맥스보드","맥스보드는 <b>어드민이 거래소 1곳 단위로 등록한 빙고판을 보여주는 화면</b>입니다. <b>사용자가 거래소를 고르는 구조가 아니고</b>, 등록되지 않은 거래소는 애초에 나오지 않습니다.<br><br>확정(<code>O-2</code>): <b>1차 대상은 ApeX·EdgeX·Aster</b>. Lighter 는 정산 주기가 주 1회라 이번 대상이 아닙니다.<br><br>필요한 것은 <b>DEX 보드가 등록됐을 때의 표시</b>입니다 — CEX 는 UID, <b>DEX 는 지갑 주소</b>로 참여 계정이 표기되고 진행도는 <b>DEX 캐시백 기준</b>입니다. 그 외 템플릿은 CEX 와 같습니다.<br><br><span class='flag'>※ 저희 프로토타입 V2.1 의 맥스보드 화면은 거래소를 사용자가 고르는 구조로 잘못 그려져 있습니다. 참고하지 마십시오.</span>"],
+
+  [4,"add","④ 실시간 출금 피드","확정: 출금 피드는 <b>게스트 홈과 서비스 소개 양쪽 모두</b>에 있습니다. <b>Figma 에 DEX 반영이 없습니다.</b><br><br><b>그릴 내용은 아래 사진에 다 있습니다.</b> 컬럼은 <code>거래 계정 · 거래소 · 캐시백 · 출금 시각 · 상태</code> 이고, 거래소 이름 옆에 <code>DEX</code>·<code>CEX</code> 배지가 붙습니다. CEX·DEX 가 <b>한 표에 섞여</b> 시간순으로 나옵니다.<br><br><span class='flag'>※ 사진의 <code>****9EE7</code> 마스킹은 그대로 쓰지 마십시오.</span> 확정은 <b>지갑 주소 전체 노출</b>입니다. CEX 식별자 마스킹은 지금 그대로 둡니다.<br><br>※ 컬럼명 <b>「거래 계정」</b> 은 보드 <code>N-11</code> 에서 정한 용어와 같습니다. 이미 맞게 돼 있습니다."],
+
+  [5,"mod","확인했으나 수정 불필요","같이 뒤졌지만 <b>고치지 않아도 되는 것</b>도 적어 둡니다.<br>· <b>포인트</b>(<code>[MAX-659]</code>) — 확정(<code>R-2</code>): 포인트는 DEX에 적용되지만 <b>이 화면에 거래소로 갈리는 것이 없습니다.</b> 바뀌는 건 어드민 쪽 하나뿐이라 <b>화면 수정 없음</b>입니다<br>· <b>거래소 리스트</b>(<code>[MAX-22]</code>) — DEX 목록은 DEX 페이지의 <code>OC Guest, partner list view</code> 와 랜딩의 <code>filter (All / Exchanges / DEXs)</code> 로 이미 그려져 있습니다"],
+ ]},
+
+{id:"N-8", tab:"N-8 혜택 상세", group:"기존 화면 수정", kind:"mod",
+ name:"혜택 상세 — 보상 3종의 DEX 적용 여부가 안 보입니다",
+ crumb:"혜택 › 보상 상세 (UID 연동 3 USDT · 첫 출금 10 USDT · 캐시백 챌린지)",
+ basis:"바탕 — <b>지금 Figma 의 실제 혜택 상세 화면</b> 6장(한국어·영문 각 3종). 점선 박스가 고쳐야 할 곳입니다.",
+ why:"보상마다 <b>DEX 적용 여부가 다른데 화면에 그 구분이 없습니다.</b><br>· <b>UID 연동 3 USDT</b> — <b>CEX 전용</b> (발급은 CEX 첫 연동만)<br>· <b>첫 출금 10 USDT</b> — <b>CEX · DEX 모두</b><br>· <b>캐시백 챌린지</b> — <b>CEX 전용</b><br><br>지금은 셋 다 똑같이 생겨서, <b>DEX 지갑만 연동한 회원이 받을 수 있다고 오해합니다.</b> 그리고 한국어 화면이 <b>「페이백」</b> 을 쓰고 있는데 <b>확정 용어는 「캐시백」</b> 입니다 — 이 3개 화면에서만 <b>모두 8곳</b>(① 2곳 · ② 1곳 · ③ 5곳)입니다.",
+ pair:[
+  {img:"base/BEN_UID_KO.png", lbl:"no", cap:"① UID 연동 3 USDT (한국어) — CEX 전용인데 표시가 없습니다",
+   marks:[{k:"mod",n:1,cap:"문구",l:33.0,t:18.0,w:34.0,h:9.0},
+          {k:"add",n:2,cap:"행 추가",l:14.7,t:80.7,w:69.0,h:12.8},
+          {k:"add",n:3,cap:"안내 추가",l:14.7,t:96.0,w:69.0,h:3.4}]},
+  {img:"base/BEN_UID_EN.png", lbl:"no", cap:"① UID 연동 3 USDT (영문) — 같은 곳을 같은 번호로 표시했습니다",
+   marks:[{k:"mod",n:1,cap:"문구",l:33.7,t:19.6,w:33.0,h:8.3},
+          {k:"add",n:2,cap:"행 추가",l:15.9,t:80.5,w:65.5,h:11.9},
+          {k:"add",n:3,cap:"안내 추가",l:15.9,t:95.0,w:65.5,h:3.0}]},
+  {img:"base/BEN_FW_KO.png", lbl:"no", cap:"② 첫 출금 10 USDT (한국어) — DEX도 되는데 그 말이 없습니다",
+   marks:[{k:"mod",n:4,cap:"문구",l:31.9,t:31.3,w:36.3,h:10.6},
+          {k:"add",n:5,cap:"행 추가",l:21.1,t:52.6,w:57.7,h:17.2}]},
+  {img:"base/BEN_FW_EN.png", lbl:"no", cap:"② 첫 출금 10 USDT (영문)",
+   marks:[{k:"mod",n:4,cap:"문구",l:30.5,t:32.0,w:39.2,h:12.0},
+          {k:"add",n:5,cap:"행 추가",l:13.6,t:55.4,w:68.0,h:18.1}]},
+  {img:"base/BEN_CH_KO.png", lbl:"no", cap:"③ 캐시백 챌린지 (한국어) — CEX 전용인데 표시가 없고 「페이백」이 5곳입니다",
+   marks:[{k:"add",n:6,cap:"배지 자리",r:1,l:18.0,t:7.9,w:15.8,h:11.8},
+          {k:"mod",n:7,cap:"문구",l:33.8,t:11.2,w:33.8,h:6.6},
+          {k:"mod",n:8,cap:"유의사항",l:17.6,t:75.5,w:65.0,h:18.4}]},
+  {img:"base/BEN_CH_EN.png", lbl:"no", cap:"③ 캐시백 챌린지 (영문) — 영문은 이미 Cashback 이라 배지와 안내만 필요합니다",
+   marks:[{k:"add",n:6,cap:"배지 자리",r:1,l:18.0,t:7.7,w:15.8,h:11.5},
+          {k:"mod",n:7,cap:"문구",l:33.8,t:10.9,w:33.8,h:6.4},
+          {k:"mod",n:8,cap:"Terms",l:17.6,t:74.4,w:65.0,h:19.2}]},
+ ],
+ rows:[
+  [1,"mod","① 제목·부제 — 「CEX UID」 로 좁히고 「캐시백」 으로","이 보상은 <b>CEX 첫 연동에만 발급</b>됩니다. 지금 문구는 <b>아무 거래소나 되는 것처럼 읽힙니다.</b><br><br><b>한국어</b><br>지금 — <code>UID 연동하고 <b>페이백</b> 받기</code> / <code>UID를 연동하여 <b>페이백</b>을 받고 3 USDT를 수령하세요.</code><br>제안 — <code><b>CEX UID</b> 연동하고 <b>캐시백</b> 받기</code> / <code><b>CEX 거래소 UID</b>를 연동하여 <b>캐시백</b>을 받고 3 USDT를 수령하세요.</code><br><br><b>영문</b><br>지금 — <code>Link UID to Get Cashback</code> / <code>Link your UID to start earning cashback and receive 3 USDT.</code><br>제안 — <code>Link a <b>CEX</b> UID to Get Cashback</code> / <code>Link a <b>CEX exchange</b> UID to start earning cashback and receive 3 USDT.</code>"],
+
+  [2,"add","② 보상 상세 정보 — 「적용 거래소」 행 추가","표에 <b>행을 하나 더</b> 넣어 주십시오. 지금 표(보상 금액 · 지급 유형 · 지급 대상)로는 <b>어느 거래소가 대상인지 알 수 없습니다.</b><br><br>한국어 — <code>적용 거래소</code> / <code>CEX 전용</code><br>영문 — <code>Eligible Exchanges</code> / <code>CEX only</code><br><br>※ 같은 행을 <b>세 보상 모두에</b> 넣습니다. 값만 달라집니다."],
+
+  [3,"add","③ 하단 안내 — DEX 지갑은 대상이 아님을 명시","지금 안내는 <code>이 리워드는 계정당 한 번만 수령가능 합니다.</code> 한 줄뿐입니다. <b>아래 한 줄을 같은 영역에 추가</b>해 주십시오.<br><br>한국어 — <code>DEX 지갑 연동은 이 보상 대상이 아닙니다.</code><br>영문 — <code>Linking a DEX wallet does not qualify for this reward.</code><br><br><span class='flag'>이 한 줄이 없으면 DEX 지갑을 연동한 회원이 3 USDT 를 기대하고 CS 로 옵니다.</span>"],
+
+  [4,"mod","④ 첫 출금 — 「페이백」 만 고치면 됩니다","이 보상은 <b>DEX 도 됩니다.</b> 그래서 거래소를 좁히는 문구는 넣지 않습니다.<br><br><b>한국어</b><br>지금 — <code>첫 <b>페이백</b>을 출금하고 10 USDT 쿠폰을 받으세요.</code><br>제안 — <code>첫 <b>캐시백</b>을 출금하고 10 USDT 쿠폰을 받으세요.</code><br><br><b>영문</b> — <code>Withdraw your first cashback to receive a 10 USDT coupon.</code> <b>그대로 두시면 됩니다.</b>"],
+
+  [5,"add","⑤ 첫 출금 — 「적용 거래소 = CEX · DEX 모두」","②와 같은 자리에 행을 넣되 값이 다릅니다.<br>한국어 — <code>적용 거래소</code> / <code>CEX · DEX 모두</code><br>영문 — <code>Eligible Exchanges</code> / <code>CEX and DEX</code><br><br><b>판정 기준은 지금 안내로 이미 정해져 있습니다</b> — <code>이 리워드는 계정당 한 번만 수령가능 합니다.</code> 즉 <b>DEX 지갑을 여러 개 연동해도 계정당 1회</b>입니다. 추가로 정할 것은 없고, <b>지갑별 1회로 오해되지 않게</b> 이 문장을 그대로 유지해 주십시오."],
+
+  [6,"add","⑥ 챌린지 — 「CEX 전용」 배지","파란 박스 왼쪽 빈 자리에 <b>CEX 전용 배지</b>를 넣어 주십시오. 위치는 ①·②와 같은 규칙입니다.<br>한국어 — <code>CEX 전용</code> · 영문 — <code>CEX only</code><br><br>그리고 <b>유의사항 맨 위에 한 줄</b>을 추가합니다.<br>한국어 — <code>이 챌린지는 CEX 거래소 UID만 참여할 수 있습니다. DEX 지갑의 캐시백은 집계되지 않습니다.</code><br>영문 — <code>Only CEX exchange UIDs can join this challenge. Cashback from DEX wallets is not counted.</code>"],
+
+  [7,"mod","⑦ 챌린지 제목·부제 — 「페이백」 → 「캐시백」","<b>한국어</b><br>지금 — <code><b>페이백</b> 목표를 달성하세요!</code> / <code><b>페이백</b> 내역은 매일 13:00에 업데이트됩니다</code><br>제안 — <code><b>캐시백</b> 목표를 달성하세요!</code> / <code><b>캐시백</b> 내역은 매일 13:00에 업데이트됩니다</code><br><br><b>영문</b> — <code>Unlock Your Cashback Goal!</code> <b>그대로입니다.</b>"],
+
+  [8,"mod","⑧ 챌린지 유의사항 — 「페이백」 3곳","<b>UID 라는 말은 그대로 두십시오.</b> 이 챌린지는 CEX 전용이라 <b>UID 가 맞는 표현</b>입니다. 바꿀 것은 용어뿐입니다.<br><br>유의사항에서 <code>페이백</code> → <code>캐시백</code> 으로 바꿀 곳은 <b>3군데</b>입니다. (제목·부제 2곳을 더하면 이 화면에서 모두 <b>5곳</b>)<br>· <code>… 다른 테더맥스 계정에 연동되더라도 <b>페이백</b> 챌린지에 적용되지 않을 수 있습니다.</code><br>· <code>19:30~21:30에는 <b>페이백</b> 챌린지 금액 업데이트로 인해 …</code><br>· <code>이슈 UID인 상태에서는 <b>페이백</b> 내역이 발생해도 …</code><br><b>영문 Terms 는 손댈 곳이 없습니다.</b>"],
+ ]},
+
+{id:"N-9", tab:"N-9 쿠폰함", group:"기존 화면 수정", kind:"mod",
+ name:"쿠폰함 — 계정 선택과 완료 화면이 UID 전용입니다",
+ crumb:"쿠폰함 › 쿠폰 사용 › 계정 선택 › 완료",
+ basis:"바탕 — <b>지금 Figma 의 실제 쿠폰 사용 흐름</b>(계정 선택 → 선택 후 → 완료). 점선 박스가 고쳐야 할 곳입니다.",
+ why:"확정(<code>P-2</code>): <b>쿠폰 사용은 DEX 도 됩니다.</b> 그런데 계정 선택에 <b>CEX UID 만 나오고</b>, 제목도 완료 화면도 <b>UID 를 전제</b>로 쓰여 있습니다.<br><br><span class='flag'>예외가 하나 있습니다 — <code>LINK UID</code> 쿠폰(첫 연동 3 USDT)만 DEX 지갑을 보여주지 않습니다.</span> 그 쿠폰은 <b>DEX 지갑 연동으로는 발급되지 않기 때문</b>입니다. 즉 <b>쿠폰 종류에 따라 목록이 갈립니다.</b>",
+ pair:[
+  {img:"base/CP_UID.png", lbl:"no", cap:"쿠폰 사용 흐름 — 지금 Figma. 왼쪽 2장이 계정 선택, 오른쪽이 완료 화면입니다",
+   marks:[{k:"mod",n:1,cap:"제목",r:1,l:5.5,t:25.1,w:25.7,h:7.9},
+          {k:"add",n:2,cap:"DEX 지갑 행 추가",r:1,l:5.5,t:38.9,w:25.7,h:24.2},
+          {k:"mod",n:4,cap:"문구",l:70.0,t:37.3,w:26.7,h:5.1},
+          {k:"mod",n:3,cap:"UID 라벨",l:76.0,t:44.2,w:20.5,h:11.5}]},
+ ],
+ rows:[
+  [1,"mod","① 제목 — <code>UID</code> 를 쓰면 안 됩니다","DEX 지갑도 이 목록에 들어오므로 <b>UID 라는 말을 쓸 수 없습니다.</b><br><br>영문<br>지금 — <code>Select a UID to apply this coupon</code><br>제안 — <code>Select an account to apply this coupon</code><br><br>한국어 — <code>이 쿠폰을 적용할 계정을 선택하세요</code><br><br>부제 <code>Once applied, it cannot be changed.</code> / <code>한 번 적용하면 변경할 수 없습니다.</code> 는 <b>그대로</b>입니다."],
+
+  [2,"add","② 계정 목록 — DEX 지갑 행을 추가합니다","지금은 <code>Bybit UID 123456789</code> 처럼 <b>CEX UID 3줄</b>뿐입니다. <b>DEX 지갑 행이 같은 목록에 들어가야</b> 합니다.<br><br>· 왼쪽 로고는 <b>DEX 로고</b>(Lighter · ApeX · EdgeX · Aster)<br>· 오른쪽 텍스트는 <b>지갑 주소 전체</b>입니다. <span class='flag'>확정 사항이라 <b>마스킹하지 않습니다.</b></span> CEX UID 행은 지금처럼 두십시오<br>· 주소가 길어 한 줄에 안 들어가면 <b>줄바꿈 또는 말줄임</b>을 어떻게 할지 정해 주십시오 — 지금 행 높이로는 안 들어갑니다<br><br><b>정렬</b>은 확정 그룹 규칙을 따릅니다 — <code>CEX</code> 그룹 헤더 아래 UID, <code>DEX</code> 그룹 헤더 아래 지갑. <b>그룹 헤더가 있으므로 행마다 배지는 붙이지 않습니다.</b><br><br><b>예외 — <code>LINK UID</code> 쿠폰</b><br>이 쿠폰 하나만 <b>DEX 지갑을 목록에서 뺍니다.</b> 뒤에 보이는 쿠폰 목록의 <code>FIRST CASHBACK</code>·<code>INVITATION REWARD</code> 등 <b>나머지는 전부 DEX 지갑을 보여줍니다.</b>"],
+
+  [3,"mod","③ 완료 화면 — <code>UID</code> 행 라벨이 DEX 에는 안 맞습니다","완료 화면 표가 <code>Exchange / UID / Amount</code> 로 돼 있습니다. <b>DEX 를 고르면 UID 가 없습니다.</b><br><br>· DEX 일 때 라벨 — 영문 <code>Wallet</code> / 한국어 <code>지갑 주소</code><br>· 값은 <b>지갑 주소 전체</b><br>· CEX 일 때는 지금 그대로 <code>UID</code> / <code>474634459</code><br><br><b>라벨이 거래소 종류에 따라 바뀌는 표</b>입니다. 한 줄 안에서 글자 수가 크게 달라지니 <b>줄바꿈 처리를 같이 봐 주십시오.</b>"],
+
+  [4,"mod","④ 완료 문구 — 출금 조건이 빠졌습니다","지금 — <code>Event rewards can be withdrawn together with your cashback.</code><br><br><span class='flag'>이 말만 보면 이벤트 리워드를 언제든 함께 뺄 수 있는 것처럼 읽힙니다. 실제로는 캐시백이 있어야 그만큼만 나갑니다.</span><br><br>확정 공식 — <b>출금 가능액 = 캐시백 + MIN(이벤트 리워드, 캐시백)</b>. 캐시백이 <b>0 이면 이벤트 리워드만으로는 출금할 수 없습니다.</b><br><br>제안<br>영문 — <code>Event rewards can be withdrawn only up to the amount of cashback you have earned.</code><br>한국어 — <code>이벤트 리워드는 받은 캐시백 금액만큼만 함께 출금할 수 있어요.</code><br><br>※ DEX 는 이 판정을 <b>지갑 주소 단위</b>로 합니다 — CEX 의 UID 단위와 같은 구조입니다."],
+ ]},
+
+{id:"N-10", tab:"N-10 캐시백 요약", group:"기존 화면 수정", kind:"mod",
+ name:"캐시백 요약(캘린더) — 거래소 선택이 전부 CEX UID 기준입니다",
+ crumb:"캐시백 요약 › 거래소·계정·유형 필터 › 달력 › 날짜별 내역",
+ basis:"바탕 — <b>지금 운영 중인 캐시백 요약 화면</b> 3장. 점선 박스가 고쳐야 할 곳입니다.",
+ why:"이 화면은 <b>거래소를 고르는 지점이 세 군데</b>(거래소 · 계정 · 유형)인데 <b>전부 CEX UID 를 전제</b>로 돼 있습니다.<br><br>· 거래소 목록에 <b>DEX 4곳이 없습니다</b><br>· 개수를 <code>(14 UIDs)</code> 로 세는데 <b>DEX 는 UID 가 없습니다</b><br>· 날짜별 내역이 <code>OKX 617755618866586639</code> 처럼 <b>UID 를 그대로 찍습니다</b><br>· 용어가 <b>「페이백」</b> 입니다 (확정 용어는 <b>「캐시백」</b>)",
+ pair:[
+  {img:"base/CAL_MAIN.png", lbl:"no", cap:"캐시백 요약 전체 — 왼쪽 필터 3개와 날짜별 내역이 모두 CEX 기준입니다",
+   marks:[{k:"mod",n:1,cap:"필터 3개",l:3.0,t:5.0,w:29.9,h:21.3},
+          {k:"mod",n:4,cap:"지갑 주소 표기",l:39.0,t:83.6,w:54.1,h:8.2}]},
+  {img:"base/CAL_DROP.png", tall:1, lbl:"no", cap:"거래소 드롭다운 — CEX 4곳뿐이고 개수를 UID 로 셉니다",
+   marks:[{k:"add",n:1,cap:"DEX 4곳 + 그룹 헤더",l:2.4,t:21.9,w:95.5,h:76.3}]},
+  {img:"base/CAL_TYPE.png", tall:1, lbl:"no", cap:"계정 선택과 유형 필터 — 「1개 선택」은 UID 선택이고, 유형은 「페이백」입니다",
+   marks:[{k:"mod",n:2,cap:"지갑 선택",l:2.9,t:23.7,w:94.3,h:10.2},
+          {k:"mod",n:3,cap:"용어",l:2.9,t:39.5,w:94.3,h:56.9}]},
+ ],
+ rows:[
+  [1,"mod","① 거래소 드롭다운 — DEX 4곳과 그룹 헤더","지금 목록은 <code>모든 거래소 / Bitget (14 UIDs) / HTX (4 UIDs) / Toobit (1 UID) / WOO X Pro (1 UID)</code> 입니다. <b>CEX 뿐입니다.</b><br><br>확정된 <b>그룹 드롭다운 규칙</b>을 적용합니다 — 맨 위 범위 선택 <b><code>전체</code> / <code>CEX 전체</code> / <code>DEX 전체</code></b>, 그 아래 <b><code>CEX</code>·<code>DEX</code> 그룹 헤더</b>. 그룹 헤더가 있으므로 <b>행마다 배지는 붙이지 않습니다.</b><br><br><span class='flag'>개수 표기가 DEX 에는 맞지 않습니다.</span> <code>(14 UIDs)</code> 의 단위가 UID 인데 <b>DEX 에는 UID 가 없습니다.</b><br>제안 — DEX 행은 <code>Lighter (2 지갑)</code> / 영문 <code>Lighter (2 wallets)</code>. CEX 행은 <b>지금 그대로</b>."],
+
+  [2,"mod","② 계정 선택 — <code>1개 선택</code> 이 가리키는 것이 달라집니다","두 번째 드롭다운은 <b>거래소 안에서 계정을 고르는 칸</b>입니다. CEX 를 고르면 <b>UID 목록</b>, DEX 를 고르면 <b>지갑 목록</b>이 나와야 합니다.<br><br>· DEX 지갑 행은 <b>주소 전체</b>를 보여줍니다 — <span class='flag'>확정 사항이라 마스킹하지 않습니다.</span><br>· 주소는 42자라 <b>지금 칸 너비에 한 줄로 안 들어갑니다.</b> 줄바꿈·말줄임 중 어느 쪽인지 정해 주십시오<br>· <code>1개 선택</code> 같은 빈 상태 문구도 <b>UID 와 지갑 양쪽에 맞는 말</b>이어야 합니다"],
+
+  [3,"mod","③ 유형 필터 — 「페이백」 → 「캐시백」","드롭다운 자체와 항목에 <code>페이백</code> 이 <b>2곳</b> 있습니다.<br>· <code>모든 <b>페이백</b> 유형</code> → <code>모든 <b>캐시백</b> 유형</code><br>· 항목 <code><b>페이백</b></code> → <code><b>캐시백</b></code><br><br><code>이벤트 리워드</code> · <code>출금 금액</code> 은 <b>그대로</b>입니다.<br><br>이 세 유형은 <b>DEX 에서도 전부 발생합니다.</b> 유형 목록 자체는 바꿀 것이 없습니다."],
+
+  [4,"mod","④ 날짜별 내역 — 거래소 + 식별자 표기","지금 한 줄이 <code>선물 거래 페이백</code> / <code>OKX 617755618866586639</code> 입니다.<br><br>· <code>선물 거래 <b>페이백</b></code> → <code>선물 거래 <b>캐시백</b></code><br>· 아랫줄은 <b>거래소명 + 식별자</b> 형식입니다. DEX 는 UID 자리에 <b>지갑 주소 전체</b>가 들어갑니다 — <code>Lighter 0x7a3F9c2B…</code> 가 아니라 <b>42자 전부</b><br>· <span class='flag'>지금 줄 길이로는 들어가지 않습니다.</span> 이 줄의 줄바꿈 처리를 ②와 같은 규칙으로 정해 주십시오"],
+
+  [5,"mod","같이 볼 것 — 중복 작업 방지","· <b>DEX 데이터 지연</b> 표시는 Figma 댓글 <code>S-7</code> 에 따로 적었습니다. <b>같은 처리면 한 번만</b> 하시면 됩니다<br>· DEX 페이지에 <code>CS1~CS6</code> 으로 <b>캐시백 요약의 DEX 판</b>이 영문으로 따로 그려져 있습니다. <span class='flag'>이 화면을 대체하는 것인지, 둘 다 살리는 것인지 확인이 필요합니다.</span> 대체라면 이 보드는 그쪽에 합쳐 주십시오"],
+ ]},
+
+{id:"N-11", tab:"N-11 UID 표현", group:"기존 화면 수정", kind:"mod",
+ name:"「UID」 라는 말을 쓰는 곳 — 전수 목록과 교체 문구",
+ crumb:"초대 리워드 · 파트너 허브 · 출금 확인 · 그 외",
+ basis:"바탕 — <b>지금 Figma 의 실제 화면</b> 3장. 점선 박스가 고쳐야 할 곳입니다.",
+ why:"DEX 는 <b>UID 가 없고 지갑 주소를 씁니다.</b> 그런데 화면 곳곳이 <code>UID</code> 를 그대로 쓰고 있어서, <b>DEX 지갑만 연동한 회원에게는 말이 안 되는 문장</b>이 됩니다.<br><br><span class='flag'>판단 기준은 하나입니다 — <b>그 화면이 CEX 만 대상이면 <code>UID</code> 를 그대로 두고, DEX 도 대상이면 바꿉니다.</b></span><br><br>교체 용어는 <b>영문 <code>Account</code> · 한국어 「거래 계정」</b> 으로 통일합니다. <b>CEX UID 와 DEX 지갑 주소를 모두 포함</b>하는 말입니다.",
+ pair:[
+  {img:"base/INV_WD.png", lbl:"no", cap:"초대 리워드 출금 — 모달 제목과 목록, 그리고 왼쪽 등록 현황까지 전부 UID 기준입니다",
+   marks:[{k:"mod",n:1,cap:"제목",l:39.5,t:29.5,w:21.0,h:8.5},
+          {k:"add",n:2,cap:"DEX 지갑 추가",l:39.5,t:40.0,w:21.0,h:25.0},
+          {k:"mod",n:3,cap:"등록 현황",r:1,l:0.8,t:46.5,w:24.5,h:9.5}]},
+  {img:"base/v21/IF8.png", lbl:"ok", cap:"✅ ①② 의 정답 — V2.1 『초대 리워드를 받을 계정 선택』. 제목도 그룹 헤더도 이미 맞습니다 (주소 마스킹만 예외)",
+   marks:[{k:"add",n:1,cap:"「계정 선택」",l:19.0,t:9.8,w:54.0,h:5.0},{k:"add",n:2,cap:"그룹 헤더 + DEX 행",l:17.5,t:54.5,w:72.0,h:17.5},{k:"del",n:2,cap:"주소는 전체 노출",l:26.0,t:66.8,w:36.0,h:4.2}]},
+  {img:"base/PH_UIDS.png", lbl:"no", cap:"파트너 허브 — 하위 회원의 연동 계정 모달. CEX·DEX 를 나누지 말고 문구만 바꿉니다",
+   marks:[{k:"mod",n:4,cap:"제목과 개수",l:34.5,t:58.5,w:38.0,h:8.0},
+          {k:"mod",n:5,cap:"목록 행",l:34.5,t:66.0,w:38.0,h:24.5}]},
+  {img:"base/WD_CONF.png", tall:1, lbl:"no", cap:"출금 확인 다이얼로그 — 하단 안내 문구에 UID 가 들어 있습니다", marks:[{k:"mod",n:6,cap:"안내 문구",l:8.5,t:76.5,w:83.5,h:10.5}]},
+ ],
+ rows:[
+  [1,"mod","① 초대 리워드 출금 모달","지금 — <code>Select a <b>UID</b> to withdraw referral rewards</code><br>제안 — <code>Select an <b>account</b> to withdraw referral rewards</code><br>한국어 — <code>초대 리워드를 받을 계정을 선택하세요</code><br><br>확정: <b>DEX 초대에도 초대 리워드가 발생합니다.</b> 이 모달은 DEX 도 대상이므로 바꿔야 합니다.<br><br><b>저희 프로토타입 V2.1 에 이미 이렇게 돼 있습니다</b> — 제목 <code>초대 리워드를 받을 계정 선택</code>. 위 ✅ 사진 그대로 가시면 됩니다."],
+
+  [2,"add","② 수령 계정 목록 — DEX 지갑 추가","지금은 <code>Bybit UID 123456789</code> 처럼 <b>CEX UID 3줄</b>뿐입니다.<br><br>· DEX 지갑 행을 <b>같은 목록</b>에 넣습니다 (로고 + <b>지갑 주소 전체</b>)<br>· 정렬은 확정 그룹 규칙 — <code>CEX</code>·<code>DEX</code> <b>그룹 헤더</b>. 헤더가 있으므로 <b>행마다 배지는 붙이지 않습니다</b><br>· 주소 42자가 지금 행 높이에 안 들어갑니다. 줄바꿈 처리를 정해 주십시오"],
+
+  [3,"mod","③ 거래소 등록 현황 표","같은 화면 왼쪽 표입니다.<br>지금 — <code>Exchange <b>UID</b> Registration Status</code> / 컬럼 <code>No. of Registered <b>UIDs</b></code><br>제안 — <code>Exchange <b>Account</b> Registration Status</code> / <code>No. of Registered <b>Accounts</b></code><br>한국어 — <code>거래소 계정 등록 현황</code> / <code>등록 계정 수</code><br><br>표 자체에도 <b>DEX 4곳이 행으로 들어가야</b> 합니다. 지금은 Bitget·BingX·Binance·Bybit … CEX 뿐입니다."],
+
+  [4,"mod","④ 파트너 허브 — 연동 계정 모달","<span class='flag'>CEX·DEX 를 나눠 세는 표로 바꾸지 마십시오. 문구만 바꿉니다.</span><br><br>지금 — 제목 <code>Linked <b>UIDs</b></code> / 개수 <code>5 <b>UIDs</b></code><br>제안 — <code>Linked <b>Accounts</b></code> / <code>5 <b>accounts</b></code><br>한국어 — <code>연동 계정</code> / <code>5개</code><br><br>하위 회원이 DEX 지갑만 연동했어도 <b>같은 목록에 같은 방식</b>으로 나옵니다.<br><br><b>저희 프로토타입 V2.1 의 같은 모달이 이미 이렇게 돼 있습니다</b> — 제목 <code>연동된 계정</code>, 부제 <code>TUID 9900690902 · 3개 계정</code>, 그 아래 <code>CEX</code> 그룹 헤더. <b>개수를 「계정」으로 세고 있습니다.</b>"],
+
+  [5,"mod","⑤ 모달의 목록 행","지금 행이 <code>Binance</code> / <code>*******7C92</code> 로 <b>마스킹</b>돼 있습니다.<br><br>· <b>CEX UID 행은 지금 그대로</b> 두십시오<br>· <b>DEX 지갑 행만 주소 전체</b>를 노출합니다 — 확정 사항입니다<br>· 금액 표기(<code>+61.89 USDT</code>)는 <b>그대로</b>입니다"],
+
+  [6,"mod","⑥ 출금 확인 다이얼로그 안내","지금 — <code>To change the withdrawal exchange or <b>UID</b> for invitation rewards, please contact support.</code><br>제안 — <code>To change the withdrawal exchange or <b>account</b> for invitation rewards, please contact support.</code><br>한국어 — <code>초대 리워드를 받을 거래소나 계정을 바꾸려면 고객센터로 문의해 주세요.</code>"],
+
+  [7,"mod","이미 다른 곳에 적어 둔 것 (중복 작업 방지)","같은 규칙이 적용되지만 <b>해당 보드·댓글에 이미 적었습니다.</b> 여기서는 다시 하지 마십시오.<br>· <b>연동 차단</b> <code>Unable to Link UID Yet</code> → 보드 <code>N-5</code><br>· <b>쿠폰함</b> <code>Select a UID to apply this coupon</code> → 보드 <code>N-9</code><br>· <b>글로벌리그</b> <code>the cumulative cashback total of linked UIDs</code> → 보드 <code>N-7</code> ①<br>· <b>캐시백 요약</b> 계정 선택 <code>1개 선택</code> → 보드 <code>N-10</code> ②<br>· <b>연동 한도 문구</b> → Figma 댓글 <code>S-2</code>"],
+
+  [8,"mod","그대로 두는 곳","<b>CEX 만 대상인 화면은 <code>UID</code> 가 맞는 말입니다. 건드리지 마십시오.</b><br>· <b>캐시백 챌린지</b> — CEX 전용입니다. 유의사항의 <code>UID</code> 3곳 모두 유지 (보드 <code>N-8</code> ⑧)<br>· <b>UID 연동 3 USDT 보상</b> — 발급이 CEX 첫 연동만이라 <code>UID</code> 유지 (보드 <code>N-8</code> ①)<br>· <b>쿠폰함의 <code>LINK UID</code> 쿠폰</b> — 이름 그대로 둡니다"],
+ ]},
+
+];
+
+const KIND={mod:["b-mod","기존 화면 수정"],new:["b-new","기존 화면 기반 신규"],wire:["b-out","바탕 없는 신규"]};
+const tabs=document.getElementById("tabs"), wrap=document.getElementById("screens");
+S.forEach(s=>{
+  const b=document.createElement("button");
+  b.textContent=s.tab; b.dataset.id=s.id;
+  b.onclick=()=>document.getElementById("sec-"+s.id).scrollIntoView({behavior:"smooth",block:"start"});
+  tabs.appendChild(b);
+
+  const shot = (img, marks, id, narrow) =>
+    `<div class="shot${narrow?" tall":""}"><img src="${img}" alt="${id}">`
+    + (marks||[]).map(m=>`<div class="mark ${m.k}${m.r?" r":""}" style="left:${m.l}%;top:${m.t}%;width:${m.w}%;height:${m.h}%"><i>${m.n}</i><u>${m.cap}</u></div>`).join("")
+    + `</div>`;
+  const visual = s.pair
+    ? `<div class="pair">` + s.pair.map(p =>
+        `<div><div class="pairlbl pl-${p.lbl}">${p.cap}</div>${shot(p.img,p.marks,s.id,p.tall)}</div>`).join("")
+      + `</div>` + (s.addon?`<div class="addon">${s.addon}</div>`:"")
+    : s.img
+    ? shot(s.img, s.marks, s.id) + (s.addon?`<div class="addon">${s.addon}</div>`:"")
+    : s.wire;
+
+  const sec=document.createElement("section");
+  sec.className="screen-section"; sec.id="sec-"+s.id;
+  sec.innerHTML=`
+    <div class="meta-box">
+      <div class="top">
+        <span class="badge b-dark">${s.id}</span>
+        <span class="badge ${KIND[s.kind][0]}">${KIND[s.kind][1]}</span>
+        <span class="badge b-out">${s.group}</span>
+        <span class="crumb">${s.crumb}</span>
+      </div>
+      <h2>${s.name}</h2>
+      <p>${s.why}</p>
+      <div class="basis">${s.basis}</div>
+    </div>
+    <div class="grid">
+      <div class="wire">${visual}</div>
+      <div class="desc">
+        <h3>DESCRIPTION — ${s.id}</h3>
+        <table>${s.rows.map(r=>`<tr><td class="n n-${r[1]==='wire'?'add':r[1]}">${r[0]}</td><td class="w">${r[2]}</td><td>${r[3]}</td></tr>`).join("")}</table>
+      </div>
+    </div>`;
+  wrap.appendChild(sec);
+});
+
+const secs=[...document.querySelectorAll(".screen-section")], btns=[...tabs.querySelectorAll("button")];
+function spy(){let cur=secs[0];for(const el of secs){if(el.getBoundingClientRect().top<=140)cur=el;}
+  btns.forEach(b=>b.classList.toggle("on","sec-"+b.dataset.id===cur.id));}
+window.addEventListener("scroll",spy,{passive:true}); spy();
+</script>
+</body>
+</html>
