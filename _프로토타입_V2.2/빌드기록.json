@@ -2,10 +2,10 @@
   {
     "mode": "user",
     "input": "사용자화면_DEX영향도.html",
-    "output": "사용자화면_DEX_V2.2_20261126_1506.html",
+    "output": "사용자화면_DEX_V2.2_20261126_2348.html",
     "sourceHash": "5417ffe4153a5e816e86e0ba682a711f48955c7a07be47cdbb6c65ce4ab0ee0e",
-    "outputHash": "f01fa7756b7e2775b71387e77b30a308f757c06169627c4f55e761df28e3cec5",
-    "bytes": 2779554,
+    "outputHash": "69c1fe8ac9f5afa5c0b1fb85271d3be984a85a5d4b4ecc3d1fd0235be76c7ae4",
+    "bytes": 2774388,
     "embeddedAssets": [
       "ab5e4c99539fa8538d4b49ec363434b8234b08cc2375b11bb33638cc4545c6df"
     ]
@@ -13,10 +13,10 @@
   {
     "mode": "admin",
     "input": "백오피스_DEX영향도.html",
-    "output": "백오피스_DEX_V2.2_20261126_1506.html",
+    "output": "백오피스_DEX_V2.2_20261126_2348.html",
     "sourceHash": "08e5df45735a62a20f353b7519fccdff9b0347d0f703d137ea3bb69c6ceabfbb",
-    "outputHash": "a63dd743398a0142d9e984c687452509be30d59245eaaeec60becc77e15ae4e6",
-    "bytes": 2701491,
+    "outputHash": "d015a782c307c025ce6042d4579f7197f4033fa6dc77a4c5ac8a31bbd014c842",
+    "bytes": 2696325,
     "embeddedAssets": [
       "ab5e4c99539fa8538d4b49ec363434b8234b08cc2375b11bb33638cc4545c6df"
     ]

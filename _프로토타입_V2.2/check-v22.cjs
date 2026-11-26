@@ -43,10 +43,6 @@ check('퍼널 Bybit Summary 각주',()=>assert(/Calculated based on paid trading
 check('챌린지 CEX 전용 문구 없음',()=>assert(!/CEX 전용/.test(at(u,'ch/CH1'))));
 check('부스트에 DEX 행',()=>assert(/EdgeX/.test(at(u,'etc/BST'))));
 check('맥스보드 DEX 보드',()=>assert(/EdgeX (맥스보드|MaxBoard)/.test(at(u,'mb/BOARD'))));
-check('출금 화면: Network fee · Auto Claim · 결과 표시 없음',()=>{const t=at(u,'wd/CLAIM');assert(/Network fee/.test(t)&&/Auto Claim/.test(t)&&!/처리 중|Sent|실패/.test(t))});
-check('출금 카드 DEX 배지 없음',()=>{at(u,'wd/CLAIM');for(const card of u.doc.querySelectorAll('.v22-wcard'))assert(!/DEX/.test(card.querySelector('.ch').textContent))});
-check('부족분 계산 A=3,B=0 → 7.00',()=>assert(/7\.00 USDT 더 받으면/.test(at(u,'wd/CLAIM'))));
-check('로딩 상태엔 금액 없음',()=>{at(u,'wd/CLAIM','loading');assert(!/USDT/.test(root(u).querySelector('.v22-wd').textContent))});
 check('초대 리워드: 계정 선택 없음',()=>{const t=at(u,'inv/IF8','rewards');assert(/관리자가 지정한|admin designated/.test(t)&&!root(u).querySelector('[data-action=selectRewardAccount]'))});
 check('지갑 상세 · 홈 지갑 표기는 0x 형식',()=>assert(/0x5290…9EE7/.test(at(u,'home/S4'))));
 check('출금 피드는 지갑 전체 주소',()=>assert(/0x52908400098527886E0F7030069857D2E4169EE7/.test(at(u,'etc/FEED'))));
@@ -57,7 +53,7 @@ check('전체 내역: 지급 구분',()=>assert(/연동 전 출금/.test(at(a,'p
 // 변경점 표시
 const staleNote=/뒤 4자리|CEX 전용 챌린지|진행률에 포함하지 않으며|부스트는 CEX 전용|소유권 확인 심사는 CEX 전용|소유권 확인 가이드는 CEX 전용|고객센터로 안내합니다|공통 출금 버튼|신청 성공 상태|페이백|DEX 계정도 선택할 수 있습니다/;
 for(const [x,keys] of [[u,ukeys],[a,akeys]]){x.w.eval('S.notes=true');for(const k of keys){x.api.nav(k);const notes=x.api.getReviewNotes();check(`${x.mode} ${k} 변경점 표시`,()=>{for(const n of notes)assert(!staleNote.test(n.title+' '+n.body),n.body)});}x.w.eval('S.notes=false')}
-u.w.eval('S.notes=true');for(const k of ['own/O1','own/O3','link/PROC','link/ADDR','wd/CLAIM','mb/BOARD','etc/BST']){u.api.nav(k);check(`user ${k} V2.2 변경점 있음`,()=>assert(u.api.getReviewNotes().length>0))}u.w.eval('S.notes=false');
+u.w.eval('S.notes=true');for(const k of ['own/O1','own/O3','link/PROC','link/ADDR','mb/BOARD','etc/BST']){u.api.nav(k);check(`user ${k} V2.2 변경점 있음`,()=>assert(u.api.getReviewNotes().length>0))}u.w.eval('S.notes=false');
 a.w.eval('S.notes=true');for(const k of ['ac/AC-2','ac/AC-3','pb/PB-1','dx/REC']){a.api.nav(k);check(`admin ${k} V2.2 변경점 있음`,()=>assert(a.api.getReviewNotes().length>0))}a.w.eval('S.notes=false');
 check('스크립트 오류 없음',()=>assert.equal(errors.length,0,errors.slice(0,5).join(' | ')));
 const fail=results.filter(r=>!r.pass);

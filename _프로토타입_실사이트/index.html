@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TetherMax 실사이트 프로토타입</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font:13px/1.4 system-ui,-apple-system,'Malgun Gothic',sans-serif;display:flex;flex-direction:column;background:#e9ecef}
+#bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:6px 12px;background:#111318;color:#cfd3dc;position:relative;z-index:2}
+#bar b{color:#fff;font-size:13px;white-space:nowrap}
+#bar select{background:#1c1f27;color:#fff;border:1px solid #2f3440;border-radius:6px;padding:5px 8px;font-size:12px;max-width:100%}
+#pg{min-width:0;flex:1 1 260px}#st{flex:0 1 220px;min-width:0}
+.seg{display:inline-flex;background:#1c1f27;border:1px solid #2f3440;border-radius:6px;padding:2px}
+.seg span{padding:3px 9px;border-radius:4px;cursor:pointer;color:#9aa3b5;white-space:nowrap}
+.seg span.on{background:#0031c6;color:#fff}.seg span.off{opacity:.35;cursor:not-allowed}
+#info{color:#8b93a7;font-size:11px;white-space:nowrap}
+#bar a{color:#8fb3ff;font-size:12px;white-space:nowrap}
+#tog{display:none;background:none;border:1px solid #2f3440;color:#fff;border-radius:6px;padding:4px 8px;font-size:12px}
+#stage{flex:1;min-height:0;display:flex;justify-content:center;overflow:hidden}
+#wrap{width:100%;height:100%;background:#fff;position:relative}
+/* DEX 연결: 연동 모달 레이어(DEX 앱 modal 모드, 배경 투명) */
+#dexm{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:transparent;z-index:3}
+#wrap.forced-mo{width:390px;box-shadow:0 0 0 1px #cfd4dc,0 4px 20px rgba(0,0,0,.15)}
+#wrap.forced-pc{width:1440px;min-width:1440px}
+#stage.scroll-x{overflow-x:auto;justify-content:flex-start}
+iframe{border:0;width:100%;height:100%;display:block}
+#toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:rgba(17,19,24,.92);color:#fff;padding:10px 16px;border-radius:8px;display:none;z-index:9}
+/* 상태 바도 좁은 화면에서 접힌다 */
+@media (max-width:720px){
+  #tog{display:inline-block}
+  #bar .more{display:none}#bar.open .more{display:flex}
+  #bar .more{width:100%;flex-wrap:wrap;gap:6px}
+  #pg,#st{flex:1 1 100%}
+}
+.more{display:contents}
+</style></head>
+<body>
+<div id="bar">
+  <b>TetherMax 실사이트 프로토타입</b>
+  <button id="tog">상태 ▾</button>
+  <div class="more">
+    <select id="pg" title="페이지"></select>
+    <select id="st" title="화면 상태"></select>
+    <span class="seg" id="auth"><span data-v="guest">게스트</span><span data-v="member">회원</span></span>
+    <span class="seg" id="view"><span data-v="auto">자동</span><span data-v="pc">PC</span><span data-v="mo">모바일</span></span>
+    <span id="info"></span>
+    <a id="live" target="_blank" rel="noopener">실사이트 ↗</a>
+  </div>
+</div>
+<div id="stage"><div id="wrap"><iframe id="fr" title="화면"></iframe><iframe id="dexm" title="거래 계정 연동" allowtransparency="true"></iframe></div></div>
+<div id="toast"></div>
+<script src="data.js"></script>
+<script>
+(function(){
+var D=window.PT_DATA, ORIGIN='https://tethermax.io', BP=1024;
+var S={key:'en',auth:'guest',state:'',view:'auto',dr:''};
+var $=function(id){return document.getElementById(id)};
+try{var h=new URLSearchParams(location.hash.slice(1));['key','auth','state','view','dr'].forEach(function(k){if(h.get(k)!==null)S[k]=h.get(k)})}catch(e){}
+// ---- DEX 연결 (README 「DEX 연결」): /en/affiliated = 캐시백 허브, /en/dex · /en/dex/{slug} = DEX 앱(dex/app.html)
+var DEXR={en__affiliated:['/hub','캐시백 허브'],en__dex:['/dex','DEX 개요'],en__dex__lighter:['/dex/lighter','Lighter 상세'],en__dex__apex:['/dex/apex','ApeX 상세'],en__dex__edgex:['/dex/edgex','EdgeX 상세'],en__dex__aster:['/dex/aster','Aster 상세'],en__rewardHistory:['/summary','캐시백 요약'],en__account:['/account','지갑·UID 상세'],'en__ownership-verification':['/ownership','소유권 인증']};
+Object.keys(DEXR).forEach(function(k){var u=ORIGIN+'/'+k.replace(/__/g,'/');if(!D.pages[k])D.pages[k]={url:u,auth:{guest:{vp:{pc:{},mo:{}}},member:{vp:{pc:{},mo:{}}}}};D.pages[k].dex=DEXR[k][0];D.pages[k].label=DEXR[k][1]+' (DEX 앱) · '+u.replace(ORIGIN,'');D.urlmap[u]=k});
+function dexKeyOf(r){var p=r.split('?')[0];for(var k in DEXR)if(DEXR[k][0]===p)return k;return 'en'+p.replace(/\//g,'__')}
+if(!D.pages[S.key])S.key='en';
+
+function toast(t){var el=$('toast');el.textContent=t;el.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(function(){el.style.display='none'},2400)}
+function vp(){return S.view==='auto'?(window.innerWidth<=BP?'mo':'pc'):S.view}
+function hasMember(){return Object.keys(D.pages).some(function(k){return D.pages[k].auth.member})}
+function pageFor(key,auth){var P=D.pages[key];if(!P)return null;return P.auth[auth]||null}
+function keyOf(url){
+  var u;try{u=new URL(url,ORIGIN)}catch(e){return null}
+  if(u.host!=='tethermax.io')return null;
+  var p=decodeURIComponent(u.pathname).replace(/\/+$/,'')||'/';
+  var full=ORIGIN+p+(u.search&&!/inviteCode|code=|token|redirect/.test(u.search)?u.search:'');
+  if(D.urlmap[full])return D.urlmap[full];
+  if(D.urlmap[ORIGIN+p])return D.urlmap[ORIGIN+p];
+  if(/^\/[a-z]{2}(\/|$)/.test(p)&&!/^\/en(\/|$)/.test(p)){var e=ORIGIN+p.replace(/^\/[a-z]{2}/,'/en');if(D.urlmap[e])return D.urlmap[e]}
+  return '';
+}
+function go(key,opt){opt=opt||{};S.key=key;S.state=opt.state||'';S.dr=opt.dr||'';closeDexModal();render()}
+function render(){
+  if(D.pages[S.key]&&D.pages[S.key].dex)return renderDex(D.pages[S.key]);
+  renderDex.base=null;
+  var v=vp(), A=pageFor(S.key,S.auth), note='';
+  if(!A&&S.auth==='member'&&pageFor(S.key,'guest')){A=pageFor(S.key,'guest');note=' · 회원 수집본 없음(게스트 화면)'}
+  var useAuth=A===pageFor(S.key,S.auth)?S.auth:'guest';
+  if(!A){toast('이 페이지는 수집본이 없습니다');return}
+  var V=A.vp[v]||A.vp[v==='pc'?'mo':'pc'];
+  if(V&&V.redirect){var k=keyOf(V.redirect);if(k&&k!==S.key){toast(useAuth==='guest'?'로그인이 필요한 페이지 → 로그인으로 이동':'리다이렉트');return go(k)}}
+  var file='pages/'+useAuth+'__'+S.key+'.'+(A.vp[v]?v:(v==='pc'?'mo':'pc'));
+  var st=S.state;
+  if(st&&st.indexOf('o:')!==0){var ok=(V.states||[]).some(function(x){return x.id===st});if(ok)file+='.'+st;else st=S.state=''}
+  file+='.html';
+  var fr=$('fr');
+  if(fr.getAttribute('src')!==file){fr.setAttribute('src',file)}else if(st.indexOf('o:')===0){fr.contentWindow.postMessage({openFrag:useAuth+'__'+st.slice(2)},'*')}else{fr.contentWindow.postMessage({closeLayers:1},'*')}
+  render.pendingFrag=st.indexOf('o:')===0?useAuth+'__'+st.slice(2):'';
+  // 바
+  $('wrap').className=S.view==='mo'?'forced-mo':S.view==='pc'?'forced-pc':'';
+  $('stage').className=S.view==='pc'?'scroll-x':'';
+  buildStates(V);
+  [].forEach.call($('auth').children,function(s){s.className=(s.dataset.v===S.auth?'on':'')+(s.dataset.v==='member'&&!hasMember()?' off':'')});
+  [].forEach.call($('view').children,function(s){s.className=s.dataset.v===S.view?'on':''});
+  $('pg').value=S.key;
+  $('info').textContent=window.innerWidth+'px → '+(v==='pc'?'PC':'모바일')+' 스냅숏'+note;
+  $('live').href=D.pages[S.key].url;
+  history.replaceState(null,'','#'+new URLSearchParams(S).toString());
+}
+// DEX 앱 페이지: 경로만 바뀌면 다시 불러오지 않고 앱에 경로를 보낸다(앱 안 상태·스크롤 유지)
+function renderDex(P){
+  var route=S.dr&&dexKeyOf(S.dr)===S.key?S.dr:P.dex;S.dr=route;S.state='';
+  var base='dex/app.html?auth='+S.auth, fr=$('fr');
+  if(renderDex.base===base){if(renderDex.route!==route)fr.contentWindow.postMessage({dexGo:route},'*')}
+  else fr.setAttribute('src',base+'#'+route);
+  renderDex.base=base;renderDex.route=route;render.pendingFrag='';
+  $('wrap').className=S.view==='mo'?'forced-mo':S.view==='pc'?'forced-pc':'';
+  $('stage').className=S.view==='pc'?'scroll-x':'';
+  buildStates(null);
+  [].forEach.call($('auth').children,function(s){s.className=(s.dataset.v===S.auth?'on':'')});
+  [].forEach.call($('view').children,function(s){s.className=s.dataset.v===S.view?'on':''});
+  $('pg').value=S.key;$('info').textContent=window.innerWidth+'px → DEX 앱 '+route;$('live').href=P.url;
+  history.replaceState(null,'','#'+new URLSearchParams(S).toString());
+}
+function openDexModal(o){
+  if(S.auth!=='member'&&!(o&&o.mode==='drawer')){toast('로그인이 필요해요');return go('en__login')}
+  var q='modal=1&auth=member';o=o||{};Object.keys(o).forEach(function(k){if(o[k]!=null)q+='&'+k+'='+encodeURIComponent(o[k])});
+  if(o.mode==='drawer')q=q.replace('auth=member','auth='+S.auth);
+  var m=$('dexm');m.setAttribute('src','dex/app.html?'+q+'#/link');m.style.display='block';
+}
+function closeDexModal(){var m=$('dexm');if(m.style.display!=='block')return;m.style.display='none';m.setAttribute('src','about:blank')}
+function buildPages(){
+  var keys=Object.keys(D.pages).sort(function(a,b){return a==='en'?-1:b==='en'?1:a.localeCompare(b)});
+  var groups={};
+  keys.forEach(function(k){var P=D.pages[k];var g=P.dex?'DEX 신규 (DEX 앱)':P.auth.guest&&!(P.auth.guest.vp.pc||{}).redirect?'공개 페이지':'로그인 필요';(groups[g]=groups[g]||[]).push(k)});
+  var html='';Object.keys(groups).forEach(function(g){html+='<optgroup label="'+g+' ('+groups[g].length+')">'+groups[g].map(function(k){return '<option value="'+k+'">'+esc(D.pages[k].label||k)+'</option>'}).join('')+'</optgroup>'});
+  $('pg').innerHTML=html;
+}
+function buildStates(V){
+  var o='<option value="">기본</option>';
+  (V&&V.states||[]).forEach(function(x){o+='<option value="'+x.id+'">[클릭] '+esc(x.label)+'</option>'});
+  (V&&V.overlays||[]).forEach(function(x){o+='<option value="o:'+x.id+'">[열림] '+esc(x.label)+'</option>'});
+  $('st').innerHTML=o;$('st').value=S.state;
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+$('pg').onchange=function(){go(this.value)};
+$('st').onchange=function(){S.state=this.value;render()};
+$('auth').onclick=function(e){var v=e.target.dataset.v;if(!v)return;if(v==='member'&&!hasMember())return toast('회원 수집본이 아직 없습니다');S.auth=v;render()};
+$('view').onclick=function(e){var v=e.target.dataset.v;if(!v)return;S.view=v;render()};
+$('tog').onclick=function(){$('bar').classList.toggle('open')};
+$('fr').onload=function(){if(render.pendingFrag)$('fr').contentWindow.postMessage({openFrag:render.pendingFrag},'*')};
+var lastVp=vp();
+window.addEventListener('resize',function(){var v=vp();if(v!==lastVp){lastVp=v;render()}else{$('info').textContent=window.innerWidth+'px → '+(v==='pc'?'PC':'모바일')+' 스냅숏'}});
+window.addEventListener('message',function(e){
+  var m=e.data||{};if(!m.pt)return;
+  // DEX 앱 · 연동 모달 메시지
+  if(m.dexReady)return;
+  if(m.dexRoute){S.dr=m.dexRoute;var dk=dexKeyOf(m.dexRoute);if(D.pages[dk])S.key=dk;renderDex.route=m.dexRoute;$('pg').value=S.key;$('info').textContent=window.innerWidth+'px → DEX 앱 '+m.dexRoute;history.replaceState(null,'','#'+new URLSearchParams(S).toString());return}
+  if(m.dexLink){openDexModal(m.dexLink);return}
+  if(m.dexModal==='close'){closeDexModal();return}
+  if(m.dexChanged){try{$('fr').contentWindow.postMessage({dexRefresh:1,quiet:1},'*')}catch(x){}return}
+  if(m.dexHome){closeDexModal();if(S.key==='en'&&renderDex.base===null&&!S.state){$('fr').contentWindow.postMessage({dexRefresh:1},'*')}else go('en');return}
+  if(e.source===$('dexm').contentWindow&&m.nav)closeDexModal();
+  if(m.toast)toast(m.toast);
+  if(m.auth){if(m.auth==='member'&&!hasMember())toast((m.toast||'')+' — 회원 수집본이 아직 없어 게스트 화면으로 보입니다');S.auth=m.auth}
+  if('layer' in m){var want=m.layer?'o:'+m.layer.replace(/^\w+__/,''):'';if(S.state.indexOf('o:')===0||want){S.state=want;$('st').value=want;history.replaceState(null,'','#'+new URLSearchParams(S).toString())}render.pendingFrag=''}
+  if(m.go&&D.pages[m.go]){S.key=m.go;S.state=m.state||'';return render()}
+  if('state' in m){S.state=m.state;render()}
+  if(m.nav){var k=keyOf(m.nav);if(k)go(k);else if(k===null)window.open(m.nav,'_blank');else toast('수집되지 않은 페이지: '+m.nav.replace(ORIGIN,''))}
+  else if(m.auth)render();
+});
+buildPages();render();
+})();
+</script>
+</body></html>

@@ -52,11 +52,11 @@ R.screen({id:'cex.list',group:'cex',title:'거래소 목록 (CEX · 기존)',rou
  states:[
   {id:'normal',label:'기본 — 표 (Recommended)',figma:{pc:'22598:410917',mo:'5145:52544'},note:'[기존 MAXOP-692] Figma (Updated) · 모바일 [기존 MAX-22] list view'},
   {id:'search',label:'검색 결과',figma:{mo:'5145:51653'},note:'[기존 MAX-22] Search Results — PC 검색 결과 프레임 없음(같은 표에 필터)'},
-  {id:'empty',label:'검색 결과 없음',figma:null,note:'디자인 없음 — 표 안 빈 상태 원문 없음'},
+  {id:'empty',label:'검색 결과 없음',figma:null,note:'디자인 없음 — 빈 검색 문구는 기존 제품 문구(언어팩 <code>no results found for</code>, 결정 N13)'},
  ],
  render(st){
   const L=window.CMN_LISTING;if(!L)return '';
   if(st==='search')return L('table',{q:'bit',chip:'all'})+C.note('검색어 입력 시 표가 즉시 필터(기존 화면).');
-  if(st==='empty')return L('table',{q:'abcd',chip:'all',empty:`<div class="empty">${C.tbd('검색 결과 없음 문구','원문 없음')}</div>`});
+  if(st==='empty')return L('table',{q:'abcd',chip:'all',empty:`<div class="empty">${T('No results found for <strong>abcd</strong>','<strong>abcd</strong>에 대한 검색 결과가 없습니다')}</div>`});
   return L('table')+C.note('CEX만 — DEX를 넣지 않는다(REQ-466 · FU-089). 카드 뷰는 <a data-go="cmn.listing:cards">cmn.listing</a>.');
  }});

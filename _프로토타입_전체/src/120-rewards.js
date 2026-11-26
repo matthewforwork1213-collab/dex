@@ -6,6 +6,8 @@ const logo=(n,s=24)=>LOGO[n]?`<img src="${A(LOGO[n])}" style="width:${s}px;heigh
 const W={edgex:'0xa410556c2A1C829d890122682B21F623b02122F0',e1:'0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69',e2:'0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9',
  v22edge:'0x52908400098527886E0F7030069857D2E4169EE7',v22aster:'0xde709f2102306220921060314715629080e2fb77',v22apex:'0x7a3F9c2B8e41D05a6F3b7C91e2D4a8B0c6E551E9'};
 const wrap=(inner,max=1200,pad)=>`<div style="max-width:${max}px;margin:0 auto;padding:${pad??(MO()?'0 16px':'0 24px')}">${inner}</div>`;
+// 기존 [MAX 1216] S9 List failed(22442:219848) — 주황 경고 바(아이콘 · 안내) + 가운데 외곽선 Try again
+const s9Fail=(msg,go)=>`<div class="col" style="gap:12px;align-items:center"><div class="row" style="width:100%;gap:12px;background:#fff4e5;border-radius:4px;padding:14px 16px"><img src="${A('link-ic-warning.svg')}" style="width:20px;height:20px;flex:none" alt=""><span class="b2" style="color:#663c00">${msg}</span></div><button class="btn outlined primary md"${go?` data-go="${go}"`:''}>Try again</button></div>`;
 const backRow=(go,label)=>`<div class="row" style="padding:${MO()?'16px 0':'24px 0'}"><button class="icon-btn" data-go="${go}"><img src="${A('rw-ic-back.svg')}" class="ic" alt=""></button>${label?`<span class="sub2">${label}</span>`:''}</div>`;
 const greyBtn=(l,go)=>`<button class="btn lg full" style="background:#f2f2f5;color:rgba(0,0,0,.87)"${go?` data-go="${go}"`:''}>${l}</button>`;
 // 같은 화면의 기본 상태 위에 오버레이(셸이 두 번 그려지지 않게 본문만 겹침)
@@ -99,8 +101,8 @@ function mbSection2(st){
  let below='';
  const nb=(a,b)=>`<div class="grid2" style="gap:16px">${[['Next Bingo',a],['Full Board',b]].map(([l,v])=>`<div class="row between" style="background:#1f45d6;border-radius:12px;padding:14px 20px;color:#fff"><span class="b2 semi">${l}</span><span class="b2 semi">${v}</span></div>`).join('')}</div>`;
  if(ph==='run')below=nb('1 cell','7 cell')+(st==='delayed'?C.note('지연 안내 노출 중에는 <code>Updated once a day</code>를 숨김(REQ-640: 지연 안내가 우선). Figma는 둘 다 보임 — 정책 우선'):info(T('Updated once a day','하루 한 번 업데이트돼요')));
- if(st==='complete')below=nb('-','0 cell')+info(T('Updated once a day','랭킹은 매일 업데이트돼요'))+C.note('완성 직후(랭킹 ON): 국문은 정책 문구 <code>랭킹은 매일 업데이트돼요</code>(REQ-654). 영문 원문 없음 — Figma 문구 유지');
- if(st==='final')below=nb('-','0 cell')+info(T(C.tbd('최종 순위 안내 EN','원문 없음'),'최종 순위는 결과 발표 때 확인할 수 있어요 · 10월 28일 09:00'));
+ if(st==='complete')below=nb('-','0 cell')+info(T('Rankings are updated daily.','랭킹은 매일 업데이트돼요'))+C.note('완성 직후(랭킹 ON): 국문 = 정책 문구(REQ-654), 영문 = 문구표_DEX');
+ if(st==='final')below=nb('-','0 cell')+info(T('Final rankings will be shown when results are announced · Oct 28, 09:00','최종 순위는 결과 발표 때 확인할 수 있어요 · 10월 28일 09:00'));
  if(ph==='end')below=info('The participation period has ended, so cells can no longer be checked.');
  const coin3d=mo?'':`<div style="position:absolute;right:-33px;top:-48px;width:160px;height:158px;overflow:hidden;pointer-events:none"><img src="${A('rw-mb-coin3d.png')}" style="position:absolute;left:-121px;top:-122px;width:444px;max-width:none" alt=""></div>`;
  return `<section style="background:#121721;padding:${mo?'48px 0':'100px 0'}">${wrap(`<div class="col g16" style="margin-bottom:${mo?40:80}px"><span class="b1 bold" style="color:#fff">01 / BINGO MISSION</span><div class="row between wrap" style="gap:8px"><span style="font-size:${mo?24:34}px;font-weight:700;color:#fff;line-height:1.235">Earn Cashback. Complete your bingo.</span><span class="b1" style="color:rgba(255,255,255,.7)">Rewards for each completed row or column</span></div></div>
@@ -214,11 +216,11 @@ function couponTerms(){if(MO())return `<div style="margin-top:24px">${moTerms()}
  const sec=(h,items)=>`<li style="margin-top:20px">${h}<ol type="a" style="margin:4px 0 0;padding-left:22px">${items.map(i=>`<li>${i}</li>`).join('')}</ol></li>`;
  return `<div class="card" style="border:0;margin-top:16px"><div class="b1 semi">Terms &amp; Conditions</div><ul class="b2" style="margin:8px 0 0;padding-left:18px;line-height:1.7">
  ${sec('Coupon expiration date',['Our coupon expriation date is based on UTC and the reward will be given after applying coupon.','Coupons without an expiration date can be used until deleting your account.','If you receive a coupon from TetherMax in an unusual way, the coupon may expire without notice.','When you cancel your membership, the coupon will expire immediately and will not be restored.','Expired coupons cannot be issued again.'])}
- ${sec('How to use coupon',['The amount from coupon use is added to the ‘event reward’.',C.tbd('쿠폰 사용엔 연동 계정(UID 또는 지갑) 최소 1개 필요 — 약관 문구','G-419 문구표'),'Coupons once have beeon used cannot be used again.','Same coupons provided as a benefit when signing up for an exchange UID that have been used once cannot be reused. (coupons provided as a benefit when signing up)'])}
+ ${sec('How to use coupon',['The amount from coupon use is added to the ‘event reward’.','To use a coupon, you must link at least one account (UID or wallet).','Coupons once have beeon used cannot be used again.','Same coupons provided as a benefit when signing up for an exchange UID that have been used once cannot be reused. (coupons provided as a benefit when signing up)'])}
  ${sec('Referral coupon',["'Referral coupon' will be issued to your account when you signing up by entering the friends' invitation code or through the friends' invitation link."])}
  ${sec('Welcome coupon',["Welcome coupon' will be issued ro new accounts signing up wihtout friends' invitation code."])}
  ${sec('Coupon for checking estimated cashback',["'Coupon for checking estimated cashback' is given to users who have finished the first cashback test after signing up."])}
- ${sec('Coupon for UID binding',["'Coupon for UID binding' is given after finishing binding exxhanges' UID for the first time."])}
+ ${sec('Coupon for UID binding',["'Coupon for UID binding' is given the first time you link a UID from a centralised exchange. Linking a DEX wallet does not qualify."])}
  ${sec('Alarm-on coupon',["'Alarm-on coupon' is issued to users who have turned on TetherMax app's notification and marketing notifications.",'You can only be eligible after turning the alarm on through TetherMax mobile application.'])}
  ${sec('Coupon for your first cashback',["'Coupon for your first casback' is issued after receiving the first casback to your TetherMax account."])}
  ${sec('Cashback TOP Coupon (1st, 2nd, 3rd, top 10%)',["'Cashback TOP coupon' is issued depending on the cashback amount of each exchange.","Please check ‘Benefits’ for details."])}
@@ -231,7 +233,8 @@ function couponPage(tab,list,n){const mo=MO();
 const couponList=()=>COUPONS.map(([n,t])=>couponRow(n,t)).join('');
 const couponDone=()=>COUPONS.map(([n,t],i)=>couponRow(n,t,{done:1,exp:'26/06/13, 23:59:59',status:i>=4?'Expired':'Used'})).join('')+couponRow('10',T('CHALLENGE','챌린지'),{done:1,exp:'Expired 10. 01. 09:00',status:'Expired'});
 const BG_CP='coupon.box:normal';
-R.screen({id:'coupon.box',group:'rewards',title:'쿠폰함',route:'/coupon',fu:['FU-070'],shell:{nav:'rewards',noTop:true},
+let cpNF=false; // notFound 상태는 기존 404 화면이 셸(GNB·상단 바)을 직접 그린다 — 쿠폰함 셸(푸터 포함)을 끈다
+const cpScr=R.screen({id:'coupon.box',group:'rewards',title:'쿠폰함',route:'/coupon',fu:['FU-070'],shell:{nav:'rewards',noTop:true},
  states:[
   {id:'normal',label:'Coupons 탭',figma:{pc:'11982:372438',mo:'11922:364127'},note:'[기존 MAX-499] 「Coupons available」 · V2.2 <code>cp/COUPON#normal</code>. 만료 쿠폰은 이 탭이 아니라 Completed 탭(MAXOP-796) · 같은 목록이 DEX 29062:117713/117894의 배경'},
   {id:'empty',label:'쿠폰 없음',figma:{pc:'11982:388195',mo:'11982:387214'},note:'[기존 MAX-499] 「No coupons」 — <code>No coupons available</code> + <code>View Benefits</code> · V2.2 <code>cp/COUPON#empty</code>. 기존 Web 프레임은 탭 배지가 7로 남아 있어 0으로 표시'},
@@ -242,9 +245,11 @@ R.screen({id:'coupon.box',group:'rewards',title:'쿠폰함',route:'/coupon',fu:[
   {id:'picker6',label:'계정 5개 초과 · Deactivated',figma:{mo:'12474:164724'},note:'[기존 MAX-499] 「Deactivated UIDs」 — 비활성 계정은 흐리게(배지 없음)·선택 불가(REQ-403). 5개 초과 목록은 다이얼로그 안 스크롤(디자인 없음) · V2.2 <code>cp/COUPON#picker6</code>'},
   {id:'done',label:'적용 완료',figma:{pc:'29065:7079',mo:'25994:12167'},note:'V2.2 <code>cp/COUPON#done</code> · 모바일은 [기존 MAX-499] MAXOP-782 「mWeb / Coupon claimed / with close」 전체 화면 · 라벨은 DEX면 <code>Wallet</code>(REQ-405)'},
   {id:'unable',label:'사용 불가',figma:{mo:'12474:164021'},note:'[기존 MAX-499] 「Error state」 — <code>Unable to Use Coupon</code> · PC는 같은 다이얼로그를 PC 폭으로(PC 프레임 없음) · V2.2 <code>cp/COUPON#unable</code>'},
+  {id:'notFound',label:'없는·남의 쿠폰 — 404',figma:null,note:'근거: 기존 [MAX-497] 404 error 회원(웹 12216:419863 · 12216:421961 · mWeb 12085:401487 · 12216:421112) 그대로 — 셸 포함, 쿠폰 경로 <code>/coupon/{id}</code>에 적용(점검 C12). <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},
   {id:'noAccount',label:'연동 계정 없음',note:'재사용 — 같은 「Error state」 다이얼로그 틀(12474:164021)에 G-196 연동 안내 + <code>Link Account</code>. 안내 문구 원문 없음 · V2.2 <code>cp/COUPON#noAccount</code>'},
  ],
- render(st){const mo=MO();
+ render(st){const mo=MO();cpNF=st==='notFound';
+  if(cpNF)return R.byId['cmn.notfound'].render('member');
   if(st==='normal')return couponPage('c',couponList(),7);
   if(st==='empty')return couponPage('c',emptyBox('No coupons available','View Benefits','benefits.list:normal'),0);
   if(st==='history')return couponPage('d',couponDone(),7);
@@ -261,8 +266,9 @@ R.screen({id:'coupon.box',group:'rewards',title:'쿠폰함',route:'/coupon',fu:[
    return ov(`<div style="background:#fff;border-radius:4px;width:480px;max-width:100%;box-shadow:var(--elev24);overflow:hidden">${doneBody}<div class="row g8" style="padding:32px 16px 16px">${greyBtn('Back to Home','home.main')}${C.btn('View Rewards',{full:true,go:'summary.main'})}</div></div>`)}
   const errDlg=(t,b,btn,go)=>`<div style="background:#fff;border-radius:4px;box-shadow:var(--elev24);width:${mo?'295px':'444px'};max-width:100%;padding:${mo?'20px':'24px'};display:flex;flex-direction:column;gap:16px">${t?`<div style="font-size:20px;line-height:1.6;font-weight:500;letter-spacing:.15px">${t}</div>`:''}<div class="b2 c2">${b}</div>${C.btn(btn,{full:true,go})}</div>`;
   if(st==='unable')return ov(errDlg('Unable to Use Coupon','This coupon is not eligible for use at this time.','OK',BG_CP));
-  if(st==='noAccount')return ov(errDlg('',C.tbd('연동 계정 없음 안내 문구','G-196 — 문구 원문 없음'),T('Link Account','거래 계정 연동하기'),'link.select'));
+  if(st==='noAccount')return ov(errDlg('',T('You need to link an account to use the coupon.','쿠폰을 사용하려면 거래 계정 연동이 필요해요'),T('Link Account','거래 계정 연동하기'),'link.select'));
  }});
+{const sh=cpScr.shell;Object.defineProperty(cpScr,'shell',{get(){return cpNF?false:sh},configurable:true,enumerable:true})}
 
 // =====================================================================
 // 글로벌 리그 (FU-064)
@@ -373,7 +379,7 @@ R.screen({id:'benefits.list',group:'rewards',title:'혜택',route:'/benefits',fu
   if(st==='uidm')return bnfDetail({title:'Link UID to Get Cashback',sub:'Link your UID to start earning cashback and receive 3 USDT.',plus:'+3 USDT',amt:'3 USDT',imgH:220,img:`<img src="${A('rw-bd-uid.png')}" style="width:100%;height:100%;object-fit:cover" alt="">`,phone:1,
    cta:`<button class="btn contained primary lg" style="width:300px" data-go="link.select">Link UID and Get 3 USDT</button>`,moCta:C.btn('Link UID and Get 3 USDT Coupon',{full:true,go:'link.select'}),once:'This reward can only be claimed once per account.'})+C.note(T('Linking a DEX wallet does not qualify for this reward.','DEX 지갑 연동은 이 보상 대상이 아닙니다.')+' — V2.2 문구(REQ-396). 기존 화면에 이 안내 자리가 없어 note로만');
   if(st==='first')return bnfDetail({title:'First Withdrawal Reward',sub:'Withdraw your first cashback to receive a 10 USDT coupon.',plus:'+10 USDT',amt:'10 USDT',imgH:162,img:`<img src="${A('rw-bd-first.png')}" style="width:100%;height:100%;object-fit:cover" alt=""><img src="${A('rw-bd-first-obj.png')}" style="position:absolute;left:27.75%;width:46%;top:calc(50% - 10px);transform:translateY(-50%)" alt="">`,
-   cta:`<button class="btn contained primary lg" style="width:308px" disabled>${C.tbd('CTA 문구 (기존 Withdraw Cashback and Get 10 USDT)','G-419')}</button>`,moCta:`<button class="btn contained primary lg full" disabled>${C.tbd('CTA 문구 (기존 Link UID)','G-419')}</button>`,once:'This reward can only be claimed once per account.'})
+   cta:`<button class="btn contained primary lg" style="width:308px" disabled>Auto Claim</button>`,moCta:`<button class="btn contained primary lg full" disabled>Auto Claim</button>`,once:'This reward can only be claimed once per account.'})
    +C.note('제목·부제의 <code>Withdrawal</code>/<code>Withdraw</code>는 기존 원문 그대로 — 자동 지급 용어로 바꿀지 문구표(G-419). CEX·DEX 모두 대상(REQ-398)');
  }});
 
@@ -381,19 +387,19 @@ R.screen({id:'benefits.list',group:'rewards',title:'혜택',route:'/benefits',fu
 // 캐시백 챌린지 (FU-071 · FU-075) — 기존 [MAX-468] MAX-503 「Get Cashback Get Extra USDT」
 // =====================================================================
 const CH_LV=[['Level 1 Reward','5 USDT','rw-ch-1.png',158,174],['Level 2 Reward','7 USDT','rw-ch-2.png',161,161],['Level 3 Reward','10 USDT','rw-ch-3.png',148,148],['Level 4 Reward','15 USDT','rw-ch-4.png',178,178]];
-function chCard(i,pct){const [lb,amt,img,w,h]=CH_LV[i];const cur=i===0;
- const prog=`<div class="col g8" style="width:100%"><div class="row between" style="font-size:10px;line-height:10px"><span>${pct}%</span><span>${pct} <span style="color:var(--text-disabled)">/ 100 USDT</span></span></div><div style="height:4px;border-radius:4px;background:rgba(0,0,0,.12);overflow:hidden"><div style="width:${pct}%;height:100%;border-radius:4px;background:var(--blue)"></div></div></div><span style="font-size:10px;line-height:10px;letter-spacing:.15px;color:var(--text-secondary);text-align:center">Complete 100 USDT to claim reward</span>`;
+function chCard(i,pct,done){const [lb,amt,img,w,h]=CH_LV[i];const cur=done?i===1:i===0;const comp=done&&i===0;if(comp)pct=100;
+ const prog=`<div class="col g8" style="width:100%"><div class="row between" style="font-size:10px;line-height:10px"><span>${comp?'Complete':pct+'%'}</span><span>${pct} <span style="color:var(--text-disabled)">/ 100 USDT</span></span></div><div style="height:4px;border-radius:4px;background:rgba(0,0,0,.12);overflow:hidden"><div style="width:${pct}%;height:100%;border-radius:4px;background:var(--blue)"></div></div></div><span style="font-size:10px;line-height:10px;letter-spacing:.15px;color:var(--text-secondary);text-align:center">Complete 100 USDT to claim reward</span>`;
  const lock=`<div class="row center" style="gap:4px"><img src="${A('rw-ic-lock.svg')}" style="width:16px;height:16px" alt=""><span style="font-size:10px;line-height:10px;letter-spacing:.15px;color:var(--text-secondary)">Complete level ${i} reward to unlock</span></div>`;
- return `<div style="flex:none;width:220px;height:320px;border-radius:8px;border:2px solid ${cur?'var(--blue)':'rgba(187,226,255,.2)'};background:rgba(255,255,255,.38);backdrop-filter:blur(2px);padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between">
-  <div class="col center" style="gap:8px;align-items:center"><span style="border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px;${cur?'background:var(--blue);color:#fff':'background:rgba(0,0,0,.08);color:var(--text-disabled)'}">${lb}</span><span class="b1 semi">${amt}</span></div>
-  <div style="width:${w}px;height:${h}px;overflow:hidden;${cur?'':'opacity:.5'}"><img src="${A(img)}" style="${cur?'width:112.66%;margin-left:-12.5%;height:100%;max-width:none':'width:100%;height:100%'};object-fit:cover" alt=""></div>
-  <div class="col g8" style="width:100%">${cur?prog:lock}</div></div>`}
-function chPage(pct){const mo=MO();
+ return `<div style="flex:none;width:220px;height:320px;border-radius:8px;border:2px solid ${cur?'var(--blue)':'rgba(187,226,255,.2)'};${comp?'background:rgba(255,255,255,.6);':''};background:rgba(255,255,255,.38);backdrop-filter:blur(2px);padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between">
+  <div class="col center" style="gap:8px;align-items:center"><span style="border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px;${comp?'background:rgba(0,0,0,.08);color:var(--text-primary)':cur?'background:var(--blue);color:#fff':'background:rgba(0,0,0,.08);color:var(--text-disabled)'}">${comp?'Completed':lb}</span><span class="b1 semi">${amt}</span></div>
+  <div style="width:${w}px;height:${h}px;overflow:hidden;${cur||comp?'':'opacity:.5'}"><img src="${A(img)}" style="${i===0?'width:112.66%;margin-left:-12.5%;height:100%;max-width:none':'width:100%;height:100%'};object-fit:cover" alt=""></div>
+  <div class="col g8" style="width:100%">${cur&&done?prog.replace(/Complete 100 USDT/,'Complete 200 USDT').replace(/\/ 100 USDT/,'/ 200 USDT'):cur||comp?prog:lock}</div></div>`}
+function chPage(pct,done){const mo=MO();
  const head=`<div class="col center" style="gap:10px;align-items:center;text-align:center;width:311px;margin:0 auto;padding-top:16px"><span class="b1 semi">Unlock Your Cashback Goal!</span><span class="b2 c2">Cashback history is updated daily at 13:00</span></div>`;
- const claim=`<button class="btn contained primary lg" disabled style="${mo?'width:100%':'width:200px'}">Claim 5 USDT Coupon</button>`;
+ const claim=`<button class="btn contained primary lg" disabled style="${mo?'width:100%':'width:200px'}">Claim ${done?7:5} USDT Coupon</button>`;
  const terms=['The UID to receive event rewards cannot be changed once set.','This benefit may be subject to changes or termination due to our circumstances.','If benefits are received through fraudulent means, rewards may be revoked without notice.','Event rewards are not included in this list.','Once a UID is linked to participate in the challenge, it may not apply to the Cashback Challenge even if it is linked to another TetherMax account.',"The 'Claim' button will be disabled from 19:30 to 21:30 due to cashback challenge amount updates.",'Cashback transactions made while your UID is in issue status will not count towards the challenge.'];
- if(mo)return `${moHead('benefits.list:normal',{coupon:1})}<div class="col" style="gap:16px;padding:16px 0 0"><div style="padding:0 16px"><div style="background:rgba(187,226,255,.2);border-radius:8px;height:430px;overflow:hidden">${head}<div class="row" style="gap:24px;margin-top:30px;padding-left:46px;overflow-x:auto;align-items:flex-start">${CH_LV.map((_,i)=>chCard(i,pct)).join('')}</div></div></div><div style="padding:0 16px">${moTerms()}</div></div><div style="position:sticky;bottom:0;margin-top:120px;background:#fff;padding:16px">${claim}</div>`;
- return `<div style="max-width:960px;margin:0 auto;padding:80px 0 64px" class="col g24"><div style="background:rgba(187,226,255,.2);border-radius:8px;height:488px;position:relative">${head}<div class="row" style="position:absolute;left:16px;top:94px;gap:16px">${CH_LV.map((_,i)=>chCard(i,pct)).join('')}</div><div style="position:absolute;left:50%;top:430px;transform:translateX(-50%)">${claim}</div></div>
+ if(mo)return `${moHead('benefits.list:normal',{coupon:1})}<div class="col" style="gap:16px;padding:16px 0 0"><div style="padding:0 16px"><div style="background:rgba(187,226,255,.2);border-radius:8px;height:430px;overflow:hidden">${head}<div class="row" style="gap:24px;margin-top:30px;padding-left:46px;overflow-x:auto;align-items:flex-start">${CH_LV.map((_,i)=>chCard(i,pct,done)).join('')}</div></div></div><div style="padding:0 16px">${moTerms()}</div></div><div style="position:sticky;bottom:0;margin-top:120px;background:#fff;padding:16px">${claim}</div>`;
+ return `<div style="max-width:960px;margin:0 auto;padding:80px 0 64px" class="col g24"><div style="background:rgba(187,226,255,.2);border-radius:8px;height:488px;position:relative">${head}<div class="row" style="position:absolute;left:16px;top:94px;gap:16px">${CH_LV.map((_,i)=>chCard(i,pct,done)).join('')}</div><div style="position:absolute;left:50%;top:430px;transform:translateX(-50%)">${claim}</div></div>
   <div style="background:#fff;border-radius:16px;padding:16px" class="col g16"><span class="b1 semi">Terms &amp; Conditions</span><ul class="b2 c2" style="margin:0;padding-left:21px;display:flex;flex-direction:column;gap:4px">${terms.map(t=>`<li>${t}</li>`).join('')}</ul></div></div>`}
 R.screen({id:'challenge.detail',group:'rewards',title:'캐시백 챌린지 상세',route:'/benefits/cashback-challenge',fu:['FU-071','FU-075'],shell:{nav:'rewards',accent:true,noTop:true},
  states:[
@@ -403,6 +409,7 @@ R.screen({id:'challenge.detail',group:'rewards',title:'캐시백 챌린지 상�
  ],
  render(st){
   if(st==='pick')return ovSelf('challenge.detail','normal',pickDialog(T('Select an account for the reward','보상을 받을 계정을 선택하세요'),T('Once applied, it cannot be changed.','한 번 선택하면 변경할 수 없어요.'),acctList([ACC.bybit,ACC.bitget],[ACC.edge22]),{cancel:'challenge.detail:normal',ok:'challenge.detail:progress',disabled:1}),true);
+  if(st==='claimedPc')return chPage(0,true)+C.note('레벨 2 진행 표기(<code>/ 200 USDT</code> · <code>Complete 200 USDT to claim reward</code>)는 기존 「When user has claimed level 1 reward」(10739:232627 등) 카드 그대로. 레벨 금액은 운영 설정값(C2) — 표본');
   return chPage(st==='progress'?35:0)+C.note('약관의 <code>UID</code> 표현은 기존 원문 — DEX 지갑을 포함하는 문구로 바꿀지 문구표(G-419). G-429: 챌린지 배치 시각까지 도착한 원장만 그 배치에 반영');
  }});
 

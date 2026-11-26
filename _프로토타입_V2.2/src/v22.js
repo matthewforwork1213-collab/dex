@@ -37,7 +37,7 @@ if(MODE==='user'){
  v22Drop('home',['EXP']);v22Label('home','PUBLIC','비로그인 홈');
  const hub=v22Group('hub');if(hub){hub.ko='캐시백 허브';hub.en='Cashback hub'}
  v22Label('hub','H1-CEX','비로그인 · CEX 탭');v22Label('hub','H1-DEX','비로그인 · DEX 탭');v22Label('hub','H5','회원 · 캐시백 패널');
- v22Drop('link',['E4']);v22Label('link','L8','레퍼럴 아님');v22Label('link','L10','Lighter Standard (온보딩 보류)');
+ v22Drop('link',['E4']);v22Label('link','L8','레퍼럴 아님');v22Label('link','L10','Lighter Standard');
  v22Label('link','PENDING','확인 중 · 귀속 확인 대기');
  v22Add('link','PRELINK','확인 중 · 연동 전 잔액 출금','PENDING');v22Add('link','PRELINKFAIL','연동 실패 · 연동 전 잔액 출금 실패','PRELINK');
  const own=v22Group('own');if(own){own.ko='소유권 인증';own.en='Ownership'}
@@ -95,13 +95,13 @@ const V22_GUIDE=[['Start recording, then disconnect your wallet','화면 녹화�
 function v22OwnPage(){
  const a=v22Dex(),c=state.previewCase||'normal',step=c==='s2'?1:c==='s3'?2:0;
  const upload={
-  normal:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 100MB)</span></div>`,
-  s2:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 100MB)</span></div>`,
-  s3:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 100MB)</span></div>`,
+  normal:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 1GB)</span></div>`,
+  s2:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 1GB)</span></div>`,
+  s3:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 1GB)</span></div>`,
   uploading:`<div class="v22-drop"><b>Uploading File</b><span class="sb">Do not close this window.</span><div class="gg"><i style="width:46%"></i></div></div>`,
   uploaded:`<div class="v22-drop done"><b>edgex_ownership.mp4</b><span class="sb">38.2 MB · Complete</span><span class="sb" style="color:var(--primary)">Remove</span></div>`,
-  failed:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 100MB)</span></div>`,
-  error:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 100MB)</span></div>`
+  failed:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 1GB)</span></div>`,
+  error:`<div class="v22-drop"><b>Upload your screen recording</b><span class="sb">MP4 or MOV (max. 1GB)</span></div>`
  }[c]||'';
  const ready=c==='uploaded';
  const popup=c==='failed'?`<div class="dlg"><h3>Upload Failed</h3><p>We couldn't upload your file. Please try again or select a different file.</p>${v22Btn('OK','','data-go="own/O3"')}</div>`:c==='error'?`<div class="dlg"><h3>Something Went Wrong</h3><p>An unexpected error occurred. Please try again.</p><div class="row2">${v22Btn('Contact Support','sec','data-action="support"')}${v22Btn('Try again','','data-go="own/O3"')}</div></div>`:'';
@@ -173,7 +173,7 @@ function v22Withdraw(empty){
   <div class="c flat"><div class="kv"><span class="k">Network</span><span class="v">BNB Smart Chain (BEP20)</span></div><p class="sb">Deposits are made to the above wallet address on BNB Smart Chain (BEP20).</p><div class="kv"><span class="k">Network fee</span><span class="v">테더맥스가 전액 부담</span></div><p class="sb">이벤트 리워드는 같은 계정의 캐시백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다.</p></div>${v22Auto()}</div></div>`;
 }
 function v22Invite(){
- return `${gnbPC()}<div class="pg"><div class="tabs"><span>TetherMax Point</span><span class="on">친구 초대</span></div><section class="c"><h2>초대 리워드</h2><div class="kv big"><span class="k">Available Invitation Rewards</span><span class="v">50.00 USDT</span></div><div class="kv"><span class="k">받는 계정</span><span class="v">관리자가 지정한 연동 계정</span></div><p class="sb">최소 50 USDT부터 자동으로 지급돼요. 캐시백 매칭과는 별개예요.</p>${v22Auto()}</section></div>`;
+ return `${gnbPC()}<div class="pg"><div class="tabs"><span>TetherMax Point</span><span class="on">친구 초대</span></div><section class="c"><h2>초대 리워드</h2><div class="kv big"><span class="k">Available Invitation Rewards</span><span class="v">12.00 USDT</span></div><div class="kv"><span class="k">받는 계정</span><span class="v">관리자가 지정한 연동 계정</span></div><p class="sb">10 USDT 이상이 되면 자동으로 지급돼요. 캐시백 매칭과는 별개예요.</p>${v22Auto()}</section></div>`;
 }
 function v22ChallengePick(){
  const accounts=state.accounts.filter(a=>a.status==='Active'),sel=state.rewardSelected||'';
@@ -236,7 +236,7 @@ function v22AdminNew(k){
   ['2026-11-25 01:10:22','System','자동 재확인 · 귀속 확정','EdgeX',`<span class="mono">${SAMPLE_WALLET}</span>`,'확인 중 → 연동 완료','—'],
   ['2026-11-25 00:52:03','admin_kim','운영자 승인','Aster',`<span class="mono">${SAMPLE_WALLET2}</span>`,'확인 중 → 연동 완료','원장 2026-11-24 행 확인'],
   ['2026-11-24 14:03:41','admin_lee','소유권 이전 승인','ApeX',`<span class="mono">${V22_WALLET_UNKNOWN}</span>`,'TUID 9900690611 → 9900690760','녹화 확인']])+`<p class="sb">감사 기록은 수정·삭제할 수 없습니다.</p>`));
- if(id==='RPT')return v22AdminShell(null,'DEX 리포팅',v22Box('DEX 요약 (2026-11)',v22Tbl(['DEX','연동 지갑','적립 캐시백 (USDT)','Paid (USDT)','미연동 보관 (건 · USDT)','수집 상태'],[['ApeX','412','8,214.20','6,930.00','38 · 211.40','LIVE'],['EdgeX','298','5,102.88','4,410.12','21 · 96.30','LIVE'],['Aster','187','3,880.50','3,120.00','17 · 84.10','DEGRADED'],['Lighter','—','—','—','—','온보딩 보류']])+`<p class="sb">USDC 정산 DEX의 커미션은 원통화와 USDT 환산값을 함께 표시합니다. Aster 월 상한 소진율 리포트는 회신 대기입니다.</p>`));
+ if(id==='RPT')return v22AdminShell(null,'DEX 리포팅',v22Box('DEX 요약 (2026-11)',v22Tbl(['DEX','연동 지갑','적립 캐시백 (USDT)','Paid (USDT)','미연동 보관 (건 · USDT)','수집 상태'],[['ApeX','412','8,214.20','6,930.00','38 · 211.40','LIVE'],['EdgeX','298','5,102.88','4,410.12','21 · 96.30','LIVE'],['Aster','187','3,880.50','3,120.00','17 · 84.10','DEGRADED'],['Lighter','212','3,410.20','2,960.80','14 · 61.40','LIVE']])+`<p class="sb">USDC 정산 DEX의 커미션은 원통화와 USDT 환산값을 함께 표시합니다. Aster 월 상한 소진율 리포트는 회신 대기입니다.</p>`));
  if(id==='BST')return v22AdminShell(null,'Account > Boost',v22Box('부스트 적용 거래소',v22Tbl(['거래소','유형','부스트율','기간','대상','관리'],[['Bybit','CEX','55%','3주','신규 UID',v22Btn('수정','o sm')],['Gate.io','CEX','50%','3주','신규 UID',v22Btn('수정','o sm')],['EdgeX','DEX','—','—','신규 지갑',v22Btn('수정','o sm')]])+`<p class="sb">DEX 선택 가능. DEX의 부스트 적용 방식과 화면 표시는 결정 후 입력합니다. Bitget Boost는 Bitget 전용 메뉴 그대로입니다.</p>`));
  if(id==='CHS')return v22AdminShell(null,'챌린지 현황',v22Box('신규·기존 회원 캐시백 챌린지',v22Tbl(['TUID','챌린지','게이지 (USDT)','수령 계정','레벨','상태'],[['9900690902','신규 회원 (90일)','182.40','Bitget · UID 123456789','Level 1 수령','진행 중'],['9900690760','기존 회원','620.10',`EdgeX · <span class="mono">${SAMPLE_WALLET}</span>`,'Level 2 수령 가능','진행 중']])+`<p class="sb">게이지는 CEX·DEX 커미션 캐시백 합산. 이벤트·초대 리워드는 제외합니다.</p>`));
  if(id==='QZ')return v22AdminShell(null,'퀴즈 설정',v22Box('퀴즈 이벤트 설정',`<label>거래소 (등록 후 수정 불가)<select>${partnerOptions('edgex')}</select></label>${v22Tbl(['점수','보상 금액 (USDT)'],[['0점','<input value="">'],['1점','<input value="">'],['2점','<input value="">']])}<p class="sb">보상은 현행 Beginner's Guide 퀴즈 방식 — 정답 시 퀴즈 쿠폰 발급, 지정 거래소 계정에서 사용하면 이벤트 리워드로 적립합니다.</p>${v22Btn('저장','')}`));
@@ -334,7 +334,7 @@ const V22_TEXT_USER=[
 ];
 const V22_TEXT_ADMIN=[
  ['페이백율 (%)','캐시백율 (%)'],['페이백 챌린지 · CEX 전용','캐시백 챌린지 · CEX/DEX'],['UID 소유권 확인 · CEX 전용','UID 소유권 확인'],
- ['일별 원장 확보가 확인되지 않아 맥스보드를 운영할 수 없습니다. 금액 칸만 운영하는 방식도 적용하지 않습니다.','Lighter는 온보딩 보류 중이라 빙고판을 만들 수 없습니다.'],
+ ['일별 원장 확보가 확인되지 않아 맥스보드를 운영할 수 없습니다. 금액 칸만 운영하는 방식도 적용하지 않습니다.','Lighter도 일 1회 원장이라 다른 DEX와 같이 빙고판을 만들 수 있습니다(G-428).'],
  ['DEX에는 소유권 심사 대상이 없습니다. 수동 연동 승인은 별도 화면에서 진행합니다.',''],
  ['한국어와 영문을 한 화면에서 같이 입력합니다.','언어 매트릭스(EN·KO 필수, RU·ID 선택) 기준으로 입력합니다.'],['입력은 두 언어를 함께 저장합니다.','입력은 언어별로 저장합니다.'],['한국어·영문 동시 입력','언어 매트릭스']
 ];
@@ -372,7 +372,7 @@ function v22Screens(root){
   if(k==='home/LKD'){root.querySelectorAll('*').forEach(el=>{if(el.children.length===0&&el.textContent.trim()==='신청 가능한 캐시백')el.textContent='출금 가능 캐시백';if(el.children.length===0&&el.textContent.trim()==='신청 가능한 페이백')el.textContent='출금 가능 캐시백'})}
   if(k==='cp/CP1'){const h=root.querySelector('.dlg h3');if(h&&!root.querySelector('.v22-once')){h.insertAdjacentHTML('afterend','<p class="sb v22-once">한 번 적용하면 변경할 수 없습니다.</p>')}}
   root.querySelectorAll('a,span,li,div').forEach(el=>{if(el.children.length===0&&['페이백 신청','캐시백 신청'].includes(el.textContent.trim()))el.remove()});
-  if(k==='link/L0'||k==='link/L1'){root.querySelectorAll('.li,.c').forEach(el=>{if(el.children.length&&/^L\s*Lighter/.test(el.textContent.trim())){const sb=el.querySelector('.sb');if(sb)sb.textContent='온보딩 보류'}})}
+  if(k==='link/L0'||k==='link/L1'){root.querySelectorAll('.li,.c').forEach(el=>{if(el.children.length&&/^L\s*Lighter/.test(el.textContent.trim())){const sb=el.querySelector('.sb');if(sb)sb.textContent=sb.textContent}})}
  }else{
   const side=Array.from(root.querySelectorAll('*')).find(el=>el.children.length>3&&el.textContent.includes('프리로그인 랜딩 페이지')&&el.textContent.includes('리그/보드')&&!el.querySelector('.ct'));
   if(side){const w=document.createTreeWalker(side,4);let n;while(n=w.nextNode()){const t=n.textContent.trim();if(t==='UID')n.textContent=n.textContent.replace('UID','Account');else if(t==='UID 리스트')n.textContent=n.textContent.replace('UID 리스트','계정 리스트')}}
@@ -403,7 +403,7 @@ const V22_NOTE_FIX=[
  ['만료일로 표시합니다',null],['신청 성공 상태입니다',null],['지급 완료가 아니라 출금 신청 성공 후',null],
  ['식별자는 뒤 4자리만 공개','CEX·DEX의 자동 지급 완료 건을 같은 피드에 시간순으로 표시합니다. DEX 지갑은 전체 주소, CEX UID는 기존 마스킹, 시각은 현지 시간(8-2, G-411).'],
  ['뒤 4자리만 남겨 마스킹','CEX는 UID(기존 마스킹), DEX는 지갑 주소 전체를 표시합니다. 좁은 자리만 앞 6 + … + 뒤 4로 줄입니다(#37).'],
- ['Lighter Standard도 연동할 수 있으며','DEX는 UID 대신 지갑 주소를 입력합니다. Lighter는 온보딩 보류(G-428)이며 재개 시 Standard 연동 허용 규칙을 따릅니다.'],
+ ['Lighter Standard도 연동할 수 있으며','DEX는 UID 대신 지갑 주소를 입력합니다. Lighter Standard도 연동할 수 있습니다(경고·차단 없음).'],
  ['UID·KYC·지갑 서명·소유권 인증을 추가로 요구하지 않습니다','DEX 연동은 지갑 주소만 입력합니다(UID·KYC·지갑 서명 없음). 다른 회원이 이미 연동한 지갑은 소유권 인증으로 되찾습니다(5-10).'],
  ['DEX에 별도 소유권 인증 단계를 추가하지 않습니다','연동 성공 화면에 정산 주기 배지와 다음 업데이트 시각(로컬)을 표시합니다. DEX 첫 연동은 3 USDT 쿠폰 안내가 없습니다(REQ-095 · 097).'],
  ['가입 경로 확인과 고객센터 안내를 제공합니다','본문은 REQ-088 원문. 영구 거부라 재시도를 권하지 않습니다. 제목 분리·`Join {DEX}` 버튼은 미정(G-092).'],
@@ -412,7 +412,7 @@ const V22_NOTE_FIX=[
  ['선택한 DEX의 설명·요율·거래 조건을 표시합니다. Lighter Standard','선택한 DEX의 설명·요율·거래 조건을 표시합니다. 요율은 거래소 레코드 값입니다.'],
  ['DEX 페이백은 챌린지 진행률에 포함하지 않으며','DEX 지갑의 커미션 캐시백도 게이지에 산입합니다(8-17). DEX 원장 반영 시점은 미정(G-429).'],
  ['챌린지 수령 목록에는 CEX 계정만','수령 계정 선택에 DEX 그룹·지갑 행을 둡니다. 한 번 고르면 변경할 수 없습니다(8-17).'],
- ['DEX도 지원 조건에 따라 참여합니다. Lighter는 일별 원장','DEX 보드를 운영합니다(Lighter는 온보딩 보류). 사용자는 거래소를 고르지 않고 어드민이 등록한 빙고판을 봅니다(REQ-634).'],
+ ['DEX도 지원 조건에 따라 참여합니다. Lighter는 일별 원장','DEX 4곳 보드를 운영합니다(Lighter 포함, G-428). 사용자는 거래소를 고르지 않고 어드민이 등록한 빙고판을 봅니다(REQ-634).'],
  ['일반 회원 초대 리워드 출금에 DEX 계정도 선택할 수 있습니다','초대 리워드도 자동 지급합니다. 받을 계정은 관리자가 지정하며 회원 화면에 계정 선택이 없습니다(REQ-414 · 417).'],
  ['일반 이벤트 쿠폰의 수령 계정에 DEX를 포함합니다','일반 이벤트·챌린지 쿠폰을 DEX 지갑에도 적용합니다. LINK UID 쿠폰도 DEX 지갑에 적용 가능(발급만 CEX 첫 연동). 확인 중 지갑은 목록에서 제외(REQ-403).'],
  ['부스트는 CEX 전용으로 유지','DEX를 부스트 거래소 목록에 넣습니다(8-18). DEX 적용 방식 G-430 · DEX 행 표시 G-431 미정.'],
@@ -422,24 +422,24 @@ const V22_NOTE_FIX=[
  ['소유권 확인 심사는 CEX 전용입니다','소유 확인 심사에 DEX 지갑 신청을 포함합니다. 관리자 응답 10분 없으면 자동 실패(기존 CEX), 거절 사유 필수(REQ-565).'],
  ['귀속 원장 없이 승인하지 않으며 소유권 인증으로 대체하지 않습니다','귀속 원장 없이 승인하지 않습니다. 확인 중은 귀속 확인 대기 / 연동 전 잔액 송금 대기로 나눠 표시하며, 송금 대기는 판정 대상이 아닙니다(REQ-555 · 722). 자동 재확인 15분 × 4회 뒤 운영 Slack.'],
  ['일반 이벤트 리워드는 CEX·DEX 지원, UID 연동 3 USDT·챌린지는 CEX 전용','일반 이벤트 리워드·챌린지는 CEX·DEX, UID 연동 3 USDT만 CEX 전용입니다(REQ-593).'],
- ['Lighter는 일별 원장이 확보되지 않으면 운영하지 않습니다. 업데이트는','DEX 보드를 운영합니다. Lighter는 온보딩 보류(처리 G-317). Batch 12:30 UTC, 사용자에게는 현지 시각.']
+ ['Lighter는 일별 원장이 확보되지 않으면 운영하지 않습니다. 업데이트는','DEX 4곳 보드를 운영합니다(Lighter 포함, G-428). Batch 12:30 UTC, 사용자에게는 현지 시각.']
 ];
 const V22_NOTES={
  'own/O1':['.dlg','소유권 인증 진입','원문 OWN-1. 다른 회원이 이미 연동한 지갑을 실제 주인이 되찾는 경로(5-10, REQ-723).'],
  'own/O2':['.dlg','30일 쿨다운','그 지갑의 마지막 소유권 승인 시각부터 30일. 신청을 만들지 않음(REQ-724).'],
- 'own/O3':['.v22-own','녹화 가이드 · 업로드','3단계 가이드(OWN-3)는 DEX별 백오피스 작성, 형식 미정(G-432). MP4·MOV 최대 100MB. 업로드 완료 전 Submit Claim 비활성(REQ-725 · 726).'],
+ 'own/O3':['.v22-own','녹화 가이드 · 업로드','3단계 가이드(OWN-3)는 DEX별 백오피스 작성, 형식 미정(G-432). MP4·MOV 최대 1GB. 업로드 완료 전 Submit Claim 비활성(REQ-725 · 726).'],
  'own/O10':['.dlg','제출 확인','Cancel하면 파일 유지. 중복 제출 방지(REQ-727).'],
  'own/O11':['.c:last-of-type','심사 상태','처리 중 = 소유 확인중(우선순위 1) + 경과 시간. 관리자 응답 10분 없으면 자동 실패(기존 CEX). 승인 시 지갑 이전(REQ-728 · 729).'],
  'own/O14':['.c:last-of-type','이전 보유자','소유권 이전으로 해제된 행. Remove Wallet은 이 행에만 있음(셀프 해제 아님). FCM 24 발송. 잔액 처리 G-433(REQ-729 · 730).'],
  'link/PRELINK':['.dlg','연동 전 잔액 출금','연동 전 잔액이 10 USDT 이상이면 그 지갑으로 먼저 출금한 뒤 자동 연동. 출금 중엔 확인 중(송금 대기). 안내 문구 미정(G-426)(5-6, REQ-107 · 722).'],
  'link/PRELINKFAIL':['.dlg','출금 실패 = 연동 실패','금액은 연동 전 잔액으로 복원, 다시 신청 가능. 문구 미정(G-426)(5-6 ⑧).'],
- 'link/L7':['.dlg','정산 카드','지갑 주소 전체 · Daily/Weekly 배지 · 다음 업데이트 로컬 시각(REQ-095).'],
+ 'link/L7':['.dlg','정산 카드','지갑 주소 전체 · Daily 배지(DEX 4곳 일 1회) · 다음 업데이트 로컬 시각(REQ-095).'],
  'link/L8':['.dlg','레퍼럴 아님','REQ-088 원문. 제목 분리 미정(G-092).'],
  'wd/DW1':['.v22-wd','표시 전용 출금 화면','카드 = 식별자(DEX 지갑 전체) · Available/Unavailable · 금액. 결과 표시 없음. 선차감 사유 문구 영문 미정. 네트워크 예시값(체인 G-044)(A-23 · A-27).'],
  'wd/DW0':['.v22-wd','전부 불가','합계 0.00 + 한 줄 사유 + 매칭 안내(6-1).'],
  'home/LKD':['.pg','지갑 상세','출금 버튼은 비활성 Auto Claim. 타임라인의 「최대 1시간 차이」 문구는 DEX 기준으로 다시 써야 함(문구 미정, 7장).'],
  'pbk/P1':['.c','/payback 퍼널','허브와 별개 퍼널. 사용자 수가 없으면 Did you know 카드를 숨김(REQ-453 · 454).'],
- 'pbk/P5':['.c','Summary','Destination = TetherMax Account. 각주는 DEX별 원문(REQ-459 · 462). Lighter는 온보딩 보류로 타일에서 뺌.'],
+ 'pbk/P5':['.c','Summary','Destination = TetherMax Account. 각주는 DEX별 원문(REQ-459 · 462). Lighter 포함(G-428).'],
  'inv/IF8':['.c','초대 리워드 자동 지급','회원 화면에 계정 선택 없음. 실패 시 초대 리워드 잔액으로 복원(REQ-414 · 416).'],
  'ch/CH2':['.dlg','DEX 수령 계정','챌린지 DEX 포함(8-17, REQ-438).'],
  'mb/MB1':['.c','DEX 보드','어드민이 등록한 빙고판. 거래소 선택 없음. DEX 보드 라벨은 지갑(REQ-634 · 603).'],

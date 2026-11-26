@@ -92,7 +92,7 @@ function panelCard(c){
  if(c==='cexPanel'||c==='cexBelowMin'){
   const low=c==='cexBelowMin',[a,b]=low?[5,2]:[28.4,4],w=fl2(a+Math.min(a,b));
   let n=0;while(fl2(a+n+Math.min(b,a+n))<10&&n<10)n=fl2(n+.01);
-  const sub2=C.tbd('이벤트 리워드 하위 줄 (Figma `Events and invites`는 틀림 — 초대 리워드는 별도 잔액)','G-140');
+  const sub2=T('From events. Invitation rewards are separate.','이벤트에서 받은 리워드예요. 초대 리워드는 따로 쌓여요.');
   return receipt(`${rHead('YOUR CASHBACK')}${rule()}${seg('CEX')}<div class="row">${partnerSel(HB_CEX.find(x=>x.id==='bybit'))}</div>${bigLine('Total available cashback',amt(w))}${rule()}
    ${lineKV('Total exchange cashback','From your Bybit trades',amt(a))}${lineKV('Total event reward',sub2,amt(b),{subSize:'b2'})}${rule()}
    ${low?capRow(T(`You can claim if you receive an additional ${amt(n).replace(' USDT','')} USDT in exchange cashback.`,`거래소 캐시백을 ${amt(n).replace(' USDT','')} USDT 더 받으면 출금할 수 있어요.`),'Minimum 10 USDT',{blue:true}):capRow(`Claimable ${amt(w)}`,'Minimum 10 USDT')}
@@ -103,7 +103,7 @@ function panelCard(c){
  const multi='';
  const sel=`<div class="row">${partnerSel(p,c==='dexMulti'?'+1':'')}</div>${multi}`;
  const head=`${rHead('YOUR CASHBACK')}${rule()}${seg('DEX')}${sel}`;
- const dest=`<p class="cap c2" style="margin:0">Payout destination: linked ${esc(p.name)} wallet.</p>`;
+ const dest=`<p class="cap c2" style="margin:0">${T(`Cashback is sent automatically to your linked ${esc(p.name)} wallet.`,`캐시백은 연동한 ${esc(p.name)} 지갑으로 자동 지급돼요.`)}</p>`;
  const paid=capRow(T('Paid to your TetherMax balance','테더맥스 잔액으로 적립돼요'),'Minimum 10 USDT');
  if(c==='dexLoading')return receipt(`${head}<div class="col" style="gap:14px">${C.skel('60%',28)}${C.skel('100%',18)}${C.skel('100%',18)}${C.skel('40%',14)}</div>${autoClaim()}`)+C.note('로딩: 0 대신 스켈레톤(REQ-301). 근거: DEX(revision) 지갑 잔액 카드 메모(29026:97581) 「조회 중에는 스켈레톤」 — 같은 잔액 줄 자리에 코어 스켈레톤(C.skel). 로딩 화면 프레임 자체는 없음. V2.2 `hub/HUB#dexLoading`.');
  if(c==='dexError')return receipt(`${head}<span class="b1 semi">Cashback could not load</span>${C.btn('Try again',{v:'outlined',c:'primary',full:true})}${autoClaim()}<p class="cap c2" style="margin:0">We could not load your cashback. Please try again.</p>`)+
@@ -122,8 +122,8 @@ function panelCard(c){
  const partial=c==='dexPartial'?`<div class="col" style="gap:0;font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)"><span>Matched ${amt(Math.min(a,b)).replace(' USDT','')} / ${amt(b)} in event rewards</span><span>Claimable ${amt(w)} · Minimum 10 USDT</span>${w<10?`<span>Additional exchange cashback needed: ${amt(need)}</span>`:''}</div>`:'';
  const claimed=c==='totalClaimed'?lineKV('Total claimed','','240.00 USDT'):'';
  const multiNote=c==='dexMulti'?`<p class="b2 c2" style="margin:0">${T('Wallets: 12.00 (auto-paid next cycle) · 4.00 (not included)','지갑 12.00(다음 10분 주기 자동 지급) · 4.00(제외)')}</p>`:'';
- const accr=c==='lighterAccruing'?lineKV(C.tbd('주중 Lighter 「집계 전」 표시 자리·영문 문구','G-100 확정 · 원문 없음'),'',C.tbd('집계 전','G-100')):'';
- const bottom=c==='dexBelowMin'?`${rule()}${capRow(T(`You can claim if you receive an additional ${amt(n).replace(' USDT','')} USDT in exchange cashback.`,`거래소 캐시백을 ${amt(n).replace(' USDT','')} USDT 더 받으면 출금할 수 있어요.`),'Minimum 10 USDT',{blue:true})}${autoClaim()}<p class="cap c2" style="margin:0">You can withdraw once your available cashback reaches 10 USDT.</p>${dest}`
+ const accr='';
+ const bottom=c==='dexBelowMin'?`${rule()}${capRow(T(`You can claim if you receive an additional ${amt(n).replace(' USDT','')} USDT in exchange cashback.`,`거래소 캐시백을 ${amt(n).replace(' USDT','')} USDT 더 받으면 출금할 수 있어요.`),'Minimum 10 USDT',{blue:true})}${autoClaim()}<p class="cap c2" style="margin:0">${T('Cashback is claimed automatically once your claimable amount reaches 10 USDT.','출금 가능액이 10 USDT가 되면 자동으로 출금돼요.')}</p>${dest}`
   :`${paid}${autoClaim()}${dest}`;
  const notes={
   dexPartial:'A=3 · B=8 → 3 + MIN(8, 3) = 6.00. 패널은 H5(28960:126908) 구성, 매칭 설명 3줄은 DEX(revision) 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704) 문구·스타일 그대로(<code>Matched … in event rewards</code> · <code>Claimable … · Minimum 10 USDT</code> · <code>Additional exchange cashback needed</code>). Event Reward 줄 = 매칭된 금액 min(A,B). V2.2 `hub/HUB#dexPartial`(V2.2 안내 문장 대신 Figma 문구).',
@@ -157,8 +157,8 @@ function hero(right,route){
 function routes(){
  // 순서 CEX → DEX → Brokers 고정(G-138 확정). Figma는 DEX → CEX → Broker(하드코딩). 강조(파란 화살표)는 Figma의 DEX 행 hover 표현
  const rows=[
-  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Automatic payouts from 10 USDT',unit:'futures cashback',go:'cex.list'},
-  {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Automatic payouts from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
+  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'cex.list'},
+  {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
   {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:''},
  ];
  const row=r=>{const on=r.k==='DEX';
@@ -182,7 +182,7 @@ function routes(){
 // ---------- 비교표 FU-048 ----------
 function compare(chip,c){
  const list=routeList(chip),n=list.length,brk=chip==='Brokers';
- const title=brk?C.tbd('Brokers 비교표 제목 — Figma·정책 원문에 금지 용어 포함, 캐시백 용어로 교체 필요','질문_hub #5'):mo()&&chip==='DEX'?`Compare cashback across ${n} DEXs`:`Compare cashback across ${n} exchanges`;
+ const title=brk?`Compare cashback across ${n} brokers`:mo()&&chip==='DEX'?`Compare cashback across ${n} DEXs`:`Compare cashback across ${n} exchanges`;
  const sub=brk?'Monthly cashback at 2 lots a month, from the calculator above.':`Monthly cashback at ${usd0(HB_VOL)} monthly trading volume, from the calculator above.`;
  const ph=chip==='DEX'?'Search for a DEX':brk?'Search for a broker':'Search for a partner';
  const est=p=>brk?p.est:fl2(HB_VOL*p.taker/100*p.rate/100);

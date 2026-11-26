@@ -23,16 +23,16 @@ const isCex=n=>!!CEXLOGO[n];
 
 // 상태 7단계(REQ-272) + DEX 칩(REQ-273). 색은 의미별 4토큰(G-058): done 완료 · prog 진행 · warn 주의 · off 실패/해제
 const ST={
- own:{lb:'소유 확인중',tone:'prog',pri:1,linked:false},
- pend:{lb:'연동 시도중이에요',tone:'prog',pri:2,linked:false},
- issue:{lb:'이슈',tone:'warn',pri:3,linked:false},
- ok:{lb:'연동 완료',tone:'done',pri:4,linked:true},
- fail:{lb:'연동 실패',tone:'off',pri:5,linked:false},
- ownfail:{lb:'소유 확인 실패',tone:'off',pri:6,linked:false},
- unlinked:{lb:'연동 해제',tone:'off',pri:7,linked:false},
- zero:{lb:'No cashback yet',tone:'prog',linked:true},
- delayed:{lb:'Data delayed',tone:'warn',linked:true},
- inactive:{lb:'Inactive',tone:'off',linked:true},
+ own:{get lb(){return T('Verifying ownership','소유 확인중이에요')},tone:'prog',pri:1,linked:false},
+ pend:{get lb(){return T('Trying to link','연동 시도중이에요')},tone:'prog',pri:2,linked:false},
+ issue:{get lb(){return T('There’s an issue','문제가 있어요')},tone:'warn',pri:3,linked:false},
+ ok:{get lb(){return T('Linked','연동 완료')},tone:'done',pri:4,linked:true},
+ fail:{get lb(){return T('Linking failed','연동 실패했어요')},tone:'off',pri:5,linked:false},
+ ownfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'off',pri:6,linked:false},
+ unlinked:{get lb(){return T('Unlinked','연동 해제되었어요')},tone:'off',pri:7,linked:false},
+ zero:{get lb(){return T('No cashback yet','아직 캐시백이 없어요')},tone:'prog',linked:true},
+ delayed:{get lb(){return T('Data delayed','반영 지연')},tone:'warn',linked:true},
+ inactive:{get lb(){return T('Inactive','비활성')},tone:'off',linked:true},
 };
 const DOT={done:'#2ea652',prog:'#ed6b03',warn:'#ed6b03',off:'rgba(0,0,0,0.38)'};
 // 칩: Figma HW1(주의 = 채움 #e65100) · S4-6(진행 = 파랑 외곽선) · PW1(완료 = 연녹 채움). 실패/해제는 MUI 기본 칩
@@ -84,7 +84,7 @@ function linkedCard(rows,o={}){
  const line=`<hr class="divider" style="margin:0">`;
  const cum=o.cum===false||o.loading?'':`${line}${cumulative(rows)}`;
  return `<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:12px">
-  <div class="row between"><span class="b1 semi">Linked Accounts</span><button class="btn text primary sm" style="padding:4px 5px">See All</button></div>
+  <div class="row between"><span class="b1 semi">Linked Accounts</span><button class="btn text primary sm" style="padding:4px 5px" data-go="home.main:seeAll">See All</button></div>
   ${o.top||''}<div class="col" style="gap:12px">${list}</div>${more}
   ${cum?line:''}<button class="btn text primary sm full" style="padding:4px 5px" data-go="link.select:all">${foot}</button>${cum}</div>`}
 // 누적 캐시백 요약 — 기존 [MAX-7] MAXOP-731 `Cumulative Cashback Summary`(Web 22913:1054295 · mWeb 22931:51476)를 Linked Accounts 카드 안 맨 아래에 그대로
@@ -208,6 +208,33 @@ function guestHome(){
   <div class="row" style="gap:16px">${[1,2,3,4,5].map(i=>`<img src="${HA('sns-'+i+'.svg')}" style="width:${i===4?23:32}px;height:${i===4?24:i===5?28:32}px" alt="">`).join('')}</div>
   <span class="cap" style="line-height:12px">© 2026 TetherMax. All rights reserved.</span></div></div>`}
 
+// ---------- See All — 연동 계정 목록 모달 (기존 9401:160223 구성, 표기 Accounts — 결정 Q3) ----------
+// 제목 + 원형 배지(계정 수) · 오른쪽 {n} Total · 거래소별 묶음(로고 · 이름 · {n} accounts · 거래소 합계) · 계정 행(상태 점 · 식별자 · 금액) · 구분선 · 세로 스크롤 · 하단 Close
+const SEE_ALL=[
+ {ex:'Bitget',id:'685432171',amt:14,st:'ok'},
+ {ex:'Bybit',id:'512093847',amt:42.5,st:'ok'},{ex:'Bybit',id:'512093912',amt:8.1,st:'ok'},
+ {ex:'Lighter',id:WAL.lighter,amt:120,st:'ok'},
+ {ex:'ApeX',id:WAL.apex,amt:14,st:'ok'},
+ {ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
+function seeAllModal(){
+ const mob=S.vp==='mo';const rows=SEE_ALL;
+ const groups=[];rows.forEach(r=>{let g=groups.find(x=>x.ex===r.ex);if(!g)groups.push(g={ex:r.ex,rows:[]});g.rows.push(r)});
+ const amt=v=>v==null?`<span class="b2 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b2 semi tnum">${n2(v)}</span><span class="cap c2">USDT</span></span>`;
+ const idTxt=r=>isCex(r.ex)?`UID ${esc(r.id)}`:`Wallet ${short(r.id)}`;
+ const grp=g=>{const sum=g.rows.reduce((a,r)=>a+(ST[r.st].linked&&r.amt?r.amt:0),0);
+  return `<div class="col" style="gap:4px;padding:12px 0">
+   <div class="row g12">${mark(g.ex,32)}<div class="col grow" style="gap:0;min-width:0"><span class="b2 semi">${g.ex}</span><span class="cap c2">${g.rows.length} ${g.rows.length===1?'account':'accounts'}</span></div>${g.rows.some(r=>ST[r.st].linked)?`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi tnum">${n2(sum)}</span><span class="b2 c2">USDT</span></span>`:`<span class="b1 semi">-</span>`}</div>
+   ${g.rows.map(r=>`<div class="row between" style="padding:6px 0 6px 44px;gap:12px"><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary);min-width:0"><span style="color:${DOT[ST[r.st].tone]}">●</span>&nbsp; ${idTxt(r)}</span>${amt(r.st==='ok'?r.amt:null)}</div>`).join('')}</div>`};
+ const list=groups.map(grp).join('<hr class="divider" style="margin:0">');
+ const box=`<div style="background:#fff;border-radius:${mob?'16px 16px 0 0':'8px'};box-shadow:var(--elev24);width:${mob?'100%':'444px'};max-width:100%;display:flex;flex-direction:column;${mob?'align-self:flex-end;':''}max-height:${mob?'640px':'680px'}">
+  ${mob?'<div class="sheet-grab"></div>':''}
+  <div class="row between" style="padding:${mob?'16px 16px 8px':'24px 24px 8px'}"><span class="row" style="gap:8px"><span class="h6">Linked Accounts</span><span style="min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center">${rows.length}</span></span><span class="b2 c2">${rows.length} Total</span></div>
+  <div class="row g8" style="padding:4px ${mob?16:24}px 8px">${C.chip('All',true,{sm:false})}${C.chip('CEX',false)}${C.chip('DEX',false)}</div>
+  <div style="overflow-y:auto;padding:0 ${mob?16:24}px;flex:1;min-height:0">${list}</div>
+  <div style="padding:${mob?'12px 16px 16px':'16px 24px 24px'}">${C.btn('Close',{full:true,go:'home.main:normal'})}</div></div>`;
+ return C.overlay('home.main:normal',box,{center:!mob,clip:mob?812:900});
+}
+
 // ---------- home.main ----------
 const autoKey=()=>S.auth==='guest'?'guest':S.auth==='s3'?'s3':'normal';
 const N_FIG='FU-038·039 행 디자인(로고·점·칩·금액)은 HW1/S4-1 컴포넌트를 그대로 썼고, 이 상태 프레임은 없음';
@@ -236,17 +263,19 @@ const HOME_STATES=[
  {id:'rejected',label:'확인 중 거절 — 행 제거',note:'V2.2 link/HOME#rejected · REQ-102 · G-069 확정: 거절되면 홈 행 제거(한도 점유 해제)'},
  {id:'labels',label:'DEX 정산 상태 라벨 (홈 행 칩)',note:'V2.2 cmn/LABELS · FU-011 · REQ-047'},
  {id:'faq',label:'홈 FAQ — 회원 답변',note:'V2.2 home/FAQ · FU-044 · REQ-711'},
+ {id:'seeAll',label:'See All — 연동 계정 목록 모달',figma:null,note:'All · CEX · DEX 칩(사용자 결정 2026-11-26, 쿠폰 계정 선택과 같은 칩) · 근거: 기존 9401:160223 연동 UID 목록 모달(거래소별 묶음 · 계정 수 · 거래소 합계 · 계정별 금액 · 상태 점 · <code>Close</code>) — 표기는 Accounts(결정 Q3 · N5). 행 표기는 홈 Linked Accounts 행과 같게(CEX <code>UID</code> · DEX <code>Wallet</code> 축약). 모바일은 바텀시트. <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},
 ];
 const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트)',route:'/',fu:['FU-037','FU-038','FU-039','FU-029','FU-022','FU-011','FU-044'],shell:false,
  states:HOME_STATES,
  render(st0){
   const st=st0==='auto'?autoKey():st0;
   if(st==='guest')return guestHome();
+  if(st==='seeAll')return seeAllModal();
   const app=st==='app'||S.vp==='mo';
   let left='',o={};
   const card=(rows,x={})=>balanceCard({amount:sumLinked(rows),...x});
   if(st==='s3')left=balanceCard({amount:0})+s3Checklist()+s3Preview();
-  else if(st==='s3App')left=balanceCard({amount:0})+`<div style="background:#fff;border-radius:8px;padding:24px 16px;text-align:center" class="col g12"><span class="b1 semi">Link once and cashbacks keep coming</span><span class="cap c2">${C.tbd('cashbacks keep coming / cashback keeps coming 문구 확인','사용자 확인 #48')}</span>${C.btn('Link Account',{go:'link.select',full:true})}</div>`;
+  else if(st==='s3App')left=balanceCard({amount:0})+`<div style="background:#fff;border-radius:8px;padding:24px 16px;text-align:center" class="col g12"><span class="b1 semi">${T('Link once and cashback keeps coming','한 번 연동하면 캐시백이 계속 쌓여요')}</span>${C.btn('Link Account',{go:'link.select',full:true})}</div>`;
   else{
    let rows=[R_BITGET,R_LIGHTER,R_APEX],x={},lc={app};
    if(st==='s3Pending')rows=[{ex:'EdgeX',id:WAL.edgex,amt:null,st:'pend'}];
@@ -262,7 +291,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    if(st==='newRow'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:0,st:'zero'}];o.toast=true}
    if(st==='transferred')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:4,st:'ok'}];
    if(st==='pending')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
-   if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:12.4,st:'inactive',extra:C.tbd('Inactive 행 안내 문구 (오프보딩 — 적립 캐시백은 자동 지급 유지)','REQ-121')}];
+   if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:12.4,st:'inactive',extra:T('No longer supported. Cashback already earned is still sent to this wallet automatically.','지원이 종료된 거래소예요. 적립된 캐시백은 이 지갑으로 계속 자동 지급돼요.')}];
    if(st==='multi')rows=[R_BITGET,...[[WAL.lighter,3.2],[WAL.w2,0],[WAL.edgex,11.05]].map(([w,a])=>({ex:'Lighter',id:w,amt:a,st:a?'ok':'zero'})),...[WAL.aster,WAL.apex].map(w=>({ex:'Aster',id:w,amt:0,st:'zero'}))];
    if(st==='labels')rows=[
     {ex:'Lighter',id:WAL.lighter,amt:120,st:'ok',extra:hChip(T('Not yet tallied','집계 전'),'prog')},
@@ -283,7 +312,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
   }
   if(st==='faq'){
    const faq=`<div style="background:#fff;border-radius:8px;padding:24px;width:${S.vp==='mo'?'100%':'717px'}" class="col g16"><span style="font-size:24px;font-weight:700">FAQs</span>
-    <details open style="border-bottom:1px solid var(--divider);padding:12px 0"><summary class="b1 semi" style="cursor:pointer">${T('How do I get cashback?','캐시백은 어떻게 받나요?')}</summary><p class="b2 c2">…select your exchange, UID, and cashback type… ${C.tbd('UID → 거래 계정 답변 — 문구표 확정분','G-419')}</p></details>
+    <details open style="border-bottom:1px solid var(--divider);padding:12px 0"><summary class="b1 semi" style="cursor:pointer">${T('How do I get cashback?','캐시백은 어떻게 받나요?')}</summary><p class="b2 c2">${T('Go to Cashback Summary, then select your exchange, account, and cashback type to view your cashback history by date.','[캐시백 요약] 메뉴에서 거래소 / 거래 계정 / 캐시백 유형을 선택하면 날짜별 캐시백 적립 내역을 확인하실 수 있습니다.')}</p></details>
     ${C.note('게스트 조회 안내 답변 2건(Search for your exchange and UID …)은 삭제 — REQ-711')}</div>`;
    return hShell(homeLayout(balanceCard({amount:148})+linkedCard([R_BITGET,R_LIGHTER,R_APEX],{app}),{right:faq}),{moNav:'home'});
   }
@@ -428,7 +457,6 @@ function wdCard(a,st,deducted){
    <div class="col" style="gap:8px">${small('Exchange Cashback',n2(deducted&&wdAvail(a)>=10?0:a.cash)+' USDT')}${a.reward>0?small('Event Reward',n2(deducted&&wdAvail(a)>=10?Math.max(0,a.reward-Math.min(a.reward,a.cash)):a.reward)+' USDT'):''}
    ${cex?'':small('Cashback updates ⓘ',wdUpdates(a.ex))}
    ${st==='preAccrual'&&a.ex==='ApeX'?small('Pending','2.10 USDT'):''}</div></div>
-  ${st==='noNetwork'&&!cex?C.alert('warn','',C.tbd('지급 네트워크 미설정 — 지갑 목적지 비활성 표시','REQ-142')):''}
   ${!ok&&!err&&!(deducted&&wdAvail(a)>=10)?`<div class="cap c2">${T(`You can claim cashback if you receive an additional ${up2(wdNeed(a))} USDT in exchange Cashback.`,`거래소 캐시백을 ${up2(wdNeed(a))} USDT 더 받으면 출금할 수 있어요.`)}</div>`:''}
   ${zero?C.alert('info','',`No exchange cashback yet. ${a.ex==='Lighter'?"Cashback appears here after Lighter's Monday settlement.":'Cashback appears here the day after you trade on your linked DEX.'}`):''}</div>`}
 const WD_NOTE='[기존 MAX-18] 출금 모달 Web 12936:389796([When there is more than 2 UIDs]) · 계정 카드 12936:346690. 정책(10분 주기 자동 지급)에 따라 `Confirm Withdraw` → 비활성 `Auto Claim`(DEX HW1·PW1), 마일스톤 진행바(First Milestone)는 REQ-278로 뺌. ';
@@ -464,8 +492,8 @@ R.screen({id:'wd.claim',group:'home',title:'출금 화면 (/withdrawal-apply)',r
    :st==='loading'?box(`${C.skel('40%',14)}${C.skel('30%',28)}`)
    :box(`<div class="col" style="gap:4px"><span style="font-size:12px;line-height:1.4;color:var(--text-secondary)">Total Available Cashback</span><span class="row" style="gap:4px;align-items:baseline"><span style="font-size:24px;line-height:32px;font-weight:600" class="tnum">${n2(total)}</span><span class="b2 c2">USDT</span></span></div>
     ${blocked?`<span>${C.badge('Not eligible to withdraw')}</span>`:''}
-    ${deducted?`<p class="cap c2" style="margin:0">${T(C.tbd('영문 — 문구표 확정분','G-112'),'출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다')}</p>`:''}
-    ${blocked?`<p class="b2 c2" style="margin:0">${T(`No account can be claimed yet. You can claim once ${up2(minNeed)} USDT more cashback accrues.`,`출금 가능한 계정이 없어요. 캐시백 ${up2(minNeed)} USDT가 더 쌓이면 출금할 수 있어요.`)}</p><p class="cap c2" style="margin:0">${T('Each account needs at least 10 USDT (cashback + matched event rewards).','이벤트 리워드는 같은 계정의 캐시백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다.')}</p>`:''}`);
+    ${deducted?`<p class="cap c2" style="margin:0">${T('Amounts being claimed are excluded from your balance until the result is confirmed.','출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다')}</p>`:''}
+    ${blocked?`<p class="b2 c2" style="margin:0">${T(`No account can be claimed yet. You can claim once ${up2(minNeed)} USDT more cashback accrues.`,`출금 가능한 계정이 없어요. 캐시백 ${up2(minNeed)} USDT가 더 쌓이면 출금할 수 있어요.`)}</p><p class="cap c2" style="margin:0">${T('Event rewards are matched 1:1 with the same account’s cashback. The minimum per account is 10 USDT.','이벤트 리워드는 같은 계정의 캐시백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다.')}</p>`:''}`);
   const shown=st==='many'?acc.slice(0,10):acc;
   const cards=st==='loading'?box(C.skel('100%',80))+box(C.skel('100%',80)):shown.map(a=>wdCard(a,st,deducted)).join('')+(st==='many'?`<button class="btn text black sm full">${T('See more','더보기')} (${acc.length-10})</button>`:'');
   const foot=st==='loading'?'':`<div style="padding:0 2px">${C.kv('Network',st==='noNetwork'?'—':'BNB Smart Chain (BEP20)')}<p class="cap c2" style="margin:0 0 8px">Deposits are made to the above wallet address on BNB Smart Chain (BEP20).</p>${C.kv('Network fee',T('covered by TetherMax','테더맥스가 전액 부담'))}</div>`;
@@ -485,7 +513,7 @@ R.screen({id:'wd.second',group:'home',title:'두 번째 출금 화면 (/withdraw
   const acc=WD_ACC().map(a=>({...a,cash:Math.min(a.cash,4),reward:0}));
   return `<div class="container" style="max-width:720px;padding-top:40px;padding-bottom:80px"><div class="card col g16">
    <span class="h5">Trading just a bit more and you can claim.</span><p class="b1 c2" style="margin:0">Cashback can be claimed for UIDs with 10 USDT or more in cashback.</p>
-   <p class="cap" style="margin:0">${C.tbd('UID → 거래 계정 · 「10 USDT 이상」 → 매칭 기준(A + MIN(B, A) ≥ 10) 문장 — 문구표 확정분','G-419')}</p>
+   <p class="cap" style="margin:0">${T('Event rewards are matched 1:1 with the same account’s cashback. The minimum per account is 10 USDT.','이벤트 리워드는 같은 계정의 캐시백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다.')}</p>
    <div>${acc.map(a=>`<div class="row g12" style="padding:12px 0;border-bottom:1px solid var(--divider)">${mark(a.ex,32)}<div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${a.ex}</span><span class="cap c2" style="word-break:break-all">${isCex(a.ex)?'UID '+a.id:a.id}</span></div><div class="col" style="gap:0;align-items:flex-end"><span class="b1 semi">${n2(wdAvail(a))} <span class="b2 c2">USDT</span></span><span class="cap c2">Trading just a bit more</span></div></div>`).join('')}</div>
    <div class="row between"><span class="b1">Cashback to be Claimed</span><span class="h6">${n2(acc.reduce((s,a)=>s+wdAvail(a),0))} USDT</span></div>
    ${C.btn('Go back',{v:'outlined',go:'home.main',full:true})}</div></div>`;

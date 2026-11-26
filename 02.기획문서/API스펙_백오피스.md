@@ -73,7 +73,7 @@
 | 422 | `NO_ELIGIBLE_ACCOUNT` | 신청 시점 재계산 결과 자격 계정 0(REQ-159) |
 | 422 | `PAYOUT_NETWORK_NOT_SET` | 지급 네트워크 미설정 상태의 DEX 지갑(그 계정은 지급하지 않음, REQ-142) |
 | 500 | `WITHDRAWAL_CREATE_FAILED` | 신청 생성 실패, 아무것도 차감하지 않고 다음 주기에 재확인(REQ-161) |
-| 422 | `INVITATION_REWARD_BELOW_MINIMUM` | 초대 리워드 50 USDT 미만 |
+| 422 | `INVITATION_REWARD_BELOW_MINIMUM` | 초대 리워드 10 USDT 미만 |
 | 422 | `DESTINATION_NOT_ALLOWED` | 목적지가 그 회원의 활성 연동 계정이 아님 |
 
 ### 도메인 에러 코드 — 어드민·수집
@@ -139,11 +139,11 @@
 | API-111 | POST | `/api/admin/dex/cashback-records/search` | DEX Cashback Records | FA-050 · FA-051 · BA-021 · BA-023 · BA-081 · BA-082 | 신규 | 원장 필드 = 표준 요건 5필드(G-021) |
 | API-112 | POST | `/api/admin/dex/cashback-records/{recordId}/corrections` | 원장 정정 레코드 생성 | FA-050 · BA-024 · BA-081 | 신규 | G-331 확정: 확정 전 직접 수정 불가 · 정정의 정정 허용 · 파트너 음수 정정은 향후 적립에서 상계 · Lighter 정정 레코드 생성 차단 |
 | API-115 | POST | `/api/admin/excel/upload` | Lighter 주간 CSV 가져오기 — 제외(G-428) | FA-035 · FA-052 · BA-027 · BA-066 · BA-083 | 기존·변경 ⚠경로 | G-338 확정: UTF-8 · 쉼표 · 50,000행 · 20 MB · ISO 8601 · 소수 6자리 · 동시 잠금 `Import in progress by {admin}` · 재업로드 `This file was already imported on {date} by {admin}` |
-| API-116 | GET | `/api/admin/dex/collection-status` | 수집 상태 (Cashback History Status) | FA-049 · BA-025 · BA-080 | 기존·변경 ⚠경로 | G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간 |
+| API-116 | GET | `/api/admin/dex/collection-status` | 수집 상태 (Cashback History Status) | FA-049 · BA-025 · BA-080 | 기존·변경 ⚠경로 | G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 일일 원장(G-428) — 도착 시각 회신 후 같은 규칙 · 공통 24시간 |
 | API-117 | POST | `/api/admin/dex/{exchangeNo}/poll` | Poll now (1회 즉시 수집) | FA-049 · BA-080 | 신규 | 확정 |
 | API-118 | GET | `/api/admin/dex/webhook-logs` | 웹훅 로그 (ApeX) | FA-049 · BA-025 · BA-080 | 신규 | ❓ G-024 |
 | API-121 | POST | `/api/admin/cashback/history/search` | 캐시백 전체 내역 (출금·지급 포함) | FA-028 · FA-048 · FA-054 · BA-034 · BA-059 · BA-079 · BA-085 | 기존·변경 ⚠경로 | 확정 |
-| API-124 | GET·PUT | `/api/admin/dex/settings` | DEX 운영 설정값 | FA-055 · BA-015 · BA-026 · BA-030 · BA-033 · BA-086 | 신규 | G-044 · G-117 · G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간 |
+| API-124 | GET·PUT | `/api/admin/dex/settings` | DEX 운영 설정값 | FA-055 · BA-015 · BA-026 · BA-030 · BA-033 · BA-086 | 신규 | G-044 · G-117 · G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 일일 원장(G-428) — 도착 시각 회신 후 같은 규칙 · 공통 24시간 |
 | API-125 | POST | `/api/admin/event-rewards` | 이벤트 리워드 지급·회수 | FA-020 · FA-053 · BA-048 · BA-074 · BA-084 | 기존·변경 ⚠경로 | 확정 |
 | API-126 | GET | `/api/admin/members/{memberNo}/linked-accounts` | 회원 상세 Linked Accounts | FA-042 · FA-043 · BA-072 · BA-073 | 기존·변경 ⚠경로 | G-237 확정: 분리 표기 `UID {n} · 지갑 {n}` + 필터 `UID만 / 지갑만 / 둘 다` |
 | API-127 | GET·PUT | `/api/admin/cashback-products/dex-landing` | DEX Landing Page 콘텐츠·리스트 | FA-027 · FA-064 · FA-065 · BA-058 · BA-094 · BA-095 | 신규 | G-266 확정: 놓으면 자동 저장 + `Saved` + 10초 Undo, 다른 페이지 이동은 `Move to position N`. 값은 전역 순위 · G-002 |
@@ -303,7 +303,7 @@
 |---|---|
 | Method | 기존 Method 유지 |
 | URL | 기존 초대 리워드 출금 API(`inviteReward`·`partner` 도메인) — 경로 문자열은 확인하지 못했다 |
-| 설명 | `Available Invitation Rewards` **전액**을 **관리자가 관리자 화면에서 지정한 그 회원의 연동 계정** 1곳으로 자동 지급한다(부분 출금 없음, 최소 50 USDT, 매칭 별개). 회원 화면에서는 부르지 않는다(`Auto Claim` 비활성). DEX 지갑 목적지는 Wallet B에서 USDT 송금 |
+| 설명 | `Available Invitation Rewards` **전액**을 **관리자가 관리자 화면에서 지정한 그 회원의 연동 계정** 1곳으로 자동 지급한다(부분 출금 없음, 최소 10 USDT, 매칭 별개). 회원 화면에서는 부르지 않는다(`Auto Claim` 비활성). DEX 지갑 목적지는 Wallet B에서 USDT 송금 |
 | 구분 | 기존·변경 ⚠경로 |
 | 권한 | 내부 호출(자동 지급). 받을 계정 지정은 기존 어드민 기능(현행) |
 | 관련 기능 | FA-022 · BA-052 |
@@ -337,7 +337,7 @@
 | 상태 코드 | 에러 코드 | 조건 |
 |---|---|---|
 | 409 | `IDEMPOTENCY_KEY_REUSED` | 같은 키 다른 본문 |
-| 422 | `INVITATION_REWARD_BELOW_MINIMUM` | 50 USDT 미만(지급하지 않고 잔액 유지) |
+| 422 | `INVITATION_REWARD_BELOW_MINIMUM` | 10 USDT 미만(지급하지 않고 잔액 유지) |
 | 422 | `DESTINATION_NOT_ALLOWED` | 지정 계정이 그 회원의 활성 연동 계정이 아님(해제·연동 미완료·브로커 계정) |
 | 422 | `PAYOUT_NETWORK_NOT_SET` | DEX 목적지인데 지급 네트워크 미설정 |
 
@@ -361,7 +361,7 @@
 | 파라미터 | 타입 | 필수 | 설명 |
 |---|---|---|---|
 | exchangeType | string | 선택 | `CEX` / `DEX` |
-| active · visible · linkable | boolean | 선택 | 플래그 필터 |
+| active · visible | boolean | 선택 | 플래그 필터 |
 | page · size | integer | 선택 | 기본 1 · 20 |
 
 **Response (200 OK)**
@@ -410,7 +410,7 @@
 { "status": "success", "data": { "exchangeNo": 45, "exchangeType": "DEX", "isVisible": false, "isLinkable": false, "version": 1 }, "meta": { "requestId": "req_…" } }
 ```
 
-- 생성 직후 노출·연동가능은 꺼진 상태(V2 조건 확인 전, REQ-183). 노출을 켜면 FCM 30이 자동 발송되는 구조(❓ G-297).
+- 생성 직후 노출은 꺼진 상태(V2 조건 확인 전, REQ-183). 노출을 켜면 FCM 30이 자동 발송되는 구조(❓ G-297).
 
 **에러 Response**
 
@@ -885,7 +885,7 @@
 }
 ```
 
-- `status` = `LIVE`/`DEGRADED`/`MANUAL`/`NOT_INTEGRATED`. `DEGRADED` 판정 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간.
+- `status` = `LIVE`/`DEGRADED`/`MANUAL`/`NOT_INTEGRATED`. `DEGRADED` 판정 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 일일 원장(G-428) — 도착 시각 회신 후 같은 규칙 · 공통 24시간.
 
 **에러 Response**
 
@@ -1036,7 +1036,7 @@
 }
 ```
 
-- 값 출처: 네트워크 ❓ G-044 · 재시도 ❓ G-117·G-118·G-120 · 지연 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간 · 재확인 15분 × 4회(G-068) · 시도 제한 G-063 확정: 1차 출시 미도입 — 기존 CEX처럼 캡차만. REQ-073 다이얼로그·어드민 제한 타입 추가 안 함(0 = 비활성) · Aster 상한은 정책의 현재값(고정값 아님) · Batch 시각은 현재값 12:30 UTC.
+- 값 출처: 네트워크 ❓ G-044 · 재시도 G-117 확정(설정 필드) · ❓ G-118·G-120 · 지연 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 일일 원장(G-428) — 도착 시각 회신 후 같은 규칙 · 공통 24시간 · 재확인 15분 × 4회(G-068) · 시도 제한 G-063 확정: 1차 출시 미도입 — 기존 CEX처럼 캡차만. REQ-073 다이얼로그·어드민 제한 타입 추가 안 함(0 = 비활성) · Aster 상한은 정책의 현재값(고정값 아님) · Batch 시각은 현재값 12:30 UTC.
 
 **에러 Response**
 
@@ -1130,7 +1130,7 @@
 |---|---|---|---|
 | version | integer | 필수 | |
 | listings | object[] | 선택 | `[{ "exchangeNo": 41, "priority": 1 }]` |
-| areas | object | 선택 | 언어별 랜딩 영역 콘텐츠(REQ-628). `{ "{lang}": { hero{title, lede}, sectionButtons[2], trust{title, subline, linkLabel, labels[2]}, venueArea{title, description, cardsPerView, overflow}, comparisonRows[3~10]{label, cex, dex}, stepsArea{title, buttonLabel}, steps[2~5]{title, body, duration, imageMediaId}, educationTiles[2~6]{tag, title, body, imageMediaId}, learnAndEarn{tag, title, description, buttonLabel}, finalCta{title, description, buttonLabel, buttonUrl}, promoBanners[0~5]{exchangeNo, title, subtitle, desktopImageMediaId, mobileImageMediaId, joinUrl, startAt?, endAt?} } }`. 빈 칸은 저장 가능(사용자 화면은 언어팩 기본 문구, G-366). 검증: 개수 범위 · 글자 수 · URL · 이미지 규격(REQ-628) — 키는 API-003 응답과 같다. 파트너 카드 필드는 거래소별이라 API-128 `section=LANDING_CARD` |
+| areas | object | 선택 | 언어별 랜딩 영역 콘텐츠(REQ-628). `{ "{lang}": { hero{title, lede}, sectionButtons[2], trust{title, subline, linkLabel, labels[2]}, venueArea{title, description, cardsPerView, overflow}, comparisonRows[3~10]{label, cex, dex}, stepsArea{title, buttonLabel}, steps[2~5]{title, body, duration, imageMediaId}, educationTiles[2~6]{tag, title, body, imageMediaId}, learnAndEarn{tag, title, description, buttonLabel}, finalCta{title, description, buttonLabel, buttonUrl} } }`. 빈 칸은 저장 가능(사용자 화면은 언어팩 기본 문구, G-366). 검증: 개수 범위 · 글자 수 · URL · 이미지 규격(REQ-628) — 키는 API-003 응답과 같다. 파트너 카드 필드는 거래소별이라 API-128 `section=LANDING_CARD` |
 | reason | string | 선택 | |
 
 **Response (200 OK)**
@@ -1182,7 +1182,7 @@
 - `section=LANDING_CARD`의 `content.{lang}` = `{ line1, line2, line3, bullets[≤4], learnMoreUrl, getStartedUrl, tvlEndpoint, volumeEndpoint }`(REQ-617, G-269 · G-441). 랜딩 카드(API-003 `venues[].card`)에는 Line 1~3 · 링크만 나가고, `bullets`는 상세 히어로 혜택 줄(API-004 `hero.benefits`)로 나간다(G-157 · G-441).
 - Right Box 탭 1개 = 상세 오퍼 박스 토글 1칸(G-438), FAQ는 섹션마다 질문·답변 쌍 1개 이상·섹션 합계 2,000자(G-439), `additionalNotes` = 상세 히어로 자격 안내(선택, G-440). 사용자 응답 대응은 API-004.
 - 검증(UI·서버 동일): `Introduction` 필수 300자 · `Key Features Title` 40자 · Right Box 탭 최대 3·전부 필수 · Structure 양의 정수·최대 1조·최대 > 최소 · 배너 데스크톱 854×173 `.webp` + 모바일 2:1 `.webp` 둘 다 · 약관 2,000자(선택) · Venue `Line 1` 20자 · `Line 2` 10자. 글자 수 = 사용자가 보는 글자 단위.
-- 단계 가이드·FAQ 구조 G-270 확정: PRD 구조 — Guide Title 100 · 단계 1~5 · Step Title 80 · Description 500 · 데스크톱 2:1 + 모바일 1:1 .mp4 필수 · G-271 확정: 단계 수 축소 시 삭제될 단계 명시 확인 창 · 단계 수는 언어 공통 · 영상은 언어별 선택 업로드 · G-272 · G-439 확정: 섹션 단위 — Section Name 40자 + 질문·답변 쌍(섹션 합계 2,000자), 약관 ❓ G-369.
+- 단계 가이드·FAQ 구조 G-270 확정: PRD 구조 — Guide Title 100 · 단계 1~5 · Step Title 80 · Description 500 · 데스크톱 2:1 + 모바일 1:1 .mp4 필수 · G-271 확정: 단계 수 축소 시 삭제될 단계 명시 확인 창 · 단계 수는 언어 공통 · 영상은 언어별 선택 업로드 · G-272 · G-439 확정: 섹션 단위 — Section Name 40자 + 질문·답변 쌍(섹션 합계 2,000자), 약관은 거래소별 어드민 입력 · 상세 약관 서랍 표시(G-369).
 
 **에러 Response**
 
@@ -1648,14 +1648,14 @@
 |---|---|---|---|---|---|---|
 | JOB-D01 | Lighter 폴링 — 제외(G-428, Lighter도 공통 수집 JOB) | 시간당(레이트리밋 분당 8회 / Builder 80회 안에서) | `userReferrals`(커서, 최대 300) → 귀속 캐시(마스킹 주소·`is_eligible`·바인딩 시각) 갱신 · `referral/stats`(최근 12주) → 주중 추정치 · main account `transfer_history?type=ReferralProgramPayout` → 주간 이체 | 귀속 캐시, 추정치, 이체 내역 | 연속 실패 → 수집 상태 `DEGRADED`·운영 알림 `Polling failing`(JOB-D12). 캐시가 비면 연동은 확인 중으로 접수 | BA-021 · BA-027 |
 | JOB-D02 | ApeX 원장 수집 | 시간당(정산 후 1시간 내) + API-201 트리거 | 원장 조회 → `record_id` 멱등 저장 → JOB-D05 | ApeX 원장 레코드 | 표준 원장 5필드(G-021). 백오프 재시도 | BA-021 · BA-028 |
-| JOB-D03 | EdgeX 원장 수집 | 일 1회(01:00 UTC 이후) | 회원당 하루 1건 레코드 `id` 멱등 저장, `payoutId`·`transferId`·`collateralTransactionId` 대조 참조 저장, 0.01 USDC 미만·지급 실패 이월 처리 → JOB-D05 | EdgeX 원장 레코드 | 엔드포인트 ⏳ G-031. 03:00 UTC까지 미도착이면 지연(임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간) | BA-021 · BA-029 |
+| JOB-D03 | EdgeX 원장 수집 | 일 1회(01:00 UTC 이후) | 회원당 하루 1건 레코드 `id` 멱등 저장, `payoutId`·`transferId`·`collateralTransactionId` 대조 참조 저장, 0.01 USDC 미만·지급 실패 이월 처리 → JOB-D05 | EdgeX 원장 레코드 | 엔드포인트 ⏳ G-031. 03:00 UTC까지 미도착이면 지연(임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 일일 원장(G-428) — 도착 시각 회신 후 같은 규칙 · 공통 24시간) | BA-021 · BA-029 |
 | JOB-D04 | Aster 원장 수집 | 일 1회(09:00 UTC 공개 후) | `tranId` 멱등 저장, `usdtValue`·`payoutPrice`·`priceTime` 보관, 월 상한 소진율 갱신 → JOB-D05 | Aster 원장 레코드, 소진율 | 🔴 엔드포인트·필드 ⏳ G-035·G-373. `usdtValue` 누락 행 거부 | BA-021 · BA-030 |
 | JOB-D05 | 캐시백 산정·적립 | 원장 저장 이벤트 | 행 검증(필수 키·주소·레퍼럴 코드) → 매칭(거래일에 주소 + DEX를 연동 완료로 보유한 회원, 주소 형식별 비교. 없으면 미연동 지갑 적립분으로 보관 — 그 지갑에 연동 신청이 들어오면 API-007 · API-109 · JOB-D07이 연동 전 잔액 처리. 이미 연동 완료된 지갑의 연동 신청 시각 이전 거래분이면 도착 시 늦게 온 연동 전 금액 판정 — REQ-721, 정책 5-6 ⑪. 거래 시각 없이 하루 1건인 원장(EdgeX)은 레코드 날짜 < 연동 신청 날짜(UTC)일 때만 연동 전, 신청 당일 레코드는 연동한 회원 몫 — G-436) → 산정식 적용 → 2자리 절삭 적립 → 늦은 레코드면 합계·요약·랭킹 재계산 → UID 예외 등록 지갑 제외 → 수집 상태 `LIVE` 갱신 · FCM 103 이벤트 · 맥스보드 원장 완료 상태(JOB-D14) | 회원 적립, 미연동 지갑 적립분, 거부 레코드(사유) | 산정식 = `총 커미션 × (1 − 마진율)`(G-046). 멱등 키(❓ G-332)로 1회 적립 보장 | BA-022 · BA-023 · BA-024 · BA-031 |
 | JOB-D07 | 확인 중 연동 자동 재확인 | 설정 주기 | **귀속 확인 대기**(`manual_link_pending` 중 `PARTNER_LOOKUP`) 건만 파트너 조회로 다시 판정 — 송금 대기 건은 대상 아님(REQ-722) → 확정이면 연동 전 잔액 처리(REQ-107 — 10 USDT 미만은 바로 `연동 완료`·이관, 이상은 그 지갑으로 출금 후 자동 연동)·알림 1회, 확정적 거절이면 실패·알림 1회, 15분마다 최대 4회 뒤에도 미확정이면 운영 Slack 알림(자동 만료 없음) | 상태 전이 | G-068 확정 | FA-005 · FA-010 · BA-005 · BA-010 |
 | JOB-D08 | 제한 지역 동기화 | 매일 1회 | 파트너 restrictions API → DEX 레코드 `제한 지역` 후보 갱신(운영자 편집값 보존, 감사 `System`) | 제한 지역 | 실패 시 마지막 값 유지 + 운영 알림 | FA-036 · BA-067 |
 | JOB-D09 | DefiLlama 캐시 갱신 | 설정 주기(24시간 캐시) | TVL `api.llama.fi/tvl/{slug}` · 24H 거래량 `/summary/derivatives/{slug}`(slug `aster`·`lighter`·`edgex`·`apex-protocol`) | 지표 캐시 | 실패 시 24시간은 마지막 값(`stale`), 그 뒤 `null` | FA-014 · BA-040 |
-| JOB-D10 | 지급 실행 (Wallet B) | 자동 지급 신청 생성 이벤트(API-011 · API-018) · 연동 전 잔액 출금 요청(API-007 · API-109 · JOB-D07, REQ-107) + 재시도 스케줄 | **지급 구분 `payoutKind`** = `MEMBER_AUTO`(회원 자동 지급) / `PRELINK`(연동 전 출금, REQ-720 · REQ-721). 계정별 1건: 송금 직전 대조(레퍼럴 코드·지갑·DEX 계정 ID) → 네트워크 설정 확인 → Wallet B 잔액 확인(부족 = 지연, 다음 충전 후) → 송금(요청액 = 도착액, 가스 테더맥스 부담) → 확정 시 tx 해시 저장 `SENT` · 드롭·리버트·가스 급등·nonce 충돌·혼잡은 재시도 · RPC 타임아웃은 재전송 없이 결과 확인 · 재시도 소진 시 `FAILED` + 그 계정 금액만 **그 요청이 차감한 잔액**으로 전액 복원 — 지급 요청에 차감 잔액 종류 `debitSource`를 저장해 참조(`ACCOUNT_BALANCE` = 캐시백 자동 지급(API-011) → 그 계정의 회원 잔액 / `INVITATION_REWARD` = 초대 리워드(API-018) → 회원의 `Available Invitation Rewards`, 지갑 캐시백에 더하지 않음 / `PRELINK_BALANCE` = 연동 전 출금 → 그 계정의 연동 전 잔액, 연동 신청 중이면 연동 실패이고 송금 대기 중 따로 보관한 늦은 금액과 합쳐 미연동 보관 — 정책 5-6 ⑧·⑩) · 성공 후 `MEMBER_AUTO`만 TP·초대 리워드 실적·첫 출금 혜택 반영(자동 지급 완료 = 출금), `PRELINK`은 혜택 없이 연동 신청 중이면 연동 완료 1회(정책 5-6 ⑦) · 상태 변화마다 JOB-D16 | 지급 기록, 잔액 복원, 결과 알림 이벤트(JOB-D13) | 계정별 지급 최대 1회(모든 재시도에서). 재시도 값 ❓ G-117·G-118·G-120, 대조 불일치 ❓ G-121·G-122 | FA-005 · BA-005 · BA-018 · BA-032 · BA-034 · BA-035 · BA-050 · BA-051 · BA-104 |
-| JOB-D12 | 수집 상태 판정·운영 알림 | 수집 실행 후 + 주기 점검 | DEX별 `LIVE`/`DEGRADED` 판정(예정 시각 + 임계), 운영 알림 공통 규칙(조건 시 1건, 해소까지 최대 24시간에 1번, 해소 시 종료): 귀속 확인 대기 자동 재확인 4회 초과(운영 Slack) · `Degraded` · 수집 실패 · 확정 기한 · Lighter `Polling failing`·`Weekly CSV late` · ApeX `ledger delayed`·중복 지갑 신청 · 원장 D+1 미도착 · Wallet B 부족 · Aster 상한 초과 · 오프보딩 DEX 데이터 유입 | 수집 상태, 운영 메시지 | 알림에 지갑·UID·DEX 계정 ID 금지. 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간 | BA-025 · BA-107 |
+| JOB-D10 | 지급 실행 (Wallet B) | 자동 지급 신청 생성 이벤트(API-011 · API-018) · 연동 전 잔액 출금 요청(API-007 · API-109 · JOB-D07, REQ-107) + 재시도 스케줄 | **지급 구분 `payoutKind`** = `MEMBER_AUTO`(회원 자동 지급) / `PRELINK`(연동 전 출금, REQ-720 · REQ-721). 계정별 1건: 송금 직전 대조(레퍼럴 코드·지갑·DEX 계정 ID) → 네트워크 설정 확인 → Wallet B 잔액 확인(부족 = 지연, 다음 충전 후) → 송금(요청액 = 도착액, 가스 테더맥스 부담) → 확정 시 tx 해시 저장 `SENT` · 드롭·리버트·가스 급등·nonce 충돌·혼잡은 재시도 · RPC 타임아웃은 재전송 없이 결과 확인 · 재시도 소진 시 `FAILED` + 그 계정 금액만 **그 요청이 차감한 잔액**으로 전액 복원 — 지급 요청에 차감 잔액 종류 `debitSource`를 저장해 참조(`ACCOUNT_BALANCE` = 캐시백 자동 지급(API-011) → 그 계정의 회원 잔액 / `INVITATION_REWARD` = 초대 리워드(API-018) → 회원의 `Available Invitation Rewards`, 지갑 캐시백에 더하지 않음 / `PRELINK_BALANCE` = 연동 전 출금 → 그 계정의 연동 전 잔액, 연동 신청 중이면 연동 실패이고 송금 대기 중 따로 보관한 늦은 금액과 합쳐 미연동 보관 — 정책 5-6 ⑧·⑩) · 성공 후 `MEMBER_AUTO`만 TP·초대 리워드 실적·첫 출금 혜택 반영(자동 지급 완료 = 출금), `PRELINK`은 혜택 없이 연동 신청 중이면 연동 완료 1회(정책 5-6 ⑦) · 상태 변화마다 JOB-D16 | 지급 기록, 잔액 복원, 결과 알림 이벤트(JOB-D13) | 계정별 지급 최대 1회(모든 재시도에서). 재시도 값 G-117 확정(설정 필드) · ❓ G-118·G-120, 대조 불일치 G-121·G-122 확정 | FA-005 · BA-005 · BA-018 · BA-032 · BA-034 · BA-035 · BA-050 · BA-051 · BA-104 |
+| JOB-D12 | 수집 상태 판정·운영 알림 | 수집 실행 후 + 주기 점검 | DEX별 `LIVE`/`DEGRADED` 판정(예정 시각 + 임계), 운영 알림 공통 규칙(조건 시 1건, 해소까지 최대 24시간에 1번, 해소 시 종료): 귀속 확인 대기 자동 재확인 4회 초과(운영 Slack) · `Degraded` · 수집 실패 · 확정 기한 · Lighter `Polling failing`·`Weekly CSV late` · ApeX `ledger delayed`·중복 지갑 신청 · 원장 D+1 미도착 · Wallet B 부족 · Aster 상한 초과 · 오프보딩 DEX 데이터 유입 | 수집 상태, 운영 메시지 | 알림에 지갑·UID·DEX 계정 ID 금지. 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 일일 원장(G-428) — 도착 시각 회신 후 같은 규칙 · 공통 24시간 | BA-025 · BA-107 |
 | JOB-D13 | 회원 알림 발송 | 상태 확정 이벤트 | 연동(FCM 100·101·102, EMAIL 30·31·32) · 적립(FCM 103 — ApeX는 회원별로 하루치를 모아 1회, 본문 금액 = 그날 적립 합계: 시간당 적립 24건 → 푸시 1건. 날짜 경계·발송 시각 ❓ G-427) · 보류(FCM 106) · 출금(발송 여부·단위는 현행 정책 — DEX 지갑 완료·실패 푸시는 FCM 104·105, 출금 메일) · EMAIL 28·29 · 기존 행 DEX 분기(FCM 26·27·29·31·32·36·37~41·63~67, EMAIL 16~20·24·25) · 맥스보드 95~99 | 발송 기록 | 이벤트·회원당 1회(이벤트 ID 멱등). 발송 실패해도 판정 유지 + 실패 기록, 수동 재발송 | BA-018 · BA-035 · BA-046 · BA-101 · BA-102 · BA-103 · BA-104 · BA-105 · BA-106 |
 | JOB-D14 | 맥스보드 원장 완료 연계 | 원장 저장·마감 | (거래소, 반영일)별 원장 완료/미완료 상태 생성 → 빙고 Batch(설정값 12:30 UTC)가 미완료 날짜를 끊김으로 판정하지 않고 다음 Batch로 넘김 → `batchDelayed` 판정 | 반영일별 완료 상태 | 정정이 이미 반영된 날짜에 생기는 경우 ❓ G-390 | FA-018 · BA-044 |
 | JOB-D15 | 10분 주기 자동 지급 | **10분마다** | 회원의 계정별 출금 가능액을 잔액 서비스(API-010과 같은 계산)로 확인 → `A + MIN(B, A)` ≥ 10 USDT인 계정(확인 중 계정 제외, 회원의 CEX UID · DEX 지갑, 모든 CEX)이 하나라도 있는 회원마다 그 회원의 자격 계정을 묶어 **기존 출금 신청 API(API-011)를 1회 호출**(멱등 키 = 회원 · 주기) → 초대 리워드(파트너 허브 제휴사 포함)는 API-018 호출 → **연동 완료 계정 중 연동 전 잔액(늦게 온 연동 전 금액 · 연동 전 출금 실패 복원분)이 남은 계정을 다시 판정**: 10 USDT 이상이면 `PRELINK` 출금 요청(JOB-D10, API-011 아님), 미만이면 회원 잔액으로 이관(정책 5-6 ⑪). 회원 보안 제한(72h/24h)·인증 없음 | 출금 신청(계정별 요청 · 선차감) | 주기 겹침·타임아웃 재시도에도 신청 1건(멱등 + 선차감). 생성 실패는 차감 없이 다음 주기 재확인. 회원이 끄는 설정 없음(항상 자동). 이미 운영 중 — DEX 지갑은 배포 시점부터 대상 | BA-017 |

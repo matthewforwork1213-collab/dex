@@ -119,7 +119,7 @@
 | API-004 | GET | `/api/exchanges/{slug}/detail` | 거래소 상세(Venue) 콘텐츠 | FU-010 · FU-054 · FU-055 · FU-056 · FU-057 · FU-058 · FU-059 · FU-084 · BU-010 · BU-047 · BU-048 · BU-049 · BU-050 · BU-051 · BU-052 | 신규 | G-270 확정: PRD 구조 — Guide Title 100 · 단계 1~5 · Step Title 80 · Description 500 · 데스크톱 2:1 + 모바일 1:1 .mp4 필수 · G-272 · G-439 확정: 섹션 단위 — Section Name 40자 + 질문·답변 쌍(섹션 합계 2,000자) |
 | API-005 | 기존 | `/exchange/get-exchange-guide-info` | 연동 가이드 (DEX = 지갑 주소 찾기) | FU-016 · FU-027 · BU-016 | 기존·변경 | 확정 |
 | API-006 | GET | `/api/link/precheck` | 연동 사전 확인 (한도·연동 가능) | FU-013 · FU-014 · BU-013 · BU-014 | 기존·변경 ⚠경로 | 확정 |
-| API-007 | POST | `/api/accounts/dex-wallets` | DEX 지갑 연동 신청 | FU-003 · FU-009 · FU-012 · FU-014 · FU-015 · FU-017 · FU-018 · FU-019 · FU-020 · FU-021 · FU-022 · FU-023 · FU-024 · FU-025 · FU-027 · BU-003 · BU-009 · BU-012 · BU-014 · BU-015 · BU-017 · BU-018 · BU-019 · BU-020 · BU-021 · BU-022 · BU-023 · BU-024 · BU-025 · BU-027 | 신규 | ❓ G-098 · G-350 |
+| API-007 | POST | `/api/accounts/dex-wallets` | DEX 지갑 연동 신청 | FU-003 · FU-009 · FU-012 · FU-014 · FU-015 · FU-017 · FU-018 · FU-019 · FU-020 · FU-021 · FU-022 · FU-023 · FU-024 · FU-025 · FU-027 · BU-003 · BU-009 · BU-012 · BU-014 · BU-015 · BU-017 · BU-018 · BU-019 · BU-020 · BU-021 · BU-022 · BU-023 · BU-024 · BU-025 · BU-027 | 신규 | ❓ G-098 · G-350 확정 |
 | API-008 | 기존 | `/uid/get-my-uid-list` | 내 거래 계정 목록 (CEX UID + DEX 지갑) | FU-002 · FU-003 · FU-007 · FU-023 · FU-025 · FU-037 · FU-039 · FU-054 · FU-070 · BU-002 · BU-003 · BU-007 · BU-023 · BU-025 · BU-032 · BU-034 · BU-047 · BU-063 | 기존·변경 | 확정 |
 | API-009 | GET | `/api/accounts/dex-wallets/{accountId}` | DEX 지갑 상세 | FU-002 · FU-011 · FU-040 · BU-002 · BU-011 · BU-035 | 신규 | G-053 확정: 유지 — V2에서는 테더맥스를 통해 출금한 누계라 데이터가 있음 · G-059 확정: 회원 화면 상태 = `DEX data pending`(미수신, 0 아님) · `Credited` · `Withheld`. Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 |
 | API-010 | 기존 | `/payback/payback-availability-withdrawal` | 캐시백 잔액 (계정별 매칭·출금 가능) | FU-002 · FU-004 · FU-007 · FU-011 · FU-030 · FU-031 · FU-032 · FU-033 · FU-036 · FU-037 · FU-038 · FU-039 · FU-040 · FU-046 · BU-002 · BU-004 · BU-007 · BU-011 · BU-029 · BU-030 · BU-032 · BU-033 · BU-034 · BU-035 · BU-040 | 기존·변경 | G-059 확정: 회원 화면 상태 = `DEX data pending`(미수신, 0 아님) · `Credited` · `Withheld`. Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 · G-100: Lighter도 일 1회 원장이라 주중 표시 문제 없음(G-428) |
@@ -130,11 +130,11 @@
 | API-016 | GET | `/api/global-leagues/{leagueId}/selectable-accounts` | 글로벌 리그 참가·수령 계정 후보 | FU-064 · BU-057 | 기존·변경 ⚠경로 | G-187 확정: 참가 계정과 동일(기존 MAX-8 · MAX-10 구조) |
 | API-017 | 기존 | `/coupon/use-coupon` (+ `/coupon/get-member-uid-coupon-availability`) | 쿠폰 적용 (DEX 지갑 포함) | FU-009 · FU-070 · BU-009 · BU-063 | 기존·변경 | 일부 미정 |
 | API-019 | 기존 | `/partner/partner-info-main` | 파트너 허브 계정 목록·지표 | FU-077 · FU-080 · BU-069 · BU-071 | 기존·변경 | G-394 확정: `{n} Accounts` / `{n}개 계정` |
-| API-020 | POST | `/api/quizzes/{quizId}/submit` | 퀴즈 제출 (DEX 퀴즈) | FU-009 · FU-073 · BU-009 · BU-066 | 기존·변경 ⚠경로 | ❓ G-350 |
+| API-020 | POST | `/api/quizzes/{quizId}/submit` | 퀴즈 제출 (DEX 퀴즈) | FU-009 · FU-073 · BU-009 · BU-066 | 기존·변경 ⚠경로 | G-350 확정 |
 | API-021 | 기존 | `/guest/get-total-event-list` (+ `/guest/get-exchange-event-list`) | 이벤트 목록 (거래소 그룹 필터) | FU-006 · FU-072 · BU-006 · BU-065 | 기존·변경 | 확정 |
 | API-022 | POST | `/api/details/{id}/comments` | 거래소 리뷰(댓글) 작성 — 작성 자격 | FU-058 · BU-051 | 기존·변경 | 확정 |
 | API-023 | POST | 기존 공개 조회 경로 확인 필요 | 비회원 캐시백 조회(읽기 전용) | FU-012 · BU-012 | 기존·변경 ⚠경로 | 공개 조회와 게스트 출금 차단 분리 |
-| API-025 | POST | `/possession/init-possession-request` | 소유권 신청 — DEX 지갑 (녹화 업로드·제출) | FU-026 · FU-027 · BU-026 · BU-027 | 기존·변경 | ❓ G-434 · G-435 |
+| API-025 | POST | `/possession/init-possession-request` | 소유권 신청 — DEX 지갑 (녹화 업로드·제출) | FU-026 · FU-027 · BU-026 · BU-027 | 기존·변경 | G-434 확정 · ❓ G-435 |
 | API-026 | GET | `/possession/get-possession-status` | 소유권 신청 상태 조회 (DEX 지갑 포함) | FU-026 · FU-027 · FU-028 · BU-026 · BU-027 · BU-028 | 기존·변경 | 확정 |
 | MB-API-002 | GET | `/api/maxboard/boards/{boardId}` | 맥스보드 상세 (DEX 보드) | FU-065 · FU-066 · FU-068 · BU-058 · BU-059 · BU-061 | 기존·변경 | G-318 확정: `LIGHTER` · `APEX` · `EDGEX` · `ASTER`(기존 대문자 규칙) |
 | MB-API-003 | GET | `/api/maxboard/boards/{boardId}/eligibility` | 맥스보드 참여 자격 (지갑) | FU-067 · FU-068 · BU-060 · BU-061 | 기존·변경 | G-314 확정: ② 연동 시점(G-436 「연동 후」와 같은 기준) · G-315 확정: 이름 유지 + 값만 지갑(하위 호환) |
@@ -216,7 +216,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 |---|---|---|---|
 | imageType | string | 선택 | 기존 값(`ICON` 등) |
 | exchangeType | string | 선택 | 신규. `CEX` / `DEX`, 없으면 전체 |
-| linkableOnly | boolean | 선택 | 신규. `true`면 연동 가능(노출 + 연동가능 + 활성 + 그 언어 지갑 가이드 있음)만 — 연동 선택기용 |
+| linkableOnly | boolean | 선택 | 신규. `true`면 연동 가능(노출 + 활성 + 그 언어 지갑 가이드 있음)만 — 연동 선택기용 |
 | lang | string | 선택 | 지갑 가이드 유무 판정 언어 |
 
 **Response (200 OK)**
@@ -350,12 +350,11 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
         "learnMoreUrl": "https://…",
         "getStartedUrl": "https://app.lighter.xyz/?referral=TETHERMAX&…",
         "detailSlug": "lighter",
-        "status": "AVAILABLE",
         "metrics": { "tvlUsd": "…", "volume24hUsd": "…", "volumeChange24h": "…", "asOf": "2026-11-11T00:00:00Z", "stale": false }
       }
     ],
     "glance": [41, 42, 43, 44],
-    "promoBanners": [ { "exchangeNo": 41, "name": "Aster", "logoUrl": "…", "title": "Trade with Aster and get Cashback!", "subtitle": "…", "desktopImageUrl": "…", "mobileImageUrl": "…", "joinUrl": "…" } ],
+    "promoBanners": [ { "imageUrl": "…", "title": "…", "content": "…", "linkUrl": "…" } ],
     "comparisonRows": [ { "label": "…", "cex": "…", "dex": "…" } ],
     "stepsArea": { "title": "A simple 3 step path", "buttonLabel": "…" },
     "steps": [ { "no": 1, "title": "Create a Web 3 Wallet", "body": "…", "duration": "About 2 minutes", "imageUrl": "…" } ],
@@ -369,7 +368,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 
 - 운영자 편집 영역은 API-127 `areas`와 같은 키(REQ-628, 정책 C-12-3): `hero`(`title` = H1 · `lede` = 리드) · `sectionButtons` · `trust` · `venueArea` · `comparisonRows` · `stepsArea`·`steps` · `educationTiles` · `learnAndEarn` · `finalCta`. 비운 칸은 언어팩 기본 문구로 채워 준다(G-366). 파트너 카드 `card`(Line 1~3) · `learnMoreUrl` · `getStartedUrl`은 거래소별 Edit Landing Content(API-128 `LANDING_CARD`) — 카드에는 오퍼 3줄만(G-157). `partnerCountText`·`riskNotice`(G-155)는 고정 문구, 히어로 배경 등 빌드 에셋은 응답에 없다.
 - `metrics`: 실패 시 24시간은 마지막 값(`stale: true`), 그 뒤 `null`(영역 숨김, REQ-323). 24H 거래량 출처 G-349 확정: `api.llama.fi/summary/derivatives/{slug}` · 캐시 24시간 · 24시간 뒤 숨김.
-- `venues[].status`: `AVAILABLE` / `MAINTENANCE` / `LINK_UNAVAILABLE`(REQ-332). 노출 DEX가 0이면 `venues: []`.
+- `venues[]`에는 상태 값을 두지 않는다 — 비노출 DEX는 응답에서 빠지고(G-162), 점검 상태도 없다(G-460). 노출 DEX가 0이면 `venues: []`.
 - 히어로 리드는 G-154의 언어별 확정 문구를 사용한다. 위험 고지는 언어팩 고정 문구(G-155)로 표시한다. 비교 문구는 `Your DEX cashback does not.`(G-401), 퀴즈 보상은 이벤트 리워드 매칭 규칙(G-158)을 따른다. 벤토 이미지는 최종 디자인 자산(G-159)을 사용한다. 선택 콘텐츠 값이 비면 해당 요소만 숨긴다.
 
 **에러 Response**
@@ -424,7 +423,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 - `memberState` = 기존 상태 `exchange_guest` / `exchange_member_unlinked` / `exchange_member_linked`(REQ-338).
 - 어드민 Edit Detailed Content(API-128 `DETAIL`)와 1:1이다: `hero.introduction` = `Introduction` · `hero.markets` = 마켓 태그(G-273) · `hero.deposit` = `Deposit` · `hero.benefits` = Edit Landing Content `Bullet 1~4`(빈 줄 제외, G-157 · G-441) · `hero.eligibilityNote` = `Additional Notes`(거래소별 자격 안내, 비면 `null` → 숨김, G-440) · `offerBox.tabs[]` = Right Box 탭(`name` = `Tab Name` · `label` = `Line 1` · `headline` = `Line 2`의 `{요율}` 치환값 · `getStartedUrl` = `Get Started link`, G-438). 탭이 1개면 토글 없음, `stages`는 레코드 요율로 서버가 계산 · `reasonCards` = `Key Features Title` + 주요 특징 4개(썸네일 · 설명) · `calculator` = `Structure` · `banner` = 배너(`Banner Liner` · `CTA button title` · `CTA link` · 문구 스타일) · `faq[].items` = 섹션의 질문·답변 쌍(G-439) · `terms` = `Terms and Conditions`. `seo`는 SEO 관리(REQ-630)에서 온다.
 - `guide`는 어드민 REQ-622 필드와 1:1이다: `guide.title` = `Guide Title` · `steps[].title` = `Step N Title`(왼쪽 목록과 오른쪽 패널 제목 공용) · `steps[].description` = `Step N Description`(경고·안전 메시지 포함, 별도 필드 없음) · `steps[].media.desktop` = 2:1 `.mp4` · `steps[].media.mobile` = 1:1 `.mp4`. `steps` 길이 = `No. of Guide Steps`(1~5)이고 `Step n of N`의 N은 배열 길이다. 요청 언어 영상이 없으면 영어 영상 URL을 준다. 지원 카드(`Stuck partway through?`)는 고정 문구라 응답에 없다.
-- `terms: null`이면 약관 섹션 숨김(❓ G-369). 단계 가이드 구조 G-270 · G-437 확정, FAQ 구조 G-272 · G-439 확정: 섹션 단위 — Section Name 40자 + 질문·답변 쌍(섹션 합계 2,000자).
+- `terms: null`이면 약관 섹션 숨김. 약관은 거래소별로 어드민(EDC `Terms and Conditions`)에서 입력(G-369). 단계 가이드 구조 G-270 · G-437 확정, FAQ 구조 G-272 · G-439 확정: 섹션 단위 — Section Name 40자 + 질문·답변 쌍(섹션 합계 2,000자).
 - 오프보딩 DEX 요청은 404가 아니라 `301` → DEX 랜딩(REQ-358).
 
 **에러 Response**
@@ -515,7 +514,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 ```
 
 - `blockReason`: `null` / `INTEGRATION_MAX_COUNT_OVER` / `EXCHANGE_NOT_LINKABLE`. `FAILED_NEED_RECEIVE`로 연동을 막지 않는다(REQ-107). 화면은 결과 숫자만 보이고 산식을 공개하지 않는다(REQ-112).
-- `accountLimit.limit` = 기존 공통 설정값(`노출=Y && 연동가능=Y 거래소 수 × 3`). `used`는 상태 무관 전부(확인 중·실패·해제 포함).
+- `accountLimit.limit` = 기존 공통 설정값(현행 산식, G-479). `used`는 상태 무관 전부(확인 중·실패·해제 포함).
 
 **에러 Response**
 
@@ -718,7 +717,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 |---|---|
 | Method | 기존 Method 유지 |
 | URL | `/payback/payback-availability-withdrawal` |
-| 설명 | 잔액 서비스. 홈 총 잔액·출금 화면(`/withdrawal-apply`, 출금 가능 계정이 없을 때의 `/withdrawal`)·허브 패널·지갑 상세가 쓰는 계정별 A·B·매칭액·자격과 원장 일자를 준다. 10분 주기 자동 지급(JOB-D15)도 같은 계산으로 대상 계정을 고른다 |
+| 설명 | 잔액 서비스. 홈 총 잔액·허브 패널·지갑 상세가 쓰는 계정별 A·B·매칭액·자격과 원장 일자를 준다. 10분 주기 자동 지급(JOB-D15)도 같은 계산으로 대상 계정을 고른다 |
 | 구분 | 기존·변경 — 기존 엔드포인트(LLM_wiki 앱 바이너리·Postman 맵, 2026-07-23 기준). 홈 총 잔액·허브 패널이 다른 기존 API에서 금액을 받으면 그 API에도 같은 필드를 추가 |
 | 권한 | 로그인 |
 | 관련 기능 | FU-002 · FU-004 · FU-007 · FU-011 · FU-030 · FU-031 · FU-032 · FU-033 · FU-036 · FU-037 · FU-038 · FU-039 · FU-040 · FU-046 · BU-002 · BU-004 · BU-007 · BU-011 · BU-029 · BU-030 · BU-032 · BU-033 · BU-034 · BU-035 · BU-040 |
@@ -767,7 +766,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 ```
 
 - 계정마다: `minimumWithdrawal` = 그 계정의 최소액(설정값, 배포 없이 변경, REQ-159·REQ-257) · `matchedAmount` = 출금 가능액 `A + MIN(B, A)` 절삭(10진 문자열) · `eligible` = 출금 가능 여부(boolean, `matchedAmount ≥ minimumWithdrawal`) · `ledgerDate` = 원장 일자(`YYYY-MM-DD`, UTC) · `shortfall` = 부족분(`eligible`이면 `null`). REQ-257 인수 기준의 최소액 · 출금 가능 여부 · 출금 가능액 · 원장 일자가 이 네 필드다.
-- `totalCashbackBalance` = 매칭 전 `availableCashback` 합(홈), `totalWithdrawable` = 자격 계정 `matchedAmount` 합(출금 화면 상단 합계). 연동 미완료 계정 제외.
+- `totalCashbackBalance` = 매칭 전 `availableCashback` 합(홈), `totalWithdrawable` = 자격 계정 `matchedAmount` 합(자동 지급 판정·허브 패널). 연동 미완료 계정 제외.
 - `preAccrual`은 어떤 합계에도 넣지 않는다(G-100: Lighter도 일 1회 원장이라 주중 표시 문제 없음(G-428)·G-127 확정: ApeX가 원장 전 배치를 노출할 때만 `Pending` 줄 표시, 결정 전 `null`).
 - 파트너 오류 시 그 계정만 `loadError: "PARTNER_UNAVAILABLE"`(금액은 마지막 확정값 유지, 0으로 만들지 않음). 원장을 아직 받지 않은 DEX는 계정 행을 반환하지 않는다(→ 계산기 폴백, REQ-275).
 - 정렬: 우선순위 순, 자격 계정 먼저(G-114 확정: 10개 + `더보기`(본문 6-1)·G-115). 확인 중(`MANUAL_LINK_PENDING`) 계정은 넣지 않는다(REQ-134).
@@ -964,7 +963,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 |---|---|
 | Method | GET |
 | URL | `/api/global-leagues/{leagueId}/selectable-accounts` |
-| 설명 | 리그 참가 계정·보상 수령 계정 선택 목록에 DEX 지갑을 포함해 준다 |
+| 설명 | 리그 참가 계정 선택 목록에 DEX 지갑을 포함해 준다(보상은 참가 계정으로 지급, G-187) |
 | 구분 | 기존·변경 ⚠경로 |
 | 권한 | 로그인 |
 | 관련 기능 | FU-064 · BU-057 |
@@ -1100,7 +1099,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |---|---|---|---|
-| Idempotency-Key | string(header) | 필수 | UUID(❓ G-350 범위) |
+| Idempotency-Key | string(header) | 필수 | UUID(G-350) |
 | quizId | string | 필수 | path |
 | answers | object[] | 필수 | 모듈 4·5는 문항별 `questionNo`와 선택한 보기의 고정 `choiceId`를 보낸다. 두 문항 모두 한 번씩 포함해야 한다. 기존 고정 순서 화면의 `choice` 숫자는 해당 콘텐츠의 원본 보기 순서로 해석한다 |
 
@@ -1139,7 +1138,7 @@ DEX 요청 예시. 보기 ID는 설명용이며 실제 값은 퀴즈 콘텐츠�
 |---|---|
 | Method | 기존 Method 유지 |
 | URL | `/guest/get-total-event-list` · `/guest/get-exchange-event-list` |
-| 설명 | 테더맥스 전용·거래소 이벤트 두 탭에 DEX 이벤트를 포함하고 거래소 그룹 필터를 지원한다 |
+| 설명 | 3탭(`Special Events` · `Exclusive` · `Exchange Events`)에 DEX 이벤트를 포함하고 거래소 그룹 필터를 지원한다 |
 | 구분 | 기존·변경 — 기존 엔드포인트(LLM_wiki 앱 바이너리·Postman 맵, 2026-07-23 기준) |
 | 권한 | 공개 |
 | 관련 기능 | FU-006 · FU-072 · BU-006 · BU-065 |
@@ -1215,7 +1214,7 @@ DEX 요청 예시. 보기 ID는 설명용이며 실제 값은 퀴즈 콘텐츠�
 |---|---|---|---|
 | exchangeNo | integer | 필수 | DEX 거래소 |
 | walletAddress | string | 필수 | trim 후 원문을 보존하며 형식별 비교 규칙으로 확인(G-062) |
-| recording | file | 필수 | MP4·MOV, 최대 100MB(기존 CEX 업로드 규칙) |
+| recording | file | 필수 | MP4·MOV, 최대 1GB(기존 CEX 업로드 규칙) |
 
 **Response (200 OK)**
 
@@ -1231,10 +1230,10 @@ DEX 요청 예시. 보기 ID는 설명용이며 실제 값은 퀴즈 콘텐츠�
 
 | 상태 코드 | 에러 코드 | 조건 |
 |---|---|---|
-| 400 | `VALIDATION_ERROR` | 주소 형식 오류 · 파일 형식(MP4·MOV 아님) · 100MB 초과 |
+| 400 | `VALIDATION_ERROR` | 주소 형식 오류 · 파일 형식(MP4·MOV 아님) · 1GB 초과 |
 | 409 | `FAILED_RECENT_POSSESSION` | 그 지갑의 마지막 소유권 승인 후 30일 이내(기존 코드) → `Ownership Claim Unavailable` |
 | 409 | `INTEGRATION_MAX_COUNT_OVER` | 통합 연동 한도 도달(기존 코드) |
-| 409 | 기존 중복 제출 코드 | 같은 신청 연타 · 진행 중 신청 있음 — 제한 규칙 ❓ G-434 |
+| 409 | 기존 중복 제출 코드 | 같은 신청 연타 · 진행 중 신청 있음 — 제한 규칙은 기존 그대로(G-434) |
 | 422 | 기존 코드 | 지갑이 다른 회원의 `확인 중` 상태 — 허용 여부 ❓ G-435 |
 | 500 | `INTERNAL_ERROR` | 업로드·바이러스 검사 실패 → `Something Went Wrong`, 신청 생성 안 함 |
 

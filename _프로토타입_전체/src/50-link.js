@@ -32,11 +32,11 @@ const dexSel=(d,s=32)=>S.vp==='mo'
 const guideText={Lighter:'Open Lighter and log in. Tap your wallet address in the top right corner, copy it, then paste it above. No wallet connection or signature required.'};
 function guide(d){
  if(S.vp==='mo'){
-  const txt=d==='Lighter'?T('Open Lighter and copy the wallet address from your account. Paste it above. TetherMax never asks for your private key, recovery phrase, or wallet signature.'):C.tbd(d+' 단계 제목·설명(어드민 거래소 가이드 작성)','REQ-533 · G-443');
+  const txt=d==='Lighter'?T('Open Lighter and copy the wallet address from your account. Paste it above. TetherMax never asks for your private key, recovery phrase, or wallet signature.'):T(`Open ${d} and copy the wallet address from your account. Paste it above.`,`${d}에서 계정의 지갑 주소를 복사해 위에 붙여넣으세요.`);
   return `<div class="col g8"><span class="b1 semi">${T('How to find your wallet address','지갑 주소 찾는 방법')}</span><p class="cap" style="margin:0">${txt}</p>
    <div style="height:256px;background:#eaeef4;overflow:hidden">${d==='Lighter'?`<img src="${A('guide-lighter-1.png')}" style="width:100%;height:100%;object-fit:contain">`:''}</div></div>`;
  }
- const txt=guideText[d]?T(guideText[d],'Lighter에 로그인한 뒤 오른쪽 위 지갑 주소를 눌러 복사하고 위에 붙여넣으세요. 지갑 연결이나 서명은 필요하지 않아요.'):C.tbd(d+' 단계 제목·설명(어드민 거래소 가이드 작성)','REQ-533 · G-443');
+ const txt=guideText[d]?T(guideText[d],'Lighter에 로그인한 뒤 오른쪽 위 지갑 주소를 눌러 복사하고 위에 붙여넣으세요. 지갑 연결이나 서명은 필요하지 않아요.'):T(`Open ${d} and copy the wallet address from your account. Paste it above.`,`${d}에서 계정의 지갑 주소를 복사해 위에 붙여넣으세요.`);
  const shot=guideText[d]?`<img src="${A('guide-lighter-1.png')}" style="width:100%;height:100%;object-fit:cover">`:`<div style="width:100%;height:100%;background:var(--bg-accent);display:flex;align-items:center;justify-content:center" class="cap c3">${d} screenshot 1 / 3</div>`;
  const arrow=(side,i)=>`<button class="icon-btn" style="position:absolute;${side}:12px;top:89px;background:#fff;box-shadow:0 2px 3px rgba(0,0,0,.16);padding:6px">${ic(i,'ic20')}</button>`;
  return `<div class="col g8"><span class="b1 semi">${T('How to find your wallet address','지갑 주소 찾는 방법')}</span><p class="b2 c2" style="margin:0">${txt}</p>
@@ -77,7 +77,7 @@ function selList(c,web){
  const dx=(web?DEXES:MO_DEXES).map(n=>({n,t:'DEX'})),cs=cx.map(n=>({n,t:'CEX'}));
  const l=web?[...cs,...dx]:[...dx,...cs]; // 웹 V2.2 순서(CEX 먼저) · 모바일 Figma 순서(DEX 타일 먼저)
  return l.filter(x=>c.chip==='all'||x.t===c.chip.toUpperCase()).filter(x=>!c.q||x.n.toLowerCase().includes(c.q)).filter(x=>x.n!==c.drop)}
-function failBox(){return `<div class="col center" style="align-items:center;padding:24px 0;gap:4px"><span class="b1 semi">${T('Partners couldn’t load')}</span><span class="b2 c2">${T('Please try loading the exchange list again.')}</span><div class="mt8">${C.btn(T('Retry'),{v:'outlined',c:'black',size:'md'})}</div></div>`}
+function failBox(){return `<div class="col center" style="align-items:center;padding:24px 0;gap:4px"><span class="b1 semi">${T('Partners couldn’t load','거래소 목록을 불러오지 못했어요')}</span><span class="b2 c2">${T('Please try loading the exchange list again.','거래소 목록을 다시 불러와 주세요.')}</span><div class="mt8">${C.btn(T('Retry','다시 시도'),{v:'outlined',c:'black',size:'md'})}</div></div>`}
 function webExchangeField(selected,st){
  const c=SEL[st]||SEL.normal;
  const tabs=[['all',T('All','전체')],['cex','CEX'],['dex','DEX']];
@@ -191,7 +191,7 @@ R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (�
  render(st){
   const mo=S.vp==='mo';
   if(st==='intro'){
-   const body=`<p class="h6" style="margin:0">${T('Have you registered a trading account with the TetherMax referral code?')}</p><p class="b1 c2" style="margin:0">${T('You must link your UID to claim USDT from TetherMax.')} ${C.tbd('UID → 거래 계정 · 지갑 문구 교체','REQ-712')}</p>`;
+   const body=`<p class="h6" style="margin:0">${T('Have you registered a trading account with the TetherMax referral code?')}</p><p class="b1 c2" style="margin:0">${T('You must link your account to receive USDT from TetherMax.','테더맥스에서 USDT를 받으려면 거래 계정 연동이 꼭 필요해요.')}</p>`;
    return C.overlay('home.main',linkModal(body,`${C.btn(T('Yes, I have one!'),{full:true,go:'link.select:normal'})}${C.btn(T('No, not yet!'),{v:'outlined',c:'black',full:true})}${signUp()}`));
   }
   if(mo){
@@ -215,10 +215,10 @@ function uidGuide(mo,d){
   ${mo?'':`<img src="${A('link-uid-guide-2.png')}" style="width:100%;aspect-ratio:1280/929;object-fit:cover">`}</div>`}
 
 function uidLinkForm(st,openPicker){
- const mo=S.vp==='mo',filled=st==='filled';
+ const mo=S.vp==='mo',filled=st==='filled',fmtErr=st==='formatError';
  const d=WEB_CEX.includes(selectedExchange)||cexBy(selectedExchange)?selectedExchange:'Bitget';
  const sel=mo?`<button type="button" class="sel" style="border-color:var(--input-border);padding:16px 12px" data-go="link.select:${filled?'uidFilled':'uid'}">${webMark(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`:webExchangeField(d,openPicker);
- const field=C.field({label:null,value:filled?'1234567':null,ph:T('Enter your UID'),focus:filled});
+ const field=C.field({label:null,value:filled?'1234567':fmtErr?'12345abc':null,ph:T('Enter your UID'),focus:filled,error:null});
  const reg=`<p class="b1 med" style="margin:0;text-align:center;padding:8px 0">${T('Don’t have an account yet?')} <a class="cb" style="cursor:pointer" data-go="auth.signup">${T('Register here')}</a></p>`;
  const next=C.btn(T('Next'),{full:true,size:'md',disabled:!filled});
  if(mo)return moForm(T('Link your exchange UID'),`${sel}${field}${uidGuide(true,d)}`,`${next}${reg}`);
@@ -247,6 +247,8 @@ const IN={ // [값, 오류, Next 활성]
  e6:['example.eth','Paste the wallet address, not an account name.',false],
  e7:['0x0000000000000000000000000000000000000000','This address can’t be linked.',false],
 };
+// 주소 검증 오류 국문(G-367) — 05.리포트/문구표_DEX.md
+const ADDR_KO={'Enter your wallet address.':'지갑 주소를 입력해 주세요.','Remove spaces within the wallet address.':'지갑 주소 안의 공백을 지워 주세요.','This address is not supported for the selected exchange.':'선택한 거래소에서 지원하지 않는 주소예요.','We couldn’t verify this wallet address. Copy it again from the exchange.':'지갑 주소를 확인하지 못했어요. 거래소에서 다시 복사해 주세요.','Paste the wallet address, not an account name.':'계정 이름이 아닌 지갑 주소를 붙여넣어 주세요.','This address can’t be linked.':'연동할 수 없는 주소예요.'};
 R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link (웹 꽉 찬 모달 · 앱 전체 화면)',fu:['FU-015','FU-016'],shell:false,
  states:[
   {id:'empty',label:'빈 값 — 안내 보임, Next 비활성 (L2)',figma:{pc:'28960:127275',mo:'28969:126986'},note:'V2.2 <code>link/ADDR#normal</code> · <code>link/SEL#detail</code>(DEX 상세 진입 = 그 DEX 선택 상태로 바로 주소 입력, 배경 D1 상세) · <code>link/SHEET#screen</code>(모바일 전체 화면 Link Account — Next 항상 닿음)'},
@@ -267,8 +269,8 @@ R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link 
   const d=preset||(st==='hub'?'ApeX':st==='empty'&&DEXES.includes(selectedExchange)?selectedExchange:'Lighter');
   const [val,err,ok]=IN[preset?'empty':st];
   const mo=S.vp==='mo';
-  const fld=C.field({label:val?T('Wallet address','지갑 주소'):null,value:val||null,ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),error:err?T(err):null,focus:mo&&st==='valid',help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')});
-  const extra=st==='paste'?`<p class="cap c2" style="margin:0">${C.tbd('클립보드 권한 거부 시 직접 붙여넣기 힌트','REQ-061 권고')}</p>`:'';
+  const fld=C.field({label:val?T('Wallet address','지갑 주소'):null,value:val||null,ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),error:err?T(err,ADDR_KO[err]):null,focus:mo&&st==='valid',help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')});
+  const extra='';
   const nt=st==='kept'?C.note('실패 다이얼로그를 닫거나 새로고침해도 선택 거래소·입력 주소 유지(REQ-064 · G-380)'):'';
   const hintTxt=T('Paste a valid wallet address to continue.','올바른 지갑 주소를 붙여넣으면 계속할 수 있어요.');
   if(mo){
@@ -293,7 +295,7 @@ R.screen({id:'link.signup',group:'link',title:'가입 후 연동 복귀 (G-402)'
  ],
  render(st){
   if(st==='return'){
-   const body=`${trust()}${dexSel('Lighter')}${C.field({ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')})}<p class="cap c2" style="margin:0">${C.tbd('가입 후 복귀 안내 문구','G-402 문구표')}</p>${guide('Lighter')}`;
+   const body=`${trust()}${dexSel('Lighter')}${C.field({ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')})}<p class="cap c2" style="margin:0">${T('Signed up on Lighter? Paste your Lighter wallet address to link it.','Lighter 가입을 마쳤다면 Lighter 지갑 주소를 붙여넣어 연동해 주세요.')}</p>${guide('Lighter')}`;
    if(S.vp==='mo')return renderInner('link.addr:empty');
    return C.overlay(BG,linkModal(body,`${C.btn(T('Next','다음'),{full:true,disabled:true})}${signUp()}`));
   }
@@ -345,7 +347,7 @@ R.screen({id:'link.proc',group:'link',title:'처리 중 (Processing Your Account
   {id:'prelink',label:'연동 전 잔액 출금 대기',figma:{pc:'28966:124158',mo:'28969:127087'},note:'V2.2 <code>link/PROC#prelink</code> · REQ-108(처리 중 화면 재사용) · 본문은 Figma 원문(G-426 문구표). Severity info'},
  ],
  render(st){
-  const msg=st==='prelink'?T('Your existing cashback is being paid to this wallet. Linking completes when the transfer is confirmed.'):T("Your account is being processed. You'll be notified once linking is complete.");
+  const msg=st==='prelink'?T('Your previous cashback of 14.00 USDT is being sent to this account. Linking completes once the transfer is confirmed.','이전에 쌓인 캐시백 14.00 USDT를 이 거래 계정으로 보내고 있어요. 송금이 확인되면 연동이 완료돼요.'):T("Your account is being processed. You'll be notified once linking is complete.");
   return splash('info',T('Processing Your Account'),msg,C.btn(T('Back to Home'),{full:true,go:'home.main'})+help());
  }});
 
@@ -373,7 +375,7 @@ R.screen({id:'link.result',group:'link',title:'연동 결과',route:'/link (전�
   if(st==='other'||st==='unavailable')return splash('error',T('Unable to Link Account'),T('We were unable to link this account. Please contact our support team for assistance.'),support,{close:'link.addr:kept'});
   if(st==='limit')return splash('warning',T('Trading account limit reached'),T('You’ve linked the maximum number of accounts (21).','연동할 수 있는 거래 계정을 모두 사용했어요 (21개)'),`${support}${help()}`);
   if(st==='pending')return splash('info',T('We’re checking your account link','지갑 연동을 확인하고 있어요'),T('We’ll let you know the result after checking the exchange’s referral records.','거래소의 귀속 내역 확인 후 연동 결과를 알려드릴게요.'),`${C.btn(T('Back to Home'),{full:true,go:'home.main'})}${help()}`);
-  return splash('error',T('Unable to Link Account'),T('We couldn’t complete the payout. Your previous balance has been restored. You can try linking this account again.'),`${C.btn(T('Try again'),{full:true,go:'link.addr:kept'})}${help()}`,{close:'link.addr:kept'});
+  return splash('error',T('Unable to Link Account'),T('We couldn’t send your previous cashback, so this account wasn’t linked. The amount is back in this account’s balance. You can try linking again.','이전에 쌓인 캐시백을 보내지 못해 연동하지 못했어요. 금액은 이 거래 계정의 잔액으로 돌아왔어요. 다시 연동을 시도할 수 있어요.'),`${C.btn(T('Try again'),{full:true,go:'link.addr:kept'})}${help()}`,{close:'link.addr:kept'});
  }});
 
 // ---------- FU-023 · FU-025 연동 성공 ----------

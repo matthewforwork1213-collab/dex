@@ -44,6 +44,17 @@ RETIRED = [
     ("4 `Deposit`(`fiat`", "G-441: ELC Deposit 없음"),
     ("6개 언어(ko", "G-447: 수동 푸시 기존 화면"),
     ("G-156 답변", "G-156 확정"),
+    ("Weekly W+1", "G-428: Lighter도 일 1회 원장"),
+    ("거래 집계 중 →", "G-192: 기존 Earning Timeline 3단계"),
+    ("No exchanges match your search", "G-151: 빈 검색 `No results found for {검색어}`"),
+    ("정확히 3행 `Centralised", "REQ-464: `Cashback` 패널 = Cashback Hub · Cashback Calculator"),
+    ("Newsletters, Points", "REQ-465: 드로어 = Figma 최신판 항목"),
+    ("Exchange, Points", "G-215: 앱 하단 탭 `Exchanges` · `Point`"),
+    ("최소 50 USDT", "G-410: 초대 리워드 최소 10 USDT"),
+    ("100MB", "소유권 업로드 한도 1GB"),
+    ("두 탭 모두 DEX 이벤트", "REQ-437: 이벤트 3탭"),
+    ("Every Monday", "G-428: Lighter도 일 1회 원장"),
+    ("Monday settlement", "G-428: Lighter도 일 1회 원장"),
 ]
 
 

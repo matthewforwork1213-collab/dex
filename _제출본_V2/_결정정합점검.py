@@ -53,7 +53,7 @@ DECISIONS = [
      [r"랭킹에서 DEX를 (제외|뺍)"]),
 
     ("A-18", "마일스톤 · VIP 진행바",
-     "★미결★ A-18의 근거가 V2에서 소멸. 결정요청서 N-1 — 사용자 확정 대기",
+     "마일스톤·VIP 진행바는 없는 기능 — 모든 화면에서 제외 (사용자 2026-11-26)",
      [r"마일스톤", r"milestone"],
      [r"마일스톤·VIP 진행바에서 \*\*DEX를 제거",
       r"remove DEX from the milestone and VIP progress bars"]),

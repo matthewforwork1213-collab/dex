@@ -1,0 +1,150 @@
+// 사이트 모드 DEX 앱 빌드: node dex/build-site.cjs
+// 전체 프로토타입(../../_프로토타입_전체/src)의 코어·화면 모듈을 그대로 묶고, 사이트 동작에 필요한 최소 패치(아래 PATCH)를 적용한 뒤
+// dex/src/site.css · site.js를 붙여 dex/app.html을 만든다. 에셋은 dex/assets/로 복사한다(단일 파일에 넣지 않음 — 모달 iframe이 같은 에셋을 다시 받지 않게).
+const fs = require('fs'), path = require('path');
+const dir = __dirname, full = path.join(dir, '..', '..', '_프로토타입_전체'), src = path.join(full, 'src');
+const read = f => fs.readFileSync(f, 'utf8');
+
+// 패치: [파일, 찾을 문자열, 바꿀 문자열] — 하나라도 못 찾으면 빌드 중단(원본이 바뀌면 바로 알 수 있게)
+const PATCH = [
+  // ---- 70-hub.js: 계산기·비교표를 입력값으로 다시 그릴 수 있게
+  ['70-hub.js', "const HB_VOL=100000;", "let HB_VOL=100000;"],
+  ['70-hub.js', "const p=route==='DEX'?HB_DEX.find(x=>x.id===(o.pid||'lighter')):route==='CEX'?HB_CEX.find(x=>x.id==='bybit'):HB_BRK[0];",
+    "const p=(window.SITEH&&SITEH.partner(route,routeList(route)))||(route==='DEX'?HB_DEX.find(x=>x.id===(o.pid||'lighter')):route==='CEX'?HB_CEX.find(x=>x.id==='bybit'):HB_BRK[0]);"],
+  ['70-hub.js', `const slider=\`<div class="col" style="gap:0"><div style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div style="position:absolute;left:0;top:10px;width:44px;height:6px;border-radius:100px;background:var(--blue)"></div><img src="\${A('hub-slider-thumb.svg')}" alt="" style="position:absolute;left:33px;top:2.5px;width:30px;height:30px"></div>`,
+    `const SLP=window.SITEH?SITEH.sliderPct(route):null;const slider=\`<div class="col" style="gap:0"><div data-hub-slider="\${route}" style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div data-sl-fill style="position:absolute;left:0;top:10px;width:\${SLP==null?'44px':\`calc((100% - 30px) * \${SLP} + 15px)\`};height:6px;border-radius:100px;background:var(--blue)"></div><img data-sl-thumb src="\${A('hub-slider-thumb.svg')}" alt="" style="position:absolute;left:\${SLP==null?'33px':\`calc((100% - 30px) * \${SLP})\`};top:2.5px;width:30px;height:30px"></div>`],
+  ['70-hub.js', `<span class="sub2 c2">Monthly trading volume</span><span class="h5">\${usd0(HB_VOL)}</span>`,
+    `<span class="sub2 c2">Monthly trading volume</span>\${window.SITEH?\`<input data-hub-vol class="h5 hub-vol" inputmode="numeric" aria-label="Monthly trading volume" value="\${usd0(HB_VOL)}"\${route==='Brokers'?' readonly':''}>\`:\`<span class="h5">\${usd0(HB_VOL)}</span>\`}`],
+  ['70-hub.js', "${rHead('CASHBACK ESTIMATE')}${rule()}${seg(route)}${inputs}${slider}${rule()}${body}${member}${o.rateFail?'':learn}",
+    "${rHead('CASHBACK ESTIMATE')}${rule()}${seg(route)}${inputs}${slider}${rule()}<div data-calc-body class=\"col\" style=\"gap:24px\">${body}${member}</div>${o.rateFail?'':learn}"],
+  ['70-hub.js', `<div class="row" style="gap:10px;border:1px solid var(--divider);border-radius:12px;padding:10px 12px;background:#fff;cursor:pointer">`,
+    `<div class="row" data-hub-partner style="gap:10px;border:1px solid var(--divider);border-radius:12px;padding:10px 12px;background:#fff;cursor:pointer">`],
+  ['70-hub.js', "const pid={aster:'aster',lighterAccruing:'lighter',dexDelayed:'lighter'}[c]||'edgex';",
+    "const SP=window.SITEH&&SITEH.panel;const pid=(SP&&SP.pid)||{aster:'aster',lighterAccruing:'lighter',dexDelayed:'lighter'}[c]||'edgex';"],
+  ['70-hub.js', "partnerSel(p,c==='dexMulti'?'+1':'')", "partnerSel(p,SP&&SP.extra!=null?SP.extra:(c==='dexMulti'?'+1':''))"],
+  ['70-hub.js', "const v={dexPartial:[3,8],dexBelowMin:[4,3],dexMulti:[12,0],aster:[18,0],totalClaimed:[100,20],lighterAccruing:[120,5]}[c]||[100,20];",
+    "const v=(SP&&SP.v)||{dexPartial:[3,8],dexBelowMin:[4,3],dexMulti:[12,0],aster:[18,0],totalClaimed:[100,20],lighterAccruing:[120,5]}[c]||[100,20];"],
+  ['70-hub.js', "const reported=c==='aster'?", "const reported=c==='aster'||pid==='aster'?"],
+  ['70-hub.js', `" data-go="hub.main:\${s}"><img src="\${A(i)}" alt="" style="width:20px;height:20px;`, `" data-hub-tab="\${k}"><img src="\${A(i)}" alt="" style="width:20px;height:20px;`],
+  ['70-hub.js', `data-go="hub.main:\${s}">\${l}</span>`, `data-hub-tab="\${k}">\${l}</span>`],
+  ['70-hub.js', `data-go="hub.main:\${s}"><img src="\${A(i)}" alt="" style="width:20px;height:20px"></span>`, `data-hub-view="\${k}"><img src="\${A(i)}" alt="" style="width:20px;height:20px"></span>`],
+  ['70-hub.js', `<div class="row grow" style="border:\${es?`, `<div class="row grow" data-hub-sbox style="border:\${es?`],
+  ['70-hub.js', `<span class="b2 grow \${es?'':'c3'}" style="line-height:20px">\${es?'Hyperliquid':ph}</span>\${es?\`<span title="Clear" style="cursor:pointer;display:inline-flex">\${ic('close')}</span>\`:''}`,
+    `\${window.SITEH?\`<input data-hub-search class="b2 grow hub-search" placeholder="\${ph}" aria-label="\${ph}"><span data-hub-clear title="Clear" style="cursor:pointer;display:none">\${ic('close')}</span>\`:\`<span class="b2 grow \${es?'':'c3'}" style="line-height:20px">\${es?'Hyperliquid':ph}</span>\${es?\`<span title="Clear" style="cursor:pointer;display:inline-flex">\${ic('close')}</span>\`:''}\`}`],
+  ['70-hub.js', "const go=p=>chip==='DEX'?`dex.detail:${p.id}`:chip==='CEX'?'cex.list':'';", "const go=p=>chip==='DEX'?`dex.detail:${p.id}`:chip==='CEX'?'cexd:'+p.id:'';"],
+  ['70-hub.js', "go:route==='DEX'?`dex.detail:${p.id}`:route==='CEX'?'cex.list':''", "go:route==='DEX'?`dex.detail:${p.id}`:route==='CEX'?'cexd:'+p.id:''"],
+  ['70-hub.js', "<tbody>${list.map((p,i)=>`<tr>", "<tbody>${list.map((p,i)=>`<tr data-hub-row=\"${esc(p.name)}\">"],
+  ['70-hub.js', "const card=p=>`<div class=\"col\" style=\"background:#fff;", "const card=p=>`<div class=\"col\" data-hub-row=\"${esc(p.name)}\" style=\"background:#fff;"],
+  ['70-hub.js', "${list.map(p=>`<div class=\"col\" data-go=\"${go(p)}\"", "${list.map(p=>`<div class=\"col\" data-hub-row=\"${esc(p.name)}\" data-go=\"${go(p)}\""],
+  ['70-hub.js', "<p class=\"b2 c2\" style=\"margin:0\">${sub}</p>${search}<div class=\"row wrap\" style=\"gap:8px\">${chips}</div>${body}</div>",
+    "<p class=\"b2 c2\" data-compare-sub style=\"margin:0\">${sub}</p>${search}<div class=\"row wrap\" style=\"gap:8px\">${chips}</div><div data-compare-body>${body}</div><p data-hub-empty class=\"b2 c2\" style=\"margin:0;padding:6px 0;display:none\">No exchanges match your search</p></div>"],
+  ['70-hub.js', "const th=(l,w,al='right',u)=>`<th style=\"background:#fff;", "const th=(l,w,al='right',u)=>`<th data-hub-sort style=\"cursor:pointer;background:#fff;"],
+  // ---- 2회차: GNB(결정 D4) · 드로어
+  ['01-core.js', "cashback:{en:'Cashback',ko:'캐시백',items:[['cex.list','Centralised Exchanges','중앙화 거래소'],['dex.overview','Decentralised Exchanges','탈중앙화 거래소'],['hub.main:brokers','Brokers','브로커']]},",
+    "cashback:{en:'Cashback',ko:'캐시백',items:[['hub.main','Cashback Hub','Cashback Hub'],['calc.p1','Cashback Calculator','Cashback Calculator']]},"],
+  ['01-core.js', "<div class=\"ni\"><a class=\"${active==='calc'?'on':''}\" data-go=\"calc.p1\">${T('Calculator','계산기')}</a></div>", ""],
+  ['10-common.js', "ex:[drIc('cmn-dr-candle.svg'),'Exchanges','cex.list']", "ex:[drIc('cmn-dr-candle.svg'),'Cashback Hub','hub.main']"],
+  ['10-common.js', "(member?['ex','ev','br','bn','calc','pt']:['ex','br','ev','bn','calc','pt'])", "(member?['ex','ev','bn','calc','pt']:['ex','ev','bn','calc','pt'])"],
+  // ---- 2회차: DEX 랜딩 · 상세
+  ['80-dex.js', "const guest=c!=='member';", "const guest=window.SITED&&SITED.guest!=null?SITED.guest:c!=='member';"],
+  ['80-dex.js', "const isList=c==='list'||mo();", "const isList=window.SITED&&SITED.list!=null?SITED.list:(c==='list'||mo());"],
+  ['80-dex.js', "const sw=`<button class=\"icon-btn\" title=\"${isList?'grid':'list'}\">", "const sw=`<button class=\"icon-btn\" data-dex-view=\"${isList?'grid':'list'}\" title=\"${isList?'grid':'list'}\">"],
+  ['80-dex.js', "return `<div class=\"col\" style=\"gap:16px;${bd}\">", "return `<div class=\"col\" data-dex-card=\"${d.id}\" style=\"gap:16px;${bd}\">"],
+  ['80-dex.js', "const id=['aster','apex','lighter','edgex'].includes(c)?c:", "const SD=window.SITED&&SITED.id?SITED:null;const id=SD?SD.id:['aster','apex','lighter','edgex'].includes(c)?c:"],
+  ['80-dex.js', "const member=c==='normal'?'guest'", "const member=SD?SD.member:c==='normal'?'guest'"],
+  ['80-dex.js', "const maker=c==='maker';", "const maker=SD?SD.maker:c==='maker';"],
+  ['80-dex.js', "${dtTabs(c)}${dtWhy(d)}${dtStructure(d,maker)}${dtGuide(d,c)}${dtClosing(d)}${dtFaq(d)}${dtReviews(d,member,c)}${sticky}",
+    "${dtTabs(c)}<div data-dt-sec=\"0\">${dtWhy(d)}</div><div data-dt-sec=\"1\">${dtStructure(d,maker)}</div><div data-dt-sec=\"2\">${dtGuide(d,c)}</div>${dtClosing(d)}<div data-dt-sec=\"3\">${dtFaq(d)}</div><div data-dt-sec=\"4\">${dtReviews(d,member,c)}</div>${sticky}"],
+  ['80-dex.js', "return `<div style=\"background:var(--bg-accent);border-bottom:1px solid var(--divider);${mo()?'overflow-x:auto':''}\">", "return `<div data-dt-tabs style=\"background:var(--bg-accent);border-bottom:1px solid var(--divider);${mo()?'overflow-x:auto':''}\">"],
+  ['80-dex.js', "${tabs.map((t,i)=>`<span style=\"padding:9px 16px;", "${tabs.map((t,i)=>`<span data-dt-tab=\"${i}\" style=\"cursor:pointer;padding:9px 16px;"],
+  ['80-dex.js', "${[a,b].map((x,i)=>`<span style=\"padding:0 8px;display:flex;", "${[a,b].map((x,i)=>`<span data-tog=\"${x}\" style=\"cursor:pointer;padding:0 8px;display:flex;"],
+  ['80-dex.js', "function calc(d,maker){\n const k=maker?'maker':'taker',vol=400000,",
+    "const VT=[100000,250000,500000,750000,1000000,5000000,10000000];\nconst volPct=v=>{for(let i=0;i<VT.length-1;i++)if(v<=VT[i+1])return Math.max(0,(i+(v-VT[i])/(VT[i+1]-VT[i]))/(VT.length-1)*100);return 100};\nconst volK=v=>v>=1e6?'$'+(Math.round(v/1e5)/10)+'M':'$'+Math.round(v/1e3)+'K';\nwindow.DEXVOL={VT,volPct,volK};\nfunction calc(d,maker){\n const k=maker?'maker':'taker',vol=(window.SITED&&SITED.vol)||400000,"],
+  ['80-dex.js', "Your selected $400K volume", "Your selected ${volK(x.vol)} volume", 2],
+  ['80-dex.js', "<span class=\"b2 c2\">Total volume</span><span class=\"b1 semi\">$400K</span>", "<span class=\"b2 c2\">Total volume</span><span class=\"b1 semi\" data-dt-vol>${volK(x.vol)}</span>"],
+  ['80-dex.js', "<div style=\"position:relative;height:25px\"><div style=\"position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15\"></div><div style=\"position:absolute;left:0;width:27%;top:10px;height:6px;border-radius:100px;background:var(--blue)\"></div><div style=\"position:absolute;left:calc(27% - 10px);",
+    "<div data-dt-slider style=\"position:relative;height:25px\"><div style=\"position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15\"></div><div data-sl-fill style=\"position:absolute;left:0;width:${volPct(x.vol)}%;top:10px;height:6px;border-radius:100px;background:var(--blue)\"></div><div data-sl-thumb style=\"position:absolute;left:calc(${volPct(x.vol)}% - 10px);"],
+  ['80-dex.js', "row('Total volume','$400K',", "row('Total volume',volK(x.vol),"],
+  ['80-dex.js', "<button data-go=\"dex.detail:edgex\" style=\"width:32px", "<button data-go=\"dex.detail:close\" style=\"width:32px"],
+  ['80-dex.js', "const g=guideData(d),cur=c==='step3'?2:0;", "const g=guideData(d),cur=window.SITED&&SITED.step!=null?SITED.step:c==='step3'?2:0;"],
+  ['80-dex.js', "const item=(t,i)=>`<div class=\"row\" style=\"gap:12px;height:56px;", "const item=(t,i)=>`<div class=\"row\" data-dt-step=\"${i}\" style=\"cursor:pointer;gap:12px;height:56px;"],
+  ['80-dex.js', "const panel=`<div class=\"col\" style=\"flex:1 1 0;min-width:0;gap:16px;padding:${mo()?0:'0 16px 16px'}\">${shot}", "const panel=`<div class=\"col\" data-dt-panel style=\"flex:1 1 0;min-width:0;gap:16px;padding:${mo()?0:'0 16px 16px'}\">${shot}"],
+  ['80-dex.js', "const acc=(s,i)=>`<div style=\"border-bottom:1px solid var(--divider)\"><div class=\"row between\" style=\"padding:16px\">", "const acc=(s,i)=>`<div data-faq=\"${i}\" style=\"border-bottom:1px solid var(--divider)\"><div class=\"row between\" data-faq-head style=\"cursor:pointer;padding:16px\">"],
+  ['80-dex.js', "<div class=\"row between\" style=\"padding:16px\"><span class=\"b1 semi\">Terms and conditions</span>", "<div class=\"row between\" data-faq-head data-faq-terms style=\"cursor:pointer;padding:16px\"><span class=\"b1 semi\">Terms and conditions</span>"],
+  ['80-dex.js', "${sorts.map((s,i)=>`<span style=\"padding:9px 16px;", "${sorts.map((s,i)=>`<span data-rv-sort=\"${i}\" style=\"cursor:pointer;padding:9px 16px;"],
+  ['80-dex.js', "const rv=(o)=>`<div class=\"col\" style=\"gap:${o.mod?16:8}px;", "const rv=(o)=>`<div class=\"col\" data-rv data-v=\"${o.v||0}\" data-date=\"${o.date||''}\" style=\"gap:${o.mod?16:8}px;"],
+  ['80-dex.js', "<span class=\"b2\">${o.body}</span><span style=\"font-size:13px;color:#1976d2\">Read more</span>", "<span class=\"b2 rv-body\">${o.body}</span><span data-rv-more style=\"cursor:pointer;font-size:13px;color:#1976d2\">Read more</span>"],
+  // ---- 2회차: 지갑·UID 상세(기존 디자인 · Earning Timeline 3단계)
+  ['40-home.js', "const mark=(name,s=32)=>CEXLOGO[name]?", "const mark=(name,s=32)=>window.SITELOGO&&SITELOGO[name]&&!['Lighter','ApeX','EdgeX','Aster'].includes(name)?`<img src=\"${SITELOGO[name]}\" style=\"width:${s}px;height:${s}px;border-radius:50%;flex:none;object-fit:cover\" alt=\"${name}\">`:CEXLOGO[name]?"],
+  ['40-home.js', "const [A0,B0]=ctx.state.ab;const pending=st==='pending';", "const SW=window.SITEW;const [A0,B0]=SW?[SW.a,SW.b]:ctx.state.ab;const pending=SW?SW.st==='pend':st==='pending';"],
+  ['40-home.js', "${C.dex('Lighter',30)}<div class=\"col\" style=\"gap:0\"><span class=\"b2 semi\">Lighter</span><span class=\"row\" style=\"gap:4px\"><span style=\"font-size:12px;line-height:12px;color:var(--text-secondary)\">${short(WAL.lighter)}</span><button class=\"icon-btn\" style=\"padding:2px\">",
+    "${SW?mark(SW.ex,30):C.dex('Lighter',30)}<div class=\"col\" style=\"gap:0\"><span class=\"b2 semi\">${SW?SW.ex:'Lighter'}</span><span class=\"row\" style=\"gap:4px\"><span style=\"font-size:12px;line-height:12px;color:var(--text-secondary)\">${SW?(SW.type==='CEX'?'UID '+SW.id:short(SW.id)):short(WAL.lighter)}</span><button class=\"icon-btn\" data-copy=\"${SW?SW.id:WAL.lighter}\" style=\"padding:2px\">"],
+  ['40-home.js', "<span class=\"b2 semi\">How was Lighter?</span>", "<span class=\"b2 semi\">How was ${(window.SITEW||{}).ex||'Lighter'}?</span>"],
+  // ---- 2회차: 캐시백 요약(실제 필터 · 월 이동 · 날짜 선택)
+  ['100-summary.js', "function sumData(st){", "function sumData(st){\n if(window.SITES)return SITES.data();"],
+  ['100-summary.js', "function filters(st){", "function filters(st){\n if(window.SITES)return SITES.filters();"],
+  ['100-summary.js', "const may=d.month==='May 2026',first=may?5:3,len=31;", "const may=d.month==='May 2026',first=d.y?new Date(Date.UTC(d.y,d.m,1)).getUTCDay():may?5:3,len=d.y?new Date(Date.UTC(d.y,d.m+1,0)).getUTCDate():31;"],
+  ['100-summary.js', "const future=may&&n>d.today;", "const future=(d.y?d.isCur:may)&&n>d.today;"],
+  ['100-summary.js', "cells.push(`<div class=\"col\" style=\"align-items:center;gap:2px;", "cells.push(`<div class=\"col\" data-day=\"${n}\" style=\"cursor:${future?'default':'pointer'};align-items:center;gap:2px;"],
+  ['100-summary.js', "const date=d.month==='May 2026'?", "const date=d.y?`${d.y}/${String(d.m+1).padStart(2,'0')}/${String(d.sel).padStart(2,'0')}${d.isCur&&d.sel===d.today?' (Today)':''}`:d.month==='May 2026'?"],
+  ['100-summary.js', "const empty=st==='oneEmpty'?", "const empty=st==='oneEmpty'||d.acct?"],
+  ['100-summary.js', "<span class=\"row g4 b2 semi\">${d.month}${ic('arrow-drop-down','ic20')}</span><span class=\"row g4\"><button class=\"icon-btn\" style=\"padding:6px\">${ic('chevron-left','ic20')}</button><button class=\"icon-btn\" style=\"padding:6px\">",
+    "<span class=\"row g4 b2 semi\" data-sm-month style=\"cursor:pointer;position:relative\">${d.month}${ic('arrow-drop-down','ic20')}</span><span class=\"row g4\"><button class=\"icon-btn\" data-sm-prev style=\"padding:6px\">${ic('chevron-left','ic20')}</button><button class=\"icon-btn\" data-sm-next style=\"padding:6px\">"],
+  // ---- 2회차: 소유권 인증(결정: 업로드 한도 1GB 현행)
+  ['60-own.js', "const OWN_DEX='Lighter';", "let OWN_DEX='Lighter';"],
+  ['60-own.js', "const OWN_SHORT='0x7a3f…51e9';", "let OWN_SHORT='0x7a3f…51e9';"],
+  ['60-own.js', "${T('MP4 or MOV (max. 100MB)')}", "${T('MP4 or MOV (max. 1GB)')}"],
+  ['60-own.js', "const height=mo?812:900;", "if(window.SITEL&&window.SITEO_DLG)return muiDialog(dlg);\n  const height=mo?812:900;"],
+  ['40-home.js', "const mob=S.vp==='mo';const rows=SEE_ALL;", "const mob=S.vp==='mo';const rows=window.SITEA||SEE_ALL;"],
+  ['40-home.js', "${C.chip('All',true,{sm:false})}${C.chip('CEX',false)}${C.chip('DEX',false)}", "${['All','CEX','DEX'].map(k=>C.chip(k,(window.SITEAF||'All')===k)).join('')}"],
+  ['60-own.js', "  return wrap(ownLayer(page,dlg));", "  if(window.SITEL&&window.SITEO_DLG)return dlg;\n  return wrap(ownLayer(page,dlg));"],
+  ['40-home.js', "const isCex=n=>!!CEXLOGO[n];", "const isCex=n=>!!CEXLOGO[n]||!!(window.SITELOGO&&SITELOGO[n]&&!['Lighter','ApeX','EdgeX','Aster'].includes(n));"],
+  // ---- 50-link.js: 입력한 주소로 성공 화면을 그리고, 레이어가 화면 높이를 채우게
+  ['50-link.js', "const ADDR='0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9';", "let ADDR='0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9';"],
+  ['50-link.js', "<div style=\"position:relative;background:#fff;min-height:${mo?812:900}px;display:flex;flex-direction:column\">",
+    "<div style=\"position:relative;background:#fff;min-height:${window.SITEL?'100vh':(mo?812:900)+'px'};display:flex;flex-direction:column\">"],
+  ['50-link.js', "gap:8px;padding:0 ${mo?32:480}px\">", "gap:8px;padding:0 ${mo?'32px':window.SITEL?'max(24px,calc(50% - 240px))':'480px'}\">"],
+  ['50-link.js', "<div style=\"background:var(--bg-accent);min-height:812px;display:flex;flex-direction:column\">", "<div style=\"background:var(--bg-accent);min-height:${window.SITEL?'100vh':'812px'};display:flex;flex-direction:column\">"],
+  ['50-link.js', "`${T('Wallet')}&nbsp;&nbsp;${ADDR}`", "`${window.SITEL&&SITEL.cex?'UID':T('Wallet')}&nbsp;&nbsp;${ADDR}`"],
+  ['50-link.js', "if(st==='truncated')lines.push(", "if(window.SITEL&&SITEL.cex)lines.pop();if(st==='truncated')lines.push("],
+];
+// 모듈 끝에 붙이는 공개 함수(사이트 런타임이 직접 조립할 때 씀)
+const EXPORT = {
+  '70-hub.js': ";window.HUBX={calcCard,panelCard,hero,routes,compare,why,shell,routeList,HB_DEX,HB_CEX,HB_BRK,setVol:v=>{HB_VOL=v},get vol(){return HB_VOL}};",
+  '80-dex.js': ";window.DEXX={DX,dtDrawer,ovPage,dtPage,offerBox,dtStructure,dtGuide,calc};",
+  '40-home.js': ";window.HOMEX={seeAllModal,ST,hChip,n2,short,mark};",
+  '100-summary.js': ";window.SUMX={sel,menu,mItem,chk,logo,short,TY};",
+  '60-own.js': ";window.OWNX={muiDialog,mBtn,oAlert,setOwn:(d,s)=>{OWN_DEX=d;OWN_SHORT=s}};",
+  '50-link.js': ";window.LINKX={linkModal,moForm,splash,webExchangeField,moSheet,uidLinkForm,guide,ADDR_KO,DEXES,WEB_CEX,get addr(){return ADDR},setAddr:v=>{ADDR=v},setSel:v=>{selectedExchange=v}};",
+};
+
+const files = fs.readdirSync(src).filter(f => f.endsWith('.js')).sort();
+const body = {};
+for (const f of files) body[f] = read(path.join(src, f));
+for (const [f, a, b, cnt = 1] of PATCH) {
+  const n = body[f].split(a).length - 1;
+  if (n !== cnt) { console.error(`패치 실패 (${n}건): ${f}\n  ${a.slice(0, 120)}`); process.exit(1) }
+  body[f] = body[f].split(a).join(b);
+}
+for (const [f, x] of Object.entries(EXPORT)) body[f] += '\n' + x;
+
+const esc = s => s.replace(/<\/script/gi, '<\\/script');
+const core = body['01-core.js'];
+const modules = files.filter(f => f !== '01-core.js').map(f => `</script>\n<script>// ===== ${f} =====\ntry{(()=>{\n${esc(body[f])}\n})()}catch(e){console.error('${f}',e);(window.PT_ERR=window.PT_ERR||[]).push('${f}: '+e.message)}`).join('\n');
+const css = fs.readdirSync(src).filter(f => f.endsWith('.css')).sort().map(f => read(path.join(src, f))).join('\n') + '\n' + read(path.join(dir, 'src', 'site.css'));
+const site = read(path.join(dir, 'src', 'site.js')) + '\n' + read(path.join(dir, 'src', 'site2.js'));
+const html = read(path.join(dir, 'src', 'template.html'))
+  .replace('/*__CSS__*/', () => css)
+  .replace('/*__JS__*/', () => esc(core) + '\n' + modules + `\n</script>\n<script>// ===== site.js =====\n${esc(site)}`);
+fs.writeFileSync(path.join(dir, 'app.html'), html);
+
+// 에셋 복사(바뀐 것만)
+const adir = path.join(dir, 'assets'); fs.mkdirSync(adir, { recursive: true });
+let copied = 0;
+for (const f of fs.readdirSync(path.join(full, 'assets'))) {
+  const s = path.join(full, 'assets', f), d = path.join(adir, f);
+  const ss = fs.statSync(s); if (!ss.isFile()) continue;
+  if (fs.existsSync(d) && fs.statSync(d).size === ss.size) continue;
+  fs.copyFileSync(s, d); copied++;
+}
+console.log('dex/app.html', (Buffer.byteLength(html) / 1024).toFixed(0) + 'KB', files.length + ' modules', PATCH.length + ' patches', 'assets +' + copied);

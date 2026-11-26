@@ -57,7 +57,7 @@ function regTable(){
 function rewardCard(amount,st){
  const btn2=`<button class="btn outlined black md" style="height:36px">Reward History</button><button class="btn outlined black md" style="height:36px">Referral Details</button>`;
  const auto=`<button class="btn contained primary md" disabled style="height:36px;min-width:136px">Auto Claim</button>`;
- const below=st==='below50'?`<p class="cap c2" style="margin:8px 0 0">${C.tbd('50 USDT 미만 안내 — `Just {amount} USDT more to withdraw`를 Claim 용어로 재작성한 문구','G-419 문구표')}</p>`:'';
+ const below=st==='below50'?`<p class="cap c2" style="margin:8px 0 0">${T('Invitation rewards are claimed automatically at 10 USDT. Just 0.01 USDT more to go.','초대 리워드는 10 USDT가 되면 자동으로 출금돼요. 0.01 USDT만 더 모이면 돼요.')}</p>`:'';
  const head=`<div class="col" style="gap:2px"><span class="cap c2">Available Invitation Rewards</span><span class="h6 semi tnum" style="font-size:${mo()?18:16}px">${amount} USDT</span></div>`;
  if(mo())return box(`<div class="col g12">${head}${auto.replace('min-width:136px','width:100%')}<div class="grid2" style="grid-template-columns:1fr 1fr;gap:8px">${btn2}</div>${below}</div>`);
  return box(`<div class="row between">${head}<div class="row g16">${auto}${btn2}</div></div>${below}`);
@@ -67,7 +67,7 @@ function invPage(st){
  const head=`${tabsTop()}<div style="margin:${mo()?'16px 0 24px':'24px 0'}">${toggle(sub)}</div>`;
  let body='';
  if(st==='empty')body=`<div class="col center" style="align-items:center;gap:8px;padding:${mo()?120:150}px 0 ${mo()?160:180}px"><span class="b1 semi">You haven't invited any friends yet${mo()?'.':''}</span><span class="b2 c2" style="max-width:325px">Share your invitation code with friends and help them start earning cashback rewards.</span><button class="btn outlined primary lg" data-go="invite.main:code" style="width:311px;max-width:100%;margin-top:12px">Share Invitation Code ${icx('inv-ic-share.svg',24)}</button></div>`;
- else if(sub==='reward')body=`<div class="col" style="gap:40px">${rewardCard(st==='below50'?'49.99':'0.00',st)}${regTable()}</div>`;
+ else if(sub==='reward')body=`<div class="col" style="gap:40px">${rewardCard(st==='below50'?'9.99':'0.00',st)}${regTable()}</div>`;
  else if(st==='normal'||st==='terms')body=`${hero('Invite friends to earn cashback with TetherMax','Share the benefits and help friends get more value from their trades.')}<div class="col g16" style="margin-top:48px">${steps(STEPS_INV())}<button class="btn outlined primary lg" data-go="invite.main:code" style="width:311px;margin:0 auto">Get Friend Invitation Code</button></div>`;
  else body=`${hero('Invite friends to earn cashback with TetherMax','Share the benefits and help friends get more value from their trades.')}<div class="col" style="gap:24px;margin-top:48px">${steps(STEPS_INV())}${shareBox(st==='codeCopied'?'Invite code copied':st==='linkCopied'?'Invite link copied':'')}</div>`;
  // 초대 랜딩(IF1)은 상단 탭에 토글이 없다
@@ -84,7 +84,7 @@ R.screen({id:'invite.main',group:'invite',title:'친구 초대',route:'/point/in
   {id:'empty',label:'Invitation Reward 탭 — 0명 빈 상태 (IF6)',figma:{pc:'28960:126846',mo:'29065:5700'},note:'V2.2 inv/IF8#empty · REQ-419 — 약관은 계속 표시'},
   {id:'terms',label:'약관 bullet 펼침',figma:null,note:'V2.2 inv/IF8#terms · PC는 약관이 항상 펼쳐짐(IF1과 같음). 모바일 펼친 상태는 재사용 — [기존 MAX-425] 「Terms&NotesExpanded」(4923:56476) 틀'},
   {id:'rewards',label:'Invitation Reward 탭 — 자동 지급 (IF7)',figma:{pc:'28967:127210',mo:'29065:6175'},note:'V2.2 inv/IF8#rewards · REQ-413·414 — `Auto Claim` 비활성, 계정 선택 없음(관리자 지정 계정으로 50 USDT부터 자동 지급). 모바일 Figma `Withdraw`·`Linked Trading Accounts 31`은 정책 문구로 바꿈'},
-  {id:'below50',label:'50 USDT 미만',figma:null,note:'V2.2 inv/IF8#below50 · REQ-414 — 안내 문구는 Claim 용어로 재작성 대상(G-419 「문구표에서 확정」, 확정 문구 없음)'},
+  {id:'below50',label:'10 USDT 미만',figma:null,note:'V2.2 inv/IF8#below50 · REQ-414 · 결정 D8(최소 10 USDT) — 안내 문구 = 05.리포트/문구표_DEX.md'},
  ],
  render(st){return invPage(st)}});
 

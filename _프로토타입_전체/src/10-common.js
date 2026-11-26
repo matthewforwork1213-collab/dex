@@ -95,7 +95,7 @@ R.screen({id:'cmn.drawer',group:'common',title:'모바일 웹 드로어',route:'
   {id:'promo',label:'프로모 배너 (선택)',figma:null,note:'V2.2 cmn/DRAWER#promo — 드로어 배너 디자인 어디에도 없음'},
  ],
  render(st){
-  const promo=st==='promo'?`<div style="padding:0 16px;margin-top:-8px">${C.tbd('프로모 배너 — 운영 설정 이미지·문구','원문 없음')}</div>`:'';
+  const promo=st==='promo'?`<div style="padding:0 16px;margin-top:-8px"><div class="row g12" style="background:#eef3ff;border-radius:8px;padding:12px"><div style="width:48px;height:48px;border-radius:8px;background:#c9d6ff;flex:none"></div><div class="col" style="gap:2px;min-width:0"><span class="b2 semi">${T('Banner title','배너 제목')}</span><span class="cap c2">${T('Banner content','배너 내용')}</span></div></div></div>`:'';
   let b=drawer(st==='member',{h:st==='member'?945:1119});if(promo)b=b.replace('<div class="col" style="gap:8px;padding:0 16px 16px">',promo+'<div class="col" style="gap:8px;padding:0 16px 16px">');
   return moFrame(b)+C.note('항목은 최신 기존 드로어 그대로(Exchanges · Brokers · Events · Benefits · Cashback Calculator · Point / Theme · Language / Terms · Privacy / About · Beginner’s Guide · Notices · Affiliate). 명세 REQ-465(Cashback · Calculator · Newsletters · Points)와 다름 → 질문_common.md. 비로그인 Figma는 Beginner’s Guide·Notices 아이콘이 서로 바뀌어 있어 로그인판(19604:32844) 기준 아이콘 사용.'+(S.vp==='pc'?' · 모바일 웹 전용 — PC 보기에서는 375폭.':''));
  }});

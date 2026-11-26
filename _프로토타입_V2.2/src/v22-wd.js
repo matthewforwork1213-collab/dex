@@ -1,5 +1,5 @@
 // ===== V2.2 · 배치 2 — 출금 (FU-030 ~ FU-036) =====
-// 출금 화면은 잔액·계정 카드·상태 표시용. 모든 출금 버튼은 비활성 Auto Claim. 처리 중·완료·실패를 보여 주는 회원 화면은 없음(REQ-163).
+// 회원 출금 화면은 삭제(G-448). 모든 출금 버튼은 비활성 Auto Claim. 처리 중·완료·실패를 보여 주는 회원 화면은 없음(REQ-163).
 if(MODE==='user'){
 const WD_TBD=(t,g)=>`<span class="v22-tbd">[${t} — 미정 ${g}]</span>`;
 const wdNeed=a=>{const n=a.cash===0?(a.reward>=5?5:10):Math.max(0,10-(a.cash+Math.min(a.reward,a.cash)));return floor2(n)};
@@ -13,7 +13,6 @@ const WD_ACC=()=>[
  {partner:'apex',identifier:SAMPLE_WALLET2,cash:3,reward:0}];
 function wdUpdates(p){
  if(p.id==='edgex')return `Daily, ${v22Clock('00:00')}`;
- if(p.id==='lighter')return `Every Monday <span class="sb">Lighter reports every Monday for the week before. New trades show after the next report.</span>`;
  return WD_TBD(p.name+' 주기·공개 시각',p.id==='aster'?'G-036':'G-025 · G-099');
 }
 function wdCard(a,c,opt={}){
@@ -63,13 +62,13 @@ function wdReflect(c){
  const rows={normal:'',deducted:`<div class="li"><span class="nm">${T('Claim Amount','출금 금액')} · EdgeX<span class="sb mono">${SAMPLE_WALLET}</span></span><span class="am">-120.00</span></div>`,restored:`<div class="li"><span class="nm">${T('Claim Amount','출금 금액')} · EdgeX<span class="sb mono">${SAMPLE_WALLET}</span></span><span class="am">-120.00</span></div><div class="li"><span class="nm">Withdrawal returned ${WD_TBD('요약 복원 행','G-113')}<span class="sb mono">${SAMPLE_WALLET}</span></span><span class="am">+120.00</span></div>`}[c];
  return `${gnbPC()}<div class="pg"><section class="c"><h3>${T('Home','홈')}</h3><div class="kv big"><span class="k">Total Cashback Balance</span><span class="v">${c==='restored'?'136.68':home} USDT</span></div>${c==='deducted'?'<p class="sb">출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다</p>':''}${v22Auto()}</section><section class="c"><h3>${T('Cashback Summary','캐시백 요약')}</h3>${rows||'<p class="sb">—</p>'}</section><section class="c"><h3>${T('Live withdrawals','실시간 출금')}</h3>${c==='restored'?'<p class="sb">실패해 복원된 건은 피드에 Sent 항목이 생기지 않음</p>':c==='deducted'?'<p class="sb">처리 중 — 피드에 아직 없음 (자동 지급 완료 = 출금일 때만 표시)</p>':`<div class="li"><span class="nm">EdgeX<span class="sb mono">${SAMPLE_WALLET}</span></span><span class="am">120.00 USDT</span></div>`}</section></div>`;
 }
-v22Retire('wd/DW1','wd/CLAIM');v22Retire('wd/DW0','wd/CLAIM');
-v22Register('wd/CLAIM',{group:'출금 (자동 지급)',label:'출금 화면 /withdrawal-apply',states:[
+v22Retire('wd/DW1','home/S4');v22Retire('wd/DW0','home/S4');
+if(0)/* G-448 회원 출금 화면 삭제 */v22Register('wd/CLAIM',{group:'출금 (자동 지급)',label:'출금 화면 /withdrawal-apply',states:[
  ['normal','정상 — 가능 위 · 불가 아래, 같은 주소 DEX별 카드','REQ-134~137'],['allBlocked','전부 불가 — Not eligible to withdraw','REQ-136 · 139 · G-108'],['zero','DEX 캐시백 0 — 배너','REQ-146 · G-110'],
  ['loading','로딩 — 스켈레톤, 금액·버튼 없음','REQ-145'],['delayed','데이터 지연 — Last updated','REQ-147 · G-348'],['partner','파트너 오류 — 그 카드만','REQ-148'],['balanceError','잔액 오류','REQ-149'],
- ['deducted','선차감 반영','REQ-158 · G-112'],['preAccrual','적립 전 줄 (합계 미포함)','REQ-138 · G-127'],['many','계정 11개 이상 — 10개 + 더보기','REQ-134 · G-114'],['noNetwork','지급 네트워크 미설정','REQ-142'],['lighter','Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets)','REQ-137 · 150'],['pending','확인 중 계정은 목록에 없음','REQ-134']],
+ ['deducted','선차감 반영','REQ-158 · G-112'],['preAccrual','적립 전 줄 (합계 미포함)','REQ-138 · G-127'],['many','계정 11개 이상 — 10개 + 더보기','REQ-134 · G-114'],['noNetwork','지급 네트워크 미설정','REQ-142'],['lighter','Lighter 카드 — Lighter (2 wallets)','REQ-137 · 150'],['pending','확인 중 계정은 목록에 없음','REQ-134']],
  render:wdScreen,modal:{background:'home/S4'},fu:['FU-030','FU-031','FU-032','FU-033','FU-034'],note:['.dlg','출금 화면 (표시 전용)','카드 = 로고·이름 · 식별자(DEX 지갑 전체) · Available Cashback · Exchange Cashback · Event Reward(있을 때만) · 칩. DEX 배지 없음(REQ-135). 금액·주소·네트워크 입력 없음(REQ-140 · 141). Auto Claim 옆 안내 문구 없음(REQ-144).']});
-v22Register('wd/SECOND',{label:'두 번째 출금 화면 /withdrawal',states:[['normal','출금 가능 계정 없음 — STG 문구 + DEX 행','REQ-710 · G-419']],render:wdSecond,fu:['FU-036']});
+if(0)/* G-448 회원 출금 화면 삭제 */v22Register('wd/SECOND',{label:'두 번째 출금 화면 /withdrawal',states:[['normal','출금 가능 계정 없음 — STG 문구 + DEX 행','REQ-710 · G-419']],render:wdSecond,fu:['FU-036']});
 v22Register('wd/REFLECT',{label:'선차감 · 복원 반영 위치',states:[['normal','지급 전','REQ-158'],['deducted','신청 생성 — 선차감 (같은 새로고침에 반영)','REQ-158'],['restored','최종 실패 — 복원','REQ-164 · G-113']],render:wdReflect,fu:['FU-034','FU-035'],note:['.pg','반영 위치','출금 화면 · 홈 · 캐시백 요약 · 실시간 출금 피드가 같은 레코드에서 같은 새로고침에 반영. 결과를 보여 주는 회원 화면은 없음(REQ-163).']});
 v22Order('wd',['CLAIM','SECOND','REFLECT']);
 }

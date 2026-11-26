@@ -111,7 +111,7 @@ function currentChangeNotes(root){
    case 'ph/PH3':
     dexRows('하위 회원의 DEX 계정','하위 회원의 계정 목록에 DEX 거래소와 지갑 식별자를 추가합니다. 사용자 계정 관리 버튼을 이 모달에 추가하지 않습니다.');break;
    case 'inv/IF8':
-    one('.dlg','초대 리워드 수령 계정','일반 회원 초대 리워드 출금에 DEX 계정도 선택할 수 있습니다. 최소 50 USDT이며 페이백 1:1 매칭과 별개입니다. 관리자 Affiliate 고정 지급 계정은 CEX 전용입니다.');break;
+    one('.dlg','초대 리워드 수령 계정','초대 리워드는 관리자가 지정한 연동 계정(DEX 지갑 포함)으로 자동 지급합니다. 최소 10 USDT이며 캐시백 매칭과 별개입니다. 관리자 Affiliate 고정 지급 계정은 CEX 전용입니다.');break;
    case 'cp/CP1':
     one('.dlg,.pg>.c','일반 쿠폰 사용','일반 이벤트 쿠폰의 수령 계정에 DEX를 포함합니다. UID 연동 3 USDT·챌린지의 CEX 전용 제한은 유지합니다.');break;
    case 'etc/BST':

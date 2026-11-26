@@ -5,7 +5,7 @@ const LK_TBD=(t,g)=>`<span class="v22-tbd">[${t} — 미정 ${g}]</span>`;
 const LK_SIGNUP=()=>`<p class="v22-signup">${T("Don't have an account yet? Sign up here","아직 계정이 없으신가요? 여기서 가입하세요")} ↗</p>`;
 const LK_HELP='<p class="sb v22-help" data-action="support">Need help? Contact Support</p>';
 const lkDex=()=>pBy(state.lkPartner||'edgex');
-const lkLinkable=()=>partnerList('ALL').filter(p=>p.id!=='lighter'); // Lighter는 온보딩 보류 — 거래소 레코드 연동가능=N
+const lkLinkable=()=>partnerList('ALL'); // G-428: Lighter도 연동 가능
 const lkMark=p=>`<span class="ava">${esc(p.name.slice(0,1))}</span>`;
 const lkWallet=(addr,full=true)=>`<span class="mono">${esc(full?addr:v22Short(addr))}</span>`;
 const lkChips=on=>`<div class="tabs v22-chips2">${[['all',T('All','전체')],['cex',T('Centralised Exchanges','중앙화 거래소')],['dex',T('Decentralised Exchanges','탈중앙화 거래소')]].map(([v,l])=>`<span class="${on===v?'on':''}">${l}</span>`).join('')}</div>`;
@@ -13,7 +13,7 @@ const lkRow=(p,badge,selected,extra='')=>`<div class="li ${selected?'selected':'
 
 // ---------- 거래소 선택 (웹 꽉 찬 모달) FU-013
 function lkSelector(c){
- const presel={detail:'edgex',hub:'apex'}[c]||'';
+ const presel={detail:'edgex',hub:'apex',normal:(lkLinkable()[0]||{}).id}[c]||'';
  const chip=c==='cex'?'cex':['dex','dexbit','homeFooter'].includes(c)?'dex':'all';
  const q={one:'edge',many:'a',none:'zzz',dexbit:'bit'}[c]||'';
  const ph=c==='homeFooter'?'Search for a DEX':T('Search partners','거래소 검색');
@@ -23,7 +23,7 @@ function lkSelector(c){
   :list.length?list.map(p=>lkRow(p,chip==='all',p.id===presel,c==='region'&&p.id==='aster'?`<span class="sb">${LK_TBD('지역 제한 사유','G-161')}</span>`:'')).join('')
   :`<div class="v22-empty">No results found</div>`;
  const popular=q||c==='fail'?'':`<div class="ch"><h3>${T('Popular partners','인기 제휴 거래소')}</h3></div><div class="v22-tiles">${lkLinkable().slice(0,5).map(p=>`<div class="c flat ${p.id===presel?'selected':''}">${lkMark(p)}<b>${esc(p.name)}</b></div>`).join('')}</div>`;
- const none=c==='normal';
+ const none=false; // G-379: 선택 없음 상태 없음 — 체크리스트 진입도 목록 첫 거래소 기본 선택
  return v22Dlg(`<h3>${T('Link Account',LK_TBD('모달 제목 (UID 없는 중립어)','G-095'))}</h3><p class="sb">No wallet connection or signature required.</p><input class="v22-input" placeholder="${ph}" value="${esc(q)}">${popular}${lkChips(chip)}<div class="c flat">${body}</div>${none?`<div class="v22-sel"><b>Select a partner</b><span class="sb">Select the partner you trade on to see how to link your account.</span></div><button type="button" class="btn" disabled>Link Account</button>`:presel?`<div class="v22-sel"><b>${esc(pBy(presel).name)}</b> ${T('selected','선택됨')}</div>${v22Btn(T('Next','다음'),'','data-go="link/ADDR"')}`:''}${LK_SIGNUP()}`,'v22-full');
 }
 // ---------- 앱·모바일웹 바텀시트 → 전체 화면
@@ -93,8 +93,8 @@ function lkResult(c){
 // ---------- 연동 성공 FU-023 · 25
 function lkDone(c){
  const p=c==='apex'?pBy('apex'):lkDex(),a=v22Dex();
- const badge=c==='apex'?LK_TBD('ApeX 정산 배지 형식','G-099 · G-025'):c==='weekly'?'<span class="bdg ok">Weekly</span>':'<span class="bdg ok">Daily</span>';
- const next=c==='weekly'?`${T('Every Monday','매주 월요일')}`:`${T('Daily','매일')} ${v22Clock('00:00')}`;
+ const badge=c==='apex'?LK_TBD('ApeX 정산 배지 형식','G-099 · G-025'):'<span class="bdg ok">Daily</span>';
+ const next=`${T('Daily','매일')} ${v22Clock('00:00')}`;
  const pre=c==='app'?`<p class="v22-ok">✓ Verification Success</p>`:'';
  return `${pre?`<div class="pg"><div class="dlg">${pre}</div></div>`:''}${v22Dlg(`<div class="ico">🛡️</div><h3>Wallet Linked</h3><p>Your ${esc(c==='weekly'?'Lighter':p.name)} wallet address has been linked.</p><div class="c flat"><div class="li">${lkMark(p)}<span class="nm">${esc(c==='weekly'?'Lighter':p.name)}<span class="sb mono">${esc(a.identifier)}</span></span></div><div class="kv"><span class="k">${T('Settlement','정산 주기')}</span><span class="v">${badge}</span></div><div class="kv"><span class="k">${T('Next update','다음 업데이트')}</span><span class="v">${next}</span></div>${c==='truncated'?`<p class="sb">Cashback shown from 2026.05.28</p>`:''}${c==='apexIdPending'?`<p class="sb">Account ID pending ${LK_TBD('지갑 기준 연동 성립 + Account ID pending 표시 / 확인 중 — 택일','G-023 · G-177')}</p>`:''}</div>${v22Btn('Back to Home','','data-go="link/HOME"')}`)}<div class="v22-toast">Wallet linked successfully</div>`;
 }
@@ -114,19 +114,19 @@ function lkHome(c){
 }
 
 // ---------- 등록
-const SEL_STATES=[['normal','진입: 체크리스트 — 선택 없음','REQ-051'],['homeFooter','진입: Linked Accounts 푸터 → DEX 목록','REQ-051'],['detail','진입: DEX 상세 → 그 DEX 선택','REQ-051'],['hub','진입: 허브 → 그 거래소 선택','REQ-051'],['cex','칩 Centralised Exchanges','REQ-055'],['dex','칩 Decentralised Exchanges (배지 없음)','REQ-055'],['one','검색 결과 1건','REQ-056'],['many','검색 결과 여러 건','REQ-056'],['none','검색 결과 없음 (No results found)','REQ-056'],['dexbit','DEX 칩에서 «bit» → 0건','REQ-056'],['region','지역 제한 DEX','REQ-120 · G-161'],['fail','파트너 목록 로드 실패','REQ-059 · G-097'],['intro','STG 웹 진입 질문','REQ-712']];
+const SEL_STATES=[['normal','진입: 체크리스트 — 목록 첫 거래소 기본 선택(G-379)','REQ-051'],['homeFooter','진입: Linked Accounts 푸터 → DEX 목록','REQ-051'],['detail','진입: DEX 상세 → 그 DEX 선택','REQ-051'],['hub','진입: 허브 → 그 거래소 선택','REQ-051'],['cex','칩 Centralised Exchanges','REQ-055'],['dex','칩 Decentralised Exchanges (배지 없음)','REQ-055'],['one','검색 결과 1건','REQ-056'],['many','검색 결과 여러 건','REQ-056'],['none','검색 결과 없음 (No results found)','REQ-056'],['dexbit','DEX 칩에서 «bit» → 0건','REQ-056'],['region','지역 제한 DEX','REQ-120 · G-161'],['fail','파트너 목록 로드 실패','REQ-059 · G-097'],['intro','STG 웹 진입 질문','REQ-712']];
 v22Group2('link','지갑 연동');
 for(const k of ['L0','L1'])v22Retire('link/'+k,'link/SEL');
 for(const k of ['L3','L10','ERROR','GUIDE','E4'])v22Retire('link/'+k,'link/ADDR');
 v22Retire('link/L7','link/DONE');v22Retire('link/L8','link/RESULT');v22Retire('link/PENDING','link/RESULT');v22Retire('link/PRELINK','link/PROC');v22Retire('link/PRELINKFAIL','link/RESULT');
-v22Register('link/SEL',{label:'거래소 선택 (웹 꽉 찬 모달)',states:SEL_STATES,render:lkSelector,modal:{background:'home/S4'},fu:['FU-013','FU-025'],note:['.dlg','거래소 선택','CEX·DEX 한 선택기. 유형을 바꾸면 입력값을 지움(REQ-057). Lighter는 온보딩 보류라 목록에 없음(레코드 연동가능=N). 모든 상태에 가입 링크(REQ-053).']});
+v22Register('link/SEL',{label:'거래소 선택 (웹 꽉 찬 모달)',states:SEL_STATES,render:lkSelector,modal:{background:'home/S4'},fu:['FU-013','FU-025'],note:['.dlg','거래소 선택','CEX·DEX 한 선택기. 유형을 바꾸면 입력값을 지움(REQ-057). 모든 상태에 가입 링크(REQ-053).']});
 v22Register('link/SHEET',{label:'거래소 선택 (앱·모바일웹)',states:[['normal','바텀시트 · All','REQ-055'],['footer','진입: 앱 홈 푸터 Trading on multiple exchanges? Link more → DEX 목록','REQ-051'],['cex','바텀시트 · CEX','REQ-055'],['dex','바텀시트 · DEX','REQ-055'],['screen','전체 화면 Link Account — Next 항상 닿음','REQ-052']],render:lkSheet,modal:{background:'home/S4'},fu:['FU-013']});
 v22Register('link/GRID',{label:'기존 선택 모달 그리드',states:[['normal','Top Partner · All Exchanges (N)','REQ-124'],['search','검색 — Top 숨김, Search Results (N)','REQ-124']],render:lkGrid,modal:{background:'home/S4'},fu:['FU-013'],note:['.dlg','기존 그리드에 DEX','DEX 레코드의 is_featured · brand_color_hex · total_savings_rate 값 미정(G-096).']});
 v22Register('link/ADDR',{label:'지갑 주소 입력',states:[['normal','빈 값 — 안내 보임, Next 비활성','REQ-061 · 062 · 069'],['valid','유효 주소 — 안내 숨김, Next 활성','REQ-062 · 069'],['paste','Paste 권한 거부','REQ-061'],['e2','② 빈 값 제출','REQ-065'],['e3','③ 다른 형식 (base58)','REQ-065 · 067'],['e4','④ 0X·길이·문자 오류','REQ-065'],['e5','⑤ 체크섬 불일치','REQ-065'],['e6','⑥ ENS·ICAP','REQ-065'],['e7','⑦ 제로 주소','REQ-065'],['kept','실패 후 주소 유지','REQ-064 · G-380']],render:lkAddress,modal:{background:'home/S4'},fu:['FU-015','FU-016'],note:['.dlg','주소 입력·검증','클라이언트·서버 같은 규칙(REQ-066). 거부되면 캡차·귀속 조회를 호출하지 않음(REQ-067). 대소문자 보존(REQ-063).']});
 v22Register('link/CAPTCHA',{label:'캡차 · 시도 제한',states:[['normal','GEETEST 퍼즐','REQ-072'],['success','Verification Success','REQ-072'],['retry','퍼즐 실패 — 주소 유지 재시도','REQ-072'],['scriptFail','캡차 스크립트 로드 실패','REQ-072'],['limit','Verification Limit Reached','REQ-073 · G-063']],render:lkCaptcha,modal:{background:'home/S4'},fu:['FU-017'],note:['.dlg','캡차','플로우에 1회, CEX와 같은 위치(REQ-050). 토큰 1회용·주소 바인딩 G-098.']});
 v22Register('link/PROC',{label:'처리 중 (Processing Your Wallet)',states:[['normal','귀속 조회 중 — 최소 1초','REQ-091'],['prelink','연동 전 잔액 출금 대기','REQ-107 · 108 · G-426']],render:lkProcessing,modal:{background:'home/S4'},fu:['FU-023','FU-014']});
 v22Register('link/RESULT',{label:'연동 결과 다이얼로그',states:[['normal','레퍼럴 아님 (FAILED_NOT_FOUND_UID)','REQ-088 · 122'],['inuse','타인 사용 중 (FAILED_ALREADY_INTEGRATION)','REQ-089 · 723'],['cooldown','30일 쿨다운 (FAILED_RECENT_POSSESSION)','REQ-724'],['mine','본인 이미 추가 (FAILED_MY_INTEGRATION)','REQ-090'],['other','기타 실패','REQ-092'],['limit','한도 초과 (INTEGRATION_MAX_COUNT_OVER)','REQ-112 · G-091'],['pending','확인 중 (manual_link_pending)','REQ-075 · 098~100'],['prelinkFail','연동 전 잔액 출금 실패 = 연동 실패','REQ-107 · G-426']],render:lkResult,modal:{background:'home/S4'},fu:['FU-023','FU-024','FU-014'],note:['.dlg','결과 다이얼로그','모든 결과에 Need help? Contact Support. Close·Cancel은 거래소·주소 유지, Try a different wallet은 주소 비움(REQ-093).']});
-v22Register('link/DONE',{label:'연동 성공',states:[['normal','EdgeX · Daily','REQ-094 · 095'],['apex','ApeX — 배지 형식 미정','REQ-095 · G-099'],['weekly','Lighter — Weekly (온보딩 후)','REQ-095'],['truncated','180일 넘는 기록 — Cashback shown from','REQ-119'],['apexIdPending','ApeX AccountID 미반환 (택일안)','REQ-082 · G-023'],['app','앱·모바일웹 — Verification Success 다음','REQ-094']],render:lkDone,modal:{background:'home/S4'},fu:['FU-023','FU-025'],note:['.dlg','연동 성공','토스트 Wallet linked successfully. DEX 첫 연동은 3 USDT 쿠폰 안내 없음(REQ-097).']});
+v22Register('link/DONE',{label:'연동 성공',states:[['normal','EdgeX · Daily','REQ-094 · 095'],['apex','ApeX — 배지 형식 미정','REQ-095 · G-099'],['truncated','180일 넘는 기록 — Cashback shown from','REQ-119'],['apexIdPending','ApeX AccountID 미반환 (택일안)','REQ-082 · G-023'],['app','앱·모바일웹 — Verification Success 다음','REQ-094']],render:lkDone,modal:{background:'home/S4'},fu:['FU-023','FU-025'],note:['.dlg','연동 성공','토스트 Wallet linked successfully. DEX 첫 연동은 3 USDT 쿠폰 안내 없음(REQ-097).']});
 v22Register('link/HOME',{label:'홈 반영',states:[['normal','새 행 맨 아래 · 연동 완료 0.00','REQ-094'],['transferred','10 USDT 미만 이관 4.00','REQ-107'],['pending','확인 중 — 연동 시도중이에요 · -','REQ-098'],['first','첫 연동 — 체크리스트 없는 S4','REQ-096 · G-070'],['inactive','DEX 오프보딩 — Inactive','REQ-121'],['multi','같은 DEX 지갑 3개 · Aster 하위 계정','REQ-118 · 084'],['rejected','확인 중 거절','REQ-102 · G-069']],render:lkHome,fu:['FU-023','FU-024','FU-025','FU-022'],note:['.c','홈 반영','새로고침 없이 새 행 추가. 금액 = 연동 시 이관된 금액(REQ-094). 사용자 셀프 해제 버튼 없음(REQ-113).']});
 v22Order('link',['SEL','SHEET','GRID','ADDR','CAPTCHA','PROC','RESULT','DONE','HOME']);
 

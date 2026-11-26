@@ -21,3 +21,6 @@ _프로토타입_전체/_latest.html
 _프로토타입_전체/ref/figma_pages/
 _프로토타입_전체/ref/*.bak
 _프로토타입_전체/ref/figma_index*.tsv
+
+# 실사이트 프로토타입 — 빌드 사본은 올리지 않음(배포 진입점은 _프로토타입_실사이트/index.html)
+_프로토타입_실사이트/TetherMax_실사이트프로토타입_*.html

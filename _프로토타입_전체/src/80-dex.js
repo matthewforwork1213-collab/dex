@@ -218,7 +218,8 @@ function offerBox(d,member,maker){
  const cta={guest:mo()?'':outlinedP(T('Sign Up','회원가입'),{full:true,go:'auth.signup'}),
   return:C.btn(T('Link Wallet','연동하기'),{full:true,go:linkWallet}),
   unlinked:outlinedP(T('Link Wallet','연동하기'),{full:true,go:linkWallet}),
-  linked:`<button class="btn outlined black lg full" disabled>Auto Claim</button>`}[member];
+  linked:`<button class="btn outlined black lg full" disabled>Auto Claim</button>`,
+  pending:`<button class="btn outlined black lg full" disabled>${T('Trying to link','연동 시도중이에요')}</button>`}[member];
  return `<div class="col" style="gap:12px;${mo()?'border-left:1px solid var(--divider);padding:0 0 0 16px':'width:400px;flex:none;border-left:1px solid var(--divider);padding:0 16px 0 24px'}">
   <div class="row between" style="align-items:flex-start"><div class="col" style="gap:0"><span class="b2 med">Trading fees cashback up to</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${d.rate}%</span></div>${lighter?toggle('Premium','Plus',0):toggle('Taker','Maker',maker?1:0)}</div>
   ${tbl}${ret?outlinedP('Get Started',{full:true}):`<button class="btn contained primary lg full">Get Started${ext()}</button>`}${cta}</div>`;
@@ -298,7 +299,7 @@ function dtGuide(d,c){
  const g=guideData(d),cur=c==='step3'?2:0;
  const item=(t,i)=>`<div class="row" style="gap:12px;height:56px;padding:12px 16px;border-radius:12px;box-sizing:border-box;${i===cur?'background:rgba(207,216,220,.2)':''}"><span style="width:32px;height:32px;border-radius:16px;flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;${i===cur?'background:var(--blue);color:rgba(255,255,255,.87)':'background:rgba(207,216,220,.2)'}">${i+1}</span><span class="b1 ${i===cur?'semi':'c2'}">${t}</span></div>`;
  const support=`<div class="col" style="gap:12px;background:rgba(0,123,255,.1);border-radius:8px;padding:16px"><img src="${A('dex-dt-ic-headset.svg')}" style="width:24px;height:24px" alt=""><span class="b2 semi">Stuck partway through?</span><span class="b2 c2">Live chat replies in about 2 minutes.</span><a class="cb" data-go="support.main" style="font-size:13px;font-weight:500;text-decoration:underline;cursor:pointer;padding:4px 5px">Chat with support</a></div>`;
- const shot=c==='mediaFail'?`<div style="height:360px;border-radius:12px;background:#eef0f3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px" class="c2"><span class="b2">${C.tbd('영상 로드 실패 — 정지된 첫 프레임 + 단계 글','REQ-348 원문 없음')}</span></div>`
+ const shot=c==='mediaFail'?`<img src="${A('dex-dt-guide-lighter-1.jpg')}" style="width:100%;height:360px;object-fit:cover;border-radius:12px" alt="">`
   :`<img src="${A(cur===2&&d.tiers?'dex-dt-guide-lighter-3.jpg':'dex-dt-guide-lighter-1.jpg')}" style="width:100%;height:360px;object-fit:cover;border-radius:12px" alt="">`;
  const safe=cur!==0?`<p class="cap c2" style="margin:0">${T('TetherMax never asks for your private key, seed phrase, or a wallet signature.','테더맥스는 개인키 · 시드 문구 · 지갑 서명을 요구하지 않아요.')}</p>`:'';
  const panel=`<div class="col" style="flex:1 1 0;min-width:0;gap:16px;padding:${mo()?0:'0 16px 16px'}">${shot}<span style="align-self:flex-start;background:var(--blue-accentlight);color:var(--blue);border-radius:100px;padding:3px 9px;font-size:13px">Step ${cur+1} of 5</span><span class="h5">${g.rail[cur]}</span><p class="b2 c2" style="margin:0">${g.bodies[cur]}</p>${safe}</div>`;
@@ -377,7 +378,7 @@ function dtDrawer(d,maker){
 function dtPage(c){
  const id=['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='signupReturn'?'lighter':'edgex';
  const d=DX[id];
- const member=c==='normal'?'guest':c==='unlinked'?'unlinked':c==='linked'?'linked':c==='signupReturn'?'return':({guest:'guest',s3:'unlinked',s4:'linked'}[S.auth]||'guest');
+ const member=c==='normal'?'guest':c==='unlinked'?'unlinked':c==='linked'?'linked':c==='signupReturn'?'return':c==='pendingLink'?'pending':({guest:'guest',s3:'unlinked',s4:'linked'}[S.auth]||'guest');
  const maker=c==='maker';
  const notes=[];
  if(c==='lighter')notes.push('Lighter 상세(Premium/Plus) — <b>Lighter 온보딩 후 표시(현재 보류)</b>. Plus 요율 미수신이라 Premium 값만. V2.2 <code>exd/DETAIL#lighter</code>');
@@ -386,6 +387,7 @@ function dtPage(c){
  if(member==='guest')notes.push('게스트 CTA <code>Sign Up</code> → 회원가입. 가입 뒤 이 DEX가 미리 선택된 연동 모달로 복귀(G-402 확정)');
  if(member==='unlinked')notes.push('미연동 CTA <code>Link Wallet</code> → 이 DEX가 미리 선택된 연동 모달(<code>link.addr</code>). V2.2 <code>exd/DETAIL#unlinked</code>');
  if(member==='return')notes.push('가입 후 복귀(Signup + Link Wallet / 3 Return, 28960:127422) — 회원 GNB, 오퍼 박스 주 버튼이 <code>Link Wallet</code>(contained), <code>Get Started</code>는 outlined로 낮춤. <code>Link Wallet</code> → 이 DEX가 미리 선택된 연동 모달(G-402). Figma 예시는 Lighter(온보딩 보류 G-428) — 실제로는 가입 전에 보던 DEX. GNB는 상단 도구의 회원 토글을 따른다(회원·연동0 선택)');
+ if(member==='pending')notes.push('확인 중 지갑만 있는 회원 — 오퍼 박스 연동 버튼 자리를 비활성 「확인 중」 표시로(결정 Q6 B). 문구는 홈 행 확인 중 칩과 같은 <code>연동 시도중이에요</code>(홈 모듈 ST.pend — 영문 원문 없어 EN에서도 같은 문자열). 버튼 모양은 연동 완료 <code>Auto Claim</code>과 같은 비활성 외곽선 버튼. 귀속 확인은 대부분 즉시 응답이라 짧게 나타남');
  if(member==='linked')notes.push('연동 완료 — 출금 자리는 비활성 <code>Auto Claim</code>(10분 주기 자동 지급), 리뷰 쓰기. V2.2 <code>exd/DETAIL#linked</code>');
  if(c==='offboarded')return `<div style="padding:8px 16px">${C.note('DEX 오프보딩 — 상세 URL <code>/dex/{slug}</code>는 DEX 랜딩으로 301 리다이렉트(REQ-121·358). 아래는 리다이렉트된 랜딩 · 디자인 없음. V2.2 <code>exd/DETAIL#offboarded</code>')}</div>${ovPage('normal')}`;
  const top=`${notes.length?`<div style="padding:8px 16px">${notes.map(C.note).join('')}</div>`:''}`;
@@ -410,6 +412,7 @@ R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',rout
   {id:'mediaFail',label:'가이드 미디어 실패',note:'V2.2 exd/DETAIL#mediaFail · DEX(revision)·기존 페이지 어디에도 디자인 없음(누락_dex.md)'},
   {id:'moderation',label:'리뷰 검토 중',figma:{pc:'27392:937',mo:'27392:1062'},note:'[기존 MAX-1216] Reviews / Card · State=In moderation(27392:937 · 모바일 27392:1062) · 상태 정의 S5_20(29002:128826) · V2.2 exd/DETAIL#moderation'},
   {id:'reviewsEmpty',label:'리뷰 없음 (G-169)',figma:{pc:'22442:219830',mo:'22956:84690'},note:'[기존 MAX-1216] S6 Empty — 0 reviews · 문구는 G-169 `No reviews yet` · V2.2 exd/DETAIL#reviewsEmpty'},
+  {id:'pendingLink',label:'확인 중 지갑만 있음 — 연동 버튼 자리 비활성 「확인 중」',figma:null,note:'근거: DEX 상세 회원 오퍼 박스(28969:129666 · 28969:129751)의 버튼 자리 + 홈 행 확인 중 표기(<code>연동 시도중이에요</code>) · 결정 Q6 B. <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},
   {id:'offboarded',label:'DEX 오프보딩 — 랜딩 리다이렉트',note:'V2.2 exd/DETAIL#offboarded · 상태 정의 S5_16 `Exchange unavailable`·S5_17 자동 이동(29002:128736·128761) — 결정(301 리다이렉트)대로 별도 화면 없음'},
  ],
  render(st,ctx){

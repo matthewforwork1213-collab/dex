@@ -21,12 +21,12 @@ const dexBadge=n=>DEXN.includes(n)?C.badge('DEX','dex'):'';
 // Figma 표 = 랜딩 28960:128525 · 서비스 소개 28960:129611. 공개 피드는 서버 마스킹 값만(DEX 지갑 고정 마스크 + 끝 4자리, CEX UID 끝 4자리)
 const FEED=[['*******8814','Bitget','197.27'],['*****0465','BingX','197.27'],['********…51e9','Lighter','14.46'],['*************7941','MEXC','160.34'],['********…22f0','ApeX','526.34']];
 function feedTable(st,w=1080){
- const th=[T('Accounts','거래 계정'),T('Partner','거래소'),T('Cashback','캐시백'),T('Payout Time','출금 시각'),T('Status','상태')];
+ const th=[T('Accounts','거래 계정'),T('Partner','거래소'),T('Cashback','캐시백'),T('Withdrawal Time','출금 시각'),T('Status','상태')];
  const cell=(x,i,o='')=>`<div style="${i===1?'width:125px;flex:none':'flex:1;min-width:0'};display:flex;align-items:center;justify-content:center;gap:6px;padding:0 4px;height:56px;text-align:center;${o}">${x}</div>`;
  let rows;
  if(st==='loading')rows=Array.from({length:5},()=>`<div class="row" style="gap:0">${[0,1,2,3,4].map(i=>cell(C.skel(i===1?'28px':'60%',i===1?28:14),i)).join('')}</div>`).join('');
- else if(st==='empty')rows=`<div class="empty" style="padding:40px 16px">${C.tbd('피드 빈 상태 문구','원문 없음 — G-137 확정은 「완료 건만 표시」')}</div>`;
- else if(st==='error')rows=`<div class="empty" style="padding:40px 16px">${C.tbd('피드 로드 실패 문구','원문 없음 — G-137 확정은 「실패 사유 미표시」')}</div>`;
+ else if(st==='empty')rows=`<div class="empty" style="padding:40px 16px">${T('No cashback activity yet.','아직 캐시백 내역이 없습니다.')}</div>`;
+ else if(st==='error')rows=`<div class="empty" style="padding:40px 16px">${T('No cashback activity yet.','아직 캐시백 내역이 없습니다.')}</div>`;
  else rows=FEED.map(([acc,p,amt])=>`<div class="row" style="gap:0">${cell(`<span class="b2 med">${acc}</span>`,0)}${cell(logo(p,28)+dexBadge(p),1)}${cell(`<span class="b2 med">${amt} USDT</span>`,2)}${cell(`<span class="cap c2" style="line-height:12px">07/24/2026, 18:18</span>`,3)}${cell(`<span class="row" style="gap:4px"><i style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block"></i><span class="cap cb" style="line-height:12px">${T('Completed','완료')}</span></span>`,4)}</div>`).join('');
  const tbl=`<div style="min-width:${mo()?640:0}px;background:#fff;border:1px solid #f2f2f5;border-radius:12px;overflow:hidden"><div class="row" style="gap:0;background:#f2f2f5">${th.map((t,i)=>cell(`<span class="b2 med c2">${t}</span>`,i,'height:44px')).join('')}</div>${rows}</div>`;
  return `<div style="${W(w)};${mo()?'overflow-x:auto':''}">${tbl}</div>`;
@@ -56,8 +56,8 @@ function lndPartners(st){
   ${img('lnd-popular-bg.png','position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:475px;height:190px;object-fit:cover;opacity:.32')}
   <span class="h6 bold" style="position:relative">Most popular exchange</span>
   <div class="col" style="gap:20px;align-items:center;justify-content:center;height:218px;position:relative">${hd?C.dex('EdgeX',80):img('lnd-bitget.png','width:80px;height:80px;border-radius:20px')}
-   <div class="col" style="gap:8px;align-items:center"><span class="cap c3">${hd?C.tbd('Promo Tagline — 운영자 입력 EN·KO','REQ-288'):'Official Partner Exchanges'}</span><div class="col" style="gap:0;align-items:center"><span class="b2">${hd?'EdgeX':'Bitget'}</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${hd?C.tbd('Total Savings — 레코드 total_savings_rate','REQ-060'):'77% <span style="color:#1c1c1e">Total Savings</span>'}</span></div></div></div>
-  <button class="btn contained primary lg full" style="position:relative" data-go="${hd?'dex.detail:edgex':'cex.list'}">${hd?C.tbd('CTA Button Title — 운영자 입력','REQ-288'):'Browse Partner Exchange'}</button></div>`;
+   <div class="col" style="gap:8px;align-items:center"><span class="cap c3">Official Partner Exchanges</span><div class="col" style="gap:0;align-items:center"><span class="b2">${hd?'EdgeX':'Bitget'}</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${hd?'30%':'77%'} <span style="color:#1c1c1e">Total Savings</span></span></div></div></div>
+  <button class="btn contained primary lg full" style="position:relative" data-go="${hd?'dex.detail:edgex':'cex.list'}">Browse Partner Exchange</button></div>`;
  const top=card(`<div class="col" style="gap:4px"><span class="h6 bold">TOP 5 Traders in December</span><span class="cap c3" style="line-height:12px">As of Aug 5, 2026 (Cashback)</span></div>
   <div class="col" style="gap:0;margin-top:4px">${[['Bitget','Bitget trader','4,051.38'],['Bitunix','BingX trader','4,561.12'],['Lighter','Lighter trader','4,561.12'],['OKX','Bitmart trader','3,051.38'],['EdgeX','EdgeX trader','2,051.38']].map(([l,n,v])=>`<div class="row" style="gap:12px;height:56px;padding:8px">${logo(l,32)}<div class="col" style="gap:4px"><span class="cap c2">${n}</span><span class="b2 semi">${v} USDT</span></div></div>`).join('')}</div>`,'flex:1;min-width:0;height:424px');
  const days=['8/11','8/12','8/13','8/14','8/15','8/16','8/17','8/18','8/19','8/20','8/21','8/22','8/23','8/24','8/25'];
@@ -80,7 +80,7 @@ function lndSteps(){
  const conn=`<div style="width:24px;height:56px;display:flex;justify-content:center"><i style="width:1px;background:#bdbdbd;display:block"></i></div>`;
  return sec(`<div style="${W(1080)};${flexRC(48)};justify-content:center">${phone('lnd-phone-screen.jpg',refCard())}
   <div class="col" style="gap:40px;width:${mo()?'100%':'500px'}"><p style="margin:0;font-size:34px;line-height:1.235;font-weight:700">Three steps to cashback</p>
-  <div class="col" style="gap:8px">${step(1,'Sign up with our code','Sign up to the exchange with our referral code',1)}${conn}${step(2,'Link your exchange account','Link your exchange UID or wallet address to TetherMax')}${conn}${step(3,'Get automatic payouts in USDT','Each linked account is paid automatically once its claimable balance reaches 10 USDT.')}</div></div></div>`)}
+  <div class="col" style="gap:8px">${step(1,'Sign up with our code','Sign up to the exchange with our referral code',1)}${conn}${step(2,'Link your exchange account','Link your exchange UID or wallet address to TetherMax')}${conn}${step(3,'Get cashback in USDT automatically','Each linked account is paid automatically once its claimable balance reaches 10 USDT.')}</div></div></div>`)}
 function lndQuiz(){return sec(`<div style="${W(1080)};${flexRC(64)}">${img('lnd-quiz.png','width:320px;height:320px;flex:none;margin:0 auto')}<div class="col" style="gap:32px;flex:1"><div class="col" style="gap:12px"><p style="margin:0;font-size:34px;line-height:1.235;font-weight:700">New to futures?<br>Learn and earn</p><p class="b1 c2" style="margin:0">Short lessons, a quick quiz, and the rewards are yours.</p></div><div>${C.btn('Get Started',{go:'quiz.list'})}</div></div></div>`,{bg:'#f8fafc'})}
 // 이벤트 카드 (eventCard/competition · signup)
 function evCard(o){

@@ -51,10 +51,10 @@ R.screen({id:'guest.search',group:'guest',title:'비회원 캐시백 조회',rou
 
 // ---------- 조회 결과 (읽기 전용) ----------
 const RES={
- above:{a:'dex',amt:'14.00 USDT',rows:[['Exchange Cashback','7.00 USDT'],['Matched event reward','7.00 USDT']],cap:'10 USDT minimum reached. Link to receive payouts.',label:'조회 성공 · 10 USDT 이상',fig:{pc:'29035:97792',mo:'29035:97855'}},
- below:{a:'dex',amt:'6.00 USDT',cap:'Below the 10 USDT payout minimum.',label:'조회 성공 · 10 USDT 미만',fig:{pc:'29035:98631',mo:'29035:98694'}},
+ above:{a:'dex',amt:'14.00 USDT',rows:[['Exchange Cashback','7.00 USDT'],['Matched event reward','7.00 USDT']],cap:['10 USDT minimum reached. Link this account to receive it.','최소 금액 10 USDT를 넘었어요. 이 거래 계정을 연동하면 받을 수 있어요.'],label:'조회 성공 · 10 USDT 이상',fig:{pc:'29035:97792',mo:'29035:97855'}},
+ below:{a:'dex',amt:'6.00 USDT',cap:['Below the 10 USDT minimum to claim.','출금 최소 금액 10 USDT에 못 미쳐요.'],label:'조회 성공 · 10 USDT 미만',fig:{pc:'29035:98631',mo:'29035:98694'}},
  zero:{a:'dex',amt:'0.00 USDT',cap:'No cashback recorded yet.',label:'조회 성공 · 잔액 0',fig:{pc:'29035:98754',mo:'29035:98817'}},
- belowcex:{a:'cex',amt:'8.00 USDT',cap:'Below the 10 USDT payout minimum.',label:'CEX · UID 잔액 조회 성공',fig:{pc:'29035:99309',mo:'29035:99372'}},
+ belowcex:{a:'cex',amt:'8.00 USDT',cap:['Below the 10 USDT minimum to claim.','출금 최소 금액 10 USDT에 못 미쳐요.'],label:'CEX · UID 잔액 조회 성공',fig:{pc:'29035:99309',mo:'29035:99372'}},
  handoff:{a:'dex',handoff:1,label:'로그인 후 · 계정 미연동 (DEX)',fig:{pc:'29035:97915',mo:'29035:97974'}},
  handoffcex:{a:'cex',handoff:1,label:'CEX · 로그인 후 같은 UID 연동',fig:{pc:'29037:102463',mo:'29037:102530'}},
 };
@@ -64,7 +64,7 @@ function acctCard(r){
  const top=`<div style="background:#fff;border-radius:8px;overflow:hidden"><div class="row" style="gap:8px;padding:12px 16px">${mark(a.name,40)}<div class="col" style="gap:0"><span class="b2 semi">${a.name}</span><span class="cap c2">${a.kind}&nbsp; ${a.short}</span></div></div>${banner}</div>`;
  let body;
  if(r.handoff)body=`<div class="col" style="gap:12px"><span class="b1 center">Link this trading account</span><hr class="divider"><span style="font-size:10px;color:var(--text-secondary)">Finish linking this account to receive cashback.</span>${C.btn('Link account',{full:true,go:linkGo})}</div>`;
- else body=`<div class="col" style="gap:12px"><div class="row between"><span class="b2">Available Cashback</span><span class="b1 bold">${r.amt}</span></div><hr class="divider">${(r.rows||[]).map(([k,v])=>`<div class="row between" style="font-size:11px;color:var(--text-secondary)"><span>${k}</span><span>${v}</span></div>`).join('')}<span style="font-size:10px;color:var(--text-secondary)">${r.cap}</span>${C.btn('Sign up to link account',{full:true,go:'auth.signup'})}</div>`;
+ else body=`<div class="col" style="gap:12px"><div class="row between"><span class="b2">Available Cashback</span><span class="b1 bold">${r.amt}</span></div><hr class="divider">${(r.rows||[]).map(([k,v])=>`<div class="row between" style="font-size:11px;color:var(--text-secondary)"><span>${k}</span><span>${v}</span></div>`).join('')}<span style="font-size:10px;color:var(--text-secondary)">${Array.isArray(r.cap)?T(...r.cap):r.cap}</span>${C.btn('Sign up to link account',{full:true,go:'auth.signup'})}</div>`;
  return `<div class="col" style="gap:12px;width:${mo()?'100%':'346px'};flex:none">${top}<div style="background:#fff;border-radius:8px;padding:16px">${body}</div></div>`}
 function sideRecs(){
  const tile=(n,bg,inner,pct)=>`<div class="col" style="gap:4px;flex:none;width:${mo()?106:155}px"><div style="height:${mo()?60:80}px;background:${bg};display:flex;align-items:center;justify-content:center;overflow:hidden">${inner}</div><span class="cap" style="color:var(--text-secondary)">${n}</span><span class="cap med">${pct} Total Savings</span></div>`;
