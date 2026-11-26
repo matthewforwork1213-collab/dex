@@ -1,0 +1,610 @@
+## DEX — DEX overview Web
+28960:125521 OA DEX overview, keys concept 1440 x 7467
+28960:125522 OA DEX overview, keys concept 1440 x 6377
+28960:125536 OA DEX overview, keys concept / Light (list view) 1440 x 7582
+28960:125542 OA DEX overview, 8 partner DEXs (overflow) 1440 x 7451
+28965:123617 정책 변경 메모 · DEX 개요 710 x 203
+## DEX · 기존 홈 / 허브 / 지갑 상세의 잔액 표시 · Web
+28960:125773 DEX withdraw DW0 Hub, DEX balance, Withdraw 1440 x 900
+28960:125775 DEX withdraw DW1 Withdraw popup 1440 x 900
+28960:125779 DEX withdraw DW2 Confirm withdrawal 1440 x 900
+28960:125805 DEX withdraw DW3 Slide puzzle 1440 x 900
+28960:125856 DEX withdraw DW4 Verified 1440 x 900
+28960:125869 DEX withdraw DW5 Email code 1440 x 900
+28960:125904 DEX withdraw DW6 Request sent 1440 x 900
+28960:125938 FIRST PASS NOTES (update when DEX payout rules are confirmed) 1400 x 325
+28960:125943 DEX withdraw PW1 My Cashback, Lighter selected 1440 x 900
+28960:125945 DEX withdraw PW2 Withdraw popup, DEXs tab 1440 x 900
+28960:125949 DEX withdraw PW4 Confirm withdrawal 1440 x 900
+28960:125975 DEX withdraw PW5 Slide puzzle 1440 x 900
+28960:126026 DEX withdraw PW6 Verified 1440 x 900
+28960:126039 DEX withdraw PW7 Email code 1440 x 900
+28960:126074 DEX withdraw PW8 Request sent 1440 x 900
+28960:126108 DEX withdraw HW1 Home, Total Cashback Balance 1440 x 900
+28960:126110 DEX withdraw HW2 Withdraw popup, Exchanges tab 1440 x 900
+28960:126114 DEX withdraw HW3 Withdraw popup, DEXs tab, several DEXs 1440 x 900
+28960:126118 DEX withdraw PS1 Below 10 USDT 1440 x 900
+28960:126122 DEX withdraw PS2 Pending withdrawal 1440 x 900
+28960:126126 DEX withdraw PS3 Received, share 1440 x 900
+28960:126155 DEX withdraw PE1 Email code, resend 1440 x 900
+28960:126189 DEX withdraw PE2 Email code, wrong code 1440 x 900
+28960:126225 DEX withdraw PE3 Google OTP 1440 x 900
+28960:126258 DEX withdraw PE4 Google OTP, wrong code 1440 x 900
+28960:126292 DEX withdraw PE5 Payout delayed 1440 x 900
+28960:126296 DEX withdraw PE6 Payout failed 1440 x 900
+28960:126302 Wallet table 1664 x 369
+28960:126396 DEX withdraw BW1 Withdraw popup, all DEX wallets 1440 x 900
+28960:126400 DEX withdraw BW2 Confirm withdrawal, 6 wallets, collapsed 1440 x 900
+28960:126429 DEX withdraw BW3 Confirm withdrawal, 6 wallets, expanded (scroll) 1440 x 900
+28960:126458 DEX withdraw BW4 Request sent, 6 wallets, collapsed 1440 x 900
+28960:126495 DEX withdraw BW5 Request sent, 6 wallets, expanded (scroll) 1440 x 900
+28960:126532 DEX withdraw SW1 Withdraw popup, one wallet over 10 USDT 1440 x 900
+28960:126536 DEX withdraw SW2 Confirm withdrawal, one wallet 1440 x 900
+28960:126562 DEX withdraw SW3 Request sent, one wallet 1440 x 900
+28960:126795 Info row 1128 x 164
+28965:123621 정책 변경 메모 · 자동 지급 및 계정별 잔액 710 x 190
+28987:126383 정책 변경 메모 · 계정별 지급 판정 · 정상과 예외 1160 x 158
+29026:97581 지갑 상세 · 이벤트 리워드 매칭 상태 2140 x 1055
+## DEX — Invite Friends Web [Light]
+28960:126816 IF1 Invite landing 1440 x 1475
+28960:126822 IF2 Invitee sign up landing 1440 x 1441
+28960:126828 IF3 Invite tab, code and link 1440 x 1711
+28960:126834 IF4 Code copied 1440 x 900
+28960:126840 IF5 Link copied 1440 x 900
+28960:126846 IF6 Invitation Reward tab, empty 1440 x 1567
+28967:127210 IF7 Invitation Reward tab 1440 x 2046
+28960:126858 IF8 Withdraw, select a CEX UID (2) 1440 x 900
+28960:126864 IF9 Withdraw, select a CEX UID (2b) 1440 x 900
+28960:126870 IF10 Withdraw, select a CEX UID (4) 1440 x 900
+28960:126876 IF11 UID Link Required 1440 x 900
+28965:123625 정책 변경 메모 · 친구 초대 710 x 208
+## DEX — Cashback Hub Web [Selected Design]
+28960:126884 Hub H1 Guest, DEX route (S1) / Light (main) 1440 x 3383
+28960:126890 Hub H2 Signed in, nothing linked (S3) 1440 x 2933
+28960:126896 Hub H3 Signed in, exchange UID linked (S4) 1440 x 3788
+28960:126902 Hub H4 Exchange balance under 10 USDT (S4) 1440 x 3788
+28960:126908 Hub H5 Signed in, DEX wallet linked (S4) 1440 x 2933
+28960:126914 Hub H6 DEX data delayed (S4) 1440 x 2933
+28960:126920 Hub H7 Balance did not load (S4) 1440 x 3788
+28960:126926 Hub H8 EdgeX wallet linked (S4) 1440 x 2933
+28960:126932 Hub H9 Aster referral expiring (S4) 1440 x 2965
+28960:126938 Hub H10 Aster referral expired (S4) 1440 x 2965
+28960:126944 Hub H1-CEX Guest, calculator on Exchanges (S1) 1440 x 4238
+28960:126950 Hub H1-Broker Guest, calculator on Brokers (S1) 1440 x 3231
+## DEX — Hub withdraw, Exchanges Web [Light] (ma
+28960:126958 Hub withdraw HC1 Withdraw popup 1440 x 900
+28960:126962 Hub withdraw HC2 Confirm withdrawal 1440 x 900
+28960:126989 Hub withdraw HC3 Slide puzzle 1440 x 900
+28960:127040 Hub withdraw HC4 Verified 1440 x 900
+28960:127053 Hub withdraw HC5 Email code 1440 x 900
+28960:127088 Hub withdraw HC6 Request sent 1440 x 900
+## DEX — Cashback Hub Web [Selected Design]
+28965:123629 정책 변경 메모 · 캐시백 허브 710 x 190
+## DEX — Cashback Summary Web [Light]
+28960:127133 CS1 Month view 1440 x 1640
+28960:127139 CS2 Month view, other day selected 1440 x 900
+28960:127145 CS3 Event reward day 1440 x 900
+28960:127151 CS4 Large amounts, empty day 1440 x 1196
+28960:127157 CS5 Empty month 1440 x 1196
+## DEX / CS6 Filter dropdowns / light
+28960:127164 &lt;Select&gt; 314 x 40
+28960:127165 All Accounts 375 x 72
+28960:127166 All Types 375 x 72
+## DEX — Cashback Summary Web [Light]
+28965:123633 정책 변경 메모 · 캐시백 요약 710 x 190
+## DEX — Partner Hub Web [Light]
+28960:127182 PH1 Dashboard 1440 x 2888
+28960:127188 Sub-Account · Member ID / Linked Accounts detail 480 x 554
+28965:123637 정책 변경 메모 · 파트너 허브 710 x 190
+29042:100846 PH2 / Dashboard Total · exchange summary overlay 1440 x 900
+29042:100849 198 Total → 거래소별 집계 모달 124 x 24
+## DEX — Cashback Ranking Web [Light]
+28960:127201 RK1 Ranking, rows 1440 x 900
+28960:127207 RK2 Ranking, ranked 1440 x 900
+28960:127213 RK3 Ranking, empty 1440 x 900
+28981:129134 정책 변경 메모 · 캐시백 랭킹 900 x 158
+28984:126296 Wallet address / 0x91c4…a07b 510 x 158
+28984:126300 Wallet address / 0x5e0d…c2f4 510 x 158
+28984:126304 Wallet address / 0x7a3f…51e9 510 x 158
+## DEX — Link, all states and detail page entry
+28960:127271 link / L1 Select a DEX 1440 x 900
+28960:127275 link / L2 Paste address, empty 1440 x 900
+28960:127279 link / L3 Valid address 1440 x 900
+28960:127283 link / L4 Format error 1440 x 900
+28960:127287 link / L5 Captcha 1440 x 900
+28960:127293 link / L6 Processing your wallet 1440 x 900
+28960:127297 link / L7 Wallet linked 1440 x 900
+28960:127301 link / L8 Not joined through TetherMax 1440 x 900
+28960:127305 link / L9 Wallet already in use 1440 x 900
+28960:127309 link / L10 Lighter Standard account 1440 x 900
+28960:127313 link / L11 Checking your referral (pending) 1440 x 900
+28960:127322 link / L12 Verification limit reached 1440 x 900
+28960:127331 link / L13 Unable to link wallet, contact support 1440 x 900
+28960:127340 link / L14 Wallet already added 1440 x 900
+28960:127349 link / L15 Wallet limit reached 1440 x 900
+28960:127367 link / L16 S3 Signed in, nothing linked 1440 x 900
+28960:127376 Signup + Link UID / 1 Entry 1440 x 199
+28960:127381 link / L17 S4 Member, link another account 1440 x 900
+28960:127391 Signup + Link UID / 2 Signup 1440 x 199
+28960:127396 Signup + Link UID / 3 Return 1440 x 199
+28960:127404 Signup + Link UID / 1 Entry 9365 x 119
+28960:127412 link / L0 Lighter page, before linking 1440 x 900
+28960:127414 link / L0 Lighter page, before linking 1440 x 900
+28960:127416 Signup + Link UID / 1 Entry 1440 x 900
+28960:127418 Signup + Link UID / 2 Signup 1440 x 900
+28960:127422 Signup + Link UID / 3 Return 1440 x 900
+28965:123641 정책 변경 메모 · 거래 계정 연동 710 x 190
+28966:124154 Link Account / Verification success 1440 x 900
+28966:124158 Link Account / Pre-link payout pending 1440 x 900
+28966:124162 Link Account / Pre-link payout failed 1440 x 900
+28980:132144 Address validation / Empty 835 x 926
+28980:132193 Address input / Preserve original case 835 x 926
+28980:132242 Address validation / Internal whitespace 835 x 926
+28980:132291 Address validation / Partner rejected address 835 x 926
+28980:132340 Address validation / Name instead of address 835 x 926
+28980:132389 Address validation / Zero address 835 x 926
+28980:132438 정책 변경 메모 · 주소 입력 · 연동 후 정산 정보 1100 x 158
+29010:126471 개발 인계 메모 · 연동 입력·오류 770 x 158
+## DEX — DEX detail Web [Light]
+28960:127443 detail / D1 Key features 1440 x 5325
+28960:127444 detail / D2 Step guide, step 3 1440 x 5421
+28960:127445 detail / D3 FAQ, reviews and terms 1440 x 5223
+28960:127454 detail / D4 EdgeX key features 1440 x 5349
+28960:127627 detail / D5 Aster key features 1440 x 5349
+28960:127633 detail / D6 ApeX key features 1440 x 5349
+28965:123645 정책 변경 메모 · DEX 상세 710 x 190
+29010:126483 개발 인계 메모 · 거래소 상세·리뷰 770 x 158
+## DEX — Ownership verification Web [Light]
+28960:127635 own / O3 Guide step 1, no file / light (main) 1440 x 1243
+28960:127644 UID link result / Splash / mWeb 375 1440 x 900
+28960:127650 UID link result / Splash / mWeb 375 1440 x 900
+28960:127664 own / O4 Guide step 2 1440 x 1243
+28960:127670 own / O5 Guide step 3 1440 x 1243
+28960:127676 own / O6 Uploading 1440 x 1243
+28960:127682 own / O7 Uploaded 1440 x 1243
+28960:127688 own / O8 Upload failed 1440 x 1207
+28960:127694 own / O9 Something went wrong 1440 x 1207
+28960:127700 own / O10 Submit this claim? 1440 x 1207
+28960:127709 own / O11 Review in progress 1440 x 900
+28960:127715 own / O12 Ownership approved 1440 x 900
+28960:127721 own / O13 Ownership not approved 1440 x 900
+28960:127727 own / O14 Wallet unlinked by another claim 1440 x 900
+28960:127733 own / O15 Reclaim this wallet 1440 x 900
+28960:127739 own / O16 Reclaim not approved, with reason 1440 x 900
+28960:127748 own / O0 Home, link another wallet 1440 x 900
+28965:123649 정책 변경 메모 · 소유권 인증 710 x 190
+29010:126475 개발 인계 메모 · 소유권 신청·복귀 770 x 158
+## DEX — Link stories on home (S3, S4) Web [Ligh
+28960:127759 story / S3-1 Home, nothing linked 1440 x 900
+28960:127765 story / S3-2 Link Account, choose a partner 1440 x 900
+29020:204682 story / S3-3 Select a DEX 1440 x 900
+29020:100272 story / S3-4 Lighter, address pasted 1440 x 900
+29020:205271 story / S3-5 Slide puzzle 1440 x 900
+28960:127789 UID link result / Splash / mWeb 375 1440 x 900
+28960:127795 story / S3-7 Back on home, now S4 1440 x 900
+28960:127804 UID link result / Splash / mWeb 375 1440 x 900
+28960:127810 UID link result / Splash / mWeb 375 1440 x 900
+28960:127816 UID link result / Splash / mWeb 375 1440 x 900
+28960:127822 UID link result / Splash / mWeb 375 1440 x 900
+28960:127828 UID link result / Splash / mWeb 375 1440 x 900
+28960:127837 story / S4-1 Home with linked accounts 1440 x 900
+28960:127843 story / S4-2 Select a DEX 1440 x 900
+29020:205838 story / S4-3 Aster, address pasted 1440 x 900
+29020:206349 story / S4-4 Slide puzzle 1440 x 900
+28960:127861 UID link result / Splash / mWeb 375 1440 x 900
+28960:127867 story / S4-6 Back on home, new row 1440 x 900
+28960:127876 UID link result / Splash / mWeb 375 1440 x 900
+28960:127882 UID link result / Splash / mWeb 375 1440 x 900
+28960:127888 UID link result / Splash / mWeb 375 1440 x 900
+28960:127894 UID link result / Splash / mWeb 375 1440 x 900
+28960:127900 UID link result / Splash / mWeb 375 1440 x 900
+28960:127906 UID link result / Splash / mWeb 375 1440 x 900
+28960:127912 UID link result / Splash / mWeb 375 1440 x 900
+28965:123653 정책 변경 메모 · 홈에서 거래 계정 추가 710 x 190
+## DEX update · Landing + Service intro (desktop
+28960:127917 Landing / Desktop / Dark (DEX) 1440 x 6948
+28960:128375 Landing / Desktop / Light (DEX) 1440 x 6948
+28960:128830 Service intro / PC / Dark (DEX) 1440 x 15907
+28960:129521 Service intro / PC / Light (DEX) 1440 x 15907
+28960:130212 숫자 영역 / 글자 애니메이션 2368 x 1196
+28960:130285 101 1440 x 1362
+28960:130303 102 1440 x 1362
+28960:130341 earn 애니메이션 1120 x 1620
+28965:123657 정책 변경 메모 · 랜딩 및 서비스 소개 710 x 205
+29067:795 개발 인계 · 이메일 및 사용자 기능 1840 x 155
+## Quiz Module page with Decentralised Trading
+28960:130554 Not Signed In 1440 x 2086
+28960:130629 Not Signed In, Module 4 1440 x 3580
+28960:130685 Signed In, Module 5 1440 x 3449
+28960:130741 Quiz 4 1440 x 1704
+28960:130764 Quiz 5 1440 x 1704
+28978:127308 Quiz 4 / Validation 1440 x 920
+28978:127406 Quiz 4 / Login required 1440 x 920
+28978:127476 Quiz 4 / Submit failed 1440 x 920
+28978:127543 Quiz 4 / Scoring unavailable 1440 x 920
+28978:127606 Quiz 4 / No correct answers 1440 x 920
+28978:127673 Quiz 4 / One correct answer 1440 x 920
+28978:127742 Quiz 4 / All answers correct 1440 x 920
+28978:127811 Quiz 4 / Previously completed 1440 x 920
+28978:127939 Quiz 5 / Validation 1440 x 920
+28978:128037 Quiz 5 / Login required 1440 x 920
+28978:128107 Quiz 5 / Submit failed 1440 x 920
+28978:128174 Quiz 5 / Scoring unavailable 1440 x 920
+28978:128237 Quiz 5 / No correct answers 1440 x 920
+28978:128304 Quiz 5 / One correct answer 1440 x 920
+28978:128373 Quiz 5 / All answers correct 1440 x 920
+28978:128442 Quiz 5 / Previously completed 1440 x 920
+28978:128570 정책 변경 메모 · 퀴즈 제출·결과·보상 1030 x 158
+29010:126487 개발 인계 메모 · 퀴즈 응답·보상 770 x 158
+29058:108346 Mobile / Quiz introduction 375 x 786
+29058:108417 Mobile / Quiz introduction / Dark 375 x 796
+29059:101485 개발용 정답표 · Quiz 4 1440 x 212
+29059:101488 개발용 정답표 · Quiz 5 1440 x 212
+## DEX — Cashback Hub Mobile [Selected Design]
+28960:130794 Mobile / Hub H1 Guest, DEX route (S1) / Light (main) 375 x 4877
+28960:130800 Mobile / Hub H2 Signed in, nothing linked (S3) 375 x 4047
+28960:130806 Mobile / Hub H3 Signed in, exchange UID linked (S4) 375 x 5810
+28960:130812 Mobile / Hub H4 Exchange balance under 10 USDT (S4) 375 x 5834
+28960:130818 Mobile / Hub H5 Signed in, DEX wallet linked (S4) 375 x 3979
+28960:130824 Mobile / Hub H6 DEX data delayed (S4) 375 x 3845
+28960:130830 Mobile / Hub H7 Balance did not load (S4) 375 x 5549
+28960:130836 Mobile / Hub H8 EdgeX wallet linked (S4) 375 x 3893
+28960:130842 Mobile / Hub H9 Aster referral expiring (S4) 375 x 3993
+28960:130848 Mobile / Hub H10 Aster referral expired (S4) 375 x 4033
+28960:130854 Mobile / Hub H1-CEX Guest, calculator on Exchanges (S1) 375 x 6793
+28960:130860 Mobile / Hub H1-Broker Guest, calculator on Brokers (S1) 375 x 4671
+28960:130870 Mobile / Hub H1 Guest, DEX route (S1) / Dark 375 x 4877
+28960:130876 Mobile / Hub H2 Signed in, nothing linked (S3) / Dark 375 x 4047
+28960:130882 Mobile / Hub H3 Signed in, exchange UID linked (S4) / Dark 375 x 5810
+28960:130888 Mobile / Hub H4 Exchange balance under 10 USDT (S4) / Dark 375 x 5834
+28960:130894 Mobile / Hub H5 Signed in, DEX wallet linked (S4) / Dark 375 x 3979
+28960:130900 Mobile / Hub H6 DEX data delayed (S4) / Dark 375 x 3845
+28960:130906 Mobile / Hub H7 Balance did not load (S4) / Dark 375 x 5549
+28960:130912 Mobile / Hub H8 EdgeX wallet linked (S4) / Dark 375 x 3893
+28960:130918 Mobile / Hub H9 Aster referral expiring (S4) / Dark 375 x 3993
+28960:130924 Mobile / Hub H10 Aster referral expired (S4) / Dark 375 x 4033
+28960:130930 Mobile / Hub H1-CEX Guest, calculator on Exchanges (S1) / Dark 375 x 6793
+28960:130936 Mobile / Hub H1-Broker Guest, calculator on Brokers (S1) / Dark 375 x 4671
+## DEX — DEX overview Mobile [Exploration A · aw
+28960:130946 Mobile / OA DEX overview, keys concept / Light (main) 375 x 9754
+28960:130952 Mobile / OA DEX overview, keys concept / Light (OB signed in) 375 x 8236
+28960:130958 Mobile / OA DEX overview, keys concept / Light (list view) 375 x 9754
+28960:130968 Mobile / OA DEX overview, keys concept / Dark 375 x 9754
+28960:130974 Mobile / OA DEX overview, keys concept / Dark (OB signed in) 375 x 8236
+28960:130980 Mobile / OA DEX overview, keys concept / Dark (list view) 375 x 9754
+## DEX — DEX detail Mobile [Light]
+28960:130990 Detail mobile 375 375 x 8213
+28960:130999 Mobile / detail / D2 Step guide, step 3 375 x 8257
+28960:131005 Mobile / detail / D3 FAQ, reviews and terms 375 x 8213
+28960:131011 Mobile / detail / D4 EdgeX key features 375 x 8017
+28960:131017 Mobile / detail / D5 Aster key features 375 x 8057
+28960:131023 Mobile / detail / D6 ApeX key features 375 x 8057
+## DEX — DEX detail Mobile [Dark]
+28960:131033 Mobile / detail / D1 Key features / dark 375 x 8213
+28960:131042 Mobile / detail / D2 Step guide, step 3 / dark 375 x 8257
+28960:131048 Mobile / detail / D3 FAQ, reviews and terms / dark 375 x 8213
+28960:131054 Mobile / detail / D4 EdgeX key features / dark 375 x 8017
+28960:131060 Mobile / detail / D5 Aster key features / dark 375 x 8057
+28960:131066 Mobile / detail / D6 ApeX key features / dark 375 x 8057
+## Mobile
+28965:123661 정책 변경 메모 · 모바일 라이트·다크 710 x 190
+## Mobile · Link Account / selector, form and al
+28969:126953 Link / Select an exchange 375 x 812
+28969:126986 Link / Enter wallet address 375 x 812
+28969:126996 Link / Valid address 375 x 812
+28969:127006 Link / Invalid address 375 x 812
+28969:127016 Link / Captcha 375 x 812
+28969:127073 Link / Verification success 375 x 812
+28969:127080 Link / Checking referral 375 x 812
+28969:127087 Link / Pre-link payout pending 375 x 812
+28969:127094 Link / Pre-link payout failed 375 x 812
+28969:127101 Link / Wallet linked 375 x 812
+28969:127109 Link / Wallet already in use 375 x 812
+28969:127118 Link / Trading account limit 375 x 812
+28969:127125 Link / Referral not eligible 375 x 812
+28969:127132 Link / Verification limit 375 x 812
+28969:127139 Link / Wallet already added 375 x 812
+28969:127146 Link / Lighter Standard 375 x 812
+28969:127153 Link / Linking unavailable 375 x 812
+28969:127160 Link / Select an exchange / Dark 375 x 812
+28969:127193 Link / Enter wallet address / Dark 375 x 812
+28969:127203 Link / Valid address / Dark 375 x 812
+28969:127213 Link / Invalid address / Dark 375 x 812
+28969:127223 Link / Captcha / Dark 375 x 812
+28969:127280 Link / Verification success / Dark 375 x 812
+28969:127287 Link / Checking referral / Dark 375 x 812
+28969:127294 Link / Pre-link payout pending / Dark 375 x 812
+28969:127301 Link / Pre-link payout failed / Dark 375 x 812
+28969:127308 Link / Wallet linked / Dark 375 x 812
+28969:127316 Link / Wallet already in use / Dark 375 x 812
+28969:127325 Link / Trading account limit / Dark 375 x 812
+28969:127332 Link / Referral not eligible / Dark 375 x 812
+28969:127339 Link / Verification limit / Dark 375 x 812
+28969:127346 Link / Wallet already added / Dark 375 x 812
+28969:127353 Link / Lighter Standard / Dark 375 x 812
+28969:127360 Link / Linking unavailable / Dark 375 x 812
+28986:126528 Link / Filter CEX 375 x 812
+28986:126557 Link / Filter DEX 375 x 812
+28986:126586 Link / Filter CEX / Dark 375 x 812
+28986:126615 Link / Filter DEX / Dark 375 x 812
+28986:126690 정책 변경 메모 · 모바일 · 연동 화면과 선택 필터 1030 x 158
+29051:100488 Link / Bitget UID · existing mobile form 375 x 812
+29051:100575 Link / Bitget UID · existing mobile form / Dark 375 x 812
+29051:104229 Link / DEX search multiple results 375 x 812
+29051:104415 Link / DEX search one result 375 x 812
+29051:104597 Link / DEX search no results 375 x 812
+29051:104784 Link / DEX search multiple results / Dark 375 x 812
+29051:104966 Link / DEX search one result / Dark 375 x 812
+29051:105148 Link / DEX search no results / Dark 375 x 812
+## Mobile · Wallet ownership verification and tr
+28982:126103 Ownership / Recording guide 1 375 x 1030
+28982:126127 Ownership / Recording guide 2 375 x 1030
+28982:126151 Ownership / Recording guide 3 375 x 1030
+28982:126175 Ownership / Uploading 375 x 1030
+28982:126199 Ownership / Ready to submit 375 x 1030
+28982:126223 Ownership / Upload failed 375 x 1030
+28982:126238 Ownership / Confirm submission 375 x 1030
+28982:126253 Ownership / Review in progress 375 x 1030
+28982:126268 Ownership / Ownership approved 375 x 1030
+28982:126283 Ownership / Ownership not approved 375 x 1030
+28982:126298 Ownership / Cooldown 375 x 812
+28982:126318 Ownership / Reclaim wallet 375 x 1030
+28982:126338 Ownership / Reclaim rejected 375 x 1030
+28982:126358 Ownership / Recording guide 1 / Dark 375 x 1030
+28982:126382 Ownership / Recording guide 2 / Dark 375 x 1030
+28982:126406 Ownership / Recording guide 3 / Dark 375 x 1030
+28982:126430 Ownership / Uploading / Dark 375 x 1030
+28982:126454 Ownership / Ready to submit / Dark 375 x 1030
+28982:126478 Ownership / Upload failed / Dark 375 x 1030
+28982:126493 Ownership / Confirm submission / Dark 375 x 1030
+28982:126508 Ownership / Review in progress / Dark 375 x 1030
+28982:126523 Ownership / Ownership approved / Dark 375 x 1030
+28982:126538 Ownership / Ownership not approved / Dark 375 x 1030
+28982:126553 Ownership / Cooldown / Dark 375 x 812
+28982:126573 Ownership / Reclaim wallet / Dark 375 x 1030
+28982:126593 Ownership / Reclaim rejected / Dark 375 x 1030
+28982:126613 정책 변경 메모 · 모바일 소유권 인증·이전 1120 x 158
+29010:126479 개발 인계 메모 · 모바일 제출 취소·파일 교체 770 x 158
+## DEX 상세 · 회원 상태별 오퍼
+28969:129578 DEX detail / Guest 1440 x 695
+28969:129666 DEX detail / Member without a linked wallet 1440 x 695
+28969:129751 DEX detail / Member with a linked wallet 1440 x 695
+28981:129050 DEX guide / Step 1 of 5 1440 x 505
+28981:129056 DEX guide / Step 2 of 5 1440 x 505
+28981:129062 DEX guide / Step 3 of 5 1440 x 505
+28981:129068 정책 변경 메모 · DEX 상세 · 회원 상태와 거래 가이드 1050 x 158
+## 게스트 캐시백 · 비회원 조회와 연동 후 지급
+29034:97621 정책 변경 메모 · 원본 대비 변경 6050 x 206
+29035:97622 Web / Guest / search · 검색 · 초기 1440 x 1445
+29035:97732 Mobile / Guest / search · 검색 · 초기 375 x 1743
+29035:97792 Web / Guest / above · 조회 성공 · 10 USDT 이상 1440 x 1253
+29035:97855 Mobile / Guest / above · 조회 성공 · 10 USDT 이상 375 x 1292
+29035:97915 Web / Guest / handoff · 로그인 후 · 계정 미연동 1440 x 1253
+29035:97974 Mobile / Guest / handoff · 로그인 후 · 계정 미연동 375 x 1292
+29035:98030 Web / Guest / picker · 거래소 선택 1440 x 900
+29035:98094 Mobile / Guest / picker · 거래소 선택 375 x 850
+29035:98155 Web / Guest / dex · DEX · 지갑 주소 입력 완료 1440 x 900
+29035:98218 Mobile / Guest / dex · DEX · 지갑 주소 입력 완료 375 x 850
+29035:98278 Web / Guest / cex · CEX · UID 입력 완료 1440 x 900
+29035:98341 Mobile / Guest / cex · CEX · UID 입력 완료 375 x 850
+29035:98401 Web / Guest / bad · 입력 오류 · 선택 거래소 기준 1440 x 900
+29035:98465 Mobile / Guest / bad · 입력 오류 · 선택 거래소 기준 375 x 850
+29035:98526 Web / Guest / loading · 거래소 조회 중 1440 x 900
+29035:98580 Mobile / Guest / loading · 거래소 조회 중 375 x 850
+29035:98631 Web / Guest / below · 조회 성공 · 10 USDT 미만 1440 x 900
+29035:98694 Mobile / Guest / below · 조회 성공 · 10 USDT 미만 375 x 850
+29035:98754 Web / Guest / zero · 조회 성공 · 잔액 0 1440 x 900
+29035:98817 Mobile / Guest / zero · 조회 성공 · 잔액 0 375 x 850
+29035:98877 Web / Guest / none · 공개 조회 결과 없음 1440 x 900
+29035:98933 Mobile / Guest / none · 공개 조회 결과 없음 375 x 850
+29035:98986 Web / Guest / delay · 거래 데이터 집계 중 1440 x 900
+29035:99040 Mobile / Guest / delay · 거래 데이터 집계 중 375 x 850
+29035:99091 Web / Guest / error · 일시 오류 · 재조회 1440 x 900
+29035:99147 Mobile / Guest / error · 일시 오류 · 재조회 375 x 850
+29035:99200 Web / Guest / limit · 조회 제한 · 대기 1440 x 900
+29035:99256 Mobile / Guest / limit · 조회 제한 · 대기 375 x 850
+29035:99309 Web / Guest / belowcex · CEX · UID 잔액 조회 성공 1440 x 900
+29035:99372 Mobile / Guest / belowcex · CEX · UID 잔액 조회 성공 375 x 850
+29037:102201 Web / Guest / emptydex · DEX 선택 · 입력 대기 1440 x 900
+29037:102272 Mobile / Guest / emptydex · DEX 선택 · 입력 대기 375 x 850
+29037:102332 Web / Guest / emptycex · CEX 선택 · 입력 대기 1440 x 900
+29037:102403 Mobile / Guest / emptycex · CEX 선택 · 입력 대기 375 x 850
+29037:102463 Web / Guest / handoffcex · CEX · 로그인 후 같은 UID 연동 1440 x 900
+29037:102530 Mobile / Guest / handoffcex · CEX · 로그인 후 같은 UID 연동 375 x 850
+29037:110962 개발 메모 · 인증 후 복귀 1850 x 220
+29037:113704 Mobile / Guest entry / Home 375 x 1394
+29037:113785 Action / flow-0 580 x 48
+29037:113787 진입 경로 화살표 348 x 30
+29037:113789 Action / flow-1 580 x 48
+29037:113791 진입 경로 화살표 348 x 30
+29037:113793 Action / flow-2 580 x 48
+29037:113795 진입 경로 화살표 348 x 30
+29037:113797 Action / flow-3 580 x 48
+29037:113799 진입 경로 화살표 348 x 30
+29037:113801 Action / flow-4 580 x 48
+29037:113804 Action / return-0 480 x 48
+29037:113806 Action / return-1 480 x 48
+29037:113809 Action / return-0 480 x 48
+29037:113811 Action / return-1 480 x 48
+29039:99761 Action / mobile-return-0 375 x 48
+29039:99763 Action / mobile-return-1 375 x 48
+29039:99765 Action / mobile-return-0 375 x 48
+29039:99767 Action / mobile-return-1 375 x 48
+29039:99769 개발 메모 · 조회 응답 → 화면 1250 x 317
+## 사용자 이메일 · 지갑 연동, 자동 지급 및 서비스 안내
+29061:835 30 · 지갑 연동 완료 630 x 787
+29061:899 발송 조건 · 30 · 지갑 연동 완료 1240 x 157
+29061:902 31 · 레퍼럴 귀속 불일치 630 x 832
+29061:967 발송 조건 · 31 · 레퍼럴 귀속 불일치 1240 x 157
+29061:970 31 · 기존 연동 630 x 832
+29061:1035 발송 조건 · 31 · 기존 연동 1240 x 157
+29061:1038 31 · 중복 자동 거절 630 x 832
+29061:1103 발송 조건 · 31 · 중복 자동 거절 1240 x 157
+29061:1106 31 · 운영자 거절 630 x 808
+29061:1171 발송 조건 · 31 · 운영자 거절 1240 x 157
+29061:1174 32 · Lighter 확인 중 → 확정 630 x 787
+29061:1238 발송 조건 · 32 · Lighter 확인 중 → 확정 1240 x 157
+29061:1241 28 · ApeX 연동 이전 미수령 630 x 766
+29061:1305 발송 조건 · 28 · ApeX 연동 이전 미수령 1240 x 157
+29061:1308 29 · 거래소 지원 종료 630 x 861
+29061:1370 발송 조건 · 29 · 거래소 지원 종료 1240 x 157
+29061:1381 지급 · 자동 지급 접수 630 x 988
+29061:1448 발송 조건 · 지급 · 자동 지급 접수 1240 x 157
+29061:1451 지급 · 자동 지급 완료 · EN 630 x 1131
+29061:1519 발송 조건 · 지급 · 자동 지급 완료 · EN 1240 x 157
+29061:1522 지급 · 자동 지급 완료 · KO 630 x 1078
+29061:1590 발송 조건 · 지급 · 자동 지급 완료 · KO 1240 x 157
+29061:1593 지급 · 자동 지급 실패 630 x 988
+29061:1662 발송 조건 · 지급 · 자동 지급 실패 1240 x 157
+29061:1665 소유권 · 이전 소유자 연동 해제 630 x 826
+29061:1729 발송 조건 · 소유권 · 이전 소유자 연동 해제 1240 x 157
+29062:8577 16 · 팀 리그 수상 630 x 903
+29062:8672 발송 조건 · 16 · 팀 리그 수상 1240 x 157
+29062:8675 17 · 팀 리그 참여 감사 630 x 674
+29062:8738 발송 조건 · 17 · 팀 리그 참여 감사 1240 x 157
+29062:8741 18 · 개인 리그 수상 630 x 655
+29062:8805 발송 조건 · 18 · 개인 리그 수상 1240 x 157
+29062:8808 19 · 개인 리그 참여 감사 630 x 674
+29062:8871 발송 조건 · 19 · 개인 리그 참여 감사 1240 x 157
+29062:8874 20 · 리그 수상 제외 630 x 772
+29062:8938 발송 조건 · 20 · 리그 수상 제외 1240 x 157
+29062:8941 24 · 맥스보드 리워드 확정 630 x 745
+29062:9005 발송 조건 · 24 · 맥스보드 리워드 확정 1240 x 157
+29062:9008 25 · 맥스보드 랭킹 수상 630 x 745
+29062:9072 발송 조건 · 25 · 맥스보드 랭킹 수상 1240 x 157
+29062:9095 T6 · 재설정 코드 · EN 630 x 650
+29062:9161 발송 조건 · T6 · 재설정 코드 · EN 1240 x 157
+29062:9164 T6 · 재설정 코드 · KO 630 x 650
+29062:9230 발송 조건 · T6 · 재설정 코드 · KO 1240 x 157
+29062:9233 T7 · 재설정 완료 · EN 630 x 622
+29062:9297 발송 조건 · T7 · 재설정 완료 · EN 1240 x 157
+29062:9300 T7 · 재설정 완료 · KO 630 x 622
+29062:9364 발송 조건 · T7 · 재설정 완료 · KO 1240 x 157
+29062:9367 T34 · 가입 환영 · EN 630 x 868
+29062:9432 발송 조건 · T34 · 가입 환영 · EN 1240 x 157
+29062:9435 T34 · 가입 환영 · KO 630 x 776
+29062:9500 발송 조건 · T34 · 가입 환영 · KO 1240 x 157
+29062:118329 30 · 지갑 연동 완료 · KO 630 x 781
+29062:118393 발송 조건 · 30 · 지갑 연동 완료 · KO 1240 x 157
+29062:118396 31 · 레퍼럴 귀속 불일치 · KO 630 x 816
+29062:118461 발송 조건 · 31 · 레퍼럴 귀속 불일치 · KO 1240 x 157
+29062:118464 31 · 기존 연동 · KO 630 x 816
+29062:118529 발송 조건 · 31 · 기존 연동 · KO 1240 x 157
+29062:118532 31 · 중복 자동 거절 · KO 630 x 796
+29062:118597 발송 조건 · 31 · 중복 자동 거절 · KO 1240 x 157
+29062:118600 31 · 운영자 거절 · KO 630 x 816
+29062:118665 발송 조건 · 31 · 운영자 거절 · KO 1240 x 157
+29062:118668 32 · Lighter 확인 중 → 확정 · KO 630 x 781
+29062:118732 발송 조건 · 32 · Lighter 확인 중 → 확정 · KO 1240 x 157
+29062:118735 28 · ApeX 연동 이전 미수령 · KO 630 x 760
+29062:118799 발송 조건 · 28 · ApeX 연동 이전 미수령 · KO 1240 x 157
+29062:118802 29 · 거래소 지원 종료 · KO 630 x 801
+29062:118866 발송 조건 · 29 · 거래소 지원 종료 · KO 1240 x 157
+29064:2151 30 · 지갑 연동 완료 / 모바일 375 375 x 899
+29064:2214 31 · 레퍼럴 귀속 불일치 / 모바일 375 375 x 968
+29064:2277 31 · 기존 연동 / 모바일 375 375 x 968
+29064:2340 31 · 중복 자동 거절 / 모바일 375 375 x 968
+29064:2403 31 · 운영자 거절 / 모바일 375 375 x 944
+29064:2466 32 · Lighter 확인 중 → 확정 / 모바일 375 375 x 931
+29064:2529 28 · ApeX 연동 이전 미수령 / 모바일 375 375 x 930
+29064:2592 29 · 거래소 지원 종료 / 모바일 375 375 x 1081
+29064:2655 지급 · 자동 지급 접수 / 모바일 375 375 x 1160
+29064:2718 지급 · 자동 지급 완료 · EN / 모바일 375 375 x 1434
+29064:2781 지급 · 자동 지급 완료 · KO / 모바일 375 375 x 1237
+29064:2844 지급 · 자동 지급 실패 / 모바일 375 375 x 1180
+29064:2907 소유권 · 이전 소유자 연동 해제 / 모바일 375 375 x 978
+29064:4561 16 · 팀 리그 수상 / 모바일 375 375 x 1180
+29064:4624 17 · 팀 리그 참여 감사 / 모바일 375 375 x 794
+29064:4687 18 · 개인 리그 수상 / 모바일 375 375 x 772
+29064:4750 19 · 개인 리그 참여 감사 / 모바일 375 375 x 794
+29064:4813 20 · 리그 수상 제외 / 모바일 375 375 x 989
+29064:4876 24 · 맥스보드 리워드 확정 / 모바일 375 375 x 889
+29064:4939 25 · 맥스보드 랭킹 수상 / 모바일 375 375 x 865
+29064:5002 T6 · 재설정 코드 · EN / 모바일 375 375 x 738
+29064:5065 T6 · 재설정 코드 · KO / 모바일 375 375 x 686
+29064:5128 T7 · 재설정 완료 · EN / 모바일 375 375 x 690
+29064:5191 T7 · 재설정 완료 · KO / 모바일 375 375 x 638
+29064:5254 T34 · 가입 환영 · EN / 모바일 375 375 x 680
+29064:5317 T34 · 가입 환영 · KO / 모바일 375 375 x 564
+29064:5380 30 · 지갑 연동 완료 · KO / 모바일 375 375 x 861
+29064:5443 31 · 레퍼럴 귀속 불일치 · KO / 모바일 375 375 x 896
+29064:5506 31 · 기존 연동 · KO / 모바일 375 375 x 916
+29064:5569 31 · 중복 자동 거절 · KO / 모바일 375 375 x 876
+29064:5632 31 · 운영자 거절 · KO / 모바일 375 375 x 876
+29064:5695 32 · Lighter 확인 중 → 확정 · KO / 모바일 375 375 x 861
+29064:5758 28 · ApeX 연동 이전 미수령 · KO / 모바일 375 375 x 872
+29064:5821 29 · 거래소 지원 종료 · KO / 모바일 375 375 x 881
+29065:7848 지급 · 자동 지급 접수 · KO 630 x 922
+29065:7915 발송 조건 · 지급 · 자동 지급 접수 · KO 1240 x 157
+29065:7918 지급 · 자동 지급 실패 · KO 630 x 942
+29065:7985 발송 조건 · 지급 · 자동 지급 실패 · KO 1240 x 157
+29065:7989 지급 · 자동 지급 접수 · KO / 모바일 375 375 x 1042
+29065:8052 지급 · 자동 지급 실패 · KO / 모바일 375 375 x 1062
+29067:783 지갑 연동 결과 → 회원 이메일 2160 x 200
+29067:786 자동 지급 → 접수·결과 2150 x 200
+29067:789 발송 보류 및 운영 결정 2200 x 200
+29067:792 리그와 맥스보드 → 결과 메일 2450 x 200
+29085:835 소유권 · 이전 소유자 연동 해제 · KO 630 x 800
+29085:901 소유권 · 이전 소유자 연동 해제 · KO / 모바일 375 375 x 900
+29085:967 발송 조건 · 소유권 이전 후 연동 해제 · KO 1240 x 157
+## 사용자 기능 · PC와 모바일 원본 보완
+29062:117713 쿠폰 · 사용할 계정 선택 / PC 1440 x 900
+29062:117894 쿠폰 · 사용할 계정 선택 / 모바일 375 x 812
+29062:110956 쿠폰 · 사용할 계정 선택 2180 x 158
+29062:110959 리그 · 팀 생성 계정 선택 / PC 480 x 394
+29062:110984 리그 · 팀 생성 계정 선택 / 모바일 375 x 625
+29062:111021 리그 · 팀 생성 계정 선택 2180 x 158
+29062:111024 맥스보드 · 참여 가능 / PC 1440 x 3997
+29062:111380 맥스보드 · 참여 가능 / 모바일 375 x 5562
+29062:111738 맥스보드 · 참여 가능 2180 x 158
+29062:111741 맥스보드 · 정산 지연 / PC 1440 x 4047
+29062:112159 맥스보드 · 정산 지연 / 모바일 375 x 6354
+29062:112583 맥스보드 · 정산 지연 2180 x 158
+29062:112586 이벤트 · 거래소 이벤트 / PC 1440 x 1651
+29062:112729 이벤트 · 거래소 이벤트 / 모바일 375 x 1950
+29062:112997 이벤트 · 거래소 이벤트 2180 x 158
+29062:113000 혜택 · 진행 중 / PC 1440 x 1670
+29062:113469 혜택 · 진행 중 / 모바일 375 x 2168
+29062:114038 혜택 · 진행 중 2180 x 158
+29062:114041 TP · 포인트 내역 / PC 1440 x 2034
+29062:114572 TP · 포인트 내역 / 모바일 375 x 2303
+29062:114990 TP · 포인트 내역 2180 x 158
+29062:115765 계산기 · 계산 과정 2180 x 158
+29062:115768 쿠폰 · 사용 / 만료 이력 / PC 1440 x 2421
+29062:116256 쿠폰 · 사용 / 만료 이력 / 모바일 375 x 1516
+29062:116489 쿠폰 · 사용 / 만료 이력 2180 x 158
+29064:934 계산기 · 계산 과정 / PC 1440 x 900
+29064:1384 계산기 · 계산 과정 / 모바일 375 x 812
+29064:7182 맥스보드 · 사전공개 · 자격 있음 / PC 1440 x 3235
+29064:7428 맥스보드 · 사전공개 · 자격 있음 / 모바일 375 x 4480
+29064:7679 맥스보드 · 사전공개 · 자격 없음 / PC 1440 x 3235
+29064:7925 맥스보드 · 사전공개 · 자격 없음 / 모바일 375 x 4480
+29064:8176 맥스보드 · 참여 전 · 자격 없음 / PC 1440 x 3961
+29064:8531 맥스보드 · 참여 전 · 자격 없음 / 모바일 375 x 5526
+29064:8888 맥스보드 · 참여 지갑 해제 · 재선택 가능 / PC 1440 x 4045
+29064:9244 맥스보드 · 참여 지갑 해제 · 재선택 가능 / 모바일 375 x 5506
+29064:9601 맥스보드 · 참여 지갑 해제 · 선택지 없음 / PC 1440 x 4121
+29064:9961 맥스보드 · 참여 지갑 해제 · 선택지 없음 / 모바일 375 x 5582
+29064:10322 맥스보드 · 보드 완성 / PC 1440 x 2809
+29064:10687 맥스보드 · 보드 완성 / 모바일 375 x 4061
+29064:12448 맥스보드 · 집계 · 참여자 / PC 1440 x 4047
+29064:12826 맥스보드 · 집계 · 참여자 / 모바일 375 x 6000
+29064:13201 맥스보드 · 결과 발표 · 참여자 / PC 1440 x 4047
+29064:13579 맥스보드 · 결과 발표 · 참여자 / 모바일 375 x 6116
+29064:13958 맥스보드 · 지급 기간 · 참여자 / PC 1440 x 4120
+29064:14356 맥스보드 · 지급 기간 · 참여자 / 모바일 375 x 6265
+29064:14754 맥스보드 · 결과 발표 · 제외 / PC 1440 x 3905
+29064:15127 맥스보드 · 결과 발표 · 제외 / 모바일 375 x 6014
+29064:15501 맥스보드 · 종료 · 404 / PC 1440 x 800
+29064:15511 맥스보드 · 종료 · 404 / 모바일 375 x 800
+29065:6175 친구 초대 · 모바일 375 x 1515
+29065:3660 파트너 허브 · 모바일 375 x 3612
+29065:6366 캐시백 요약 · 모바일 375 x 812
+29065:6980 내 캐시백 랭킹 · 모바일 375 x 812
+29065:7079 쿠폰 적용 완료 · PC 1440 x 900
+29065:4998 내 캐시백 랭킹 · 대상 없음 375 x 812
+29065:6687 캐시백 요약 · 캘린더 375 x 1195
+29065:5700 친구 초대 · 초대 이력 없음 375 x 1483
+29069:6544 거래소 이벤트 필터 / 모바일 375 x 520
+29069:6595 거래소 이벤트 필터 / PC · 목록 335 x 372
+29069:6626 거래소 이벤트 필터 / PC · 셀렉트 280 x 36

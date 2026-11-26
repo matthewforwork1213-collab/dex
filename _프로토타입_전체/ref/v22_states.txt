@@ -1,0 +1,868 @@
+
+# FU-001 용어·상태 표기 통일
+
+# FU-002 지갑 주소 표시·복사
+
+# FU-003 지갑 주소 저장·중복 키·식별자 보호
+
+# FU-004 금액 계산·표시 규칙
+
+# FU-005 시각 처리
+
+# FU-006 CEX·DEX 구분 컨트롤과 배지
+
+# FU-007 계정 단위 판정과 집계 범위
+
+# FU-008 거래소 레코드 단일 원본·국가 노출
+
+# FU-009 화면 공통 동작 (렌더 조건·비활성 이유·입력 유지·멱등 제출)
+
+# FU-010 외부 가입 경로(귀속 서비스)
+
+# FU-011 DEX 정산 상태 라벨
+cmn/LABELS#normal | DEX 정산 상태 라벨 | 라벨 세트
+
+# FU-012 비회원 조회와 연동 후 지급
+
+# FU-013 연동 진입·거래소 선택
+link/SEL#normal | 거래소 선택 (웹 꽉 찬 모달) | 진입: 체크리스트 — 선택 없음
+link/SEL#homeFooter | 거래소 선택 (웹 꽉 찬 모달) | 진입: Linked Accounts 푸터 → DEX 목록
+link/SEL#detail | 거래소 선택 (웹 꽉 찬 모달) | 진입: DEX 상세 → 그 DEX 선택
+link/SEL#hub | 거래소 선택 (웹 꽉 찬 모달) | 진입: 허브 → 그 거래소 선택
+link/SEL#cex | 거래소 선택 (웹 꽉 찬 모달) | 칩 Centralised Exchanges
+link/SEL#dex | 거래소 선택 (웹 꽉 찬 모달) | 칩 Decentralised Exchanges (배지 없음)
+link/SEL#one | 거래소 선택 (웹 꽉 찬 모달) | 검색 결과 1건
+link/SEL#many | 거래소 선택 (웹 꽉 찬 모달) | 검색 결과 여러 건
+link/SEL#none | 거래소 선택 (웹 꽉 찬 모달) | 검색 결과 없음 (No results found)
+link/SEL#dexbit | 거래소 선택 (웹 꽉 찬 모달) | DEX 칩에서 «bit» → 0건
+link/SEL#region | 거래소 선택 (웹 꽉 찬 모달) | 지역 제한 DEX
+link/SEL#fail | 거래소 선택 (웹 꽉 찬 모달) | 파트너 목록 로드 실패
+link/SEL#intro | 거래소 선택 (웹 꽉 찬 모달) | STG 웹 진입 질문
+link/SHEET#normal | 거래소 선택 (앱·모바일웹) | 바텀시트 · All
+link/SHEET#footer | 거래소 선택 (앱·모바일웹) | 진입: 앱 홈 푸터 Trading on multiple exchanges? Link more → DEX 목록
+link/SHEET#cex | 거래소 선택 (앱·모바일웹) | 바텀시트 · CEX
+link/SHEET#dex | 거래소 선택 (앱·모바일웹) | 바텀시트 · DEX
+link/SHEET#screen | 거래소 선택 (앱·모바일웹) | 전체 화면 Link Account — Next 항상 닿음
+link/GRID#normal | 기존 선택 모달 그리드 | Top Partner · All Exchanges (N)
+link/GRID#search | 기존 선택 모달 그리드 | 검색 — Top 숨김, Search Results (N)
+
+# FU-014 연동 사전 게이트(한도) · 연동 전 잔액 처리
+link/PROC#normal | 처리 중 (Processing Your Wallet) | 귀속 조회 중 — 최소 1초
+link/PROC#prelink | 처리 중 (Processing Your Wallet) | 연동 전 잔액 출금 대기
+link/RESULT#normal | 연동 결과 다이얼로그 | 레퍼럴 아님 (FAILED_NOT_FOUND_UID)
+link/RESULT#inuse | 연동 결과 다이얼로그 | 타인 사용 중 (FAILED_ALREADY_INTEGRATION)
+link/RESULT#cooldown | 연동 결과 다이얼로그 | 30일 쿨다운 (FAILED_RECENT_POSSESSION)
+link/RESULT#mine | 연동 결과 다이얼로그 | 본인 이미 추가 (FAILED_MY_INTEGRATION)
+link/RESULT#other | 연동 결과 다이얼로그 | 기타 실패
+link/RESULT#limit | 연동 결과 다이얼로그 | 한도 초과 (INTEGRATION_MAX_COUNT_OVER)
+link/RESULT#pending | 연동 결과 다이얼로그 | 확인 중 (manual_link_pending)
+link/RESULT#prelinkFail | 연동 결과 다이얼로그 | 연동 전 잔액 출금 실패 = 연동 실패
+
+# FU-015 지갑 주소 입력·검증
+link/ADDR#normal | 지갑 주소 입력 | 빈 값 — 안내 보임, Next 비활성
+link/ADDR#valid | 지갑 주소 입력 | 유효 주소 — 안내 숨김, Next 활성
+link/ADDR#paste | 지갑 주소 입력 | Paste 권한 거부
+link/ADDR#e2 | 지갑 주소 입력 | ② 빈 값 제출
+link/ADDR#e3 | 지갑 주소 입력 | ③ 다른 형식 (base58)
+link/ADDR#e4 | 지갑 주소 입력 | ④ 0X·길이·문자 오류
+link/ADDR#e5 | 지갑 주소 입력 | ⑤ 체크섬 불일치
+link/ADDR#e6 | 지갑 주소 입력 | ⑥ ENS·ICAP
+link/ADDR#e7 | 지갑 주소 입력 | ⑦ 제로 주소
+link/ADDR#kept | 지갑 주소 입력 | 실패 후 주소 유지
+
+# FU-016 지갑 주소 찾기 안내
+link/ADDR#normal | 지갑 주소 입력 | 빈 값 — 안내 보임, Next 비활성 (dup)
+link/ADDR#valid | 지갑 주소 입력 | 유효 주소 — 안내 숨김, Next 활성 (dup)
+link/ADDR#paste | 지갑 주소 입력 | Paste 권한 거부 (dup)
+link/ADDR#e2 | 지갑 주소 입력 | ② 빈 값 제출 (dup)
+link/ADDR#e3 | 지갑 주소 입력 | ③ 다른 형식 (base58) (dup)
+link/ADDR#e4 | 지갑 주소 입력 | ④ 0X·길이·문자 오류 (dup)
+link/ADDR#e5 | 지갑 주소 입력 | ⑤ 체크섬 불일치 (dup)
+link/ADDR#e6 | 지갑 주소 입력 | ⑥ ENS·ICAP (dup)
+link/ADDR#e7 | 지갑 주소 입력 | ⑦ 제로 주소 (dup)
+link/ADDR#kept | 지갑 주소 입력 | 실패 후 주소 유지 (dup)
+
+# FU-017 캡차·시도 제한
+link/CAPTCHA#normal | 캡차 · 시도 제한 | GEETEST 퍼즐
+link/CAPTCHA#success | 캡차 · 시도 제한 | Verification Success
+link/CAPTCHA#retry | 캡차 · 시도 제한 | 퍼즐 실패 — 주소 유지 재시도
+link/CAPTCHA#scriptFail | 캡차 · 시도 제한 | 캡차 스크립트 로드 실패
+link/CAPTCHA#limit | 캡차 · 시도 제한 | Verification Limit Reached
+
+# FU-018 레퍼럴 귀속 확인 (공통)
+
+# FU-019 귀속 확인 — Lighter
+
+# FU-020 귀속 확인 — ApeX
+
+# FU-021 귀속 확인 — EdgeX·Aster
+
+# FU-022 중복 판정·동시성
+link/HOME#normal | 홈 반영 | 새 행 맨 아래 · 연동 완료 0.00
+link/HOME#transferred | 홈 반영 | 10 USDT 미만 이관 4.00
+link/HOME#pending | 홈 반영 | 확인 중 — 연동 시도중이에요 · -
+link/HOME#first | 홈 반영 | 첫 연동 — 체크리스트 없는 S4
+link/HOME#inactive | 홈 반영 | DEX 오프보딩 — Inactive
+link/HOME#multi | 홈 반영 | 같은 DEX 지갑 3개 · Aster 하위 계정
+link/HOME#rejected | 홈 반영 | 확인 중 거절
+
+# FU-023 연동 결과 처리·결과 화면
+link/PROC#normal | 처리 중 (Processing Your Wallet) | 귀속 조회 중 — 최소 1초 (dup)
+link/PROC#prelink | 처리 중 (Processing Your Wallet) | 연동 전 잔액 출금 대기 (dup)
+link/RESULT#normal | 연동 결과 다이얼로그 | 레퍼럴 아님 (FAILED_NOT_FOUND_UID) (dup)
+link/RESULT#inuse | 연동 결과 다이얼로그 | 타인 사용 중 (FAILED_ALREADY_INTEGRATION) (dup)
+link/RESULT#cooldown | 연동 결과 다이얼로그 | 30일 쿨다운 (FAILED_RECENT_POSSESSION) (dup)
+link/RESULT#mine | 연동 결과 다이얼로그 | 본인 이미 추가 (FAILED_MY_INTEGRATION) (dup)
+link/RESULT#other | 연동 결과 다이얼로그 | 기타 실패 (dup)
+link/RESULT#limit | 연동 결과 다이얼로그 | 한도 초과 (INTEGRATION_MAX_COUNT_OVER) (dup)
+link/RESULT#pending | 연동 결과 다이얼로그 | 확인 중 (manual_link_pending) (dup)
+link/RESULT#prelinkFail | 연동 결과 다이얼로그 | 연동 전 잔액 출금 실패 = 연동 실패 (dup)
+link/DONE#normal | 연동 성공 | EdgeX · Daily
+link/DONE#apex | 연동 성공 | ApeX — 배지 형식 미정
+link/DONE#weekly | 연동 성공 | Lighter — Weekly (온보딩 후)
+link/DONE#truncated | 연동 성공 | 180일 넘는 기록 — Cashback shown from
+link/DONE#apexIdPending | 연동 성공 | ApeX AccountID 미반환 (택일안)
+link/DONE#app | 연동 성공 | 앱·모바일웹 — Verification Success 다음
+link/HOME#normal | 홈 반영 | 새 행 맨 아래 · 연동 완료 0.00 (dup)
+link/HOME#transferred | 홈 반영 | 10 USDT 미만 이관 4.00 (dup)
+link/HOME#pending | 홈 반영 | 확인 중 — 연동 시도중이에요 · - (dup)
+link/HOME#first | 홈 반영 | 첫 연동 — 체크리스트 없는 S4 (dup)
+link/HOME#inactive | 홈 반영 | DEX 오프보딩 — Inactive (dup)
+link/HOME#multi | 홈 반영 | 같은 DEX 지갑 3개 · Aster 하위 계정 (dup)
+link/HOME#rejected | 홈 반영 | 확인 중 거절 (dup)
+
+# FU-024 확인 중(manual_link_pending) 처리
+link/RESULT#normal | 연동 결과 다이얼로그 | 레퍼럴 아님 (FAILED_NOT_FOUND_UID) (dup)
+link/RESULT#inuse | 연동 결과 다이얼로그 | 타인 사용 중 (FAILED_ALREADY_INTEGRATION) (dup)
+link/RESULT#cooldown | 연동 결과 다이얼로그 | 30일 쿨다운 (FAILED_RECENT_POSSESSION) (dup)
+link/RESULT#mine | 연동 결과 다이얼로그 | 본인 이미 추가 (FAILED_MY_INTEGRATION) (dup)
+link/RESULT#other | 연동 결과 다이얼로그 | 기타 실패 (dup)
+link/RESULT#limit | 연동 결과 다이얼로그 | 한도 초과 (INTEGRATION_MAX_COUNT_OVER) (dup)
+link/RESULT#pending | 연동 결과 다이얼로그 | 확인 중 (manual_link_pending) (dup)
+link/RESULT#prelinkFail | 연동 결과 다이얼로그 | 연동 전 잔액 출금 실패 = 연동 실패 (dup)
+link/HOME#normal | 홈 반영 | 새 행 맨 아래 · 연동 완료 0.00 (dup)
+link/HOME#transferred | 홈 반영 | 10 USDT 미만 이관 4.00 (dup)
+link/HOME#pending | 홈 반영 | 확인 중 — 연동 시도중이에요 · - (dup)
+link/HOME#first | 홈 반영 | 첫 연동 — 체크리스트 없는 S4 (dup)
+link/HOME#inactive | 홈 반영 | DEX 오프보딩 — Inactive (dup)
+link/HOME#multi | 홈 반영 | 같은 DEX 지갑 3개 · Aster 하위 계정 (dup)
+link/HOME#rejected | 홈 반영 | 확인 중 거절 (dup)
+
+# FU-025 연동 이후 운영 상태 (Lighter Standard·연동 전 적립분·지역 제한·DEX 오프보딩)
+link/SEL#normal | 거래소 선택 (웹 꽉 찬 모달) | 진입: 체크리스트 — 선택 없음 (dup)
+link/SEL#homeFooter | 거래소 선택 (웹 꽉 찬 모달) | 진입: Linked Accounts 푸터 → DEX 목록 (dup)
+link/SEL#detail | 거래소 선택 (웹 꽉 찬 모달) | 진입: DEX 상세 → 그 DEX 선택 (dup)
+link/SEL#hub | 거래소 선택 (웹 꽉 찬 모달) | 진입: 허브 → 그 거래소 선택 (dup)
+link/SEL#cex | 거래소 선택 (웹 꽉 찬 모달) | 칩 Centralised Exchanges (dup)
+link/SEL#dex | 거래소 선택 (웹 꽉 찬 모달) | 칩 Decentralised Exchanges (배지 없음) (dup)
+link/SEL#one | 거래소 선택 (웹 꽉 찬 모달) | 검색 결과 1건 (dup)
+link/SEL#many | 거래소 선택 (웹 꽉 찬 모달) | 검색 결과 여러 건 (dup)
+link/SEL#none | 거래소 선택 (웹 꽉 찬 모달) | 검색 결과 없음 (No results found) (dup)
+link/SEL#dexbit | 거래소 선택 (웹 꽉 찬 모달) | DEX 칩에서 «bit» → 0건 (dup)
+link/SEL#region | 거래소 선택 (웹 꽉 찬 모달) | 지역 제한 DEX (dup)
+link/SEL#fail | 거래소 선택 (웹 꽉 찬 모달) | 파트너 목록 로드 실패 (dup)
+link/SEL#intro | 거래소 선택 (웹 꽉 찬 모달) | STG 웹 진입 질문 (dup)
+link/DONE#normal | 연동 성공 | EdgeX · Daily (dup)
+link/DONE#apex | 연동 성공 | ApeX — 배지 형식 미정 (dup)
+link/DONE#weekly | 연동 성공 | Lighter — Weekly (온보딩 후) (dup)
+link/DONE#truncated | 연동 성공 | 180일 넘는 기록 — Cashback shown from (dup)
+link/DONE#apexIdPending | 연동 성공 | ApeX AccountID 미반환 (택일안) (dup)
+link/DONE#app | 연동 성공 | 앱·모바일웹 — Verification Success 다음 (dup)
+link/HOME#normal | 홈 반영 | 새 행 맨 아래 · 연동 완료 0.00 (dup)
+link/HOME#transferred | 홈 반영 | 10 USDT 미만 이관 4.00 (dup)
+link/HOME#pending | 홈 반영 | 확인 중 — 연동 시도중이에요 · - (dup)
+link/HOME#first | 홈 반영 | 첫 연동 — 체크리스트 없는 S4 (dup)
+link/HOME#inactive | 홈 반영 | DEX 오프보딩 — Inactive (dup)
+link/HOME#multi | 홈 반영 | 같은 DEX 지갑 3개 · Aster 하위 계정 (dup)
+link/HOME#rejected | 홈 반영 | 확인 중 거절 (dup)
+exd/LGUIDE#normal | Lighter 가이드 (보류) | 필수 서술 4개 · 지갑 주소 찾기 예시 · Step 3 경고
+
+# FU-026 해제·정정·소유권·회원 탈퇴
+
+# FU-027 소유권 인증 신청 (DEX 지갑)
+own/O1#normal | O1 Wallet Already in Use | 타인 사용 중
+own/O2#normal | O2 신청 불가 (30일) | 마지막 승인 후 30일 이내
+own/O3#normal | O3~O9 인증 화면 · 업로드 | Step 1 · 파일 없음
+own/O3#s2 | O3~O9 인증 화면 · 업로드 | Step 2
+own/O3#s3 | O3~O9 인증 화면 · 업로드 | Step 3
+own/O3#uploading | O3~O9 인증 화면 · 업로드 | 업로드 중
+own/O3#uploaded | O3~O9 인증 화면 · 업로드 | 업로드 완료
+own/O3#failed | O3~O9 인증 화면 · 업로드 | Upload Failed
+own/O3#error | O3~O9 인증 화면 · 업로드 | Something Went Wrong
+own/O10#normal | O10 제출 확인 | Submit this claim?
+own/O11#normal | O11~O13 홈 · 심사 상태 | 심사 중
+own/O11#approved | O11~O13 홈 · 심사 상태 | 승인
+own/O11#rejected | O11~O13 홈 · 심사 상태 | 거절
+
+# FU-028 소유권 승인·이전 처리
+own/O11#normal | O11~O13 홈 · 심사 상태 | 심사 중 (dup)
+own/O11#approved | O11~O13 홈 · 심사 상태 | 승인 (dup)
+own/O11#rejected | O11~O13 홈 · 심사 상태 | 거절 (dup)
+own/O14#normal | O14~O16 이전 보유자 · 재청구 | 해제 행
+own/O14#reclaim | O14~O16 이전 보유자 · 재청구 | 재청구 다이얼로그
+own/O14#rejected | O14~O16 이전 보유자 · 재청구 | 재청구 거절 · 사유
+
+# FU-029 거래소 배지 표시
+
+# FU-030 매칭 공식·출금 자격 판정 (잔액 서비스)
+wd/CLAIM#normal | 출금 화면 /withdrawal-apply | 정상 — 가능 위 · 불가 아래, 같은 주소 DEX별 카드
+wd/CLAIM#allBlocked | 출금 화면 /withdrawal-apply | 전부 불가 — Not eligible to withdraw
+wd/CLAIM#zero | 출금 화면 /withdrawal-apply | DEX 캐시백 0 — 배너
+wd/CLAIM#loading | 출금 화면 /withdrawal-apply | 로딩 — 스켈레톤, 금액·버튼 없음
+wd/CLAIM#delayed | 출금 화면 /withdrawal-apply | 데이터 지연 — Last updated
+wd/CLAIM#partner | 출금 화면 /withdrawal-apply | 파트너 오류 — 그 카드만
+wd/CLAIM#balanceError | 출금 화면 /withdrawal-apply | 잔액 오류
+wd/CLAIM#deducted | 출금 화면 /withdrawal-apply | 선차감 반영
+wd/CLAIM#preAccrual | 출금 화면 /withdrawal-apply | 적립 전 줄 (합계 미포함)
+wd/CLAIM#many | 출금 화면 /withdrawal-apply | 계정 11개 이상 — 10개 + 더보기
+wd/CLAIM#noNetwork | 출금 화면 /withdrawal-apply | 지급 네트워크 미설정
+wd/CLAIM#lighter | 출금 화면 /withdrawal-apply | Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets)
+wd/CLAIM#pending | 출금 화면 /withdrawal-apply | 확인 중 계정은 목록에 없음
+
+# FU-031 출금 화면 — 계정 목록·카드·합계·`Auto Claim`
+wd/CLAIM#normal | 출금 화면 /withdrawal-apply | 정상 — 가능 위 · 불가 아래, 같은 주소 DEX별 카드 (dup)
+wd/CLAIM#allBlocked | 출금 화면 /withdrawal-apply | 전부 불가 — Not eligible to withdraw (dup)
+wd/CLAIM#zero | 출금 화면 /withdrawal-apply | DEX 캐시백 0 — 배너 (dup)
+wd/CLAIM#loading | 출금 화면 /withdrawal-apply | 로딩 — 스켈레톤, 금액·버튼 없음 (dup)
+wd/CLAIM#delayed | 출금 화면 /withdrawal-apply | 데이터 지연 — Last updated (dup)
+wd/CLAIM#partner | 출금 화면 /withdrawal-apply | 파트너 오류 — 그 카드만 (dup)
+wd/CLAIM#balanceError | 출금 화면 /withdrawal-apply | 잔액 오류 (dup)
+wd/CLAIM#deducted | 출금 화면 /withdrawal-apply | 선차감 반영 (dup)
+wd/CLAIM#preAccrual | 출금 화면 /withdrawal-apply | 적립 전 줄 (합계 미포함) (dup)
+wd/CLAIM#many | 출금 화면 /withdrawal-apply | 계정 11개 이상 — 10개 + 더보기 (dup)
+wd/CLAIM#noNetwork | 출금 화면 /withdrawal-apply | 지급 네트워크 미설정 (dup)
+wd/CLAIM#lighter | 출금 화면 /withdrawal-apply | Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets) (dup)
+wd/CLAIM#pending | 출금 화면 /withdrawal-apply | 확인 중 계정은 목록에 없음 (dup)
+
+# FU-032 출금 화면 상태 (로딩·0원·지연·오류)
+wd/CLAIM#normal | 출금 화면 /withdrawal-apply | 정상 — 가능 위 · 불가 아래, 같은 주소 DEX별 카드 (dup)
+wd/CLAIM#allBlocked | 출금 화면 /withdrawal-apply | 전부 불가 — Not eligible to withdraw (dup)
+wd/CLAIM#zero | 출금 화면 /withdrawal-apply | DEX 캐시백 0 — 배너 (dup)
+wd/CLAIM#loading | 출금 화면 /withdrawal-apply | 로딩 — 스켈레톤, 금액·버튼 없음 (dup)
+wd/CLAIM#delayed | 출금 화면 /withdrawal-apply | 데이터 지연 — Last updated (dup)
+wd/CLAIM#partner | 출금 화면 /withdrawal-apply | 파트너 오류 — 그 카드만 (dup)
+wd/CLAIM#balanceError | 출금 화면 /withdrawal-apply | 잔액 오류 (dup)
+wd/CLAIM#deducted | 출금 화면 /withdrawal-apply | 선차감 반영 (dup)
+wd/CLAIM#preAccrual | 출금 화면 /withdrawal-apply | 적립 전 줄 (합계 미포함) (dup)
+wd/CLAIM#many | 출금 화면 /withdrawal-apply | 계정 11개 이상 — 10개 + 더보기 (dup)
+wd/CLAIM#noNetwork | 출금 화면 /withdrawal-apply | 지급 네트워크 미설정 (dup)
+wd/CLAIM#lighter | 출금 화면 /withdrawal-apply | Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets) (dup)
+wd/CLAIM#pending | 출금 화면 /withdrawal-apply | 확인 중 계정은 목록에 없음 (dup)
+
+# FU-033 출금 단위·목적지·네트워크·가스 표시
+wd/CLAIM#normal | 출금 화면 /withdrawal-apply | 정상 — 가능 위 · 불가 아래, 같은 주소 DEX별 카드 (dup)
+wd/CLAIM#allBlocked | 출금 화면 /withdrawal-apply | 전부 불가 — Not eligible to withdraw (dup)
+wd/CLAIM#zero | 출금 화면 /withdrawal-apply | DEX 캐시백 0 — 배너 (dup)
+wd/CLAIM#loading | 출금 화면 /withdrawal-apply | 로딩 — 스켈레톤, 금액·버튼 없음 (dup)
+wd/CLAIM#delayed | 출금 화면 /withdrawal-apply | 데이터 지연 — Last updated (dup)
+wd/CLAIM#partner | 출금 화면 /withdrawal-apply | 파트너 오류 — 그 카드만 (dup)
+wd/CLAIM#balanceError | 출금 화면 /withdrawal-apply | 잔액 오류 (dup)
+wd/CLAIM#deducted | 출금 화면 /withdrawal-apply | 선차감 반영 (dup)
+wd/CLAIM#preAccrual | 출금 화면 /withdrawal-apply | 적립 전 줄 (합계 미포함) (dup)
+wd/CLAIM#many | 출금 화면 /withdrawal-apply | 계정 11개 이상 — 10개 + 더보기 (dup)
+wd/CLAIM#noNetwork | 출금 화면 /withdrawal-apply | 지급 네트워크 미설정 (dup)
+wd/CLAIM#lighter | 출금 화면 /withdrawal-apply | Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets) (dup)
+wd/CLAIM#pending | 출금 화면 /withdrawal-apply | 확인 중 계정은 목록에 없음 (dup)
+
+# FU-034 자동 지급 신청 생성 (10분 주기·선차감·재검사·멱등)
+wd/CLAIM#normal | 출금 화면 /withdrawal-apply | 정상 — 가능 위 · 불가 아래, 같은 주소 DEX별 카드 (dup)
+wd/CLAIM#allBlocked | 출금 화면 /withdrawal-apply | 전부 불가 — Not eligible to withdraw (dup)
+wd/CLAIM#zero | 출금 화면 /withdrawal-apply | DEX 캐시백 0 — 배너 (dup)
+wd/CLAIM#loading | 출금 화면 /withdrawal-apply | 로딩 — 스켈레톤, 금액·버튼 없음 (dup)
+wd/CLAIM#delayed | 출금 화면 /withdrawal-apply | 데이터 지연 — Last updated (dup)
+wd/CLAIM#partner | 출금 화면 /withdrawal-apply | 파트너 오류 — 그 카드만 (dup)
+wd/CLAIM#balanceError | 출금 화면 /withdrawal-apply | 잔액 오류 (dup)
+wd/CLAIM#deducted | 출금 화면 /withdrawal-apply | 선차감 반영 (dup)
+wd/CLAIM#preAccrual | 출금 화면 /withdrawal-apply | 적립 전 줄 (합계 미포함) (dup)
+wd/CLAIM#many | 출금 화면 /withdrawal-apply | 계정 11개 이상 — 10개 + 더보기 (dup)
+wd/CLAIM#noNetwork | 출금 화면 /withdrawal-apply | 지급 네트워크 미설정 (dup)
+wd/CLAIM#lighter | 출금 화면 /withdrawal-apply | Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets) (dup)
+wd/CLAIM#pending | 출금 화면 /withdrawal-apply | 확인 중 계정은 목록에 없음 (dup)
+wd/REFLECT#normal | 선차감 · 복원 반영 위치 | 지급 전
+wd/REFLECT#deducted | 선차감 · 복원 반영 위치 | 신청 생성 — 선차감 (같은 새로고침에 반영)
+wd/REFLECT#restored | 선차감 · 복원 반영 위치 | 최종 실패 — 복원
+
+# FU-035 자동 지급 결과 처리·전달
+wd/REFLECT#normal | 선차감 · 복원 반영 위치 | 지급 전 (dup)
+wd/REFLECT#deducted | 선차감 · 복원 반영 위치 | 신청 생성 — 선차감 (같은 새로고침에 반영) (dup)
+wd/REFLECT#restored | 선차감 · 복원 반영 위치 | 최종 실패 — 복원 (dup)
+
+# FU-036 두 번째 출금 화면 (`/withdrawal`)
+wd/SECOND#normal | 두 번째 출금 화면 /withdrawal | 출금 가능 계정 없음 — STG 문구 + DEX 행
+
+# FU-037 홈 상태 분기 (미연동·S3 홈)
+home/S3#normal | S3 홈 (연동 0) | 웹 — 체크리스트 · Cashback Preview
+home/S3#app | S3 홈 (연동 0) | 앱·모바일웹 빈 홈 카드
+home/S3#pendingOnly | S3 홈 (연동 0) | 확인 중 계정만 있음
+
+# FU-038 총 캐시백 잔액 카드
+home/S4#normal | S4 홈 (연동 있음) | CEX·DEX 한 목록 · 총액 = 매칭 전 합계
+home/S4#statuses | S4 홈 (연동 있음) | 상태 7단계 행
+home/S4#chips | S4 홈 (연동 있음) | DEX 칩 — No cashback yet · Data delayed · Inactive
+home/S4#loading | S4 홈 (연동 있음) | 로딩 — 스켈레톤
+home/S4#error | S4 홈 (연동 있음) | 잔액 로드 실패
+home/S4#delayed | S4 홈 (연동 있음) | DEX 원장 지연
+home/S4#many | S4 홈 (연동 있음) | 계정 11개 이상
+home/S4#app | S4 홈 (연동 있음) | 앱·모바일웹 — Wallet 라벨 없음 · 푸터
+home/S4#full | S4 홈 (연동 있음) | 지갑 전체 주소 펼침
+home/S4#guest | S4 홈 (연동 있음) | 비로그인 (공개 화면)
+
+# FU-039 Linked Accounts 목록·상태 칩
+home/S4#normal | S4 홈 (연동 있음) | CEX·DEX 한 목록 · 총액 = 매칭 전 합계 (dup)
+home/S4#statuses | S4 홈 (연동 있음) | 상태 7단계 행 (dup)
+home/S4#chips | S4 홈 (연동 있음) | DEX 칩 — No cashback yet · Data delayed · Inactive (dup)
+home/S4#loading | S4 홈 (연동 있음) | 로딩 — 스켈레톤 (dup)
+home/S4#error | S4 홈 (연동 있음) | 잔액 로드 실패 (dup)
+home/S4#delayed | S4 홈 (연동 있음) | DEX 원장 지연 (dup)
+home/S4#many | S4 홈 (연동 있음) | 계정 11개 이상 (dup)
+home/S4#app | S4 홈 (연동 있음) | 앱·모바일웹 — Wallet 라벨 없음 · 푸터 (dup)
+home/S4#full | S4 홈 (연동 있음) | 지갑 전체 주소 펼침 (dup)
+home/S4#guest | S4 홈 (연동 있음) | 비로그인 (공개 화면) (dup)
+
+# FU-040 DEX 지갑 상세
+home/LKD#normal | DEX 지갑 상세 | 정상
+home/LKD#noReward | DEX 지갑 상세 | 이벤트 리워드 0 — Event Reward 행 없음
+home/LKD#zero | DEX 지갑 상세 | 캐시백 0
+home/LKD#delayed | DEX 지갑 상세 | 지연 — Last updated
+home/LKD#reviewed | DEX 지갑 상세 | 리뷰 작성 후 — 리뷰 유도 없음
+home/LKD#pending | DEX 지갑 상세 | 연동 시도중
+home/LKD#totalClaimed | DEX 지갑 상세 | Total Claimed 행 (유지 시)
+home/LKD#subaccounts | DEX 지갑 상세 | 하위 계정 나열 (Lighter)
+
+# FU-041 캐시백 타임라인·누적 캐시백
+home/TL#normal | 캐시백 타임라인 · 누적 | EdgeX Daily D+1
+home/TL#apex | 캐시백 타임라인 · 누적 | ApeX D+2
+home/TL#lighter | 캐시백 타임라인 · 누적 | Lighter Weekly W+1 (온보딩 후)
+home/TL#compact | 캐시백 타임라인 · 누적 | compact 단계
+home/TL#warning | 캐시백 타임라인 · 누적 | 순차 지급 경고
+
+# FU-042 실시간 출금 피드
+etc/FEED#normal | 실시간 출금 피드 | CEX·DEX 시간순 · DEX 배지 · 지갑 전체
+etc/FEED#loading | 실시간 출금 피드 | 불러오는 중
+etc/FEED#empty | 실시간 출금 피드 | 내역 없음
+etc/FEED#error | 실시간 출금 피드 | 불러오기 실패
+etc/ABOUT#normal | 서비스 소개 | 파트너 캐러셀 · 출금 피드 · UID 문구
+etc/ABOUT#loading | 서비스 소개 | 피드 불러오는 중
+etc/ABOUT#empty | 서비스 소개 | 피드 없음
+etc/ABOUT#error | 서비스 소개 | 피드 실패
+
+# FU-043 서비스 소개·프리로그인 랜딩
+etc/ABOUT#normal | 서비스 소개 | 파트너 캐러셀 · 출금 피드 · UID 문구 (dup)
+etc/ABOUT#loading | 서비스 소개 | 피드 불러오는 중 (dup)
+etc/ABOUT#empty | 서비스 소개 | 피드 없음 (dup)
+etc/ABOUT#error | 서비스 소개 | 피드 실패 (dup)
+etc/PLP#normal | 프리로그인 랜딩 | Featured Exchanges — DEX 선택 가능
+etc/PLP#heroDex | 프리로그인 랜딩 | Hero Exchange = DEX
+etc/PLP#inactive | 프리로그인 랜딩 | Featured·Hero 파트너 비활성
+
+# FU-044 홈 FAQ
+home/FAQ#normal | 홈 FAQ | 회원 답변 · 비회원 답변 삭제
+
+# FU-045 허브 히어로·계산기
+hub/HUB#normal | 캐시백 허브 | 게스트 · DEX 탭 계산기 (EdgeX 기본)
+hub/HUB#cex | 캐시백 허브 | 게스트 · CEX 탭 (Bybit $100,000 검증값)
+hub/HUB#brokers | 캐시백 허브 | Brokers 칩 비교표
+hub/HUB#member | 캐시백 허브 | 로그인 · 연동 0 (이유 카드 없음)
+hub/HUB#dexPanel | 캐시백 허브 | DEX 잔액 패널
+hub/HUB#dexPartial | 캐시백 허브 | A=3 · B=8 — 일부만 출금
+hub/HUB#dexBelowMin | 캐시백 허브 | 최소액 미만 — 넛지
+hub/HUB#dexDelayed | 캐시백 허브 | 데이터 지연
+hub/HUB#dexLoading | 캐시백 허브 | 패널 로딩
+hub/HUB#dexError | 캐시백 허브 | 패널 로드 실패
+hub/HUB#dexMulti | 캐시백 허브 | 같은 DEX 복수 지갑 +N
+hub/HUB#aster | 캐시백 허브 | Aster — USDT value at payout
+hub/HUB#totalClaimed | 캐시백 허브 | Total claimed (유지 시)
+hub/HUB#noLedger | 캐시백 허브 | 원장 미수신 DEX → 계산기
+hub/HUB#rateFail | 캐시백 허브 | 요율 서비스 실패
+hub/HUB#lighterAccruing | 캐시백 허브 | Lighter 주중 추정 줄 (온보딩 후)
+hub/HUB#cards | 캐시백 허브 | 비교표 카드 뷰 (평점 생략)
+hub/HUB#emptySearch | 캐시백 허브 | 비교표 빈 검색
+
+# FU-046 허브 상태 분기·DEX 잔액 패널
+hub/HUB#normal | 캐시백 허브 | 게스트 · DEX 탭 계산기 (EdgeX 기본) (dup)
+hub/HUB#cex | 캐시백 허브 | 게스트 · CEX 탭 (Bybit $100,000 검증값) (dup)
+hub/HUB#brokers | 캐시백 허브 | Brokers 칩 비교표 (dup)
+hub/HUB#member | 캐시백 허브 | 로그인 · 연동 0 (이유 카드 없음) (dup)
+hub/HUB#dexPanel | 캐시백 허브 | DEX 잔액 패널 (dup)
+hub/HUB#dexPartial | 캐시백 허브 | A=3 · B=8 — 일부만 출금 (dup)
+hub/HUB#dexBelowMin | 캐시백 허브 | 최소액 미만 — 넛지 (dup)
+hub/HUB#dexDelayed | 캐시백 허브 | 데이터 지연 (dup)
+hub/HUB#dexLoading | 캐시백 허브 | 패널 로딩 (dup)
+hub/HUB#dexError | 캐시백 허브 | 패널 로드 실패 (dup)
+hub/HUB#dexMulti | 캐시백 허브 | 같은 DEX 복수 지갑 +N (dup)
+hub/HUB#aster | 캐시백 허브 | Aster — USDT value at payout (dup)
+hub/HUB#totalClaimed | 캐시백 허브 | Total claimed (유지 시) (dup)
+hub/HUB#noLedger | 캐시백 허브 | 원장 미수신 DEX → 계산기 (dup)
+hub/HUB#rateFail | 캐시백 허브 | 요율 서비스 실패 (dup)
+hub/HUB#lighterAccruing | 캐시백 허브 | Lighter 주중 추정 줄 (온보딩 후) (dup)
+hub/HUB#cards | 캐시백 허브 | 비교표 카드 뷰 (평점 생략) (dup)
+hub/HUB#emptySearch | 캐시백 허브 | 비교표 빈 검색 (dup)
+
+# FU-047 라우트 선택 블록·이유 카드
+hub/HUB#normal | 캐시백 허브 | 게스트 · DEX 탭 계산기 (EdgeX 기본) (dup)
+hub/HUB#cex | 캐시백 허브 | 게스트 · CEX 탭 (Bybit $100,000 검증값) (dup)
+hub/HUB#brokers | 캐시백 허브 | Brokers 칩 비교표 (dup)
+hub/HUB#member | 캐시백 허브 | 로그인 · 연동 0 (이유 카드 없음) (dup)
+hub/HUB#dexPanel | 캐시백 허브 | DEX 잔액 패널 (dup)
+hub/HUB#dexPartial | 캐시백 허브 | A=3 · B=8 — 일부만 출금 (dup)
+hub/HUB#dexBelowMin | 캐시백 허브 | 최소액 미만 — 넛지 (dup)
+hub/HUB#dexDelayed | 캐시백 허브 | 데이터 지연 (dup)
+hub/HUB#dexLoading | 캐시백 허브 | 패널 로딩 (dup)
+hub/HUB#dexError | 캐시백 허브 | 패널 로드 실패 (dup)
+hub/HUB#dexMulti | 캐시백 허브 | 같은 DEX 복수 지갑 +N (dup)
+hub/HUB#aster | 캐시백 허브 | Aster — USDT value at payout (dup)
+hub/HUB#totalClaimed | 캐시백 허브 | Total claimed (유지 시) (dup)
+hub/HUB#noLedger | 캐시백 허브 | 원장 미수신 DEX → 계산기 (dup)
+hub/HUB#rateFail | 캐시백 허브 | 요율 서비스 실패 (dup)
+hub/HUB#lighterAccruing | 캐시백 허브 | Lighter 주중 추정 줄 (온보딩 후) (dup)
+hub/HUB#cards | 캐시백 허브 | 비교표 카드 뷰 (평점 생략) (dup)
+hub/HUB#emptySearch | 캐시백 허브 | 비교표 빈 검색 (dup)
+
+# FU-048 비교표·로고 그리드
+hub/HUB#normal | 캐시백 허브 | 게스트 · DEX 탭 계산기 (EdgeX 기본) (dup)
+hub/HUB#cex | 캐시백 허브 | 게스트 · CEX 탭 (Bybit $100,000 검증값) (dup)
+hub/HUB#brokers | 캐시백 허브 | Brokers 칩 비교표 (dup)
+hub/HUB#member | 캐시백 허브 | 로그인 · 연동 0 (이유 카드 없음) (dup)
+hub/HUB#dexPanel | 캐시백 허브 | DEX 잔액 패널 (dup)
+hub/HUB#dexPartial | 캐시백 허브 | A=3 · B=8 — 일부만 출금 (dup)
+hub/HUB#dexBelowMin | 캐시백 허브 | 최소액 미만 — 넛지 (dup)
+hub/HUB#dexDelayed | 캐시백 허브 | 데이터 지연 (dup)
+hub/HUB#dexLoading | 캐시백 허브 | 패널 로딩 (dup)
+hub/HUB#dexError | 캐시백 허브 | 패널 로드 실패 (dup)
+hub/HUB#dexMulti | 캐시백 허브 | 같은 DEX 복수 지갑 +N (dup)
+hub/HUB#aster | 캐시백 허브 | Aster — USDT value at payout (dup)
+hub/HUB#totalClaimed | 캐시백 허브 | Total claimed (유지 시) (dup)
+hub/HUB#noLedger | 캐시백 허브 | 원장 미수신 DEX → 계산기 (dup)
+hub/HUB#rateFail | 캐시백 허브 | 요율 서비스 실패 (dup)
+hub/HUB#lighterAccruing | 캐시백 허브 | Lighter 주중 추정 줄 (온보딩 후) (dup)
+hub/HUB#cards | 캐시백 허브 | 비교표 카드 뷰 (평점 생략) (dup)
+hub/HUB#emptySearch | 캐시백 허브 | 비교표 빈 검색 (dup)
+
+# FU-049 DEX 랜딩 구조·히어로·위험 고지
+lnd/LANDING#normal | DEX 랜딩 | 게스트 — 이유 카드 · 마지막 CTA 띠까지
+lnd/LANDING#member | DEX 랜딩 | 로그인 — Learn and Earn 띠로 끝
+lnd/LANDING#list | DEX 랜딩 | Venue 리스트 뷰
+lnd/LANDING#defiStale | DEX 랜딩 | DefiLlama 실패 — 마지막 캐시값 + 기준 시각
+lnd/LANDING#defiHidden | DEX 랜딩 | DefiLlama 24시간 넘게 실패 — 숨김
+lnd/LANDING#noBanner | DEX 랜딩 | 게시 배너 없음 — 렌더 안 함
+lnd/LANDING#empty | DEX 랜딩 | 노출 DEX 0개
+lnd/LANDING#maint | DEX 랜딩 | 특정 DEX 점검·일시 연동 불가
+lnd/LANDING#lighter | DEX 랜딩 | Lighter 카드 (온보딩 후) — benefit 4줄
+
+# FU-050 glance 타일·DefiLlama 지표·프로모션 배너
+lnd/LANDING#normal | DEX 랜딩 | 게스트 — 이유 카드 · 마지막 CTA 띠까지 (dup)
+lnd/LANDING#member | DEX 랜딩 | 로그인 — Learn and Earn 띠로 끝 (dup)
+lnd/LANDING#list | DEX 랜딩 | Venue 리스트 뷰 (dup)
+lnd/LANDING#defiStale | DEX 랜딩 | DefiLlama 실패 — 마지막 캐시값 + 기준 시각 (dup)
+lnd/LANDING#defiHidden | DEX 랜딩 | DefiLlama 24시간 넘게 실패 — 숨김 (dup)
+lnd/LANDING#noBanner | DEX 랜딩 | 게시 배너 없음 — 렌더 안 함 (dup)
+lnd/LANDING#empty | DEX 랜딩 | 노출 DEX 0개 (dup)
+lnd/LANDING#maint | DEX 랜딩 | 특정 DEX 점검·일시 연동 불가 (dup)
+lnd/LANDING#lighter | DEX 랜딩 | Lighter 카드 (온보딩 후) — benefit 4줄 (dup)
+
+# FU-051 Venue 카드·리스트 뷰
+lnd/LANDING#normal | DEX 랜딩 | 게스트 — 이유 카드 · 마지막 CTA 띠까지 (dup)
+lnd/LANDING#member | DEX 랜딩 | 로그인 — Learn and Earn 띠로 끝 (dup)
+lnd/LANDING#list | DEX 랜딩 | Venue 리스트 뷰 (dup)
+lnd/LANDING#defiStale | DEX 랜딩 | DefiLlama 실패 — 마지막 캐시값 + 기준 시각 (dup)
+lnd/LANDING#defiHidden | DEX 랜딩 | DefiLlama 24시간 넘게 실패 — 숨김 (dup)
+lnd/LANDING#noBanner | DEX 랜딩 | 게시 배너 없음 — 렌더 안 함 (dup)
+lnd/LANDING#empty | DEX 랜딩 | 노출 DEX 0개 (dup)
+lnd/LANDING#maint | DEX 랜딩 | 특정 DEX 점검·일시 연동 불가 (dup)
+lnd/LANDING#lighter | DEX 랜딩 | Lighter 카드 (온보딩 후) — benefit 4줄 (dup)
+
+# FU-052 교육 섹션 (CEX/DEX 비교·3단계 경로·교육 타일·Learn and Earn·CTA 띠)
+lnd/LANDING#normal | DEX 랜딩 | 게스트 — 이유 카드 · 마지막 CTA 띠까지 (dup)
+lnd/LANDING#member | DEX 랜딩 | 로그인 — Learn and Earn 띠로 끝 (dup)
+lnd/LANDING#list | DEX 랜딩 | Venue 리스트 뷰 (dup)
+lnd/LANDING#defiStale | DEX 랜딩 | DefiLlama 실패 — 마지막 캐시값 + 기준 시각 (dup)
+lnd/LANDING#defiHidden | DEX 랜딩 | DefiLlama 24시간 넘게 실패 — 숨김 (dup)
+lnd/LANDING#noBanner | DEX 랜딩 | 게시 배너 없음 — 렌더 안 함 (dup)
+lnd/LANDING#empty | DEX 랜딩 | 노출 DEX 0개 (dup)
+lnd/LANDING#maint | DEX 랜딩 | 특정 DEX 점검·일시 연동 불가 (dup)
+lnd/LANDING#lighter | DEX 랜딩 | Lighter 카드 (온보딩 후) — benefit 4줄 (dup)
+
+# FU-053 DEX 랜딩 빈·예외 상태
+lnd/LANDING#normal | DEX 랜딩 | 게스트 — 이유 카드 · 마지막 CTA 띠까지 (dup)
+lnd/LANDING#member | DEX 랜딩 | 로그인 — Learn and Earn 띠로 끝 (dup)
+lnd/LANDING#list | DEX 랜딩 | Venue 리스트 뷰 (dup)
+lnd/LANDING#defiStale | DEX 랜딩 | DefiLlama 실패 — 마지막 캐시값 + 기준 시각 (dup)
+lnd/LANDING#defiHidden | DEX 랜딩 | DefiLlama 24시간 넘게 실패 — 숨김 (dup)
+lnd/LANDING#noBanner | DEX 랜딩 | 게시 배너 없음 — 렌더 안 함 (dup)
+lnd/LANDING#empty | DEX 랜딩 | 노출 DEX 0개 (dup)
+lnd/LANDING#maint | DEX 랜딩 | 특정 DEX 점검·일시 연동 불가 (dup)
+lnd/LANDING#lighter | DEX 랜딩 | Lighter 카드 (온보딩 후) — benefit 4줄 (dup)
+
+# FU-054 상세 구조·히어로·오퍼 박스
+exd/DETAIL#normal | DEX 상세 (공용 템플릿) | 게스트 — EdgeX
+exd/DETAIL#unlinked | DEX 상세 (공용 템플릿) | 회원 · 미연동 — 연동하기
+exd/DETAIL#linked | DEX 상세 (공용 템플릿) | 회원 · 연동 완료 — Auto Claim · 리뷰 쓰기
+exd/DETAIL#maker | DEX 상세 (공용 템플릿) | Maker 토글
+exd/DETAIL#aster | DEX 상세 (공용 템플릿) | Aster
+exd/DETAIL#apex | DEX 상세 (공용 템플릿) | ApeX
+exd/DETAIL#lighter | DEX 상세 (공용 템플릿) | Lighter — Premium/Plus (온보딩 후)
+exd/DETAIL#drawer | DEX 상세 (공용 템플릿) | How this works 드로어
+exd/DETAIL#step3 | DEX 상세 (공용 템플릿) | 단계 가이드 Step 3
+exd/DETAIL#mediaFail | DEX 상세 (공용 템플릿) | 가이드 미디어 실패
+exd/DETAIL#moderation | DEX 상세 (공용 템플릿) | 리뷰 검토 중
+exd/DETAIL#reviewsEmpty | DEX 상세 (공용 템플릿) | 리뷰 없음
+exd/DETAIL#offboarded | DEX 상세 (공용 템플릿) | DEX 오프보딩 — 랜딩 리다이렉트
+
+# FU-055 탭 바·이유 카드·상세 계산기
+exd/DETAIL#normal | DEX 상세 (공용 템플릿) | 게스트 — EdgeX (dup)
+exd/DETAIL#unlinked | DEX 상세 (공용 템플릿) | 회원 · 미연동 — 연동하기 (dup)
+exd/DETAIL#linked | DEX 상세 (공용 템플릿) | 회원 · 연동 완료 — Auto Claim · 리뷰 쓰기 (dup)
+exd/DETAIL#maker | DEX 상세 (공용 템플릿) | Maker 토글 (dup)
+exd/DETAIL#aster | DEX 상세 (공용 템플릿) | Aster (dup)
+exd/DETAIL#apex | DEX 상세 (공용 템플릿) | ApeX (dup)
+exd/DETAIL#lighter | DEX 상세 (공용 템플릿) | Lighter — Premium/Plus (온보딩 후) (dup)
+exd/DETAIL#drawer | DEX 상세 (공용 템플릿) | How this works 드로어 (dup)
+exd/DETAIL#step3 | DEX 상세 (공용 템플릿) | 단계 가이드 Step 3 (dup)
+exd/DETAIL#mediaFail | DEX 상세 (공용 템플릿) | 가이드 미디어 실패 (dup)
+exd/DETAIL#moderation | DEX 상세 (공용 템플릿) | 리뷰 검토 중 (dup)
+exd/DETAIL#reviewsEmpty | DEX 상세 (공용 템플릿) | 리뷰 없음 (dup)
+exd/DETAIL#offboarded | DEX 상세 (공용 템플릿) | DEX 오프보딩 — 랜딩 리다이렉트 (dup)
+
+# FU-056 단계 가이드·안전 메시지
+exd/DETAIL#normal | DEX 상세 (공용 템플릿) | 게스트 — EdgeX (dup)
+exd/DETAIL#unlinked | DEX 상세 (공용 템플릿) | 회원 · 미연동 — 연동하기 (dup)
+exd/DETAIL#linked | DEX 상세 (공용 템플릿) | 회원 · 연동 완료 — Auto Claim · 리뷰 쓰기 (dup)
+exd/DETAIL#maker | DEX 상세 (공용 템플릿) | Maker 토글 (dup)
+exd/DETAIL#aster | DEX 상세 (공용 템플릿) | Aster (dup)
+exd/DETAIL#apex | DEX 상세 (공용 템플릿) | ApeX (dup)
+exd/DETAIL#lighter | DEX 상세 (공용 템플릿) | Lighter — Premium/Plus (온보딩 후) (dup)
+exd/DETAIL#drawer | DEX 상세 (공용 템플릿) | How this works 드로어 (dup)
+exd/DETAIL#step3 | DEX 상세 (공용 템플릿) | 단계 가이드 Step 3 (dup)
+exd/DETAIL#mediaFail | DEX 상세 (공용 템플릿) | 가이드 미디어 실패 (dup)
+exd/DETAIL#moderation | DEX 상세 (공용 템플릿) | 리뷰 검토 중 (dup)
+exd/DETAIL#reviewsEmpty | DEX 상세 (공용 템플릿) | 리뷰 없음 (dup)
+exd/DETAIL#offboarded | DEX 상세 (공용 템플릿) | DEX 오프보딩 — 랜딩 리다이렉트 (dup)
+exd/LGUIDE#normal | Lighter 가이드 (보류) | 필수 서술 4개 · 지갑 주소 찾기 예시 · Step 3 경고 (dup)
+
+# FU-057 FAQ·약관
+exd/DETAIL#normal | DEX 상세 (공용 템플릿) | 게스트 — EdgeX (dup)
+exd/DETAIL#unlinked | DEX 상세 (공용 템플릿) | 회원 · 미연동 — 연동하기 (dup)
+exd/DETAIL#linked | DEX 상세 (공용 템플릿) | 회원 · 연동 완료 — Auto Claim · 리뷰 쓰기 (dup)
+exd/DETAIL#maker | DEX 상세 (공용 템플릿) | Maker 토글 (dup)
+exd/DETAIL#aster | DEX 상세 (공용 템플릿) | Aster (dup)
+exd/DETAIL#apex | DEX 상세 (공용 템플릿) | ApeX (dup)
+exd/DETAIL#lighter | DEX 상세 (공용 템플릿) | Lighter — Premium/Plus (온보딩 후) (dup)
+exd/DETAIL#drawer | DEX 상세 (공용 템플릿) | How this works 드로어 (dup)
+exd/DETAIL#step3 | DEX 상세 (공용 템플릿) | 단계 가이드 Step 3 (dup)
+exd/DETAIL#mediaFail | DEX 상세 (공용 템플릿) | 가이드 미디어 실패 (dup)
+exd/DETAIL#moderation | DEX 상세 (공용 템플릿) | 리뷰 검토 중 (dup)
+exd/DETAIL#reviewsEmpty | DEX 상세 (공용 템플릿) | 리뷰 없음 (dup)
+exd/DETAIL#offboarded | DEX 상세 (공용 템플릿) | DEX 오프보딩 — 랜딩 리다이렉트 (dup)
+
+# FU-058 리뷰
+exd/DETAIL#normal | DEX 상세 (공용 템플릿) | 게스트 — EdgeX (dup)
+exd/DETAIL#unlinked | DEX 상세 (공용 템플릿) | 회원 · 미연동 — 연동하기 (dup)
+exd/DETAIL#linked | DEX 상세 (공용 템플릿) | 회원 · 연동 완료 — Auto Claim · 리뷰 쓰기 (dup)
+exd/DETAIL#maker | DEX 상세 (공용 템플릿) | Maker 토글 (dup)
+exd/DETAIL#aster | DEX 상세 (공용 템플릿) | Aster (dup)
+exd/DETAIL#apex | DEX 상세 (공용 템플릿) | ApeX (dup)
+exd/DETAIL#lighter | DEX 상세 (공용 템플릿) | Lighter — Premium/Plus (온보딩 후) (dup)
+exd/DETAIL#drawer | DEX 상세 (공용 템플릿) | How this works 드로어 (dup)
+exd/DETAIL#step3 | DEX 상세 (공용 템플릿) | 단계 가이드 Step 3 (dup)
+exd/DETAIL#mediaFail | DEX 상세 (공용 템플릿) | 가이드 미디어 실패 (dup)
+exd/DETAIL#moderation | DEX 상세 (공용 템플릿) | 리뷰 검토 중 (dup)
+exd/DETAIL#reviewsEmpty | DEX 상세 (공용 템플릿) | 리뷰 없음 (dup)
+exd/DETAIL#offboarded | DEX 상세 (공용 템플릿) | DEX 오프보딩 — 랜딩 리다이렉트 (dup)
+
+# FU-059 거래소별 콘텐츠·상세 URL
+exd/DETAIL#normal | DEX 상세 (공용 템플릿) | 게스트 — EdgeX (dup)
+exd/DETAIL#unlinked | DEX 상세 (공용 템플릿) | 회원 · 미연동 — 연동하기 (dup)
+exd/DETAIL#linked | DEX 상세 (공용 템플릿) | 회원 · 연동 완료 — Auto Claim · 리뷰 쓰기 (dup)
+exd/DETAIL#maker | DEX 상세 (공용 템플릿) | Maker 토글 (dup)
+exd/DETAIL#aster | DEX 상세 (공용 템플릿) | Aster (dup)
+exd/DETAIL#apex | DEX 상세 (공용 템플릿) | ApeX (dup)
+exd/DETAIL#lighter | DEX 상세 (공용 템플릿) | Lighter — Premium/Plus (온보딩 후) (dup)
+exd/DETAIL#drawer | DEX 상세 (공용 템플릿) | How this works 드로어 (dup)
+exd/DETAIL#step3 | DEX 상세 (공용 템플릿) | 단계 가이드 Step 3 (dup)
+exd/DETAIL#mediaFail | DEX 상세 (공용 템플릿) | 가이드 미디어 실패 (dup)
+exd/DETAIL#moderation | DEX 상세 (공용 템플릿) | 리뷰 검토 중 (dup)
+exd/DETAIL#reviewsEmpty | DEX 상세 (공용 템플릿) | 리뷰 없음 (dup)
+exd/DETAIL#offboarded | DEX 상세 (공용 템플릿) | DEX 오프보딩 — 랜딩 리다이렉트 (dup)
+
+# FU-060 캐시백 요약 필터
+hist/SUM#normal | 캐시백 요약 | 필터 · 월간 카드 · 캘린더 · 일별 목록
+hist/SUM#dexRange | 캐시백 요약 | 거래소 범위 DEX 전체
+hist/SUM#account | 캐시백 요약 | 계정 필터 — 지갑 전체 주소
+hist/SUM#types | 캐시백 요약 | 유형 체크박스
+hist/SUM#pending | 캐시백 요약 | DEX data pending — 0 아님
+hist/SUM#returned | 캐시백 요약 | Withdrawal returned 행
+hist/SUM#lighter | 캐시백 요약 | Lighter Credited·Withheld (온보딩 후)
+hist/SUM#noMonth | 캐시백 요약 | 활동 없는 달
+hist/SUM#noDay | 캐시백 요약 | 활동 없는 날 · 필터 결과 없음
+hist/SUM#oneEmpty | 캐시백 요약 | 1개 선택 빈 상태
+hist/SUM#delayed | 캐시백 요약 | 데이터 지연 (허브 H6과 같음)
+hist/SUM#old | 캐시백 요약 | 180일 넘은 달
+
+# FU-061 월간 카드·캘린더·일별 목록
+hist/SUM#normal | 캐시백 요약 | 필터 · 월간 카드 · 캘린더 · 일별 목록 (dup)
+hist/SUM#dexRange | 캐시백 요약 | 거래소 범위 DEX 전체 (dup)
+hist/SUM#account | 캐시백 요약 | 계정 필터 — 지갑 전체 주소 (dup)
+hist/SUM#types | 캐시백 요약 | 유형 체크박스 (dup)
+hist/SUM#pending | 캐시백 요약 | DEX data pending — 0 아님 (dup)
+hist/SUM#returned | 캐시백 요약 | Withdrawal returned 행 (dup)
+hist/SUM#lighter | 캐시백 요약 | Lighter Credited·Withheld (온보딩 후) (dup)
+hist/SUM#noMonth | 캐시백 요약 | 활동 없는 달 (dup)
+hist/SUM#noDay | 캐시백 요약 | 활동 없는 날 · 필터 결과 없음 (dup)
+hist/SUM#oneEmpty | 캐시백 요약 | 1개 선택 빈 상태 (dup)
+hist/SUM#delayed | 캐시백 요약 | 데이터 지연 (허브 H6과 같음) (dup)
+hist/SUM#old | 캐시백 요약 | 180일 넘은 달 (dup)
+
+# FU-062 요약 데이터 지연·행 상태
+hist/SUM#normal | 캐시백 요약 | 필터 · 월간 카드 · 캘린더 · 일별 목록 (dup)
+hist/SUM#dexRange | 캐시백 요약 | 거래소 범위 DEX 전체 (dup)
+hist/SUM#account | 캐시백 요약 | 계정 필터 — 지갑 전체 주소 (dup)
+hist/SUM#types | 캐시백 요약 | 유형 체크박스 (dup)
+hist/SUM#pending | 캐시백 요약 | DEX data pending — 0 아님 (dup)
+hist/SUM#returned | 캐시백 요약 | Withdrawal returned 행 (dup)
+hist/SUM#lighter | 캐시백 요약 | Lighter Credited·Withheld (온보딩 후) (dup)
+hist/SUM#noMonth | 캐시백 요약 | 활동 없는 달 (dup)
+hist/SUM#noDay | 캐시백 요약 | 활동 없는 날 · 필터 결과 없음 (dup)
+hist/SUM#oneEmpty | 캐시백 요약 | 1개 선택 빈 상태 (dup)
+hist/SUM#delayed | 캐시백 요약 | 데이터 지연 (허브 H6과 같음) (dup)
+hist/SUM#old | 캐시백 요약 | 180일 넘은 달 (dup)
+
+# FU-063 캐시백 랭킹
+rk/RANK#normal | 캐시백 랭킹 | 한 순위표 CEX+DEX
+rk/RANK#dex | 캐시백 랭킹 | DEX 칩
+rk/RANK#empty | 캐시백 랭킹 | 자격 계정 없음
+
+# FU-064 글로벌 리그 DEX 적용
+lg/LEAGUE#normal | 글로벌 리그 | 팀 리더보드 — Next Update 로컬
+lg/LEAGUE#create | 글로벌 리그 | 팀 생성 자격 (CEX + DEX 합산)
+lg/LEAGUE#picker | 글로벌 리그 | 참가 계정 선택 — DEX 지갑 포함
+lg/LEAGUE#reward | 글로벌 리그 | 상금 수령 계정 선택
+lg/LEAGUE#dexOnly | 글로벌 리그 | DEX 지갑만 연동한 회원
+lg/LEAGUE#notLinked | 글로벌 리그 | DEX 리그 미연동 안내
+lg/LEAGUE#lighter | 글로벌 리그 | Lighter 리그 (온보딩 후)
+lg/LEAGUE#card | 글로벌 리그 | DEX 리그 혜택 카드 · URL
+
+# FU-065 DEX 보드 구조·기준·리워드
+mb/BOARD#normal | DEX 보드 | 참여 중 — 하루 한 번 업데이트돼요
+mb/BOARD#today | DEX 보드 | 오늘 마감
+mb/BOARD#delayed | DEX 보드 | 지연 — 캐시백 반영이 지연되고 있어요
+mb/BOARD#complete | DEX 보드 | 완성 직후 (랭킹 ON)
+mb/BOARD#final | DEX 보드 | 마지막 날 Batch 후 완성
+mb/BOARD#payout | DEX 보드 | 지급 기간 — 이벤트 리워드 확인하기
+mb/BOARD#reselect | DEX 보드 | 참여 지갑 끊김
+mb/BOARD#confirm | DEX 보드 | 새 지갑 재선택 확인
+mb/BOARD#noEligible | DEX 보드 | 자격 지갑 없음 — 지갑 연동하기
+mb/BOARD#failToast | DEX 보드 | 등록 실패 토스트
+mb/BOARD#payDate | DEX 보드 | 지급일 안내
+mb/BOARD#preopen | DEX 보드 | 사전공개 — 자격 지갑 있음
+mb/BOARD#preopenNo | DEX 보드 | 사전공개 — 자격 지갑 없음
+
+# FU-066 원장 완료 상태와 빙고 Batch 연계
+mb/BOARD#normal | DEX 보드 | 참여 중 — 하루 한 번 업데이트돼요 (dup)
+mb/BOARD#today | DEX 보드 | 오늘 마감 (dup)
+mb/BOARD#delayed | DEX 보드 | 지연 — 캐시백 반영이 지연되고 있어요 (dup)
+mb/BOARD#complete | DEX 보드 | 완성 직후 (랭킹 ON) (dup)
+mb/BOARD#final | DEX 보드 | 마지막 날 Batch 후 완성 (dup)
+mb/BOARD#payout | DEX 보드 | 지급 기간 — 이벤트 리워드 확인하기 (dup)
+mb/BOARD#reselect | DEX 보드 | 참여 지갑 끊김 (dup)
+mb/BOARD#confirm | DEX 보드 | 새 지갑 재선택 확인 (dup)
+mb/BOARD#noEligible | DEX 보드 | 자격 지갑 없음 — 지갑 연동하기 (dup)
+mb/BOARD#failToast | DEX 보드 | 등록 실패 토스트 (dup)
+mb/BOARD#payDate | DEX 보드 | 지급일 안내 (dup)
+mb/BOARD#preopen | DEX 보드 | 사전공개 — 자격 지갑 있음 (dup)
+mb/BOARD#preopenNo | DEX 보드 | 사전공개 — 자격 지갑 없음 (dup)
+
+# FU-067 DEX 보드 참여 자격·참여 규칙
+mb/BOARD#normal | DEX 보드 | 참여 중 — 하루 한 번 업데이트돼요 (dup)
+mb/BOARD#today | DEX 보드 | 오늘 마감 (dup)
+mb/BOARD#delayed | DEX 보드 | 지연 — 캐시백 반영이 지연되고 있어요 (dup)
+mb/BOARD#complete | DEX 보드 | 완성 직후 (랭킹 ON) (dup)
+mb/BOARD#final | DEX 보드 | 마지막 날 Batch 후 완성 (dup)
+mb/BOARD#payout | DEX 보드 | 지급 기간 — 이벤트 리워드 확인하기 (dup)
+mb/BOARD#reselect | DEX 보드 | 참여 지갑 끊김 (dup)
+mb/BOARD#confirm | DEX 보드 | 새 지갑 재선택 확인 (dup)
+mb/BOARD#noEligible | DEX 보드 | 자격 지갑 없음 — 지갑 연동하기 (dup)
+mb/BOARD#failToast | DEX 보드 | 등록 실패 토스트 (dup)
+mb/BOARD#payDate | DEX 보드 | 지급일 안내 (dup)
+mb/BOARD#preopen | DEX 보드 | 사전공개 — 자격 지갑 있음 (dup)
+mb/BOARD#preopenNo | DEX 보드 | 사전공개 — 자격 지갑 없음 (dup)
+
+# FU-068 맥스보드 API 필드·문구의 DEX 대응
+mb/BOARD#normal | DEX 보드 | 참여 중 — 하루 한 번 업데이트돼요 (dup)
+mb/BOARD#today | DEX 보드 | 오늘 마감 (dup)
+mb/BOARD#delayed | DEX 보드 | 지연 — 캐시백 반영이 지연되고 있어요 (dup)
+mb/BOARD#complete | DEX 보드 | 완성 직후 (랭킹 ON) (dup)
+mb/BOARD#final | DEX 보드 | 마지막 날 Batch 후 완성 (dup)
+mb/BOARD#payout | DEX 보드 | 지급 기간 — 이벤트 리워드 확인하기 (dup)
+mb/BOARD#reselect | DEX 보드 | 참여 지갑 끊김 (dup)
+mb/BOARD#confirm | DEX 보드 | 새 지갑 재선택 확인 (dup)
+mb/BOARD#noEligible | DEX 보드 | 자격 지갑 없음 — 지갑 연동하기 (dup)
+mb/BOARD#failToast | DEX 보드 | 등록 실패 토스트 (dup)
+mb/BOARD#payDate | DEX 보드 | 지급일 안내 (dup)
+mb/BOARD#preopen | DEX 보드 | 사전공개 — 자격 지갑 있음 (dup)
+mb/BOARD#preopenNo | DEX 보드 | 사전공개 — 자격 지갑 없음 (dup)
+
+# FU-069 맥스보드 알림
+mb/BOARD#normal | DEX 보드 | 참여 중 — 하루 한 번 업데이트돼요 (dup)
+mb/BOARD#today | DEX 보드 | 오늘 마감 (dup)
+mb/BOARD#delayed | DEX 보드 | 지연 — 캐시백 반영이 지연되고 있어요 (dup)
+mb/BOARD#complete | DEX 보드 | 완성 직후 (랭킹 ON) (dup)
+mb/BOARD#final | DEX 보드 | 마지막 날 Batch 후 완성 (dup)
+mb/BOARD#payout | DEX 보드 | 지급 기간 — 이벤트 리워드 확인하기 (dup)
+mb/BOARD#reselect | DEX 보드 | 참여 지갑 끊김 (dup)
+mb/BOARD#confirm | DEX 보드 | 새 지갑 재선택 확인 (dup)
+mb/BOARD#noEligible | DEX 보드 | 자격 지갑 없음 — 지갑 연동하기 (dup)
+mb/BOARD#failToast | DEX 보드 | 등록 실패 토스트 (dup)
+mb/BOARD#payDate | DEX 보드 | 지급일 안내 (dup)
+mb/BOARD#preopen | DEX 보드 | 사전공개 — 자격 지갑 있음 (dup)
+mb/BOARD#preopenNo | DEX 보드 | 사전공개 — 자격 지갑 없음 (dup)
+
+# FU-070 쿠폰 DEX 적용
+cp/COUPON#normal | 쿠폰함 | Coupons 탭
+cp/COUPON#empty | 쿠폰함 | 쿠폰 없음
+cp/COUPON#emptyDone | 쿠폰함 | Completed 비어 있음
+cp/COUPON#picker | 쿠폰함 | 계정 선택 — CEX/DEX 그룹 · Deactivated
+cp/COUPON#picker1 | 쿠폰함 | 계정 1개
+cp/COUPON#picker6 | 쿠폰함 | 계정 5개 초과
+cp/COUPON#done | 쿠폰함 | 적용 완료
+cp/COUPON#unable | 쿠폰함 | 사용 불가
+cp/COUPON#noAccount | 쿠폰함 | 연동 계정 없음
+bnf/LIST#normal | 혜택 목록 | 회원
+bnf/LIST#guest | 혜택 목록 | 게스트 — 0 USDT · View History 없음
+bnf/LIST#doneEmpty | 혜택 목록 | 완료 0건
+bnf/LIST#uidm | 혜택 목록 | UID 연동 3 USDT 상세 (CEX 전용)
+bnf/LIST#first | 혜택 목록 | 첫 출금 10 USDT 상세 (CEX · DEX)
+
+# FU-071 혜택 페이지·챌린지 표기·첫 출금 혜택
+bnf/LIST#normal | 혜택 목록 | 회원 (dup)
+bnf/LIST#guest | 혜택 목록 | 게스트 — 0 USDT · View History 없음 (dup)
+bnf/LIST#doneEmpty | 혜택 목록 | 완료 0건 (dup)
+bnf/LIST#uidm | 혜택 목록 | UID 연동 3 USDT 상세 (CEX 전용) (dup)
+bnf/LIST#first | 혜택 목록 | 첫 출금 10 USDT 상세 (CEX · DEX) (dup)
+ch/CH1#normal | 챌린지 상세 | 레벨 1
+ch/CH1#progress | 챌린지 상세 | 게이지 진행
+
+# FU-072 이벤트·이벤트 리워드 DEX 적용
+
+# FU-073 DEX 퀴즈 (Beginner's Guide)
+qz/QUIZ#normal | DEX 퀴즈 | 모듈 4·5 카드
+qz/QUIZ#completed | DEX 퀴즈 | 완료 모듈
+qz/QUIZ#article | DEX 퀴즈 | 아티클 (로그인)
+qz/QUIZ#guestArticle | DEX 퀴즈 | 아티클 (게스트) — Login to Take Quiz
+qz/QUIZ#quiz | DEX 퀴즈 | 문항 2개
+qz/QUIZ#unanswered | DEX 퀴즈 | 미응답 문항 제출 차단
+qz/QUIZ#submitFail | DEX 퀴즈 | 제출 실패
+qz/QUIZ#answersFail | DEX 퀴즈 | 정답·해설 로드 실패
+qz/QUIZ#result | DEX 퀴즈 | 결과 2/2
+qz/QUIZ#result0 | DEX 퀴즈 | 결과 0/2
+
+# FU-074 TP(포인트) 적립
+
+# FU-075 캐시백 챌린지·부스트 DEX 적용
+ch/CH1#normal | 챌린지 상세 | 레벨 1 (dup)
+ch/CH1#progress | 챌린지 상세 | 게이지 진행 (dup)
+
+# FU-076 Beginner's Guide `Cashback Basics` 문구
+cmn/BASICS#normal | Beginner's Guide · Cashback Basics | 본문 교체
+
+# FU-077 초대 리워드 산식·실적
+inv/IF8#normal | 친구 초대 | 초대 랜딩
+inv/IF8#empty | 친구 초대 | 0명 빈 상태
+inv/IF8#terms | 친구 초대 | 약관 bullet
+inv/IF8#rewards | 친구 초대 | Available Invitation Rewards — 자동 지급
+inv/IF8#below50 | 친구 초대 | 50 USDT 미만
+ph/PHUB#normal | 파트너 허브 | 대시보드 — Linked Accounts · 퍼널
+ph/PHUB#modal | 파트너 허브 | 연동 계정 모달
+
+# FU-078 초대 리워드 자동 지급
+inv/IF8#normal | 친구 초대 | 초대 랜딩 (dup)
+inv/IF8#empty | 친구 초대 | 0명 빈 상태 (dup)
+inv/IF8#terms | 친구 초대 | 약관 bullet (dup)
+inv/IF8#rewards | 친구 초대 | Available Invitation Rewards — 자동 지급 (dup)
+inv/IF8#below50 | 친구 초대 | 50 USDT 미만 (dup)
+
+# FU-079 초대 랜딩·약관·문구
+inv/IF8#normal | 친구 초대 | 초대 랜딩 (dup)
+inv/IF8#empty | 친구 초대 | 0명 빈 상태 (dup)
+inv/IF8#terms | 친구 초대 | 약관 bullet (dup)
+inv/IF8#rewards | 친구 초대 | Available Invitation Rewards — 자동 지급 (dup)
+inv/IF8#below50 | 친구 초대 | 50 USDT 미만 (dup)
+
+# FU-080 파트너 허브
+ph/PHUB#normal | 파트너 허브 | 대시보드 — Linked Accounts · 퍼널 (dup)
+ph/PHUB#modal | 파트너 허브 | 연동 계정 모달 (dup)
+
+# FU-081 /payback 퍼널 — 진입·플랫폼·거래 프로필
+pbk/P1#normal | Landing | Did you know 카드
+pbk/P1#noUsers | Landing | 사용자 수 없음 — 카드 숨김
+pbk/P2#normal | Choose platform | 통합 그리드 — 선택됨
+pbk/P2#none | Choose platform | 미선택 — Next 비활성
+pbk/P2#dexChip | Choose platform | DEX 칩
+pbk/P3#normal | Trading profile | 카드 4장
+pbk/P3#noFreq | Trading profile | 빈도 미선택 — Check Results 비활성
+pbk/P3L#normal | Lighter 계정 유형 (온보딩 후) | Premium · Plus · Standard
+pbk/P4C#normal | Calculating | You might be surprised...
+pbk/P4#normal | 결과 | DEX — Did you know 숨김
+pbk/P4#cex | 결과 | CEX — On average…
+pbk/P5#normal | Summary | EdgeX — Daily
+pbk/P5#cex | Summary | Bybit
+pbk/P5#aster | Summary | Aster 각주
+pbk/P5#apex | Summary | ApeX — 표기 미정
+pbk/P5#lighter | Summary | Lighter Weekly · Every Monday (온보딩 후)
+pbk/P5#mobile | Summary | 375폭
+
+# FU-082 /payback 퍼널 — 결과·Summary
+pbk/P1#normal | Landing | Did you know 카드 (dup)
+pbk/P1#noUsers | Landing | 사용자 수 없음 — 카드 숨김 (dup)
+pbk/P2#normal | Choose platform | 통합 그리드 — 선택됨 (dup)
+pbk/P2#none | Choose platform | 미선택 — Next 비활성 (dup)
+pbk/P2#dexChip | Choose platform | DEX 칩 (dup)
+pbk/P3#normal | Trading profile | 카드 4장 (dup)
+pbk/P3#noFreq | Trading profile | 빈도 미선택 — Check Results 비활성 (dup)
+pbk/P3L#normal | Lighter 계정 유형 (온보딩 후) | Premium · Plus · Standard (dup)
+pbk/P4C#normal | Calculating | You might be surprised... (dup)
+pbk/P4#normal | 결과 | DEX — Did you know 숨김 (dup)
+pbk/P4#cex | 결과 | CEX — On average… (dup)
+pbk/P5#normal | Summary | EdgeX — Daily (dup)
+pbk/P5#cex | Summary | Bybit (dup)
+pbk/P5#aster | Summary | Aster 각주 (dup)
+pbk/P5#apex | Summary | ApeX — 표기 미정 (dup)
+pbk/P5#lighter | Summary | Lighter Weekly · Every Monday (온보딩 후) (dup)
+pbk/P5#mobile | Summary | 375폭 (dup)
+
+# FU-083 사이트맵·헤더·드로어·푸터
+cmn/HEADER#normal | 데스크톱 헤더 | 로그인
+cmn/HEADER#guest | 데스크톱 헤더 | 비로그인 — Login · Sign up
+cmn/HEADER#hover | 데스크톱 헤더 | Cashback hover 패널 3행
+cmn/HEADER#bellFail | 데스크톱 헤더 | 알림·아바타 로드 실패
+cmn/DRAWER#normal | 모바일 웹 드로어 | 비로그인 — 환영 블록
+cmn/DRAWER#member | 모바일 웹 드로어 | 로그인
+cmn/DRAWER#promo | 모바일 웹 드로어 | 프로모 배너 (선택)
+cmn/FOOTER#normal | 푸터 | 지원 · Company · Legal · 소셜
+
+# FU-084 Exchange Listings·라우팅·SEO
+cmn/LISTING#normal | Exchange Listings Page (CEX만) | 표 — Rating 열
+cmn/LISTING#cards | Exchange Listings Page (CEX만) | 카드 뷰 — 평점 생략
+
+# FU-085 앱 하단 내비·앱 예외
+cmn/APPNAV#normal | 앱 하단 내비 | Home 활성
+cmn/APPNAV#events | 앱 하단 내비 | Events 활성
+cmn/APPNAV#exchange | 앱 하단 내비 | Exchange 활성
+cmn/APPNAV#inapp | 앱 하단 내비 | 미지원 Cashback 페이지 → 인앱 브라우저
+cmn/APPNAV#linkFail | 앱 하단 내비 | DEX 링크 실패 — 복사 + Open {DEX}
+
+# FU-086 공지
+cmn/NOTICE#normal | 공지 | 카테고리 8개 · 신규 거래소 추가
+
+# FU-087 웹 기능 범위 (혜택·리그·랭킹·캠페인)
+
+# FU-088 이용약관·개인정보처리방침
+cmn/TERMS#normal | 약관 · 개인정보처리방침 | 개인정보처리방침
+cmn/TERMS#use | 약관 · 개인정보처리방침 | 이용약관 6.8
+
+# FU-089 CEX 회귀 방지
+
+# FU-090 분석 이벤트
+etc/ANALYTICS#normal | 분석 이벤트 규칙 | 공통 스키마 · 금지 payload · 범위
+etc/ANALYTICS#changed | 분석 이벤트 규칙 | 수정·재정의 이벤트
+etc/ANALYTICS#own | 분석 이벤트 규칙 | 소유권 이벤트
+etc/ANALYTICS#retired | 분석 이벤트 규칙 | 구현 제외 이벤트

@@ -109,14 +109,14 @@
 | `LinkStatus` | 기존 UID 상태 값 그대로 + DEX는 `LINKED`(`연동 완료`) · `MANUAL_LINK_PENDING`(기존 `manual_link_pending`, `연동 시도중이에요`) · `INACTIVE`(DEX 오프보딩) | DEX용 신규 상태 없음(REQ-098). 실제 키 문자열은 기존 상태 키를 따른다 |
 | `LinkResult` | `LINKED` / `PROCESSING` | API-007 성공 응답의 결과(실패는 에러 코드) |
 | `ProcessingReason` | `PARTNER_LOOKUP` / `PRELINK_PAYOUT` | `PROCESSING`의 이유 — 파트너 귀속 확인 대기 / 연동 전 잔액 출금 대기(REQ-107) |
-| `SettlementStatus` | `ACCRUING_ESTIMATE` · `CREDITED` · `WITHHELD` · `UNDER_MINIMUM` · `PENDING` · `DATA_PENDING` | DEX 정산 상태 라벨(REQ-047). 전체 enum·전이 ❓ G-059 |
+| `SettlementStatus` | `CREDITED` · `WITHHELD` · `PENDING` · `DATA_PENDING` | DEX 정산 상태 라벨(REQ-047). 전체 enum·전이 G-059 확정: 회원 화면 상태 = `DEX data pending`(미수신, 0 아님) · `Credited` · `Withheld`. Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 |
 | `CollectionStatus` | `LIVE` / `DEGRADED` / `MANUAL` / `NOT_INTEGRATED` | DEX별 수집 상태(REQ-201) |
 | `WithdrawalStage` | `REQUEST` → `WAIT` → `PROCESSING` → `REVIEW` | 내부 처리 단계. 사용자에게는 하나(「처리 중」) |
 | `PayoutStatus` | `PROCESSING` / `SENT` / `FAILED` | 계정별 지급 상태 |
 | `SummaryRowType` | `EXCHANGE_CASHBACK` · `EVENT_REWARD` · `WITHDRAWAL` · `WITHDRAWAL_RETURNED` | 캐시백 요약 행 유형 |
 | `WebhookResult` | `PROCESSED` / `DUPLICATE` / `REJECTED` | 웹훅 처리 결과 |
 | `ExchangeScope` | `ALL` / `CEX` / `DEX` / 거래소 코드 | 그룹 드롭다운 범위 선택 값(REQ-030) |
-| `exchangeCode` | 기존 CEX 예 `BITGET`·`OKX` / DEX 값 ❓ G-318 | 거래소 코드. DEX 4곳 값이 정해지기 전에는 `exchangeNo`로 식별 |
+| `exchangeCode` | 기존 CEX 예 `BITGET`·`OKX` / DEX 값 G-318 확정: `LIGHTER` · `APEX` · `EDGEX` · `ASTER`(기존 대문자 규칙) | 거래소 코드. DEX 4곳 값이 정해지기 전에는 `exchangeNo`로 식별 |
 
 ## API 엔드포인트 목록
 
@@ -125,39 +125,39 @@
 | API-ID | Method | URL | 기능명 | 관련 기능 ID | 구분 | 상태 |
 |---|---|---|---|---|---|---|
 | API-011 | 기존 | `/payback/member-payback-init-withdrawal` | 출금 신청 (자동 지급 호출, CEX·DEX 통합) | BA-015 · BA-016 · BA-017 · BA-019 · BA-036 | 기존·변경 | ❓ G-044 |
-| API-018 | 기존 | 기존 초대 리워드 출금 API | 초대 리워드 출금 (자동 지급) | FA-022 · BA-052 | 기존·변경 ⚠경로 | ❓ G-056 |
+| API-018 | 기존 | 기존 초대 리워드 출금 API | 초대 리워드 출금 (자동 지급) | FA-022 · BA-052 | 기존·변경 ⚠경로 | G-056 확정: 제휴사(A)도 DEX 지갑을 고정 지급 계정으로 지정할 수 있다 — V2는 테더맥스가 Wallet B로 DEX 지갑에 지급하므로 CEX 전용 제한을 없앤다 |
 | API-101 | GET | `/api/admin/exchanges` | 거래소 관리 목록 | FA-025 · FA-026 · FA-028 · FA-033 · FA-040 · FA-059 · FA-062 · FA-069 · BA-056 · BA-057 · BA-059 · BA-064 · BA-071 · BA-090 · BA-093 · BA-099 | 기존·변경 ⚠경로 | 확정 |
-| API-102 | POST | `/api/admin/exchanges` | 거래소 생성 (Exchange Type 필수) | FA-025 · FA-034 · BA-056 · BA-065 | 기존·변경 ⚠경로 | ❓ G-246 |
-| API-103 | PUT | `/api/admin/exchanges/{exchangeNo}` | 거래소 수정 (DEX 필드·DEX별 설정) | FA-027 · FA-034 · FA-035 · FA-036 · FA-037 · FA-038 · FA-039 · FA-041 · BA-020 · BA-026 · BA-058 · BA-065 · BA-066 · BA-067 · BA-068 · BA-069 · BA-070 | 기존·변경 ⚠경로 | ❓ G-393 · G-022 · G-031 |
+| API-102 | POST | `/api/admin/exchanges` | 거래소 생성 (Exchange Type 필수) | FA-025 · FA-034 · BA-056 · BA-065 | 기존·변경 ⚠경로 | G-246 확정: 브로커 2건 · test 행 모두 `CEX`로 백필하고 비활성 유지 |
+| API-103 | PUT | `/api/admin/exchanges/{exchangeNo}` | 거래소 수정 (DEX 필드·DEX별 설정) | FA-027 · FA-034 · FA-035 · FA-036 · FA-037 · FA-038 · FA-039 · FA-041 · BA-020 · BA-026 · BA-058 · BA-065 · BA-066 · BA-067 · BA-068 · BA-069 · BA-070 | 기존·변경 ⚠경로 | G-393 확정: 일 · 주만 두고 「사용자 표시용 정산 주기, 수집 주기와 별개」 명시 · G-022 · G-031 |
 | API-104 | PUT | `/api/admin/exchanges/{exchangeNo}/partner-credentials` | 파트너 API 키 교체 (write-only) | FA-037 · FA-038 · BA-020 · BA-068 · BA-069 | 신규 | 확정 |
 | API-105 | POST | `/api/admin/exchanges/{exchangeNo}/partner-credentials/test` | 파트너 API 연결 테스트 | FA-037 · FA-038 · BA-020 · BA-068 · BA-069 | 신규 | 확정 |
 | API-106 | PUT | `/api/admin/exchanges/display-order` | 거래소 전역 순위 저장 | FA-027 · FA-033 · BA-058 · BA-064 | 기존·변경 ⚠경로 | 확정 |
-| API-107 | POST | `/api/admin/accounts/search` | Account List | FA-028 · FA-035 · FA-044 · FA-047 · BA-059 · BA-066 · BA-075 · BA-078 | 기존·변경 ⚠경로 | ❓ G-238 |
-| API-108 | POST | `/api/admin/linking-applications/search` | Linking Management (DEX 확인 중 큐) | FA-010 · FA-028 · FA-045 · BA-010 · BA-059 · BA-076 | 기존·변경 ⚠경로 | ❓ G-337 |
-| API-109 | POST | `/api/admin/linking-applications/{applicationId}/decision` | DEX 수동 연동 승인·거절 | FA-005 · FA-010 · FA-045 · FA-047 · BA-005 · BA-010 · BA-011 · BA-076 · BA-078 | 기존·변경 ⚠경로 | ❓ G-069 · G-074 |
+| API-107 | POST | `/api/admin/accounts/search` | Account List | FA-028 · FA-035 · FA-044 · FA-047 · BA-059 · BA-066 · BA-075 · BA-078 | 기존·변경 ⚠경로 | G-238 확정: 한 컬럼 `UID / Wallet address` |
+| API-108 | POST | `/api/admin/linking-applications/search` | Linking Management (DEX 확인 중 큐) | FA-010 · FA-028 · FA-045 · BA-010 · BA-059 · BA-076 | 기존·변경 ⚠경로 | G-337 확정: `Weekly CSV cut-off` 월요일 23:59 UTC · 2주 미등장 시 `Needs review` + 운영 알림 |
+| API-109 | POST | `/api/admin/linking-applications/{applicationId}/decision` | DEX 수동 연동 승인·거절 | FA-005 · FA-010 · FA-045 · FA-047 · BA-005 · BA-010 · BA-011 · BA-076 · BA-078 | 기존·변경 ⚠경로 | G-069 확정: 거절되면 홈 행 제거(한도 점유도 해제) · G-074 확정: `Not a TetherMax referral` · `Bound before program start` · `Ambiguous match not confirmed` · `Other`. `Bound before program start`는 Lighter에서만 허용 |
 | API-110 | POST | `/api/admin/linking-audit-logs/search` | 연동 감사 로그 | FA-046 · BA-011 · BA-077 | 신규 | 확정 |
-| API-111 | POST | `/api/admin/dex/cashback-records/search` | DEX Cashback Records | FA-050 · FA-051 · BA-021 · BA-023 · BA-081 · BA-082 | 신규 | ❓ G-021 |
-| API-112 | POST | `/api/admin/dex/cashback-records/{recordId}/corrections` | 원장 정정 레코드 생성 | FA-050 · BA-024 · BA-081 | 신규 | ❓ G-331 |
-| API-115 | POST | `/api/admin/excel/upload` | Lighter 주간 CSV 가져오기 (Preview·Commit) | FA-035 · FA-052 · BA-027 · BA-066 · BA-083 | 기존·변경 ⚠경로 | ❓ G-338 |
-| API-116 | GET | `/api/admin/dex/collection-status` | 수집 상태 (Cashback History Status) | FA-049 · BA-025 · BA-080 | 기존·변경 ⚠경로 | ❓ G-348 |
+| API-111 | POST | `/api/admin/dex/cashback-records/search` | DEX Cashback Records | FA-050 · FA-051 · BA-021 · BA-023 · BA-081 · BA-082 | 신규 | 원장 필드 = 표준 요건 5필드(G-021) |
+| API-112 | POST | `/api/admin/dex/cashback-records/{recordId}/corrections` | 원장 정정 레코드 생성 | FA-050 · BA-024 · BA-081 | 신규 | G-331 확정: 확정 전 직접 수정 불가 · 정정의 정정 허용 · 파트너 음수 정정은 향후 적립에서 상계 · Lighter 정정 레코드 생성 차단 |
+| API-115 | POST | `/api/admin/excel/upload` | Lighter 주간 CSV 가져오기 — 제외(G-428) | FA-035 · FA-052 · BA-027 · BA-066 · BA-083 | 기존·변경 ⚠경로 | G-338 확정: UTF-8 · 쉼표 · 50,000행 · 20 MB · ISO 8601 · 소수 6자리 · 동시 잠금 `Import in progress by {admin}` · 재업로드 `This file was already imported on {date} by {admin}` |
+| API-116 | GET | `/api/admin/dex/collection-status` | 수집 상태 (Cashback History Status) | FA-049 · BA-025 · BA-080 | 기존·변경 ⚠경로 | G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간 |
 | API-117 | POST | `/api/admin/dex/{exchangeNo}/poll` | Poll now (1회 즉시 수집) | FA-049 · BA-080 | 신규 | 확정 |
 | API-118 | GET | `/api/admin/dex/webhook-logs` | 웹훅 로그 (ApeX) | FA-049 · BA-025 · BA-080 | 신규 | ❓ G-024 |
 | API-121 | POST | `/api/admin/cashback/history/search` | 캐시백 전체 내역 (출금·지급 포함) | FA-028 · FA-048 · FA-054 · BA-034 · BA-059 · BA-079 · BA-085 | 기존·변경 ⚠경로 | 확정 |
-| API-124 | GET·PUT | `/api/admin/dex/settings` | DEX 운영 설정값 | FA-055 · BA-015 · BA-026 · BA-030 · BA-033 · BA-086 | 신규 | ❓ G-044 · G-117 · G-348 |
+| API-124 | GET·PUT | `/api/admin/dex/settings` | DEX 운영 설정값 | FA-055 · BA-015 · BA-026 · BA-030 · BA-033 · BA-086 | 신규 | G-044 · G-117 · G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간 |
 | API-125 | POST | `/api/admin/event-rewards` | 이벤트 리워드 지급·회수 | FA-020 · FA-053 · BA-048 · BA-074 · BA-084 | 기존·변경 ⚠경로 | 확정 |
-| API-126 | GET | `/api/admin/members/{memberNo}/linked-accounts` | 회원 상세 Linked Accounts | FA-042 · FA-043 · BA-072 · BA-073 | 기존·변경 ⚠경로 | ❓ G-237 |
-| API-127 | GET·PUT | `/api/admin/cashback-products/dex-landing` | DEX Landing Page 콘텐츠·리스트 | FA-027 · FA-064 · FA-065 · BA-058 · BA-094 · BA-095 | 신규 | ❓ G-266 · G-002 |
-| API-128 | GET·PUT | `/api/admin/cashback-products/exchanges/{exchangeNo}/content` | 거래소 랜딩·상세 콘텐츠 편집 | FA-027 · FA-064 · FA-066 · FA-067 · BA-058 · BA-094 · BA-096 · BA-097 | 신규 | ❓ G-366 🔴 |
+| API-126 | GET | `/api/admin/members/{memberNo}/linked-accounts` | 회원 상세 Linked Accounts | FA-042 · FA-043 · BA-072 · BA-073 | 기존·변경 ⚠경로 | G-237 확정: 분리 표기 `UID {n} · 지갑 {n}` + 필터 `UID만 / 지갑만 / 둘 다` |
+| API-127 | GET·PUT | `/api/admin/cashback-products/dex-landing` | DEX Landing Page 콘텐츠·리스트 | FA-027 · FA-064 · FA-065 · BA-058 · BA-094 · BA-095 | 신규 | G-266 확정: 놓으면 자동 저장 + `Saved` + 10초 Undo, 다른 페이지 이동은 `Move to position N`. 값은 전역 순위 · G-002 |
+| API-128 | GET·PUT | `/api/admin/cashback-products/exchanges/{exchangeNo}/content` | 거래소 랜딩·상세 콘텐츠 편집 | FA-027 · FA-064 · FA-066 · FA-067 · BA-058 · BA-094 · BA-096 · BA-097 | 신규 | G-366 확정: 운영자 편집 영역도 고정 폴백 문구로 언어팩에 둔다(키 수 재산정은 언어팩 작업 때) 🔴 |
 | API-129 | POST | `/api/admin/media` | 미디어 업로드 | FA-064 · FA-067 · BA-094 · BA-097 | 신규 | 일부 미정 |
 | API-130 | GET·PUT | `/api/admin/cashback-products/spending-estimate` | Spending Estimate 설정 | FA-027 · FA-068 · BA-058 · BA-098 | 신규 | 확정 |
-| API-131 | POST | `/api/admin/messaging/target-count` | 발송 대상 해석 (수동 푸시·이메일 캠페인·쿠폰 발송) | FA-056 · FA-057 · FA-058 · BA-087 · BA-088 · BA-089 | 기존·변경 ⚠경로 | ❓ G-240 |
-| API-132 | POST | `/api/admin/exports` | 내보내기 | FA-029 · FA-044 · BA-060 · BA-075 | 기존·변경 ⚠경로 | ❓ G-232 |
+| API-131 | POST | `/api/admin/messaging/target-count` | 발송 대상 해석 (수동 푸시·이메일 캠페인·쿠폰 발송) | FA-056 · FA-057 · FA-058 · BA-087 · BA-088 · BA-089 | 기존·변경 ⚠경로 | G-240 확정: 회원 수동 캐시백은 DEX 행 포함, 인도네시안 캐시백 내역은 미포함 |
+| API-132 | POST | `/api/admin/exports` | 내보내기 | FA-029 · FA-044 · BA-060 · BA-075 | 기존·변경 ⚠경로 | G-232 확정: 10,000행까지 즉시, 초과 시 백그라운드 + 알림 + 7일 만료 링크 · `=` `+` `-` `@` 이스케이프 |
 | API-133 | GET | `/api/admin/audit-logs` | 감사 로그 | FA-030 · BA-061 | 기존·변경 ⚠경로 | 확정 |
-| API-134 | POST | `/api/admin/global-leagues` | 글로벌 리그 생성 (DEX 운영 거래소) | FA-060 · BA-091 | 기존·변경 ⚠경로 | ❓ G-398 |
+| API-134 | POST | `/api/admin/global-leagues` | 글로벌 리그 생성 (DEX 운영 거래소) | FA-060 · BA-091 | 기존·변경 ⚠경로 | G-398 확정: 슬러그(`apex` · `edgex` · `aster`) |
 | API-135 | GET | `/api/admin/dex/reports` | DEX 리포팅 | FA-026 · FA-055 · BA-030 · BA-057 · BA-086 | 신규 | 일부 미정 |
-| API-136 | 기존 | 기존 퀴즈 이벤트 등록·수정 API | 퀴즈 이벤트 설정 (DEX 거래소 · 점수별 보상) | FA-062 · BA-093 | 기존·변경 ⚠경로 | ❓ G-205 |
-| API-137 | 기존 | 기존 `Ownership Verification` 큐 조회·승인·거절 API | 소유 확인 큐 — DEX 지갑 신청 포함 | FA-047 · BA-013 · BA-078 | 기존·변경 ⚠경로 | ❓ G-063 |
-| MB-API-115 | GET | `/api/admin/maxboard/exchanges` | 맥스보드 생성 거래소 목록 | FA-019 · FA-061 · BA-045 · BA-092 | 기존·변경 | ❓ G-317 · G-318 |
+| API-136 | 기존 | 기존 퀴즈 이벤트 등록·수정 API | 퀴즈 이벤트 설정 (DEX 거래소 · 점수별 보상) | FA-062 · BA-093 | 기존·변경 ⚠경로 | G-205 확정: 콘텐츠(문항·해설·아티클)는 운영 작성 · 보상 단계 금액은 백오피스 설정 · 제출 시 완료(점수 무관), 재응시 없음 |
+| API-137 | 기존 | 기존 `Ownership Verification` 큐 조회·승인·거절 API | 소유 확인 큐 — DEX 지갑 신청 포함 | FA-047 · BA-013 · BA-078 | 기존·변경 ⚠경로 | G-063 확정: 1차 출시 미도입 — 기존 CEX처럼 캡차만. REQ-073 다이얼로그·어드민 제한 타입 추가 안 함 |
+| MB-API-115 | GET | `/api/admin/maxboard/exchanges` | 맥스보드 생성 거래소 목록 | FA-019 · FA-061 · BA-045 · BA-092 | 기존·변경 | G-317 확정: ① 목록에서 뺌(Lighter 보류 중) · G-318 확정: `LIGHTER` · `APEX` · `EDGEX` · `ASTER`(기존 대문자 규칙) |
 | API-201 | POST | `/api/webhooks/dex/apex` | ApeX 웹훅 수신 | BA-025 · BA-028 | 신규 | ❓ G-024 |
 | API-202 | POST | `/api/webhooks/dex/edgex` | EdgeX 웹훅 수신 (로드맵) | BA-025 · BA-029 | 신규 | ⏳ G-033 |
 | API-203 | POST | `/api/webhooks/dex/aster` | Aster 웹훅 수신 (요청 단계) | BA-025 | 신규 | ⏳ G-035 |
@@ -176,7 +176,7 @@
 | API-107 | Account List | `/api/admin/accounts/search` | — |
 | API-108 | Linking Management (DEX 확인 중 큐) | `/api/admin/linking-applications/search` | — |
 | API-109 | DEX 수동 연동 승인·거절 | `/api/admin/linking-applications/{applicationId}/decision` | — |
-| API-115 | Lighter 주간 CSV 가져오기 (Preview·Commit) | `/api/admin/excel/upload` | 기존 `Excel > Upload` 처리 경로 |
+| API-115 | Lighter 주간 CSV 가져오기 — 제외(G-428) | `/api/admin/excel/upload` | 기존 `Excel > Upload` 처리 경로 |
 | API-116 | 수집 상태 (Cashback History Status) | `/api/admin/dex/collection-status` | — |
 | API-121 | 캐시백 전체 내역 (출금·지급 포함) | `/api/admin/cashback/history/search` | — |
 | API-125 | 이벤트 리워드 지급·회수 | `/api/admin/event-rewards` | — |
@@ -330,7 +330,7 @@
 - 연동 계정이 하나도 없으면 지급하지 않고 잔액을 유지한다(REQ-417).
 - 보안 확인(캡차 · 이메일/OTP · 72h/24h)이 없다. DEX 지갑 목적지의 처리 중·`Sent`·지연·재시도·`Failed`는 회원 캐시백 자동 지급과 똑같다(JOB-D10, REQ-416).
 - **실패 시 복원은 초대 리워드 잔액으로**(`debitSource = INVITATION_REWARD`). 예: 초대 리워드 52.30 · 지정 지갑 캐시백 0인 회원의 송금이 최종 실패 → `Available Invitation Rewards` 52.30, 지갑 캐시백 0 그대로. 다음 주기에 다시 자동 지급 대상.
-- 제휴사(Affiliate)는 어드민이 지정한 CEX 고정 지급 UID로 자동 지급한다(REQ-418·REQ-428, G-420). DEX만 연동한 제휴사 초대자의 출금 수단 ❓ G-056.
+- 제휴사(Affiliate)는 어드민이 지정한 고정 지급 계정(그 제휴사의 활성 연동 계정 중 CEX UID 또는 DEX 지갑)으로 자동 지급한다(REQ-418·REQ-428, G-420 · G-056). DEX 지갑이면 회원 자동 지급과 같은 Wallet B 온체인 송금
 
 **에러 Response**
 
@@ -370,7 +370,7 @@
 { "status": "success", "data": [ { "exchangeNo": 41, "nameEn": "Lighter", "exchangeType": "DEX", "iconUrl": "…", "logoUrl": "…", "isVisible": true, "displayOrder": 7, "isLinkable": true, "isActive": true, "asAt": "2026-11-01", "asAtStale": false, "version": 12 } ], "meta": { "requestId": "req_…", "pagination": { "page": 1, "size": 20, "totalCount": 22, "totalPages": 2 } } }
 ```
 
-- `asAtStale` = as-at 90일 초과(경고, REQ-515). Broker 유형은 필터 선택지에서 제거(❓ G-246 기존 레코드 처리).
+- `asAtStale` = as-at 90일 초과(경고, REQ-515). Broker 유형은 필터 선택지에서 제거(G-246 확정: 브로커 2건 · test 행 모두 `CEX`로 백필하고 비활성 유지 기존 레코드 처리).
 
 **에러 Response**
 
@@ -400,7 +400,7 @@
 | feeAssetAsUsdtEquivalent | boolean | 선택 | `Fee asset paid, recorded as USDT equivalent` |
 | walletAddressFormat | string | DEX 필수 | 거래소가 확인한 주소 형식(예: `EVM`). 거래소별 설정값 |
 | referralLink · referralCode | string | DEX 필수 | `https://`만 |
-| settlementCycle · dayOfWeek | string | DEX 필수 | `DAILY`/`WEEKLY` · 요일(❓ G-393) |
+| settlementCycle · dayOfWeek | string | DEX 필수 | `DAILY`/`WEEKLY` · 요일(G-393 확정: 일 · 주만 두고 「사용자 표시용 정산 주기, 수집 주기와 별개」 명시) |
 | aggregationStart · aggregationEnd · updateTimeUtc | string | 필수 | 상대 일자(최대 7일 전) · `HH:mm` |
 | reason | string | 필수 | 감사 사유 |
 
@@ -462,7 +462,7 @@
 ```
 
 - 이름 변경 시 `slugRedirect: { "from": "…", "to": "…" }`(이전 URL 301, 확인 창에 「공개 URL이 바뀝니다」). 비활성화 시 랜딩·연동·선택 목록에서 즉시 제외, 상세 URL → DEX 랜딩. 저장 시 관련 캐시 무효화.
-- ApeX `referralCode` 저장 전 `Validate` — 파트너가 `is_valid false`면 라이브 링크로 저장 불가. EdgeX `registrationRate`는 읽기 전용(EdgeX 콘솔에서만 변경). Aster 섹션 여부 ❓ G-251 · G-035 · G-037, ApeX 키 모드 ❓ G-075.
+- ApeX `referralCode` 저장 전 `Validate` — 파트너가 `is_valid false`면 라이브 링크로 저장 불가. EdgeX `registrationRate`는 읽기 전용(EdgeX 콘솔에서만 변경). Aster 섹션 여부 G-251 확정: 둔다 — 필드는 G-035 · G-037 회신 후 확정 · G-035 · G-037, ApeX 키 모드 G-075 확정: 선택 표시 필드만(식별 키 아님) → ApeX `Account key mode` · `Re-key` 만들지 않음.
 
 **에러 Response**
 
@@ -597,7 +597,7 @@
 { "status": "success", "data": { "rows": [ { "no": 1, "integration": "LINKED", "exchangeType": "DEX", "exchange": "Lighter", "identifier": "0x7a3F9c1b2D4e5F60718293a4B5c6D7e8F90151E9", "dexAccountId": "…", "tuid": "990001234", "linkedAt": "2026-11-11T03:20:11Z", "accumulatedCashback": "120.00" } ], "accumulatedCashbackTotal": "120.00" }, "meta": { "requestId": "req_…", "pagination": { "page": 1, "size": 20, "totalCount": 1, "totalPages": 1 } } }
 ```
 
-- 컬럼 세부 ❓ G-238. 엑셀은 API-132(`Exports` 권한).
+- 컬럼 세부 G-238 확정: 한 컬럼 `UID / Wallet address`. 엑셀은 API-132(`Exports` 권한).
 
 **에러 Response**
 
@@ -613,7 +613,7 @@
 | URL | `/api/admin/linking-applications/search` |
 | 설명 | 기존 `Linking Management`·`Manual Linking Application`을 DEX 확인 중(`manual_link_pending`) 건까지 조회한다. Lighter 큐 = `processStatus = PENDING` + Lighter 저장 필터 |
 | 구분 | 기존·변경 ⚠경로 |
-| 권한 | Master · Operator · PM · CS(❓ 승인 권한 G-069) |
+| 권한 | 조회는 Master · Operator · PM · CS. 승인·거절은 API-109의 권한을 적용한다 |
 | 관련 기능 | FA-010 · FA-028 · FA-045 · BA-010 · BA-059 · BA-076 |
 
 **Request**
@@ -622,16 +622,16 @@
 |---|---|---|---|
 | exchangeType · exchangeNo | — | 선택 | |
 | processStatus | string | 선택 | 기존 상태 값(확인 중 포함) |
-| pendingReason | string | 선택 | `PARTNER_UNAVAILABLE` · `LIGHTER_MASK_COLLISION` · `APEX_ACCOUNT_ID_MISSING` · `MULTIPLE_DEX_ACCOUNTS`(이상 귀속 확인 대기) · `PRELINK_PAYOUT`(연동 전 잔액 송금 대기 — 승인·거절 대상 아님, 송금 결과로만 끝남, REQ-722) |
+| pendingReason | string | 선택 | `PARTNER_UNAVAILABLE` · `APEX_ACCOUNT_ID_MISSING` · `MULTIPLE_DEX_ACCOUNTS`(이상 귀속 확인 대기) · `PRELINK_PAYOUT`(연동 전 잔액 송금 대기 — 승인·거절 대상 아님, 송금 결과로만 끝남, REQ-722) |
 | keywordType · keyword | — | 선택 | API-107과 같음 |
 
 **Response (200 OK)**
 
 ```json
-{ "status": "success", "data": [ { "applicationId": "la_…", "tuid": "990001234", "exchange": "Lighter", "identifier": "0x7a3F9c1b2D4e5F60718293a4B5c6D7e8F90151E9", "pendingReason": "LIGHTER_MASK_COLLISION", "appliedAt": "2026-11-11T03:20:11Z", "attributionEvidence": { "found": true, "source": "LIGHTER_WEEKLY_CSV", "week": "2026-11-02" }, "autoRecheck": { "attempts": 2, "nextAt": "…", "expiresAt": "…" } } ], "meta": { "requestId": "req_…" } }
+{ "status": "success", "data": [ { "applicationId": "la_…", "tuid": "990001234", "exchange": "Lighter", "identifier": "0x7a3F9c1b2D4e5F60718293a4B5c6D7e8F90151E9", "pendingReason": "CHECK_UNAVAILABLE", "appliedAt": "2026-11-11T03:20:11Z", "attributionEvidence": { "found": true, "source": "DAILY_LEDGER", "ledgerDate": "2026-11-10" }, "autoRecheck": { "attempts": 2, "nextAt": "…", "expiresAt": "…" } } ], "meta": { "requestId": "req_…" } }
 ```
 
-- `attributionEvidence` = 귀속 원장에서 그 지갑을 찾았는지(승인 조건). 자동 재확인은 15분마다 최대 4회, 이후 운영 Slack 알림 → 운영자 판정(자동 만료 없음, G-068). Lighter CSV 미등장 처리는 보류(G-428).
+- `attributionEvidence` = 귀속 원장에서 그 지갑을 찾았는지(승인 조건). 자동 재확인은 15분마다 최대 4회, 이후 운영 Slack 알림 → 운영자 판정(자동 만료 없음, G-068).
 
 **에러 Response**
 
@@ -647,7 +647,7 @@
 | URL | `/api/admin/linking-applications/{applicationId}/decision` |
 | 설명 | 확인 중 건을 귀속 원장 확인 후 승인하거나 사유와 함께 거절한다. 원장에 없으면 승인 불가(운영자 재량 없음). 결과 알림 1회(FCM 100/101 · EMAIL 30/31). CS 접수 해제·정정 처리도 이 API의 `UNLINK` 동작으로 한다(화면 여부는 결정 대기) |
 | 구분 | 기존·변경 ⚠경로 |
-| 권한 | ❓ G-069(PM·CS 제외 여부) |
+| 권한 | Master · Operator만 실행 가능(G-223 · G-224). PM · CS는 조회만 가능 |
 | 관련 기능 | FA-005 · FA-010 · FA-045 · FA-047 · BA-005 · BA-010 · BA-011 · BA-076 · BA-078 |
 
 **Request**
@@ -656,8 +656,14 @@
 |---|---|---|---|
 | applicationId | string | 필수 | path |
 | action | string | 필수 | `APPROVE` / `REJECT` / `UNLINK` |
-| rejectReason | string | REJECT 필수 | 회원에게 보이는 사유(형식 ❓ G-074) |
-| reason | string | 필수 | 감사 사유 |
+| rejectReason | string | REJECT 필수 | 회원에게 보이는 사유(형식 G-074 확정: `Not a TetherMax referral` · `Bound before program start` · `Ambiguous match not confirmed` · `Other`. `Bound before program start`는 Lighter에서만 허용) |
+| reason | string | 필수 | 내부 감사 사유. 회원 안내와 이메일에는 `rejectReason`만 사용 |
+
+거절 요청 예시 (EdgeX)
+
+```json
+{ "action": "REJECT", "rejectReason": "Not a TetherMax referral", "reason": "Attribution ledger checked by operator." }
+```
 
 **Response (200 OK)**
 
@@ -667,13 +673,14 @@
 
 - 거절 후 같은 지갑 재연동은 처음부터 다시 검사. 승인 시 연동 전 잔액 처리(REQ-107)를 시작한다 — 10 USDT 미만이면 바로 연동 완료·이관, 이상이면 그 지갑으로 출금한 뒤 자동 연동(실패 = 연동 실패). 금액 기준 시각은 연동 신청 시각.
 
-- 대상은 귀속 확인 대기 건뿐이다. 송금 대기(`PRELINK_PAYOUT`) 건에 요청하면 409 `NOT_ATTRIBUTION_PENDING`. 같은 신청을 자동 재확인 · Lighter CSV가 먼저 확정했으면 409 `ALREADY_ACTIONED` — 연동 전 잔액 처리는 신청 1건당 한 번(정책 5-6 ④).
+- 대상은 귀속 확인 대기 건뿐이다. 송금 대기(`PRELINK_PAYOUT`) 건에 요청하면 409 `NOT_ATTRIBUTION_PENDING`. 같은 신청을 자동 재확인이 먼저 확정했으면 409 `ALREADY_ACTIONED` — 연동 전 잔액 처리는 신청 1건당 한 번(정책 5-6 ④).
 
 **에러 Response**
 
 | 상태 코드 | 에러 코드 | 조건 |
 |---|---|---|
 | 409 | `ALREADY_ACTIONED` | 다른 운영자가 먼저 처리(`Already actioned by {admin}`) |
+| 409 | `NOT_ATTRIBUTION_PENDING` | 귀속 확인 단계를 지난 신청(연동 전 잔액 송금 대기 등) |
 | 422 | `ATTRIBUTION_NOT_CONFIRMED` | 귀속 원장에 없는 지갑 승인 |
 
 #### API-110. 연동 감사 로그
@@ -692,7 +699,7 @@
 | 파라미터 | 타입 | 필수 | 설명 |
 |---|---|---|---|
 | from · to | string | 필수 | UTC |
-| action | string | 선택 | `CREATED` · `APPROVED` · `REJECTED` · `UNLINKED` · `DEX_ACCOUNT_ID_CHANGED` · `PRELINK_BALANCE_PAID_OUT` · `PRELINK_BALANCE_TRANSFERRED` · `LIGHTER_CSV_CONFIRMED`(Lighter CSV 자동 확정) · `GUEST_TO_MEMBER_TRANSFERRED`(CEX UID 게스트 → 회원 이관) |
+| action | string | 선택 | `CREATED` · `APPROVED` · `REJECTED` · `UNLINKED` · `DEX_ACCOUNT_ID_CHANGED` · `PRELINK_BALANCE_PAID_OUT` · `PRELINK_BALANCE_TRANSFERRED` · `GUEST_TO_MEMBER_TRANSFERRED`(CEX UID 게스트 → 회원 이관) |
 | actorType | string | 선택 | `SYSTEM` / `ADMIN` |
 | actorId | string | 선택 | 운영자 ID(`actorType = ADMIN`일 때) |
 | keywordType · keyword | — | 선택 | API-107과 같음 |
@@ -703,7 +710,7 @@
 { "status": "success", "data": [ { "at": "2026-11-11T07:00:00Z", "actor": "admin_07", "action": "APPROVED", "tuid": "990001234", "exchange": "Lighter", "identifier": "0x7a3F…", "before": "MANUAL_LINK_PENDING", "after": "LINKED", "reason": "…" } ], "meta": { "requestId": "req_…" } }
 ```
 
-- 예: 「이번 주 System이 자동 확정한 건」 = `{ "from": "2026-11-23T00:00:00Z", "to": "2026-11-29T23:59:59Z", "actorType": "SYSTEM", "action": "LIGHTER_CSV_CONFIRMED" }` → 행 `{ "actor": "System", "action": "LIGHTER_CSV_CONFIRMED", "tuid": "…", "exchange": "Lighter", "walletAddress": "0x…", "timestamp": "…" }`.
+- 예: 「이번 주 System이 자동 재확인으로 확정한 건」 = `{ "from": "2026-11-23T00:00:00Z", "to": "2026-11-29T23:59:59Z", "actorType": "SYSTEM", "action": "APPROVED" }` → 행 `{ "actor": "System", "action": "APPROVED", "tuid": "…", "exchange": "EdgeX", "walletAddress": "0x…", "timestamp": "…" }`.
 
 **에러 Response**
 
@@ -745,7 +752,7 @@
 ```
 
 - 미매칭 큐 화면·운영자 액션은 없다. 미연동 지갑 적립분(`UNLINKED_HELD`) · 연동 전 출금(`PRELINK_PAID`) · 거부 레코드(`REJECTED`, `rejectReason` = `INVALID_ADDRESS` · `INVALID_CHECKSUM` · `MISSING_FIELD` · `NOT_TETHERMAX_REFERRAL` · `WRONG_TOKEN` · `NOT_ELIGIBLE`)는 이 조회로 확인만 한다(REQ-576). `UNLINKED_HELD`는 그 지갑의 연동 신청 시 연동 전 잔액 처리(REQ-107)에 따라 `PRELINK_PAID`가 되거나 그 회원의 적립 레코드로 이관된다.
-- 금액은 전체 정밀도 문자열 + 통화. 회원 적립액은 절삭값으로 별도 필드. 산정식 = `총 커미션 × (1 − 마진율)`(G-046), ApeX 필드 ❓ G-021(🔴), Lighter 주간 형식 ❓ G-017.
+- 금액은 전체 정밀도 문자열 + 통화. 회원 적립액은 절삭값으로 별도 필드. 산정식 = `총 커미션 × (1 − 마진율)`(G-046). 원장 필드는 표준 요건 5필드(표준 요건 수락 전제, G-001 · G-021).
 
 **에러 Response**
 
@@ -780,7 +787,7 @@
 { "status": "success", "data": { "correctionId": "adj_…", "originalRecordId": "…", "amount": "-1.250000", "currency": "USDC", "effectiveDate": "2026-11-11" }, "meta": { "requestId": "req_…" } }
 ```
 
-- Lighter 원장은 정정 대상이 아니다(정정·clawback 없음, 유일한 음수 결과는 `Withheld`). 정정 규칙 세부 ❓ G-331.
+- Lighter 원장은 정정 대상이 아니다(정정·clawback 없음, 유일한 음수 결과는 `Withheld`). 정정 규칙 세부 G-331 확정: 확정 전 직접 수정 불가 · 정정의 정정 허용 · 파트너 음수 정정은 향후 적립에서 상계 · Lighter 정정 레코드 생성 차단.
 
 **에러 Response**
 
@@ -789,13 +796,15 @@
 | 404 | `NOT_FOUND` | 없는 원본 레코드 |
 | 422 | `VALIDATION_ERROR` | Lighter 레코드 정정 시도 |
 
-#### API-115. Lighter 주간 CSV 가져오기 (Preview·Commit)
+#### API-115. Lighter 주간 CSV 가져오기 (Preview·Commit) — 제외
+
+> **제외 — G-428 확정: Lighter도 표준 요건(단건·대량 귀속 조회 + T-1 일일 원장)으로 수집한다. 이 API는 만들지 않는다.**
 
 | 항목 | 내용 |
 |---|---|
 | Method | POST |
 | URL | `/api/admin/excel/upload` |
-| 설명 | 기존 `Excel > Upload`에 템플릿 `Lighter weekly CSV`를 추가한다. 2단계: `step=PREVIEW`(검증·요약, 저장 없음) → `step=COMMIT`(확정). 확정하면 그 주 `Accruing` 추정치를 대체하고, CSV에 나온 **귀속 확인 대기** Lighter 연동의 귀속을 확정해 연동 전 잔액 처리를 시작한다(정책 5-6 ④ · REQ-722 — 바로 연동 완료되는 건만 FCM 102, 송금 대기로 가면 송금 성공 때 1회). Lighter 온보딩 보류(G-428) |
+| 설명 | 기존 `Excel > Upload`에 템플릿 `Lighter weekly CSV`를 추가한다. 2단계: `step=PREVIEW`(검증·요약, 저장 없음) → `step=COMMIT`(확정). 확정하면 그 주 Lighter 금액이 회원 화면에 반영되고, CSV에 나온 **귀속 확인 대기** Lighter 연동의 귀속을 확정해 연동 전 잔액 처리를 시작한다(정책 5-6 ④ · REQ-722 — 바로 연동 완료되는 건만 FCM 102, 송금 대기로 가면 송금 성공 때 1회). Lighter 온보딩 보류(G-428) |
 | 구분 | 기존·변경 ⚠경로 |
 | 권한 | Master · Operator(권한 없으면 템플릿 선택지 비활성) |
 | 관련 기능 | FA-035 · FA-052 · BA-027 · BA-066 · BA-083 |
@@ -832,7 +841,7 @@
 
 - 예: `week` = `2026-11-03`(화요일) → `Invalid week`. 정상 주차는 월요일(`2026-11-02`).
 - 거부 사유 문자열: `Invalid week` · `Empty address` · `Invalid address` · `Invalid checksum` · `Not eligible` · `Invalid amount` · `Invalid status` · `Missing or invalid tx hash` · `Duplicate line`. 거부 행 리포트 다운로드 제공.
-- COMMIT 응답: `{ paidRows, withheldRows, unlinkedRows, confirmedLinks }` — `unlinkedRows` = 연동 없는 지갑 행(미연동 지갑 적립분으로 보관, 연동 신청 시 REQ-107 처리). 전 행 거절이면 이력에 `Failed`. 교체된 파일은 History에 보존·감사. 템플릿 ❓ G-338.
+- COMMIT 응답: `{ paidRows, withheldRows, unlinkedRows, confirmedLinks }` — `unlinkedRows` = 연동 없는 지갑 행(미연동 지갑 적립분으로 보관, 연동 신청 시 REQ-107 처리). 전 행 거절이면 이력에 `Failed`. 교체된 파일은 History에 보존·감사. 템플릿 G-338 확정: UTF-8 · 쉼표 · 50,000행 · 20 MB · ISO 8601 · 소수 6자리 · 동시 잠금 `Import in progress by {admin}` · 재업로드 `This file was already imported on {date} by {admin}`.
 - ApeX·EdgeX·Aster 일별 원장 CSV 템플릿은 두지 않는다.
 
 **에러 Response**
@@ -868,7 +877,7 @@
 {
   "status": "success",
   "data": [
-    { "exchangeNo": 41, "dex": "Lighter", "path": "API_POLLING_WEEKLY_CSV", "status": "LIVE", "lastLedgerAt": "2026-11-10T09:00:00Z",
+    { "exchangeNo": 41, "dex": "Lighter", "path": "API_DAILY_LEDGER", "status": "LIVE", "lastLedgerAt": "2026-11-10T09:00:00Z",
       "lighter": { "todayStatus": "OK", "lastPollSuccessAt": "…", "nextPollAt": "…", "consecutiveFailures": 0, "lastError": null, "rateLimitRequests24h": 96 } },
     { "exchangeNo": 42, "dex": "ApeX", "path": "API_WEBHOOK", "status": "DEGRADED", "lastLedgerAt": "…", "degradedSince": "…" }
   ],
@@ -876,7 +885,7 @@
 }
 ```
 
-- `status` = `LIVE`/`DEGRADED`/`MANUAL`/`NOT_INTEGRATED`. `DEGRADED` 판정 임계 ❓ G-348.
+- `status` = `LIVE`/`DEGRADED`/`MANUAL`/`NOT_INTEGRATED`. `DEGRADED` 판정 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간.
 
 **에러 Response**
 
@@ -1027,7 +1036,7 @@
 }
 ```
 
-- 값 출처: 네트워크 ❓ G-044 · 재시도 ❓ G-117·G-118·G-120 · 지연 임계 ❓ G-348 · 재확인 15분 × 4회(G-068) · 시도 제한 ❓ G-063(0 = 비활성) · Aster 상한은 정책의 현재값(고정값 아님) · Batch 시각은 현재값 12:30 UTC.
+- 값 출처: 네트워크 ❓ G-044 · 재시도 ❓ G-117·G-118·G-120 · 지연 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간 · 재확인 15분 × 4회(G-068) · 시도 제한 G-063 확정: 1차 출시 미도입 — 기존 CEX처럼 캡차만. REQ-073 다이얼로그·어드민 제한 타입 추가 안 함(0 = 비활성) · Aster 상한은 정책의 현재값(고정값 아님) · Batch 시각은 현재값 12:30 UTC.
 
 **에러 Response**
 
@@ -1064,7 +1073,7 @@
 { "status": "success", "data": { "entryId": "er_…", "accountId": "acc_8f21c0", "amount": "5.00", "action": "PAY" }, "meta": { "requestId": "req_…" } }
 ```
 
-- `회원 수동 캐시백`의 DEX 포함 여부 ❓ G-240.
+- `회원 수동 캐시백`의 DEX 포함 여부 G-240 확정: 회원 수동 캐시백은 DEX 행 포함, 인도네시안 캐시백 내역은 미포함.
 
 **에러 Response**
 
@@ -1096,7 +1105,7 @@
 { "status": "success", "data": { "count": 5, "rows": [ { "exchangeType": "DEX", "exchange": "Lighter", "walletAddress": "0x7a3F9c1b2D4e5F60718293a4B5c6D7e8F90151E9", "dexAccountId": "…", "linkStatus": "LINKED", "referralStatus": "Confirmed", "tier": "Unknown", "remainingCashback": "35.00", "receivedCashback": "80.00", "withdrawable": "35.00" } ] }, "meta": { "requestId": "req_…" } }
 ```
 
-- `receivedCashback` = 출금한 금액, `remainingCashback` = 잔액. Lighter `referralStatus` `Confirmed` / `Linked – confirming referral`. `연동계정수` 분리 표기 ❓ G-237.
+- `receivedCashback` = 출금한 금액, `remainingCashback` = 잔액. Lighter `referralStatus` `Confirmed` / `Linked – confirming referral`. `연동계정수` 분리 표기 G-237 확정: 분리 표기 `UID {n} · 지갑 {n}` + 필터 `UID만 / 지갑만 / 둘 다`.
 
 **에러 Response**
 
@@ -1121,7 +1130,7 @@
 |---|---|---|---|
 | version | integer | 필수 | |
 | listings | object[] | 선택 | `[{ "exchangeNo": 41, "priority": 1 }]` |
-| areas | object | 선택 | 영역별·언어별 콘텐츠(비교 행 3~10, 3단계 2~5 등) |
+| areas | object | 선택 | 언어별 랜딩 영역 콘텐츠(REQ-628). `{ "{lang}": { hero{title, lede}, sectionButtons[2], trust{title, subline, linkLabel, labels[2]}, venueArea{title, description, cardsPerView, overflow}, comparisonRows[3~10]{label, cex, dex}, stepsArea{title, buttonLabel}, steps[2~5]{title, body, duration, imageMediaId}, educationTiles[2~6]{tag, title, body, imageMediaId}, learnAndEarn{tag, title, description, buttonLabel}, finalCta{title, description, buttonLabel, buttonUrl}, promoBanners[0~5]{exchangeNo, title, subtitle, desktopImageMediaId, mobileImageMediaId, joinUrl, startAt?, endAt?} } }`. 빈 칸은 저장 가능(사용자 화면은 언어팩 기본 문구, G-366). 검증: 개수 범위 · 글자 수 · URL · 이미지 규격(REQ-628) — 키는 API-003 응답과 같다. 파트너 카드 필드는 거래소별이라 API-128 `section=LANDING_CARD` |
 | reason | string | 선택 | |
 
 **Response (200 OK)**
@@ -1130,7 +1139,7 @@
 { "status": "success", "data": { "version": 9, "listings": [ { "exchangeNo": 41, "priority": 1 } ], "addable": [ 44 ] }, "meta": { "requestId": "req_…" } }
 ```
 
-- 언어 구조 = 언어 매트릭스(EN·KO 필수, RU·ID 선택, G-261), 언어팩 키와 편집 영역 중복 ❓ G-366(🔴). 필수 필드가 빈 언어가 있으면 저장 차단, 오류는 언어 → 필드 순(`details.fields[].field` = `ko.hero.title`).
+- 언어 구조 = 언어 매트릭스(EN·KO 필수, RU·ID 선택, G-261), 언어팩 키와 편집 영역 중복 G-366 확정: 운영자 편집 영역도 고정 폴백 문구로 언어팩에 둔다(키 수 재산정은 언어팩 작업 때)(🔴). 필수 필드가 빈 언어가 있으면 저장 차단, 오류는 언어 → 필드 순(`details.fields[].field` = `ko.hero.title`).
 
 **에러 Response**
 
@@ -1161,7 +1170,7 @@
 | content | object | 필수 | 언어별 필드. 미디어는 API-129 업로드 ID로 참조 |
 
 ```json
-{ "version": 3, "section": "DETAIL", "content": { "en": { "introduction": "…", "markets": ["BTC"], "deposit": ["CRYPTO"], "rightBox": [ { "tab": "Taker", "rows": [] } ], "keyFeatures": { "title": "…", "items": [ { "thumbnailId": "md_…", "description": "…" } ] }, "structure": { "minVolume": "1000", "maxVolume": "250000" }, "banner": { "desktopId": "md_…", "mobileId": "md_…" }, "terms": null, "faq": [] } } }
+{ "version": 3, "section": "DETAIL", "content": { "en": { "introduction": "…", "markets": ["BTC"], "deposit": ["CRYPTO"], "additionalNotes": "…", "rightBox": [ { "tabName": "Taker", "line1": "Trading fees cashback up to", "line2": "{요율}", "getStartedUrl": "https://…" } ], "keyFeatures": { "title": "…", "items": [ { "thumbnailId": "md_…", "description": "…" } ] }, "structure": { "minVolume": "1000", "maxVolume": "250000" }, "guide": { "title": "…", "steps": [ { "title": "…", "description": "…", "desktopMediaId": "md_…", "mobileMediaId": "md_…" } ] }, "banner": { "desktopId": "md_…", "mobileId": "md_…", "liner": "…", "ctaTitle": "Join Now", "ctaUrl": "https://…", "style": { "fontSize": "…", "fontWeight": "…", "color": "…" } }, "terms": null, "faq": [ { "sectionName": "…", "items": [ { "q": "…", "a": "…" } ] } ] } } }
 ```
 
 **Response (200 OK)**
@@ -1170,8 +1179,10 @@
 { "status": "success", "data": { "version": 4, "cacheInvalidated": true }, "meta": { "requestId": "req_…" } }
 ```
 
+- `section=LANDING_CARD`의 `content.{lang}` = `{ line1, line2, line3, bullets[≤4], learnMoreUrl, getStartedUrl, tvlEndpoint, volumeEndpoint }`(REQ-617, G-269 · G-441). 랜딩 카드(API-003 `venues[].card`)에는 Line 1~3 · 링크만 나가고, `bullets`는 상세 히어로 혜택 줄(API-004 `hero.benefits`)로 나간다(G-157 · G-441).
+- Right Box 탭 1개 = 상세 오퍼 박스 토글 1칸(G-438), FAQ는 섹션마다 질문·답변 쌍 1개 이상·섹션 합계 2,000자(G-439), `additionalNotes` = 상세 히어로 자격 안내(선택, G-440). 사용자 응답 대응은 API-004.
 - 검증(UI·서버 동일): `Introduction` 필수 300자 · `Key Features Title` 40자 · Right Box 탭 최대 3·전부 필수 · Structure 양의 정수·최대 1조·최대 > 최소 · 배너 데스크톱 854×173 `.webp` + 모바일 2:1 `.webp` 둘 다 · 약관 2,000자(선택) · Venue `Line 1` 20자 · `Line 2` 10자. 글자 수 = 사용자가 보는 글자 단위.
-- 단계 가이드·FAQ 구조 ❓ G-270 · G-271 · G-272, 약관 ❓ G-369.
+- 단계 가이드·FAQ 구조 G-270 확정: PRD 구조 — Guide Title 100 · 단계 1~5 · Step Title 80 · Description 500 · 데스크톱 2:1 + 모바일 1:1 .mp4 필수 · G-271 확정: 단계 수 축소 시 삭제될 단계 명시 확인 창 · 단계 수는 언어 공통 · 영상은 언어별 선택 업로드 · G-272 · G-439 확정: 섹션 단위 — Section Name 40자 + 질문·답변 쌍(섹션 합계 2,000자), 약관 ❓ G-369.
 
 **에러 Response**
 
@@ -1197,7 +1208,7 @@
 | 파라미터 | 타입 | 필수 | 설명 |
 |---|---|---|---|
 | file | file | 필수 | `.webp`·`.mp4` 등 슬롯이 허용하는 형식 |
-| slot | string | 필수 | `DETAIL_BANNER_DESKTOP` · `DETAIL_BANNER_MOBILE` · `KEY_FEATURE_THUMBNAIL` · `WALLET_GUIDE_MOBILE` … (슬롯별 형식·비율·용량) |
+| slot | string | 필수 | `DETAIL_BANNER_DESKTOP` · `DETAIL_BANNER_MOBILE` · `KEY_FEATURE_THUMBNAIL` · `GUIDE_STEP_DESKTOP`(2:1 `.mp4`) · `GUIDE_STEP_MOBILE`(1:1 `.mp4`) · `WALLET_GUIDE_MOBILE` … (슬롯별 형식·비율·용량) |
 | altText | string | 필수 | 대체 텍스트 |
 
 **Response (201 Created)**
@@ -1273,7 +1284,7 @@
 |---|---|---|---|
 | channel | string | 필수 | `PUSH` / `EMAIL_CAMPAIGN` / `COUPON` |
 | linkedExchanges | object | 선택 | `{ "scope": "DEX" }` 또는 `{ "exchangeNos": [41, 42] }`, `NOT_LINKED` 포함 가능 |
-| otherBlocks | object | 선택 | 기존 블록(회원 구분·커미션 캐시백·이벤트 리워드·출금 여부·날짜) — CEX+DEX 합산 여부 ❓ G-301 · G-303 |
+| otherBlocks | object | 선택 | 기존 블록(회원 구분·커미션 캐시백·이벤트 리워드·출금 여부·날짜) — CEX+DEX 합산 여부 G-301 · G-303 확정: DEX 기준일 = 연동일 · 금액/날짜 선택지는 기존 그대로 |
 
 **Response (200 OK)**
 
@@ -1313,7 +1324,7 @@
 { "status": "success", "data": { "mode": "IMMEDIATE", "downloadUrl": "…", "rows": 840 }, "meta": { "requestId": "req_…" } }
 ```
 
-- 대량은 `mode: "BACKGROUND"` + 완료 알림 + 만료 링크(10,000행 기준·7일 만료·수식 이스케이프 ❓ G-232).
+- 대량은 `mode: "BACKGROUND"` + 완료 알림 + 만료 링크(10,000행 기준·7일 만료·수식 이스케이프 G-232 확정: 10,000행까지 즉시, 초과 시 백그라운드 + 알림 + 7일 만료 링크 · `=` `+` `-` `@` 이스케이프).
 
 **에러 Response**
 
@@ -1358,7 +1369,7 @@
 |---|---|
 | Method | POST |
 | URL | `/api/admin/global-leagues` |
-| 설명 | 생성 폼 m 운영 거래소에 DEX를 고를 수 있게 한다. 나머지 필드·제약 기존 그대로, 리그 1개 = 거래소 1개, DEX 리그 생성 시 혜택 카드 자동 생성 |
+| 설명 | 생성 폼의 운영 거래소에 DEX 4곳을 추가한다(Lighter 포함, G-428). 나머지 필드·제약 기존 그대로, 리그 1개 = 거래소 1개, DEX 리그 생성 시 혜택 카드 자동 생성 |
 | 구분 | 기존·변경 ⚠경로 |
 | 권한 | Master · Operator · PM |
 | 관련 기능 | FA-060 · BA-091 |
@@ -1380,7 +1391,7 @@
 { "status": "success", "data": { "leagueId": "gl_…", "url": "/golbal_league_{exchangename}_for_team_{n}", "benefitCardCreated": true }, "meta": { "requestId": "req_…" } }
 ```
 
-- URL의 `{exchangename}` DEX 값 ❓ G-398. 점수 = 커미션 캐시백.
+- URL의 `{exchangename}` DEX 값 G-398 확정: 슬러그(`apex` · `edgex` · `aster`). 점수 = 커미션 캐시백.
 
 **에러 Response**
 
@@ -1395,7 +1406,7 @@
 |---|---|
 | Method | GET |
 | URL | `/api/admin/dex/reports` |
-| 설명 | 기간·필터별 DEX 리포트(합산 USDT, USDC 정산 DEX의 커미션 수치는 USDC 유지), Lighter 주간 요약(`RPT-4`), Aster 월 상한 소진율 |
+| 설명 | 기간·필터별 DEX 리포트(합산 USDT, USDC 정산 DEX의 커미션 수치는 USDC 유지), DEX별 요약(`RPT-5`, Lighter 포함), Aster 월 상한 소진율 |
 | 구분 | 신규 |
 | 권한 | Master · Operator · PM |
 | 관련 기능 | FA-026 · FA-055 · BA-030 · BA-057 · BA-086 |
@@ -1404,7 +1415,7 @@
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |---|---|---|---|
-| report | string | 필수 | `SUMMARY` · `LIGHTER_WEEKLY` · `ASTER_CAP` |
+| report | string | 필수 | `SUMMARY` · `DEX` · `ASTER_CAP` |
 | from · to | string | 필수 | |
 | exchangeNo | integer | 선택 | |
 
@@ -1414,7 +1425,7 @@
 { "status": "success", "data": { "report": "ASTER_CAP", "month": "2026-11", "capUsdt": "20000", "usedUsdt": "…", "usageRate": "…", "source": "AUTO" }, "meta": { "requestId": "req_…" } }
 ```
 
-- Aster 상한 초과 처리 ❓ G-039·G-344. 내보내기는 API-132(`DEX_REPORT`).
+- Aster 상한 초과 처리 G-039·G-344 확정: Lighter 주간 요약 · ApeX/EdgeX 요약 유지, Aster 바인딩 리포트 삭제 → 월 상한 소진율 리포트로 대체(소진율 자동/수동은 G-039 회신 후). 내보내기는 API-132(`DEX_REPORT`).
 
 **에러 Response**
 
@@ -1438,7 +1449,7 @@
 | 파라미터 | 타입 | 필수 | 설명 |
 |---|---|---|---|
 | exchangeNo | integer | 필수 | 퀴즈 거래소. DEX 선택 가능, 등록 후 수정 불가, 한 번에 한 거래소 |
-| rewardTiers | object[] | 필수 | 점수 단계별 보상 `[{ "score": 0, "amount": "…" }, { "score": 1, "amount": "…" }, { "score": 2, "amount": "…" }]` — USDT 10진 문자열, 금액 값 ❓ G-205 |
+| rewardTiers | object[] | 필수 | 점수 단계별 보상 `[{ "score": 0, "amount": "…" }, { "score": 1, "amount": "…" }, { "score": 2, "amount": "…" }]` — USDT 10진 문자열, 금액 값 G-205 확정: 콘텐츠(문항·해설·아티클)는 운영 작성 · 보상 단계 금액은 백오피스 설정 · 제출 시 완료(점수 무관), 재응시 없음 |
 | version | integer | 수정 시 필수 | 동시 편집 |
 
 **Response (200 OK)**
@@ -1447,7 +1458,7 @@
 { "status": "success", "data": { "quizNo": 31, "exchangeNo": 41, "rewardTiers": [ { "score": 0, "amount": "…" }, { "score": 1, "amount": "…" }, { "score": 2, "amount": "…" } ], "version": 2 }, "meta": { "requestId": "req_…" } }
 ```
 
-- 기존 규칙 그대로: 오답 재시도 TUID당 UTC 일 10회 · 퀴즈 쿠폰 30일 · 사전 공개 최소 1일 · 종료 후 7일 노출 · 합계 최대 90일.
+- DEX 모듈 4·5는 최초 채점 완료 후 재응시 불가(G-205·207). 기존 운영 규칙은 퀴즈 쿠폰 30일 · 사전 공개 최소 1일 · 종료 후 7일 노출 · 합계 최대 90일.
 - 보상 경로 = 현행 퀴즈 쿠폰 경로(G-206). 사용자 채점 결과는 API-020.
 
 **에러 Response**
@@ -1486,7 +1497,7 @@
 
 - 백오피스는 지갑 전체 주소를 표시한다. 녹화는 비공개 저장 · 백오피스 안 스트리밍만(REQ-732).
 - 관리자 응답이 10분 안에 없으면 시스템이 자동 실패 처리한다(기존 CEX). 신청 접수 알림은 기존 소유 확인 Slack 채널.
-- 지갑 연동 시도 횟수 초과를 제한 타입으로 넣을지 ❓ G-063.
+- 지갑 연동 시도 횟수 초과를 제한 타입으로 넣을지 G-063 확정: 1차 출시 미도입 — 기존 CEX처럼 캡차만. REQ-073 다이얼로그·어드민 제한 타입 추가 안 함.
 
 **에러 Response**
 
@@ -1519,7 +1530,7 @@
 { "status": "success", "data": [ { "code": "BITGET", "name": "Bitget" }, { "code": null, "name": "ApeX" } ], "meta": { "requestId": "req_…" } }
 ```
 
-- DEX `code` 값 ❓ G-318. Lighter 처리 ❓ G-317(목록 제외 / `INVALID_EXCHANGE` / 운영 판단). 참여자 검색의 지갑 부분 일치 대소문자 처리는 G-062와 같은 결정.
+- DEX `code` 값 G-318 확정: `LIGHTER` · `APEX` · `EDGEX` · `ASTER`(기존 대문자 규칙). Lighter 처리 G-317 확정: ① 목록에서 뺌(Lighter 보류 중)(목록 제외 / `INVALID_EXCHANGE` / 운영 판단). 참여자 검색의 지갑 부분 일치 대소문자 처리는 G-062와 같은 결정.
 
 **에러 Response**
 
@@ -1635,16 +1646,16 @@
 
 | 작업 ID | 이름 | 트리거·주기 | 처리 | 출력 | 실패 처리 | 관련 기능 |
 |---|---|---|---|---|---|---|
-| JOB-D01 | Lighter 폴링 | 시간당(레이트리밋 분당 8회 / Builder 80회 안에서) | `userReferrals`(커서, 최대 300) → 귀속 캐시(마스킹 주소·`is_eligible`·바인딩 시각) 갱신 · `referral/stats`(최근 12주) → 주중 추정치 · main account `transfer_history?type=ReferralProgramPayout` → 주간 이체 | 귀속 캐시, 추정치, 이체 내역 | 연속 실패 → 수집 상태 `DEGRADED`·운영 알림 `Polling failing`(JOB-D12). 캐시가 비면 연동은 확인 중으로 접수 | BA-021 · BA-027 |
-| JOB-D02 | ApeX 원장 수집 | 시간당(정산 후 1시간 내) + API-201 트리거 | 원장 조회 → `record_id` 멱등 저장 → JOB-D05 | ApeX 원장 레코드 | 🔴 원장 금액 필드 ❓ G-021 — 확정 전 비활성. 백오프 재시도 | BA-021 · BA-028 |
-| JOB-D03 | EdgeX 원장 수집 | 일 1회(01:00 UTC 이후) | 회원당 하루 1건 레코드 `id` 멱등 저장, `payoutId`·`transferId`·`collateralTransactionId` 대조 참조 저장, 0.01 USDC 미만·지급 실패 이월 처리 → JOB-D05 | EdgeX 원장 레코드 | 엔드포인트 ⏳ G-031. 03:00 UTC까지 미도착이면 지연(임계 ❓ G-348) | BA-021 · BA-029 |
+| JOB-D01 | Lighter 폴링 — 제외(G-428, Lighter도 공통 수집 JOB) | 시간당(레이트리밋 분당 8회 / Builder 80회 안에서) | `userReferrals`(커서, 최대 300) → 귀속 캐시(마스킹 주소·`is_eligible`·바인딩 시각) 갱신 · `referral/stats`(최근 12주) → 주중 추정치 · main account `transfer_history?type=ReferralProgramPayout` → 주간 이체 | 귀속 캐시, 추정치, 이체 내역 | 연속 실패 → 수집 상태 `DEGRADED`·운영 알림 `Polling failing`(JOB-D12). 캐시가 비면 연동은 확인 중으로 접수 | BA-021 · BA-027 |
+| JOB-D02 | ApeX 원장 수집 | 시간당(정산 후 1시간 내) + API-201 트리거 | 원장 조회 → `record_id` 멱등 저장 → JOB-D05 | ApeX 원장 레코드 | 표준 원장 5필드(G-021). 백오프 재시도 | BA-021 · BA-028 |
+| JOB-D03 | EdgeX 원장 수집 | 일 1회(01:00 UTC 이후) | 회원당 하루 1건 레코드 `id` 멱등 저장, `payoutId`·`transferId`·`collateralTransactionId` 대조 참조 저장, 0.01 USDC 미만·지급 실패 이월 처리 → JOB-D05 | EdgeX 원장 레코드 | 엔드포인트 ⏳ G-031. 03:00 UTC까지 미도착이면 지연(임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간) | BA-021 · BA-029 |
 | JOB-D04 | Aster 원장 수집 | 일 1회(09:00 UTC 공개 후) | `tranId` 멱등 저장, `usdtValue`·`payoutPrice`·`priceTime` 보관, 월 상한 소진율 갱신 → JOB-D05 | Aster 원장 레코드, 소진율 | 🔴 엔드포인트·필드 ⏳ G-035·G-373. `usdtValue` 누락 행 거부 | BA-021 · BA-030 |
 | JOB-D05 | 캐시백 산정·적립 | 원장 저장 이벤트 | 행 검증(필수 키·주소·레퍼럴 코드) → 매칭(거래일에 주소 + DEX를 연동 완료로 보유한 회원, 주소 형식별 비교. 없으면 미연동 지갑 적립분으로 보관 — 그 지갑에 연동 신청이 들어오면 API-007 · API-109 · JOB-D07이 연동 전 잔액 처리. 이미 연동 완료된 지갑의 연동 신청 시각 이전 거래분이면 도착 시 늦게 온 연동 전 금액 판정 — REQ-721, 정책 5-6 ⑪. 거래 시각 없이 하루 1건인 원장(EdgeX)은 레코드 날짜 < 연동 신청 날짜(UTC)일 때만 연동 전, 신청 당일 레코드는 연동한 회원 몫 — G-436) → 산정식 적용 → 2자리 절삭 적립 → 늦은 레코드면 합계·요약·랭킹 재계산 → UID 예외 등록 지갑 제외 → 수집 상태 `LIVE` 갱신 · FCM 103 이벤트 · 맥스보드 원장 완료 상태(JOB-D14) | 회원 적립, 미연동 지갑 적립분, 거부 레코드(사유) | 산정식 = `총 커미션 × (1 − 마진율)`(G-046). 멱등 키(❓ G-332)로 1회 적립 보장 | BA-022 · BA-023 · BA-024 · BA-031 |
 | JOB-D07 | 확인 중 연동 자동 재확인 | 설정 주기 | **귀속 확인 대기**(`manual_link_pending` 중 `PARTNER_LOOKUP`) 건만 파트너 조회로 다시 판정 — 송금 대기 건은 대상 아님(REQ-722) → 확정이면 연동 전 잔액 처리(REQ-107 — 10 USDT 미만은 바로 `연동 완료`·이관, 이상은 그 지갑으로 출금 후 자동 연동)·알림 1회, 확정적 거절이면 실패·알림 1회, 15분마다 최대 4회 뒤에도 미확정이면 운영 Slack 알림(자동 만료 없음) | 상태 전이 | G-068 확정 | FA-005 · FA-010 · BA-005 · BA-010 |
 | JOB-D08 | 제한 지역 동기화 | 매일 1회 | 파트너 restrictions API → DEX 레코드 `제한 지역` 후보 갱신(운영자 편집값 보존, 감사 `System`) | 제한 지역 | 실패 시 마지막 값 유지 + 운영 알림 | FA-036 · BA-067 |
 | JOB-D09 | DefiLlama 캐시 갱신 | 설정 주기(24시간 캐시) | TVL `api.llama.fi/tvl/{slug}` · 24H 거래량 `/summary/derivatives/{slug}`(slug `aster`·`lighter`·`edgex`·`apex-protocol`) | 지표 캐시 | 실패 시 24시간은 마지막 값(`stale`), 그 뒤 `null` | FA-014 · BA-040 |
 | JOB-D10 | 지급 실행 (Wallet B) | 자동 지급 신청 생성 이벤트(API-011 · API-018) · 연동 전 잔액 출금 요청(API-007 · API-109 · JOB-D07, REQ-107) + 재시도 스케줄 | **지급 구분 `payoutKind`** = `MEMBER_AUTO`(회원 자동 지급) / `PRELINK`(연동 전 출금, REQ-720 · REQ-721). 계정별 1건: 송금 직전 대조(레퍼럴 코드·지갑·DEX 계정 ID) → 네트워크 설정 확인 → Wallet B 잔액 확인(부족 = 지연, 다음 충전 후) → 송금(요청액 = 도착액, 가스 테더맥스 부담) → 확정 시 tx 해시 저장 `SENT` · 드롭·리버트·가스 급등·nonce 충돌·혼잡은 재시도 · RPC 타임아웃은 재전송 없이 결과 확인 · 재시도 소진 시 `FAILED` + 그 계정 금액만 **그 요청이 차감한 잔액**으로 전액 복원 — 지급 요청에 차감 잔액 종류 `debitSource`를 저장해 참조(`ACCOUNT_BALANCE` = 캐시백 자동 지급(API-011) → 그 계정의 회원 잔액 / `INVITATION_REWARD` = 초대 리워드(API-018) → 회원의 `Available Invitation Rewards`, 지갑 캐시백에 더하지 않음 / `PRELINK_BALANCE` = 연동 전 출금 → 그 계정의 연동 전 잔액, 연동 신청 중이면 연동 실패이고 송금 대기 중 따로 보관한 늦은 금액과 합쳐 미연동 보관 — 정책 5-6 ⑧·⑩) · 성공 후 `MEMBER_AUTO`만 TP·초대 리워드 실적·첫 출금 혜택 반영(자동 지급 완료 = 출금), `PRELINK`은 혜택 없이 연동 신청 중이면 연동 완료 1회(정책 5-6 ⑦) · 상태 변화마다 JOB-D16 | 지급 기록, 잔액 복원, 결과 알림 이벤트(JOB-D13) | 계정별 지급 최대 1회(모든 재시도에서). 재시도 값 ❓ G-117·G-118·G-120, 대조 불일치 ❓ G-121·G-122 | FA-005 · BA-005 · BA-018 · BA-032 · BA-034 · BA-035 · BA-050 · BA-051 · BA-104 |
-| JOB-D12 | 수집 상태 판정·운영 알림 | 수집 실행 후 + 주기 점검 | DEX별 `LIVE`/`DEGRADED` 판정(예정 시각 + 임계), 운영 알림 공통 규칙(조건 시 1건, 해소까지 최대 24시간에 1번, 해소 시 종료): 귀속 확인 대기 자동 재확인 4회 초과(운영 Slack) · `Degraded` · 수집 실패 · 확정 기한 · Lighter `Polling failing`·`Weekly CSV late` · ApeX `ledger delayed`·중복 지갑 신청 · 원장 D+1 미도착 · Wallet B 부족 · Aster 상한 초과 · 오프보딩 DEX 데이터 유입 | 수집 상태, 운영 메시지 | 알림에 지갑·UID·DEX 계정 ID 금지. 임계 ❓ G-348 | BA-025 · BA-107 |
+| JOB-D12 | 수집 상태 판정·운영 알림 | 수집 실행 후 + 주기 점검 | DEX별 `LIVE`/`DEGRADED` 판정(예정 시각 + 임계), 운영 알림 공통 규칙(조건 시 1건, 해소까지 최대 24시간에 1번, 해소 시 종료): 귀속 확인 대기 자동 재확인 4회 초과(운영 Slack) · `Degraded` · 수집 실패 · 확정 기한 · Lighter `Polling failing`·`Weekly CSV late` · ApeX `ledger delayed`·중복 지갑 신청 · 원장 D+1 미도착 · Wallet B 부족 · Aster 상한 초과 · 오프보딩 DEX 데이터 유입 | 수집 상태, 운영 메시지 | 알림에 지갑·UID·DEX 계정 ID 금지. 임계 G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 월 23:59 UTC + 2시간 · 공통 24시간 | BA-025 · BA-107 |
 | JOB-D13 | 회원 알림 발송 | 상태 확정 이벤트 | 연동(FCM 100·101·102, EMAIL 30·31·32) · 적립(FCM 103 — ApeX는 회원별로 하루치를 모아 1회, 본문 금액 = 그날 적립 합계: 시간당 적립 24건 → 푸시 1건. 날짜 경계·발송 시각 ❓ G-427) · 보류(FCM 106) · 출금(발송 여부·단위는 현행 정책 — DEX 지갑 완료·실패 푸시는 FCM 104·105, 출금 메일) · EMAIL 28·29 · 기존 행 DEX 분기(FCM 26·27·29·31·32·36·37~41·63~67, EMAIL 16~20·24·25) · 맥스보드 95~99 | 발송 기록 | 이벤트·회원당 1회(이벤트 ID 멱등). 발송 실패해도 판정 유지 + 실패 기록, 수동 재발송 | BA-018 · BA-035 · BA-046 · BA-101 · BA-102 · BA-103 · BA-104 · BA-105 · BA-106 |
 | JOB-D14 | 맥스보드 원장 완료 연계 | 원장 저장·마감 | (거래소, 반영일)별 원장 완료/미완료 상태 생성 → 빙고 Batch(설정값 12:30 UTC)가 미완료 날짜를 끊김으로 판정하지 않고 다음 Batch로 넘김 → `batchDelayed` 판정 | 반영일별 완료 상태 | 정정이 이미 반영된 날짜에 생기는 경우 ❓ G-390 | FA-018 · BA-044 |
 | JOB-D15 | 10분 주기 자동 지급 | **10분마다** | 회원의 계정별 출금 가능액을 잔액 서비스(API-010과 같은 계산)로 확인 → `A + MIN(B, A)` ≥ 10 USDT인 계정(확인 중 계정 제외, 회원의 CEX UID · DEX 지갑, 모든 CEX)이 하나라도 있는 회원마다 그 회원의 자격 계정을 묶어 **기존 출금 신청 API(API-011)를 1회 호출**(멱등 키 = 회원 · 주기) → 초대 리워드(파트너 허브 제휴사 포함)는 API-018 호출 → **연동 완료 계정 중 연동 전 잔액(늦게 온 연동 전 금액 · 연동 전 출금 실패 복원분)이 남은 계정을 다시 판정**: 10 USDT 이상이면 `PRELINK` 출금 요청(JOB-D10, API-011 아님), 미만이면 회원 잔액으로 이관(정책 5-6 ⑪). 회원 보안 제한(72h/24h)·인증 없음 | 출금 신청(계정별 요청 · 선차감) | 주기 겹침·타임아웃 재시도에도 신청 1건(멱등 + 선차감). 생성 실패는 차감 없이 다음 주기 재확인. 회원이 끄는 설정 없음(항상 자동). 이미 운영 중 — DEX 지갑은 배포 시점부터 대상 | BA-017 |
@@ -1656,14 +1667,10 @@
 
 | DEX | 용도 | 엔드포인트 | 상태 | 쓰는 곳 |
 |---|---|---|---|---|
-| Lighter | 레퍼럴 귀속 목록 | `GET /api/v1/referral/userReferrals?l1_address=<테더맥스 코드 지갑>&limit=300`(커서, 최신순) | ✔ | JOB-D01 → API-007 귀속 판정 |
-| Lighter | 레퍼럴 통계 | `GET /api/v1/referral/stats?l1_address=`(최근 12주) | ✔ | JOB-D01 주중 추정치 |
-| Lighter | 주간 지급 이체 | `GET /api/v1/transfer_history?account_index=&type=ReferralProgramPayout` | ✔ | JOB-D01 |
-| Lighter | 계정 조회 | `GET /api/v1/accountsByL1Address?l1_address=` · `GET /api/v1/account?by=l1_address&value=` | ✔ | 하위 계정 확인(표시 ❓ G-053) |
-| Lighter | 주간 CSV | 파일(월요일, 컬럼 `week`·`wallet`·`account_index`·`bind_time`·`tier`·`fees_paid`·`cashback`·`tethermax_share`·`status`·`tx_hash`) | 형식 ❓ G-015·G-338 | API-115 |
+| Lighter | 표준 요건 API | 단건·대량 귀속 조회(지갑 비마스킹) · T-1 일일 원장(지갑 · `trade_type` · `fee_paid` · `commission` · `referral_code`) — 엔드포인트는 회신 후 | ✔ | 공통 수집 JOB(표준 요건 수락 전제, G-428) |
 | ApeX | 귀속 조회 | `POST api/clients`(`wallet_address`) — `is_partner_referral`·`AccountID` | ✔ 구 API, 신규 ❓ G-022 | API-007 |
 | ApeX | (사용 안 함) 하위 제휴사 고객 확인 | `POST /v2/api/subs/client/check` | — | 테더맥스 직속 판정에 쓰지 않음 |
-| ApeX | 원장 | 신규 API 3(금액 필드 없음) / 구 `commissions` + `omni_spot_commissions` | 🔴 ❓ G-021 | JOB-D02 |
+| ApeX | 원장 | 표준 요건 T-1 일일 원장(5필드) — 엔드포인트는 회신 후 | ✔ | JOB-D02 |
 | ApeX | 웹훅 | 이벤트·payload "개발 완료 후" | ⏳ G-024 | API-201 |
 | EdgeX | 귀속 단건 조회 | "attribution endpoint"(Alignment D2·D3 원칙 수락, 경로·파라미터 통합 문서 대기). 요청안 `GET /api/v2/partner/referral/getReferralByEthAddress?ethAddress=`(v1.2 초안, 발송 기록 없음). 가입을 끝낸 사용자만 반환 | ⏳ G-031 · G-345 · G-346 | API-007 |
 | EdgeX | 리베이트 레코드 | 회원당 일 1건(`id` · `partnerCommissionAmount` · `payoutId` · `transferId` · `collateralTransactionId` · `accruingAmount` · `pendingAmount` · `totalPaidAmount`), 01:00 UTC까지 조회 가능 | ✔ 구조 / ⏳ 경로 | JOB-D03 |
@@ -1672,7 +1679,7 @@
 | Aster | 리베이트 원장 | `GET /fapi/v3/referral/userIncome?address=&incomeType=REFERRAL_KICKBACK,COMMISSION_REBATE&startTime=`(`tranId`·`address`·`incomeType`·`asset`·`feeBasis`·`income`·`payoutPrice`·`priceTime`·`usdtValue`) | ➜ 요청안 🔴 G-035 · G-373 · G-038 | JOB-D04 |
 | Aster | 현존 API(대체 불가) | `GET /fapi/v3/income`(계정 소유자만 — 추천 사용자 리베이트를 테더맥스가 읽을 수 없음) · `/fapi/v3/builder/userTrades` · `/builder/userCommissionRates` · `/builder/userBalances` · `/builder/approvedUserList` | ✔ 현존이나 귀속·원장 용도로 쓸 수 없음 → 요청안 API 없이는 출시 차단 | — |
 | 4곳 공통 | 제한(restrictions) | 파트너별 | ApeX만 회신 | JOB-D08 |
-| 외부 | DefiLlama | `api.llama.fi/tvl/{slug}` · `/summary/derivatives/{slug}` | TVL ✔ / 24H 거래량 ❓ G-349 | JOB-D09 |
+| 외부 | DefiLlama | `api.llama.fi/tvl/{slug}` · `/summary/derivatives/{slug}` | TVL ✔ / 24H 거래량 G-349 확정: `api.llama.fi/summary/derivatives/{slug}` · 캐시 24시간 · 24시간 뒤 숨김 | JOB-D09 |
 
 **호출 규약(공통, 정책 E-7-5)** — HTTPS(ApeX TLS 1.2+) · 읽기 전용 키 · 금액 소수 문자열 · 시각 UTC(ApeX ISO 8601 / EdgeX·Aster·Lighter 밀리초) · `429` + `Retry-After` 존중 · 조회 기간 최대 180일 · 개인정보(이름·이메일·IP·KYC) 미수신(ApeX `api/clients`의 `mobile`·`email`은 저장하지 않음) · 레코드 불변·정정은 원본 ID 참조 새 레코드.
 

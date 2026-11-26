@@ -1,0 +1,2735 @@
+{
+ "total": 395,
+ "designed": 298,
+ "partial": 104,
+ "missing": 97,
+ "groups": [
+  {
+   "group": "common",
+   "label": "1. 공통 · 셸 (헤더·푸터·공지·약관)",
+   "order": 10,
+   "screens": 13,
+   "total": 28,
+   "both": 9,
+   "one": 16,
+   "none": 3
+  },
+  {
+   "group": "landing",
+   "label": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screens": 3,
+   "total": 11,
+   "both": 0,
+   "one": 3,
+   "none": 8
+  },
+  {
+   "group": "guest",
+   "label": "3. 비회원 캐시백 조회",
+   "order": 30,
+   "screens": 4,
+   "total": 19,
+   "both": 18,
+   "one": 1,
+   "none": 0
+  },
+  {
+   "group": "home",
+   "label": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screens": 7,
+   "total": 65,
+   "both": 14,
+   "one": 20,
+   "none": 31
+  },
+  {
+   "group": "link",
+   "label": "5. 거래 계정 연동",
+   "order": 50,
+   "screens": 9,
+   "total": 54,
+   "both": 25,
+   "one": 15,
+   "none": 14
+  },
+  {
+   "group": "own",
+   "label": "6. 소유권 인증",
+   "order": 60,
+   "screens": 3,
+   "total": 17,
+   "both": 17,
+   "one": 0,
+   "none": 0
+  },
+  {
+   "group": "hub",
+   "label": "7. 캐시백 허브",
+   "order": 70,
+   "screens": 1,
+   "total": 20,
+   "both": 12,
+   "one": 1,
+   "none": 7
+  },
+  {
+   "group": "dex",
+   "label": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screens": 2,
+   "total": 25,
+   "both": 13,
+   "one": 4,
+   "none": 8
+  },
+  {
+   "group": "calc",
+   "label": "9. 계산기 (/payback)",
+   "order": 90,
+   "screens": 6,
+   "total": 17,
+   "both": 9,
+   "one": 1,
+   "none": 7
+  },
+  {
+   "group": "summary",
+   "label": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screens": 2,
+   "total": 20,
+   "both": 5,
+   "one": 7,
+   "none": 8
+  },
+  {
+   "group": "invite",
+   "label": "11. 친구 초대 · 파트너 허브",
+   "order": 110,
+   "screens": 3,
+   "total": 12,
+   "both": 7,
+   "one": 3,
+   "none": 2
+  },
+  {
+   "group": "rewards",
+   "label": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screens": 7,
+   "total": 50,
+   "both": 34,
+   "one": 8,
+   "none": 8
+  },
+  {
+   "group": "quiz",
+   "label": "13. 퀴즈 · Beginner’s Guide",
+   "order": 130,
+   "screens": 5,
+   "total": 24,
+   "both": 1,
+   "one": 23,
+   "none": 0
+  },
+  {
+   "group": "email",
+   "label": "14. 사용자 이메일",
+   "order": 140,
+   "screens": 7,
+   "total": 22,
+   "both": 22,
+   "one": 0,
+   "none": 0
+  },
+  {
+   "group": "cex",
+   "label": "15. 기존 테더맥스 (CEX·계정·마이)",
+   "order": 150,
+   "screens": 3,
+   "total": 11,
+   "both": 8,
+   "one": 2,
+   "none": 1
+  }
+ ],
+ "oneViewport": [
+  {
+   "screen": "cmn.header",
+   "state": "normal",
+   "label": "로그인",
+   "has": "pc",
+   "node": "28967:127332"
+  },
+  {
+   "screen": "cmn.header",
+   "state": "guest",
+   "label": "비로그인 — Login · Sign Up",
+   "has": "pc",
+   "node": "19604:32578"
+  },
+  {
+   "screen": "cmn.header",
+   "state": "hover",
+   "label": "Cashback 드롭다운 열림",
+   "has": "pc",
+   "node": "19604:32652"
+  },
+  {
+   "screen": "cmn.header",
+   "state": "rewards",
+   "label": "Rewards Hub 드롭다운 열림",
+   "has": "pc",
+   "node": "19604:32665"
+  },
+  {
+   "screen": "cmn.header",
+   "state": "discover",
+   "label": "Discover 드롭다운 열림",
+   "has": "pc",
+   "node": "19604:32678"
+  },
+  {
+   "screen": "cmn.header",
+   "state": "unread",
+   "label": "알림 안 읽음 (빨간 점)",
+   "has": "pc",
+   "node": "8643:121393"
+  },
+  {
+   "screen": "cmn.header",
+   "state": "bellFail",
+   "label": "알림 로드 실패 — 점 숨김",
+   "has": "pc",
+   "node": "28967:127332"
+  },
+  {
+   "screen": "cmn.drawer",
+   "state": "normal",
+   "label": "비로그인 — 환영 블록",
+   "has": "mo",
+   "node": "19604:33156"
+  },
+  {
+   "screen": "cmn.drawer",
+   "state": "member",
+   "label": "로그인",
+   "has": "mo",
+   "node": "19604:32998"
+  },
+  {
+   "screen": "cmn.lang",
+   "state": "sheet",
+   "label": "언어 바텀시트",
+   "has": "mo",
+   "node": "12085:400397"
+  },
+  {
+   "screen": "cmn.footer",
+   "state": "guest",
+   "label": "모바일 게스트 — Company › Claim Cashback",
+   "has": "mo",
+   "node": "29072:1797"
+  },
+  {
+   "screen": "cmn.appnav",
+   "state": "normal",
+   "label": "Home 활성",
+   "has": "mo",
+   "node": "8582:155585"
+  },
+  {
+   "screen": "cmn.appnav",
+   "state": "events",
+   "label": "Events 활성",
+   "has": "mo",
+   "node": "8582:155585"
+  },
+  {
+   "screen": "cmn.appnav",
+   "state": "exchange",
+   "label": "Exchanges 활성",
+   "has": "mo",
+   "node": "8582:155585"
+  },
+  {
+   "screen": "cmn.listing",
+   "state": "cards",
+   "label": "카드 뷰 (모바일)",
+   "has": "mo",
+   "node": "8471:65818"
+  },
+  {
+   "screen": "cmn.appupdate",
+   "state": "normal",
+   "label": "Update Required 다이얼로그",
+   "has": "mo",
+   "node": "2913:17755"
+  },
+  {
+   "screen": "summary.main",
+   "state": "otherDay",
+   "label": "다른 날 선택 (CS2)",
+   "has": "pc",
+   "node": "28960:127139"
+  },
+  {
+   "screen": "summary.main",
+   "state": "eventDay",
+   "label": "이벤트 리워드 날 · 큰 금액 축약 (CS3)",
+   "has": "pc",
+   "node": "28960:127145"
+  },
+  {
+   "screen": "summary.main",
+   "state": "account",
+   "label": "계정 필터 드롭다운 (CS6 All Accounts)",
+   "has": "pc",
+   "node": "29265:120180"
+  },
+  {
+   "screen": "summary.main",
+   "state": "noMonth",
+   "label": "활동 없는 달 (CS5)",
+   "has": "pc",
+   "node": "28960:127157"
+  },
+  {
+   "screen": "summary.main",
+   "state": "noDay",
+   "label": "활동 없는 날 · 큰 금액 (CS4)",
+   "has": "pc",
+   "node": "28960:127151"
+  },
+  {
+   "screen": "ranking.main",
+   "state": "normal",
+   "label": "순위 매겨짐 (RK2)",
+   "has": "pc",
+   "node": "28960:127207"
+  },
+  {
+   "screen": "ranking.main",
+   "state": "wallet",
+   "label": "지갑 주소 전체 보기",
+   "has": "pc",
+   "node": "28984:126296"
+  },
+  {
+   "screen": "invite.main",
+   "state": "codeCopied",
+   "label": "코드 복사 토스트 (IF4)",
+   "has": "pc",
+   "node": "28960:126834"
+  },
+  {
+   "screen": "invite.main",
+   "state": "linkCopied",
+   "label": "링크 복사 토스트 (IF5)",
+   "has": "pc",
+   "node": "28960:126840"
+  },
+  {
+   "screen": "partner.hub",
+   "state": "modal",
+   "label": "하위 회원별 연동 계정 모달",
+   "has": "pc",
+   "node": "28960:127188"
+  },
+  {
+   "screen": "maxboard.main",
+   "state": "failToast",
+   "label": "등록 실패 토스트",
+   "has": "mo",
+   "node": "28537:459718"
+  },
+  {
+   "screen": "coupon.box",
+   "state": "picker6",
+   "label": "계정 5개 초과 · Deactivated",
+   "has": "mo",
+   "node": "12474:164724"
+  },
+  {
+   "screen": "coupon.box",
+   "state": "unable",
+   "label": "사용 불가",
+   "has": "mo",
+   "node": "12474:164021"
+  },
+  {
+   "screen": "league.main",
+   "state": "picker",
+   "label": "참가 계정 선택 — DEX 지갑 포함",
+   "has": "mo",
+   "node": "2913:21161"
+  },
+  {
+   "screen": "challenge.detail",
+   "state": "normal",
+   "label": "레벨 1 (0%)",
+   "has": "pc",
+   "node": "10981:85015"
+  },
+  {
+   "screen": "challenge.detail",
+   "state": "pick",
+   "label": "보상 받을 계정 선택",
+   "has": "pc",
+   "node": "10981:85017"
+  },
+  {
+   "screen": "events.list",
+   "state": "filterPc",
+   "label": "거래소 필터 (PC 셀렉트·목록)",
+   "has": "pc",
+   "node": "29069:6595"
+  },
+  {
+   "screen": "events.list",
+   "state": "filterMo",
+   "label": "거래소 필터 (모바일 시트)",
+   "has": "mo",
+   "node": "29069:6544"
+  },
+  {
+   "screen": "quiz.list",
+   "state": "normal",
+   "label": "회원 · 모듈 4·5 카드",
+   "has": "pc",
+   "node": "28960:130554"
+  },
+  {
+   "screen": "quiz.list",
+   "state": "completed",
+   "label": "완료 모듈 (Completed)",
+   "has": "pc",
+   "node": "19604:31447"
+  },
+  {
+   "screen": "quiz.article",
+   "state": "guest4",
+   "label": "게스트 · 모듈 4 (Login to Take Quiz)",
+   "has": "pc",
+   "node": "28960:130629"
+  },
+  {
+   "screen": "quiz.article",
+   "state": "member5",
+   "label": "회원 · 모듈 5 (Take the Quiz)",
+   "has": "pc",
+   "node": "28960:130685"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "q4",
+   "label": "모듈 4 · 문항 2개",
+   "has": "pc",
+   "node": "28960:130741"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "q5",
+   "label": "모듈 5 · 문항 2개",
+   "has": "pc",
+   "node": "28960:130764"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "val4",
+   "label": "모듈 4 · 미응답 제출 차단 (Validation)",
+   "has": "pc",
+   "node": "28978:127308"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "val5",
+   "label": "모듈 5 · Validation",
+   "has": "pc",
+   "node": "28978:127939"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "login4",
+   "label": "모듈 4 · 게스트 제출 → 로그인 필요",
+   "has": "pc",
+   "node": "28978:127406"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "login5",
+   "label": "모듈 5 · 로그인 필요",
+   "has": "pc",
+   "node": "28978:128037"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "fail4",
+   "label": "모듈 4 · 제출 실패",
+   "has": "pc",
+   "node": "28978:127476"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "fail5",
+   "label": "모듈 5 · 제출 실패",
+   "has": "pc",
+   "node": "28978:128107"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "score4",
+   "label": "모듈 4 · 채점 불가 (정답·해설 로드 실패)",
+   "has": "pc",
+   "node": "28978:127543"
+  },
+  {
+   "screen": "quiz.play",
+   "state": "score5",
+   "label": "모듈 5 · 채점 불가",
+   "has": "pc",
+   "node": "28978:128174"
+  },
+  {
+   "screen": "quiz.result",
+   "state": "r0_4",
+   "label": "모듈 4 · 0 / 2",
+   "has": "pc",
+   "node": "28978:127606"
+  },
+  {
+   "screen": "quiz.result",
+   "state": "r1_4",
+   "label": "모듈 4 · 1 / 2",
+   "has": "pc",
+   "node": "28978:127673"
+  },
+  {
+   "screen": "quiz.result",
+   "state": "r2_4",
+   "label": "모듈 4 · 2 / 2",
+   "has": "pc",
+   "node": "28978:127742"
+  },
+  {
+   "screen": "quiz.result",
+   "state": "done4",
+   "label": "모듈 4 · 이미 완료 (재응시 없음)",
+   "has": "pc",
+   "node": "28978:127811"
+  },
+  {
+   "screen": "quiz.result",
+   "state": "r0_5",
+   "label": "모듈 5 · 0 / 2",
+   "has": "pc",
+   "node": "28978:128237"
+  },
+  {
+   "screen": "quiz.result",
+   "state": "r1_5",
+   "label": "모듈 5 · 1 / 2",
+   "has": "pc",
+   "node": "28978:128304"
+  },
+  {
+   "screen": "quiz.result",
+   "state": "r2_5",
+   "label": "모듈 5 · 2 / 2",
+   "has": "pc",
+   "node": "28978:128373"
+  },
+  {
+   "screen": "quiz.result",
+   "state": "done5",
+   "label": "모듈 5 · 이미 완료",
+   "has": "pc",
+   "node": "28978:128442"
+  },
+  {
+   "screen": "quiz.basics",
+   "state": "normal",
+   "label": "본문 교체 (거래 계정 · 자동 지급)",
+   "has": "pc",
+   "node": "19604:32207"
+  },
+  {
+   "screen": "auth.login",
+   "state": "reset",
+   "label": "비밀번호 재설정 완료 토스트",
+   "has": "pc",
+   "node": "11073:165120"
+  },
+  {
+   "screen": "cex.list",
+   "state": "search",
+   "label": "검색 결과",
+   "has": "mo",
+   "node": "5145:51653"
+  },
+  {
+   "screen": "landing.main",
+   "state": "normal",
+   "label": "기본 — Our Partners·Featured에 DEX 포함 (PLP)",
+   "has": "pc",
+   "node": "28960:128375"
+  },
+  {
+   "screen": "about.intro",
+   "state": "normal",
+   "label": "기본 — 파트너 캐러셀(DEX 포함) · 출금 피드 · 거래 계정 문구",
+   "has": "pc",
+   "node": "28960:129521"
+  },
+  {
+   "screen": "about.feed",
+   "state": "normal",
+   "label": "CEX·DEX 시간순 · DEX 배지 · 마스킹",
+   "has": "pc",
+   "node": "28960:128520"
+  },
+  {
+   "screen": "guest.entry",
+   "state": "normal",
+   "label": "모바일 홈 푸터 → Claim Cashback",
+   "has": "mo",
+   "node": "29037:113704"
+  },
+  {
+   "screen": "home.main",
+   "state": "guest",
+   "label": "비로그인 — 공개 화면 (home/S4#guest)",
+   "has": "mo",
+   "node": "29037:113704"
+  },
+  {
+   "screen": "home.main",
+   "state": "s3App",
+   "label": "S3 앱·모바일웹 빈 홈 카드",
+   "has": "mo",
+   "node": "8582:154521"
+  },
+  {
+   "screen": "home.main",
+   "state": "hw1",
+   "label": "총액 카드 · 4행 + Aster 칩 (HW1)",
+   "has": "pc",
+   "node": "28960:126108"
+  },
+  {
+   "screen": "home.main",
+   "state": "app",
+   "label": "앱·모바일웹 — Wallet 라벨 없음 · 푸터 문구",
+   "has": "mo",
+   "node": "8582:156599"
+  },
+  {
+   "screen": "home.main",
+   "state": "first",
+   "label": "첫 연동 — 체크리스트 없는 S4 + 토스트 (S3-7)",
+   "has": "pc",
+   "node": "28960:127795"
+  },
+  {
+   "screen": "home.main",
+   "state": "newRow",
+   "label": "새 행 맨 아래 · 0.00 + No cashback yet (S4-6)",
+   "has": "pc",
+   "node": "28960:127867"
+  },
+  {
+   "screen": "home.main",
+   "state": "multi",
+   "label": "같은 DEX 지갑 3개 · Aster 하위 계정",
+   "has": "mo",
+   "node": "7633:92140"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "noReward",
+   "label": "리워드 없음 · 최소액 이상 — Event Reward 행 없음",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "zero",
+   "label": "모든 적립 잔액 0",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "cashBelow",
+   "label": "캐시백만 보유 · 최소액 미만",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "rewardOnly",
+   "label": "리워드만 보유",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "partialBelow",
+   "label": "부분 매칭 · 최소액 미만",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "fullBelow",
+   "label": "전액 매칭 · 최소액 미만",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "fullEqual",
+   "label": "전액 매칭 · 최소액과 일치",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "fullAbove",
+   "label": "전액 매칭 · 최소액 초과",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "edge",
+   "label": "소수점 절삭 · 기준 직전",
+   "has": "pc",
+   "node": "29026:97581"
+  },
+  {
+   "screen": "home.wallet",
+   "state": "subaccounts",
+   "label": "하위 계정 나열 안 함 (Lighter)",
+   "has": "pc",
+   "node": "28960:125943"
+  },
+  {
+   "screen": "wd.claim",
+   "state": "allBlocked",
+   "label": "전부 불가 — Not eligible to withdraw",
+   "has": "pc",
+   "node": "10500:94074"
+  },
+  {
+   "screen": "wd.claim",
+   "state": "deducted",
+   "label": "선차감 반영",
+   "has": "pc",
+   "node": "10501:104627"
+  },
+  {
+   "screen": "wd.claim",
+   "state": "many",
+   "label": "계정 11개 이상 — 10개 + 더보기",
+   "has": "pc",
+   "node": "12936:389796"
+  },
+  {
+   "screen": "link.select",
+   "state": "one",
+   "label": "검색 결과 1건",
+   "has": "mo",
+   "node": "29051:104415"
+  },
+  {
+   "screen": "link.select",
+   "state": "many",
+   "label": "검색 결과 여러 건",
+   "has": "mo",
+   "node": "29051:104229"
+  },
+  {
+   "screen": "link.select",
+   "state": "dexbit",
+   "label": "DEX 칩에서 «bit» → 0건",
+   "has": "mo",
+   "node": "29051:104597"
+  },
+  {
+   "screen": "link.addr",
+   "state": "e2",
+   "label": "빈 값 제출 — Enter your wallet address.",
+   "has": "pc",
+   "node": "28980:132144"
+  },
+  {
+   "screen": "link.addr",
+   "state": "case",
+   "label": "다른 형식 · 대소문자 원문 유지 — 오류 없음",
+   "has": "pc",
+   "node": "28980:132193"
+  },
+  {
+   "screen": "link.addr",
+   "state": "rejected",
+   "label": "거래소가 주소 거절 — 입력 유지",
+   "has": "pc",
+   "node": "28980:132291"
+  },
+  {
+   "screen": "link.addr",
+   "state": "e6",
+   "label": "ENS·이름 입력",
+   "has": "pc",
+   "node": "28980:132340"
+  },
+  {
+   "screen": "link.addr",
+   "state": "e7",
+   "label": "제로 주소",
+   "has": "pc",
+   "node": "28980:132389"
+  },
+  {
+   "screen": "link.signup",
+   "state": "prompt",
+   "label": "2 Signup — Start by signing up for Lighter?",
+   "has": "pc",
+   "node": "28960:127418"
+  },
+  {
+   "screen": "link.signup",
+   "state": "return",
+   "label": "3 Return — 상세로 돌아와 Link Wallet → 미리 선택된 연동 모달",
+   "has": "pc",
+   "node": "28960:127422"
+  },
+  {
+   "screen": "link.result",
+   "state": "unavailable",
+   "label": "선택 뒤 연동 불가로 바뀐 거래소",
+   "has": "mo",
+   "node": "28969:127153"
+  },
+  {
+   "screen": "link.done",
+   "state": "normal",
+   "label": "EdgeX · Daily",
+   "has": "pc",
+   "node": "28960:127861"
+  },
+  {
+   "screen": "link.done",
+   "state": "apex",
+   "label": "ApeX — Daily (G-025 롤업 합의 전제)",
+   "has": "pc",
+   "node": "28960:127861"
+  },
+  {
+   "screen": "link.done",
+   "state": "apexIdPending",
+   "label": "ApeX AccountID 미반환 — 회원에게는 연동 완료",
+   "has": "pc",
+   "node": "28960:127861"
+  },
+  {
+   "screen": "link.lguide",
+   "state": "normal",
+   "label": "Lighter 가이드 Step 3 — Plus·Premium 안내 (D2)",
+   "has": "pc",
+   "node": "28960:127444"
+  },
+  {
+   "screen": "hub.main",
+   "state": "emptySearch",
+   "label": "비교표 빈 검색",
+   "has": "mo",
+   "node": "5145:50887"
+  },
+  {
+   "screen": "dex.overview",
+   "state": "overflow",
+   "label": "파트너 8개 — glance 가로 넘침 (Figma 전용)",
+   "has": "pc",
+   "node": "28960:125542"
+  },
+  {
+   "screen": "dex.detail",
+   "state": "unlinked",
+   "label": "회원 · 미연동 — Link Wallet",
+   "has": "pc",
+   "node": "28969:129666"
+  },
+  {
+   "screen": "dex.detail",
+   "state": "signupReturn",
+   "label": "가입 후 복귀 — Link Wallet 주 버튼 강조",
+   "has": "pc",
+   "node": "28960:127422"
+  },
+  {
+   "screen": "dex.detail",
+   "state": "linked",
+   "label": "회원 · 연동 완료 — Auto Claim · 리뷰 쓰기",
+   "has": "pc",
+   "node": "28969:129751"
+  },
+  {
+   "screen": "calc.p5",
+   "state": "mobile",
+   "label": "375폭 (모바일 보기로 확인)",
+   "has": "mo",
+   "node": "8135:170693"
+  }
+ ],
+ "items": [
+  {
+   "group": "common",
+   "groupLabel": "1. 공통 · 셸 (헤더·푸터·공지·약관)",
+   "order": 10,
+   "screen": "cmn.drawer",
+   "title": "모바일 웹 드로어",
+   "route": "모바일 웹 ☰",
+   "fu": [
+    "FU-083"
+   ],
+   "state": "promo",
+   "label": "프로모 배너 (선택)",
+   "note": "V2.2 cmn/DRAWER#promo — 드로어 배너 디자인 어디에도 없음",
+   "near": "모바일 드로어 12085:400249",
+   "what": "배너 이미지·문구",
+   "vp": "mo"
+  },
+  {
+   "group": "common",
+   "groupLabel": "1. 공통 · 셸 (헤더·푸터·공지·약관)",
+   "order": 10,
+   "screen": "cmn.appnav",
+   "title": "앱 하단 내비",
+   "route": "앱",
+   "fu": [
+    "FU-085"
+   ],
+   "state": "inapp",
+   "label": "미지원 Cashback 페이지 → 인앱 브라우저",
+   "note": "V2.2 cmn/APPNAV#inapp — 인앱 브라우저 디자인 어디에도 없음",
+   "near": "`<BottomNavigation>` 8582:155585",
+   "what": "인앱 브라우저 화면(상단 바 · 닫기 · URL)",
+   "vp": "mo"
+  },
+  {
+   "group": "common",
+   "groupLabel": "1. 공통 · 셸 (헤더·푸터·공지·약관)",
+   "order": 10,
+   "screen": "cmn.appnav",
+   "title": "앱 하단 내비",
+   "route": "앱",
+   "fu": [
+    "FU-085"
+   ],
+   "state": "linkFail",
+   "label": "DEX 링크 실패 — 복사 + Open {DEX}",
+   "note": "V2.2 cmn/APPNAV#linkFail — 다이얼로그 디자인 없음",
+   "near": "—",
+   "what": "다이얼로그 전체(문구는 V2.2 영문만)",
+   "vp": "mo"
+  },
+  {
+   "group": "landing",
+   "groupLabel": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screen": "landing.main",
+   "title": "프리로그인 랜딩",
+   "route": "/ (비로그인)",
+   "fu": [
+    "FU-043",
+    "FU-042"
+   ],
+   "state": "heroDex",
+   "label": "Hero Exchange = DEX",
+   "note": "V2.2 etc/PLP#heroDex · REQ-288 — Figma에는 Hero 자리에 DEX를 고른 변형 없음",
+   "near": "Landing / Desktop / Light (DEX) 28960:128375 › 「Most popular exchange」 카드 28960:128434",
+   "what": "DEX를 고른 변형이 없음. 운영자 입력 `Promo Tagline`·`CTA Button Title`(EN·KO) 자리, DEX의 Total Savings 표기",
+   "vp": "pc"
+  },
+  {
+   "group": "landing",
+   "groupLabel": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screen": "landing.main",
+   "title": "프리로그인 랜딩",
+   "route": "/ (비로그인)",
+   "fu": [
+    "FU-043",
+    "FU-042"
+   ],
+   "state": "inactive",
+   "label": "Featured·Hero 파트너 비활성",
+   "note": "V2.2 etc/PLP#inactive · G-259·G-260 확정",
+   "near": "같은 프레임 › 「Our Partners」 28960:128420",
+   "what": "슬롯이 숨은 뒤 목록·Hero 카드가 어떻게 보이는지(G-260)",
+   "vp": "pc"
+  },
+  {
+   "group": "landing",
+   "groupLabel": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screen": "about.intro",
+   "title": "서비스 소개",
+   "route": "/service-intro-new",
+   "fu": [
+    "FU-043",
+    "FU-042"
+   ],
+   "state": "loading",
+   "label": "피드 불러오는 중",
+   "note": "V2.2 etc/ABOUT#loading",
+   "near": "Service intro / PC / Light (DEX) 28960:129521 › 표 28960:129611",
+   "what": "피드 로딩(스켈레톤)",
+   "vp": "pc"
+  },
+  {
+   "group": "landing",
+   "groupLabel": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screen": "about.intro",
+   "title": "서비스 소개",
+   "route": "/service-intro-new",
+   "fu": [
+    "FU-043",
+    "FU-042"
+   ],
+   "state": "empty",
+   "label": "피드 없음",
+   "note": "V2.2 etc/ABOUT#empty",
+   "near": "같은 표 28960:129611",
+   "what": "빈 상태 화면·문구(원문 없음)",
+   "vp": "pc"
+  },
+  {
+   "group": "landing",
+   "groupLabel": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screen": "about.intro",
+   "title": "서비스 소개",
+   "route": "/service-intro-new",
+   "fu": [
+    "FU-043",
+    "FU-042"
+   ],
+   "state": "error",
+   "label": "피드 실패",
+   "note": "V2.2 etc/ABOUT#error",
+   "near": "같은 표 28960:129611",
+   "what": "실패 화면·문구(원문 없음)",
+   "vp": "pc"
+  },
+  {
+   "group": "landing",
+   "groupLabel": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screen": "about.feed",
+   "title": "실시간 출금 피드",
+   "route": "게스트 홈 · 서비스 소개 섹션",
+   "fu": [
+    "FU-042"
+   ],
+   "state": "loading",
+   "label": "불러오는 중",
+   "note": "V2.2 etc/FEED#loading",
+   "near": "랜딩 피드 섹션 28960:128520",
+   "what": "피드 로딩(스켈레톤)",
+   "vp": "pc"
+  },
+  {
+   "group": "landing",
+   "groupLabel": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screen": "about.feed",
+   "title": "실시간 출금 피드",
+   "route": "게스트 홈 · 서비스 소개 섹션",
+   "fu": [
+    "FU-042"
+   ],
+   "state": "empty",
+   "label": "내역 없음",
+   "note": "V2.2 etc/FEED#empty · G-137",
+   "near": "랜딩 피드 섹션 28960:128520",
+   "what": "빈 상태 화면·문구(원문 없음)",
+   "vp": "pc"
+  },
+  {
+   "group": "landing",
+   "groupLabel": "2. 랜딩 · 서비스 소개",
+   "order": 20,
+   "screen": "about.feed",
+   "title": "실시간 출금 피드",
+   "route": "게스트 홈 · 서비스 소개 섹션",
+   "fu": [
+    "FU-042"
+   ],
+   "state": "error",
+   "label": "불러오기 실패",
+   "note": "V2.2 etc/FEED#error · G-137",
+   "near": "랜딩 피드 섹션 28960:128520",
+   "what": "실패 화면·문구(원문 없음)",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "s3Pending",
+   "label": "확인 중 계정만 있음 → S4 전환",
+   "note": "V2.2 home/S3#pendingOnly · G-070 확정: S4로 전환하고 행에 확인 중 표시",
+   "near": "S4-1 (28960:127837)",
+   "what": "확인 중 행 1개뿐인 S4",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "statuses",
+   "label": "상태 7단계 행",
+   "note": "V2.2 home/S4#statuses · REQ-272 · G-060(데이터 지연·로드 실패는 그 뒤 번호). FU-038·039 행 디자인(로고·점·칩·금액)은 HW1/S4-1 컴포넌트를 그대로 썼고, 이 상태 프레임은 없음",
+   "near": "HW1 (28960:126108)",
+   "what": "소유 확인중·연동 시도중이에요·이슈·연동 실패·소유 확인 실패·연동 해제 행의 점·칩 색과 라벨(G-058 4토큰)",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "chips",
+   "label": "DEX 칩 — No cashback yet · Data delayed · Inactive",
+   "note": "V2.2 home/S4#chips · REQ-273 · G-058 · G-177(ApeX Account ID 미반환 칩 없음). FU-038·039 행 디자인(로고·점·칩·금액)은 HW1/S4-1 컴포넌트를 그대로 썼고, 이 상태 프레임은 없음",
+   "near": "HW1 (28960:126108)",
+   "what": "No cashback yet · Data delayed · Inactive 칩 실물(Figma는 자리표시 \"Chip\")",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "loading",
+   "label": "로딩 — 스켈레톤",
+   "note": "V2.2 home/S4#loading · REQ-269·271",
+   "near": "HW1 (28960:126108)",
+   "what": "총액 카드·행 스켈레톤",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "error",
+   "label": "잔액 로드 실패",
+   "note": "V2.2 home/S4#error · REQ-269",
+   "near": "HW1 (28960:126108)",
+   "what": "오류 알림 + Try again 위치",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "delayed",
+   "label": "DEX 원장 지연 — Last updated",
+   "note": "V2.2 home/S4#delayed · REQ-269·274",
+   "near": "HW1 (28960:126108)",
+   "what": "Last updated 위치 · 지연 배너(REQ-274 문구)",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "many",
+   "label": "계정 11개 이상 — 10개 + 더보기",
+   "note": "V2.2 home/S4#many · REQ-271",
+   "near": "HW1 (28960:126108)",
+   "what": "10개 + 더보기 · 패널 내부 스크롤",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "full",
+   "label": "지갑 전체 주소 펼침",
+   "note": "V2.2 home/S4#full · REQ-271",
+   "near": "HW1 (28960:126108)",
+   "what": "전체 주소 줄바꿈 표시",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "transferred",
+   "label": "10 USDT 미만 이관 4.00",
+   "note": "V2.2 link/HOME#transferred · REQ-107",
+   "near": "S4-6 (28960:127867)",
+   "what": "이관 금액이 있는 새 행",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "pending",
+   "label": "확인 중 — 연동 시도중이에요 · -",
+   "note": "V2.2 link/HOME#pending · REQ-098",
+   "near": "S4-6 (28960:127867)",
+   "what": "연동 시도중이에요 칩 · 금액 `-`",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "inactive",
+   "label": "DEX 오프보딩 — Inactive",
+   "note": "V2.2 link/HOME#inactive · REQ-121",
+   "near": "HW1 (28960:126108)",
+   "what": "Inactive 행 + 안내 문구(REQ-121, 문구 미정)",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "rejected",
+   "label": "확인 중 거절 — 행 제거",
+   "note": "V2.2 link/HOME#rejected · REQ-102 · G-069 확정: 거절되면 홈 행 제거(한도 점유 해제)",
+   "near": "S4-1 (28960:127837)",
+   "what": "행 제거 후 화면(안내 여부)",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "labels",
+   "label": "DEX 정산 상태 라벨 (홈 행 칩)",
+   "note": "V2.2 cmn/LABELS · FU-011 · REQ-047",
+   "near": "HW1 (28960:126108)",
+   "what": "Accruing this week (estimate) · Credited · Withheld · Under the $1 minimum · Pending · DEX data pending 칩·보조 줄",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.main",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "route": "/",
+   "fu": [
+    "FU-037",
+    "FU-038",
+    "FU-039",
+    "FU-029",
+    "FU-022",
+    "FU-011",
+    "FU-044"
+   ],
+   "state": "faq",
+   "label": "홈 FAQ — 회원 답변",
+   "note": "V2.2 home/FAQ · FU-044 · REQ-711",
+   "near": "HW1 (28960:126108)",
+   "what": "홈 FAQ 섹션",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.wallet",
+   "title": "DEX 지갑 상세",
+   "route": "/dex/wallet (지갑 상세)",
+   "fu": [
+    "FU-040"
+   ],
+   "state": "loading",
+   "label": "잔액 로딩 — 스켈레톤",
+   "note": "Figma 매칭 상태 프레임 하단 메모(REQ-145) — 화면 프레임 없음",
+   "near": "지갑 상세 · 이벤트 리워드 매칭 상태 (29026:97581)",
+   "what": "잔액 카드 스켈레톤",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.wallet",
+   "title": "DEX 지갑 상세",
+   "route": "/dex/wallet (지갑 상세)",
+   "fu": [
+    "FU-040"
+   ],
+   "state": "error",
+   "label": "잔액 조회 실패 — 오류 · 재시도",
+   "note": "Figma 매칭 상태 프레임 하단 메모(REQ-149) — 화면 프레임 없음",
+   "near": "29026:97581",
+   "what": "오류·재시도",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.wallet",
+   "title": "DEX 지갑 상세",
+   "route": "/dex/wallet (지갑 상세)",
+   "fu": [
+    "FU-040"
+   ],
+   "state": "delayed",
+   "label": "파트너 지연 — 마지막 확정 금액 · Last updated",
+   "note": "V2.2 home/LKD#delayed · REQ-277",
+   "near": "29026:97581",
+   "what": "Last updated 위치",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.wallet",
+   "title": "DEX 지갑 상세",
+   "route": "/dex/wallet (지갑 상세)",
+   "fu": [
+    "FU-040"
+   ],
+   "state": "pending",
+   "label": "연동 시도중",
+   "note": "V2.2 home/LKD#pending · REQ-098",
+   "near": "PW1 (28960:125943)",
+   "what": "헤더 칩 · 금액 `-` 표시",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "home.timeline",
+   "title": "캐시백 타임라인 · 누적 캐시백",
+   "route": "/ (홈 · 지갑 상세 섹션)",
+   "fu": [
+    "FU-041"
+   ],
+   "state": "warning",
+   "label": "순차 지급 경고",
+   "note": "V2.2 home/TL#warning · REQ-289. 경고 자리 디자인 없음 — 기존 MUI Alert(warning) 재사용",
+   "near": "〃",
+   "what": "경고 배너",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.claim",
+   "title": "출금 화면 (/withdrawal-apply)",
+   "route": "/withdrawal-apply",
+   "fu": [
+    "FU-030",
+    "FU-031",
+    "FU-032",
+    "FU-033",
+    "FU-034"
+   ],
+   "state": "zero",
+   "label": "DEX 캐시백 0 — 배너",
+   "note": "V2.2 wd/CLAIM#zero · REQ-146 · G-110. 상태 정의 = DEX 흐름 S4_12 `No cashback yet`(29002:127873). 배너 모양 디자인 없음 — MUI Alert(info) 재사용",
+   "near": "〃",
+   "what": "G-110 배너",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.claim",
+   "title": "출금 화면 (/withdrawal-apply)",
+   "route": "/withdrawal-apply",
+   "fu": [
+    "FU-030",
+    "FU-031",
+    "FU-032",
+    "FU-033",
+    "FU-034"
+   ],
+   "state": "loading",
+   "label": "로딩 — 스켈레톤, 금액·버튼 없음",
+   "note": "V2.2 wd/CLAIM#loading · REQ-145. 재사용: [MAX-425] Loading state 5702:12582 스켈레톤",
+   "near": "〃",
+   "what": "스켈레톤",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.claim",
+   "title": "출금 화면 (/withdrawal-apply)",
+   "route": "/withdrawal-apply",
+   "fu": [
+    "FU-030",
+    "FU-031",
+    "FU-032",
+    "FU-033",
+    "FU-034"
+   ],
+   "state": "delayed",
+   "label": "데이터 지연 — Last updated",
+   "note": "V2.2 wd/CLAIM#delayed · REQ-147 · G-348. 상태 정의 = DEX 흐름 S4_13 29002:127898",
+   "near": "〃",
+   "what": "Last updated",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.claim",
+   "title": "출금 화면 (/withdrawal-apply)",
+   "route": "/withdrawal-apply",
+   "fu": [
+    "FU-030",
+    "FU-031",
+    "FU-032",
+    "FU-033",
+    "FU-034"
+   ],
+   "state": "partner",
+   "label": "파트너 오류 — 그 카드만",
+   "note": "V2.2 wd/CLAIM#partner · REQ-148. 상태 정의 = DEX 흐름 S4_14 `Partner data unavailable` 29002:127923 · 오류 모양 = Hub H7 28960:126920",
+   "near": "〃",
+   "what": "카드 단위 오류",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.claim",
+   "title": "출금 화면 (/withdrawal-apply)",
+   "route": "/withdrawal-apply",
+   "fu": [
+    "FU-030",
+    "FU-031",
+    "FU-032",
+    "FU-033",
+    "FU-034"
+   ],
+   "state": "balanceError",
+   "label": "잔액 오류",
+   "note": "V2.2 wd/CLAIM#balanceError · REQ-149. 상태 정의 = DEX 흐름 S4_15 29002:127948 · 오류 모양 = Hub H7 28960:126920",
+   "near": "〃",
+   "what": "합계 오류",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.claim",
+   "title": "출금 화면 (/withdrawal-apply)",
+   "route": "/withdrawal-apply",
+   "fu": [
+    "FU-030",
+    "FU-031",
+    "FU-032",
+    "FU-033",
+    "FU-034"
+   ],
+   "state": "preAccrual",
+   "label": "적립 전 줄 (합계 미포함)",
+   "note": "V2.2 wd/CLAIM#preAccrual · REQ-138 · G-127. 상태 정의 = DEX 흐름 S6_11 `Pending settlement` 29002:129353",
+   "near": "〃",
+   "what": "ApeX Pending 줄",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.claim",
+   "title": "출금 화면 (/withdrawal-apply)",
+   "route": "/withdrawal-apply",
+   "fu": [
+    "FU-030",
+    "FU-031",
+    "FU-032",
+    "FU-033",
+    "FU-034"
+   ],
+   "state": "noNetwork",
+   "label": "지급 네트워크 미설정",
+   "note": "V2.2 wd/CLAIM#noNetwork · REQ-142. 상태 정의 = DEX 흐름 S4_20 `Network unavailable` 29002:128078. 모양 디자인 없음",
+   "near": "〃",
+   "what": "목적지 비활성 표시(REQ-142)",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.claim",
+   "title": "출금 화면 (/withdrawal-apply)",
+   "route": "/withdrawal-apply",
+   "fu": [
+    "FU-030",
+    "FU-031",
+    "FU-032",
+    "FU-033",
+    "FU-034"
+   ],
+   "state": "lighter",
+   "label": "Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets)",
+   "note": "V2.2 wd/CLAIM#lighter · REQ-137·150. 카드 = 기존 계정 카드 재사용",
+   "near": "〃",
+   "what": "Every Monday · 2 wallets",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.second",
+   "title": "두 번째 출금 화면 (/withdrawal)",
+   "route": "/withdrawal",
+   "fu": [
+    "FU-036"
+   ],
+   "state": "normal",
+   "label": "출금 가능 계정 없음 — STG 문구 + DEX 행",
+   "note": "V2.2 wd/SECOND#normal · REQ-710 · G-419(문구표에서 확정 — 확정 문안 원문 없음)",
+   "near": "없음",
+   "what": "/withdrawal 화면 전체",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.reflect",
+   "title": "선차감 · 복원 반영 위치",
+   "route": "/ · /cashback-summary · 실시간 출금 피드",
+   "fu": [
+    "FU-034",
+    "FU-035"
+   ],
+   "state": "normal",
+   "label": "지급 전",
+   "note": "V2.2 wd/REFLECT#normal · REQ-158",
+   "near": "HW1 (28960:126108)",
+   "what": "홈 · 캐시백 요약 · 피드 반영 위치",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.reflect",
+   "title": "선차감 · 복원 반영 위치",
+   "route": "/ · /cashback-summary · 실시간 출금 피드",
+   "fu": [
+    "FU-034",
+    "FU-035"
+   ],
+   "state": "deducted",
+   "label": "신청 생성 — 선차감 (같은 새로고침에 반영)",
+   "note": "V2.2 wd/REFLECT#deducted · REQ-158 · G-112",
+   "near": "〃",
+   "what": "선차감 안내 문구 위치",
+   "vp": "pc"
+  },
+  {
+   "group": "home",
+   "groupLabel": "4. 홈 · 잔액 · 지갑 상세",
+   "order": 40,
+   "screen": "wd.reflect",
+   "title": "선차감 · 복원 반영 위치",
+   "route": "/ · /cashback-summary · 실시간 출금 피드",
+   "fu": [
+    "FU-034",
+    "FU-035"
+   ],
+   "state": "restored",
+   "label": "최종 실패 — 복원",
+   "note": "V2.2 wd/REFLECT#restored · REQ-164 · G-113 확정: 복원된 날 + 부호 행(Withdrawal returned)",
+   "near": "〃",
+   "what": "Withdrawal returned 행",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.select",
+   "title": "거래소 선택",
+   "route": "/link (웹 꽉 찬 모달 · 앱 바텀시트)",
+   "fu": [
+    "FU-013"
+   ],
+   "state": "none",
+   "label": "검색 결과 없음 (All 칩)",
+   "note": "V2.2 <code>link/SEL#none</code>. 모바일 0건 디자인은 DEX 칩 «bit»(<code>dexbit</code>)에만 있음 — 문구는 그 원문"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.select",
+   "title": "거래소 선택",
+   "route": "/link (웹 꽉 찬 모달 · 앱 바텀시트)",
+   "fu": [
+    "FU-013"
+   ],
+   "state": "region",
+   "label": "지역 제한 DEX — 목록에서 제외",
+   "note": "V2.2 <code>link/SEL#region</code>. G-161 확정: 이유 표시 없음 — 서버가 제외(EX-05). 예시: Aster 제외",
+   "near": "L1 (28960:127271)",
+   "what": "제외된 목록(G-161, 이유 표시 없음)",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.select",
+   "title": "거래소 선택",
+   "route": "/link (웹 꽉 찬 모달 · 앱 바텀시트)",
+   "fu": [
+    "FU-013"
+   ],
+   "state": "fail",
+   "label": "파트너 목록 로드 실패 (캐시 없음)",
+   "note": "V2.2 <code>link/SEL#fail</code>. G-097 확정: 캐시된 목록 우선, 캐시도 없을 때만 오류 + <code>Retry</code>, <code>Popular partners</code> 숨김. 오류 문구는 Figma API 상태 보드 S5_05 원문",
+   "near": "API 상태 보드 S5_05 `Partners couldn’t load` (29002:128426, 연동 섹션 밖)",
+   "what": "선택기 안 오류 + `Retry`(G-097)",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.select",
+   "title": "거래소 선택",
+   "route": "/link (웹 꽉 찬 모달 · 앱 바텀시트)",
+   "fu": [
+    "FU-013"
+   ],
+   "state": "intro",
+   "label": "STG 웹 진입 질문",
+   "note": "V2.2 <code>link/SEL#intro</code> — 현행 <code>/uidlinking</code> 첫 질문(REQ-712)",
+   "near": "—",
+   "what": "`/uidlinking` 첫 질문 화면 전체",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.addr",
+   "title": "지갑 주소 입력",
+   "route": "/link (웹 꽉 찬 모달 · 앱 전체 화면)",
+   "fu": [
+    "FU-015",
+    "FU-016"
+   ],
+   "state": "paste",
+   "label": "Paste 권한 거부",
+   "note": "V2.2 <code>link/ADDR#paste</code> — 디자인 없음",
+   "near": "L2 (28960:127275)",
+   "what": "직접 붙여넣기 힌트(문구도 미정 REQ-061)",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.addr",
+   "title": "지갑 주소 입력",
+   "route": "/link (웹 꽉 찬 모달 · 앱 전체 화면)",
+   "fu": [
+    "FU-015",
+    "FU-016"
+   ],
+   "state": "kept",
+   "label": "실패 후 주소 유지",
+   "note": "V2.2 <code>link/ADDR#kept</code>. G-380 확정: 새로고침·실패 후에도 입력 주소 유지",
+   "near": "L3 (28960:127279)",
+   "what": "결과 화면에서 돌아온 상태(G-380)",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.addr",
+   "title": "지갑 주소 입력",
+   "route": "/link (웹 꽉 찬 모달 · 앱 전체 화면)",
+   "fu": [
+    "FU-015",
+    "FU-016"
+   ],
+   "state": "hub",
+   "label": "허브 진입 — 그 거래소 미리 선택",
+   "note": "V2.2 <code>link/SEL#hub</code>(허브 → ApeX 선택). 선택 DEX는 지갑 경로로 바로 감(REQ-051·056)",
+   "near": "L2 (28960:127275)",
+   "what": "ApeX 선택 상태 · ApeX 지갑 주소 찾기 안내 문구·스크린샷",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.addr",
+   "title": "지갑 주소 입력",
+   "route": "/link (웹 꽉 찬 모달 · 앱 전체 화면)",
+   "fu": [
+    "FU-015",
+    "FU-016"
+   ],
+   "state": "lighter",
+   "label": "Lighter 상세 진입 — 거래소 미리 선택",
+   "note": ""
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.addr",
+   "title": "지갑 주소 입력",
+   "route": "/link (웹 꽉 찬 모달 · 앱 전체 화면)",
+   "fu": [
+    "FU-015",
+    "FU-016"
+   ],
+   "state": "apex",
+   "label": "ApeX 상세 진입 — 거래소 미리 선택",
+   "note": ""
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.addr",
+   "title": "지갑 주소 입력",
+   "route": "/link (웹 꽉 찬 모달 · 앱 전체 화면)",
+   "fu": [
+    "FU-015",
+    "FU-016"
+   ],
+   "state": "edgex",
+   "label": "EdgeX 상세 진입 — 거래소 미리 선택",
+   "note": ""
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.addr",
+   "title": "지갑 주소 입력",
+   "route": "/link (웹 꽉 찬 모달 · 앱 전체 화면)",
+   "fu": [
+    "FU-015",
+    "FU-016"
+   ],
+   "state": "aster",
+   "label": "Aster 상세 진입 — 거래소 미리 선택",
+   "note": ""
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.captcha",
+   "title": "캡차",
+   "route": "/link (모달)",
+   "fu": [
+    "FU-017"
+   ],
+   "state": "retry",
+   "label": "퍼즐 실패·만료 — 주소 유지 재시도",
+   "note": "V2.2 <code>link/CAPTCHA#retry</code>. 연동을 시도하지 않고 같은 거래소·주소 유지(REQ-072). 문구는 Figma API 상태 보드 S1_14 원문",
+   "near": "L5 (28960:127287) · API 보드 S1_14 (29002:126248)",
+   "what": "연동 모달 안 인라인 오류",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.captcha",
+   "title": "캡차",
+   "route": "/link (모달)",
+   "fu": [
+    "FU-017"
+   ],
+   "state": "scriptFail",
+   "label": "캡차 스크립트 로드 실패 — Retry",
+   "note": "V2.2 <code>link/CAPTCHA#scriptFail</code>. 캡차 없이 절대 제출하지 않음(REQ-072). 문구는 Figma API 상태 보드 S1_13 원문",
+   "near": "L5 (28960:127287) · API 보드 S1_13 (29002:126223)",
+   "what": "연동 모달 안 인라인 오류 + `Retry`",
+   "vp": "pc"
+  },
+  {
+   "group": "link",
+   "groupLabel": "5. 거래 계정 연동",
+   "order": 50,
+   "screen": "link.done",
+   "title": "연동 성공",
+   "route": "/link (전체 화면 모달)",
+   "fu": [
+    "FU-023",
+    "FU-025"
+   ],
+   "state": "truncated",
+   "label": "180일 넘는 기록 — Cashback shown from",
+   "note": "V2.2 <code>link/DONE#truncated</code> · REQ-119. 디자인 없음 — L7/S4-5 스플래시에 줄만 추가, 문구는 Figma API 상태 보드 S2_13 <code>Cashback history</code>(29002:126835). 날짜는 서버 값을 로컬 표시, null이면 숨김",
+   "near": "L7 (28960:127297) · API 보드 `Cashback history`",
+   "what": "성공 카드 안 안내 줄",
+   "vp": "pc"
+  },
+  {
+   "group": "hub",
+   "groupLabel": "7. 캐시백 허브",
+   "order": 70,
+   "screen": "hub.main",
+   "title": "캐시백 허브",
+   "route": "/cashback-hub",
+   "fu": [
+    "FU-045",
+    "FU-046",
+    "FU-047",
+    "FU-048"
+   ],
+   "state": "dexPartial",
+   "label": "A=3 · B=8 — 일부만 출금",
+   "note": "V2.2 hub/HUB#dexPartial · 재사용: H5 패널 + 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704)",
+   "near": "H5 `28960:126908`",
+   "what": "이벤트 리워드 > 캐시백일 때의 「일부만 출금」 안내 줄과 그 배치",
+   "vp": "pc"
+  },
+  {
+   "group": "hub",
+   "groupLabel": "7. 캐시백 허브",
+   "order": 70,
+   "screen": "hub.main",
+   "title": "캐시백 허브",
+   "route": "/cashback-hub",
+   "fu": [
+    "FU-045",
+    "FU-046",
+    "FU-047",
+    "FU-048"
+   ],
+   "state": "dexLoading",
+   "label": "패널 로딩",
+   "note": "V2.2 hub/HUB#dexLoading · 재사용: H5 패널 + 코어 스켈레톤(지갑 카드 메모 29026:97581 「조회 중에는 스켈레톤」)",
+   "near": "H5 `28960:126908`",
+   "what": "로딩 스켈레톤",
+   "vp": "pc"
+  },
+  {
+   "group": "hub",
+   "groupLabel": "7. 캐시백 허브",
+   "order": 70,
+   "screen": "hub.main",
+   "title": "캐시백 허브",
+   "route": "/cashback-hub",
+   "fu": [
+    "FU-045",
+    "FU-046",
+    "FU-047",
+    "FU-048"
+   ],
+   "state": "dexMulti",
+   "label": "같은 DEX 복수 지갑 +N",
+   "note": "V2.2 hub/HUB#dexMulti · 재사용: H5 패널 · `EdgeX +1` 표기는 상태 정의 S4_18(29002:128037)",
+   "near": "H5 `28960:126908`",
+   "what": "지갑 주소 + `+N` 표시, 지갑별 자동 지급 포함/제외 안내",
+   "vp": "pc"
+  },
+  {
+   "group": "hub",
+   "groupLabel": "7. 캐시백 허브",
+   "order": 70,
+   "screen": "hub.main",
+   "title": "캐시백 허브",
+   "route": "/cashback-hub",
+   "fu": [
+    "FU-045",
+    "FU-046",
+    "FU-047",
+    "FU-048"
+   ],
+   "state": "aster",
+   "label": "Aster — USDT value at payout",
+   "note": "V2.2 hub/HUB#aster · 재사용: H5 패널 · H9·H10은 숨김 폐기안이라 쓰지 않음",
+   "near": "H5 `28960:126908`(H9·H10은 숨김 폐기안)",
+   "what": "Aster 패널(USDT 환산 표기 줄)",
+   "vp": "pc"
+  },
+  {
+   "group": "hub",
+   "groupLabel": "7. 캐시백 허브",
+   "order": 70,
+   "screen": "hub.main",
+   "title": "캐시백 허브",
+   "route": "/cashback-hub",
+   "fu": [
+    "FU-045",
+    "FU-046",
+    "FU-047",
+    "FU-048"
+   ],
+   "state": "totalClaimed",
+   "label": "Total claimed (G-053 유지)",
+   "note": "V2.2 hub/HUB#totalClaimed · 재사용: H5 패널 + 기존 `Total Claimed` 줄(29035:97792)",
+   "near": "H5 `28960:126908`",
+   "what": "`Total claimed` 줄",
+   "vp": "pc"
+  },
+  {
+   "group": "hub",
+   "groupLabel": "7. 캐시백 허브",
+   "order": 70,
+   "screen": "hub.main",
+   "title": "캐시백 허브",
+   "route": "/cashback-hub",
+   "fu": [
+    "FU-045",
+    "FU-046",
+    "FU-047",
+    "FU-048"
+   ],
+   "state": "rateFail",
+   "label": "요율 서비스 실패",
+   "note": "V2.2 hub/HUB#rateFail · 재사용: H1 계산기 영수증 · 문구 근거 DEX(revision) 상태 정의 S5_11 `Estimate unavailable`(29002:128580) = G-144",
+   "near": "H1 `28960:126884`",
+   "what": "계산기 자리의 `Estimate unavailable` + `Try again`(G-144)",
+   "vp": "pc"
+  },
+  {
+   "group": "hub",
+   "groupLabel": "7. 캐시백 허브",
+   "order": 70,
+   "screen": "hub.main",
+   "title": "캐시백 허브",
+   "route": "/cashback-hub",
+   "fu": [
+    "FU-045",
+    "FU-046",
+    "FU-047",
+    "FU-048"
+   ],
+   "state": "lighterAccruing",
+   "label": "Lighter 주중 「집계 전」 (G-100)",
+   "note": "V2.2 hub/HUB#lighterAccruing · 가장 가까운 Figma H5(28960:126908)는 추정치 줄 — G-100으로 미표시",
+   "near": "H5 `28960:126908`",
+   "what": "주중 「집계 전」 표시 자리와 영문 문구. H5의 `Accruing this week (estimate)` 추정 줄은 G-100으로 쓰지 않음",
+   "vp": "pc"
+  },
+  {
+   "group": "dex",
+   "groupLabel": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screen": "dex.overview",
+   "title": "DEX 개요 (랜딩)",
+   "route": "/dex",
+   "fu": [
+    "FU-049",
+    "FU-050",
+    "FU-051",
+    "FU-052",
+    "FU-053"
+   ],
+   "state": "defiStale",
+   "label": "DefiLlama 실패 — 마지막 캐시값 + 기준 시각",
+   "note": "V2.2 lnd/LANDING#defiStale · 재사용: OA glance 서브라인 `… as of {date}` 형식 · 상태 정의 S5_07 `24H trading volume`(29002:128485)",
+   "near": "OA DEX overview, keys concept (28960:125521)",
+   "what": "캐시값 표시 중임을 알리는 `Source: DefiLlama, as of {time}.` 줄의 위치·스타일",
+   "vp": "pc"
+  },
+  {
+   "group": "dex",
+   "groupLabel": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screen": "dex.overview",
+   "title": "DEX 개요 (랜딩)",
+   "route": "/dex",
+   "fu": [
+    "FU-049",
+    "FU-050",
+    "FU-051",
+    "FU-052",
+    "FU-053"
+   ],
+   "state": "defiHidden",
+   "label": "DefiLlama 24시간 넘게 실패 — 숨김",
+   "note": "V2.2 lnd/LANDING#defiHidden · OA 카드에서 지표 칸만 뺌 · 상태 정의 S5_07(29002:128485)",
+   "near": "28960:125521",
+   "what": "TVL·24H Vol 칸이 빠진 venue 카드(2칸) 레이아웃, glance 서브라인 없는 머리",
+   "vp": "pc"
+  },
+  {
+   "group": "dex",
+   "groupLabel": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screen": "dex.overview",
+   "title": "DEX 개요 (랜딩)",
+   "route": "/dex",
+   "fu": [
+    "FU-049",
+    "FU-050",
+    "FU-051",
+    "FU-052",
+    "FU-053"
+   ],
+   "state": "noBanner",
+   "label": "게시 배너 없음 — 렌더 안 함 (G-156 답변 대기)",
+   "note": "V2.2 lnd/LANDING#noBanner",
+   "near": "28960:125521",
+   "what": "배너가 빠졌을 때 glance → venue 사이 간격",
+   "vp": "pc"
+  },
+  {
+   "group": "dex",
+   "groupLabel": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screen": "dex.overview",
+   "title": "DEX 개요 (랜딩)",
+   "route": "/dex",
+   "fu": [
+    "FU-049",
+    "FU-050",
+    "FU-051",
+    "FU-052",
+    "FU-053"
+   ],
+   "state": "empty",
+   "label": "노출 DEX 0개 — 영역 숨김 (G-160)",
+   "note": "V2.2 lnd/LANDING#empty · Figma 상태 정의 S5_02 `No DEX partners are available`(29002:128365)는 G-160(빈 상태 화면 없음)과 충돌 → 결정대로",
+   "near": "28960:125521",
+   "what": "glance·배너·venue가 없는 페이지, 히어로 마크 줄·숫자 줄 처리",
+   "vp": "pc"
+  },
+  {
+   "group": "dex",
+   "groupLabel": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screen": "dex.overview",
+   "title": "DEX 개요 (랜딩)",
+   "route": "/dex",
+   "fu": [
+    "FU-049",
+    "FU-050",
+    "FU-051",
+    "FU-052",
+    "FU-053"
+   ],
+   "state": "maint",
+   "label": "특정 DEX 점검·일시 연동 불가 (G-162)",
+   "note": "V2.2 lnd/LANDING#maint · Figma 상태 정의 S5_03 `Temporarily under maintenance`(29002:128385)는 G-162(카드 변화 없음)와 충돌 → 결정대로",
+   "near": "28960:125521",
+   "what": "점검 중 표식이 필요한지(현재 G-162에 따라 카드 변화 없음)",
+   "vp": "pc"
+  },
+  {
+   "group": "dex",
+   "groupLabel": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screen": "dex.detail",
+   "title": "DEX 상세 (공용 템플릿)",
+   "route": "/dex/{slug}",
+   "fu": [
+    "FU-054",
+    "FU-055",
+    "FU-056",
+    "FU-057",
+    "FU-058",
+    "FU-059"
+   ],
+   "state": "maker",
+   "label": "Maker 토글 (D4 토글 선택 변형 재사용)",
+   "note": "V2.2 exd/DETAIL#maker · 재사용: D4 28960:127454 Taker/Maker 토글",
+   "near": "D4 EdgeX key features (28960:127454)",
+   "what": "Maker 선택 시 오퍼 박스 단계 표(`Final Maker` 열)·계산기",
+   "vp": "pc"
+  },
+  {
+   "group": "dex",
+   "groupLabel": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screen": "dex.detail",
+   "title": "DEX 상세 (공용 템플릿)",
+   "route": "/dex/{slug}",
+   "fu": [
+    "FU-054",
+    "FU-055",
+    "FU-056",
+    "FU-057",
+    "FU-058",
+    "FU-059"
+   ],
+   "state": "mediaFail",
+   "label": "가이드 미디어 실패",
+   "note": "V2.2 exd/DETAIL#mediaFail · DEX(revision)·기존 페이지 어디에도 디자인 없음(누락_dex.md)",
+   "near": "D1 step panel (28960:127443)",
+   "what": "정지 첫 프레임·정적 자리표시자와 캡션",
+   "vp": "pc"
+  },
+  {
+   "group": "dex",
+   "groupLabel": "8. DEX 개요 · 상세",
+   "order": 80,
+   "screen": "dex.detail",
+   "title": "DEX 상세 (공용 템플릿)",
+   "route": "/dex/{slug}",
+   "fu": [
+    "FU-054",
+    "FU-055",
+    "FU-056",
+    "FU-057",
+    "FU-058",
+    "FU-059"
+   ],
+   "state": "offboarded",
+   "label": "DEX 오프보딩 — 랜딩 리다이렉트",
+   "note": "V2.2 exd/DETAIL#offboarded · 상태 정의 S5_16 `Exchange unavailable`·S5_17 자동 이동(29002:128736·128761) — 결정(301 리다이렉트)대로 별도 화면 없음",
+   "near": "— (리다이렉트라 화면 없음)",
+   "what": "리다이렉트 후 안내 여부(현재 랜딩 그대로)",
+   "vp": "pc"
+  },
+  {
+   "group": "calc",
+   "groupLabel": "9. 계산기 (/payback)",
+   "order": 90,
+   "screen": "calc.p1",
+   "title": "P1 Landing",
+   "route": "/payback",
+   "fu": [
+    "FU-081"
+   ],
+   "state": "noUsers",
+   "label": "사용자 수 없음 — 카드 숨김",
+   "note": "[기존 MAX-146] 재사용: P1(7260:88375 · 8135:170663)에서 Did you know 카드만 뺌 · V2.2 pbk/P1#noUsers",
+   "near": "P1 Landing (7260:88375)",
+   "what": "카드 없는 랜딩(간격 처리)",
+   "vp": "pc"
+  },
+  {
+   "group": "calc",
+   "groupLabel": "9. 계산기 (/payback)",
+   "order": 90,
+   "screen": "calc.p3",
+   "title": "P3 Trading profile",
+   "route": "/payback",
+   "fu": [
+    "FU-081"
+   ],
+   "state": "normal",
+   "label": "카드 4장 — 빈도 선택됨",
+   "note": "[기존 MAX-146] 재사용: P3(6510:88401 · mWeb 8135:170237 · Prototype 7260:73533 모두 빈도 미선택 — 스크린샷 확인) + 선택 표시는 같은 퍼널 P2 타일 선택 스타일 · V2.2 pbk/P3#normal",
+   "near": "Trading profile (6510:88401, 빈도 미선택)",
+   "what": "빈도 카드 선택 스타일 · 활성 `Check Results`",
+   "vp": "pc"
+  },
+  {
+   "group": "calc",
+   "groupLabel": "9. 계산기 (/payback)",
+   "order": 90,
+   "screen": "calc.p4",
+   "title": "P4 What You're Missing Out On",
+   "route": "/payback",
+   "fu": [
+    "FU-082"
+   ],
+   "state": "normal",
+   "label": "DEX(EdgeX) — Did you know 숨김",
+   "note": "[기존 MAX-146] 재사용: P4(6922:77328 · 7922:99923)에서 Did you know만 뺌 · V2.2 pbk/P4#normal",
+   "near": "What You're Missing Out On (6922:77328, Bitget)",
+   "what": "DEX 결과(카드 없는 배치)",
+   "vp": "pc"
+  },
+  {
+   "group": "calc",
+   "groupLabel": "9. 계산기 (/payback)",
+   "order": 90,
+   "screen": "calc.p5",
+   "title": "P5 Summary",
+   "route": "/payback",
+   "fu": [
+    "FU-082"
+   ],
+   "state": "normal",
+   "label": "EdgeX — Daily",
+   "note": "[기존 MAX-146] 재사용: Summary(6510:89041 · 8135:170693) — 플랫폼·각주·주기 값만 다름 · V2.2 pbk/P5#normal",
+   "near": "Summary (6510:89041, Bitget)",
+   "what": "DEX Summary(로고 · 각주)",
+   "vp": "pc"
+  },
+  {
+   "group": "calc",
+   "groupLabel": "9. 계산기 (/payback)",
+   "order": 90,
+   "screen": "calc.p5",
+   "title": "P5 Summary",
+   "route": "/payback",
+   "fu": [
+    "FU-082"
+   ],
+   "state": "aster",
+   "label": "Aster 각주",
+   "note": "[기존 MAX-146] 재사용: Summary(6510:89041 · 8135:170693) — 플랫폼·각주·주기 값만 다름 · V2.2 pbk/P5#aster",
+   "near": "Summary (6510:89041)",
+   "what": "Aster 각주",
+   "vp": "pc"
+  },
+  {
+   "group": "calc",
+   "groupLabel": "9. 계산기 (/payback)",
+   "order": 90,
+   "screen": "calc.p5",
+   "title": "P5 Summary",
+   "route": "/payback",
+   "fu": [
+    "FU-082"
+   ],
+   "state": "apex",
+   "label": "ApeX — 표기 G-025 대기",
+   "note": "[기존 MAX-146] 재사용: Summary(6510:89041 · 8135:170693) — 플랫폼·각주·주기 값만 다름 · V2.2 pbk/P5#apex",
+   "near": "Summary (6510:89041)",
+   "what": "ApeX Schedule·Payout Time 표기(G-025 합의 시 `Daily`)",
+   "vp": "pc"
+  },
+  {
+   "group": "calc",
+   "groupLabel": "9. 계산기 (/payback)",
+   "order": 90,
+   "screen": "calc.p5",
+   "title": "P5 Summary",
+   "route": "/payback",
+   "fu": [
+    "FU-082"
+   ],
+   "state": "lighter",
+   "label": "Lighter Weekly · Every Monday (온보딩 후)",
+   "note": "[기존 MAX-146] 재사용: Summary(6510:89041 · 8135:170693) — 플랫폼·각주·주기 값만 다름 · V2.2 pbk/P5#lighter",
+   "near": "Summary (6510:89041)",
+   "what": "Weekly 표기 · Lighter Premium 플랫폼 줄",
+   "vp": "pc"
+  },
+  {
+   "group": "summary",
+   "groupLabel": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screen": "summary.main",
+   "title": "캐시백 요약",
+   "route": "/cashback-summary",
+   "fu": [
+    "FU-060",
+    "FU-061",
+    "FU-062"
+   ],
+   "state": "dexRange",
+   "label": "거래소 범위 DEX 전체",
+   "note": "V2.2 hist/SUM#dexRange — 거래소 드롭다운은 Figma 없음(CS6에 계정·유형만)",
+   "near": "CS6 Filter dropdowns `<Select>` (28960:127164)",
+   "what": "거래소 드롭다운 펼침(범위 전체/CEX 전체/DEX 전체 + CEX·DEX 그룹, `Bitget (2 UIDs)`·`Aster (2 지갑)` 행)",
+   "vp": "pc"
+  },
+  {
+   "group": "summary",
+   "groupLabel": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screen": "summary.main",
+   "title": "캐시백 요약",
+   "route": "/cashback-summary",
+   "fu": [
+    "FU-060",
+    "FU-061",
+    "FU-062"
+   ],
+   "state": "pending",
+   "label": "DEX data pending — 0 아님",
+   "note": "V2.2 hist/SUM#pending · REQ-373·377 · G-059 — 원장 미도착 DEX는 0 대신 라벨, 합계 제외",
+   "near": "CS1 Month view (28960:127133) — 25일 칸 라벨만 있음",
+   "what": "그날을 선택했을 때 일별 목록의 `DEX data pending` 행(금액 `—`)",
+   "vp": "pc"
+  },
+  {
+   "group": "summary",
+   "groupLabel": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screen": "summary.main",
+   "title": "캐시백 요약",
+   "route": "/cashback-summary",
+   "fu": [
+    "FU-060",
+    "FU-061",
+    "FU-062"
+   ],
+   "state": "returned",
+   "label": "Withdrawal returned 행",
+   "note": "V2.2 hist/SUM#returned · G-113 확정: 복원된 날 `+` 부호 행",
+   "near": "CS1 (28960:127133)",
+   "what": "`Withdrawal returned` `+` 부호 행(G-113)",
+   "vp": "pc"
+  },
+  {
+   "group": "summary",
+   "groupLabel": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screen": "summary.main",
+   "title": "캐시백 요약",
+   "route": "/cashback-summary",
+   "fu": [
+    "FU-060",
+    "FU-061",
+    "FU-062"
+   ],
+   "state": "lighter",
+   "label": "Lighter Credited · Withheld (온보딩 후)",
+   "note": "V2.2 hist/SUM#lighter · G-181 정산 월요일 날짜로 기록 · G-059 상태명 · Withheld는 합계 제외. Lighter 보류(G-100 온보딩 때 재확인)",
+   "near": "CS1 (28960:127133)",
+   "what": "Credited/Withheld 행 표기, Withheld 합계 제외 표시(G-059·G-181)",
+   "vp": "pc"
+  },
+  {
+   "group": "summary",
+   "groupLabel": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screen": "summary.main",
+   "title": "캐시백 요약",
+   "route": "/cashback-summary",
+   "fu": [
+    "FU-060",
+    "FU-061",
+    "FU-062"
+   ],
+   "state": "oneEmpty",
+   "label": "계정 1개 선택 빈 상태",
+   "note": "V2.2 hist/SUM#oneEmpty · G-180 확정 문구",
+   "near": "CS5 Empty month (28960:127157)",
+   "what": "계정 선택 상태의 셀렉트 + 빈 문구 `No cashback activity for this account yet.`(G-180)",
+   "vp": "pc"
+  },
+  {
+   "group": "summary",
+   "groupLabel": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screen": "summary.main",
+   "title": "캐시백 요약",
+   "route": "/cashback-summary",
+   "fu": [
+    "FU-060",
+    "FU-061",
+    "FU-062"
+   ],
+   "state": "delayed",
+   "label": "데이터 지연 (허브 H6과 같음)",
+   "note": "V2.2 hist/SUM#delayed · REQ-376 — 문구는 허브 H6 각주와 같게(V2.2 국문 배너의 「출금할 수 있어요」는 자동 지급과 맞지 않아 쓰지 않음)",
+   "near": "Hub H6 DEX data delayed (28960:126914)",
+   "what": "요약 화면의 지연 배너 위치·문구",
+   "vp": "pc"
+  },
+  {
+   "group": "summary",
+   "groupLabel": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screen": "summary.main",
+   "title": "캐시백 요약",
+   "route": "/cashback-summary",
+   "fu": [
+    "FU-060",
+    "FU-061",
+    "FU-062"
+   ],
+   "state": "old",
+   "label": "180일 넘은 달",
+   "note": "V2.2 hist/SUM#old · REQ-374",
+   "near": "CS1 (28960:127133)",
+   "what": "오래된 달 안내 문구 위치",
+   "vp": "pc"
+  },
+  {
+   "group": "summary",
+   "groupLabel": "10. 캐시백 요약 · 랭킹",
+   "order": 100,
+   "screen": "ranking.main",
+   "title": "캐시백 랭킹",
+   "route": "/benefits (My Cashback Ranking 패널)",
+   "fu": [
+    "FU-063"
+   ],
+   "state": "dex",
+   "label": "순위표 DEX 칩",
+   "note": "V2.2 rk/RANK#dex — 칩 필터 디자인 없음. 카드는 [기존 MAX-468] MAXOP-805 재사용",
+   "near": "RK2 (28960:127207)",
+   "what": "전체/CEX/DEX 칩과 DEX만 남은 순위표",
+   "vp": "pc"
+  },
+  {
+   "group": "invite",
+   "groupLabel": "11. 친구 초대 · 파트너 허브",
+   "order": 110,
+   "screen": "invite.main",
+   "title": "친구 초대",
+   "route": "/point/invite",
+   "fu": [
+    "FU-077",
+    "FU-078",
+    "FU-079"
+   ],
+   "state": "terms",
+   "label": "약관 bullet 펼침",
+   "note": "V2.2 inv/IF8#terms · PC는 약관이 항상 펼쳐짐(IF1과 같음). 모바일 펼친 상태는 재사용 — [기존 MAX-425] 「Terms&NotesExpanded」(4923:56476) 틀",
+   "near": "친구 초대 · 모바일 (29065:6175) — 아코디언 접힘",
+   "what": "모바일 약관 아코디언 펼친 상태(PC는 IF1처럼 항상 펼침)",
+   "vp": "pc"
+  },
+  {
+   "group": "invite",
+   "groupLabel": "11. 친구 초대 · 파트너 허브",
+   "order": 110,
+   "screen": "invite.main",
+   "title": "친구 초대",
+   "route": "/point/invite",
+   "fu": [
+    "FU-077",
+    "FU-078",
+    "FU-079"
+   ],
+   "state": "below50",
+   "label": "50 USDT 미만",
+   "note": "V2.2 inv/IF8#below50 · REQ-414 — 안내 문구는 Claim 용어로 재작성 대상(G-419 「문구표에서 확정」, 확정 문구 없음)",
+   "near": "IF7 Invitation Reward tab (28967:127210)",
+   "what": "49.99 USDT 등 50 미만일 때의 안내 문구(`Just {amount} USDT more…`를 Claim 용어로 재작성, G-419 문구 미확정)",
+   "vp": "pc"
+  },
+  {
+   "group": "rewards",
+   "groupLabel": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screen": "maxboard.main",
+   "title": "맥스보드 (DEX 보드)",
+   "route": "/benefits/{benefitNo} (MAX BOARD)",
+   "fu": [
+    "FU-065",
+    "FU-066",
+    "FU-067",
+    "FU-068",
+    "FU-069"
+   ],
+   "state": "today",
+   "label": "참여 중 · 오늘 마감",
+   "note": "재사용 — [기존 MAX-] Bingo 「참여 기간 · 참여 중」(28537:449610 · 458145) + 일정 줄. <code>Ends Today</code>/<code>오늘 마감</code>(REQ-639)은 Figma에 없는 문구 · V2.2 <code>mb/BOARD#today</code>",
+   "near": "정산 지연 (29062:111741)",
+   "what": "`Ends Today` 마감 표기",
+   "vp": "pc"
+  },
+  {
+   "group": "rewards",
+   "groupLabel": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screen": "maxboard.main",
+   "title": "맥스보드 (DEX 보드)",
+   "route": "/benefits/{benefitNo} (MAX BOARD)",
+   "fu": [
+    "FU-065",
+    "FU-066",
+    "FU-067",
+    "FU-068",
+    "FU-069"
+   ],
+   "state": "final",
+   "label": "마지막 날 Batch 후 완성",
+   "note": "재사용 — DEX 보드 완성(29064:10322 · 10687 = 기존 「참여 중 (빙고판 완성)」 28537:450028)에 최종 순위 안내 한 줄(원문 없음) · V2.2 <code>mb/BOARD#final</code>",
+   "near": "보드 완성 (29064:10322)",
+   "what": "`최종 순위는 결과 발표 때…` 안내 위치 · 영문 원문",
+   "vp": "pc"
+  },
+  {
+   "group": "rewards",
+   "groupLabel": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screen": "coupon.box",
+   "title": "쿠폰함",
+   "route": "/coupon",
+   "fu": [
+    "FU-070"
+   ],
+   "state": "picker1",
+   "label": "계정 1개",
+   "note": "재사용 — DEX 계정 선택 다이얼로그(29062:117713 · 117894)에 행 1개. 기존 MAX-499 흐름에도 1개 분기 프레임 없음 · V2.2 <code>cp/COUPON#picker1</code>",
+   "near": "쿠폰 · 사용할 계정 선택 (29062:117713)",
+   "what": "1개 분기",
+   "vp": "pc"
+  },
+  {
+   "group": "rewards",
+   "groupLabel": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screen": "coupon.box",
+   "title": "쿠폰함",
+   "route": "/coupon",
+   "fu": [
+    "FU-070"
+   ],
+   "state": "noAccount",
+   "label": "연동 계정 없음",
+   "note": "재사용 — 같은 「Error state」 다이얼로그 틀(12474:164021)에 G-196 연동 안내 + <code>Link Account</code>. 안내 문구 원문 없음 · V2.2 <code>cp/COUPON#noAccount</code>",
+   "near": "—",
+   "what": "안내 다이얼로그 · 안내 문구(G-196 문구 원문 없음)",
+   "vp": "pc"
+  },
+  {
+   "group": "rewards",
+   "groupLabel": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screen": "league.main",
+   "title": "글로벌 리그",
+   "route": "/global-league",
+   "fu": [
+    "FU-064"
+   ],
+   "state": "reward",
+   "label": "상금 수령 계정",
+   "note": "재사용 — DEX 계정 선택 다이얼로그(29062:110959)에 참가 지갑 한 줄(G-187: 수령 계정 = 참가 계정) · V2.2 <code>lg/LEAGUE#reward</code>",
+   "near": "리그 · 팀 생성 계정 선택 (29062:110959)",
+   "what": "수령 계정 모달(G-187: 참가 계정과 동일)",
+   "vp": "pc"
+  },
+  {
+   "group": "rewards",
+   "groupLabel": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screen": "league.main",
+   "title": "글로벌 리그",
+   "route": "/global-league",
+   "fu": [
+    "FU-064"
+   ],
+   "state": "dexOnly",
+   "label": "DEX 지갑만 연동한 회원",
+   "note": "재사용 — 「>1 UID handling」(2913:21161) 틀에 DEX 그룹만 · 「연동 계정 없음」으로 떨어지지 않음(REQ-389) · V2.2 <code>lg/LEAGUE#dexOnly</code>",
+   "near": "리그 · 팀 생성 계정 선택 (29062:110959)",
+   "what": "DEX만 있는 목록",
+   "vp": "pc"
+  },
+  {
+   "group": "rewards",
+   "groupLabel": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screen": "league.main",
+   "title": "글로벌 리그",
+   "route": "/global-league",
+   "fu": [
+    "FU-064"
+   ],
+   "state": "notLinked",
+   "label": "DEX 리그 미연동 안내",
+   "note": "재사용 — 기존 [MAX-499] 「Error state」 다이얼로그 틀(12474:164021) + G-188 확정 문구 · V2.2 <code>lg/LEAGUE#notLinked</code>",
+   "near": "—",
+   "what": "미연동 안내 다이얼로그 · 국문 원문",
+   "vp": "pc"
+  },
+  {
+   "group": "rewards",
+   "groupLabel": "12. 리워드 (맥스보드·리그·쿠폰·혜택·이벤트·TP)",
+   "order": 120,
+   "screen": "league.main",
+   "title": "글로벌 리그",
+   "route": "/global-league",
+   "fu": [
+    "FU-064"
+   ],
+   "state": "card",
+   "label": "DEX 리그 혜택 카드 · URL",
+   "note": "재사용 — 혜택 Special Benefits 카드 틀([MAX-468] 10954:228708) · 기존 MAX-117 「Benefit list」(1017:8236) · V2.2 <code>lg/LEAGUE#card</code> · G-398: <code>{exchangename}</code> = 슬러그",
+   "near": "혜택 · 진행 중 (29062:113000)",
+   "what": "리그 혜택 카드",
+   "vp": "pc"
+  },
+  {
+   "group": "cex",
+   "groupLabel": "15. 기존 테더맥스 (CEX·계정·마이)",
+   "order": 150,
+   "screen": "cex.list",
+   "title": "거래소 목록 (CEX · 기존)",
+   "route": "/exchange",
+   "fu": [
+    "FU-084"
+   ],
+   "state": "empty",
+   "label": "검색 결과 없음",
+   "note": "디자인 없음 — 표 안 빈 상태 원문 없음"
+  }
+ ]
+}

@@ -13,11 +13,12 @@ function msPush(c){
 // ---------- 푸시 언어·발송 (REQ-589)
 function msPushLang(c){
  const L=['ko','en','zh (번체)','ru','vi','id'];
- const rows=L.map(l=>[l,c==='missing'&&l==='vi'?'':T('Title','제목')+' ✓',c==='missing'&&l==='vi'?'':T('Body','본문')+' ✓']);
- const res={missing:v22Note(T('Save blocked — missing language: vi (title, body).','저장 차단 — 누락 언어: vi (제목·본문)'),'error'),
-  fallback:v22Note(T('Members whose language has no template were sent English — fallback logged (412 members).','템플릿 없는 언어 회원은 영어로 발송 — 폴백 로그 기록(412명)'),'warn'),
+ const req=l=>l==='ko'||l==='en';
+ const rows=L.map(l=>[l+(req(l)?' *':` (${T('selected','선택함')})`),c==='missing'&&l==='en'?'':T('Title','제목')+' ✓',c==='missing'&&l==='en'?'':T('Body','본문')+(l==='ko'?' (≤200)':' (≤400)')+' ✓']);
+ const res={missing:v22Note(T('Send blocked — English title and body are required.','전송 차단 — 영문 제목·내용은 필수'),'error'),
+  fallback:v22Note(T('Members whose language was not selected were sent English (412 members).','선택하지 않은 언어의 회원은 영어로 발송(412명)'),'warn'),
   failed:adTbl([T('Member','회원'),T('Status','상태'),T('Last try (UTC)','마지막 시도')],[['T-10233','Sent','2026-11-25 09:00'],['T-10871','Failed','2026-11-25 09:00'],['T-11902','Retried','2026-11-26 09:00']])+`<p class="sb">${T('Failure keeps the decision, logs it and retries with 24-hour back-off. Manual re-send targets failed items only and is audited. Opt-outs respected; in-app messages always delivered.','실패 시 결정 유지·실패 로그·24시간 백오프 재시도. 수동 재발송은 실패 건만 + 감사. 수신 거부 존중, 인앱 메시지는 항상 전달')} ${AD_TBD('재시도·상태','G-312')}</p>${adBtn(T('Re-send failed only','실패 건만 재발송'))}`}[c]||'';
- return v22AdmShell('Push','Manual push',T('Manual push — content','수동 푸시 — 내용'),c==='missing'?adOff(T('Save','저장')):adBtn(T('Save','저장'),''),res+adBx(T('6 languages — title and body required for each (DEX targets too)','6개 언어 — 언어마다 제목·본문 필수(DEX 대상도 같음)'),adTbl([T('Language','언어'),T('Title','제목'),T('Body','본문')],rows)));
+ return v22AdmShell('Push','Manual push',T('Manual push — content','수동 푸시 — 내용'),c==='missing'?adOff(T('Save','저장')):adBtn(T('Save','저장'),''),res+adBx(T('Existing screen: choose send languages — Korean · English required, others only when selected (DEX targets too, G-447)','기존 화면: 발송 언어 선택 — 한글·영문 필수, 나머지는 선택한 언어만(DEX 대상도 같음, G-447)'),adTbl([T('Language','언어'),T('Title','제목'),T('Body','본문')],rows)));
 }
 // ---------- 딥링크 목적지 (REQ-590 · 596)
 function msDeep(c){
@@ -84,7 +85,7 @@ function bsAdmin(c){
 }
 const R=(k,o)=>v22Register(k,o);
 R('sd/SD-1',{group:'발송',label:'수동 푸시 대상',states:[['normal','블록 1~6 · DEX 그룹','REQ-586 · 596'],['dexAll','DEX 전체 체크','REQ-586'],['saved','기존 저장 조건 재발송 — DEX 0','REQ-586'],['none','없음 칩','REQ-586 · G-399']],render:msPush,fu:['FA-056']});
-R('sd/PLANG',{label:'수동 푸시 언어·발송',states:[['normal','6개 언어','REQ-589'],['missing','언어 누락 — 저장 차단','REQ-589'],['fallback','템플릿 없는 언어 → 영어','REQ-589'],['failed','Sent / Failed / Retried','REQ-589 · G-312']],render:msPushLang,fu:['FA-056']});
+R('sd/PLANG',{label:'수동 푸시 언어·발송',states:[['normal','발송 언어 선택','REQ-589 · G-447'],['missing','영문 누락 — 전송 차단','REQ-589 · G-447'],['fallback','템플릿 없는 언어 → 영어','REQ-589'],['failed','Sent / Failed / Retried','REQ-589 · G-312']],render:msPushLang,fu:['FA-056']});
 R('sd/DEEP',{label:'수동 푸시 딥링크',states:[['normal','기존 11종 + 3종','REQ-590 · 596'],['dexNoEx','DEX Detail page 거래소 미선택','REQ-590'],['inactive','비활성 거래소 경고','REQ-590']],render:msDeep,fu:['FA-056']});
 R('sd/SD-2',{label:'이메일 캠페인 대상',states:[['normal','필터로 선택 — DEX 그룹','REQ-591 · 597'],['dex','DEX 전체 범위','REQ-591'],['saved','저장된 CEX 캠페인 재사용','REQ-591'],['excel','엑셀 업로드','G-306']],render:msMail,fu:['FA-057']});
 R('sd/SD-3',{label:'이벤트 안내 이메일 이력',states:[['normal','DEX 대상 발송 이력','REQ-592 · G-282']],render:msEvMail,fu:['FA-057']});

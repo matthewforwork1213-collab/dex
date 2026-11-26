@@ -14,3 +14,10 @@ DEX/09_파트너_커뮤니케이션_기록.md
 # STG 실물 캡처 (회원 정보가 찍혔을 수 있음). Figma 캡처는 포함
 _캡처자료/*.png
 _캡처자료/_추가요청/**/*.png
+
+# 전체 프로토타입 — 빌드 사본·대용량 Figma 메타데이터는 올리지 않음(배포본은 prototype/full.html)
+_프로토타입_전체/TetherMax_전체프로토타입_*.html
+_프로토타입_전체/_latest.html
+_프로토타입_전체/ref/figma_pages/
+_프로토타입_전체/ref/*.bak
+_프로토타입_전체/ref/figma_index*.tsv
