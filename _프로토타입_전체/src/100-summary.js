@@ -66,20 +66,20 @@ function calendar(d){
 function monthCard(d){return `<div>${monthCard0(d)}</div>`}
 function monthCard0(d){
  const cap=`<p class="c2" style="margin:8px 0 0;font-size:${mo()?10:11}px;line-height:1.4">All amounts are shown in USDT. Cashback a DEX pays in USDC is shown 1:1 in USDT. Each calendar day shows the net amount.</p>`;
- const head=`<span class="b2 semi">Monthly total cashback</span>`;
+ const head=`<span class="b2 semi" style="line-height:20px">Monthly total cashback</span>`;
  if(!d.card)return `<div style="border:1px solid var(--divider);border-radius:8px;padding:16px" class="col">${head}<span class="cap c2">There is no cashback history for this month.</span></div>${cap}`;
  const [r,w,n]=d.card;
- const line=(k,v,c)=>`<div class="row between"><span class="cap c2">${k}</span><span class="b2 semi tnum" style="color:${c}">${v} USDT</span></div>`;
- return `<div style="border:1px solid var(--divider);border-radius:8px;padding:16px" class="col">${head}${line('Received',r,'var(--blue)')}${line('Withdrawn',w,w==='0.00'?'var(--text-primary)':'var(--error)')}<hr class="divider" style="margin:4px 0"><div class="row between"><span class="cap c2">Net</span><span class="sub1 semi tnum">${n} USDT</span></div></div>${cap}`}
+ const line=(k,v,c)=>`<div class="row between" style="margin-top:8px;line-height:20px"><span class="cap c2" style="line-height:20px">${k}</span><span class="b2 semi tnum" style="line-height:20px;color:${c}">${v} USDT</span></div>`;
+ return `<div style="border:1px solid var(--divider);border-radius:8px;padding:16px;gap:0" class="col">${head}${line('Received',r,'var(--blue)')}${line('Withdrawn',w,w==='0.00'?'var(--text-primary)':'var(--error)')}<hr class="divider" style="margin:9px 0"><div class="row between" style="line-height:24px"><span class="cap c2" style="line-height:20px">Net</span><span class="sub1 semi tnum" style="line-height:24px">${n} USDT</span></div></div>${cap}`}
 function dayRow(r){
  const acct=r.w?`Wallet ${mo()?addr(r.w):r.w}`:r.id;
  const v=r.pending?'—':`${r.v} USDT`;
- return `<div class="row g12" style="border:1px solid var(--divider);border-radius:8px;padding:10px 12px;background:#fff">${logo(r.p,24)}<div class="col grow" style="gap:2px"><span class="b2 med" style="font-size:13px">${r.t}</span><span class="cap c2" style="word-break:break-all">${r.p} ${acct}</span></div><span class="b2 tnum" style="white-space:nowrap;font-size:13px;color:${r.muted||r.pending?'var(--text-disabled)':amtColor(r.v)}">${v}</span></div>`}
+ return `<div class="row" style="gap:4px;border:1px solid var(--divider);border-radius:8px;padding:7px 12px;background:#fff">${logo(r.p,24)}<div class="col grow" style="gap:0;min-width:0"><span class="b2 med" style="font-size:13px;line-height:20px">${r.t}</span><span class="cap c2" style="line-height:20px;word-break:break-all">${r.p} ${acct}</span></div><span class="b2 tnum" style="white-space:nowrap;font-size:13px;color:${r.muted||r.pending?'var(--text-disabled)':amtColor(r.v)}">${v}</span></div>`}
 function dayList(d,st){
  const date=d.month==='May 2026'?`2026/05/${String(d.sel).padStart(2,'0')}${d.sel===d.today?' (Today)':''}`:`2025/10/${d.sel}`;
  const empty=st==='oneEmpty'?T('No cashback activity for this account yet.','이 거래 계정에는 아직 캐시백 내역이 없어요.'):'No cashback activity yet.';
- const list=d.rows.length?`<div class="col">${d.rows.map(dayRow).join('')}</div>`:`<div class="b2 c2 center" style="padding:56px 0">${empty}</div>`;
- return `<div class="col" style="gap:4px"><span class="cap c2">Date</span><span class="b2 med">${date}</span></div>${list}`}
+ const list=d.rows.length?`<div class="col" style="gap:8px;${mo()?'':'margin:0 -8px'}">${d.rows.map(dayRow).join('')}</div>`:`<div class="b2 c2 center" style="padding:56px 0">${empty}</div>`;
+ return `<div class="col" style="gap:0;${mo()?'':'margin:16px -8px 0'}"><span class="cap c2" style="line-height:17px">Date</span><span class="med" style="font-size:12px;line-height:17px">${date}</span></div>${list}`}
 // 필터 · 드롭다운 (CS6)
 const EX_OPTS=()=>[['h',T('Range','범위')],['o',T('All','전체')],['o','CEX 전체'],['o','DEX 전체',true],['h','CEX'],['o','Bitget (2 UIDs)'],['o','OKX (1 UID)'],['h','DEX'],['o',T('EdgeX (1 wallet)','EdgeX (1 지갑)')],['o',T('Aster (2 wallets)','Aster (2 지갑)')]];
 function menu(items){return `<div style="background:#fff;border-radius:4px;box-shadow:var(--elev8);padding:8px 0;margin-top:4px;position:relative;z-index:3">${items}</div>`}
@@ -173,11 +173,11 @@ function rkBoard(st){
 
 R.screen({id:'ranking.main',group:'summary',title:'캐시백 랭킹',route:'/benefits (My Cashback Ranking 패널)',fu:['FU-063'],shell:false,closeTo:'benefits.list',
  states:[
-  {id:'normal',label:'순위 매겨짐 (RK2)',figma:{pc:'28960:127207'},note:'V2.2 rk/RANK#normal(사이드 패널 부분) · 행에 금액 없음(REQ-383) · CEX는 UID, DEX는 Wallet 접두(Figma 메모)'},
-  {id:'unranked',label:'순위 미집계 – (RK1)',figma:{pc:'28960:127201',mo:'29065:6980'},note:'Figma에만 있는 상태 — Figma 메모 「순위 미집계는 –로 표시」, REQ-383 순위 밖 `–`'},
-  {id:'empty',label:'자격 계정 없음 (RK3)',figma:{pc:'28960:127213',mo:'29065:4998'},note:'V2.2 rk/RANK#empty · REQ-383'},
-  {id:'cex',label:'거래소 유형 CEX',figma:{mo:'29192:123337'},note:'거래소 유형 칩(Figma 29192:123527) — UID 행만'},
-  {id:'dex',label:'거래소 유형 DEX',figma:{mo:'29192:123432'},note:'거래소 유형 칩 — 지갑 행만'},
+  {id:'normal',label:'순위 매겨짐 (RK2)',figma:{pc:'29192:123588'},note:'V2.2 rk/RANK#normal(사이드 패널 부분) · 행에 금액 없음(REQ-383) · CEX는 UID, DEX는 Wallet 접두(Figma 메모)'},
+  {id:'unranked',label:'순위 미집계 – (RK1)',figma:{pc:'29192:121828',mo:'29065:6980'},note:'Figma에만 있는 상태 — Figma 메모 「순위 미집계는 –로 표시」, REQ-383 순위 밖 `–`'},
+  {id:'empty',label:'자격 계정 없음 (RK3)',figma:{pc:'29192:124091',mo:'29192:124549'},note:'V2.2 rk/RANK#empty · REQ-383'},
+  {id:'cex',label:'거래소 유형 CEX',figma:{pc:'29192:122197',mo:'29192:123337'},note:'거래소 유형 칩(Figma 29192:123527) — UID 행만'},
+  {id:'dex',label:'거래소 유형 DEX',figma:{pc:'29192:122566',mo:'29192:123432'},note:'거래소 유형 칩 — 지갑 행만'},
   {id:'wallet',label:'지갑 주소 전체 보기 — 툴팁',figma:{mo:'29415:138026'},note:'축약 지갑 주소를 누르면(모바일) · 올리면(PC) 전체 주소 툴팁(기존 어두운 툴팁, 꼬리 없음 — 결정 12차 「축약 지갑 주소 전체 보기」). 카드형 <code>Wallet address</code> 대화상자(28984:126296)는 쓰지 않음'},
   {id:'board',label:'월간 순위 CEX+DEX 한 목록 (혜택 랭킹 카드)',figma:{pc:'26651:60616',mo:'25849:1340946'},note:'[기존 MAX-468] MAXOP-805 랭킹 카드. V2.2 rk/RANK#normal(순위표 부분)'},
   {id:'boardDex',label:'순위표 DEX 칩',note:'V2.2 rk/RANK#dex — 칩 필터 디자인 없음. 카드는 [기존 MAX-468] MAXOP-805 재사용'},

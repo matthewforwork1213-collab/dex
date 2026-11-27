@@ -114,7 +114,7 @@ function linkedCard(rows,o={}){
   ${o.top||''}<div class="col" style="gap:12px">${list}</div>${more}
   <button class="btn text primary sm full" style="padding:4px 5px" data-go="link.select:all">${foot}</button></div>`}
 // ---------- 홈 오른쪽 열: 기존 홈 콘텐츠 (Figma HW1 main) ----------
-const secHead=(t,go)=>`<div class="row" style="gap:16px"><span style="font-size:24px;line-height:1.334;font-weight:700;white-space:nowrap">${t}</span><span class="grow"></span><button class="btn text primary md" style="padding:8px 11px;font-size:15px"${go?` data-go="${go}"`:''}>See All</button></div>`;
+const secHead=(t,go)=>`<div class="row" style="gap:16px;min-height:42px"><span style="font-size:24px;line-height:1.334;font-weight:700;white-space:nowrap">${t}</span><span class="grow"></span><button class="btn text primary md" style="padding:8px 11px;font-size:15px"${go?` data-go="${go}"`:''}>See All</button></div>`;
 function evBanner(img,title,tag){
  const tg=tag==='Lighter'?C.dex('Lighter',14):`<img src="${HA('bitget-sm.png')}" style="width:14px;height:14px;border-radius:50%" alt="">`;
  return `<div style="height:140px;border-radius:4px;position:relative;overflow:hidden;background:#000">
@@ -360,7 +360,7 @@ function walletRight(o={}){
  const review=o.reviewed?'':`<div style="position:relative;background:rgba(0,123,255,.1);border-radius:8px;padding:16px 16px 16px 124px;display:flex;flex-wrap:wrap;gap:16px;align-items:center">
   <div style="position:absolute;left:8px;top:-14px;width:104px;height:88px;overflow:hidden"><img src="${HA('review.png')}" style="position:absolute;height:142.56%;left:-39.21%;top:-21.21%;width:177.17%;max-width:none" alt=""></div>
   <div class="col grow" style="gap:2px;min-width:178px;flex-basis:0"><span class="b2 semi">How was ${o.ex||'Lighter'}?</span><span class="cap c2" style="font-size:14px;line-height:20px;letter-spacing:.17px">Your first review earns you 2 USDT. It takes about a minute.</span></div>
-  <button class="btn contained primary md" style="gap:8px;flex:none;padding:6px 18px" data-go="${o.cex?'cexd':'dex.detail'}:${(o.ex||'Lighter').toLowerCase()}">Write a review, get 2 USDT<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="display:block;fill:currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></button></div>`;
+  <button class="btn contained primary md" style="gap:8px;flex:none;padding:6px 18px;min-width:239px;justify-content:center" data-go="${o.cex?'cexd':'dex.detail'}:${(o.ex||'Lighter').toLowerCase()}">Write a review, get 2 USDT<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="display:block;fill:currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></button></div>`;
  if(o.onlyReview)return review;
  // 하단 = `Top Partner Exchanges`(결정 「지갑 상세 하단」) — Figma PW1 28960:125943: DEX 4곳 타일 · `Up to n% cashback` · 다음 화살표
  const parts=[['Lighter','#00f0ff','20%'],['ApeX','#15192a','30%'],['EdgeX','#181a20','30%'],['Aster','#000','20%']];

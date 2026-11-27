@@ -352,6 +352,20 @@ def rule_hits(rule, sid, st, vp, typ, ftxt, ptxt):
     if typ == 'added': return ppat is not None and m(ppat, ptxt)
     return (fpat is None or m(fpat, ftxt)) and (ppat is None or m(ppat, ptxt)) and (fpat or ppat)
 
+def geom_rule(sid, st, vp, iss):
+    """위치·크기 예외: type=geom 규칙의 label(이슈 라벨) · geomType(이슈 종류) 패턴 — 결정·Figma 오류로 다르게 둔 배치"""
+    def rx(pat, t):
+        if pat.startswith('/') and pat.rfind('/') > 0:
+            return re.search(pat[1:pat.rfind('/')], t or '', re.I if 'i' in pat[pat.rfind('/') + 1:] else 0) is not None
+        return pat.lower() == (t or '').lower()
+    for r in EXC.get('rules', []):
+        if r.get('type') != 'geom': continue
+        sc = r.get('scope', '*')
+        if sc != '*' and not (f'{sid}:{st}' == sc or sid == sc or (sc.endswith('.') and sid.startswith(sc)) or (sc.endswith('*') and f'{sid}:{st}'.startswith(sc[:-1]))): continue
+        if r.get('vp', '*') not in ('*', vp): continue
+        if rx(r.get('label', '/.*/'), iss.get('label')) and (r.get('geomType') is None or rx(r['geomType'], iss.get('type'))): return r
+    return None
+
 def find_rule(sid, st, vp, typ, ftxt=None, ptxt=None):
     for r in EXC.get('rules', []):
         if rule_hits(r, sid, st, vp, typ, ftxt, ptxt): return r
@@ -575,7 +589,11 @@ def geom_compare(fg, pg, tol):
             fl, pl = a[0] - fc[0], b[0] - pc[0]
             # 문구는 줄 상자(Figma)와 글자 상자(브라우저) 높이가 달라 세로는 중심으로 잰다. 버튼은 상자 위쪽 모서리
             ftop, ptop = (a[1] - fc[1], b[1] - pc[1]) if kind == 'btn' else (round(a[1] + a[3] / 2 - fc[1]), round(b[1] + b[3] / 2 - pc[1]))
+            # Figma 글상자가 글자보다 넓으면(고정 폭) 정렬 기준점으로 잰다: 가운데 정렬 = 중심, 오른쪽 정렬 = 오른쪽 끝
+            if kind == 'text' and a[2] - b[2] > 4 and (abs((b[0] + b[2] / 2 - pc[0]) - (a[0] + a[2] / 2 - fc[0])) <= tol or abs((b[0] + b[2] - pc[0]) - (a[0] + a[2] - fc[0])) <= tol): pl = fl
             if abs(pl - fl) > tol: issues.append({'type': '안쪽 왼쪽 여백', 'label': k, 'figma': a, 'proto': b, 'd': pl - fl, 'fv': fl, 'pv': pl, 'card': fc, 'pcard': pc})
+            # Figma 글상자가 글자보다 훨씬 높으면(고정 높이 — 예: 두 줄 자리에 한 줄) 위쪽 모서리로 잰다
+            if kind != 'btn' and a[3] - b[3] > 8 and abs((b[1] - pc[1]) - (a[1] - fc[1])) <= tol + 4: ptop = ftop
             if abs(ptop - ftop) > tol: issues.append({'type': '안쪽 위 여백' if kind == 'btn' else '안쪽 세로 위치(중심)', 'label': k, 'figma': a, 'proto': b, 'd': ptop - ftop, 'fv': ftop, 'pv': ptop, 'card': fc, 'pcard': pc})
             if kind == 'btn':
                 fr_, pr_ = fc[0] + fc[2] - (a[0] + a[2]), pc[0] + pc[2] - (b[0] + b[2])
@@ -597,6 +615,7 @@ def geom_compare(fg, pg, tol):
         for (k1, a1, b1), (k2, a2, b2) in zip(xs, xs[1:]):
             if a2[1] < a1[1] + a1[3] or b2[1] < b1[1] + b1[3]: continue   # 같은 줄(옆으로 나란한 것)
             fgap = round((a2[1] + a2[3] / 2) - (a1[1] + a1[3] / 2)); pgap = round((b2[1] + b2[3] / 2) - (b1[1] + b1[3] / 2))   # 중심 사이 거리
+            if a2[3] - b2[3] > 8 and abs(((b2[1] - b1[1]) - (a2[1] - a1[1]))) <= tol + 4: pgap = fgap   # 고정 높이 글상자(위 정렬) — 위쪽 모서리 기준으로 같으면 통과
             if abs(pgap - fgap) > tol: issues.append({'type': '요소 간격', 'label': f'{k1} → {k2}', 'figma': a2, 'proto': b2, 'd': pgap - fgap, 'fv': fgap, 'pv': pgap, 'card': list(fc), 'pcard': pc_of.get(fc)})
     return issues, len(tp) + len(bp), len(cpairs)
 
@@ -668,13 +687,15 @@ def main():
                     P = r['items']
                     geo = None
                     if nid in GEOM and not r.get('err') and not PRECISE.get(nid, {}).get('overlay'):   # 배경 위 모달 프레임은 뒤 화면과 겹쳐 짝이 틀어지므로 뺀다
-                        gpage = geo_page(vp, GEOM[nid]['w'])
+                        gpage = geo_page(vp, GEOM[nid]['w'] if screen_sized(GEOM[nid]['w'], GEOM[nid]['h'], vp) else (1440 if vp == 'pc' else 375))   # 컴포넌트 크기 프레임은 화면 폭(1440·375)에서 그 요소만 잰다
                         gpage.evaluate(EXTRACT_JS, [sc['id'], st['id'], vp, lang, False, with_shell])
                         gpage.wait_for_timeout(50)
                         g_scope = not screen_sized(GEOM[nid]['w'], GEOM[nid]['h'], vp)
                         pgm = gpage.evaluate(GEOM_JS, [g_scope])
                         gi, npair, ncard = geom_compare(GEOM[nid], pgm, ARGS.geom_tol)
                         geo = {'issues': gi, 'pairs': npair, 'cards': ncard, 'fw': GEOM[nid]['w'], 'pw': pgm['fw'], 'scope': g_scope}
+                        gx = [(i, geom_rule(sc['id'], st['id'], vp, i)) for i in gi]
+                        geo['issues'] = [i for i, r in gx if not r]; geo['excepted'] = [dict(i, rule=r['id']) for i, r in gx if r]
                     # 「추가」를 판정할 수 있는 종류: Figma 쪽에 그 종류가 인스턴스로 가려져 있지 않을 때만
                     op = fs['opaque']
                     if fs['src'] == '정밀': allow = {'text', 'button', 'chip', 'tab', 'input', 'badge'}

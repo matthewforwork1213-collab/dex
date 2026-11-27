@@ -141,24 +141,6 @@ document.addEventListener('click', e => {
   if (t.closest('[data-paste]')) { e.preventDefault(); return go('link.addr:valid') }
   // 이메일 인증 Paste(목록판) — 6칸을 채우고 Verify 활성
   if (t.closest('[data-otp-paste]')) { e.preventDefault(); fr.querySelectorAll('[data-otp-i]').forEach((x, i) => x.value = '123456'[i]); const v = fr.querySelector('[data-otp-verify]'); if (v) v.disabled = false; return }
-  // 이벤트 탭 전환(REQ-437): 밑줄 이동 · 목록 교체
-  const evt = t.closest('[data-ev-tab]');
-  if (evt) { const k = evt.dataset.evTab; fr.querySelectorAll('[data-ev-tab]').forEach(x => x.classList.toggle('on', x === evt));
-    const lists = [...fr.querySelectorAll('[data-ev-list]')], to = lists.find(l => l.dataset.evList === k); if (!to || !to.hidden) return;
-    lists.forEach(l => { l.hidden = l !== to }); if (to.animate && !(window.UI && UI.reduced && UI.reduced())) to.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' }); return }
-  // 거래소 이벤트 필터(Figma 29069:6595): 칩 = 그룹 거르기 · 체크 = 선택 · 셀렉트 `{첫 거래소}+{n}` · 모바일 Apply (n)
-  const evc = t.closest('[data-ev-chip]');
-  if (evc) { const box = evc.closest('[data-ev-filter]'), k = evc.dataset.evChip; box.querySelectorAll('[data-ev-chip]').forEach(x => x.classList.toggle('on', x === evc));
-    const apply = () => box.querySelectorAll('[data-ev-grp]').forEach(g => { g.hidden = k !== 'All' && g.dataset.evGrp !== k });
-    if (window.UI && UI.heightFx) UI.heightFx(() => box, apply); else apply(); return }
-  const evk = t.closest('[data-ev-check]');
-  if (evk) { const box = evk.closest('[data-ev-filter]'), n = evk.dataset.evCheck, set = (row, on) => { row.querySelector('.chk').classList.toggle('on', on); row.setAttribute('aria-checked', on) };
-    const items = [...box.querySelectorAll('[data-ev-grp] [data-ev-check]')], allRow = box.querySelector('[data-ev-check="All Exchanges"]');
-    if (n === 'All Exchanges') { const on = !allRow.querySelector('.chk').classList.contains('on'); items.forEach(r => set(r, on)); set(allRow, on) }
-    else { set(evk, !evk.querySelector('.chk').classList.contains('on')); set(allRow, items.every(r => r.querySelector('.chk').classList.contains('on'))) }
-    const sel = items.filter(r => r.querySelector('.chk').classList.contains('on')).map(r => r.dataset.evCheck);
-    const lab = fr.querySelector('[data-ev-label]'); if (lab) lab.textContent = sel.length ? sel[0] + (sel.length > 1 ? '+' + (sel.length - 1) : '') : 'All Exchanges';
-    const ap = fr.querySelector('[data-ev-apply]'); if (ap) ap.textContent = 'Apply (' + sel.length + ')'; return }
   // 라디오(퀴즈 보기 등): 같은 묶음 안 단일 선택
   const rd = t.closest('label.radio');
   if (rd) { const g = rd.parentElement; g.querySelectorAll(':scope > label.radio').forEach(x => x.classList.toggle('on', x === rd)); return }
@@ -185,6 +167,85 @@ document.addEventListener('click', e => {
     return;
   }
 }, false);
+
+// ---- 이벤트 목록(두 판 공통 — 목록판 events.list · 동작판 #/events): 탭 전환 · 거래소 필터(칩·체크·셀렉트·모바일 시트) · 카드 거르기 · Join Now ----
+// 탭 = 밑줄 이동 + 목록 교체(REQ-437 · 결정 D3 3탭) · 칩(Figma A1 29069:6595 · 29190:123385~123515) = 그룹 거르기 + 첫 행 `All {CEX|DEX} exchanges`
+// 셀렉트 = PC 드롭다운(클릭 펼침·유지, 바깥·Esc 닫힘) / 모바일 바텀시트(Close · Apply (n)) · 선택 = 셀렉트 `{첫 거래소}+{n}`, 카드는 선택한 거래소만(없으면 전체)
+(function () {
+  const EV_ALL = { All: 'All Exchanges', CEX: 'All CEX exchanges', DEX: 'All DEX exchanges' };
+  const reduced = () => (window.UI && UI.reduced && UI.reduced()) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const fade = el => { if (el && el.animate && !reduced()) el.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' }) };
+  const on = r => r.querySelector('.chk').classList.contains('on');
+  const set = (r, v) => { r.querySelector('.chk').classList.toggle('on', v); r.setAttribute('aria-checked', v) };
+  const items = box => [...box.querySelectorAll('[data-ev-grp] [data-ev-check]')];
+  const scope = box => items(box).filter(r => !r.closest('[data-ev-grp]').hidden);
+  const selOf = box => items(box).filter(on).map(r => r.dataset.evCheck);
+  const syncAll = box => { const a = box.querySelector('[data-ev-check="All Exchanges"]'), sc = scope(box); if (a) set(a, sc.length > 0 && sc.every(on)) };
+  const label = sel => sel.length ? sel[0] + (sel.length > 1 ? '+' + (sel.length - 1) : '') : 'All Exchanges';
+  const toast = msg => { if (window.siteToast) return window.siteToast(msg); const d = document.createElement('div'); d.className = 'bh-toast'; d.setAttribute('role', 'status'); d.textContent = msg; document.body.appendChild(d); requestAnimationFrame(() => d.classList.add('in')); setTimeout(() => { d.classList.remove('in'); setTimeout(() => d.remove(), 320) }, 2200) };
+  function filterCards(root, sel) { root.querySelectorAll('[data-ev-list] [data-ev-ex]').forEach(c => { c.hidden = sel.length > 0 && !sel.includes(c.dataset.evEx) }) }
+  function apply(root, sel) { root.dataset.evSel = sel.join(','); const lab = root.querySelector('[data-ev-label]'); if (lab) lab.textContent = label(sel); filterCards(root, sel) }
+  function ddOpen(root, open) {
+    const dd = root.querySelector('[data-ev-dd]'), tr = root.querySelector('[data-ev-open]'); if (!dd) return;
+    if (open === dd.hidden) { dd.hidden = !open; if (open) fade(dd) }
+    if (tr) tr.setAttribute('aria-expanded', String(!dd.hidden));
+  }
+  function sheetOpen(root, open) {
+    const sh = root.querySelector('[data-ev-sheet]'); if (!sh) return;
+    if (open) {   // 열 때 지금 적용된 선택을 시트에 복사
+      const cur = (root.dataset.evSel || '').split(',').filter(Boolean), box = sh.querySelector('[data-ev-filter]');
+      items(box).forEach(r => set(r, cur.includes(r.dataset.evCheck))); syncAll(box);
+      const ap = sh.querySelector('[data-ev-apply]'); if (ap) ap.textContent = 'Apply (' + cur.length + ')';
+      sh.hidden = false; const panel = sh.firstElementChild;
+      if (panel && panel.animate && !reduced()) panel.animate([{ transform: 'translateY(100%)' }, { transform: 'none' }], { duration: 280, easing: 'cubic-bezier(.2,0,0,1)' });
+      document.body.style.overflow = 'hidden';
+    } else { sh.hidden = true; document.body.style.overflow = '' }
+  }
+  document.addEventListener('click', e => {
+    const t = e.target; if (!t || !t.closest) return;
+    const root = t.closest('[data-ev-root]');
+    if (!root || !t.closest('[data-ev-dd],[data-ev-open]')) document.querySelectorAll('[data-ev-root]').forEach(r => { if (r !== root || !t.closest('[data-ev-dd]')) ddOpen(r, false) });
+    if (!root || t.closest('[data-go]')) return;
+    const stop = () => { e.preventDefault(); e.stopPropagation() };
+    const tab = t.closest('[data-ev-tab]');
+    if (tab) {
+      stop(); const k = tab.dataset.evTab;
+      root.querySelectorAll('[data-ev-tab]').forEach(x => { x.classList.toggle('on', x === tab); x.setAttribute('aria-selected', String(x === tab)) });
+      const lists = [...root.querySelectorAll('[data-ev-list]')], to = lists.find(l => l.dataset.evList === k); if (!to || !to.hidden) return;
+      lists.forEach(l => { l.hidden = l !== to }); fade(to); return;
+    }
+    const join = t.closest('[data-ev-join]');
+    if (join) { stop(); const ex = join.dataset.evJoin; window.PT_LAST_OPEN = 'event:' + ex; return toast(ex + ' 이벤트 페이지가 새 탭으로 열려요 — 링크는 어드민 이벤트 값 (프로토타입)') }
+    if (t.closest('[data-ev-open]')) { stop(); if (root.querySelector('[data-ev-sheet]')) return sheetOpen(root, true); const dd = root.querySelector('[data-ev-dd]'); return ddOpen(root, !!(dd && dd.hidden)) }
+    const sh = root.querySelector('[data-ev-sheet]');
+    if (sh && !sh.hidden) {
+      if (t.closest('[data-ev-close]') || t === sh) { stop(); return sheetOpen(root, false) }
+      if (t.closest('[data-ev-apply-go]')) { stop(); apply(root, selOf(sh.querySelector('[data-ev-filter]'))); return sheetOpen(root, false) }
+    }
+    const chip = t.closest('[data-ev-chip]');
+    if (chip) {
+      stop(); const box = chip.closest('[data-ev-filter]'), k = chip.dataset.evChip;
+      box.querySelectorAll('[data-ev-chip]').forEach(x => x.classList.toggle('on', x === chip));
+      const run = () => { box.querySelectorAll('[data-ev-grp]').forEach(g => { g.hidden = k !== 'All' && g.dataset.evGrp !== k }); const al = box.querySelector('[data-ev-alllab]'); if (al) al.textContent = EV_ALL[k]; syncAll(box) };
+      if (window.UI && UI.heightFx) UI.heightFx(() => box, run); else run(); return;
+    }
+    const ck = t.closest('[data-ev-check]');
+    if (ck) {
+      stop(); const box = ck.closest('[data-ev-filter]');
+      if (ck.dataset.evCheck === 'All Exchanges') { const v = !on(ck); scope(box).forEach(r => set(r, v)); set(ck, v) } else { set(ck, !on(ck)); syncAll(box) }
+      const inSheet = ck.closest('[data-ev-sheet]'), sel = selOf(box);
+      const ap = (inSheet || root).querySelector('[data-ev-apply]'); if (ap) ap.textContent = 'Apply (' + sel.length + ')';
+      if (!inSheet) apply(root, sel);
+      return;
+    }
+  }, false);
+  // 인라인 display(grid·flex)가 hidden 속성을 덮지 않게 · Figma A1 유형 칩(선택 = 파랑 채움 · 나머지 = 회색 채움)
+  try { const st = document.createElement('style'); st.textContent = '[data-ev-root] [hidden]{display:none!important}[data-ev-chips] .chip{border:0;background:#eef0f3;color:rgba(0,0,0,.87);height:32px;padding:0 16px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;transition:background-color .3s,color .3s}[data-ev-chips] .chip.on{background:var(--blue,#0031c6);color:#fff}'; (document.head || document.documentElement).appendChild(st) } catch (x) { }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('[data-ev-root]').forEach(r => { ddOpen(r, false); const sh = r.querySelector('[data-ev-sheet]'); if (sh && !sh.hidden) sheetOpen(r, false) });
+    if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.matches && e.target.matches('[data-ev-root] [data-ev-tab],[data-ev-root] [data-ev-chip],[data-ev-root] [data-ev-check],[data-ev-root] [data-ev-open]')) { e.preventDefault(); e.target.click() }
+  });
+})();
 
 // 목록판 오른쪽 아래 위젯·토스트 모양
 const css = document.createElement('style');

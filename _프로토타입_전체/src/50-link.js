@@ -222,7 +222,7 @@ function uidLinkForm(st,openPicker){
  const sel=mo?`<button type="button" class="sel" style="border-color:var(--input-border);padding:16px 12px" data-go="link.select:${filled?'uidFilled':'uid'}">${webMark(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`:webExchangeField(d,openPicker);
  const field=C.field({label:null,value:filled?'1234567':fmtErr?'12345abc':null,ph:T('Enter your UID'),focus:filled,error:null});
  const reg=signUp(d);
- const next=C.btn(T('Next'),{full:true,size:'md',disabled:!filled});
+ const next=C.btn(T('Next'),{full:true,size:mo?'lg':'md',disabled:!filled});   // 모바일 42(Figma 29051:100488)
  if(mo)return moForm(T('Link your exchange UID'),`${sel}${field}${uidGuide(true,d)}`,`${next}${reg}`);
  const modal=`<div style="background:var(--paper);border-radius:4px;box-shadow:var(--elev24);width:600px;max-width:100%;height:800px;display:flex;flex-direction:column">
   <div class="row between" style="padding:16px 24px 0"><span class="h6" style="font-weight:500">${T('Link your exchange UID')}</span><button class="icon-btn" data-go="home.main">${ic('close')}</button></div>
@@ -279,7 +279,7 @@ R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link 
   const paste=preset||st==='empty'||st==='paste'||st==='hub'?`<button class="btn contained primary sm" data-paste style="position:absolute;right:12px;top:${mo?12:16}px">${T('Paste','붙여넣기')}</button>`:'';
   if(mo){
    const sel=`<div class="sel" style="border-color:var(--input-border);padding:16px 12px;cursor:pointer" data-go="link.select:normal">${C.dex(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</div>`;
-   const acts=`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:!ok,go:ok?'link.captcha:normal':''})}${ok?'':moHint(hintTxt)}${signUp(d)}`;
+   const acts=`${C.btn(T('Next','다음'),{full:true,size:'lg',disabled:!ok,go:ok?'link.captcha:normal':''})}${ok?'':moHint(hintTxt)}${signUp(d)}`;
    return moForm(T('Link Account','거래 계정 연동하기'),`${sel}<div style="position:relative">${fld}${paste}</div>${extra}${nt}${guide(d)}`,acts,st==='hub'?'hub.main':'home.main');
   }
   const body=`${trust()}${dexSel(d)}<div style="position:relative">${fld}${paste}</div>${extra}${nt}${guide(d)}`;
@@ -293,7 +293,7 @@ R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link 
 // Figma 1 Entry(28960:127416, DEX 상세 — Get Started 주 버튼) → 2 Signup(28960:127418, 모달 「DEX / Signup before redirect」) → 3 Return(28960:127422, 상세 — Link Wallet 주 버튼)
 R.screen({id:'link.signup',group:'link',title:'가입 후 연동 복귀 (G-402) — 중간 안내 없음',route:'/exchange/{dex} (모달)',fu:['FU-013'],shell:false,
  states:[
-  {id:'return',label:'3 Return — 상세로 돌아와 Link Wallet → 미리 선택된 연동 모달',figma:{pc:'28960:127422'},note:'Figma 3 Return: 상세 페이지에서 <code>Link Wallet</code>이 주 버튼(파랑)으로, <code>Get Started</code>가 보조로 바뀜 — 상세 화면은 DEX 담당(<code>dex.detail:lighter</code>)이라 버튼 강조는 그쪽 반영 필요. 여기서는 복귀 후 열리는 연동 모달(G-402: 그 DEX 미리 선택)을 보여 줌. 복귀 안내 문구는 문구표'},
+  {id:'return',label:'3 Return — 상세로 돌아와 Link Wallet → 미리 선택된 연동 모달',figma:null,note:'근거 프레임 3 Return(28960:127422)은 DEX 상세 페이지(<code>dex.detail:lighter</code> 담당) — 이 상태는 그 다음 화면. Figma 3 Return: 상세 페이지에서 <code>Link Wallet</code>이 주 버튼(파랑)으로, <code>Get Started</code>가 보조로 바뀜 — 상세 화면은 DEX 담당(<code>dex.detail:lighter</code>)이라 버튼 강조는 그쪽 반영 필요. 여기서는 복귀 후 열리는 연동 모달(G-402: 그 DEX 미리 선택)을 보여 줌. 복귀 안내 문구는 문구표'},
  ],
  render(st){
   {
@@ -397,7 +397,7 @@ R.screen({id:'link.done',group:'link',title:'연동 성공',route:'/link (전체
 // Figma DEX(revision) D2 Step guide, step 3 (28960:127444) › guide 섹션(I28960:127444;354:49328) — 컴포넌트 DEX / Step rail item · DEX / Step panel
 const LG_STEPS=['Create a Web3 wallet','Deposit USDC into your wallet','Join Lighter and link your wallet','Deposit USDC into Lighter','Trade and get rewarded'];
 R.screen({id:'link.lguide',group:'link',title:'Lighter 가이드 (보류)',route:'/exchange/lighter (가이드 영역)',fu:['FU-016','FU-025'],shell:{nav:'cashback',accent:true,back:'dex.detail',moTitle:['Lighter guide','Lighter 가이드']},
- states:[{id:'normal',label:'Lighter 가이드 Step 3 — Plus·Premium 안내 (D2)',figma:{pc:'28960:127444'},note:'V2.2 <code>exd/LGUIDE#normal</code> — REQ-347·116·126 · Lighter 온보딩 보류(G-428). DEX(revision) D2 Step guide, step 3의 가이드 섹션(1·2단계 완료 체크 · 3단계 활성 · 스크린샷 · <code>Step 3 of 5</code> · 안내 Alert). 단계 본문은 Figma 초안 문구(Step panel 설명: DRAFT). 모바일 D2(28960:130999)는 미대조 — 레일을 위에 쌓아 표시'}],
+ states:[{id:'normal',label:'Lighter 가이드 Step 3 — Plus·Premium 안내 (D2)',figma:{pc:'29357:145019'},note:'V2.2 <code>exd/LGUIDE#normal</code> — REQ-347·116·126 · Lighter 온보딩 보류(G-428). DEX(revision) D2 Step guide, step 3의 가이드 섹션(1·2단계 완료 체크 · 3단계 활성 · 스크린샷 · <code>Step 3 of 5</code> · 안내 Alert). 단계 본문은 Figma 초안 문구(Step panel 설명: DRAFT). 모바일 D2(28960:130999)는 미대조 — 레일을 위에 쌓아 표시'}],
  render(){
   const mo=S.vp==='mo';
   const rail=LG_STEPS.map((t,i)=>{const done=i<2,act=i===2;

@@ -109,8 +109,8 @@ R.screen({id:'cmn.lang',group:'common',title:'언어 설정 시트',route:'모�
 
 R.screen({id:'cmn.footer',group:'common',title:'푸터',route:'전 페이지',fu:['FU-083'],shell:false,
  states:[{id:'normal',label:'Live Chat · 지원 메일 · Company · Legal · 소셜',figma:{pc:'28967:127334',mo:'29062:118042'},note:'DEX(revision) FooterA · Footer/mWeb · V2.2 cmn/FOOTER#normal'},
-  {id:'guest',label:'모바일 게스트 — Company › Claim Cashback',figma:{mo:'29072:1797'},note:'DEX(revision) Footer / Company / Claim Cashback'}],
- render(st){return withAuth(st==='guest'?'guest':S.auth,()=>`${pageBg(mo()?120:200)}${footer()}`)+C.note('지원 연락처 + 복사 · Company · Legal · 소셜 5종(REQ-472). Legal 문구는 Figma 원문 <code>Terms of Service</code>. 게스트 모바일은 Company 3행이 <code>Claim Cashback</code>(→ guest.search).')}});
+  {id:'guest',label:'게스트 — Company › Claim Cashback (PC·모바일)',figma:{mo:'29072:1797'},note:'DEX(revision) Footer / Company / Claim Cashback — PC 게스트도 같은 항목(결정: 푸터 PC 게스트 Claim Cashback)'}],
+ render(st){return withAuth(st==='guest'?'guest':S.auth,()=>`${pageBg(mo()?120:200)}${footer()}`)+C.note('지원 연락처 + 복사 · Company · Legal · 소셜 4종(기존 푸터 링크 — 블로그 · YouTube · X · Telegram). Legal <code>Terms of Service</code>(→ /terms/use). 게스트는 PC·모바일 모두 Company 3행이 <code>Claim Cashback</code>(→ guest.search).')}});
 
 // ---------- 앱 하단 탭 (코어 moNav({app:true})) ----------
 R.screen({id:'cmn.appnav',group:'common',title:'앱 하단 내비',route:'앱',fu:['FU-085'],shell:false,
@@ -124,18 +124,11 @@ R.screen({id:'cmn.appnav',group:'common',title:'앱 하단 내비',route:'앱',f
   const on={normal:'home',events:'events',exchange:'exchange'}[st]||'home';
   let main=`<div style="flex:1;background:var(--bg-accent)"></div>`;
   if(st==='inapp')main=`<div style="flex:1;display:flex;flex-direction:column"><div class="row between" style="height:48px;padding:0 12px;background:#fff;border-bottom:1px solid var(--divider)"><button class="icon-btn">${ic('close')}</button><span class="cap c2">tethermax.io/cashback-hub</span><span style="width:40px"></span></div><div style="flex:1;background:var(--bg-accent)"></div></div>`;
-  if(st==='linkFail')main=`<div style="flex:1;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px">${C.dialog('Open EdgeX',T('The link could not open. Copy it or try again.'),C.btn(T('Copy link','링크 복사'),{v:'outlined'})+C.btn('Open EdgeX'))}</div>`;
-  const notes={normal:'탭 이름 Figma 원문 <code>Exchanges</code> · <code>Point</code>(명세 Exchange · Points, ❓ G-215). 앱 전용 — 모바일 웹에는 하단 탭 없음.',events:'Events 활성.',exchange:'Exchanges 활성.',inapp:'앱 빌드가 지원하지 않는 Cashback 페이지 → 인앱 브라우저(REQ-470 · G-216). 디자인 없음 — V2.2 내용.',linkFail:'앱에서 DEX 링크 실패 → 링크 복사 + <code>Open {DEX}</code>(REQ-470). 디자인 없음 — V2.2 내용.'};
+  const notes={normal:'탭 이름 Figma 원문 <code>Exchanges</code> · <code>Point</code>(명세 Exchange · Points, ❓ G-215). 앱 전용 — 모바일 웹에는 하단 탭 없음.',events:'Events 활성.',exchange:'Exchanges 활성.',inapp:'앱 빌드가 지원하지 않는 Cashback 페이지 → 인앱 브라우저(REQ-470 · G-216). 디자인 없음 — V2.2 내용.'};   // DEX 외부 링크 실패 다이얼로그 없음 — 외부 브라우저로 열림(결정 3차 #7 · G-216)
   return `<div style="background:#e9ecef;padding:${mo()?0:24}px"><div style="width:375px;height:812px;display:flex;flex-direction:column;background:#fff;margin:0 auto;box-shadow:var(--elev8)">${main}${moNav(on,{app:true})}</div></div>${C.note(notes[st])}`;
  }});
 
-// ---------- Exchange Listings Page (CEX만) ----------
-R.screen({id:'cmn.listing',group:'common',title:'Exchange Listings Page (CEX만)',route:'/exchange',fu:['FU-084'],shell:{nav:'cashback',accent:true,moTitle:['All Partner Exchanges','전체 파트너 거래소'],back:'hub.main'},
- states:[
-  {id:'normal',label:'표 — Recommended',figma:{pc:'22598:410917',mo:'5145:52544'},note:'[기존 MAXOP-692] Figma (Updated) · 모바일 [기존 MAX-22] list view · V2.2 cmn/LISTING#normal'},
-  {id:'cards',label:'카드 뷰 (모바일)',figma:{mo:'8471:65818'},note:'[기존 MAX-22] All Exchanges(카드) · V2.2 cmn/LISTING#cards — PC 카드 뷰 없음'},
- ],
- render(st){return listing(st==='cards'?'cards':'table')+C.note('CEX만 나열 — DEX 추가 안 함(REQ-466 · 475). 명세의 <code>Rating</code> 열(Avg. Cashback과 Live Campaigns 사이)은 Figma 표에 없음 → 질문_common.md. 모바일은 [MAX-22] 5145:52544 배치(행 = 번호 · 로고 · 이름 · 배지 · Total Savings).')}});
+// Exchange Listings 화면 없음 — 거래소 목록 자리 = 캐시백 허브 CEX 탭(결정 12차 「허브 CEX 라우트 행 목적지」 · 사용자 2026-11-27)
 
 // ---------- 공지 (웹 목록 디자인 없음 → [MAX-1244] Newsletter 목록 컴포넌트 재사용) ----------
 R.screen({id:'notice.list',group:'common',title:'공지',route:'/notice',fu:['FU-086'],shell:{nav:'discover',accent:true,moTitle:['Notices','공지'],back:'back:home.main'},
@@ -234,7 +227,7 @@ for(const f of RULES.R){
   states:[{id:'normal',label:'규칙 원문 ('+f.rows.map(r=>r[0]).join(' · ')+')',figma:null}],
   render(){
    const tbl=`<div class="tblwrap" style="background:#fff"><table class="tbl"><thead><tr><th>REQ</th><th>구분</th><th>내용</th><th>인수 기준</th><th>우선순위</th><th>상태</th></tr></thead><tbody>${f.rows.map(r=>`<tr>${r.slice(0,5).map(c=>`<td style="vertical-align:top">${rmd(c)}</td>`).join('')}<td style="vertical-align:top">${statusCell(r[5])}</td></tr>`).join('')}</tbody></table></div>`;
-   return docWrap(`${f.id}. ${esc(f.title)}`,`<div class="note" style="border:0;background:none;color:inherit;padding:0;margin:0;font-size:inherit"><p class="b2 c2" style="margin:0">${rmd(f.desc)}</p>${C.note('화면이 아니라 규칙인 기능 — 기능명세서 원문(V2.2 rule/'+f.id+'). 상태 열의 G-nnn은 2026-11-25 확정 결정이 있으면 확정값으로 표시. 디자인 대상 아님.'+(f.id==='FU-089'?' <b>CEX 회귀 방지</b>: CEX 배지 추가 없음 · CEX 이메일 템플릿·UID 마스킹·알림 17행 그대로 — 이 프로토타입의 CEX 화면(<a data-go="hub.main:cex">허브 CEX 탭</a> · <a data-go="cmn.listing">cmn.listing</a>)에도 DEX를 넣지 않는다.':''))}${tbl}</div>`);
+   return docWrap(`${f.id}. ${esc(f.title)}`,`<div class="note" style="border:0;background:none;color:inherit;padding:0;margin:0;font-size:inherit"><p class="b2 c2" style="margin:0">${rmd(f.desc)}</p>${C.note('화면이 아니라 규칙인 기능 — 기능명세서 원문(V2.2 rule/'+f.id+'). 상태 열의 G-nnn은 2026-11-25 확정 결정이 있으면 확정값으로 표시. 디자인 대상 아님.'+(f.id==='FU-089'?' <b>CEX 회귀 방지</b>: CEX 배지 추가 없음 · CEX 이메일 템플릿·UID 마스킹·알림 17행 그대로 — 이 프로토타입의 CEX 화면(<a data-go="hub.main:cex">허브 CEX 탭</a>)에도 DEX를 넣지 않는다.':''))}${tbl}</div>`);
   }});
 }
 

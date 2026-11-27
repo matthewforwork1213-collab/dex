@@ -68,7 +68,7 @@ function gnb(active,o={}){
 function footer(){
  const mob=S.vp==='mo',guest=S.auth==='guest';
  const company=[['about.intro','About TetherMax'],['notice.list','Notices'],guest?['guest.search:search','Claim Cashback']:['partner.apply','Affiliate Partner Inquiry']];
- const legal=[['terms.privacy','Privacy Policy'],['terms.use','Terms of Use']];
+ const legal=[['terms.privacy','Privacy Policy'],['terms.use','Terms of Service']];   // Figma FooterA 원문 Terms of Service(IA 1.1 TRM → /terms/use)
  const sec=(h,items)=>`<div class="fsec"><b>${h}</b><div class="flinks">${items.map(([go,t])=>`<a data-go="${go}">${t}</a>`).join('')}</div></div>`;
  const btns=`<div class="fbtns"><button class="btn contained primary md fchat">${shIc('cmn-ic-headset.svg','ic20')}Live Chat</button><button class="btn text black md fmail">support@${mob?'tethermax':'TetherMax'}.io${shIc('cmn-ic-copy.svg','ic16')}</button></div>`;
  const sns=`<div class="fsns">${[2,3].map(i=>`<img src="${A('cmn-fa-sns-'+i+'.svg')}" style="width:32px;height:32px" alt="">`).join('')}<span style="width:31px;height:32px;display:flex;align-items:center;justify-content:center"><img src="${A('cmn-fa-sns-4.svg')}" style="width:23.4px;height:24.3px" alt=""></span><img src="${A('cmn-fa-sns-5.svg')}" style="width:32px;height:28px" alt=""></div>`;

@@ -1,6 +1,6 @@
 {
  "source": "use_figma",
- "fetched": "2026-11-27T19:00",
+ "fetched": "2026-11-27T19:42",
  "nodes": {
   "22442:219830": {
    "name": "MAX1216 / detail / S6 Empty — 0 reviews / light",
@@ -29414,10 +29414,6 @@
      "kind": "text"
     },
     {
-     "t": "Remember me",
-     "kind": "text"
-    },
-    {
      "t": "Continue",
      "kind": "button"
     },
@@ -31484,48 +31480,7 @@
    "h": 585,
    "hidden": false,
    "overlay": false,
-   "texts": [
-    {
-     "t": "Live Chat",
-     "kind": "button"
-    },
-    {
-     "t": "support@tethermax.io",
-     "kind": "button"
-    },
-    {
-     "t": "Company",
-     "kind": "text"
-    },
-    {
-     "t": "About TetherMax",
-     "kind": "text"
-    },
-    {
-     "t": "Notices",
-     "kind": "text"
-    },
-    {
-     "t": "Affiliate Partner Inquiry",
-     "kind": "text"
-    },
-    {
-     "t": "Legal",
-     "kind": "text"
-    },
-    {
-     "t": "Privacy Policy",
-     "kind": "text"
-    },
-    {
-     "t": "Terms of Use",
-     "kind": "text"
-    },
-    {
-     "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
-    }
-   ]
+   "texts": []
   },
   "29062:8577": {
    "name": "16 · 팀 리그 수상",
@@ -43587,6 +43542,2257 @@
     },
     {
      "t": "Get Started",
+     "kind": "button"
+    }
+   ]
+  },
+  "29192:121828": {
+   "name": "DEX / RK1 Ranking, rows / light",
+   "w": 1440,
+   "h": 900,
+   "hidden": false,
+   "overlay": true,
+   "texts": [
+    {
+     "t": "Stack rewards on every trade.",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Event Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Special Benefits",
+     "kind": "text"
+    },
+    {
+     "t": "Predict Bitcoin price and win up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Earn More Cashback.  Earn Extra USDT.",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 37 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "tab"
+    },
+    {
+     "t": "10",
+     "kind": "tab"
+    },
+    {
+     "t": "Completed",
+     "kind": "tab"
+    },
+    {
+     "t": "Become a member to access completed rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "button"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "button"
+    },
+    {
+     "t": "Company",
+     "kind": "text"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "Notices",
+     "kind": "text"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "text"
+    },
+    {
+     "t": "Legal",
+     "kind": "text"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "May 2026",
+     "kind": "chip"
+    },
+    {
+     "t": "My Cashback Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Rankings are updated daily at 00:01",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "UID 7605865687",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "UID 08547939171",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet 0x7a3f…51e9",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback under 0.01 USDT isn’t included in the rankings.",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback.",
+     "kind": "text"
+    }
+   ]
+  },
+  "29192:123588": {
+   "name": "DEX / RK2 Ranking, ranked / light",
+   "w": 1440,
+   "h": 900,
+   "hidden": false,
+   "overlay": true,
+   "texts": [
+    {
+     "t": "Stack rewards on every trade.",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Event Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Special Benefits",
+     "kind": "text"
+    },
+    {
+     "t": "Predict Bitcoin price and win up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Earn More Cashback.  Earn Extra USDT.",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 37 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "tab"
+    },
+    {
+     "t": "10",
+     "kind": "tab"
+    },
+    {
+     "t": "Completed",
+     "kind": "tab"
+    },
+    {
+     "t": "Become a member to access completed rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "button"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "button"
+    },
+    {
+     "t": "Company",
+     "kind": "text"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "Notices",
+     "kind": "text"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "text"
+    },
+    {
+     "t": "Legal",
+     "kind": "text"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "May 2026",
+     "kind": "chip"
+    },
+    {
+     "t": "My Cashback Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Rankings are updated daily at 00:01",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "UID 7605865687",
+     "kind": "text"
+    },
+    {
+     "t": "1st",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "UID 08547939171",
+     "kind": "text"
+    },
+    {
+     "t": "2nd",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet 0x7a3f…51e9",
+     "kind": "text"
+    },
+    {
+     "t": "3rd",
+     "kind": "text"
+    }
+   ]
+  },
+  "29192:124091": {
+   "name": "DEX / RK3 Ranking, empty / light",
+   "w": 1440,
+   "h": 900,
+   "hidden": false,
+   "overlay": true,
+   "texts": [
+    {
+     "t": "Stack rewards on every trade.",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Event Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Special Benefits",
+     "kind": "text"
+    },
+    {
+     "t": "Predict Bitcoin price and win up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Earn More Cashback.  Earn Extra USDT.",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 37 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "tab"
+    },
+    {
+     "t": "10",
+     "kind": "tab"
+    },
+    {
+     "t": "Completed",
+     "kind": "tab"
+    },
+    {
+     "t": "Become a member to access completed rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "button"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "button"
+    },
+    {
+     "t": "Company",
+     "kind": "text"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "Notices",
+     "kind": "text"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "text"
+    },
+    {
+     "t": "Legal",
+     "kind": "text"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "There are currently no eligible accounts for ranking.",
+     "kind": "text"
+    }
+   ]
+  },
+  "29192:122197": {
+   "name": "캐시백 랭킹 · PC · CEX",
+   "w": 1440,
+   "h": 900,
+   "hidden": false,
+   "overlay": true,
+   "texts": [
+    {
+     "t": "Stack rewards on every trade.",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Event Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Special Benefits",
+     "kind": "text"
+    },
+    {
+     "t": "Predict Bitcoin price and win up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Earn More Cashback.  Earn Extra USDT.",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 37 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "tab"
+    },
+    {
+     "t": "10",
+     "kind": "tab"
+    },
+    {
+     "t": "Completed",
+     "kind": "tab"
+    },
+    {
+     "t": "Become a member to access completed rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "button"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "button"
+    },
+    {
+     "t": "Company",
+     "kind": "text"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "Notices",
+     "kind": "text"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "text"
+    },
+    {
+     "t": "Legal",
+     "kind": "text"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "May 2026",
+     "kind": "chip"
+    },
+    {
+     "t": "My Cashback Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Rankings are updated daily at 00:01",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "UID 7605865687",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "UID 08547939171",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    }
+   ]
+  },
+  "29192:122566": {
+   "name": "캐시백 랭킹 · PC · DEX",
+   "w": 1440,
+   "h": 900,
+   "hidden": false,
+   "overlay": true,
+   "texts": [
+    {
+     "t": "Stack rewards on every trade.",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Event Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Special Benefits",
+     "kind": "text"
+    },
+    {
+     "t": "Predict Bitcoin price and win up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Earn More Cashback.  Earn Extra USDT.",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 37 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "tab"
+    },
+    {
+     "t": "10",
+     "kind": "tab"
+    },
+    {
+     "t": "Completed",
+     "kind": "tab"
+    },
+    {
+     "t": "Become a member to access completed rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "button"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "button"
+    },
+    {
+     "t": "Company",
+     "kind": "text"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "Notices",
+     "kind": "text"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "text"
+    },
+    {
+     "t": "Legal",
+     "kind": "text"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "May 2026",
+     "kind": "chip"
+    },
+    {
+     "t": "My Cashback Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Rankings are updated daily at 00:01",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet 0x7a3f…51e9",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    }
+   ]
+  },
+  "29192:124549": {
+   "name": "내 캐시백 랭킹 · 대상 없음",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "There are currently no eligible accounts for ranking.",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "text"
+    }
+   ]
+  },
+  "29192:123337": {
+   "name": "캐시백 랭킹 · 모바일 · CEX",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "May 2026",
+     "kind": "chip"
+    },
+    {
+     "t": "My Cashback Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Rankings are updated daily at 00:01",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "UID 7605865687",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "UID 08547939171",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "text"
+    }
+   ]
+  },
+  "29192:123432": {
+   "name": "캐시백 랭킹 · 모바일 · DEX",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "May 2026",
+     "kind": "chip"
+    },
+    {
+     "t": "My Cashback Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Rankings are updated daily at 00:01",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet 0x884B…1a69",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "text"
+    }
+   ]
+  },
+  "29415:138026": {
+   "name": "내 캐시백 랭킹 · 모바일 · 주소 팝오버",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "May 2026",
+     "kind": "chip"
+    },
+    {
+     "t": "My Cashback Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Rankings are updated daily at 00:01",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "UID 7605865687",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "UID 08547939171",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet 0x884B…1a69",
+     "kind": "text"
+    },
+    {
+     "t": "–",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback under 0.01 USDT isn’t included in the rankings.",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "text"
+    },
+    {
+     "t": "0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    }
+   ]
+  },
+  "29474:136690": {
+   "name": "Wallet detail / mWeb · Lighter · Address tooltip",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "0x7a3f…51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Active",
+     "kind": "chip"
+    },
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "14.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Claimed",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "7.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Event Reward",
+     "kind": "text"
+    },
+    {
+     "t": "7.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Matched 7.00 / 100.00 USDT in event rewards\nClaimable 14.00 USDT · Minimum 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "How was Lighter?",
+     "kind": "text"
+    },
+    {
+     "t": "Your first review earns you 2 USDT. It takes about a minute.",
+     "kind": "text"
+    },
+    {
+     "t": "Write a review, get 2 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Earning Timeline",
+     "kind": "text"
+    },
+    {
+     "t": "Start Trading",
+     "kind": "text"
+    },
+    {
+     "t": "2026.03.17 00:00",
+     "kind": "text"
+    },
+    {
+     "t": "Cut-off Time",
+     "kind": "text"
+    },
+    {
+     "t": "2026.03.18 00:00",
+     "kind": "text"
+    },
+    {
+     "t": "Updated",
+     "kind": "text"
+    },
+    {
+     "t": "2026.03.18 10:50",
+     "kind": "text"
+    },
+    {
+     "t": "Top Partner Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "54% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "55% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Exclusive For Members",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Guess Bitcoin Price",
+     "kind": "text"
+    },
+    {
+     "t": "Win Up to 1,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Earn More Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Earn extra USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Earn More Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Earn extra USDT",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "https://TetherMax.io",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    },
+    {
+     "t": "0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9",
+     "kind": "text"
+    }
+   ]
+  },
+  "29357:145019": {
+   "name": "guide",
+   "w": 1440,
+   "h": 776,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Step by step guide on starting your trading journey on Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "Create a Web3 wallet",
+     "kind": "text"
+    },
+    {
+     "t": "Deposit USDC into your wallet",
+     "kind": "text"
+    },
+    {
+     "t": "3",
+     "kind": "text"
+    },
+    {
+     "t": "Join Lighter and link your wallet",
+     "kind": "text"
+    },
+    {
+     "t": "4",
+     "kind": "text"
+    },
+    {
+     "t": "Deposit USDC into Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "5",
+     "kind": "text"
+    },
+    {
+     "t": "Trade and get rewarded",
+     "kind": "text"
+    },
+    {
+     "t": "Stuck partway through?",
+     "kind": "text"
+    },
+    {
+     "t": "Live chat replies in about 2 minutes.",
+     "kind": "text"
+    },
+    {
+     "t": "Chat with support",
+     "kind": "button"
+    },
+    {
+     "t": "Step 3 of 5",
+     "kind": "chip"
+    },
+    {
+     "t": "Join Lighter and link your wallet",
+     "kind": "text"
+    },
+    {
+     "t": "Open Lighter through the TetherMax link and log in. Then copy your wallet address from Lighter and paste it in TetherMax. TetherMax never asks you to connect a ",
+     "kind": "text"
+    }
+   ]
+  },
+  "29179:116130": {
+   "name": "Web / Guest / picker · DEX 필터",
+   "w": 1440,
+   "h": 900,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Choose your exchange and enter your UID or wallet address to check your cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Sign up or log in and link this trading account to receive your cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Email address",
+     "kind": "input"
+    },
+    {
+     "t": "Sign Up Now",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "button"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "button"
+    },
+    {
+     "t": "Company",
+     "kind": "text"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "Notices",
+     "kind": "text"
+    },
+    {
+     "t": "Affiliate Partner Inquiry Claim Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Legal",
+     "kind": "text"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "Login",
+     "kind": "button"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "button"
+    },
+    {
+     "t": "Select Exchange",
+     "kind": "text"
+    },
+    {
+     "t": "Search for an exchange",
+     "kind": "input"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised Exchanges (4)",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "ApeX",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Aster",
+     "kind": "text"
+    }
+   ]
+  },
+  "29179:116351": {
+   "name": "Mobile / Guest / picker · CEX 필터",
+   "w": 375,
+   "h": 850,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Check your cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Choose your exchange and enter your UID or wallet address to check your cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Select exchange",
+     "kind": "text"
+    },
+    {
+     "t": "Select an exchange",
+     "kind": "text"
+    },
+    {
+     "t": "Select an exchange first",
+     "kind": "text"
+    },
+    {
+     "t": "Check cashback",
+     "kind": "button"
+    },
+    {
+     "t": "No account? Join our partner exchange",
+     "kind": "button"
+    },
+    {
+     "t": "Don't leave your cashback behind.",
+     "kind": "text"
+    },
+    {
+     "t": "Sign up or log in and link this trading account to receive your cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Email address",
+     "kind": "input"
+    },
+    {
+     "t": "Sign Up Now",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "button"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "button"
+    },
+    {
+     "t": "Company",
+     "kind": "text"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "Notices",
+     "kind": "text"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "text"
+    },
+    {
+     "t": "Legal",
+     "kind": "text"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "Sign up in the app and earn more cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Get the App",
+     "kind": "button"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "button"
+    },
+    {
+     "t": "Select Exchange",
+     "kind": "text"
+    },
+    {
+     "t": "Search for an exchange",
+     "kind": "input"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised Exchanges (13)",
+     "kind": "text"
+    },
+    {
+     "t": "Top Popular Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "WOO X Pro",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "MEXC",
+     "kind": "text"
+    },
+    {
+     "t": "BingX",
+     "kind": "text"
+    },
+    {
+     "t": "DeepCoin",
+     "kind": "text"
+    },
+    {
+     "t": "Gate",
+     "kind": "text"
+    },
+    {
+     "t": "LBank",
+     "kind": "text"
+    },
+    {
+     "t": "BlockFin",
+     "kind": "text"
+    },
+    {
+     "t": "KuCoin",
+     "kind": "text"
+    },
+    {
+     "t": "Zoomex",
+     "kind": "text"
+    },
+    {
+     "t": "Bitunix",
+     "kind": "text"
+    },
+    {
+     "t": "BloFin",
+     "kind": "text"
+    },
+    {
+     "t": "HTX",
+     "kind": "text"
+    },
+    {
+     "t": "Toobit",
+     "kind": "text"
+    }
+   ]
+  },
+  "29179:116630": {
+   "name": "Mobile / Guest / picker · DEX 필터",
+   "w": 375,
+   "h": 850,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Check your cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Choose your exchange and enter your UID or wallet address to check your cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Select exchange",
+     "kind": "text"
+    },
+    {
+     "t": "Select an exchange",
+     "kind": "text"
+    },
+    {
+     "t": "Select an exchange first",
+     "kind": "text"
+    },
+    {
+     "t": "Check cashback",
+     "kind": "button"
+    },
+    {
+     "t": "No account? Join our partner exchange",
+     "kind": "button"
+    },
+    {
+     "t": "Don't leave your cashback behind.",
+     "kind": "text"
+    },
+    {
+     "t": "Sign up or log in and link this trading account to receive your cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Email address",
+     "kind": "input"
+    },
+    {
+     "t": "Sign Up Now",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "button"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "button"
+    },
+    {
+     "t": "Company",
+     "kind": "text"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "Notices",
+     "kind": "text"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "text"
+    },
+    {
+     "t": "Legal",
+     "kind": "text"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "Sign up in the app and earn more cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Get the App",
+     "kind": "button"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "button"
+    },
+    {
+     "t": "Select Exchange",
+     "kind": "text"
+    },
+    {
+     "t": "Search for an exchange",
+     "kind": "input"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised Exchanges (4)",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "ApeX",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Aster",
+     "kind": "text"
+    }
+   ]
+  },
+  "29026:97588": {
+   "name": "지갑 잔액 카드 · 리워드 없음 · 최소액 이상",
+   "w": 375,
+   "h": 199,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "120.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "120.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Claimable 120.00 USDT · Minimum 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    }
+   ]
+  },
+  "29026:97617": {
+   "name": "지갑 잔액 카드 · 모든 적립 잔액 0",
+   "w": 375,
+   "h": 227,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Claimable 0.00 USDT · Minimum 10 USDT\nYou can claim cashback if you receive an additional 10.00 USDT in exchange Cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    }
+   ]
+  },
+  "29026:97646": {
+   "name": "지갑 잔액 카드 · 캐시백만 보유 · 최소액 미만",
+   "w": 375,
+   "h": 227,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "3.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "3.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Claimable 3.00 USDT · Minimum 10 USDT\nYou can claim cashback if you receive an additional 7.00 USDT in exchange Cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    }
+   ]
+  },
+  "29026:97675": {
+   "name": "지갑 잔액 카드 · 리워드만 보유",
+   "w": 375,
+   "h": 266,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Event Reward",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Matched 0.00 / 8.00 USDT in event rewards\nClaimable 0.00 USDT · Minimum 10 USDT\nYou can claim cashback if you receive an additional 5.00 USDT in exchange Cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    }
+   ]
+  },
+  "29026:97704": {
+   "name": "지갑 잔액 카드 · 부분 매칭 · 최소액 미만",
+   "w": 375,
+   "h": 266,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "4.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "2.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Event Reward",
+     "kind": "text"
+    },
+    {
+     "t": "2.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Matched 2.00 / 8.00 USDT in event rewards\nClaimable 4.00 USDT · Minimum 10 USDT\nYou can claim cashback if you receive an additional 3.00 USDT in exchange Cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    }
+   ]
+  },
+  "29026:97762": {
+   "name": "지갑 잔액 카드 · 전액 매칭 · 최소액 미만",
+   "w": 375,
+   "h": 266,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "9.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "4.50 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Event Reward",
+     "kind": "text"
+    },
+    {
+     "t": "4.50 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Matched 4.50 / 4.50 USDT in event rewards\nClaimable 9.00 USDT · Minimum 10 USDT\nYou can claim cashback if you receive an additional 1.00 USDT in exchange Cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    }
+   ]
+  },
+  "29026:97791": {
+   "name": "지갑 잔액 카드 · 전액 매칭 · 최소액과 일치",
+   "w": 375,
+   "h": 238,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "10.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "5.50 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Event Reward",
+     "kind": "text"
+    },
+    {
+     "t": "4.50 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Matched 4.50 / 4.50 USDT in event rewards\nClaimable 10.00 USDT · Minimum 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    }
+   ]
+  },
+  "29026:97820": {
+   "name": "지갑 잔액 카드 · 전액 매칭 · 최소액 초과",
+   "w": 375,
+   "h": 238,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "16.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "12.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Event Reward",
+     "kind": "text"
+    },
+    {
+     "t": "4.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Matched 4.00 / 4.00 USDT in event rewards\nClaimable 16.00 USDT · Minimum 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    }
+   ]
+  },
+  "29026:97849": {
+   "name": "지갑 잔액 카드 · 소수점 절삭 · 기준 직전",
+   "w": 375,
+   "h": 227,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Available Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "9.99 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Exchange Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "9.99 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Claimable 9.99 USDT · Minimum 10 USDT\nYou can claim cashback if you receive an additional 0.01 USDT in exchange Cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
      "kind": "button"
     }
    ]

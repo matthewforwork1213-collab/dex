@@ -22,15 +22,16 @@ const W_APEX='0x4bd2'+'0'.repeat(31)+'9Af03';
 // 약관 bullet 9개 — Figma IF1~IF7 화면 문구(4곳 동일, REQ-421). 정책 원문과의 차이는 ref/질문_invite.md
 const TERMS=['If you sign up using this link, you do not need to enter a separate friend invitation code.',
  'If you do not sign up using this link, you can enter the friend invitation code to receive a \'Friend Invitation Completion Coupon.\'',
- 'Invitation Rewards are earned on trading cashback from linked CEX and DEX accounts.',
- 'Invitation Rewards are paid in USDT to your designated linked account from 50 USDT.',
+ 'Invitation Rewards are earned when friends you invite receive eligible trading cashback from centralised exchanges (CEXs) or decentralised exchanges (DEXs) linked to TetherMax.',
+ 'Once your available Invitation Rewards reach 10 USDT, they are paid automatically in USDT to your designated linked account (exchange UID or DEX wallet).',   // 최소액 10 USDT — 결정 D8
  'Members who signed up before being invited by a friend are excluded from the event.',
  'The invitation code can only be entered once and cannot be changed after entry.',
  'If you participate in the event through abnormal means, the coupon may be revoked without notice.',
  'The event may be changed or discontinued without prior notice due to the operator\'s circumstances.',
  'There is no limit to the number of friends you can invite, but the reward ratio may change or be limited due to the operator\'s circumstances.'];
 function terms(list,open){
- const ul=`<ul class="b2 c2" style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:${list===TERMS?4:20}px">${list.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`;
+ // Figma는 약관 전체가 글머리표 목록 한 덩어리(텍스트 1개) — 한 블록 안 글머리 줄로 그린다
+ const ul=`<div class="b2 c2" role="list" style="margin:0;padding-left:20px">${list.map((t,i)=>`<span role="listitem" style="display:list-item;list-style:disc;${i?`margin-top:${list===TERMS?4:20}px`:''}">${esc(t)}</span>`).join('')}</div>`;
  if(mo()&&!open)return box(`<div class="row between"><span class="b1 semi">Terms &amp; Conditions</span>${ic('arrow-drop-down','ic20')}</div>`,{p:16});
  return box(`<div class="col g16"><div class="row between"><span class="b1 semi">Terms &amp; Conditions</span>${mo()?`<span style="transform:rotate(180deg);display:inline-flex">${ic('arrow-drop-down','ic20')}</span>`:''}</div>${ul}</div>`,{p:16,style:'border-radius:12px'})}
 const hero=(title,sub)=>`<div class="col center" style="align-items:center;gap:8px;padding-top:16px"><div style="width:240px;height:154px;overflow:hidden;position:relative"><img src="${A('inv-hero-people.png')}" alt="" style="position:absolute;left:0;top:-27.72%;width:100%;height:155.45%;object-fit:cover"></div><span class="b1 semi" style="margin-top:8px">${title}</span><span class="b2 c2">${sub}</span></div>`;

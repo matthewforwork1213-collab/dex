@@ -144,7 +144,7 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
   {id:'unlinked',label:'이전 보유자 · 연동 해제 행 (O14)',figma:{pc:'28960:127727',mo:'12783:404139'},note:'V2.2 <code>own/O14#normal</code>. 모바일 = [기존 MAX-561] mWeb Unlinked and UID claim by others(행 아래 경고 Alert + 오른쪽 화살표) — DEX 모바일 프레임 없음'},
   {id:'reclaim',label:'재청구 다이얼로그 (O15)',figma:{pc:'29202:120092',mo:'28982:126318'},note:'V2.2 <code>own/O14#reclaim</code>'},
   {id:'reclaimUid',label:'재청구 다이얼로그 — CEX UID (기존 MAX-561)',note:'CEX 해제 행은 기존 UID 문구 — 지갑 문구(O15)를 쓰지 않음'},
-  {id:'reclaimRejectedRow',label:'재청구 거절 · 홈 계정 행',figma:{pc:'29202:120644',mo:'28982:126338'}},
+  {id:'reclaimRejectedRow',label:'재청구 거절 · 홈 계정 행',figma:null,note:'행 전용 Figma 프레임 없음 — 29202:120644 · 28982:126338은 행을 누른 뒤 O16 다이얼로그(<code>reclaimRejected</code>)'},
   {id:'reclaimRejected',label:'재청구 거절 · 사유 (O16)',figma:{pc:'29202:120644',mo:'28982:126338'},note:'V2.2 <code>own/O14#rejected</code>'},
  ],
  render(st,ctx){

@@ -44,7 +44,7 @@ function bar(k){return k==='p4c'?'':`<div data-calc-bar style="padding:0 ${mo()?
 // 페이지 골격: 진행 바 + 본문(가운데 정렬 컨테이너) + 하단 버튼 줄(선택)
 function page(k,body,o={}){
  const w=o.w||744;
- const foot=o.foot?`<div style="padding:${mo()?'12px 16px 24px':'16px 24px 40px'};display:flex;justify-content:space-between;gap:8px;max-width:${mo()?'none':'800px'};margin:0 auto;width:100%;box-sizing:border-box">${o.foot}</div>`:'';
+ const foot=o.foot?`<div style="padding:${mo()?'16px 10px 12px':'16px 24px 40px'};display:flex;justify-content:space-between;gap:8px;max-width:${mo()?'none':'800px'};margin:0 auto;width:100%;box-sizing:border-box">${o.foot}</div>`:'';
  return `<div data-calc-page="${k}" style="display:flex;flex-direction:column;min-height:${mo()?756:836}px">${bar(k)}
   <div style="flex:1;padding:${mo()?'24px 16px 32px':'40px 24px 48px'}"><div style="max-width:${w}px;margin:0 auto" class="col g24">${body}</div></div>${foot}</div>${o.note?C.note(o.note):''}`}
 const backBtn=go=>`<button class="btn contained lg" data-calc-back style="background:#f2f2f5;color:var(--text-primary);width:${mo()?'50%':'200px'}" data-go="${go}">${T('Back','뒤로')}</button>`;
@@ -53,16 +53,16 @@ const title=(t)=>`<h1 style="margin:0;text-align:center;font-size:${mo()?20:24}p
 // 정보 아이콘 — hover 시 실서비스 툴팁 문구(data-tip)
 const tipIc=tip=>`<span data-tip="${esc(tip)}" tabindex="0" style="width:18px;height:18px;border-radius:50%;border:1.5px solid var(--action-active);color:var(--action-active);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:none;cursor:default">i</span>`;
 // Did you know 카드 (Figma aiReasoning/didyouknow: 연파랑 그라데이션 · 테두리 #c7d6ff · 제목 #7f9fff)
-const dyk=(html,w)=>`<div style="border:1px solid #c7d6ff;border-radius:8px;padding:16px;box-shadow:1px 1px 15px rgba(28,28,30,.04);background:linear-gradient(160deg,rgba(199,214,255,.08),rgba(0,49,198,.08) 230%);${w?`width:${w}px;max-width:100%;margin:0 auto`:''}" class="col g12"><div class="row g8"><img src="${A('calc-ic-tips.svg')}" style="width:16px;height:16px" alt=""><span class="b2 semi" style="color:#7f9fff">Did you know?</span></div><div class="cap" style="line-height:1.4;letter-spacing:.2px">${html}</div></div>`;
+const dyk=(html,w)=>`<div style="border:1px solid #c7d6ff;border-radius:8px;padding:16px 16px 20px;box-shadow:1px 1px 15px rgba(28,28,30,.04);background:linear-gradient(160deg,rgba(199,214,255,.08),rgba(0,49,198,.08) 230%);${w?`width:${w}px;max-width:100%;margin:0 auto`:''}" class="col g12"><div class="row g8"><img src="${A('calc-ic-tips.svg')}" style="width:16px;height:16px" alt=""><span class="b2 semi" style="color:#7f9fff">Did you know?</span></div><div class="cap" style="line-height:18px;letter-spacing:.2px">${html}</div></div>`;
 // 실서비스 집계값(측정일 표시값) — Landing·결과 카드
 const CL_USERS='95,000',CL_UPTO='284';
 
 // 거래소 타일: 브랜드 배경 + 로고 + 이름 + CEX `{n}% Total Savings` / DEX `{rate}% Cashback`. 선택 = 파란 테두리
-function tile(p,on){
+function tile(p,on,row){   // row: 전체 보기에서 DEX 첫 타일은 새 줄에서 시작(Figma 29194:120700 · 121368)
  const size=p.logo==='calc-toobit.svg'?(mo()?16:21):(mo()?32:40);   // 파일 이름이 실제 로고와 엇갈려 있음(calc-toobit.svg = Flipster F, calc-flipster.png = Toobit)
  const logo=p.type==='DEX'?C.dex(p.name,size):`<img src="${A(p.logo)}" style="width:${size}px;height:${size}px;object-fit:contain${p.logo==='calc-flipster.png'?';border-radius:50%':''}" alt="">`;
  const rate=p.type==='CEX'?T(`${p.savings}% Total Savings`,`총 절감률 ${p.savings}%`):T(`${p.rate}% Cashback`,`최종 캐시백률 ${p.rate}%`);
- return `<button type="button" aria-pressed="${on}" data-calc-platform="${p.id}" style="font:inherit;color:inherit;min-width:0;text-align:left;border-radius:8px;padding:8px;cursor:pointer;border:1px solid ${on?'#0031c6':'transparent'};background:${on?'rgba(187,226,255,.2)':'transparent'};transition:border-color .2s">
+ return `<button type="button" aria-pressed="${on}" data-calc-platform="${p.id}" style="${row?'grid-column-start:1;':''}font:inherit;color:inherit;min-width:0;text-align:left;border-radius:8px;padding:8px;cursor:pointer;border:1px solid ${on?'#0031c6':'transparent'};background:${on?'rgba(187,226,255,.2)':'transparent'};transition:border-color .2s">
   <span style="height:${mo()?42:60}px;border-radius:4px;background:${p.color};display:flex;align-items:center;justify-content:center">${logo}</span>
   <span class="cap c2" style="display:block;margin-top:4px;line-height:1.4">${esc(p.name)}</span><span class="cap" style="display:block;font-weight:500;line-height:1.4">${rate}</span></button>`}
 const pill=(l,on,k)=>`<button type="button" aria-pressed="${on}" data-calc-chip="${k}" data-go="calc.p2:${k==='All'?'none':k==='CEX'?'cexChip':'dexChip'}" style="height:34px;min-width:64px;border:0;padding:0 12px;border-radius:18px;font-size:13px;font-weight:500;cursor:pointer;transition:background-color .3s,color .3s;${on?'background:#0031c6;color:#fff':'background:#e9ecf1;color:var(--text-primary)'}">${l}</button>`;
@@ -92,7 +92,7 @@ R.screen({id:'calc.p1',group:'calc',title:'P1 Landing',route:'/payback',fu:['FU-
  render(st){
   const card=st==='noUsers'?'':dyk(`Cashback made simple — up to <b>${CL_UPTO} USDT</b> a month.<br>Trusted by <b>${CL_USERS}</b> users.`,343);
   const body=`<div class="col g8" style="text-align:center">${title('Check your missed Cashback,<br>in just 1 minute')}<p class="b2 c2" style="margin:0">Check now</p></div>
-   <img src="${A('calc-hero.png')}" style="width:${mo()?320:480}px;max-width:100%;margin:-24px auto -12px" alt="">${card}<div class="row center" style="padding:0 10px">${C.btn('Start Cashback Preview',{go:'calc.p2:none',full:true})}</div>`;
+   <img src="${A('calc-hero.png')}" style="width:${mo()?320:480}px;max-width:100%;margin:-24px auto -12px" alt="">${card}<div class="row center" style="padding:0 10px;${mo()?'margin:0 -16px':''}">${C.btn('Start Cashback Preview',{go:'calc.p2:none',full:true}).replace('<button ','<button style="letter-spacing:.09px" ')}</div>`;
   return page('p1',body,{w:500,note:st==='noUsers'?'사용자 수가 없으면 카드를 숨기고 0을 표시하지 않는다(<code>Trusted by 0 users</code> 금지, 정책 PB-2).':'제목·부제·카드 문구는 실서비스 화면(calc_01). 숫자 284 · 95,000은 측정일 실서비스 집계값(G-211 집계 자동).'});
  }});
 
@@ -109,10 +109,10 @@ R.screen({id:'calc.p2',group:'calc',title:'P2 Choose platform',route:'/payback',
   const list=type==='DEX'?CL_DEX:type==='CEX'?CL_CEX:[...CL_CEX,...CL_DEX];
   const candidate=window.SITEC?v.pid:(selectedPlatform||v.pid);
   const sel=list.some(p=>p.id===candidate)?candidate:null;
-  const grid=`<div data-calc-selection style="display:grid;grid-template-columns:repeat(${mo()?3:6},minmax(0,1fr));gap:${mo()?'8px':'8px 8px'}">${list.map(p=>tile(p,p.id===sel)).join('')}</div>`;
+  const grid=`<div data-calc-selection style="display:grid;grid-template-columns:repeat(${mo()?3:6},minmax(0,1fr));gap:${mo()?'8px':'8px 8px'}">${list.map(p=>tile(p,p.id===sel,type==='All'&&p===CL_DEX[0])).join('')}</div>`;
   const body=`${title(T('First, which exchange do you use most?','먼저, 가장 자주 사용하는 거래소는 어디인가요?'))}<div class="row center g8">${pill(T('All','전체'),type==='All','All')}${pill('CEX',type==='CEX','CEX')}${pill('DEX',type==='DEX','DEX')}</div>${grid}`;
   const next=`<button type="button" class="btn contained primary lg" style="width:${mo()?'50%':'200px'}" data-calc-next data-go="calc.p3"${sel?'':' disabled'}>${T('Next','다음')}</button>`;
-  return page('p2',body,{w:800,foot:backBtn('calc.p1')+next,
+  return page('p2',body,{w:808,foot:backBtn('calc.p1')+next,
    note:'CEX 타일 순서·<code>Total Savings</code>는 실서비스 화면(calc_02). DEX 4곳은 정책 PB-3(<code>{rate}% Cashback</code>, 요율 G-003 ⏳). 선택 후 <code>Next</code> 활성.'});
  }});
 

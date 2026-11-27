@@ -936,4 +936,22 @@
       }, 250);
     }
   }
+  // ---- Brokers 상세(결정 12차 「Brokers 페이지」 유지) — 라이브 tethermax.io 측정(2026-11-27) ----
+  // `Sign Up` · `Sign Up for STP/ECN Account` · 계정 카드 `Get Started` = 브로커 가입 사이트 새 탭(카드 순서 = 계정 유형),
+  // 1단계 `referral link` · 아래 띠 `Get Started` = Account Type 구역으로 스크롤. 수집 보완표는 RS 상세에 INFINOX 링크를 잘못 담고 있어 여기서 먼저 처리
+  var BRK_RS = 'https://crm.rs-fin.com/account/register/?shareUserSetId=a6d2c90a05b54a948', BRK_STP = 'https://myaccount.infinox.com/register/?lid=9931382&pid=100215934', BRK_ECN = 'https://myaccount.infinox.com/register/?lid=9931383&pid=100215934';
+  var BRK = { 'rs-finance': { 'Sign Up': BRK_RS, card: [BRK_RS] }, infinox: { 'Sign Up for STP Account': BRK_STP, 'Sign Up for ECN Account': BRK_ECN, card: [BRK_STP, BRK_ECN] } };
+  window.addEventListener('click', function (e) {
+    var m = /brokers__(rs-finance|infinox)$/.exec(PT.key || '') || /brokers__(rs-finance|infinox)\./.exec(location.pathname); if (!m) return;
+    var t = e.target, b = t && t.closest && t.closest('button'); if (!b || b.closest('header,footer')) return;
+    var lab = (b.innerText || '').replace(/\s+/g, ' ').trim(), C = BRK[m[1]], url = C[lab];
+    var vis = function (x) { return x.offsetParent !== null };
+    var band = function (x) { var s = x.closest('section,div'); for (var k = 0; s && k < 6; k++, s = s.parentElement) if (/Start Earning\s+Rebates/.test(s.innerText || '') && !/Account Type/.test(s.innerText || '')) return true; return false };
+    if (!url && lab === 'Get Started' && !band(b)) { var cards = [].filter.call(document.querySelectorAll('button'), function (x) { return vis(x) && (x.innerText || '').trim() === 'Get Started' && !band(x) }); url = C.card[Math.max(0, cards.indexOf(b))] || C.card[0] }
+    if (url) { e.preventDefault(); e.stopImmediatePropagation(); try { window.open(url, '_blank', 'noopener') } catch (x) { } return }
+    if (lab === 'referral link' || lab === 'Get Started') {
+      var h = [].filter.call(document.querySelectorAll('h2'), function (x) { return vis(x) && /^Account Type/.test((x.innerText || '').trim()) })[0]; if (!h) return;
+      e.preventDefault(); e.stopImmediatePropagation(); window.scrollTo({ top: h.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
+    }
+  }, true);
 })();

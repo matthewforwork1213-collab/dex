@@ -141,7 +141,7 @@ function moEntry(){
    <p style="margin:0;font-size:32px;line-height:1.2;font-weight:700;text-shadow:0 2px 6px rgba(0,0,0,.35)">Found a higher rate?<br>We want to hear it</p>
    <span class="row" style="gap:6px;font-size:17px;font-weight:500">${img('lnd-ic-reward.svg','width:22px;height:22px')}Sign up and get up to <b style="color:#ff9800">10,000 USDT</b>!</span>
    <div style="position:relative;width:100%;background:#fff;border-radius:1000px"><div style="border:1px solid var(--input-border);border-radius:5000px;padding:16px;text-align:left"><span class="b1 c2">Email address</span></div><button class="btn contained primary lg" data-go="auth.signup" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);border-radius:1000px">Sign Up Now</button></div></div>
-  <div class="row" style="position:absolute;left:16px;top:610px;gap:12px">${stat('199,092','Total registered users')}${stat('24/7','Live support center')}</div></section>`;
+  <div class="row" style="position:absolute;left:16px;right:0;top:610px;gap:12px;overflow-x:auto;scrollbar-width:none">${stat('199,092','Total registered users')}${stat('24/7','Live support center')}${stat('370,342 USDT','Cumulative cashback')}${stat('2,103 USDT','Cashback paid today (24h)')}</div></section>`;
  const foot=footer();
  return `${hero}<div style="padding:0 16px">${C.note('<b>진입 경로</b> 모바일 홈(게스트) 푸터 Company › <b>Claim Cashback</b>(점선) → guest.search:search. 히어로는 프리로그인 랜딩 모바일과 같은 컴포넌트.')}</div>${foot}`}
 R.screen({id:'guest.entry',group:'guest',title:'모바일 진입 홈 (Claim Cashback)',route:'/ (모바일 · 비로그인)',fu:['FU-012'],shell:false,

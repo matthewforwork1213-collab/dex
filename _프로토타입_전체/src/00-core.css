@@ -202,7 +202,7 @@ img{display:block;max-width:100%}
 .ftA .flinks a{font-size:16px;line-height:1.5;letter-spacing:.15px;color:var(--text-secondary);cursor:pointer;white-space:nowrap}
 .fbtns{display:flex;gap:8px;align-items:flex-start}
 .fbtns .btn.md{font-size:14px;line-height:24px;letter-spacing:-.14px;padding:6px 16px;gap:8px}
-.fbtns .fmail{padding:6px 8px;color:var(--black)}
+.fbtns .btn.fmail{padding:6px 8px;color:var(--black)}
 .fdiv{height:33px;display:flex;align-items:center}.fdiv i{display:block;height:1px;width:100%;background:linear-gradient(90deg,rgba(0,0,0,0),var(--divider) 15%,var(--divider) 85%,rgba(0,0,0,0))}
 .fsns{display:flex;gap:16px;align-items:center}
 .fcopy{margin:0;font-size:12px;line-height:12px;color:var(--text-primary)}
