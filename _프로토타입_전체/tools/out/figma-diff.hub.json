@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27T22:43",
+ "generated": "2026-11-27T22:57",
  "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
  "results": [
   {
@@ -100,7 +100,39 @@
    "diff": [],
    "excepted": [],
    "geom": {
-    "issues": [],
+    "issues": [
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "per year $#",
+      "figma": [
+       140,
+       1232,
+       103,
+       20
+      ],
+      "proto": [
+       143,
+       1192,
+       99,
+       16
+      ],
+      "d": 3,
+      "fv": 124,
+      "pv": 127,
+      "card": [
+       16,
+       522,
+       343,
+       822
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     }
+    ],
     "pairs": 77,
     "cards": 10,
     "fw": 375,
@@ -1200,7 +1232,13 @@
     }
    ],
    "geom": {
-    "issues": [
+    "issues": [],
+    "pairs": 41,
+    "cards": 4,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
      {
       "type": "카드 높이",
       "label": "your cashback",
@@ -1228,7 +1266,8 @@
        474,
        343,
        944
-      ]
+      ],
+      "rule": "EX-A46"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -1259,7 +1298,8 @@
        474,
        343,
        944
-      ]
+      ],
+      "rule": "EX-A46"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -1290,7 +1330,8 @@
        474,
        343,
        944
-      ]
+      ],
+      "rule": "EX-A46"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -1321,7 +1362,8 @@
        474,
        343,
        944
-      ]
+      ],
+      "rule": "EX-A46"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -1352,7 +1394,8 @@
        474,
        343,
        944
-      ]
+      ],
+      "rule": "EX-A46"
      },
      {
       "type": "요소 간격",
@@ -1383,7 +1426,8 @@
        474,
        343,
        944
-      ]
+      ],
+      "rule": "EX-A46"
      },
      {
       "type": "요소 간격",
@@ -1414,15 +1458,10 @@
        474,
        343,
        944
-      ]
+      ],
+      "rule": "EX-A46"
      }
-    ],
-    "pairs": 41,
-    "cards": 4,
-    "fw": 375,
-    "pw": 375,
-    "scope": false,
-    "excepted": []
+    ]
    },
    "scope_overlay": false
   },
@@ -1574,7 +1613,13 @@
     }
    ],
    "geom": {
-    "issues": [
+    "issues": [],
+    "pairs": 37,
+    "cards": 4,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
      {
       "type": "카드 높이",
       "label": "your cashback",
@@ -1602,7 +1647,8 @@
        474,
        343,
        472
-      ]
+      ],
+      "rule": "EX-A47"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -1633,7 +1679,8 @@
        474,
        343,
        472
-      ]
+      ],
+      "rule": "EX-A47"
      },
      {
       "type": "요소 간격",
@@ -1664,15 +1711,10 @@
        474,
        343,
        472
-      ]
+      ],
+      "rule": "EX-A47"
      }
-    ],
-    "pairs": 37,
-    "cards": 4,
-    "fw": 375,
-    "pw": 375,
-    "scope": false,
-    "excepted": []
+    ]
    },
    "scope_overlay": false
   },
@@ -2540,32 +2582,17 @@
  "geom_top": [
   {
    "i": 1,
-   "node": "29515:140513",
+   "node": "29515:137400",
    "screen": "hub.main",
-   "state": "dexBelowMin",
+   "state": "normal",
    "vp": "mo",
-   "type": "요소 간격",
-   "label": "total exchange cashback → total event reward",
+   "type": "안쪽 왼쪽 여백",
+   "label": "per year $#",
    "crop": [
     16,
     522,
     343,
-    776
-   ]
-  },
-  {
-   "i": 2,
-   "node": "29515:142500",
-   "screen": "hub.main",
-   "state": "dexError",
-   "vp": "mo",
-   "type": "요소 간격",
-   "label": "cashback could not load → we could not load your cashback. please try again",
-   "crop": [
-    16,
-    522,
-    343,
-    408
+    822
    ]
   }
  ]

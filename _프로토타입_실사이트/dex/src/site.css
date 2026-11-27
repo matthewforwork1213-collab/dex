@@ -167,7 +167,7 @@ details[data-link-picker][open]>summary img[src*="arrow-drop-down"]{transform:ro
 [data-faq-head]:hover{background:var(--action-hover)}
 [data-sm-sel]>div:first-child{transition:border-color var(--m-base)}
 [data-dt-panel] img{transition:opacity var(--m-slow)}
-.rv-body{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rv-body{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .rv-open .rv-body{display:block}
 [data-dex-card]{cursor:pointer;transition:background var(--m-base)}
 [data-dex-card]:hover{background:#fafbfc}

@@ -1,6 +1,6 @@
 {
  "source": "use_figma",
- "fetched": "2026-11-27T22:33",
+ "fetched": "2026-11-27T22:53",
  "nodes": {
   "22442:219830": {
    "name": "MAX1216 / detail / S6 Empty — 0 reviews / light",
@@ -9043,7 +9043,7 @@
   "28960:127454": {
    "name": "DEX / detail / D4 EdgeX key features / light",
    "w": 1440,
-   "h": 5577,
+   "h": 5580,
    "hidden": false,
    "overlay": false,
    "texts": [
@@ -51386,7 +51386,7 @@
   "29357:147710": {
    "name": "DEX / detail / D5 Aster key features / light",
    "w": 1440,
-   "h": 5577,
+   "h": 5580,
    "hidden": false,
    "overlay": false,
    "texts": [
@@ -52235,7 +52235,7 @@
   "29357:148976": {
    "name": "DEX / detail / D6 ApeX key features / light",
    "w": 1440,
-   "h": 5577,
+   "h": 5580,
    "hidden": false,
    "overlay": false,
    "texts": [
@@ -53088,7 +53088,7 @@
   "29360:142096": {
    "name": "DEX / Mobile / detail / D2 Step guide, step 3 / light",
    "w": 375,
-   "h": 8313,
+   "h": 8333,
    "hidden": false,
    "overlay": false,
    "texts": [
@@ -53737,7 +53737,7 @@
      "kind": "shell"
     },
     {
-     "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
+     "t": "Does it support ApeX too? I linked my Lighter wallet already and I am not sure whether a second DEX needs a separate verification step.",
      "kind": "text"
     },
     {
@@ -53909,7 +53909,7 @@
   "29360:144056": {
    "name": "DEX / Mobile / detail / D4 EdgeX key features / light",
    "w": 375,
-   "h": 7825,
+   "h": 7845,
    "hidden": false,
    "overlay": false,
    "texts": [
@@ -54518,7 +54518,7 @@
      "kind": "shell"
     },
     {
-     "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
+     "t": "Does it support ApeX too? I linked my EdgeX wallet already and I am not sure whether a second DEX needs a separate verification step.",
      "kind": "text"
     },
     {
@@ -54690,7 +54690,7 @@
   "29360:145006": {
    "name": "DEX / Mobile / detail / D5 Aster key features / light",
    "w": 375,
-   "h": 7865,
+   "h": 7853,
    "hidden": false,
    "overlay": false,
    "texts": [
@@ -54740,10 +54740,6 @@
     },
     {
      "t": "Forex",
-     "kind": "chip"
-    },
-    {
-     "t": "Indices & ETFs",
      "kind": "chip"
     },
     {
@@ -55315,7 +55311,7 @@
      "kind": "shell"
     },
     {
-     "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
+     "t": "Does it support ApeX too? I linked my Aster wallet already and I am not sure whether a second DEX needs a separate verification step.",
      "kind": "text"
     },
     {
@@ -55487,7 +55483,7 @@
   "29360:145980": {
    "name": "DEX / Mobile / detail / D6 ApeX key features / light",
    "w": 375,
-   "h": 7865,
+   "h": 7853,
    "hidden": false,
    "overlay": false,
    "texts": [
@@ -55537,10 +55533,6 @@
     },
     {
      "t": "Commodities",
-     "kind": "chip"
-    },
-    {
-     "t": "Indices & ETFs",
      "kind": "chip"
     },
     {
@@ -56116,7 +56108,7 @@
      "kind": "shell"
     },
     {
-     "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
+     "t": "Does it support EdgeX too? I linked my ApeX wallet already and I am not sure whether a second DEX needs a separate verification step.",
      "kind": "text"
     },
     {
@@ -56833,7 +56825,7 @@
      "kind": "text"
     },
     {
-     "t": "Cashback arrives at the same time every day.",
+     "t": "Cashback reaches my TetherMax balance every day.",
      "kind": "text"
     },
     {
@@ -56845,7 +56837,7 @@
      "kind": "text"
     },
     {
-     "t": "The fee discount is wide enough that frequent traders notice it.",
+     "t": "Frequent traders notice the cashback on Premium fees.",
      "kind": "text"
     },
     {
@@ -57696,7 +57688,7 @@
    "texts": [
     {
      "t": "9:41",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -57856,23 +57848,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (0)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Lighter",
@@ -57988,7 +57980,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on Lighter",
@@ -58000,7 +57992,7 @@
     },
     {
      "t": "2",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Lighter pays a settlement",
@@ -58012,7 +58004,7 @@
     },
     {
      "t": "3",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -58168,39 +58160,39 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@tethermax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
