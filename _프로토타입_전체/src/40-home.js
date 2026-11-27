@@ -135,12 +135,12 @@ function evBanner(img,title,tag){
 const evCard=(banner,mid,join)=>`<div style="background:#fff;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:16px;flex:1;min-width:0">${banner}${mid}${join}</div>`;
 const evRow=(icon,k,v)=>`<div class="row between"><span class="row" style="gap:4px">${hic(icon,16)}<span class="b2 c2">${k}</span></span><span class="b2">${v}</span></div>`;
 const ongoing=`<span style="align-self:flex-start;background:#e6e7e9;border-radius:4px;padding:4px;font-size:12px;line-height:12px;color:var(--text-secondary)">Ongoing</span>`;
-const joinBtn=(outlined)=>`<button class="btn ${outlined?'outlined primary':'contained primary'} md full" data-go="events.list">Join Now</button>`;
+const joinBtn=(outlined,go='benefits.list')=>`<button class="btn ${outlined?'outlined primary':'contained primary'} md full" data-go="${go}">Join Now</button>`;
 function memberEvents(tag,outlined){
  const grid=S.vp==='mo'?'display:flex;flex-direction:column;gap:16px':'display:flex;gap:16px';
  return `<div style="${grid}">
   ${evCard(evBanner('ev-btc.jpg','Predict Bitcoin price and win up to 1,000.00 USDT',tag),evRow('redeem','Rewards','Up to 1,000.00 USDT')+ongoing,joinBtn(outlined))}
-  ${evCard(evBanner('ev-challenge.jpg','Earn More Cashback. Earn Extra USDT',tag),evRow('redeem','Rewards','Up to 37 USDT')+ongoing,joinBtn(outlined))}</div>`}
+  ${evCard(evBanner('ev-challenge.jpg','Earn More Cashback. Earn Extra USDT',tag),evRow('redeem','Rewards','Up to 37 USDT')+ongoing,joinBtn(outlined,'challenge.detail'))}</div>`}
 // 모바일 홈 본문 — 기존 mWeb MAXOP-731 Content(22913:1051714): 흰 블록(Exclusive For Members 2열 카드 · Limited Time Offers 1장 + 페이지 점) + 회색 블록(Top Partner Exchanges 가로 목록)
 const moHead=(t,go,line)=>`<div class="row" style="gap:16px"><span class="b1 semi" style="white-space:nowrap">${t}</span>${line?'<span class="grow" style="height:1px;background:var(--divider)"></span>':'<span class="grow"></span>'}<button class="btn text primary sm" style="padding:4px 5px"${go?` data-go="${go}"`:''}>See All</button></div>`;
 function moMemberCards(tag='Bitget',title='Exclusive For Members'){
@@ -201,7 +201,7 @@ function s3Checklist(){
  return `<div style="background:#fff;border-radius:8px;padding-bottom:24px">
   <div class="b2 semi" style="padding:24px 16px 16px">Unlock Your <span class="cb">First Cashback</span> in 3 Steps!</div>
   <div class="row between" style="padding:0 16px"><span class="row">${badge(1)}${lbl('Create TetherMax account')}</span>${hic('check-step',24)}</div>${div}
-  <div class="row between" style="padding:0 16px;cursor:pointer" data-go="cex.list"><span class="row">${badge(2)}${lbl('Browse partners')}</span>${hic('chevron',24)}</div>${div}
+  <div class="row between" style="padding:0 16px;cursor:pointer" data-go="hub.main"><span class="row">${badge(2)}${lbl('Browse partners')}</span>${hic('chevron',24)}</div>${div}
   <div class="row" style="padding:0 16px;cursor:pointer" data-go="link.select">${badge(3)}<span class="grow">${lbl('Link your account with us')}</span>${chip}${hic('chevron',24)}</div></div>`}
 const s3Preview=()=>`<div data-go="calc.p1" style="cursor:pointer;border:1px solid #c7d6ff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:1px 1px 15px rgba(28,28,30,.04);background:linear-gradient(160deg,rgba(199,214,255,.08),rgba(199,214,255,.35))">
  <div class="row between"><span class="row">${hic('calc',16)}<span class="b2 semi" style="color:#7f9fff">Cashback Preview</span></span>${hic('chevron-blue',16)}</div>

@@ -123,10 +123,10 @@ function siteGo(key) {
   if (id.startsWith('cexd')) { const s = CEX_SLUG[st] || st; return navReal('/en/exchangeDetail/' + s + '-referral') }
   if (id === 'tp.main') return navReal(isMember() ? '/en/tethermax-point' : '/en/tethermax-point-introduction');
   if (id === 'invite.main') return navReal(isMember() ? '/en/mypage/invitefriend/invitefriend' : '/en/login');
-  if (id === 'support.main') return toast('Live Chat (프로토타입)');
+  if (id === 'support.main') return window.ptSupport ? ptSupport() : toast('Live Chat');
   if (id === 'my.main') return toast('마이 페이지는 실사이트 상단 프로필 메뉴 (프로토타입)');
   if (id === 'cmn.header') return toast('알림 (프로토타입)');
-  if (id === 'partner.apply') return toast('「Affiliate Partner Inquiry」 처리됨 (프로토타입)');
+  if (id === 'partner.apply') return window.open('https://tally.so/r/obEp4N', '_blank', 'noopener');
   if (id === 'cmn.drawer') return openDrawer();
   if (REAL[id]) { closeLayer(true); return navReal(REAL[id]) }
   if (NEXT[id]) return toast(NEXT[id] + ' — 다음 회차에 연결');
@@ -236,19 +236,7 @@ function hubEnhance() {
 }
 function bindRight() {
   const box = $('[data-hub-right]'); if (!box) return;
-  const vol = $('[data-hub-vol]', box);
-  if (vol && !vol.readOnly) {
-    vol.addEventListener('focus', () => setTimeout(() => vol.select(), 0));
-    vol.addEventListener('input', () => {
-      const n = parseInt(vol.value.replace(/[^\d]/g, ''), 10) || 0;
-      const pos = vol.selectionStart, before = vol.value.length;
-      vol.value = '$' + n.toLocaleString('en-US');
-      const d = vol.value.length - before; try { vol.setSelectionRange(pos + d, pos + d) } catch (e) { }
-      H.vol[H.route] = n; updateCalc({ fromInput: true });
-    });
-    vol.addEventListener('blur', () => { const [a, b] = RANGE[H.route]; const n = Math.max(a, Math.min(b, H.vol[H.route])); if (n !== H.vol[H.route]) { H.vol[H.route] = n; updateCalc() } vol.value = '$' + n.toLocaleString('en-US') });
-    vol.addEventListener('keydown', e => { if (e.key === 'Enter') vol.blur() });
-  }
+  // 월 거래량 값 = 표시 전용(슬라이더로만 조정 — 🔴 #26 권장 A)
   // 거래량 슬라이더 — 공통 UI.slider(손잡이 SVG 30px 안의 원 중심 = (15,14))
   const sl = $('[data-hub-slider]', box);
   if (sl && sl.dataset.hubSlider !== 'Brokers') {
@@ -282,7 +270,7 @@ function updateCalc(o = {}) {
   const sl = $('[data-hub-slider]', box);
   if (sl && sl._ui && sl._ui.value !== H.vol[r]) sl._ui.set(H.vol[r]);
   const vol = $('[data-hub-vol]', box);
-  if (vol && document.activeElement !== vol) vol.value = '$' + H.vol[r].toLocaleString('en-US');
+  if (vol) vol.textContent = '$' + H.vol[r].toLocaleString('en-US');
   // 비교표 Est. monthly cashback · 부제
   const ct = document.createElement('div'); ct.innerHTML = HUBX.compare(r, H.view === 'card' ? 'cards' : 'normal');
   const sub = $('[data-compare-sub]'), nsub = $('[data-compare-sub]', ct); if (sub && nsub) sub.innerHTML = nsub.innerHTML;
@@ -424,7 +412,7 @@ const BASE_ADDR = '0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9';
 function openLink(o = {}) {
   if (!isMember()) { toast('로그인이 필요해요 — 로그인 화면으로 이동'); return setTimeout(() => { closeLayer(true); navReal('/en/login') }, 600) }
   Object.assign(L, { open: true, err: null, touched: false, busy: false, prev: null, result: null, onClose: null });
-  if (o.ex) setExchange(o.ex, o.type); else { L.step = 'select'; L.ex = null }
+  setExchange(o.ex || 'WOO X Pro', o.ex ? o.type : 'CEX');   // 첫 상태 = 목록 첫 거래소 기본 선택(G-379 · 결정 12차)
   renderLayer({ enter: true });
 }
 window.openLink = openLink;
@@ -725,7 +713,7 @@ if (MODAL) {
   document.body.classList.toggle('vp-mo', S.vp === 'mo');
   if (Q.get('mode') && window.SITE2) SITE2.modal(Q.get('mode'), Object.fromEntries(Q));
   else openLink({ ex: Q.get('ex') || null, type: Q.get('type') || null });
-} else renderPage();
+} else { renderPage(); if (route.q.link === '1') { const q = Object.assign({}, route.q); delete q.link; route.q = q; history.replaceState(null, '', '#' + hashOf(route)); if (isMember()) openLink(); else navReal('/en/login') } }   // 목록판 「실제 동작」에서 연동 모달 바로 열기
 post({ dexReady: hashOf(route) });
 });
 })();

@@ -30,10 +30,7 @@ const EMAILS={
    body:fail31('Another linking request was approved. Your request was closed. Contact support if you need help.','다른 연동 요청이 먼저 승인되어 이번 요청이 종료되었습니다.','지갑 연동 요청이 자동으로 종료되었습니다.')},
   {id:'e31op',label:'31 · 운영자 거절',pc:'29061:1106',mo:'29064:2403',ko:'29062:118600',koMo:'29064:5632',
    cond:'<b>29061:1171 · 31 · 운영자 거절</b><br>EN [TetherMax] Wallet Binding Failed / KO [TetherMax] 지갑 연동에 실패했어요<br>확인 중 → 운영자 거절. FCM 101 + EMAIL 31. 선택한 사유 1개만 본문에 표시(G-074). 예시는 레퍼럴 불일치. 시작일 이전 귀속 사유는 Lighter 전용. 번역 검토 G-296.',
-   body:fail31('Not a TetherMax referral','테더맥스 레퍼럴로 가입한 지갑이 아닙니다.','지갑 연동 요청이 승인되지 않았습니다. 아래에서 사유를 확인하세요.')},
-  {id:'e32',label:'32 · Lighter 확인 중 → 확정',pc:'29061:1174',mo:'29064:2466',ko:'29062:118668',koMo:'29064:5695',
-   cond:'<b>29061:1238 · 32 · Lighter 확인 중 → 확정</b><br>EN [TetherMax] Your pending wallet is now confirmed / KO [TetherMax] 확인 중이던 지갑 연동이 확정됐어요<br>월요일 CSV로 보류 해제 시 FCM 102와 동시. Lighter 온보딩 보류 G-428. 접수 시 발송 없음.',
-   body:[{h:['Your pending wallet is now confirmed','확인 중이던 지갑 연동이 확정됐어요']},{p:['Your Lighter wallet has been confirmed and linked to TetherMax.','확인 중이던 Lighter 지갑이 테더맥스에 연동되었습니다.']},...base('Lighter'),{p:'SUP'},VIEW_WALLET]},
+   body:fail31('Not a TetherMax referral','테더맥스 레퍼럴로 가입한 지갑이 아닙니다.','지갑 연동 요청이 승인되지 않았습니다. 아래에서 사유를 확인하세요.')}
  ]},
  'email.dex':{title:'DEX 안내 메일 (28·29)',states:[
   {id:'e28',label:'28 · ApeX 연동 이전 미수령',pc:'29061:1241',mo:'29064:2529',ko:'29062:118735',koMo:'29064:5758',

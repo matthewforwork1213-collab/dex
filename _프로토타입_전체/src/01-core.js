@@ -2,9 +2,9 @@
 // 화면 모듈은 R.screen({...})으로 등록한다. 규칙은 README.md 참고.
 const FIGMA_FILE='hsa3bSV9QmFTe2jsf6tzTm';
 const figmaUrl=id=>`https://www.figma.com/design/${FIGMA_FILE}/UI-UX-Design?node-id=${String(id).replace(':','-')}`;
-const S={lang:'en',vp:'pc',auth:'s4',design:false,screen:null,state:null};
+const S={lang:'en',vp:'pc',auth:'s4',design:false,screen:null,state:null,live:false};
 try{Object.assign(S,JSON.parse(localStorage.getItem('tm-full-proto')||'{}'))}catch(e){}
-const save=()=>{try{localStorage.setItem('tm-full-proto',JSON.stringify({lang:S.lang,vp:S.vp,auth:S.auth,design:S.design}))}catch(e){}};
+const save=()=>{try{localStorage.setItem('tm-full-proto',JSON.stringify({lang:S.lang,vp:S.vp,auth:S.auth,design:S.design,live:S.live}))}catch(e){}};
 const T=(en,ko)=>S.lang==='ko'&&ko!=null?ko:en;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const A=n=>(window.ASSETS&&ASSETS[n])||('assets/'+n);
@@ -36,7 +36,7 @@ const C={
  dialog(title,body,actions){return `<div class="dialog">${title?`<div class="dt">${title}</div>`:''}<div class="dc">${body}</div>${actions?`<div class="da">${actions}</div>`:''}</div>`},
  // 배경 화면 위에 오버레이(모달·다이얼로그·시트)를 겹친다. bg = 'screenId' 또는 'screenId:state'
  // o.clip: 높이(px)를 고정해 배경을 자른다(모바일 바텀시트가 첫 화면 안에 보이게). 모바일 기본 812
- overlay(bg,inner,o={}){const clip=o.clip??(S.vp==='mo'?812:null);return `<div style="position:relative;${clip?`height:${clip}px;overflow:hidden`:`min-height:900px`}">${renderInner(bg,true)}<div class="scrim${o.center?' center':''}"${clip?` style="bottom:auto;height:${clip}px"`:''}>${inner}</div></div>`},
+ overlay(bg,inner,o={}){return `<div style="position:relative">${renderInner(bg,true)}<div class="scrim pt-fixed${o.center?' center':''}">${inner}</div></div>`},
  toast(msg){return `<div class="toast">${msg}</div>`},
  skel(w='100%',h=14){return `<div class="skel" style="width:${w};height:${h}px"></div>`},
  // 개발 보기 전용 주석: 디자인 보기에서 숨는다. 사용자에게 보이는 문구를 여기에 넣지 않는다.
@@ -67,11 +67,11 @@ function gnb(active,o={}){
 // 푸터 — PC FooterA 28967:127334 · 모바일 Footer/mWeb 29062:118042 · 게스트 모바일 Company 3행 = Claim Cashback(29072:1797)
 function footer(){
  const mob=S.vp==='mo',guest=S.auth==='guest';
- const company=[['about.intro','About TetherMax'],['notice.list','Notices'],guest&&mob?['guest.search:search','Claim Cashback']:['partner.apply','Affiliate Partner Inquiry']];
- const legal=[['terms.privacy','Privacy Policy'],['terms.use','Terms of Service']];
+ const company=[['about.intro','About TetherMax'],['notice.list','Notices'],guest?['guest.search:search','Claim Cashback']:['partner.apply','Affiliate Partner Inquiry']];
+ const legal=[['terms.privacy','Privacy Policy'],['terms.use','Terms of Use']];
  const sec=(h,items)=>`<div class="fsec"><b>${h}</b><div class="flinks">${items.map(([go,t])=>`<a data-go="${go}">${t}</a>`).join('')}</div></div>`;
  const btns=`<div class="fbtns"><button class="btn contained primary md fchat">${shIc('cmn-ic-headset.svg','ic20')}Live Chat</button><button class="btn text black md fmail">support@${mob?'tethermax':'TetherMax'}.io${shIc('cmn-ic-copy.svg','ic16')}</button></div>`;
- const sns=`<div class="fsns">${[1,2,3].map(i=>`<img src="${A('cmn-fa-sns-'+i+'.svg')}" style="width:32px;height:32px" alt="">`).join('')}<span style="width:31px;height:32px;display:flex;align-items:center;justify-content:center"><img src="${A('cmn-fa-sns-4.svg')}" style="width:23.4px;height:24.3px" alt=""></span><img src="${A('cmn-fa-sns-5.svg')}" style="width:32px;height:28px" alt=""></div>`;
+ const sns=`<div class="fsns">${[2,3].map(i=>`<img src="${A('cmn-fa-sns-'+i+'.svg')}" style="width:32px;height:32px" alt="">`).join('')}<span style="width:31px;height:32px;display:flex;align-items:center;justify-content:center"><img src="${A('cmn-fa-sns-4.svg')}" style="width:23.4px;height:24.3px" alt=""></span><img src="${A('cmn-fa-sns-5.svg')}" style="width:32px;height:28px" alt=""></div>`;
  const copy=`<p class="fcopy">© 2026 TetherMax. All rights reserved.</p>`;
  if(mob)return `<footer class="ftm"><img src="${A('logo.svg')}" style="width:142px;height:16px" alt="TetherMax">${btns}${sec('Company',company)}${sec('Legal',legal)}<div class="fdiv"><i></i></div>${sns}${copy}</footer>`;
  return `<footer class="ftA"><div class="fin"><div class="ftop"><div class="fl"><img src="${A('logo.svg')}" style="width:142px;height:16px" alt="TetherMax">${btns}</div><div class="fr">${sec('Company',company)}${sec('Legal',legal)}</div></div><div class="fdiv"><i></i></div>${sns}${copy}</div></footer>`}
@@ -124,25 +124,79 @@ function render(){
  const cv=coverage();
  document.getElementById('pt-side').innerHTML=`<div class="pt-brand">TetherMax 전체 프로토타입<small>디자인 반영 ${cv.a}/${cv.b} 상태</small></div><input class="pt-q" placeholder="화면 검색" oninput="ptFilter(this.value)">${sidebar()}`;
  const fu=sc.fu.length?`<span class="pt-fu">${sc.fu.join(' · ')}</span>`:'';
- document.getElementById('pt-bar').innerHTML=`<div class="pt-l"><b>${sc.title}</b>${sc.route?`<code>${sc.route}</code>`:''}${fu}</div>
+ document.body.classList.toggle('pt-mo',S.vp==='mo');
+ document.getElementById('pt-bar').innerHTML=`<div class="pt-l"><button class="pt-menu" id="pt-menu" title="화면 목록">☰ 화면 목록</button><b>${sc.title}</b>${sc.route?`<code>${sc.route}</code>`:''}${fu}</div>
  <div class="pt-r"><select id="pt-state">${sc.states.map(s=>`<option value="${s.id}" ${s.id===state.id?'selected':''}>${s.figma?'●':'○'} ${s.label}</option>`).join('')}</select>
  <span class="pt-seg">${[['pc','PC'],['mo','모바일']].map(([k,l])=>`<span data-vp="${k}" class="${S.vp===k?'on':''}">${l}</span>`).join('')}</span>
  <span class="pt-seg">${[['en','EN'],['ko','KO']].map(([k,l])=>`<span data-lg="${k}" class="${S.lang===k?'on':''}">${l}</span>`).join('')}</span>
  <span class="pt-seg">${[['guest','게스트'],['s3','회원·연동0'],['s4','회원·연동']].map(([k,l])=>`<span data-au="${k}" class="${S.auth===k?'on':''}">${l}</span>`).join('')}</span>
+ ${appRoute(sc.id,state.id)?`<span class="pt-seg" title="실제 동작 = 실제 동작판(dex/app.html)을 이 자리에서 조작">${[[0,'화면 상태'],[1,'실제 동작']].map(([k,l])=>`<span data-live="${k}" class="${(+S.live)===k?'on':''}">${l}</span>`).join('')}</span>`:''}
  <label class="pt-ck"><input type="checkbox" id="pt-design" ${S.design?'checked':''}> 디자인 보기(주석 숨김)</label></div>
  <div class="pt-d">${designBadge(sc,state)}${state.note?`<span class="pt-n">${state.note}</span>`:''}</div>`;
  const fr=document.getElementById('pt-frame');fr.className='pt-frame vp-'+S.vp;
- fr.innerHTML=renderInner(sc.id+':'+state.id);
+ const ar=S.live&&appRoute(sc.id,state.id);
+ fr.innerHTML=ar?liveFrame(ar):renderInner(sc.id+':'+state.id);
  const h=`#${sc.id}/${state.id}`;if(location.hash!==h)history.replaceState(null,'',h);
  document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;render()};
  document.getElementById('pt-design').onchange=e=>{S.design=e.target.checked;save();render()};
  document.querySelectorAll('[data-vp]').forEach(x=>x.onclick=()=>{S.vp=x.dataset.vp;save();render()});
  document.querySelectorAll('[data-lg]').forEach(x=>x.onclick=()=>{S.lang=x.dataset.lg;save();render()});
- document.querySelectorAll('[data-au]').forEach(x=>x.onclick=()=>{S.auth=x.dataset.au;save();render()});
+ document.querySelectorAll('[data-au]').forEach(x=>x.onclick=()=>{const a=x.dataset.au;if(a===S.auth)return;const to=authTarget(S.screen,S.state,a);S.auth=a;save();if(to){S.screen=to[0];S.state=to[1]}render();window.scrollTo(0,0)});
+ document.getElementById('pt-menu').onclick=()=>document.body.classList.toggle('pt-side-open');
+ document.querySelectorAll('[data-live]').forEach(x=>x.onclick=()=>{S.live=x.dataset.live==='1';save();render()});
+ document.documentElement.style.setProperty('--pt-bar-h',document.getElementById('pt-bar').offsetHeight+'px');
  const on=document.querySelector('.pt-s.on');if(on)on.scrollIntoView({block:'nearest'});
 }
 window.ptFilter=q=>{q=q.trim().toLowerCase();document.querySelectorAll('.pt-s').forEach(a=>{a.style.display=!q||a.textContent.toLowerCase().includes(q)?'':'none'});document.querySelectorAll('.pt-g').forEach(d=>{if(q)d.open=true})};
-function go(key){if(!key)return;const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}S.screen=id;S.state=st||null;render();document.getElementById('pt-frame').scrollTop=0;window.scrollTo(0,0)}
+// 뒤로(이전 화면, 없으면 지정 화면) — data-go="back:{대체 화면}" (기존 mWeb 제목 행 · REQ-276 · REQ-726)
+const HIST=[];
+function go(key,o={}){if(!key)return;
+ if(key.startsWith('back:')){const p=HIST.pop();return go(p||key.slice(5),{noPush:true})}
+ if(!o.noPush&&S.screen)HIST.push(S.screen+(S.state?':'+S.state:''));if(HIST.length>50)HIST.shift();
+ const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}document.body.classList.remove('pt-side-open');S.screen=id;S.state=st||(AUTH_STATE[id]?AUTH_STATE[id][S.auth]:null);   // 상태를 안 정하면 지금 로그인 상태의 화면
+ // 지금 로그인 상태로는 볼 수 없는 화면이면 실제로 보게 되는 화면으로(게스트 전용 ↔ 회원 전용)
+ const to=(id==='home.main'&&!st&&S.auth==='guest')?['landing.main','normal']:(AUTH_ONLY_GUEST.includes(id)&&S.auth!=='guest')||((AUTH_ONLY_MEMBER.includes(id)||/^(link|own)./.test(id))&&S.auth==='guest')?authTarget(id,st,S.auth):null;if(to){if(to[0]==='auth.login')S.after=key;S.screen=to[0];S.state=to[1]}
+ render();window.scrollTo(0,0)}
+// 로그인 상태 전환 → 그 상태에서 사용자가 실제로 보게 되는 화면(결정 12차). [화면, 상태] 또는 null(그대로)
+const AUTH_ONLY_GUEST=['landing.main','guest.entry','guest.search','guest.result','guest.modal','auth.login','auth.signup','invite.landing'];
+const AUTH_ONLY_MEMBER=['summary.main','ranking.main','invite.main','partner.hub','coupon.box','home.wallet','home.timeline','wd.reflect','my.main','league.main','maxboard.main','challenge.detail','tp.main'];
+const AUTH_STATE={'home.main':{guest:'guest',s3:'s3',s4:'normal'},'dex.detail':{guest:'normal',s3:'unlinked',s4:'linked'},'dex.overview':{guest:'normal',s3:'member',s4:'member'},'hub.main':{guest:'normal',s3:'member',s4:'dexPanel'},'cmn.header':{guest:'guest',s3:'normal',s4:'normal'},'cmn.drawer':{guest:'normal',s3:'member',s4:'member'},'cmn.footer':{guest:'guest',s3:'normal',s4:'normal'},'cmn.notfound':{guest:'guest',s3:'member',s4:'member'},'quiz.list':{guest:'guest',s3:'normal',s4:'normal'},'quiz.article':{guest:'guest4',s3:'member5',s4:'member5'},'benefits.list':{guest:'guestOn',s3:'normal',s4:'normal'}};
+function authTarget(id,st,a){
+ const member=a!=='guest';
+ if(!member&&id==='home.main')return ['landing.main','normal'];   // 게스트가 /en에 오면 랜딩(실사이트)
+ if(member&&(id==='auth.login'||id==='auth.signup')&&S.after){const k=S.after.split(':');S.after=null;if(!(a==='s3'&&(k[0]==='home.wallet'||k[0]==='home.timeline')))return [k[0],k[1]||(AUTH_STATE[k[0]]?AUTH_STATE[k[0]][a]:null)]}
+ if(!member&&(AUTH_ONLY_MEMBER.includes(id)||/^(link|own)./.test(id)))S.after=id+(st?':'+st:'');
+ if(member&&AUTH_ONLY_GUEST.includes(id))return ['home.main',a==='s3'?'s3':'normal'];
+ if(!member&&(AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id)))return ['auth.login','normal'];
+ if(a==='s3'&&(id==='home.wallet'||id==='home.timeline'))return ['home.main','s3'];
+ const m=AUTH_STATE[id];if(!m)return null;
+ const sc=R.byId[id],cur=sc&&sc.states.find(x=>x.id===st);
+ // 로그인 상태에 묶인 상태(게스트·회원·로그인·연동 표시)일 때만 바꾼다 — DEX 종류·탭 같은 다른 변형은 유지
+ if(cur&&!/게스트|비로그인|회원|로그인|연동|guest|member|^auto$|^normal$/i.test(cur.label+' '+cur.id))return null;
+ return [id,m[a]];
+}
+window.authTarget=authTarget;
+// ---- 실제 동작 보기(결정 12차 — 목록판과 동작판의 인터랙션을 같게): 동작판(_프로토타입_실사이트/dex/app.html)을 이 자리에 띄운다
+function appRoute(id,st){
+ const slug=['aster','apex','lighter','edgex'].includes(st)?st:'edgex';
+ if(id==='hub.main')return '#/hub'+({cex:'?tab=CEX',brokers:'?tab=Brokers',cards:'?view=cards'}[st]||'');
+ if(id==='dex.overview')return '#/dex';
+ if(id==='dex.detail')return '#/dex/'+slug;
+ if(/^calc\./.test(id))return '#/payback';
+ if(id==='summary.main')return '#/summary';
+ if(id==='own.verify')return '#/ownership';
+ if(/^link\./.test(id))return '#/hub?link=1';
+ return null}
+function appBase(){return '../_프로토타입_실사이트/dex/app.html'}   // _프로토타입_전체/_latest.html · prototype/full.html 모두 DEX 바로 아래
+function liveFrame(r){const au=S.auth==='guest'?'guest':'member';return `<iframe id="pt-live" title="실제 동작판" src="${appBase()}?auth=${au}${r}" style="display:block;width:100%;height:calc(100vh - var(--pt-bar-h,48px));border:0;background:#fff"></iframe>`}
+const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/exchangeDetail\//,'cex.list'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'hub.main'],[/^\/en\/dex\/?$/,'dex.overview']];
+window.addEventListener('message',e=>{const m=e.data||{};if(!m.pt||!S.live)return;
+ if(m.auth){S.auth=m.auth==='member'?(S.auth==='guest'?'s4':S.auth):'guest';save()}
+ if(m.nav){let p='';try{p=new URL(m.nav).pathname}catch(x){p=String(m.nav)}
+  const hit=REAL2SCREEN.find(([re])=>re.test(p));
+  if(hit){S.live=false;const t=typeof hit[1]==='function'?hit[1]():hit[1];go(t);return}
+  window.open(m.nav,'_blank','noopener')}
+ if(m.dexHome){S.live=false;go(S.auth==='guest'?'landing.main':'home.main')}});
 window.go=go;
 // GNB 큰 메뉴: 클릭하면 이동하지 않고 아래로 펼침(펼친 채 유지) · 다시 클릭·바깥 클릭·Esc로 닫힘 — 실사이트와 같음
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-nav-toggle]');

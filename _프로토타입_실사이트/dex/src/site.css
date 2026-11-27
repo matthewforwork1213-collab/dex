@@ -39,9 +39,6 @@ a[data-go]:hover{opacity:.85}
 [data-ui-trigger]:focus-visible{box-shadow:0 0 0 2px rgba(0,49,198,.35)}
 
 /* 허브 */
-.hub-vol{border:0;outline:0;background:transparent;padding:0;margin:0;width:100%;font:inherit;color:inherit;border-bottom:1px dashed transparent;transition:border-color var(--m-base)}
-.hub-vol:not([readonly]):hover{border-bottom-color:var(--divider)}
-.hub-vol:focus{border-bottom-color:var(--blue)}
 /* 공통 슬라이더(UI.slider) — 실사이트 MUI Slider: 클릭 점프 .15s, 끄는 동안 전환 없음, 링 hover·포커스 8px / 누름 14px */
 .ui-sl{cursor:pointer;touch-action:none;outline:0;user-select:none;-webkit-tap-highlight-color:transparent}
 .ui-sl [data-sl-thumb]{cursor:pointer;z-index:2}

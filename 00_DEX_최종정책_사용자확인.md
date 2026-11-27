@@ -53,6 +53,7 @@
 | 47 | 랭킹 DEX 행에 금액이 없는 경우 별도 라벨이 필요합니까? | 디자인 확인 | 랭킹 DEX 행 | B-9 |
 | 48 | 빈 홈 카드 문구는 원문 치환 `cashbacks keep coming`입니까, `cashback keeps coming`입니까? | 현재 문서 3곳 `cashbacks` | 문구만 | A-9 · B-3-1 · B-22-2 |
 | 49 | V2 제안서 발송일·수신 확인, EdgeX·Lighter v1.1 사본, ApeX v1.6·Aster v1.3 발송일 기록을 줄 수 있습니까? | 표는 PDF 생성일·파일명 기준. 사본이 없어 EdgeX 요청 세부는 v1.2 초안 기준 | 기록 정확도(구현은 안 막음) | E-0 · E-6-0 |
+| 50 | 별도 Exchange Listings Page 없이 허브 CEX 탭이 대신할 때(결정 Q7), 기존 목록 요소 중 아래 것을 허브 CEX 탭에 옮깁니까? 상단 배너 `Join Now`·점 · 캐러셀 `Top Centralised Exchanges` · 칩 `Recommended`·`All`·`Cashback Boost`·`Events` · 열 `Avg. Cashback`·`Live Campaigns`·`View Event` ↗ · 거래소 행 본문 클릭(기존 = 거래소 상세) | 옮김 / 없앰(요소별). 검색·보기 전환·정렬·`Rating`은 허브 비교표로 유지, 목록 전용 헤더·목록 안 `See All`·목록 모바일 ←은 없앰으로 정리됨 | 허브 CEX 탭 구성 | REQ-475 · B-21-5 |
 
 ## 이미 답이 있어 뺀 것
 

@@ -30,7 +30,7 @@ const lsHead=(t,btn)=>`<div class="row" style="gap:16px"><span style="font-size:
 function lsTop(){
  const T4=[['bitget','#00f0ff','54%'],['bybit','#15192a','55%'],['binance','#181a20','50%'],['okx','#000','65%']];
  const n={bitget:'Bitget',bybit:'Bybit',binance:'Binance',okx:'OKX'};
- return `<div class="col" style="gap:16px">${lsHead('Top Partner Exchanges',1)}<div style="display:flex;gap:16px;${mo()?'overflow-x:auto':''}">${T4.map(([k,bg,s])=>`<div class="col" style="gap:4px;flex:1;min-width:${mo()?110:0}px"><div style="height:${mo()?80:160}px;background:${bg};border-radius:16px;display:flex;align-items:center;justify-content:center;padding:10px">${lsImg('cmn-ls-top-'+k+'.png',`width:${mo()?50:100}px;height:${mo()?50:100}px;border-radius:80px${k==='okx'?';border:3px solid rgba(255,255,255,.05)':''}`)}</div><span style="font-size:${mo()?12:16}px;line-height:1.5;letter-spacing:.15px;font-weight:600;color:var(--text-secondary)">${n[k]}</span><span style="font-size:${mo()?12:16}px;line-height:1.5;letter-spacing:.15px;font-weight:600">${s} Total Savings</span></div>`).join('')}</div></div>`}
+ return `<div class="col" style="gap:16px">${lsHead('Top Partner Exchanges')}<div style="display:flex;gap:16px;${mo()?'overflow-x:auto':''}">${T4.map(([k,bg,s])=>`<div class="col" style="gap:4px;flex:1;min-width:${mo()?110:0}px"><div style="height:${mo()?80:160}px;background:${bg};border-radius:16px;display:flex;align-items:center;justify-content:center;padding:10px">${lsImg('cmn-ls-top-'+k+'.png',`width:${mo()?50:100}px;height:${mo()?50:100}px;border-radius:80px${k==='okx'?';border:3px solid rgba(255,255,255,.05)':''}`)}</div><span style="font-size:${mo()?12:16}px;line-height:1.5;letter-spacing:.15px;font-weight:600;color:var(--text-secondary)">${n[k]}</span><span style="font-size:${mo()?12:16}px;line-height:1.5;letter-spacing:.15px;font-weight:600">${s} Total Savings</span></div>`).join('')}</div></div>`}
 const lsChip=(l,on,icon)=>`<span class="row" style="gap:0;padding:4px;border-radius:100px;${on?'background:var(--blue);color:#fff':'background:var(--action-selected)'};flex:none">${icon?lsImg(icon,'width:16px;height:16px;margin:0 0 0 4px'):''}<span style="padding:3px 6px;font-size:13px;line-height:18px;letter-spacing:.16px;white-space:nowrap">${l}</span></span>`;
 function lsTable(o={}){
  const rows=o.rows||(o.q?LS.filter(p=>p.name.toLowerCase().includes(o.q.toLowerCase())):LS);
@@ -76,7 +76,7 @@ const drRow=(icon,t,go,end='')=>`<div class="row" style="justify-content:space-b
 const drCard=rows=>`<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 2.5px rgba(93,96,103,.05)">${rows}</div>`;
 function drawer(member,o={}){
  const P={ex:[drIc('cmn-dr-candle.svg'),'Cashback Hub','hub.main'],br:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-broker.svg')}" alt="" style="width:16.67px;height:16.66px;transform:scaleY(-1)"></span>`,'Brokers','hub.main:brokers'],
-  ev:[drIc('cmn-dr-event.svg'),'Exchange Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.main']};
+  ev:[drIc('cmn-dr-event.svg'),'Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.main']};
  const prod=(member?['ex','ev','bn','calc','pt']:['ex','ev','bn','calc','pt']).map(k=>drRow(...P[k])).join('');
  const theme=`<span style="background:#e6e7e9;border-radius:5000px;height:28px;padding:2px;display:flex"><span style="background:#fff;border-radius:5000px;padding:6px 4px;display:flex">${drIc('cmn-dr-light.svg','width:16px;height:16px')}</span><span style="width:24px"></span></span>`;
  const welcome=member?'':`<div style="padding:0 16px"><div style="background:#fff;border:.5px solid rgba(0,0,0,.05);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:24px"><div class="col center" style="gap:4px;font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:600"><span>Welcome to TetherMax!</span><span class="c2">Create an account or log in to start<br>earning Cashback.</span></div><div class="row" style="gap:12px">${C.btn('Log In',{v:'outlined',full:true,go:'auth.login'})}${C.btn('Sign Up',{full:true,go:'auth.signup'})}</div></div></div>`;
@@ -92,7 +92,6 @@ R.screen({id:'cmn.drawer',group:'common',title:'모바일 웹 드로어',route:'
  states:[
   {id:'normal',label:'비로그인 — 환영 블록',figma:{mo:'19604:33156'},note:'[기존 MAX-] Quiz › GNB mWeb 드로어 비로그인 · 이전판 [MAX-497] 12085:400249 · V2.2 cmn/DRAWER#normal'},
   {id:'member',label:'로그인',figma:{mo:'19604:32998'},note:'[기존 MAX-] Quiz › GNB mWeb 드로어 로그인 · 이전판 [MAX-497] 12216:424053 · V2.2 cmn/DRAWER#member'},
-  {id:'promo',label:'프로모 배너 (선택)',figma:null,note:'V2.2 cmn/DRAWER#promo — 드로어 배너 디자인 어디에도 없음'},
  ],
  render(st){
   const promo=st==='promo'?`<div style="padding:0 16px;margin-top:-8px"><div class="row g12" style="background:#eef3ff;border-radius:8px;padding:12px"><div style="width:48px;height:48px;border-radius:8px;background:#c9d6ff;flex:none"></div><div class="col" style="gap:2px;min-width:0"><span class="b2 semi">${T('Banner title','배너 제목')}</span><span class="cap c2">${T('Banner content','배너 내용')}</span></div></div></div>`:'';
@@ -120,7 +119,6 @@ R.screen({id:'cmn.appnav',group:'common',title:'앱 하단 내비',route:'앱',f
   {id:'events',label:'Events 활성',figma:{mo:'8582:155585'},note:'[기존 MAX-7] 같은 컴포넌트, 활성 탭만 다름 · V2.2 cmn/APPNAV#events'},
   {id:'exchange',label:'Exchanges 활성',figma:{mo:'8582:155585'},note:'[기존 MAX-7] 같은 컴포넌트 · V2.2 cmn/APPNAV#exchange'},
   {id:'inapp',label:'미지원 Cashback 페이지 → 인앱 브라우저',figma:null,note:'V2.2 cmn/APPNAV#inapp — 인앱 브라우저 디자인 어디에도 없음'},
-  {id:'linkFail',label:'DEX 링크 실패 — 복사 + Open {DEX}',figma:null,note:'V2.2 cmn/APPNAV#linkFail — 다이얼로그 디자인 없음'},
  ],
  render(st){
   const on={normal:'home',events:'events',exchange:'exchange'}[st]||'home';

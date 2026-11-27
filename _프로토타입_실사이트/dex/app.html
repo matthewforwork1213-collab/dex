@@ -304,9 +304,6 @@ a[data-go]:hover{opacity:.85}
 [data-ui-trigger]:focus-visible{box-shadow:0 0 0 2px rgba(0,49,198,.35)}
 
 /* 허브 */
-.hub-vol{border:0;outline:0;background:transparent;padding:0;margin:0;width:100%;font:inherit;color:inherit;border-bottom:1px dashed transparent;transition:border-color var(--m-base)}
-.hub-vol:not([readonly]):hover{border-bottom-color:var(--divider)}
-.hub-vol:focus{border-bottom-color:var(--blue)}
 /* 공통 슬라이더(UI.slider) — 실사이트 MUI Slider: 클릭 점프 .15s, 끄는 동안 전환 없음, 링 hover·포커스 8px / 누름 14px */
 .ui-sl{cursor:pointer;touch-action:none;outline:0;user-select:none;-webkit-tap-highlight-color:transparent}
 .ui-sl [data-sl-thumb]{cursor:pointer;z-index:2}
@@ -462,9 +459,9 @@ details[data-link-picker][open]>summary img[src*="arrow-drop-down"]{transform:ro
 // 화면 모듈은 R.screen({...})으로 등록한다. 규칙은 README.md 참고.
 const FIGMA_FILE='hsa3bSV9QmFTe2jsf6tzTm';
 const figmaUrl=id=>`https://www.figma.com/design/${FIGMA_FILE}/UI-UX-Design?node-id=${String(id).replace(':','-')}`;
-const S={lang:'en',vp:'pc',auth:'s4',design:false,screen:null,state:null};
+const S={lang:'en',vp:'pc',auth:'s4',design:false,screen:null,state:null,live:false};
 try{Object.assign(S,JSON.parse(localStorage.getItem('tm-full-proto')||'{}'))}catch(e){}
-const save=()=>{try{localStorage.setItem('tm-full-proto',JSON.stringify({lang:S.lang,vp:S.vp,auth:S.auth,design:S.design}))}catch(e){}};
+const save=()=>{try{localStorage.setItem('tm-full-proto',JSON.stringify({lang:S.lang,vp:S.vp,auth:S.auth,design:S.design,live:S.live}))}catch(e){}};
 const T=(en,ko)=>S.lang==='ko'&&ko!=null?ko:en;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const A=n=>(window.ASSETS&&ASSETS[n])||('assets/'+n);
@@ -496,7 +493,7 @@ const C={
  dialog(title,body,actions){return `<div class="dialog">${title?`<div class="dt">${title}</div>`:''}<div class="dc">${body}</div>${actions?`<div class="da">${actions}</div>`:''}</div>`},
  // 배경 화면 위에 오버레이(모달·다이얼로그·시트)를 겹친다. bg = 'screenId' 또는 'screenId:state'
  // o.clip: 높이(px)를 고정해 배경을 자른다(모바일 바텀시트가 첫 화면 안에 보이게). 모바일 기본 812
- overlay(bg,inner,o={}){const clip=o.clip??(S.vp==='mo'?812:null);return `<div style="position:relative;${clip?`height:${clip}px;overflow:hidden`:`min-height:900px`}">${renderInner(bg,true)}<div class="scrim${o.center?' center':''}"${clip?` style="bottom:auto;height:${clip}px"`:''}>${inner}</div></div>`},
+ overlay(bg,inner,o={}){return `<div style="position:relative">${renderInner(bg,true)}<div class="scrim pt-fixed${o.center?' center':''}">${inner}</div></div>`},
  toast(msg){return `<div class="toast">${msg}</div>`},
  skel(w='100%',h=14){return `<div class="skel" style="width:${w};height:${h}px"></div>`},
  // 개발 보기 전용 주석: 디자인 보기에서 숨는다. 사용자에게 보이는 문구를 여기에 넣지 않는다.
@@ -527,11 +524,11 @@ function gnb(active,o={}){
 // 푸터 — PC FooterA 28967:127334 · 모바일 Footer/mWeb 29062:118042 · 게스트 모바일 Company 3행 = Claim Cashback(29072:1797)
 function footer(){
  const mob=S.vp==='mo',guest=S.auth==='guest';
- const company=[['about.intro','About TetherMax'],['notice.list','Notices'],guest&&mob?['guest.search:search','Claim Cashback']:['partner.apply','Affiliate Partner Inquiry']];
- const legal=[['terms.privacy','Privacy Policy'],['terms.use','Terms of Service']];
+ const company=[['about.intro','About TetherMax'],['notice.list','Notices'],guest?['guest.search:search','Claim Cashback']:['partner.apply','Affiliate Partner Inquiry']];
+ const legal=[['terms.privacy','Privacy Policy'],['terms.use','Terms of Use']];
  const sec=(h,items)=>`<div class="fsec"><b>${h}</b><div class="flinks">${items.map(([go,t])=>`<a data-go="${go}">${t}</a>`).join('')}</div></div>`;
  const btns=`<div class="fbtns"><button class="btn contained primary md fchat">${shIc('cmn-ic-headset.svg','ic20')}Live Chat</button><button class="btn text black md fmail">support@${mob?'tethermax':'TetherMax'}.io${shIc('cmn-ic-copy.svg','ic16')}</button></div>`;
- const sns=`<div class="fsns">${[1,2,3].map(i=>`<img src="${A('cmn-fa-sns-'+i+'.svg')}" style="width:32px;height:32px" alt="">`).join('')}<span style="width:31px;height:32px;display:flex;align-items:center;justify-content:center"><img src="${A('cmn-fa-sns-4.svg')}" style="width:23.4px;height:24.3px" alt=""></span><img src="${A('cmn-fa-sns-5.svg')}" style="width:32px;height:28px" alt=""></div>`;
+ const sns=`<div class="fsns">${[2,3].map(i=>`<img src="${A('cmn-fa-sns-'+i+'.svg')}" style="width:32px;height:32px" alt="">`).join('')}<span style="width:31px;height:32px;display:flex;align-items:center;justify-content:center"><img src="${A('cmn-fa-sns-4.svg')}" style="width:23.4px;height:24.3px" alt=""></span><img src="${A('cmn-fa-sns-5.svg')}" style="width:32px;height:28px" alt=""></div>`;
  const copy=`<p class="fcopy">© 2026 TetherMax. All rights reserved.</p>`;
  if(mob)return `<footer class="ftm"><img src="${A('logo.svg')}" style="width:142px;height:16px" alt="TetherMax">${btns}${sec('Company',company)}${sec('Legal',legal)}<div class="fdiv"><i></i></div>${sns}${copy}</footer>`;
  return `<footer class="ftA"><div class="fin"><div class="ftop"><div class="fl"><img src="${A('logo.svg')}" style="width:142px;height:16px" alt="TetherMax">${btns}</div><div class="fr">${sec('Company',company)}${sec('Legal',legal)}</div></div><div class="fdiv"><i></i></div>${sns}${copy}</div></footer>`}
@@ -584,25 +581,79 @@ function render(){
  const cv=coverage();
  document.getElementById('pt-side').innerHTML=`<div class="pt-brand">TetherMax 전체 프로토타입<small>디자인 반영 ${cv.a}/${cv.b} 상태</small></div><input class="pt-q" placeholder="화면 검색" oninput="ptFilter(this.value)">${sidebar()}`;
  const fu=sc.fu.length?`<span class="pt-fu">${sc.fu.join(' · ')}</span>`:'';
- document.getElementById('pt-bar').innerHTML=`<div class="pt-l"><b>${sc.title}</b>${sc.route?`<code>${sc.route}</code>`:''}${fu}</div>
+ document.body.classList.toggle('pt-mo',S.vp==='mo');
+ document.getElementById('pt-bar').innerHTML=`<div class="pt-l"><button class="pt-menu" id="pt-menu" title="화면 목록">☰ 화면 목록</button><b>${sc.title}</b>${sc.route?`<code>${sc.route}</code>`:''}${fu}</div>
  <div class="pt-r"><select id="pt-state">${sc.states.map(s=>`<option value="${s.id}" ${s.id===state.id?'selected':''}>${s.figma?'●':'○'} ${s.label}</option>`).join('')}</select>
  <span class="pt-seg">${[['pc','PC'],['mo','모바일']].map(([k,l])=>`<span data-vp="${k}" class="${S.vp===k?'on':''}">${l}</span>`).join('')}</span>
  <span class="pt-seg">${[['en','EN'],['ko','KO']].map(([k,l])=>`<span data-lg="${k}" class="${S.lang===k?'on':''}">${l}</span>`).join('')}</span>
  <span class="pt-seg">${[['guest','게스트'],['s3','회원·연동0'],['s4','회원·연동']].map(([k,l])=>`<span data-au="${k}" class="${S.auth===k?'on':''}">${l}</span>`).join('')}</span>
+ ${appRoute(sc.id,state.id)?`<span class="pt-seg" title="실제 동작 = 실제 동작판(dex/app.html)을 이 자리에서 조작">${[[0,'화면 상태'],[1,'실제 동작']].map(([k,l])=>`<span data-live="${k}" class="${(+S.live)===k?'on':''}">${l}</span>`).join('')}</span>`:''}
  <label class="pt-ck"><input type="checkbox" id="pt-design" ${S.design?'checked':''}> 디자인 보기(주석 숨김)</label></div>
  <div class="pt-d">${designBadge(sc,state)}${state.note?`<span class="pt-n">${state.note}</span>`:''}</div>`;
  const fr=document.getElementById('pt-frame');fr.className='pt-frame vp-'+S.vp;
- fr.innerHTML=renderInner(sc.id+':'+state.id);
+ const ar=S.live&&appRoute(sc.id,state.id);
+ fr.innerHTML=ar?liveFrame(ar):renderInner(sc.id+':'+state.id);
  const h=`#${sc.id}/${state.id}`;if(location.hash!==h)history.replaceState(null,'',h);
  document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;render()};
  document.getElementById('pt-design').onchange=e=>{S.design=e.target.checked;save();render()};
  document.querySelectorAll('[data-vp]').forEach(x=>x.onclick=()=>{S.vp=x.dataset.vp;save();render()});
  document.querySelectorAll('[data-lg]').forEach(x=>x.onclick=()=>{S.lang=x.dataset.lg;save();render()});
- document.querySelectorAll('[data-au]').forEach(x=>x.onclick=()=>{S.auth=x.dataset.au;save();render()});
+ document.querySelectorAll('[data-au]').forEach(x=>x.onclick=()=>{const a=x.dataset.au;if(a===S.auth)return;const to=authTarget(S.screen,S.state,a);S.auth=a;save();if(to){S.screen=to[0];S.state=to[1]}render();window.scrollTo(0,0)});
+ document.getElementById('pt-menu').onclick=()=>document.body.classList.toggle('pt-side-open');
+ document.querySelectorAll('[data-live]').forEach(x=>x.onclick=()=>{S.live=x.dataset.live==='1';save();render()});
+ document.documentElement.style.setProperty('--pt-bar-h',document.getElementById('pt-bar').offsetHeight+'px');
  const on=document.querySelector('.pt-s.on');if(on)on.scrollIntoView({block:'nearest'});
 }
 window.ptFilter=q=>{q=q.trim().toLowerCase();document.querySelectorAll('.pt-s').forEach(a=>{a.style.display=!q||a.textContent.toLowerCase().includes(q)?'':'none'});document.querySelectorAll('.pt-g').forEach(d=>{if(q)d.open=true})};
-function go(key){if(!key)return;const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}S.screen=id;S.state=st||null;render();document.getElementById('pt-frame').scrollTop=0;window.scrollTo(0,0)}
+// 뒤로(이전 화면, 없으면 지정 화면) — data-go="back:{대체 화면}" (기존 mWeb 제목 행 · REQ-276 · REQ-726)
+const HIST=[];
+function go(key,o={}){if(!key)return;
+ if(key.startsWith('back:')){const p=HIST.pop();return go(p||key.slice(5),{noPush:true})}
+ if(!o.noPush&&S.screen)HIST.push(S.screen+(S.state?':'+S.state:''));if(HIST.length>50)HIST.shift();
+ const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}document.body.classList.remove('pt-side-open');S.screen=id;S.state=st||(AUTH_STATE[id]?AUTH_STATE[id][S.auth]:null);   // 상태를 안 정하면 지금 로그인 상태의 화면
+ // 지금 로그인 상태로는 볼 수 없는 화면이면 실제로 보게 되는 화면으로(게스트 전용 ↔ 회원 전용)
+ const to=(id==='home.main'&&!st&&S.auth==='guest')?['landing.main','normal']:(AUTH_ONLY_GUEST.includes(id)&&S.auth!=='guest')||((AUTH_ONLY_MEMBER.includes(id)||/^(link|own)./.test(id))&&S.auth==='guest')?authTarget(id,st,S.auth):null;if(to){if(to[0]==='auth.login')S.after=key;S.screen=to[0];S.state=to[1]}
+ render();window.scrollTo(0,0)}
+// 로그인 상태 전환 → 그 상태에서 사용자가 실제로 보게 되는 화면(결정 12차). [화면, 상태] 또는 null(그대로)
+const AUTH_ONLY_GUEST=['landing.main','guest.entry','guest.search','guest.result','guest.modal','auth.login','auth.signup','invite.landing'];
+const AUTH_ONLY_MEMBER=['summary.main','ranking.main','invite.main','partner.hub','coupon.box','home.wallet','home.timeline','wd.reflect','my.main','league.main','maxboard.main','challenge.detail','tp.main'];
+const AUTH_STATE={'home.main':{guest:'guest',s3:'s3',s4:'normal'},'dex.detail':{guest:'normal',s3:'unlinked',s4:'linked'},'dex.overview':{guest:'normal',s3:'member',s4:'member'},'hub.main':{guest:'normal',s3:'member',s4:'dexPanel'},'cmn.header':{guest:'guest',s3:'normal',s4:'normal'},'cmn.drawer':{guest:'normal',s3:'member',s4:'member'},'cmn.footer':{guest:'guest',s3:'normal',s4:'normal'},'cmn.notfound':{guest:'guest',s3:'member',s4:'member'},'quiz.list':{guest:'guest',s3:'normal',s4:'normal'},'quiz.article':{guest:'guest4',s3:'member5',s4:'member5'},'benefits.list':{guest:'guestOn',s3:'normal',s4:'normal'}};
+function authTarget(id,st,a){
+ const member=a!=='guest';
+ if(!member&&id==='home.main')return ['landing.main','normal'];   // 게스트가 /en에 오면 랜딩(실사이트)
+ if(member&&(id==='auth.login'||id==='auth.signup')&&S.after){const k=S.after.split(':');S.after=null;if(!(a==='s3'&&(k[0]==='home.wallet'||k[0]==='home.timeline')))return [k[0],k[1]||(AUTH_STATE[k[0]]?AUTH_STATE[k[0]][a]:null)]}
+ if(!member&&(AUTH_ONLY_MEMBER.includes(id)||/^(link|own)./.test(id)))S.after=id+(st?':'+st:'');
+ if(member&&AUTH_ONLY_GUEST.includes(id))return ['home.main',a==='s3'?'s3':'normal'];
+ if(!member&&(AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id)))return ['auth.login','normal'];
+ if(a==='s3'&&(id==='home.wallet'||id==='home.timeline'))return ['home.main','s3'];
+ const m=AUTH_STATE[id];if(!m)return null;
+ const sc=R.byId[id],cur=sc&&sc.states.find(x=>x.id===st);
+ // 로그인 상태에 묶인 상태(게스트·회원·로그인·연동 표시)일 때만 바꾼다 — DEX 종류·탭 같은 다른 변형은 유지
+ if(cur&&!/게스트|비로그인|회원|로그인|연동|guest|member|^auto$|^normal$/i.test(cur.label+' '+cur.id))return null;
+ return [id,m[a]];
+}
+window.authTarget=authTarget;
+// ---- 실제 동작 보기(결정 12차 — 목록판과 동작판의 인터랙션을 같게): 동작판(_프로토타입_실사이트/dex/app.html)을 이 자리에 띄운다
+function appRoute(id,st){
+ const slug=['aster','apex','lighter','edgex'].includes(st)?st:'edgex';
+ if(id==='hub.main')return '#/hub'+({cex:'?tab=CEX',brokers:'?tab=Brokers',cards:'?view=cards'}[st]||'');
+ if(id==='dex.overview')return '#/dex';
+ if(id==='dex.detail')return '#/dex/'+slug;
+ if(/^calc\./.test(id))return '#/payback';
+ if(id==='summary.main')return '#/summary';
+ if(id==='own.verify')return '#/ownership';
+ if(/^link\./.test(id))return '#/hub?link=1';
+ return null}
+function appBase(){return '../_프로토타입_실사이트/dex/app.html'}   // _프로토타입_전체/_latest.html · prototype/full.html 모두 DEX 바로 아래
+function liveFrame(r){const au=S.auth==='guest'?'guest':'member';return `<iframe id="pt-live" title="실제 동작판" src="${appBase()}?auth=${au}${r}" style="display:block;width:100%;height:calc(100vh - var(--pt-bar-h,48px));border:0;background:#fff"></iframe>`}
+const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/exchangeDetail\//,'cex.list'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'hub.main'],[/^\/en\/dex\/?$/,'dex.overview']];
+window.addEventListener('message',e=>{const m=e.data||{};if(!m.pt||!S.live)return;
+ if(m.auth){S.auth=m.auth==='member'?(S.auth==='guest'?'s4':S.auth):'guest';save()}
+ if(m.nav){let p='';try{p=new URL(m.nav).pathname}catch(x){p=String(m.nav)}
+  const hit=REAL2SCREEN.find(([re])=>re.test(p));
+  if(hit){S.live=false;const t=typeof hit[1]==='function'?hit[1]():hit[1];go(t);return}
+  window.open(m.nav,'_blank','noopener')}
+ if(m.dexHome){S.live=false;go(S.auth==='guest'?'landing.main':'home.main')}});
 window.go=go;
 // GNB 큰 메뉴: 클릭하면 이동하지 않고 아래로 펼침(펼친 채 유지) · 다시 클릭·바깥 클릭·Esc로 닫힘 — 실사이트와 같음
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-nav-toggle]');
@@ -765,6 +816,143 @@ M.scan = scan;
 
 })()}catch(e){console.error('03-motion.js',e);(window.PT_ERR=window.PT_ERR||[]).push('03-motion.js: '+e.message)}
 </script>
+<script>// ===== 04-behave.js =====
+try{(()=>{
+// ===== 04-behave.js — 화면요소 공통 동작(결정 12차 5항 · 05.리포트/화면요소_정의_전수점검.md) =====
+// 목록판(full.html)과 동작판(dex/app.html) 모두에 들어간다. 한 요소의 목적지는 한 곳에서만 정한다.
+//  · 고객지원(Live Chat · Contact Support · Chat with support · Speak to us · Report it · 헤드셋) = Zendesk 상담 위젯 자리
+//  · 제휴 문의(Affiliate Partner Inquiry · Contact for Partnership) = Tally 폼 새 탭
+//  · Notices = Zendesk Help Center 공지 새 탭(🔴 #2 · #3 권장 (a))
+//  · 푸터 소셜 = 기존 실사이트 링크 새 탭 · 지원 메일 = 복사
+//  · 목록판 전용: 복사 아이콘 · 칩 묶음 단일 선택 · ＋/− 접기 · 라디오 · 체크박스 · 점(캐러셀) · 정렬 머리
+(function () {
+'use strict';
+if (typeof document === 'undefined' || !document.addEventListener) return;
+const SITE = () => document.body && document.body.classList.contains('site');
+const URLS = {
+  tally: 'https://tally.so/r/obEp4N',
+  notices: 'https://tethermaxhelp.zendesk.com/hc/en-us/categories/11531697864335-Announcements',
+  // 푸터 소셜 — 기존 실사이트 푸터 링크(스냅숏). 1번(Instagram 모양)은 기존 푸터에 없는 아이콘이라 링크 없음
+  sns: { 2: 'https://tethermax.tistory.com/', 3: 'https://www.youtube.com/@tethermax', 4: 'https://twitter.com/tethermax', 5: 'https://t.me/tethermax_official' }
+};
+const txt = el => ((el && (el.innerText || el.textContent)) || '').replace(/\s+/g, ' ').trim();
+const SUPPORT_RE = /^(Live Chat|Contact Support|Need help\? Contact Support|Chat with support|Speak to us ?→?|Report it|고객센터 문의)$/i;
+const TALLY_RE = /^(Affiliate Partner Inquiry|Contact for Partnership ?→?)$/i;
+const open = u => { try { window.open(u, '_blank', 'noopener') } catch (e) { } window.PT_LAST_OPEN = u };
+
+function toast(msg) {
+  if (window.siteToast) return window.siteToast(msg);
+  const t = document.createElement('div'); t.className = 'bh-toast'; t.setAttribute('role', 'status'); t.textContent = msg;
+  document.body.appendChild(t); requestAnimationFrame(() => t.classList.add('in'));
+  setTimeout(() => { t.classList.remove('in'); setTimeout(() => t.remove(), 320) }, 2000);
+}
+function copy(v) {
+  const done = () => toast('Copied.');
+  try { navigator.clipboard.writeText(v).then(done, fb) } catch (e) { fb() }
+  function fb() { const ta = document.createElement('textarea'); ta.value = v; ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy') } catch (e) { } ta.remove(); done() }
+}
+window.ptCopy = copy;
+
+// ---- Zendesk 상담 위젯 자리(실서비스 = Zendesk Web Widget). 오른쪽 아래에 뜨고 × · Esc로 닫힘 ----
+function support() {
+  let w = document.getElementById('bh-chat');
+  if (w) { w.querySelector('button').focus(); return }
+  w = document.createElement('div'); w.id = 'bh-chat'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-label', 'Live Chat');
+  w.innerHTML = '<div class="bh-ch"><b>Live Chat</b><button type="button" aria-label="Close">×</button></div><div class="bh-cb"><p>Zendesk 상담 위젯이 열리는 자리입니다(프로토타입).</p><p class="bh-cs">실서비스는 기존 Zendesk 웹 위젯 — 24/7 고객지원.</p></div>';
+  document.body.appendChild(w);
+  requestAnimationFrame(() => w.classList.add('in'));
+  const b = w.querySelector('button'); b.onclick = closeSupport; b.focus();
+}
+function closeSupport() { const w = document.getElementById('bh-chat'); if (!w) return; w.classList.remove('in'); setTimeout(() => w.remove(), 240) }
+window.ptSupport = support;
+
+// ---- 공통 목적지: 캡처 단계에서 먼저 처리(두 판의 다른 클릭 처리보다 앞) ----
+window.addEventListener('click', e => {
+  const t = e.target; if (!t || !t.closest) return;
+  if (t.closest('#pt-bar,#pt-side')) return;
+  const stop = () => { e.preventDefault(); e.stopImmediatePropagation() };
+  const sns = t.closest('.fsns img,.fsns span');
+  if (sns) {
+    const img = sns.tagName === 'IMG' ? sns : sns.querySelector('img');
+    const m = img && /cmn-fa-sns-(\d)/.exec(img.getAttribute('src') || ''); const n = m && +m[1];
+    stop(); if (n && URLS.sns[n]) open(URLS.sns[n]); else toast('기존 푸터에 없는 소셜 — 링크 없음 (프로토타입)'); return;
+  }
+  if (t.closest('.fmail')) { stop(); return copy('support@tethermax.io') }
+  const el = t.closest('[data-go],button,a,[role="button"],span,div');
+  if (!el) return;
+  const go = el.closest('[data-go]') && el.closest('[data-go]').dataset.go;
+  const lab = txt(t.closest('button,a,[data-go]') || el).slice(0, 60);
+  if (go === 'support.main' || t.closest('.fchat') || (t.closest('button,a,[data-go]') && SUPPORT_RE.test(lab))) { stop(); return support() }
+  if (go === 'partner.apply' || (t.closest('button,a,[data-go]') && TALLY_RE.test(lab))) { stop(); return open(URLS.tally) }
+  if (go === 'notice.list' && /^Notices$/.test(lab)) { stop(); return open(URLS.notices) }
+}, true);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('bh-chat')) { e.stopImmediatePropagation(); closeSupport() } }, true);
+
+// ---- 목록판 전용 화면 안 동작(동작판은 site.js · site2.js가 같은 동작을 가진다) ----
+document.addEventListener('click', e => {
+  if (SITE()) return;
+  const fr = document.getElementById('pt-frame'); const t = e.target;
+  if (!fr || !t || !t.closest || !fr.contains(t)) return;
+  if (t.closest('[data-go]')) return;
+  // 맥스보드 섹션 이동 탭(위 고정) · 전체 일정 펼침(MB-REQ-126 · 123)
+  const mt = t.closest('[data-mb-tab]');
+  if (mt) {
+    const k = mt.dataset.mbTab, sec = fr.querySelector('[data-mb-sec="' + k + '"]'), bar = fr.querySelector('[data-mb-tabs]');
+    fr.querySelectorAll('[data-mb-tab]').forEach(x => x.classList.toggle('on', x === mt));
+    if (sec) { const off = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pt-bar-h')) || 0) + (bar ? bar.offsetHeight : 0); const y = sec.getBoundingClientRect().top + window.scrollY - off; const rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; window.scrollTo({ top: y, behavior: rm ? 'auto' : 'smooth' }) }
+    return;
+  }
+  const ms = t.closest('[data-mb-sched]');
+  if (ms) { const body = ms.closest('section') && ms.closest('section').querySelector('[data-mb-sched-body]'); if (body) { body.hidden = !body.hidden; ms.setAttribute('aria-expanded', String(!body.hidden)); const ic = ms.querySelector('img,svg'); if (ic) ic.style.transform = body.hidden ? '' : 'rotate(180deg)' } return }
+  // 복사 아이콘
+  const ci = t.closest('img[src*="copy"],button,span');
+  const cimg = ci && (ci.tagName === 'IMG' ? ci : ci.querySelector && ci.querySelector(':scope > img[src*="copy"]'));
+  if (cimg && /copy/.test(cimg.getAttribute('src') || '')) {
+    const host = cimg.closest('[data-copy]') || cimg.parentElement;
+    const v = (host.dataset && host.dataset.copy) || txt(host) || txt(host.parentElement);
+    e.preventDefault(); return copy(v);
+  }
+  // 라디오(퀴즈 보기 등): 같은 묶음 안 단일 선택
+  const rd = t.closest('label.radio');
+  if (rd) { const g = rd.parentElement; g.querySelectorAll(':scope > label.radio').forEach(x => x.classList.toggle('on', x === rd)); return }
+  // 칩 묶음: 이동이 없는 칩은 같은 줄 안에서 하나만 선택
+  const ch = t.closest('.chip');
+  if (ch && ch.parentElement) {
+    const sib = [...ch.parentElement.children].filter(x => x.classList.contains('chip'));
+    if (sib.length > 1) { sib.forEach(x => x.classList.toggle('on', x === ch)); return }
+  }
+  // ＋/− 접기(FAQ · Terms & Conditions): 머리 줄 끝의 ＋/−를 바꾸고, 바로 뒤 답변이 있으면 펼침/접힘. FAQ 묶음은 하나만 펼침
+  const isSign = el => el && /^[+−]$/.test(txt(el));
+  const head = t.closest('.row');
+  if (head && isSign(head.lastElementChild)) {
+    const p = head.parentElement;
+    const item = p && p.firstElementChild === head && !p.classList.contains('col') ? p : head;   // 머리 + 답변 묶음이면 그 묶음
+    const headOf = it => it.classList.contains('row') ? it : it.querySelector(':scope > .row');
+    const opening = txt(head.lastElementChild) === '+';
+    if (opening && item.parentElement) [...item.parentElement.children].forEach(it => {
+      if (it === item) return; const h = headOf(it); if (!h || !isSign(h.lastElementChild) || txt(h.lastElementChild) !== '−') return;
+      h.lastElementChild.textContent = '+'; if (it !== h && h.nextElementSibling) h.nextElementSibling.hidden = true;
+    });
+    head.lastElementChild.textContent = opening ? '−' : '+';
+    if (item !== head && head.nextElementSibling) head.nextElementSibling.hidden = !opening;
+    return;
+  }
+}, false);
+
+// 목록판 오른쪽 아래 위젯·토스트 모양
+const css = document.createElement('style');
+css.textContent = `#bh-chat{position:fixed;right:24px;bottom:24px;width:340px;max-width:calc(100vw - 32px);background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.22);z-index:3000;overflow:hidden;font:14px/1.5 Inter,system-ui,sans-serif;opacity:0;transform:translateY(16px);transition:opacity var(--m-modal,.22s) var(--e-std,ease),transform var(--m-modal,.22s) var(--e-std,ease)}
+#bh-chat.in{opacity:1;transform:none}
+#bh-chat .bh-ch{display:flex;justify-content:space-between;align-items:center;background:#0031c6;color:#fff;padding:12px 16px}#bh-chat .bh-ch button{background:none;border:0;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+#bh-chat .bh-cb{padding:16px;color:#212121;min-height:120px}#bh-chat .bh-cs{color:#6b7385;font-size:12px}
+.bh-toast{position:fixed;left:50%;bottom:32px;transform:translate(-50%,12px);background:#323232;color:#fff;border-radius:4px;padding:10px 16px;font:14px Inter,system-ui,sans-serif;z-index:3001;opacity:0;transition:opacity .3s,transform .3s}
+.bh-toast.in{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){#bh-chat,.bh-toast{transition:none}}`;
+(document.head || document.documentElement).appendChild(css);
+})();
+
+})()}catch(e){console.error('04-behave.js',e);(window.PT_ERR=window.PT_ERR||[]).push('04-behave.js: '+e.message)}
+</script>
 <script>// ===== 10-common.js =====
 try{(()=>{
 // 1. 공통 · 셸 — FU-083 ~ FU-088 (헤더 · 드로어 · 푸터 · 앱 하단 내비 · Exchange Listings · 공지 · 약관)
@@ -799,7 +987,7 @@ const lsHead=(t,btn)=>`<div class="row" style="gap:16px"><span style="font-size:
 function lsTop(){
  const T4=[['bitget','#00f0ff','54%'],['bybit','#15192a','55%'],['binance','#181a20','50%'],['okx','#000','65%']];
  const n={bitget:'Bitget',bybit:'Bybit',binance:'Binance',okx:'OKX'};
- return `<div class="col" style="gap:16px">${lsHead('Top Partner Exchanges',1)}<div style="display:flex;gap:16px;${mo()?'overflow-x:auto':''}">${T4.map(([k,bg,s])=>`<div class="col" style="gap:4px;flex:1;min-width:${mo()?110:0}px"><div style="height:${mo()?80:160}px;background:${bg};border-radius:16px;display:flex;align-items:center;justify-content:center;padding:10px">${lsImg('cmn-ls-top-'+k+'.png',`width:${mo()?50:100}px;height:${mo()?50:100}px;border-radius:80px${k==='okx'?';border:3px solid rgba(255,255,255,.05)':''}`)}</div><span style="font-size:${mo()?12:16}px;line-height:1.5;letter-spacing:.15px;font-weight:600;color:var(--text-secondary)">${n[k]}</span><span style="font-size:${mo()?12:16}px;line-height:1.5;letter-spacing:.15px;font-weight:600">${s} Total Savings</span></div>`).join('')}</div></div>`}
+ return `<div class="col" style="gap:16px">${lsHead('Top Partner Exchanges')}<div style="display:flex;gap:16px;${mo()?'overflow-x:auto':''}">${T4.map(([k,bg,s])=>`<div class="col" style="gap:4px;flex:1;min-width:${mo()?110:0}px"><div style="height:${mo()?80:160}px;background:${bg};border-radius:16px;display:flex;align-items:center;justify-content:center;padding:10px">${lsImg('cmn-ls-top-'+k+'.png',`width:${mo()?50:100}px;height:${mo()?50:100}px;border-radius:80px${k==='okx'?';border:3px solid rgba(255,255,255,.05)':''}`)}</div><span style="font-size:${mo()?12:16}px;line-height:1.5;letter-spacing:.15px;font-weight:600;color:var(--text-secondary)">${n[k]}</span><span style="font-size:${mo()?12:16}px;line-height:1.5;letter-spacing:.15px;font-weight:600">${s} Total Savings</span></div>`).join('')}</div></div>`}
 const lsChip=(l,on,icon)=>`<span class="row" style="gap:0;padding:4px;border-radius:100px;${on?'background:var(--blue);color:#fff':'background:var(--action-selected)'};flex:none">${icon?lsImg(icon,'width:16px;height:16px;margin:0 0 0 4px'):''}<span style="padding:3px 6px;font-size:13px;line-height:18px;letter-spacing:.16px;white-space:nowrap">${l}</span></span>`;
 function lsTable(o={}){
  const rows=o.rows||(o.q?LS.filter(p=>p.name.toLowerCase().includes(o.q.toLowerCase())):LS);
@@ -845,7 +1033,7 @@ const drRow=(icon,t,go,end='')=>`<div class="row" style="justify-content:space-b
 const drCard=rows=>`<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 2.5px rgba(93,96,103,.05)">${rows}</div>`;
 function drawer(member,o={}){
  const P={ex:[drIc('cmn-dr-candle.svg'),'Cashback Hub','hub.main'],br:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-broker.svg')}" alt="" style="width:16.67px;height:16.66px;transform:scaleY(-1)"></span>`,'Brokers','hub.main:brokers'],
-  ev:[drIc('cmn-dr-event.svg'),'Exchange Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.main']};
+  ev:[drIc('cmn-dr-event.svg'),'Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.main']};
  const prod=(member?['ex','ev','bn','calc','pt']:['ex','ev','bn','calc','pt']).map(k=>drRow(...P[k])).join('');
  const theme=`<span style="background:#e6e7e9;border-radius:5000px;height:28px;padding:2px;display:flex"><span style="background:#fff;border-radius:5000px;padding:6px 4px;display:flex">${drIc('cmn-dr-light.svg','width:16px;height:16px')}</span><span style="width:24px"></span></span>`;
  const welcome=member?'':`<div style="padding:0 16px"><div style="background:#fff;border:.5px solid rgba(0,0,0,.05);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:24px"><div class="col center" style="gap:4px;font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:600"><span>Welcome to TetherMax!</span><span class="c2">Create an account or log in to start<br>earning Cashback.</span></div><div class="row" style="gap:12px">${C.btn('Log In',{v:'outlined',full:true,go:'auth.login'})}${C.btn('Sign Up',{full:true,go:'auth.signup'})}</div></div></div>`;
@@ -861,7 +1049,6 @@ R.screen({id:'cmn.drawer',group:'common',title:'모바일 웹 드로어',route:'
  states:[
   {id:'normal',label:'비로그인 — 환영 블록',figma:{mo:'19604:33156'},note:'[기존 MAX-] Quiz › GNB mWeb 드로어 비로그인 · 이전판 [MAX-497] 12085:400249 · V2.2 cmn/DRAWER#normal'},
   {id:'member',label:'로그인',figma:{mo:'19604:32998'},note:'[기존 MAX-] Quiz › GNB mWeb 드로어 로그인 · 이전판 [MAX-497] 12216:424053 · V2.2 cmn/DRAWER#member'},
-  {id:'promo',label:'프로모 배너 (선택)',figma:null,note:'V2.2 cmn/DRAWER#promo — 드로어 배너 디자인 어디에도 없음'},
  ],
  render(st){
   const promo=st==='promo'?`<div style="padding:0 16px;margin-top:-8px"><div class="row g12" style="background:#eef3ff;border-radius:8px;padding:12px"><div style="width:48px;height:48px;border-radius:8px;background:#c9d6ff;flex:none"></div><div class="col" style="gap:2px;min-width:0"><span class="b2 semi">${T('Banner title','배너 제목')}</span><span class="cap c2">${T('Banner content','배너 내용')}</span></div></div></div>`:'';
@@ -889,7 +1076,6 @@ R.screen({id:'cmn.appnav',group:'common',title:'앱 하단 내비',route:'앱',f
   {id:'events',label:'Events 활성',figma:{mo:'8582:155585'},note:'[기존 MAX-7] 같은 컴포넌트, 활성 탭만 다름 · V2.2 cmn/APPNAV#events'},
   {id:'exchange',label:'Exchanges 활성',figma:{mo:'8582:155585'},note:'[기존 MAX-7] 같은 컴포넌트 · V2.2 cmn/APPNAV#exchange'},
   {id:'inapp',label:'미지원 Cashback 페이지 → 인앱 브라우저',figma:null,note:'V2.2 cmn/APPNAV#inapp — 인앱 브라우저 디자인 어디에도 없음'},
-  {id:'linkFail',label:'DEX 링크 실패 — 복사 + Open {DEX}',figma:null,note:'V2.2 cmn/APPNAV#linkFail — 다이얼로그 디자인 없음'},
  ],
  render(st){
   const on={normal:'home',events:'events',exchange:'exchange'}[st]||'home';
@@ -1453,7 +1639,7 @@ const s9Fail=(msg,go)=>`<div class="col" style="gap:12px;align-items:center"><di
 const backRow=(go,label)=>`<div class="row" style="padding:${MO()?'16px 0':'24px 0'}"><button class="icon-btn" data-go="${go}"><img src="${A('rw-ic-back.svg')}" class="ic" alt=""></button>${label?`<span class="sub2">${label}</span>`:''}</div>`;
 const greyBtn=(l,go)=>`<button class="btn lg full" style="background:#f2f2f5;color:rgba(0,0,0,.87)"${go?` data-go="${go}"`:''}>${l}</button>`;
 // 같은 화면의 기본 상태 위에 오버레이(셸이 두 번 그려지지 않게 본문만 겹침)
-const ovSelf=(id,base,inner,center)=>`<div style="position:relative;height:${MO()?812:900}px;overflow:hidden">${R.byId[id].render(base,{})}<div class="scrim${center?' center':''}" style="${center&&!MO()?'align-items:center':''}">${inner}</div></div>`;
+const ovSelf=(id,base,inner,center)=>`<div style="position:relative">${R.byId[id].render(base,{})}<div class="scrim pt-fixed${center?' center':''}" style="${center&&!MO()?'align-items:center':''}">${inner}</div></div>`;
 const tabBar=(items,on,o={})=>`<div class="tabs" style="${o.style||''}">${items.map(([k,l,go,badge])=>`<span class="tab${k===on?' on':''}"${go?` data-go="${go}"`:''}>${l}${badge!=null?` <span style="display:inline-flex;min-width:20px;height:20px;border-radius:10px;padding:0 6px;align-items:center;justify-content:center;font-size:12px;background:${k===on?'var(--blue)':'#5d6067'};color:#fff;margin-left:4px">${badge}</span>`:''}</span>`).join('')}</div>`;
 
 // =====================================================================
@@ -1463,7 +1649,7 @@ const MBC=[['Cashback',2,'USDT'],['Cashback',3,'USDT'],['Streak',3,'Days'],['Cas
 const PHASE={join:'pre',noEligible:'pre',reselect:'pre',reselNone:'pre',failToast:'pre',confirm:'pre',preopen:'open',preopenNo:'open',
  normal:'run',today:'run',complete:'done',final:'done',tally:'end',result:'end',excluded:'end',payout:'end'};
 const mbAlertTop=(tone,t,b)=>`<div style="background:${tone==='err'?'#fdd':'#ffe0b2'};border-radius:8px;padding:10px 16px;margin-top:24px"><div class="b2 semi" style="color:${tone==='err'?'#c62828':'#663c00'}">${t}</div><div class="cap" style="color:${tone==='err'?'#c62828':'#663c00'}">${b}</div></div>`;
-function mbTabs(){return `<div style="background:#fff;border-bottom:1px solid var(--divider)">${wrap(tabBar([['o','Overview'],['b','Bingo missions'],['r','Rewards & ranking'],['n','Rules']],'o',{style:'border-bottom:0'}))}</div>`}
+function mbTabs(){return `<div data-mb-tabs style="background:#fff;border-bottom:1px solid var(--divider);position:sticky;top:var(--pt-bar-h,0px);z-index:20">${wrap(tabBar([['o','Overview'],['b','Bingo Missions'],['r','Rewards & Ranking'],['n','Notes']],'o',{style:'border-bottom:0'}).replace(/<span class="tab([^"]*)">(Overview|Bingo Missions|Rewards &amp; Ranking|Rewards & Ranking|Notes)/g,(m,c,l)=>`<span class="tab${c}" data-mb-tab="${{'Overview':'o','Bingo Missions':'b','Notes':'n'}[l]||'r'}">${l}`))}</div>`}
 function mbTimer(){const box=v=>`<span style="display:inline-flex;align-items:center;justify-content:center;min-width:${MO()?48:60}px;height:${MO()?36:42}px;padding:0 6px;background:#fff;border-radius:8px;box-shadow:inset 0 1px 2px rgba(0,0,0,.25);font-size:${MO()?20:24}px;font-weight:700">${v}</span>`;const c=`<span class="h6 c2" style="font-weight:700">:</span>`;
  return `<div class="col g8"><span class="b2 semi c2">${T('Ends in','마감까지')}</span><div class="row g8">${box('9D')}${c}${box('23H')}${c}${box('59m')}${c}${box('21s')}</div></div>`}
 function mbHero(st){
@@ -1480,9 +1666,9 @@ function mbHero(st){
  else if(st==='excluded'){when=dateBlock('Reward Distribution','10.31, From 09:00')}
  else if(st==='payout'){when=dateBlock('Reward Distribution','10.31','Paying Out Sequentially');cta=pill(T('Check Event Rewards','이벤트 리워드 확인하기'),{go:'summary.main'})}
  else{when=mbTimer();
-  if(st==='join'||st==='failToast'){cta=pill('Join NOW',{go:'maxboard.main:normal'});cap=`<span class="b2 c2">You can participate until Oct 24, 08:59.</span>`}
-  if(st==='noEligible'||st==='reselNone')cta=pill(T('Link Wallet','지갑 연동하기'),{go:'link.addr:empty'});
-  if(st==='reselect'||st==='confirm')cta=pill(T('Select New Wallet','새 지갑 선택하기'),{go:'maxboard.main:confirm'});}
+  if(st==='join'||st==='failToast'){cta=pill('Join NOW',{go:'maxboard.main:pick'});cap=`<span class="b2 c2">You can participate until Oct 24, 08:59.</span>`}
+  if(st==='noEligible'||st==='reselNone')cta=pill(T('Link Account','계정 연동하기'),{go:'link.addr:empty'});
+  if(st==='reselect'||st==='confirm')cta=pill(T('Select New Account','새 계정 선택하기'),{go:'maxboard.main:repick'});}
  const sched={open:`Opens <b>Oct 3, 09:00</b>`,tally:`Results on <b>Oct 28, 09:00</b>`,result:`Rewards paid from <b>Oct 31, 09:00</b>`,excluded:`Rewards paid from <b>Oct 31, 09:00</b>`,payout:`Paying rewards since <b>Oct 31, 09:00</b>`}[ph==='open'?'open':st]
   ||(st==='today'?T('Ends Today','오늘 마감'):T(`Ends in <b>D-10</b> Oct 24, 08:59`,`<b>D-10</b> 10월 24일 08:59 마감`));
  const lost=mbAlertTop('err',T('You Can No Longer Participate with This wallet','참여 중이던 지갑으로 더 이상 참여할 수 없어요'),T('This wallet can no longer join this board.','이 지갑으로는 이 빙고판에 다시 참여할 수 없어요.'));
@@ -1492,7 +1678,12 @@ function mbHero(st){
  const art=mo?`<img src="${A('rw-mb-hero.webp')}" style="width:220px;margin:0 auto" alt="">`:`<div style="position:absolute;right:74px;top:4px;width:505px;height:502px;pointer-events:none"><img src="${A('rw-mb-glow.svg')}" style="position:absolute;left:-194px;top:-201px;width:905px;max-width:none;opacity:.9" alt=""><img src="${A('rw-mb-hero.webp')}" style="position:relative;width:505px;height:502px" alt=""></div>`;
  return `<section style="background:#e9f0ff;padding:${mo?'0 0 24px':'0 0 40px'}">${wrap(`${top}<div class="${mo?'col':'row between'}" style="padding:${mo?'16px 0':'40px 0'};${mo?'align-items:flex-start;gap:16px':''}"><button class="btn text black md" data-go="benefits.list" style="color:#5d6067;font-weight:700;padding:8px 11px"><img src="${A('rw-ic-back.svg')}" class="ic" alt="">All benefits</button><div class="row g16"><img src="${A('logo.svg')}" style="width:124px" alt="TetherMax"><span style="width:1px;height:18px;background:var(--divider)"></span><span class="row g12">${C.dex('EdgeX',22)}<span class="b1 bold">EdgeX</span></span></div></div>
  <div style="position:relative;${mo?'':'min-height:510px'}">${mo?art:''}${left}${mo?'':art}</div>
- <div class="${mo?'col center':'row between'}" style="background:#fff;border-radius:16px;padding:12px 24px;margin-top:${mo?24:40}px;${mo?'align-items:center':''}"><div class="${mo?'col g4 center':'row g16'}" style="${mo?'align-items:center':''}"><span class="row g8"><img src="${A('rw-ic-calendar.svg')}" style="width:18px" alt=""><span class="b1 semi">Event schedule</span></span><span class="b1 c2">${sched}</span></div><button class="btn text black md" style="color:#5d6067;font-weight:700">View schedule${ic('arrow-drop-down')}</button></div>`)}</section>`}
+ <div class="${mo?'col center':'row between'}" style="background:#fff;border-radius:16px;padding:12px 24px;margin-top:${mo?24:40}px;${mo?'align-items:center':''}"><div class="${mo?'col g4 center':'row g16'}" style="${mo?'align-items:center':''}"><span class="row g8"><img src="${A('rw-ic-calendar.svg')}" style="width:18px" alt=""><span class="b1 semi">Event schedule</span></span><span class="b1 c2">${sched}</span></div><button class="btn text black md" style="color:#5d6067;font-weight:700" data-mb-sched aria-expanded="false">View schedule${ic('arrow-drop-down')}</button></div>${mbSchedule(st)}`)}</section>`}
+// 전체 일정(기본 접힘) — PC 가로 단계 · 모바일 세로 타임라인, 현재 단계 강조
+function mbSchedule(st){const ph=PHASE[st]||'run',mo=MO();
+ const steps=[['open','Opens <b>Oct 3, 09:00</b>'],['run','You can participate until <b>Oct 24, 08:59</b>.'],['tally','Results on <b>Oct 28, 09:00</b>'],['pay','Rewards paid from <b>Oct 31, 09:00</b>']];
+ const cur={pre:'run',open:'open',run:'run',done:'run',end:st==='tally'?'tally':'pay'}[ph]||'run';
+ return `<div data-mb-sched-body hidden style="background:#fff;border-radius:16px;padding:16px 24px;margin-top:8px"><div class="${mo?'col':'row'}" style="gap:${mo?12:16}px">${steps.map(([k,t],i)=>`<div class="${mo?'row':'col'}" style="flex:1;gap:8px;align-items:${mo?'center':'flex-start'}"><span style="width:24px;height:24px;border-radius:12px;flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:${k===cur?'var(--blue)':'#e6e9ef'};color:${k===cur?'#fff':'#5d6067'}">${i+1}</span><span class="b2${k===cur?' semi':' c2'}">${t}</span></div>`).join('')}</div></div>`}
 
 function mbCell(i,state){const [lbl,n,u]=MBC[i];
  const st={done:'background:rgba(36,83,240,.85);color:rgba(255,255,255,.55)',can:'background:#fff;color:var(--blue)',canS:'background:#d9f5f3;color:#005f5a'}[state]||'background:rgba(0,0,0,.08);box-shadow:inset 0 2px 3px rgba(0,0,0,.25);color:rgba(255,255,255,.7)';
@@ -1592,6 +1783,9 @@ R.screen({id:'maxboard.main',group:'rewards',title:'맥스보드 (DEX 보드)',r
   {id:'excluded',label:'결과 발표 · 제외',figma:{pc:'29064:14754',mo:'29064:15127'},note:'Figma에만 있는 상태 — 원본 PRD 「어뷰징 제외: 사용자에게 알리지 않음」(ParticipantStatus <code>EXCLUDED</code>)'},
   {id:'payout',label:'지급 기간 — 이벤트 리워드 확인하기',figma:{pc:'29064:13958',mo:'29064:14356'},note:'V2.2 <code>mb/BOARD#payout</code> · 버튼은 캐시백 요약으로 이동, 지갑 주소 대신 <code>benefitNo</code>(G-386 확정)'},
   {id:'reselect',label:'참여 지갑 해제 · 재선택 가능',figma:{pc:'29064:8888',mo:'29064:9244'},note:'V2.2 <code>mb/BOARD#reselect</code> · Figma 버튼 <code>Select a New UID</code> → 정책 <code>Select New Wallet</code>(REQ-655)'},
+  {id:'pick',label:'참여 계정 선택 레이어 (Join NOW)',figma:{pc:'29330:190799'},note:'Figma R-09 — 문구표 #64 <code>Select an Account to Participate</code> · #65 부제. 자격 지갑만, 행 = <code>EdgeX · Wallet</code> + 전체 주소(MB-REQ-124 · REQ-655). PC 팝업 · 모바일 바텀시트'},
+  {id:'regConfirm',label:'등록 확인 팝업',figma:{pc:'29330:190851'},note:'Figma R-09 — 문구표 #66 <code>Would you like to participate with this account?</code> · Confirm = 등록(API-004) → 참여 중 · Cancel = 닫기'},
+  {id:'repick',label:'참여 계정 재선택 레이어 (Select New Account)',figma:{pc:'29330:190799'},note:'선택 레이어 → 재선택 확인 팝업(REQ-655 · MB 프론트 F-005)'},
   {id:'confirm',label:'새 지갑 재선택 확인 팝업',figma:{pc:'28537:462948',mo:'28537:462988'},note:'[기존 MAX-] Bingo 「시안 B__modal3」 — 제목·선택 계정 박스·안내·Cancel/Confirm. 원문 <code>UID</code>를 지갑으로(REQ-655, 안내 문장은 V2.2 확정 문구) · 모바일은 바텀시트 · V2.2 <code>mb/BOARD#confirm</code>'},
   {id:'reselNone',label:'참여 지갑 해제 · 선택지 없음',figma:{pc:'29064:9601',mo:'29064:9961'},note:'V2.2 <code>mb/BOARD#noEligible</code>(끊김 후 자격 없음) · Figma 버튼 <code>Link UID</code> → <code>Link Wallet</code>(G-322)'},
   {id:'noEligible',label:'참여 전 · 자격 지갑 없음',figma:{pc:'29064:8176',mo:'29064:8531'},note:'V2.2 <code>mb/BOARD#noEligible</code>(둘째 문장) · 버튼은 이 DEX가 미리 선택된 지갑 입력으로(REQ-647)'},
@@ -1601,12 +1795,19 @@ R.screen({id:'maxboard.main',group:'rewards',title:'맥스보드 (DEX 보드)',r
   {id:'ended404',label:'종료 · 404',figma:{pc:'29064:15501',mo:'29064:15511'},note:'Figma에만 있는 상태 — 원본 PRD 「종료·강제 종료 → 404」'},
  ],
  render(st){
-  if(st==='ended404')return `<div class="col center" style="min-height:${MO()?600:700}px;justify-content:center;align-items:center;gap:8px;text-align:center;padding:16px"><div style="font-size:${MO()?48:60}px;font-weight:700;color:#9bb8f5">404</div><div class="b1 semi">Page Not Found</div><div class="b2 c2">This page has ended or does not exist.</div>${C.btn('Go to Benefit List',{v:'outlined',size:'md',go:'benefits.list',cls:'mt16'})}</div>`;
-  const page=`${mbTabs()}${mbHero(st)}${mbSection2(st)}<section style="background:#e9f0ff;padding:${MO()?'40px 0':'100px 0 40px'}">${wrap(`<div class="col" style="gap:${MO()?32:64}px">${mbMyRewards(st)}${mbRanking(st)}</div>`)}</section>${mbNotes()}`;
+  if(st==='ended404')return `<div class="col center" style="min-height:${MO()?600:700}px;justify-content:center;align-items:center;gap:8px;text-align:center;padding:16px"><div style="font-size:${MO()?48:60}px;font-weight:700;color:#9bb8f5">404</div><div class="b1 semi">Page Not Found</div><div class="b2 c2">If you need help, contact our support team at support@tethermax.io and we’ll point you in the right direction.</div>${C.btn('Back to Home',{size:'md',go:S.auth==='guest'?'landing.main':'home.main',cls:'mt16'})}</div>`;
+  const page=`${mbTabs()}<div data-mb-sec="o">${mbHero(st)}</div><div data-mb-sec="b">${mbSection2(st)}</div><section data-mb-sec="r" style="background:#e9f0ff;padding:${MO()?'40px 0':'100px 0 40px'}">${wrap(`<div class="col" style="gap:${MO()?32:64}px">${mbMyRewards(st)}${mbRanking(st)}</div>`)}</section><div data-mb-sec="n">${mbNotes()}</div>`;
+  if(st==='pick'||st==='repick'||st==='regConfirm'){const mo=MO(),back=st==='repick'?'reselect':'join';
+   const acc=(a,on)=>`<label class="radio${on?' on':''}" style="display:flex;gap:12px;align-items:flex-start;border:1px solid ${on?'var(--blue)':'var(--divider)'};border-radius:8px;padding:10px 16px;cursor:pointer"><i style="margin-top:2px"></i><span class="col" style="gap:0;min-width:0"><span class="b1 semi">EdgeX · ${T('Wallet','지갑')}</span><span class="b2 c2" style="word-break:break-all">${a}</span></span></label>`;
+   const shell=(title,sub,body,cancel,ok)=>`<div style="background:#fff;border-radius:${mo?'16px 16px 0 0':'4px'};box-shadow:0 6px 30px 5px rgba(0,0,0,.12),0 16px 24px 2px rgba(0,0,0,.14),0 8px 10px -5px rgba(0,0,0,.2);width:${mo?'100%':'440px'};${mo?'align-self:flex-end':''}">${mo?'<div class="sheet-grab"></div>':''}<div class="row between" style="padding:24px 24px 0;align-items:flex-start;gap:16px"><span style="font-size:20px;font-weight:700;line-height:1.6;letter-spacing:.15px">${title}</span><button class="icon-btn" style="padding:0" data-go="maxboard.main:${back}">${ic('close')}</button></div><div class="col g16" style="padding:16px 24px">${sub?`<span class="b2 c2">${sub}</span>`:''}${body}</div><div class="row g8" style="padding:24px">${greyBtn(T('Cancel','취소'),'maxboard.main:'+cancel)}<button class="btn contained primary lg full" style="font-weight:700" data-go="maxboard.main:${ok}">${T('Confirm','확인')}</button></div></div>`;
+   if(st==='regConfirm'){const box=`<div style="background:rgba(187,226,255,.2);border:1px solid var(--blue);border-radius:8px;padding:10px 16px;color:var(--blue)"><div class="b1 semi">EdgeX · ${T('Wallet','지갑')}</div><div class="b2" style="word-break:break-all">${W.edgex}</div></div>`;
+    return ovSelf('maxboard.main','join',shell(T('Would you like to participate with this account?','이 거래 계정으로 참여할까요?'),'',box,'join','normal'),!mo)}
+   const list=`<div class="col g8">${acc(W.edgex,true)}${acc(W.e1,false)}</div>`;
+   return ovSelf('maxboard.main',back,shell(T('Select an Account to Participate','참여할 거래 계정을 선택하세요'),T('Only eligible EdgeX accounts are shown.','참여 가능한 EdgeX 거래 계정만 표시돼요.'),list,back,st==='repick'?'confirm':'regConfirm'),!mo)}
   if(st==='confirm'){const mo=MO();const box=`<div style="background:rgba(187,226,255,.2);border:1px solid var(--blue);border-radius:8px;padding:10px 16px;color:var(--blue)"><div class="b1 semi">EdgeX · ${T('Wallet','지갑')}</div><div class="b2" style="word-break:break-all">${W.edgex}</div></div>`;
-   const dlg=`<div style="background:#fff;border-radius:${mo?'16px 16px 0 0':'4px'};box-shadow:0 6px 30px 5px rgba(0,0,0,.12),0 16px 24px 2px rgba(0,0,0,.14),0 8px 10px -5px rgba(0,0,0,.2);width:${mo?'100%':'440px'};${mo?'align-self:flex-end':''}">${mo?'<div class="sheet-grab"></div>':''}<div class="row between" style="padding:24px 24px 0;align-items:flex-start;gap:16px"><span style="font-size:20px;font-weight:700;line-height:1.6;letter-spacing:.15px">${T('Would you like to participate with this wallet?','이 지갑으로 참여할까요?')}</span><button class="icon-btn" style="padding:0" data-go="maxboard.main:reselect">${ic('close')}</button></div><div class="col g16" style="padding:16px 24px">${box}<span class="b2 c2">${T('If you select a new wallet, your progress on this board starts over. You can’t change it after registration.','새 지갑을 선택하면 이 빙고판의 진행이 처음부터 다시 시작돼요. 등록 후에는 변경할 수 없어요.')}</span></div><div class="row g8" style="padding:24px">${greyBtn(T('Cancel','취소'),'maxboard.main:reselect')}<button class="btn contained primary lg full" style="font-weight:700" data-go="maxboard.main:normal">${T('Confirm','확인')}</button></div></div>`;
+   const dlg=`<div style="background:#fff;border-radius:${mo?'16px 16px 0 0':'4px'};box-shadow:0 6px 30px 5px rgba(0,0,0,.12),0 16px 24px 2px rgba(0,0,0,.14),0 8px 10px -5px rgba(0,0,0,.2);width:${mo?'100%':'440px'};${mo?'align-self:flex-end':''}">${mo?'<div class="sheet-grab"></div>':''}<div class="row between" style="padding:24px 24px 0;align-items:flex-start;gap:16px"><span style="font-size:20px;font-weight:700;line-height:1.6;letter-spacing:.15px">${T('Would you like to participate with this account?','이 거래 계정으로 참여할까요?')}</span><button class="icon-btn" style="padding:0" data-go="maxboard.main:reselect">${ic('close')}</button></div><div class="col g16" style="padding:16px 24px">${box}<span class="b2 c2">${T('If you select a new wallet, your progress on this board starts over. You can’t change it after registration.','새 지갑을 선택하면 이 빙고판의 진행이 처음부터 다시 시작돼요. 등록 후에는 변경할 수 없어요.')}</span></div><div class="row g8" style="padding:24px">${greyBtn(T('Cancel','취소'),'maxboard.main:reselect')}<button class="btn contained primary lg full" style="font-weight:700" data-go="maxboard.main:normal">${T('Confirm','확인')}</button></div></div>`;
    return ovSelf('maxboard.main','reselect',dlg,!mo)}
-  if(st==='failToast')return `<div style="position:relative">${page}<div style="position:fixed;left:50%;bottom:40px;transform:translateX(-50%);z-index:30"><div class="toast" style="position:static;transform:none;background:#ed6c02;min-width:${MO()?'327px':'343px'};border-radius:4px">${T("You can't participate with this wallet.",'이 지갑으로는 참여할 수 없어요')}</div></div></div>`;
+  if(st==='failToast')return `<div style="position:relative">${page}<div style="position:fixed;left:50%;bottom:40px;transform:translateX(-50%);z-index:30"><div class="toast" style="position:static;transform:none;background:#ed6c02;min-width:${MO()?'327px':'343px'};border-radius:4px">${T("You can't participate with this account.",'이 거래 계정으로는 참여할 수 없어요')}</div></div></div>`;
   return page;
  }});
 
@@ -1734,7 +1935,6 @@ R.screen({id:'league.main',group:'rewards',title:'글로벌 리그',route:'/glob
   {id:'create',label:'팀 생성 (자격 있음 → Create Team)',figma:{pc:'2913:24305',mo:'2913:24073'},note:'[기존 MAX-117] 「createTeam handling」 · 「When user is eligible to create team」 — 자격(연동 거래 계정 CEX + DEX 누적 캐시백 500 USDT 또는 최근 30일 100 USDT, REQ-388)을 만족하면 이 모달. 자격 안내 문구 자체는 기존 화면에 없음 · V2.2 <code>lg/LEAGUE#create</code>'},
   {id:'createPick',label:'팀 생성 계정 선택',figma:{pc:'29062:110959',mo:'29062:110984'},note:'Figma에만 있는 상태 — 팀 생성 시 그 DEX 지갑 선택(REQ-390 참가 계정에 DEX 지갑)'},
   {id:'picker',label:'참가 계정 선택 — DEX 지갑 포함',figma:{mo:'2913:21161'},note:'[기존 MAX-117] 「>1 UID handling」 Max 5 UID + DEX 계정 선택 행(CEX/DEX 그룹, REQ-390) · PC는 DEX 계정 선택 다이얼로그 재사용 · V2.2 <code>lg/LEAGUE#picker</code> 문구(국문만)'},
-  {id:'reward',label:'상금 수령 계정',note:'재사용 — DEX 계정 선택 다이얼로그(29062:110959)에 참가 지갑 한 줄(G-187: 수령 계정 = 참가 계정) · V2.2 <code>lg/LEAGUE#reward</code>'},
   {id:'dexOnly',label:'DEX 지갑만 연동한 회원',note:'재사용 — 「>1 UID handling」(2913:21161) 틀에 DEX 그룹만 · 「연동 계정 없음」으로 떨어지지 않음(REQ-389) · V2.2 <code>lg/LEAGUE#dexOnly</code>'},
   {id:'notLinked',label:'DEX 리그 미연동 안내',note:'재사용 — 기존 [MAX-499] 「Error state」 다이얼로그 틀(12474:164021) + G-188 확정 문구 · V2.2 <code>lg/LEAGUE#notLinked</code>'},
   {id:'lighter',label:'Lighter 리그 (보류)',figma:{pc:'1095:64518',mo:'1017:17857'},note:'[기존 MAX-117] 리더보드와 같음 — Lighter 보류(G-189 · G-428), 화면 변화 없음 · V2.2 <code>lg/LEAGUE#lighter</code>'},
@@ -1751,7 +1951,6 @@ R.screen({id:'league.main',group:'rewards',title:'글로벌 리그',route:'/glob
   if(st==='createPick'){const rows=[W.e1,W.e2,W.edgex].map((a,i)=>`<div class="row g12" style="border:1px solid ${i===0?'var(--blue)':'var(--divider)'};border-radius:12px;padding:12px">${C.dex('EdgeX',36)}<div class="col" style="gap:0;min-width:0"><span class="b2">${T('Wallet','지갑')}</span><span class="b2" style="word-break:break-all">${a}</span></div></div>`).join('');
    return ov(pickDialog('Create team','Select an EdgeX wallet to create a team',rows,{center:1,cancel:BG_LG,ok:BG_LG}))}
   if(st==='picker')return ov(v22pick('참가할 거래 계정 선택','P1~P3 동안 변경할 수 없어요',[ACC.bitget,ACC.okx],[ACC.edge22,ACC.aster],'edge22'))+C.note('V2.2 문구(국문만) · DEX 그룹·지갑 주소 표시·배지 없음(REQ-390). 디자인 없음 — Figma 계정 행 모양 사용');
-  if(st==='reward')return ov(pickDialog('상금을 받을 계정 선택','',acctList([],[ACC.edge22],'edge22'),{cancel:BG_LG,ok:BG_LG}))+C.note('G-187 확정: 수령 계정 = 참가 계정(기존 MAX-8 · MAX-10 구조) → 참가한 지갑 한 줄만 보임. 디자인 없음');
   if(st==='dexOnly')return ov(v22pick('참가할 거래 계정 선택','P1~P3 동안 변경할 수 없어요',[],[ACC.edge22,ACC.aster],'edge22'))+C.note('DEX 지갑만 연동한 회원도 「연동 계정 없음」이 아님(REQ-389)');
   if(st==='notLinked')return ov(`<div style="background:#fff;border-radius:4px;box-shadow:var(--elev24);width:${MO()?'295px':'444px'};padding:${MO()?20:24}px" class="col g16"><div class="b2 c2">Link your EdgeX wallet to participate</div>${C.btn(T('Link Wallet','지갑 연동하기'),{full:true,go:'link.addr:empty'})}</div>`)+C.note('G-188 확정 <code>Link your {exchange} wallet to participate</code> · 버튼 G-322 <code>Link Wallet</code> 계열. 국문 원문 없음');
   if(st==='card')return wrap(`<div class="col g16" style="padding:40px 0"><div class="card col g8" style="max-width:343px">${C.badge('Benefit')}<b class="b1">TetherMax Global League with EdgeX</b><span class="b2 c2">league prize → 캐시백 내역에 표시</span></div>${C.note('DEX 리그를 열면 혜택 카드 자동 생성. URL <code>/golbal_league_edgex_for_team_{n}</code> · <code>_for_ind_{n}</code>(원문 오타 유지, REQ-394)')}</div>`,1088);
@@ -1815,7 +2014,7 @@ R.screen({id:'benefits.list',group:'rewards',title:'혜택',route:'/benefits',fu
   if(st==='guest')return bnfPage({total:'0.00 USDT',tab:'done',body:emptyBox('Become a member to access completed rewards','Sign Up','auth.signup')});
   if(st==='guestOn')return bnfPage({total:'0.00 USDT',tab:'on',body:bnfList(false)});
   if(st==='normal')return bnfPage({total:'0.00 USDT',history:1,member:1,tab:'on',body:bnfList(true)})+C.note('맥스보드 진입은 혜택 카드(V2.2 <code>MAX BOARD</code> 행) — 기존 혜택 페이지에는 맥스보드 카드 디자인이 없음 → <a data-go="maxboard.main:join" style="text-decoration:underline;cursor:pointer">maxboard.main</a>. 월간 랭킹 <code>cashback earned</code>(REQ-400)은 MONTHLY CASHBACK 상세 쪽');
-  if(st==='doneEmpty')return bnfPage({total:'0.00 USDT',history:1,member:1,tab:'done',body:emptyBox("You haven't completed any benefits yet.",'View Benefits','benefits.list:normal')});
+  if(st==='doneEmpty')return bnfPage({total:'0.00 USDT',history:1,member:1,tab:'done',body:emptyBox('No Completed Rewards Yet','Explore Ongoing Rewards','benefits.list:normal')});
   if(st==='uidm')return bnfDetail({title:'Link UID to Get Cashback',sub:'Link your UID to start earning cashback and receive 3 USDT.',plus:'+3 USDT',amt:'3 USDT',imgH:220,img:`<img src="${A('rw-bd-uid.png')}" style="width:100%;height:100%;object-fit:cover" alt="">`,phone:1,
    cta:`<button class="btn contained primary lg" style="width:300px" data-go="link.select">Link UID and Get 3 USDT</button>`,moCta:C.btn('Link UID and Get 3 USDT Coupon',{full:true,go:'link.select'}),once:'This reward can only be claimed once per account.'})+C.note(T('Linking a DEX wallet does not qualify for this reward.','DEX 지갑 연동은 이 보상 대상이 아닙니다.')+' — V2.2 문구(REQ-396). 기존 화면에 이 안내 자리가 없어 note로만');
   if(st==='first')return bnfDetail({title:'First Withdrawal Reward',sub:'Withdraw your first cashback to receive a 10 USDT coupon.',plus:'+10 USDT',amt:'10 USDT',imgH:162,img:`<img src="${A('rw-bd-first.png')}" style="width:100%;height:100%;object-fit:cover" alt=""><img src="${A('rw-bd-first-obj.png')}" style="position:absolute;left:27.75%;width:46%;top:calc(50% - 10px);transform:translateY(-50%)" alt="">`,
@@ -1886,9 +2085,8 @@ R.screen({id:'tp.main',group:'rewards',title:'테더맥스 포인트 (TP)',route
   const how=[['Trade with Bitget','Top trending exchange'],['Withdraw Cashback','TP earned upon withdrawal'],['Invite Friends','Earn TP for every friend who trades via your referral link']];
   const faq=['What exactly is TP (TetherMax Point)?','Where can I use TP? Can I cash it out?','How do I start earning points?','Does a larger cashback amount mean more points?','Is there an extra benefit for inviting friends?','Why does the earning rate change depending on the timing?'];
   return wrap(`<div class="col g24" style="padding:${mo?'16px 0 48px':'40px 0 80px'}">${tabBar([['tp','TetherMax Point (TP)'],['inv','Invite Friends','invite.main']],'tp')}
-   <div class="row between" style="background:var(--info-bg);border-radius:4px;padding:12px 16px"><span class="row g12 b2" style="color:#014361"><span style="width:20px;height:20px;border-radius:50%;background:var(--info);color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;font-weight:700">i</span>You have TetherMax Points available to claim.</span><span class="b2 semi" style="color:#014361">View</span></div>
    <div style="background:#fff;border-radius:8px;padding:16px"><div class="cap c2">Available TP</div><b class="b1">0.00 TP</b></div>
-   <div class="row g8"><span class="chip sm" style="background:var(--blue);border-color:var(--blue);color:#fff">TP</span>${C.chip('Earning History',false,{sm:1})}${C.chip('Real-Time Ranking',false,{sm:1})}</div>
+   <div class="row g8"><span class="chip sm" style="background:var(--blue);border-color:var(--blue);color:#fff">TP</span>${C.chip('Earning History',false,{sm:1})}</div>
    <div style="position:relative;border-radius:16px;overflow:hidden;padding:${mo?'48px 16px':'80px 0'};display:flex;flex-direction:column;align-items:center;gap:16px;background:#000"><img src="${A('rw-tp-banner.jpg')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" alt=""><img src="${A('rw-ic-tm.svg')}" style="position:relative;width:40px" alt=""><div class="h6 center" style="position:relative;color:#fff;font-weight:700">Join the TetherMax Rewards Ecosystem</div><button class="btn contained black lg" style="position:relative;width:${mo?'100%':'311px'};box-shadow:var(--elev2)">Learn More</button></div>
    <div class="b2 semi center" style="margin-top:16px">How To Earn TetherMax Point (TP)?</div>
    <div class="col g8">${how.map(([t,s])=>`<div class="row between" style="background:#fff;border-radius:4px;padding:8px 16px;min-height:56px"><div class="col" style="gap:0"><span class="b2 semi">${t}</span><span class="cap c2">${s}</span></div>${ic('chevron-right','ic20')}</div>`).join('')}</div>
@@ -1955,7 +2153,7 @@ function qzArticle(m,guest){const a=ART[m];const mo=MO();
  const rail=`<div class="col g16" style="${mo?'':'position:sticky;top:88px'}"><div class="h6">Share Post</div><button class="btn outlined primary lg full">Share</button><div class="col" style="gap:0;margin-top:8px">${toc.map((t,i)=>`<div class="row g12" style="align-items:flex-start;padding:6px 0"><span style="width:10px;height:10px;border-radius:50%;border:2px solid ${i?'#c4c4c4':'#000'};margin-top:4px;flex:none"></span><span class="b2 ${i?'c3':''}">${t}</span></div>`).join('')}</div></div>`;
  const main=`<div class="col" style="gap:16px;min-width:0">${crumb(m)}<h1 style="font-size:${mo?26:34}px;font-weight:700;line-height:1.5;margin:0">${a.title}</h1><span>${readChip(m==='basics'?'5 min read':'6 min read')}</span><img src="${A(a.img)}" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-top:16px" alt="">
   <div>${body}</div><div style="background:#e8f1ff;border-radius:16px;padding:16px 16px 20px;margin-top:24px"><div class="b2 bold cb" style="margin-bottom:8px">KEY TAKEAWAYS</div><ul class="b1" style="margin:0;padding-left:24px;font-weight:500">${a.take.map(t=>`<li style="margin-bottom:8px">${rb(t)}</li>`).join('')}</ul></div>
-  <div class="row g8" style="margin-top:24px">${C.btn('Back',{v:'outlined',size:'lg',go:'quiz.list:'+(guest?'guest':'normal')})}${guest?C.btn('Login to Take Quiz',{size:'lg',go:'auth.login'}):C.btn('Take the Quiz',{size:'lg',go:m==='basics'?'quiz.list:normal':`quiz.play:q${m}`})}</div></div>`;
+  ${m==='basics'?'':`<div class="row g8" style="margin-top:24px">${C.btn('Back',{v:'outlined',size:'lg',go:'quiz.list:'+(guest?'guest':'normal')})}${guest?C.btn('Login to Take Quiz',{size:'lg',go:'auth.login'}):C.btn('Take the Quiz',{size:'lg',go:`quiz.play:q${m}`})}</div>`}</div>`;
  return wrap(`<div style="display:grid;grid-template-columns:${mo?'1fr':'minmax(0,724px) 300px'};gap:${mo?32:56}px;padding:${mo?'24px 0 64px':'96px 0 96px'}">${mo?rail+main:main+rail}</div>`,1100)}
 R.screen({id:'quiz.article',group:'quiz',title:'Beginner’s Guide 아티클',route:'/beginner-guide/{module}',fu:['FU-073'],shell:{nav:'discover',back:'quiz.list',moTitle:['Beginner’s Guide','초보자 가이드'],moNav:'home'},
  states:[
@@ -2007,7 +2205,7 @@ R.screen({id:'quiz.play',group:'quiz',title:'퀴즈 풀기 · 제출',route:'/be
 // ---------- 결과 ----------
 function qzResult(m,score){const z=QZ[m];const ok=score===2?[1,1]:score===1?[1,0]:[0,0];
  const row=(i)=>{const q=z.q[i];const good=ok[i];return `<div style="margin-bottom:40px">${qHead(i+1,q,good?'#1b7a3e':'#a8321e',good?'Correct':'Incorrect')}<div class="b1" style="margin-top:12px">${q.short}&nbsp;&nbsp; ${q.exp}</div></div>`};
- const coupon=score>0?`<div style="font-size:20px;font-weight:600;margin-bottom:12px">Quiz coupon</div><div class="b1" style="margin-bottom:24px">Redeem an available quiz coupon on its designated linked account. The event reward matches trading cashback 1:1. A quiz reward alone cannot be paid out.</div>${C.btn('View Coupons',{size:'md',go:'coupon.box:normal'}).replace('class="btn','style="min-width:215px" class="btn')}`:C.btn('Back to module',{size:'md',go:'quiz.list:normal'}).replace('class="btn','style="min-width:215px" class="btn');
+ const coupon=score>0?`<div style="font-size:20px;font-weight:600;margin-bottom:12px">Quiz coupon</div><div class="b1" style="margin-bottom:24px">Redeem an available quiz coupon on its designated linked account. The event reward matches trading cashback 1:1. A quiz reward alone cannot be paid out.</div>${C.btn('View Coupons',{size:'md',go:'coupon.box:normal'}).replace('class="btn','style="min-width:215px" class="btn')}`:C.btn('Back to module',{size:'md',go:'quiz.article'}).replace('class="btn','style="min-width:215px" class="btn');
  return qzStateFrame(m,`<div class="row g24" style="font-size:${MO()?26:32}px;font-weight:600;margin:16px 0 48px"><span>Your score</span><span>${score} / 2</span></div>${row(0)}${row(1)}${coupon}`)}
 R.screen({id:'quiz.result',group:'quiz',title:'퀴즈 결과',route:'/beginner-guide/{module}/quiz (결과)',fu:['FU-073'],shell:{nav:'discover',back:'quiz.article',moTitle:['Quiz','퀴즈'],moNav:'home'},
  states:[
@@ -2082,10 +2280,7 @@ const EMAILS={
    body:fail31('Another linking request was approved. Your request was closed. Contact support if you need help.','다른 연동 요청이 먼저 승인되어 이번 요청이 종료되었습니다.','지갑 연동 요청이 자동으로 종료되었습니다.')},
   {id:'e31op',label:'31 · 운영자 거절',pc:'29061:1106',mo:'29064:2403',ko:'29062:118600',koMo:'29064:5632',
    cond:'<b>29061:1171 · 31 · 운영자 거절</b><br>EN [TetherMax] Wallet Binding Failed / KO [TetherMax] 지갑 연동에 실패했어요<br>확인 중 → 운영자 거절. FCM 101 + EMAIL 31. 선택한 사유 1개만 본문에 표시(G-074). 예시는 레퍼럴 불일치. 시작일 이전 귀속 사유는 Lighter 전용. 번역 검토 G-296.',
-   body:fail31('Not a TetherMax referral','테더맥스 레퍼럴로 가입한 지갑이 아닙니다.','지갑 연동 요청이 승인되지 않았습니다. 아래에서 사유를 확인하세요.')},
-  {id:'e32',label:'32 · Lighter 확인 중 → 확정',pc:'29061:1174',mo:'29064:2466',ko:'29062:118668',koMo:'29064:5695',
-   cond:'<b>29061:1238 · 32 · Lighter 확인 중 → 확정</b><br>EN [TetherMax] Your pending wallet is now confirmed / KO [TetherMax] 확인 중이던 지갑 연동이 확정됐어요<br>월요일 CSV로 보류 해제 시 FCM 102와 동시. Lighter 온보딩 보류 G-428. 접수 시 발송 없음.',
-   body:[{h:['Your pending wallet is now confirmed','확인 중이던 지갑 연동이 확정됐어요']},{p:['Your Lighter wallet has been confirmed and linked to TetherMax.','확인 중이던 Lighter 지갑이 테더맥스에 연동되었습니다.']},...base('Lighter'),{p:'SUP'},VIEW_WALLET]},
+   body:fail31('Not a TetherMax referral','테더맥스 레퍼럴로 가입한 지갑이 아닙니다.','지갑 연동 요청이 승인되지 않았습니다. 아래에서 사유를 확인하세요.')}
  ]},
  'email.dex':{title:'DEX 안내 메일 (28·29)',states:[
   {id:'e28',label:'28 · ApeX 연동 이전 미수령',pc:'29061:1241',mo:'29064:2529',ko:'29062:118735',koMo:'29064:5758',
@@ -2440,7 +2635,7 @@ function siBoost(){
  const rows=[['BingX','Total Savings 77%'],['Bybit','Total Savings 77%'],['W','Cashback 90%'],['OKX','Total Savings 77%'],['Binance','Total Savings 77%']];
  const list=card(rows.map(([l,t],i)=>`<div class="row" style="gap:12px;padding:10px 12px;border-radius:8px;${i===2?'background:#eef5fd':''}">${logo(l,24)}<span class="b2 semi grow">${t}</span><span class="cap" style="color:#ef6c00">🔥 for new traders</span></div>`).join(''),`width:${mo()?'100%':'480px'};padding:8px`);
  const sl=(k,v,a,b)=>`<div class="col" style="gap:4px"><div class="row between"><span class="b2">${k}</span><span class="b2 bold cb">${v}</span></div><div style="position:relative;height:16px"><i style="position:absolute;left:0;right:0;top:7px;height:2px;background:#e3e6eb;display:block"></i><i style="position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:var(--elev2);display:block"></i></div><div class="row between cap c2"><span>${a}</span><span>${b}</span></div></div>`;
- const calc=card(`<div class="col" style="gap:16px"><div class="row" style="gap:8px"><span class="row between grow b2 c2" style="background:#f2f3f5;border-radius:6px;padding:8px">Select a partner ▾</span><span class="row between grow b2 c2" style="background:#f2f3f5;border-radius:6px;padding:8px">Trade Frequency ▾</span></div>${sl('Leverage','10x','1x','100x')}${sl('Account Balance','1,000 USDT','500','50K')}${sl('Maker / Taker Ratio','Taker 25%','0%','100%')}<button class="btn contained black sm full" style="background:#f2f3f5;color:var(--text-primary)">Label</button><span class="cap c2 center">ⓘ Actual savings may vary depending on your maker/taker ratio.</span></div>`,`width:${mo()?'100%':'480px'}`);
+ const calc=card(`<div class="col" style="gap:16px"><div class="row" style="gap:8px"><span class="row between grow b2 c2" style="background:#f2f3f5;border-radius:6px;padding:8px">Select a partner ▾</span><span class="row between grow b2 c2" style="background:#f2f3f5;border-radius:6px;padding:8px">Trade Frequency ▾</span></div>${sl('Leverage','10x','1x','100x')}${sl('Account Balance','1,000 USDT','500','50K')}${sl('Maker / Taker Ratio','Taker 25%','0%','100%')}<button class="btn contained black sm full" style="background:#f2f3f5;color:var(--text-primary)">Calculate</button><span class="cap c2 center">ⓘ Actual savings may vary depending on your maker/taker ratio.</span></div>`,`width:${mo()?'100%':'480px'}`);
  return sec(`<div class="col" style="${W(1080)};gap:${mo()?48:160}px"><div style="${flexRC(40)};justify-content:space-between">${head('Cashback boost for new customers','New here? Take 90% of it back.','We prepared a cashback boost event for customers new to TetherMax.',{left:1})}${list}</div>
  <div style="${flexRC(40)};justify-content:space-between;${mo()?'flex-direction:column-reverse':''}">${calc}<div class="col" style="gap:12px;max-width:440px">${head('Cashback Calculator','See what your fees are actually worth',"Ten seconds to find out what you've been leaving behind.",{left:1})}</div></div></div>`,{p:'120px 24px'})}
 function siBenefits(){
@@ -2772,12 +2967,12 @@ function evBanner(img,title,tag){
 const evCard=(banner,mid,join)=>`<div style="background:#fff;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:16px;flex:1;min-width:0">${banner}${mid}${join}</div>`;
 const evRow=(icon,k,v)=>`<div class="row between"><span class="row" style="gap:4px">${hic(icon,16)}<span class="b2 c2">${k}</span></span><span class="b2">${v}</span></div>`;
 const ongoing=`<span style="align-self:flex-start;background:#e6e7e9;border-radius:4px;padding:4px;font-size:12px;line-height:12px;color:var(--text-secondary)">Ongoing</span>`;
-const joinBtn=(outlined)=>`<button class="btn ${outlined?'outlined primary':'contained primary'} md full" data-go="events.list">Join Now</button>`;
+const joinBtn=(outlined,go='benefits.list')=>`<button class="btn ${outlined?'outlined primary':'contained primary'} md full" data-go="${go}">Join Now</button>`;
 function memberEvents(tag,outlined){
  const grid=S.vp==='mo'?'display:flex;flex-direction:column;gap:16px':'display:flex;gap:16px';
  return `<div style="${grid}">
   ${evCard(evBanner('ev-btc.jpg','Predict Bitcoin price and win up to 1,000.00 USDT',tag),evRow('redeem','Rewards','Up to 1,000.00 USDT')+ongoing,joinBtn(outlined))}
-  ${evCard(evBanner('ev-challenge.jpg','Earn More Cashback. Earn Extra USDT',tag),evRow('redeem','Rewards','Up to 37 USDT')+ongoing,joinBtn(outlined))}</div>`}
+  ${evCard(evBanner('ev-challenge.jpg','Earn More Cashback. Earn Extra USDT',tag),evRow('redeem','Rewards','Up to 37 USDT')+ongoing,joinBtn(outlined,'challenge.detail'))}</div>`}
 // 모바일 홈 본문 — 기존 mWeb MAXOP-731 Content(22913:1051714): 흰 블록(Exclusive For Members 2열 카드 · Limited Time Offers 1장 + 페이지 점) + 회색 블록(Top Partner Exchanges 가로 목록)
 const moHead=(t,go,line)=>`<div class="row" style="gap:16px"><span class="b1 semi" style="white-space:nowrap">${t}</span>${line?'<span class="grow" style="height:1px;background:var(--divider)"></span>':'<span class="grow"></span>'}<button class="btn text primary sm" style="padding:4px 5px"${go?` data-go="${go}"`:''}>See All</button></div>`;
 function moMemberCards(tag='Bitget',title='Exclusive For Members'){
@@ -2838,7 +3033,7 @@ function s3Checklist(){
  return `<div style="background:#fff;border-radius:8px;padding-bottom:24px">
   <div class="b2 semi" style="padding:24px 16px 16px">Unlock Your <span class="cb">First Cashback</span> in 3 Steps!</div>
   <div class="row between" style="padding:0 16px"><span class="row">${badge(1)}${lbl('Create TetherMax account')}</span>${hic('check-step',24)}</div>${div}
-  <div class="row between" style="padding:0 16px;cursor:pointer" data-go="cex.list"><span class="row">${badge(2)}${lbl('Browse partners')}</span>${hic('chevron',24)}</div>${div}
+  <div class="row between" style="padding:0 16px;cursor:pointer" data-go="hub.main"><span class="row">${badge(2)}${lbl('Browse partners')}</span>${hic('chevron',24)}</div>${div}
   <div class="row" style="padding:0 16px;cursor:pointer" data-go="link.select">${badge(3)}<span class="grow">${lbl('Link your account with us')}</span>${chip}${hic('chevron',24)}</div></div>`}
 const s3Preview=()=>`<div data-go="calc.p1" style="cursor:pointer;border:1px solid #c7d6ff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:1px 1px 15px rgba(28,28,30,.04);background:linear-gradient(160deg,rgba(199,214,255,.08),rgba(199,214,255,.35))">
  <div class="row between"><span class="row">${hic('calc',16)}<span class="b2 semi" style="color:#7f9fff">Cashback Preview</span></span>${hic('chevron-blue',16)}</div>
@@ -3311,7 +3506,7 @@ document.addEventListener('keydown',event=>{
 
 R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (웹 꽉 찬 모달 · 앱 바텀시트)',fu:['FU-013'],shell:false,
  states:[
-  {id:'normal',label:'진입: 홈 체크리스트 — 선택 없음 (S3-2) · 모바일 시트 All',figma:{pc:'28960:127765',mo:'28969:126953'},note:'V2.2 <code>link/SEL#normal</code> · <code>link/SHEET#normal</code> · <code>link/GRID#normal</code>. 웹 = Figma S3-2 「Link Account modal (live)」 기본 상태(Select a partner · Link Account 비활성). 모바일 = 연동 폼 위 선택 시트(Top Partner · All exchanges (23))'},
+  {id:'normal',label:'진입 — 첫 거래소 WOO X Pro 기본 선택 (G-379)',figma:{pc:'28960:127765',mo:'28969:126953'},note:'V2.2 <code>link/SEL#normal</code> · <code>link/SHEET#normal</code> · <code>link/GRID#normal</code>. 웹 = Figma S3-2 「Link Account modal (live)」 기본 상태(Select a partner · Link Account 비활성). 모바일 = 연동 폼 위 선택 시트(Top Partner · All exchanges (23))'},
   {id:'dexlist',label:'홈 Linked Accounts 푸터 → 공통 선택기 All',figma:{pc:'28960:127381',mo:'28969:126953'}},
   {id:'all',label:'기존 연동 폼의 검색 팝오버 · All',figma:{pc:'28960:127381',mo:'28969:126953'}},
   {id:'uid',label:'UID 입력 화면에서 연 공통 선택기',figma:{pc:'28960:127381',mo:'28969:126953'}},
@@ -3330,15 +3525,12 @@ R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (�
   const mo=S.vp==='mo';
   if(st==='intro'){
    const body=`<p class="h6" style="margin:0">${T('Have you registered a trading account with the TetherMax referral code?')}</p><p class="b1 c2" style="margin:0">${T('You must link your account to receive USDT from TetherMax.','테더맥스에서 USDT를 받으려면 거래 계정 연동이 꼭 필요해요.')}</p>`;
-   return C.overlay('home.main',linkModal(body,`${C.btn(T('Yes, I have one!'),{full:true,go:'link.select:normal'})}${C.btn(T('No, not yet!'),{v:'outlined',c:'black',full:true})}${signUp()}`));
+   return C.overlay('home.main',linkModal(body,`${C.btn(T('Yes, I have one!'),{full:true,go:'link.select:normal'})}${C.btn(T('No, not yet!'),{v:'outlined',c:'black',full:true,go:'link.select:normal'})}${signUp()}`));
   }
+  if(st==='normal')return uidLinkForm('empty');   // 결정 12차: 연동 모달 첫 상태 = 첫 거래소(WOO X Pro) 기본 선택 — 실서비스와 같음
   if(mo){
    const origin={uid:'link.uid:empty',uidFilled:'link.uid:filled'}[st]||'link.addr:empty';
    return C.overlay(origin,moSheet(st==='all'?'normal':st,origin));
-  }
-  if(st==='normal'){ // Figma S3-2: 선택 전 기본 상태
-   const body=`<div class="col" style="gap:16px">${webExchangeField(null)}<p class="cap c2" style="margin:0">${T('Select the partner you trade on to see how to link your account.')}</p></div>`;
-   return C.overlay('home.main',linkModal(body,`${C.btn(T('Link Account','거래 계정 연동하기'),{full:true,disabled:true})}${signUp()}`));
   }
   return uidLinkForm(st==='uidFilled'?'filled':'empty',st==='all'?'normal':st);
  }});
@@ -3354,7 +3546,7 @@ function uidGuide(mo,d){
 
 function uidLinkForm(st,openPicker){
  const mo=S.vp==='mo',filled=st==='filled',fmtErr=st==='formatError';
- const d=WEB_CEX.includes(selectedExchange)||cexBy(selectedExchange)?selectedExchange:'Bitget';
+ const d=WEB_CEX.includes(selectedExchange)||cexBy(selectedExchange)?selectedExchange:WEB_CEX[0];   // 첫 상태 = 목록 첫 거래소 기본 선택(WOO X Pro, G-379 · 결정 12차)
  const sel=mo?`<button type="button" class="sel" style="border-color:var(--input-border);padding:16px 12px" data-go="link.select:${filled?'uidFilled':'uid'}">${webMark(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`:webExchangeField(d,openPicker);
  const field=C.field({label:null,value:filled?'1234567':fmtErr?'12345abc':null,ph:T('Enter your UID'),focus:filled,error:null});
  const reg=`<p class="b1 med" style="margin:0;text-align:center;padding:8px 0">${T('Don’t have an account yet?')} <a class="cb" style="cursor:pointer" data-go="auth.signup">${T('Register here')}</a></p>`;
@@ -3466,7 +3658,7 @@ R.screen({id:'link.captcha',group:'link',title:'캡차',route:'/link (모달)',f
  ],
  render(st){
   const mo=S.vp==='mo';
-  if(st==='success')return splash('success',T('Verification Success'),T('Verification is complete. We’re checking your referral.'),`${mo?C.btn(T('Close','닫기'),{full:true,go:'link.result:pending'}):C.btn(T('Back to Home'),{full:true,go:'home.main'})}${help()}`,{close:'link.addr:valid'});
+  if(st==='success')return splash('success',T('Verification Success'),T('Verification is complete. We’re checking your referral.'),`${C.btn(T('Back to Home'),{full:true,go:'home.main'})}${help()}`,{close:'home.main'});
   const layer=`<div style="position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;justify-content:center;align-items:flex-start;padding-top:${mo?213:152}px">${puzzle()}</div>`;
   if(st==='normal'){
    if(mo)return `<div style="position:relative;height:812px;overflow:hidden">${renderInner('link.addr:valid')}${layer}</div>`;
@@ -3830,7 +4022,7 @@ function calcCard(route,o={}){
  const range=route==='DEX'?['$1K','$250K']:route==='CEX'?['$10K','$500K']:['$10K','$20M'];
  const SLP=window.SITEH?SITEH.sliderPct(route):null;const slider=`<div class="col" style="gap:0"><div data-hub-slider="${route}" style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div data-sl-fill style="position:absolute;left:0;top:10px;width:${SLP==null?'44px':`calc((100% - 30px) * ${SLP} + 15px)`};height:6px;border-radius:100px;background:var(--blue)"></div><img data-sl-thumb src="${A('hub-slider-thumb.svg')}" alt="" style="position:absolute;left:${SLP==null?'33px':`calc((100% - 30px) * ${SLP})`};top:-1px;width:30px;height:30px"></div>
   <div class="row between cap c2"><span>${range[0]}</span><span>${range[1]}</span></div></div>`;
- const inputs=`<div class="row" style="gap:24px;align-items:flex-start;${mo()?'flex-direction:column;align-items:stretch':''}">${partnerSel(p)}<div class="col" style="gap:8px;flex:1"><span class="sub2 c2">Monthly trading volume</span>${window.SITEH?`<input data-hub-vol class="h5 hub-vol" inputmode="numeric" aria-label="Monthly trading volume" value="${usd0(HB_VOL)}"${route==='Brokers'?' readonly':''}>`:`<span class="h5">${usd0(HB_VOL)}</span>`}</div></div>`;
+ const inputs=`<div class="row" style="gap:24px;align-items:flex-start;${mo()?'flex-direction:column;align-items:stretch':''}">${partnerSel(p)}<div class="col" style="gap:8px;flex:1"><span class="sub2 c2">Monthly trading volume</span><span class="h5" data-hub-vol aria-live="polite">${usd0(HB_VOL)}</span></div></div>`;
  let body;
  if(o.rateFail){
   body=`<div class="col" style="gap:12px;padding:24px 0;align-items:center;text-align:center"><span class="h6">Estimate unavailable</span>${C.btn('Try again',{v:'outlined',c:'primary',size:'md'})}</div>`;
@@ -3952,7 +4144,7 @@ function compare(chip,c){
  const top=list.reduce((m,p)=>m==null||est(p)>est(m)?p:m,null);
  const chips=[['CEX',mo()?'CEX':'Centralised Exchanges','cex'],['DEX',mo()?'DEX':'Decentralised Exchanges','normal'],['Brokers','Brokers','brokers']].map(([k,l,s])=>`<span class="chip" style="border:0;height:auto;padding:${mo()?'7px 10px':'4px 10px'};border-radius:100px;line-height:18px;${k===chip?'background:var(--blue);color:#fff':'background:var(--action-selected)'}" data-hub-tab="${k}">${l}</span>`).join('');
  const view=c==='cards'?'card':'table';
- const toggle=mo()?`<img src="${A('hub-ic-list.svg')}" alt="" style="width:24px;height:24px;margin:0 6px">`:`<div class="row" style="border:1px solid var(--divider);border-radius:8px;padding:2px;gap:0">${[['table','hub-ic-list.svg','normal'],['card','hub-ic-grid.svg','cards']].map(([k,i,s])=>`<span style="width:36px;height:36px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;${k===view?'background:var(--divider)':''}" data-hub-view="${k}"><img src="${A(i)}" alt="" style="width:20px;height:20px"></span>`).join('')}</div>`;
+ const toggle=mo()?'':`<div class="row" style="border:1px solid var(--divider);border-radius:8px;padding:2px;gap:0">${[['table','hub-ic-list.svg','normal'],['card','hub-ic-grid.svg','cards']].map(([k,i,s])=>`<span style="width:36px;height:36px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;${k===view?'background:var(--divider)':''}" data-hub-view="${k}"><img src="${A(i)}" alt="" style="width:20px;height:20px"></span>`).join('')}</div>`;
  const es=c==='emptySearch';
  const search=`<div class="row" style="gap:12px"><div class="row grow" data-hub-sbox style="border:${es?'2px solid var(--blue)':'1px solid var(--input-border)'};border-radius:4px;padding:${es?'7px 11px':'8px 12px'};gap:8px;background:#fff"><img src="${A('hub-ic-search.svg')}" alt="" style="width:24px;height:24px">${window.SITEH?`<input data-hub-search class="b2 grow hub-search" placeholder="${ph}" aria-label="${ph}"><span data-hub-clear title="Clear" style="cursor:pointer;display:none">${ic('close')}</span>`:`<span class="b2 grow ${es?'':'c3'}" style="line-height:20px">${es?'Hyperliquid':ph}</span>${es?`<span title="Clear" style="cursor:pointer;display:inline-flex">${ic('close')}</span>`:''}`}</div>${toggle}</div>`;
  const go=p=>chip==='DEX'?`dex.detail:${p.id}`:chip==='CEX'?'cexd:'+p.id:'';
@@ -3972,7 +4164,7 @@ function compare(chip,c){
  }else if(view==='card'){
   const card=p=>`<div class="col" data-m-lift data-hub-row="${esc(p.name)}" style="background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
    <div class="row" style="align-items:center;gap:16px"><div class="col" style="gap:6px"><div class="row" style="gap:16px"><span class="row" style="gap:8px">${plogo(p,24)}<span style="font-size:20px;line-height:1.6;font-weight:700;letter-spacing:.15px">${esc(p.name)}</span></span>${hp(p)}</div>
-    <span class="row" style="gap:4px"><span class="b1 semi cb">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span><img src="${A('hub-ic-info16.svg')}" alt="" style="width:16px;height:16px"></span></div><span class="grow"></span>${C.btn(`Join ${esc(p.name)}`,{go:go(p)})}</div>
+    <span class="row" style="gap:4px"><span class="b1 semi cb">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span></span></div><span class="grow"></span>${C.btn(`Join ${esc(p.name)}`,{go:go(p)})}</div>
    <div style="height:1px;background:var(--divider)"></div>
    <div class="row between b2"><span class="row" style="gap:6px"><span class="c2">${brk?'Commission':'Final Taker'}</span><b class="semi">${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span class="row" style="gap:6px"><span class="c2">${brk?'Discounted':'Final Maker'}</span><b class="semi">${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div></div>`;
   body=`<div class="col" style="gap:16px">${list.map(card).join('')}</div>`+
@@ -5129,10 +5321,10 @@ function siteGo(key) {
   if (id.startsWith('cexd')) { const s = CEX_SLUG[st] || st; return navReal('/en/exchangeDetail/' + s + '-referral') }
   if (id === 'tp.main') return navReal(isMember() ? '/en/tethermax-point' : '/en/tethermax-point-introduction');
   if (id === 'invite.main') return navReal(isMember() ? '/en/mypage/invitefriend/invitefriend' : '/en/login');
-  if (id === 'support.main') return toast('Live Chat (프로토타입)');
+  if (id === 'support.main') return window.ptSupport ? ptSupport() : toast('Live Chat');
   if (id === 'my.main') return toast('마이 페이지는 실사이트 상단 프로필 메뉴 (프로토타입)');
   if (id === 'cmn.header') return toast('알림 (프로토타입)');
-  if (id === 'partner.apply') return toast('「Affiliate Partner Inquiry」 처리됨 (프로토타입)');
+  if (id === 'partner.apply') return window.open('https://tally.so/r/obEp4N', '_blank', 'noopener');
   if (id === 'cmn.drawer') return openDrawer();
   if (REAL[id]) { closeLayer(true); return navReal(REAL[id]) }
   if (NEXT[id]) return toast(NEXT[id] + ' — 다음 회차에 연결');
@@ -5242,19 +5434,7 @@ function hubEnhance() {
 }
 function bindRight() {
   const box = $('[data-hub-right]'); if (!box) return;
-  const vol = $('[data-hub-vol]', box);
-  if (vol && !vol.readOnly) {
-    vol.addEventListener('focus', () => setTimeout(() => vol.select(), 0));
-    vol.addEventListener('input', () => {
-      const n = parseInt(vol.value.replace(/[^\d]/g, ''), 10) || 0;
-      const pos = vol.selectionStart, before = vol.value.length;
-      vol.value = '$' + n.toLocaleString('en-US');
-      const d = vol.value.length - before; try { vol.setSelectionRange(pos + d, pos + d) } catch (e) { }
-      H.vol[H.route] = n; updateCalc({ fromInput: true });
-    });
-    vol.addEventListener('blur', () => { const [a, b] = RANGE[H.route]; const n = Math.max(a, Math.min(b, H.vol[H.route])); if (n !== H.vol[H.route]) { H.vol[H.route] = n; updateCalc() } vol.value = '$' + n.toLocaleString('en-US') });
-    vol.addEventListener('keydown', e => { if (e.key === 'Enter') vol.blur() });
-  }
+  // 월 거래량 값 = 표시 전용(슬라이더로만 조정 — 🔴 #26 권장 A)
   // 거래량 슬라이더 — 공통 UI.slider(손잡이 SVG 30px 안의 원 중심 = (15,14))
   const sl = $('[data-hub-slider]', box);
   if (sl && sl.dataset.hubSlider !== 'Brokers') {
@@ -5288,7 +5468,7 @@ function updateCalc(o = {}) {
   const sl = $('[data-hub-slider]', box);
   if (sl && sl._ui && sl._ui.value !== H.vol[r]) sl._ui.set(H.vol[r]);
   const vol = $('[data-hub-vol]', box);
-  if (vol && document.activeElement !== vol) vol.value = '$' + H.vol[r].toLocaleString('en-US');
+  if (vol) vol.textContent = '$' + H.vol[r].toLocaleString('en-US');
   // 비교표 Est. monthly cashback · 부제
   const ct = document.createElement('div'); ct.innerHTML = HUBX.compare(r, H.view === 'card' ? 'cards' : 'normal');
   const sub = $('[data-compare-sub]'), nsub = $('[data-compare-sub]', ct); if (sub && nsub) sub.innerHTML = nsub.innerHTML;
@@ -5430,7 +5610,7 @@ const BASE_ADDR = '0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9';
 function openLink(o = {}) {
   if (!isMember()) { toast('로그인이 필요해요 — 로그인 화면으로 이동'); return setTimeout(() => { closeLayer(true); navReal('/en/login') }, 600) }
   Object.assign(L, { open: true, err: null, touched: false, busy: false, prev: null, result: null, onClose: null });
-  if (o.ex) setExchange(o.ex, o.type); else { L.step = 'select'; L.ex = null }
+  setExchange(o.ex || 'WOO X Pro', o.ex ? o.type : 'CEX');   // 첫 상태 = 목록 첫 거래소 기본 선택(G-379 · 결정 12차)
   renderLayer({ enter: true });
 }
 window.openLink = openLink;
@@ -5731,7 +5911,7 @@ if (MODAL) {
   document.body.classList.toggle('vp-mo', S.vp === 'mo');
   if (Q.get('mode') && window.SITE2) SITE2.modal(Q.get('mode'), Object.fromEntries(Q));
   else openLink({ ex: Q.get('ex') || null, type: Q.get('type') || null });
-} else renderPage();
+} else { renderPage(); if (route.q.link === '1') { const q = Object.assign({}, route.q); delete q.link; route.q = q; history.replaceState(null, '', '#' + hashOf(route)); if (isMember()) openLink(); else navReal('/en/login') } }   // 목록판 「실제 동작」에서 연동 모달 바로 열기
 post({ dexReady: hashOf(route) });
 });
 })();

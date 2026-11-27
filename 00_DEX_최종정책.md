@@ -373,6 +373,14 @@ API-007 · API-109 · API-115 · JOB-D05 · JOB-D07 · JOB-D10은 이 표를 기
 | 게스트 | 신청 불가(회원 기능) |
 | 분석 이벤트 | dexw38~41 구현 (부록 F-3) |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 모바일 소유권 제목 줄 ToggleButtonGroup | 두지 않는다(가이드 이동은 가이드 카드 안 이전/다음 화살표) | REQ-725 |
+| O16 닫기 X | 모달을 닫는다(기존 MAX-561 모달 구성) | REQ-729 |
+| O16 `Apply for Ownership` | 소유권 인증 화면으로 이동한다(재신청, 쿨다운 적용, 기존 동작) | REQ-729 |
+
 ---
 
 # 6. 출금 정책
@@ -497,13 +505,32 @@ API-007 · API-109 · API-115 · JOB-D05 · JOB-D07 · JOB-D10은 이 표를 기
 | 상태 우선순위 | 기존 UID 7단계 그대로 — `소유 확인중`1 · `연동 시도중`2 · `이슈`3 · `연동 완료`4 · `연동 실패`5 · `소유 확인 실패`6 · `연동 해제`7. DEX도 소유권 계열(1·6·7 중 소유권 원인)이 같은 규칙으로 발생(5-10) |
 | 상태 표시 | 칩 없이 기존 홈 행 디자인(행 상태 점 + 행 아래 배너, 이슈는 행 탭 → 모달). 캐시백 0은 `0.00 USDT`만(0원 칩·배너 없음). 자동 연동 실패는 목록에 표시하지 않고 수동 연동 실패만 표시. `Data delayed`·`Inactive` 칩 없음 — 오프보딩 계정은 이슈 처리(사용자 2026-11-27). 문구는 REQ-273·문구표 |
 | 상태 겹침 | 데이터 지연 + 로드 실패 등 동시 발생 규칙 (G-060 확정: UID 7단계와 같은 정수 priority로 확장(데이터 지연·로드 실패를 그 뒤 번호로)) |
-| 11개 이상 | `더보기` 전까지 10개 |
+| 11개 이상 | `더보기`(`Show More`, 문구표 #14) 전까지 10개 |
 | 미연동 상태 | **모든 거래소(CEX·DEX)에 연동 계정이 없을 때만.** DEX만 연동한 회원을 미연동으로 분류하지 않음 |
 | 데이터 지연 | **사용자 화면에 반영 지연을 표시하지 않음**(지연 문구·`Last updated` 지연 표시·`Data delayed` 칩 없음 — 실서비스에 없는 표시). 확정 잔액·내역은 마지막 값으로 유지, 기존 잔액 자동 지급 막지 않음. 지연 감지(운영 알림·어드민 `Degraded`) 조건 = DEX 원장이 **예정 시각 + 임계값( G-348 확정: 예상 도착 + 2시간 — ApeX 2시간 · EdgeX 03:00 UTC · Aster 11:00 UTC(G-036 따라 조정) · Lighter 일일 원장(G-428) — 도착 시각 회신 후 같은 규칙 · 공통 24시간)** 까지 미도착. 홈 총액은 모든 적립액 합 하나 (부록 F-2-4) |
 | 캐시백 타임라인 | 거래 시작·마감·업데이트 시각을 거래소 설정 기준 로컬 타임으로 |
 | 마일스톤 진행바 | ⛔ 없음 |
-| 계정 상세 | V2 구성(잔액 카드 · 캐시백 타임라인 · 주간 내역). DEX 적립 내역 포함. 별도 계정 목록·지갑 관리 버튼 없음 |
+| 계정 상세 | 기존 UID 상세 디자인 구성(잔액 카드 · 캐시백 타임라인, `Weekly Cashback History`·마일스톤 블록 없음 — B-3-4). 별도 계정 목록·지갑 관리 버튼 없음 |
 | 3 USDT 체크리스트 배지 | DEX 첫 연동 경로에서는 획득 안내 제거 (5-9) |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| My Page 닫기 X | 패널을 닫고 홈을 보인다(기존 동작) | REQ-284 |
+| `Member ID` 복사 | 회원 ID를 복사하고 `Copied.`를 보인다(기존 동작) | REQ-284 |
+| My Page `Cashback Summary` | `/rewardHistory`로 이동한다(기존 동작) | REQ-284 |
+| My Page `Partners Hub` | 파트너 허브로 이동한다(기존 동작) | REQ-284 |
+| My Page `My Coupons` | `/coupon`으로 이동한다(기존 동작) | REQ-284 |
+| My Page `Account Security` | 계정 보안 화면으로 이동한다(기존 동작) | REQ-284 |
+| My Page `Notification Settings` | 알림 설정으로 이동한다(기존 동작) | REQ-284 |
+| My Page `Log Out` | 로그아웃 후 비로그인 랜딩을 보인다(기존 동작) | REQ-284 |
+| `Exclusive For Members` `See All` | 혜택 목록 `/benefits`로 이동한다(홈 담당 기획 확인 대상, REQ-284) | REQ-284 |
+| `Exclusive For Members` 카드(웹 `Join Now`·모바일 카드) | 그 혜택 상세로 이동하며 웹·모바일이 같다 | REQ-284 |
+| `Limited Time Offers` `See All` | `/events`로 이동한다(기존 동작) | REQ-284 |
+| `Limited Time Offers` 카드 `Join Now` | 그 이벤트 외부 링크를 새 탭으로 연다(기존 동작) | REQ-284 |
+| 홈 `Top Partner Exchanges` `See All` | 허브 CEX 탭(기존 거래소 목록 자리, 결정 Q7)으로 이동한다 | REQ-284 |
+| 홈 `Top Partner Exchanges` 거래소 카드 | 그 거래소 상세로 이동한다(기존 동작) | REQ-284 |
 
 ## 8-2. 게스트 홈 · 서비스 소개
 
@@ -591,6 +618,12 @@ API-007 · API-109 · API-115 · JOB-D05 · JOB-D07 · JOB-D10은 이 표를 기
 | `Unable to Link Wallet Yet` | CEX 전용 다이얼로그인데 `wallet`으로 적힌 카피 → 5-6의 중립 문구로 통일 |
 | 레퍼럴 아님 다이얼로그 제목 | MAXOP-751과 같은 `Unable to Link Account` |
 | 지갑 주소 찾기 | UID 찾기 대신 **지갑 주소 찾기** 안내 |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 진입 질문 `No, not yet!` | 현행 `?page=2` 거래소 선택(가입할 거래소 + 배지)으로 간다 | REQ-712 |
 
 ## 8-7. 출금 (회원)
 
@@ -792,6 +825,17 @@ STG(`www-dev.tethermax.io`, 2026-11-16, 게스트·회원 · PC·390) 순회에�
 | 거래소 배지 (어드민 입력) | `/uidlinking?page=2` 영문 화면에 한국어 배지 `최상위 거래소` · `신규 제휴` · `추천 거래소` · **`최대 페이백`** | 배지를 언어별로 입력(영문 화면 영문) · `페이백` → `캐시백`(3-1). DEX 배지 입력에도 같은 규칙 | S-18 |
 | 웹에서 홈으로 돌려보내는 경로 | `/benefit/*` · `/global-league/*` · `/campaign/*` · `/mypage/rank*` · `/draw` · `/paybackBoost` (회원·게스트 모두) | **웹에도 있어야 함** — 7장·8장의 웹 화면 변경 범위에 포함. STG에서 홈으로 돌아가는 현상은 개발 확인(G-422) | S-16 |
 | 캐시백 요약 유형 필터 `/rewardHistory` | 현행 유형값 `Trading Cashback` · `Event Reward` · `Claim Amount` | 출금 유형은 `Claim` 용어 결정(G-418)에 따라 현행 `Claim Amount` 유지. `Trading Cashback` → `Exchange Cashback` 개명은 G-365 확정: `Exchange Cashback`으로 통일(요약 유형값 `Trading Cashback`도 개명) 결정 전까지 현행값 | S-17 |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 이용약관·개인정보처리방침 모바일 `Close` | 닫고 직전 화면으로 돌아간다(가입 화면에서 연 약관 모달과 같음) | REQ-718 |
+| 홈 FAQ 질문 | 펼침/접힘이며 한 번에 하나만 펼친다(약 0.3초, 기존 동작) | REQ-711 |
+| Cashback Basics 브레드크럼 `Beginner's Guide` | 모듈 목록으로 이동한다(기존 동작) | REQ-714 |
+| Cashback Basics `Share` | 기존 가이드 `Share` 동작 그대로다 | REQ-714 |
+| Cashback Basics 목차 항목 | 해당 섹션으로 부드럽게 스크롤한다(기존 동작) | REQ-714 |
+| Cashback Basics 하단 버튼 | 두지 않는다(실서비스 그대로 — 하단 `Back`·`Take the Quiz` 없음, 이 모듈은 퀴즈 없음) | REQ-714 |
 
 ---
 
@@ -1504,9 +1548,16 @@ Aster는 회원별 테더맥스 커미션 필드를 요청한 적이 없음(트�
 | `hub` | 공통 | 허브에서 진입 | **해당 거래소가 미리 선택**된 채 |
 
 - 형태: **웹 = 꽉 찬(전체 화면) 모달**(현행 프로덕트 `/uidlinking`, 디자인의 화면 일부 모달은 수정 대상 — G-423), **앱·모바일웹 = `Select an exchange` 바텀시트 → 전체 화면 Link Account 화면**(`Next`). 안내가 화면보다 길면 세로 스크롤, `Next`는 항상 닿아야 함. 캡차·성공·실패 다이얼로그는 웹과 같음.
-- 모든 상태에 `Don't have an account yet? Sign up here` → 선택한 거래소의 테더맥스 레퍼럴 가입 경로를 **새 탭**으로(귀속 서비스 경유). 기존 국문 `아직 계정이 없으신가요? 여기서 가입하세요`.
+- 모든 상태에 `Don't have an account yet? Register here`(실서비스 원문) → 선택한 거래소의 테더맥스 레퍼럴 가입 경로를 중간 안내(`Start by signing up for {DEX}?` 등) 없이 바로 **새 탭**으로(귀속 서비스 경유, 사용자 2026-11-27). 국문 `아직 계정이 없으신가요? 여기서 가입하세요`(국문 언어팩 확인).
 - 기존 실물 모달 국문: 제목 `거래소 UID 연동하기`(중립어 교체 ❓) · 검색 `거래소 검색` · `인기 제휴 거래소` · 버튼 `다음`(미선택 시 비활성).
 - **기본 선택(현행 그대로)**: 백엔드 목록의 첫 거래소가 기본 선택되고, 새로고침하면 첫 거래소로 돌아감(MAX-30 QA1·155·157). 같은 연동 화면이라 DEX도 같은 규칙(G-379).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 연동 모달 거래소 드롭다운 | 미선택(`Select a partner`) 상태가 없고, 진입점이 거래소를 정하지 않으면 목록 첫 거래소(STG `WOO X Pro`)가 기본 선택된 채 열린다(G-379) | REQ-051 |
+| `Don’t have an account yet? Register here` | 화면에 선택된 거래소(기본 = 목록 첫 거래소)의 테더맥스 레퍼럴 가입을 귀속 서비스 경유 새 탭으로 연다 | REQ-053 |
 
 근거: 13.txt LW-1·LW-9 · 10.txt LK-2 · 08.txt dexw30·35·49 · 화면_수정_필요_목록 1196-1206 · MAX-30 p15 QA1, p33 QA155·157
 
@@ -1523,7 +1574,7 @@ Aster는 회원별 테더맥스 커미션 필드를 요청한 적이 없음(트�
 | 행 | 마크 + 이름 + 선택 표시 | 기존 모바일 행/타일 구조 |
 | `DEX` 배지 | 그룹 헤더 없는 `All` 목록 행에만 DEX 항목에 (본문 P5) | 같음 |
 
-- 검색은 **선택된 칩 안에서** 입력하는 대로 필터. 상태 3종: 결과 1건 · 여러 건 · `No results found`(아무것도 선택 안 됨).
+- 검색은 **선택된 칩 안에서** 입력하는 대로 필터. 상태 3종: 결과 1건 · 여러 건 · `No results found for {검색어}`(아무것도 선택 안 됨).
 - 선택된 파트너는 타일·목록에서 하이라이트, 다시 열어도 유지. 선택하면 선택기가 닫히고 CEX = UID 경로, DEX = 지갑 경로.
 - **유형을 바꾸면 입력값 초기화**: CEX/DEX를 고르고 값을 입력한 뒤 유형을 바꾸면 입력한 UID·지갑 주소를 지우고 넘기지 않음. 선택지는 레코드의 `Exchange Type`에서 만듦.
 - 파트너 목록 로드 실패: 모달 안에서 오류 + `Retry`, `Popular partners`는 빈 타일 대신 숨김 ( G-097 확정: 캐시된 목록 우선(기존 CEX 동작 유지), 캐시도 없을 때만 오류 + `Retry`, `Popular partners` 숨김). 기존 CEX 규칙은 목록 API 실패 시 **캐시된 거래소 목록**, `update_time` 누락 시 **캐시된 `update_time`** 사용(MAX-30 QA137·138). 같은 선택기를 쓰므로 오류 + `Retry`로 바꾸면 CEX 동작도 바뀜(본문 P9) — 캐시 우선, 캐시도 없을 때만 오류 + `Retry`로 둘지 .
@@ -1600,6 +1651,12 @@ Aster는 회원별 테더맥스 커미션 필드를 요청한 적이 없음(트�
 | 시도 한도 | 반복 실패·반복 제출에는 별도 시도 횟수 한도를 두지 않는다(G-063). |
 | 실패 후 | 주소는 유지하고 캡차에 다시 도전할 수 있다. |
 | 기존 CEX | 시도 횟수 제한 없음(캡차만). DEX도 시도 횟수 제한 없음(G-063). 캡차 표시는 백엔드가 판단 — auto-link가 허용되면 캡차 없이 바로 검증(MAX-30 QA75·78·79). DEX에도 같은 판단을 둘지 ❓ (본문 5-1) |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 캡차 위젯 닫기(×)·새로고침(↻) | 닫기는 퍼즐을 닫고 주소 입력 폼으로 돌아가 주소를 유지하며(연동 시도 없음, `Next` 다시 가능), 새로고침은 새 퍼즐을 낸다(기존 CEX GEETEST 위젯) | REQ-072 |
 
 근거: 13.txt LW-5 · 10.txt LK-3 · 09.txt EC-LNK-9~12 · 08.txt 1355-1362 · 기준선 403·408 · MAX-30 p23-24 QA75·78·79
 
@@ -1679,6 +1736,12 @@ Aster는 회원별 테더맥스 커미션 필드를 요청한 적이 없음(트�
 | 첫 연동 전환 | `Back to Home` → S4 홈(Total Cashback Balance + Withdraw, Linked Accounts 새 행, 푸터, 토스트). 체크리스트와 Cashback Preview는 더 이상 렌더 안 함. 앱·모바일웹은 잔액 카드 유지 + 체크리스트·Preview 자리를 Linked Accounts로 교체 |
 | S3에서 발생하는 결과 | 캡차 한도 · 기타 실패 · 레퍼럴 아님 · 타인 사용 중 · 확인 중 · 연동 전 잔액 출금 대기(연동 0개라 `Already Added`·한도 초과는 없음) |
 | 확인 중으로 끝난 첫 연동 | 홈을 S3로 둘지 S4로 바꿀지 ❓ (본문 8-1 「미연동 = 연동 계정이 전혀 없을 때」와의 관계) |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| `Verification Success` 화면 닫기 X | `Back to Home`과 같이 홈으로 간다(연동은 접수됐고 결과는 확정 시 알림) | REQ-094 |
 
 근거: 13.txt LW-7·LW-27·LW-28·LW-29 · 10.txt LK-3 · PRD분석 199-225 · 09.txt EC-LNK-30
 
@@ -1972,6 +2035,36 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 
 거래소 선택 후 CEX는 UID, DEX는 지갑 주소로 조회한다. 결과에서는 가입·로그인과 같은 계정 연동을 안내한다(본문 6-5).
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 푸터 Company `Claim Cashback` | PC·모바일 게스트 푸터 모두에 두고 `/{lang}/search` 비회원 조회로 이동한다 | REQ-175 |
+| 조회 입력칸 `?` 아이콘 | 기존 `What is UID?` 안내 팝업을 연다(기존 동작) | REQ-175 |
+| `No account? Join our partner exchange ⟶` | 허브 CEX 탭(기존 거래소 목록 `/affiliated` 자리, 결정 Q7)으로 이동한다 | REQ-175 |
+| 조회 하단 띠 `Email address` 입력 | 입력한 이메일을 가입 화면에 채운다(기존 동작) | REQ-175 |
+| 거래소 선택 닫기 X | 선택 없이 닫는다(기존 동작) | REQ-175 |
+| 거래소 선택 `Search for an exchange` | 입력대로 목록을 거르고 0건이면 `No results found for {검색어}`를 보인다 | REQ-175 |
+| 거래소 선택 CEX/DEX 필터 | 연동 선택기와 같은 `All`/`CEX`/`DEX` 칩으로 거른다(REQ-055·056 규칙) | REQ-175 |
+| 결과 `Top Partner Exchanges` `See All` | 허브 CEX 탭(기존 거래소 목록 자리)으로 이동한다 | REQ-179 |
+| 결과 Top Partner 타일 | 그 거래소 상세로 이동한다(기존 동작) | REQ-179 |
+| 결과 타일 › | 다음 타일로 넘긴다(기존 동작) | REQ-179 |
+| 결과 `Exclusive For Members` `See All` | 혜택 목록으로 이동한다(기존 동작) | REQ-179 |
+| 결과 혜택 카드 `Join Now`(PC)·카드(모바일) | 운영자 입력 링크를 새 탭으로 연다(기존 동작) | REQ-179 |
+| 모바일 진입 홈 히어로 `Email address` 입력 | 입력한 이메일을 가입 화면에 채운다(기존 동작) | REQ-175 |
+| 로그인 `Email`·`Password` | 포커스 시 라벨이 올라가고 벗어날 때 형식을 검사한다(`Enter a valid email address` · `8-16 characters.`, 기존 동작) | REQ-179 |
+| 로그인 비밀번호 눈 아이콘 | 보기/숨기기를 전환한다(기존 동작) | REQ-179 |
+| `Forgot Password?` | `/resetpassword`로 이동한다(기존 동작) | REQ-179 |
+| 로그인 `Continue` | 기존 이메일 인증 모달(`Email Verification` · `We've sent a code to {email}` · 6칸 코드 · `Paste` · `Verify` · `Resend code in 01:00`)을 거쳐 홈으로 가고, 게스트 조회에서 왔으면 같은 계정 연동 단계로 간다 | REQ-179 |
+| `Don’t have an account? Sign Up Now` | 회원가입으로 이동한다(기존 동작) | REQ-179 |
+| 가입 `Email`·`Password`·`Referral Code (optional)` | 비밀번호 규칙 2줄을 보이고 초대 코드는 4자 이상이다(기존 동작) | REQ-179 |
+| 초대 코드 미리 채움 | 초대 링크로 오면 초대 코드를 채운다(기존 동작) | REQ-179 |
+| 가입 비밀번호 눈 아이콘 | 보기/숨기기를 전환한다(기존 동작) | REQ-179 |
+| 약관 동의 체크박스 | 처음엔 체크돼 있고 해제하면 `Continue`가 비활성이다(기존 동작) | REQ-179 |
+| 동의 문장 `Terms of Use`·`Privacy Policy` | 약관 모달을 열고 `Close`로 닫는다(기존 동작) | REQ-179 |
+| 가입 `Continue` | `Email Verification` 모달을 거쳐 가입을 마치고, 게스트 조회에서 왔으면 같은 계정 연동 단계로 간다(FU-012) | REQ-179 |
+| `Already have an account? Log in`(PC)·`Log In`(모바일) | 로그인으로 이동한다(기존 동작) | REQ-179 |
+
 근거: 판정 H-34
 
 ---
@@ -2022,7 +2115,7 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 | G1 | 불러오기 실패 ≠ 0 | 값을 못 불러오면 오류 + `Try again`. `0.00` 표시 금지. 실제 0(정상 응답·캐시백 없음)일 때만 `0.00 USDT` + 0 상태 캡션 |
 | G2 | 지연 데이터는 마지막 값 유지 | 반영 지연 표시 없음. 비우거나 0으로 바꾸지 않음 |
 | G3 | 설정 없는 컨트롤은 렌더하지 않음 | 외부 경로 없는 파트너 → 외부 버튼 없음 · 상세 페이지 없는 거래소 → `Learn More` 없음 · 비활성 링크 대신 링크 없이 렌더 |
-| G4 | 비활성 컨트롤은 이유를 텍스트로 | 색만으로 표현 금지. 비활성 주요 버튼 옆에 활성 조건을 텍스트로(`Next`가 대표). 항상 비활성인 `Auto Claim`은 예외 — 안내 문구를 두지 않음(본문 6-1). 상태 점(dot)은 텍스트 병기 |
+| G4 | 비활성 컨트롤은 이유를 텍스트로 | 색만으로 표현 금지. 비활성 주요 버튼 옆에 활성 조건을 텍스트로(`Next`가 대표). 항상 비활성인 `Auto Claim`은 예외 — 안내 문구를 두지 않음(본문 6-1). 기존 화면을 그대로 쓰는 `/payback` 계산기 `Next`·`Check Results`와 소유권 인증 `Submit Claim`도 기존 화면처럼 조건 텍스트 없이 비활성(사용자 2026-11-27). 상태 점(dot)은 텍스트 병기 |
 | G5 | 서버가 클라이언트 검증을 반복 | 같은 사유 반환, 실패 시 아무것도 저장하지 않음 |
 | G6 | 입력 보존 | 다이얼로그 닫기·취소·제출 실패·재로그인 후에도 선택값·입력값·퀴즈 답 유지 (연동·퀴즈는 확정 사양, 그 외 기존 폼은 기존 동작 그대로 — G-351) |
 | G7 | 모든 제출은 멱등 | 더블 클릭·타임아웃 재시도 → 연동 1건 · 출금 요청 1건 · 쿠폰 적용 1건 · 퀴즈 완료 1건. 지갑 지급은 요청당 최대 1회(재시도해도). 출금·지급 재시도는 확정, 그 외는 ❓ 권고 |
@@ -2110,8 +2203,9 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 
 ### B-1-7 외부 경로 (어트리뷰션, `AT-1`·`AT-2`)
 
-- 모든 파트너 외부 링크는 하드코딩 링크가 아니라 **하나의 어트리뷰션 서비스**로 해석: 허브 계산기 버튼 · 라우트 블록·마크 · 비교표 `Join {partner}` · DEX venue 카드 · 상세 히어로·마지막 띠 · Link Account `Sign up here` · 앱 파트너 카드 · `/payback` `Start {platform} Cashback`.
+- 모든 파트너 외부 링크는 하드코딩 링크가 아니라 **하나의 어트리뷰션 서비스**로 해석: 라우트 블록·마크 · 비교표 `Join {partner}` · DEX venue 카드 · 상세 히어로·마지막 띠 · Link Account `Register here` · 앱 파트너 카드 · `/payback` `Start {platform} Cashback`.
 - 서비스가 **페이지·배치 위치를 식별하는 캠페인 파라미터**를 붙여 **새 탭**으로 엶. 사용자 식별자는 목적지 URL에 절대 붙이지 않음.
+- 허브 계산기 카드 `Learn More`는 외부 링크가 아니라 선택 파트너의 테더맥스 상세(현재 탭, B-5-2)로 감.
 - 경로 미설정 파트너 → 외부 버튼 자체를 렌더하지 않음(G3).
 - 외부 가입 목적지에 어트리뷰션 코드가 **미리 채워진 채** 도착하고 사용자가 확인 가능해야 함. 단계 가이드에 "DEX Referral 화면에서 코드 확인" 지시 필수.
 - 카드·오퍼 박스에 실행 동작이 하나도 없으면(경로 없음 + 상세 없음) 게시 차단 (❓ 권고).
@@ -2176,6 +2270,13 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 | 단계 | 기존 Earning Timeline 3단계 `Start Trading` · `Cut-off Time` · `Updated` 그대로(예 `[MAX-7]` 9193:119755). 새 4단계·캐러셀 없음. UID·지갑 연동 상세도 기존 디자인 (G-192) |
 | 경고 | `거래소별로 순차 지급하고 있어서 몇 분 더 걸릴 수 있어요.` |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 누적 캐시백 `View history` | 캐시백 요약(`/rewardHistory`)으로 이동한다(기존 동작) | REQ-283 |
+| 캐시백 타임라인 화면 형태 | 홈·지갑 상세 안의 섹션이라 별도 화면과 모바일 뒤로가 없다 | REQ-282 |
+
 근거: 부가서비스_DEX연동_가능여부_국문.md 2-2·2-3, 10.txt LK-7
 
 ### B-2-3 그 외 판정표 항목의 세부
@@ -2213,6 +2314,12 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 - 첫 연동이 `확인 중`(`manual_link_pending`)이면 S3인지 S4인지 ❓ — 원본 권고는 "S4 레이아웃 + 행을 확인 중으로". 본문 P8(없는 셈, 행은 보임)·8-1 미연동 정의와 함께 결정.
 - S2(게스트)는 캐시백을 조회할 수 있다. 지급은 인증 및 같은 계정 연동이 필요하다(6-5).
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 체크리스트 2 `Browse partners` › | 캐시백 허브(기본 탭)로 이동한다 | REQ-267 |
+
 근거: 13.txt LW-26·LW-28·LW-29, 10.txt LK-1·LK-5 (p.31~33), 화면_수정_필요_목록:716-718, 862
 
 ### B-3-2 `Linked Accounts` 패널 (S4)
@@ -2228,6 +2335,14 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 | 로딩 | 스켈레톤 행, 금액 미렌더 |
 | 지연 | 행은 마지막 적립 금액, 계정 페이지에 갱신 시각 |
 | Link Account 진입점 | `home_link_account`(홈 `+ Link Account`) · `empty_state` · `dex_detail` · `hub` · `checklist` |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| Linked Accounts 식별자 줄(축약 주소·UID) | 누르면 전체 값을 보이고(이동 없음), 그 밖의 행 영역을 누르면 상세로 이동한다 | REQ-271 |
+| 거래소 묶음 행(같은 CEX 여러 UID) | 연동 계정 목록 모달(`See All`)을 연다 | REQ-271 |
+| See All 모달 계정 행 | 홈 행과 같은 규칙으로 CEX는 계정 페이지, DEX는 지갑 상세로 가고 연동 완료가 아니면 진입하지 않는다 | REQ-271 |
 
 근거: 10.txt LK-1 (p.30~31), 13.txt RK-2, 08.txt dexw30·dexw49
 
@@ -2263,6 +2378,17 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 | Lighter | 하위 계정 `account_index`(`accountsByL1Address`)를 지갑 페이지 아래 나열할지 ❓ (행·페이지는 지갑당 1개) |
 | `Total Claimed` | LK-7 디자인에 있음(예 `40.00 USDT`). 유지(G-053) |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 리뷰 유도 `Write a review, get 2 USDT` | 지갑 상세 위에 기존 리뷰 작성 모달을 연다(DEX 상세로 이동하지 않음) | REQ-278 |
+| `Exclusive Benefit` `See All` | 혜택 목록 `/benefits`로 이동한다 | REQ-278 |
+| `Exclusive Benefit` 카드(웹 `Join Now`·모바일 카드) | 그 혜택 상세로 이동하며 웹·모바일이 같다 | REQ-278 |
+| 지갑 상세 `Top Partner Exchanges` `See All` | 허브 CEX 탭으로 이동한다(홈과 같음) | REQ-278 |
+| 지갑 상세 모바일 뒤로 | 이전 화면으로 돌아가고 이전 화면이 없으면 홈으로 간다 | REQ-276 |
+| 지갑 상세 잔액 조회 실패 | 기존 빈 상태로 두며 오류 Alert·`Try again`을 두지 않는다(G-459) | REQ-277 |
+
 근거: 10.txt LK-7·LK-9·LK-10 (p.35~44), 09.txt EC-DEX-15·17, 05.txt:1797-1812
 
 ### B-3-5 홈 상태 칩
@@ -2283,6 +2409,16 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 | 칩 색상 | 기존에 칩 명칭·색상 토큰 체계 없음 → DEX 칩 색상 신규 수립 ❓ |
 | 겹침 | 전역 우선순위 규칙은 기존에도 없음. 선례는 UID 홈 우선순위 1~7(정수 priority) 하나 → 같은 형식으로 확장(❓ 권고). 겹침 대상: 데이터 지연(H6) · 잔액 로드 실패(H7) · 연동 대기 |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 소유 확인 실패 배너 `View reason.` | 본인 신청이 거절된 행은 `Ownership Verification Unsuccessful`(REQ-728, `OK`)을, 연동 해제 행에서 낸 재청구가 거절된 행은 사유 다이얼로그(REQ-729, `Reason from review: {reason}` · `Remove Wallet` · `Apply for Ownership`)를 연다 | REQ-273 |
+| 수동 연동 실패 모달 `Remove UID`/`Remove Wallet` | 그 실패 행(연동 실패 기록)을 지우고 모달을 닫는다(기존 동작 — 연동 완료 계정의 해제가 아니므로 REQ-113과 별개) | REQ-273 |
+| 수동 연동 실패 모달 `UID Link`/`Link Wallet` | 그 거래소가 선택된 연동 모달(입력 비움)을 연다 | REQ-273 |
+| 수동 연동 실패 모달 닫기 X | 모달을 닫는다(기존 동작) | REQ-273 |
+| 이슈 모달 닫기 X | 모달을 닫는다(기존 동작) | REQ-273 |
+
 근거: 화면_수정_필요_목록:133-146·670-680·1732, 09.txt EC-BAL-5·6, EC-LNK-33, EC-PG-16, 기준선:177-201
 
 ---
@@ -2301,6 +2437,12 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 | 실패 사유 표시 | (본문 8-2, G-137 확정: 완료 건만(원본) — 실패 사유 미표시). 후보 = 가스 급등 · nonce · 체인 혼잡. Wallet B 잔액 부족은 실패가 아니라 지연(처리 중 유지, 본문 6-4)이라 후보 아님 |
 | 반영 | 출금 후 잔액 변화가 반영되는 화면에 포함: 홈 `Total Cashback Balance` · 글로벌 리그 · 실시간 출금 피드. 캐시백 랭킹은 기존 랭킹 로직 그대로 — 기존 규칙이 없으면 반영 안 함(랭킹은 그달 적립액 기준, G-184) |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 실시간 출금 피드 모바일 ← | 직전 화면으로 돌아간다(기존 동작) | REQ-285 |
+
 근거: 화면_수정_필요_목록:1275-1288, 09.txt EC-WD-13, 11.txt CH-13c
 
 ### B-4-2 테더맥스 랜딩 · 서비스 소개 · 프리로그인 랜딩
@@ -2309,6 +2451,38 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 - 프리로그인 랜딩 `Featured Exchanges`(`PLP-1`·`PLP-2`): 순위 자리마다 운영자가 고른 파트너 — **DEX도 고를 수 있고 고른 DEX가 그 순위 자리에 노출.** 모듈 라벨 `Exchange` 유지.
 - 프리로그인 랜딩 `Hero Exchange`(`PLP-3~5`): 히어로가 고른 DEX를 운영자 입력 `Promo Tagline`·`CTA Button Title`(EN·KO)로 표시.
 - 서비스 소개 로고 띠·수수료 비교표는 국가 노출 제어 `EX-11` 대상(B-2-1).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 히어로 `Email address` 입력 | 입력한 이메일을 가입 화면 이메일 칸에 채워 검증한다(기존 동작) | REQ-288 |
+| Hero 카드 CTA(운영자 입력 `CTA Button Title`) | Hero 거래소 상세로 이동한다(CEX = 거래소 상세, DEX = DEX 상세) | REQ-288 |
+| `View live payouts` | Telegram 지급 채널 `t.me/TetherMax_Cashback`을 새 탭으로 연다(기존 동작) | REQ-288 |
+| 3단계(`Sign up with our code`·`Link your exchange account`·`Get cashback…`) | 누른 단계를 보이고 3초마다 자동으로 넘긴다(기존 동작) | REQ-288 |
+| `Get Started`(Learn and earn) | `/beginner-guide`로 이동한다(기존 동작) | REQ-288 |
+| `Exchange Events` `See All` | `/events`로 이동한다(기존 동작) | REQ-288 |
+| 이벤트 카드 `Join Now` | 그 이벤트 외부 URL을 새 탭으로 연다(기존 동작) | REQ-288 |
+| 이벤트 줄 › | 다음 카드로 넘긴다(기존 동작) | REQ-288 |
+| `More ways to earn` `See All` | 혜택 목록으로 이동한다(기존 동작) | REQ-288 |
+| 혜택 카드 `Join Now` | 운영자가 입력한 링크를 새 탭으로 연다(기존 동작) | REQ-288 |
+| 랜딩 FAQ 질문 | 펼침/접힘이며 한 번에 하나만 펼친다(약 0.3초, 기존 동작) | REQ-288 |
+| `Cashback Trend` 차트 hover | 커서 위치 날짜에 세로선과 그날 캐시백 툴팁(요일 · `Cashback {금액} USDT`)을 보인다 | REQ-288 |
+| 서비스 소개 히어로 아래 화살표 | 다음 섹션으로 스크롤한다(기존 동작) | REQ-287 |
+| `Why traders never leave` 슬라이드 점 | 그 슬라이드로 이동한다(기존 동작) | REQ-287 |
+| `Three steps` 폰 슬라이드 점 | 그 슬라이드로 이동한다(기존 동작) | REQ-287 |
+| 부스트 거래소 행 | 그 거래소 상세로 이동하고, 부스트 거래소가 없으면 섹션을 숨긴다(기존 동작) | REQ-287 |
+| 계산기 `Trade Frequency ▾` | 거래 빈도를 고른다(기존 홈 계산기 동작) | REQ-287 |
+| 슬라이더 `Leverage`·`Account Balance`·`Maker / Taker Ratio` | 끌기·클릭으로 값을 바꾸고 값을 표시한다(기존 동작) | REQ-287 |
+| 계산 버튼 | 라벨은 PC·모바일 모두 `Calculate`이고 누르면 계산 결과를 표시한다(기존 동작) | REQ-287 |
+| 혜택 카드 `Get extra cashback` | 운영자 입력 링크를 새 탭으로 연다(기존 동작) | REQ-287 |
+| 서비스 소개 이벤트 카드 `Join Now` | 그 이벤트 외부 URL로 이동한다(기존 동작) | REQ-287 |
+| `Contact for Partnership` → | Tally 제휴 문의 폼을 새 탭으로 연다(기존 동작) | REQ-287 |
+| 크리에이터 카드 플랫폼 아이콘 | 설정된 URL을 새 탭으로 열고 URL이 없으면 비활성이다(기존 동작) | REQ-287 |
+| 리뷰 띠 | 드래그로 넘기고 열 단위로 맞춘다(기존 동작) | REQ-287 |
+| `Report it` | Zendesk를 연다(기존 동작) | REQ-287 |
+| 앱 다운로드 | 모바일은 스토어 버튼, PC는 QR이다(기존 동작) | REQ-287 |
+| 서비스 소개 모바일 ← | 직전 화면으로 돌아간다(기존 동작) | REQ-287 |
 
 근거: 08.txt:135~136, 05.txt:4-125
 
@@ -2351,6 +2525,12 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 - 국문: `테더맥스 잔액으로 적립돼요` / 출금 안내 `출금 신청 시 연동한 지갑으로 보내드려요` — 자동 지급과 맞지 않아 문구 재작성 필요 (G-419 확정: ①②③ 모두 진행 — 문구표에서 확정).
 - 로그인 상태 계산기 줄 `Paid to your TetherMax balance    Minimum 10 USDT` — `10`은 서버값.
 - 탭 전환: 파트너 셀렉트가 그 라우트 파트너로 바뀌고 기본 파트너 선택 · 슬라이더 라벨/범위 교체 · 전 수치 재계산. 파트너 변경·슬라이더 정착 시 **네트워크 호출 없이** 재계산.
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| `Monthly trading volume` 값 | 표시 전용이며 슬라이더로만 조정한다(입력칸 없음) | REQ-292 |
 
 근거: 11.txt CH-4 (p.6~7), 백오피스관리_vs_하드코딩:108-130, _프로토타입_검토/검토결과_20261023.md:89, 화면_수정_필요_목록:1592-1596
 
@@ -2445,7 +2625,7 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 요소 | 원문·규칙 |
 |---|---|
 | 섹션 머리 (RT-1) | 제목 `Pick where you trade`(좌) · 설명 `Every route pays back a share of your trading fees. Open one to see its partners and rates.`(우, 같은 줄). 모바일은 설명이 제목 아래 |
-| 목록 (RT-2) | 점선 구분 3행. 순서 `Decentralised exchanges` → `Centralised exchanges` → `Brokers`(모든 허브 상태·모든 카드 라우트에서 고정). 행 = 3D 아이콘(`Swap`·`Stack`·`Chart`) · 라우트명 + 한 줄 설명 · `PARTNERS` 로고 + 캡션 · `UP TO` 최고 요율 + 캡션 · 둥근 화살표 버튼. hover = 회색 채움 + 화살표 파란 원. 행/화살표 선택 → **현재 탭** 이동: DEX → DEX 랜딩, CEX → Exchange Listings Page, Brokers → Brokers 페이지. 모바일 = 아이콘·이름 / 파트너 / 요율 순으로 쌓음 |
+| 목록 (RT-2) | 점선 구분 3행. 순서 `Decentralised exchanges` → `Centralised exchanges` → `Brokers`(모든 허브 상태·모든 카드 라우트에서 고정). 행 = 3D 아이콘(`Swap`·`Stack`·`Chart`) · 라우트명 + 한 줄 설명 · `PARTNERS` 로고 + 캡션 · `UP TO` 최고 요율 + 캡션 · 둥근 화살표 버튼. hover = 회색 채움 + 화살표 파란 원. 행/화살표 선택 → **현재 탭** 이동: DEX → DEX 랜딩, CEX → 허브 CEX 탭(별도 목록 페이지 없음, B-21-5), Brokers → Brokers 페이지. 모바일 = 아이콘·이름 / 파트너 / 요율 순으로 쌓음 |
 | 목록 주석 | `"Up to" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.` |
 | DEX 행 (RT-4) | `Decentralised exchanges` / `For traders who keep their own keys` / 로고 Lighter·ApeX·EdgeX·Aster(레코드) / 세 번째 줄 = CEX와 같은 지급 조건 문구(본문 8-3), 원본 캡션 `Paste your wallet, never connect`는 자리 이동 / `UP TO {n}%` + `trading fee cashback` |
 | CEX 행 (RT-3) | `Centralised exchanges` / `For futures traders on exchanges` / 로고 두 줄 / `Paid daily, withdraw from 10 USDT`(10 서버값) / `UP TO {n}%` + `futures cashback` |
@@ -2480,10 +2660,10 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 열 | `#` · `Exchange`(DEX 칩에서는 `DEX`) · `Cashback` · `Final Taker` · `Final Maker`(캐시백 후 수수료) · `Est. monthly cashback` · `Rating` |
 | 정렬 | `#` 제외 전 열 정렬, 같은 헤더 재선택 시 역순 |
 | Rating | `4.2 (23)` 형식. **리뷰 20개 미만 `-`**, 카드 뷰는 평점 생략(0 표시 아님). 거래소 목록(LS-2)과 같은 규칙·같은 값. 현재 값 있는 곳 Bitget `4.2 (23)` · OKX `4.6 (41)` · Gate `3.9 (27)` |
-| 행 끝 | `Join {partner}` 또는 모바일 거래소 카드 → 해당 거래소의 테더맥스 상세로 직접 이동 |
+| 행 끝 | `Join {partner}` → 그 거래소의 테더맥스 레퍼럴 가입(귀속 서비스 경유 새 탭, B-1-7) |
 | 배지 | Est. monthly cashback 최고 파트너에 `Highest payout` — 선정 기준(필터별/전체) ❓ |
 | 재계산 | 계산기 값 변경 시 전 행 재계산 |
-| 모바일 | 행이 카드, 카드 끝 전폭 `Join {partner}` |
+| 모바일 | 행이 카드, 카드 끝 전폭 `Join {partner}`(같은 레퍼럴 가입 새 탭) |
 | 미설계 | 웹 카드 뷰 · **검색 결과 없음 빈 상태** · **기본 행 순서** — Figma에 없음 ❓ |
 | 숨김 요소 | `Live Campaigns` 컬럼(용도 ❓) · `View switch` |
 | `Final Taker`/`Final Maker` | Figma 전 행 플레이스홀더, 실제 값은 레코드(할인율·자동 계산) |
@@ -2491,6 +2671,13 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 - Figma 칩 `All`/`Exchanges`/`DEXs`/`Brokers`·제목 `across 23 partners`는 PRD와 다름 — PRD(위 표)가 원본.
 - 로고 그리드 vs 비교표 실측 불일치(로고에만 WOO X Pro·Bitmart·HTX·CoinCatch·Toobit·Flipster / 표에만 BitMEX·BlockFin·Zoomex·Bitunix·BioFin·BVOX) — 둘 다 레코드 자동 생성(본문 8-3)으로 해소.
 - 개요 1.1의 "라우트 선택 위 3개 제품 합계 파트너 밴드(23 / 17 / 4 / 2)"는 두지 않음 (G-152).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 비교표 검색 0건 | `No results found for {검색어}`와 검색어 지우기를 보인다(G-151) | REQ-312 |
+| 모바일 비교 카드 ⓘ(`Up to n% cashback` 옆) | 기존 거래소 목록 카드(MAX-1216 CMT-08)의 ⓘ 동작을 그대로 쓰고, 기존 카드에 ⓘ 동작이 없으면 아이콘을 두지 않는다 | REQ-312 |
 
 근거: 11.txt RT-8 (p.31~33), LS-2, 백오피스관리_vs_하드코딩:155-206, 08.txt:44~49
 
@@ -2555,6 +2742,12 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 빈 상태 | **게시된 슬라이드가 없으면 배너를 렌더하지 않고 빈 공간도 남기지 않음** |
 | 관리 | 기존 어드민 「거래소 목록 상단 배너」 모달(이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가)을 그대로 쓴다(G-156). 새 입력 화면·필드 없음 |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 프로모션 배너 캐러셀 점·넘김 | 기존 거래소 목록 상단 배너 캐러셀과 같게 동작한다(같은 어드민 배너, D7·Q7) | REQ-324 |
+
 근거: 10.txt DX-14 (p.4)
 
 ### B-6-5 Venue 카드 그리드 (`DX-4`)
@@ -2573,6 +2766,12 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 
 - 카드 표시 범위 ❓: PRD Notes "입금 칩·혜택 줄은 카드에 없고 상세에만" vs Figma·본문 9-9 `ELC` 4·5번(입금 방식·Bullet 1~4)이 카드 필드.
 - 오퍼 줄 글자 수(G-269): Line 1 20자 · Line 2 10자 · Bullet 각 50자. Line 3 30자(디자인 기준 문서). 입금 칩·혜택 줄은 카드가 아니라 상세 히어로(G-157 · G-441).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| venue 카드 본문 클릭 | 동작이 없다(`Learn More`·`Get Started` 버튼만) | REQ-325 |
 
 근거: 10.txt DX-4 (p.6~7), DX-5 (p.8), 백오피스관리_vs_하드코딩:305-337, 화면_수정_필요_목록:403-405
 
@@ -2658,7 +2857,13 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 ### B-6-11 게스트 이유 카드 · 마지막 CTA 띠 (`DX-8`)
 
 - 이유 카드: 허브와 같은 컴포넌트(B-5-7).
-- 마지막 띠(게스트만): 전폭, **테마와 무관하게 항상 다크**(`always dark, the last hook`), 키체인 애니메이션(`TetherMax_keychain_loop_1080`, `seamless-transition`). 제목 `Your keys. Your trades. Your Cashback.`(Figma `Our cashback.`) · 줄 `Join TetherMax, pick a partner Decentralised Exchange, and the Cashback starts with your next trade.` · 주 버튼 `Sign Up Now` → 회원가입 (문구 G-402 확정: 그 DEX가 미리 선택된 연동 모달로 복귀. 문구는 문구표).
+- 마지막 띠(게스트만): 전폭, **테마와 무관하게 항상 다크**(`always dark, the last hook`), 키체인 애니메이션(`TetherMax_keychain_loop_1080`, `seamless-transition`). 제목 `Your keys. Your trades. Your Cashback.`(Figma `Our cashback.`) · 줄 `Join TetherMax, pick a partner Decentralised Exchange, and the Cashback starts with your next trade.` · 주 버튼 `Sign Up Now` → 회원가입, 가입 후 DEX 랜딩으로 복귀(G-462).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 마지막 띠 `Sign Up Now` | 회원가입으로 가고 가입 후 DEX 랜딩으로 돌아온다(G-462) | REQ-331 |
 
 근거: 10.txt DX-8 (p.11), 백오피스관리_vs_하드코딩:365-374
 
@@ -2690,6 +2895,12 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 왼쪽 | 마크·이름(제목) · 짧은 설명 · `Perpetuals` 라벨 + 시장 칩(여러 줄이면 **줄바꿈, 자르지 않음**) · 혜택 줄(ELC `Bullet 1~4`, 체크 표시 목록, 빈 줄 미표시, G-441) · `Deposit` 라벨 + 체크 표시 입금 칩(EDC `Deposit`) · 거래소별 자격 안내 |
 | 자격 안내 | 어드민 `Additional Notes`(EDC-6a, 선택, 비면 숨김, G-440). 기본값: Lighter 국문 `캐시백은 Premium과 Plus 계정에 적용됩니다. Standard 계정은 캐시백이 쌓이지 않아요.`(G-173), 영문 ❓ (부록 A-22) / EdgeX·Aster·ApeX en `Cashback applies to eligible trading fees on {DEX}.`, 국문 (G-396 확정: `{DEX}에서 발생한 대상 거래 수수료에 캐시백이 적용돼요.`) |
 | 마켓 칩 값 | Perpetuals 6고정값 `Crypto` · `Tokenised Equity` · `Pre IPO` · `Commodities` · `Indices and ETFs` · `Forex` 다중선택, 목록 정의 순서로 렌더(G-273) |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 브레드크럼 `Decentralised Exchanges` | DEX 랜딩으로 이동한다 | REQ-336 |
 
 근거: 10.txt VD-1 (p.12~13), 00_결정요청:116
 
@@ -2736,6 +2947,13 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 
 **드로어**: 제목 `How your cashback is worked out` · 줄 `Move the slider and all three numbers change together.` · 구역 `WHAT YOU CHOOSE`(총 거래량·Taker/Maker) · `WHAT WE WORK OUT`(결과 3개) · `WHERE THE MONEY COMES FROM`(거래소가 테더맥스에 파트너 정산 → 테더맥스가 대부분을 돌려줌, **사용자 수수료에 더해지는 것 없음**) · 마무리 `These are estimates. Final amounts vary by exchange, tier and trading activity.` 드로어 숫자는 뒤 계산기와 일치. Figma 미작성.
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 드로어 닫기 ✕ | ✕ 또는 배경 클릭으로 닫히고 Esc로는 닫히지 않으며 불투명도 + 위로 30px 약 220ms로 사라진다(기존 팝업 동작) | REQ-344 |
+| 드로어 `See the full flow ↓` | 드로어를 닫고 계산기 흐름도 `Where your cashback comes from`으로 스크롤한다 | REQ-344 |
+
 근거: 10.txt VD-5·VD-6 (p.15~18), 화면_수정_필요_목록:455-457
 
 ### B-7-5 단계 가이드 (`VD-7`)
@@ -2765,6 +2983,12 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 **Lighter 가이드 필수 서술**: Plus·Premium은 Lighter 레퍼럴 가입 중 선택(또는 Lighter Portfolio 페이지에서 전환) · 레퍼럴 코드는 Lighter 화면 안에서 **1회 영구 바인딩** · 인티그레이터 승인 불필요 · 테더맥스는 서명 요구 안 함.
 
 - 모든 DEX 가이드 공통: 테더맥스는 개인키·시드 문구(비밀 복구 문구)·지갑 서명을 요구하지 않는다는 점이 가이드 안에 드러나야 함(피싱 방지, 요구서 11 보안). 연동 모달 지갑 주소 찾기 안내 쪽 문구는 부록 A-11. 문구 원문·위치 (G-392 확정: 가이드 하단에 `테더맥스는 개인키 · 시드 문구 · 지갑 서명을 요구하지 않아요.` / `TetherMax never asks for your private key, seed phrase, or a wallet signature.`).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 단계 가이드 단계 목록 항목 | 누르면 그 단계 패널로 전환한다(Lighter 가이드 포함) | REQ-345 |
 
 근거: 10.txt VD-7 (p.18~20), 09.txt EC-PG-7·8, 08.txt:69~107·142, 화면_수정_필요_목록:459-468
 
@@ -2845,6 +3069,13 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 
 - 통화 필터 없음. 기존 유형값 `거래 캐시백`(`Trading Cashback`) → `Exchange Cashback` 개명 제안은 본문 8-3 용어 중복 ❓과 함께 결정.
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 요약 월 헤더 `{Month YYYY} ▾` | 연·월 피커(연도 ‹ › · 12개월 · `Cancel` · `Ok`)를 열고 180일 범위를 적용한다(기존 동작) | REQ-368 |
+| 요약 모바일 상단 뒤로 | 이전 화면으로 돌아간다(기존 동작) | REQ-368 |
+
 ### B-8-2 월간 요약 카드 (`CS-2`)
 
 | 요소 | 원문·규칙 |
@@ -2919,6 +3150,15 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 월 경계 | UTC 월 (G-185, B-1-6) |
 | 제목 문구 | `Monthly Top Trader Rewards`의 *"Top traders each month earn exclusive rewards based on trading activity"* → `cashback earned` |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 랭킹 패널 뒤로 ← | 패널만 닫고 혜택 화면을 유지한다 | REQ-383 |
+| 랭킹 DEX 행(주소 외 영역) | 이동이 없다(축약 주소만 눌러 팝오버로 전체 표시) | REQ-383 |
+| 혜택 랭킹 카드 행 | 패널 행과 같다(CEX → `rankdetail`, DEX 이동 없음) | REQ-383 |
+| 랭킹 모바일 상단 뒤로 | 이전 화면으로 돌아간다(기존 동작) | REQ-383 |
+
 근거: 13.txt RK-1·RK-3, 09.txt EC-RNK-1~6, 부가서비스 4-6, A1(10-21 K-1), 화면_수정_필요_목록:739-747
 
 ---
@@ -2935,6 +3175,22 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 리그 URL | `/golbal_league_{exchangename}_for_team_{n}` · `_for_ind_{n}` (원문 오타 `golbal` 유지, MAX-8). DEX 리그는 거래소 레코드의 슬러그(예 `lighter`·`apex`·`edgex`·`aster`)를 `{exchangename}`에 넣는지 확인 (G-398 확정: 슬러그(`apex` · `edgex` · `aster`)) |
 | 상금 | 유형 `league prize`, My Cashback History에 표시 |
 | 혜택 카드 | DEX 리그를 열면 `TetherMax Global League with {exchange}`(`{total prize}` USDT, `Join`) 혜택 카드가 자동 생성 |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 리그 탭 `Summary`·`Team League`/`Individual League` | 리그 안 대시보드와 리더보드를 전환한다(기존 동작) | REQ-394 |
+| 팀 이름 입력 | 기존 팀 생성 검증 그대로다 | REQ-388 |
+| `Add Team Photo` | 팀 이미지를 업로드한다(기존 동작) | REQ-388 |
+| 팀 생성 동의 체크박스 ×4 | 토글이며 모두 체크하면 `Confirm`이 활성된다(기존 동작) | REQ-388 |
+| 리그 다이얼로그 `Cancel`·닫기 X | 다이얼로그를 닫는다(기존 동작) | REQ-388 |
+| `My Score`(개인 리그) | 기존 리그 웹 동작 그대로 두고, 기존에 없으면 리더보드의 내 순위 행으로 스크롤·강조한다 | REQ-394 |
+| 리그 `Search`(팀 이름) | 완전 일치, 20자, 페이지 1로 검색한다(기존 동작) | REQ-394 |
+| `All Countries`·모바일 필터 아이콘 | 국기·체크·검색 드롭다운을 열고 페이지 1로 돌아간다(기존 동작) | REQ-394 |
+| 리더보드 페이지네이션 | 10팀/페이지, 5페이지 묶음이다(기존 동작) | REQ-394 |
+| `Show More`(모바일 Event Rules) | 규칙을 펼친다(기존 동작) | REQ-394 |
+| `Link Wallet`(DEX 리그 미연동 안내) | 연동 흐름으로 간다(기존 연동 안내 모달 동작) | REQ-389 |
 
 근거: 기존_PRD_6종_분석:398-426·495-498, 빠진화면 설계서 화면 N-7, change-notes.js:107-108, MAX-8 p4·p5·p51~52, MAX-10 p4
 
@@ -2961,6 +3217,27 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 완료 카드 | 완료 당시 금액 표시 |
 | 상단 `Total Event Rewards` | CEX·DEX 이벤트 리워드 합산(기존 계산 로직, MAX-466). 게스트는 `0 USDT` + `View History` 버튼 없음 |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 혜택 `View History` | `/rewardHistory` + `Event Reward` 필터로 이동한다(기존 동작, 게스트 숨김) | REQ-401 |
+| 탭 `Ongoing {n}`·`Completed` | 같은 화면에서 탭을 전환한다(기존 동작) | REQ-401 |
+| 혜택 `View Coupons`(PC) | 쿠폰함으로 이동한다(기존 동작) | REQ-401 |
+| 혜택 목록 모바일 상단 뒤로 | 이전 화면으로 돌아간다(기존 동작) | REQ-401 |
+| 혜택 목록 모바일 쿠폰 아이콘(회원) | 쿠폰함으로 이동한다(기존 동작) | REQ-401 |
+| Special Benefits 카드 | 그 혜택 상세로 이동한다(기존 동작) | REQ-401 |
+| 혜택 행 CTA(`Sign Up`·`Claim`) | 각 혜택 상세로 이동하고(기존 라우팅) NOTIFICATIONS 웹은 `Download App`이다(기존 동작) | REQ-401 |
+| 혜택 행 `Invite` | 초대 혜택 상세로 이동한다(기존 동작) | REQ-401 |
+| 혜택 행 `View`(JOIN EVENTS & EARN) | 기존 라우팅 그대로다 | REQ-401 |
+| 혜택 행 `Claim`(CASHBACK PREVIEW) | `/payback`으로 이동한다(기존 동작) | REQ-401 |
+| 혜택 행 `Claim`(LINK UID · FIRST CASHBACK) | 그 혜택 상세로 이동한다(기존 동작) | REQ-396 |
+| 게스트 혜택 행 CTA | 혜택 상세로 이동한다(게스트 열람 가능, 기존 동작) | REQ-401 |
+| 혜택 상세 `View Coupon`(PC)·쿠폰 아이콘(모바일) | 쿠폰함으로 이동하며 회원만, 미수령 쿠폰이 있으면 빨간 점이다(기존 동작) | REQ-401 |
+| 혜택 상세 모바일 뒤로 | 혜택 목록으로 돌아간다(기존 동작) | REQ-401 |
+| `Link UID and Get 3 USDT (Coupon)` | 기존 CEX UID 연동 화면으로 이동한다(기존 동작) | REQ-396 |
+| 혜택 상세 `3 simple ways` 캐러셀 ‹ › | 슬라이드를 이동한다(기존 동작) | REQ-401 |
+
 근거: 빠진화면 설계서 화면 N-8, 기존_PRD_6종_분석:489·509-516, 화면_수정_필요_목록:1691, MAX-466 p.5·p.44~46
 
 ---
@@ -2977,6 +3254,15 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 빈 상태 | `Coupons` 탭 `No coupons available` / `Completed` 탭 `You haven't used any coupons yet.` |
 | 만료 | `Expired {date}` 표시, 사용 불가 |
 | 사용 불가 | `Unable to Use Coupon` — `This coupon is not eligible for use at this time.` `OK` (적용 없음) |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 쿠폰함 상단 뒤로 | 이전 화면으로 돌아간다(기존 동작) | REQ-402 |
+| `View Benefits`(쿠폰 없음) | 혜택 목록으로 이동한다(기존 동작) | REQ-402 |
+| `View Coupons`(Completed 비어 있음) | `Coupons` 탭으로 전환한다(기존 동작) | REQ-402 |
+| 쿠폰함 모바일 `Terms & Conditions` 아코디언 | 펼침/접힘이다(기존 동작) | REQ-402 |
 
 ### B-12-2 계정 선택 다이얼로그
 
@@ -3001,6 +3287,13 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 수령 화면 | 웹 다이얼로그 `You've received a {n} USDT reward!` / 앱·모바일 웹 전체 화면 `You've received {n} USDT as a reward!` + 표(`Account`: 마크·이름·UID 또는 지갑 주소 / `Amount`) · `Total Amount` · `Back to Home` / `View Rewards` · 부제 `Event rewards can be withdrawn only up to the amount of cashback you have earned.` / `이벤트 리워드는 받은 캐시백 금액만큼만 함께 출금할 수 있어요.` (본문 8-14) |
 | 완료 표 원래 구성 | `Exchange / UID / Amount` → 라벨이 거래소 종류에 따라 바뀜(본문 8-14) |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 적용 완료 `View Rewards` | 캐시백 요약을 `Event Reward` 필터 + 적용 계정으로 연다(지갑 주소는 URL에 넣지 않음) | REQ-405 |
+| 적용 완료 닫기 X(모바일) | 쿠폰함으로 돌아간다(기존 동작) | REQ-405 |
+
 ### B-12-4 발급 측 (`LINK UID` — CEX 첫 연동만)
 
 - 첫 연동 쿠폰은 **회원당 1회** — 이미 받았으면 이후 연동으로 추가 발급 없음.
@@ -3024,6 +3317,17 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 
 키가 바뀌면 지원 언어 전부 갱신 후 출시. 3단계 "whenever they trade"는 확정 산식(하위 회원이 **출금**해야 발생, 본문 4-3)과 표현이 어긋날 수 있음 ❓.
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 상단 탭 `TetherMax Point (TP)` | TP 화면 `/{lang}/tethermax-point`로 이동한다(기존 동작) | REQ-419 |
+| 선택된 탭 `Invite Friends` | 변화가 없다(기존 동작) | REQ-419 |
+| `Get Friend Invitation Code` | 코드를 발급하고 Invite 탭으로 전환하며 발급 토스트를 보인다(기존 동작) | REQ-419 |
+| 초대 코드·링크 복사 아이콘 | 복사하고 `Invite code copied` / `Invite link copied`를 보인다(기존 동작) | REQ-419 |
+| `Share Invitation Code`(0명 빈 상태) | Invite 탭(코드·링크 복사 화면)으로 전환한다 | REQ-419 |
+| 초대 `Terms & Conditions` 아코디언 | 모바일은 펼침/접힘, PC는 항상 펼침이다(기존 동작) | REQ-419 |
+
 ### B-13-2 초대 리워드 탭
 
 | 요소 | 원문·규칙 |
@@ -3034,6 +3338,13 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 0명 빈 상태 | `You haven't invited any friends yet` / `Share your invitation code with friends and help them start earning cashback rewards.` + `Share Invitation Code`. 약관 목록은 계속 표시 |
 | 실적 제외 | Lighter 보류 주차·추정·대기 금액 · **하위 출금액 중 이벤트 리워드 부분** |
 | 화면 위치 | `Point > 친구초대 > 초대 리워드` |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| `Reward History` | `/{lang}/mypage/invitefriend/withdrawalhistory`로 이동한다(기존 동작) | REQ-413 |
+| `Referral Details` | 기존 초대 회원 목록·상세(앱 `mypage/invitefriend/searchmembership` · `membershipdetail`)로 이동한다 | REQ-413 |
 
 ### B-13-3 등록 현황 표
 
@@ -3070,6 +3381,12 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 
 쿠폰(최대 15 USDT) 그대로. 피초대자가 CEX·DEX 어디서 거래하든 동일 지급.
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| `Sign Up and Receive Up to 15 USDT` | 가입 화면으로 가며 초대 코드를 자동 적용한다(기존 동작) | REQ-423 |
+
 근거: 13.txt IF-1~IF-8 (6855~7240행), 09.txt EC-WD-19·20, 부가서비스 4-9, 빠진화면 설계서 화면 N-11, 화면_수정_필요_목록:758-792·1507-1512
 
 ---
@@ -3089,6 +3406,20 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 요율 표시 | 일반 회원 요율이 계산 컨텍스트 10%, 파트너 허브 표시는 0%로 정규화 — 표시값으로 지급 공식을 추론하지 않음 |
 | `Exchange UIDs` 배지 | 현재값 `10` · `198 Total` |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 파트너 허브 `View history ›` | `/{lang}/mypage/invitefriend/withdrawalhistory`로 이동한다(기존 동작) | REQ-426 |
+| `7D`/`1M`/`3M` | 차트·값 기간을 전환한다(기존 동작) | REQ-426 |
+| 파트너 허브 복사 아이콘 ×4 | 그 칸 값을 복사하고 `Copied.`를 보인다(값은 기존 `?inviteCode=` 형식) | REQ-426 |
+| `FOR BRIEF INTRODUCTION ⓘ` | 안내 팝업을 열고 `Close`로 닫는다(기존 동작) | REQ-426 |
+| My Sub-Accounts 정보 아이콘 | `Partner Hub Information` 팝업을 열고 `Close`로 닫는다(기존 동작) | REQ-426 |
+| 파트너 허브 `Terms & Conditions` 아코디언 | 모바일에서 펼침/접힘이다(기존 동작) | REQ-426 |
+| `All Types`·`All Status`·`Apply Filter` | 기존 하위 계정 필터 그대로 거른다 | REQ-426 |
+| 하위 계정 페이지네이션 | 기존 목록 페이지 이동 그대로다 | REQ-426 |
+| 파트너 허브 모바일 상단 뒤로 | 이전 화면으로 돌아간다(기존 동작) | REQ-426 |
+
 근거: 13.txt PH-2~PH-5 (3800~3975행), 부가서비스 4-9, 빠진화면 설계서 화면 N-11, 화면_수정_필요_목록:800-822
 
 ---
@@ -3098,10 +3429,30 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 - 챌린지 게이지는 CEX·DEX 커미션 캐시백 합산이라 홈 총액과 같은 기준(이벤트·초대 리워드 제외 차이만 남음).
 - 프로토타입 위치: `캐시백 챌린지 > 챌린지 게이지 / 수령 계정 선택`(DEX 그룹 추가), 부스트 `기타 반영 지점 > 캐시백 부스트`(DEX 행 추가).
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 챌린지 레벨 카드 칩 | 표시 전용이다(기존 동작) | REQ-438 |
+| `Claim 5 USDT Coupon` | 조건을 채우면 눌러 쿠폰을 받고 19:30~21:30에는 비활성이다(기존 약관) | REQ-438 |
+| 챌린지 수령 계정 선택 다이얼로그 | 수령 계정을 고르지 않았으면 선택 다이얼로그를 연다(기존 동작) | REQ-438 |
+| 챌린지 모바일 뒤로·쿠폰 아이콘 | 혜택 목록·쿠폰함으로 이동한다(기존 동작) | REQ-438 |
+| 챌린지 모바일 `Terms & Conditions` 아코디언 | 펼침/접힘이다(기존 동작) | REQ-438 |
+
 ## B-16 이벤트 목록 (본문 8-19)
 
 - 이벤트 리워드 행은 요약 일별 목록에 이벤트 이름으로 표시(B-8-4).
 - DEX 리그 개설 시 혜택 카드 자동 생성(B-10).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 이벤트 모바일 필터 시트 `Close` | 변경 없이 닫는다(기존 동작) | REQ-437 |
+| 이벤트 모바일 필터 시트 `Apply (n)` | 적용 후 시트를 닫고 목록을 거른다(기존 동작) | REQ-437 |
+| 이벤트 카드 `Join Now` | 외부 이벤트 URL을 새 탭으로 연다(기존 동작) | REQ-437 |
+| 이벤트 상단 배너 `Join Now` | 팝업형은 팝업, 링크형은 이동, 설정이 없으면 반응이 없다(기존 동작) | REQ-437 |
+| 이벤트 상단 배너 점·화살표 | 수동으로 넘기며 PC는 화살표, 모바일은 스와이프이고 순환한다(기존 동작) | REQ-437 |
 
 ---
 
@@ -3116,6 +3467,13 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 
 카드 = 썸네일 · 제목 · 한 문장 설명 · 읽기 시간 칩(기존 컴포넌트) · `Start Learning`. 구조는 기존 3장과 동일, 클램프 시 기존과 같은 지점에서 말줄임. 선택 시 아티클.
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| `Start Learning` | 각 모듈 아티클 경로로 이동한다(기존 동작) | REQ-443 |
+| 완료 카드 `View` | 그 모듈 아티클로 이동한다(완료 회원은 아티클의 `Take the Quiz`에서 저장된 결과를 봄) | REQ-443 |
+
 ### B-17-2 아티클 (`LE-3`~`LE-5`)
 
 | 요소 | 규칙 |
@@ -3126,7 +3484,14 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | `KEY TAKEAWAYS` | **정확히 bullet 3개**, 각 bullet = 짧은 주장 문장 + 상세 1~2문장 |
 | 하단 버튼 | `Back`(Beginner's Guide 목록) + 퀴즈 버튼: 로그인 `Take the Quiz` / 게스트 `Login to Take Quiz`(로그인 후 퀴즈로) |
 | 게스트 | 아티클은 게이트 없이 전문 열람 |
-| 공유 실패 | Web Share API 없음·실패 → 링크 복사 + 토스트 (❓ 권고) |
+| 공유 실패 | Web Share API 없음·실패 → 링크 복사 + `Copied.` 토스트 |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 아티클 `Share`(우측 레일 `Share Post`) | Web Share를 열고 미지원·실패 시 링크를 복사하고 `Copied.`를 보인다 | REQ-444 |
+| 모바일 상단 뒤로(아티클·퀴즈·결과·Cashback Basics) | 이전 화면으로 돌아간다(기존 동작) | REQ-444 |
 
 ### B-17-3 퀴즈 페이지 · 채점 (`LE-6`~`LE-10`)
 
@@ -3155,6 +3520,13 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 정답·해설 로드 실패 | `We couldn't check your answers` + `Retry`, 정답 일부도 노출 안 함 (❓ 권고) |
 | 더블 제출 · 두 탭 | 채점·기록 1회 (❓ 권고) |
 | 중간 이탈 | 선택 보존 안 함, 기록 없음 (❓ 권고) |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 퀴즈 결과 `View Coupons` | 쿠폰함 `/{lang}/coupon`으로 이동한다 | REQ-448 |
+| 퀴즈 결과 `Back to module` | 그 모듈 아티클로 이동한다 | REQ-447 |
 
 ### B-17-5 기존 퀴즈 쿠폰 운영 규칙과 DEX 모듈 4·5의 재응시 예외(G-205·206·207)
 
@@ -3187,6 +3559,18 @@ TP 적립 공식(출금이 트리거, DEX 출금에도 같은 공식):
 
 - 하위의 이벤트 리워드 출금분은 상위 TP에 포함 안 됨. TP 소수 둘째 자리 내림.
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 포인트 탭 `Invite Friends` | `/mypage/invitefriend/invitefriend`로 이동한다(기존 동작) | REQ-451 |
+| 포인트 안내 줄 `View` | 기존(STG) 포인트 화면 동작 그대로 두고 기존 화면에 없는 요소면 두지 않는다 | REQ-451 |
+| 포인트 칩 `TP`·`Earning History` | 보기를 전환한다(기존 동작) | REQ-451 |
+| 포인트 칩 `Real-Time Ranking` | 기존(STG) 동작 그대로 두고 기존 화면에 없으면 두지 않는다 | REQ-451 |
+| 포인트 `Learn More` | `/tethermax-point-introduction`으로 이동한다(기존 동작) | REQ-451 |
+| `How To Earn` 행 | 행별 기존 동작 그대로다(Bitget 외부 링크 · 친구 초대 · 반응 없음) | REQ-451 |
+| 포인트 FAQ 질문 | 펼침/접힘이다(기존 동작) | REQ-451 |
+
 근거: 부가서비스_DEX연동_가능여부_국문.md 4-3
 
 ---
@@ -3211,6 +3595,14 @@ TP 적립 공식(출금이 트리거, DEX 출금에도 같은 공식):
 | **PB-7 What You're Missing Out On** | 카드 2장 `Trade with TetherMax` `+{amount}` `YOUR CASHBACK (USDT)` / `Without TetherMax` `-{amount}` `FEES LOST (USDT)`(같은 월 캐시백 값) · `How we calculated this?` 펼침(계산 표시, 펼친 내용 Figma 미설계) · CEX만 `Did you know?` `On average, {n} {platform} traders like you earn about {amount} USDT/mo.` — **DEX는 이 카드 숨김** · `Next` |
 | **PB-8 Summary** | 제목 `You're all set. Here's your summary.` 타일 `Exchange`(실서비스 라벨, Lighter는 계정 유형) · `Account balance` · `Leverage` · `Order Type Ratio`(예 `100% Taker`) · `Trading frequency`(예 `1-2 trades a day`). 영수증 `Trading Fees {amount} USDT/mo` · `× Cashback Rate ×{rate}%` · `Cashback {amount} USDT/mo*`. `Payout Details` = `Schedule` · `Payout Time` · `Destination` — **Destination = `TetherMax Account`(전 플랫폼)**, DEX가 직접 지급한다는 표현 금지. 버튼 `Restart`(입력 초기화 후 Landing) · `Start {platform} Cashback`(어트리뷰션 새 탭) |
 | **PB-9 모바일 웹** | 375폭. 같은 단계·같은 문구, 1열, 가로 스크롤 없음, 플랫폼 타일 줄바꿈 |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 플랫폼 목록 불러오기 실패 `Retry` | 목록을 다시 불러온다(문구는 문구표 #17 재사용, `/payback`에도 적용) | REQ-455 |
+| 정보 아이콘 ⓘ(레버리지·잔고·주문 비율) | hover·포커스 시 툴팁을 보인다(레버리지 `This means how much bigger your trade is compared to your actual money.` + 예시 · 잔고 `Your total funds available for trading` · 비율 Maker/Taker 설명, 기존 계산기) | REQ-456 |
+| `Restart` | `/payback` 소개로 돌아가 입력을 초기화한다(기존 동작) | REQ-459 |
 
 ### B-19-3 Summary 계산 · 지급 표기
 
@@ -3242,6 +3634,16 @@ TP 적립 공식(출금이 트리거, DEX 출금에도 같은 공식):
 | 열람 | 로그인 없이 (`BG-06`). 콘텐츠 6개 언어 / UI 15개 언어 |
 | 수신거부 | 서명 토큰(`user_id + email + exp + purpose`)으로만 식별, 거래소 개념 없음 |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 공지 카테고리 칩 | 사이트 안에 두지 않고 Help Center 카테고리로 운영한다(공지는 Zendesk Help Center) | REQ-473 |
+| 공지 행 | Help Center 글을 새 탭으로 연다 | REQ-468 |
+| 공지 목록 모바일 ← | 공지는 Help Center에서 열리므로 사이트 안 공지 목록과 모바일 ←을 두지 않는다(기존 동작) | REQ-468 |
+| 긴급 공지 팝업 `OK` | 팝업을 닫는다(기존 동작) | REQ-468 |
+| `Don't show again today` | 같은 공지를 오늘 하루 숨기고 팝업을 닫는다(기존 동작) | REQ-468 |
+
 근거: 부가서비스_DEX연동_가능여부_국문.md 2-7·2-8
 
 ---
@@ -3250,14 +3652,14 @@ TP 적립 공식(출금이 트리거, DEX 출금에도 같은 공식):
 
 ### B-21-1 사이트맵
 
-Cashback Landing(허브) → **Centralised Exchanges**(= 기존 Exchange Listings Page 직행, CEX 개요 페이지 없음) · **Decentralised Exchanges Overview** · Brokers · **Cashback Calculator**(`/payback`, 독립 제품). DEX Overview → DEX Detailed Page → 귀속 코드가 미리 채워진 파트너 가입 페이지. 테더맥스 안에서 지갑 생성·브리지·입금·거래 실행 없음(모든 경로는 파트너 사이트/앱에서 끝남). 허브 비교표 외 DEX 전용 비교 페이지 없음.
+Cashback Landing(허브) → **Centralised Exchanges**(= 허브 CEX 탭. 허브가 기존 거래소 목록 `/{lang}/affiliated` 자리를 대신하며 별도 Exchange Listings Page·CEX 개요 페이지 없음 — 결정 Q7, 사용자 2026-11-27) · **Decentralised Exchanges Overview** · Brokers · **Cashback Calculator**(`/payback`, 독립 제품). DEX Overview → DEX Detailed Page → 귀속 코드가 미리 채워진 파트너 가입 페이지. 테더맥스 안에서 지갑 생성·브리지·입금·거래 실행 없음(모든 경로는 파트너 사이트/앱에서 끝남). 허브 비교표 외 DEX 전용 비교 페이지 없음.
 
 ### B-21-2 데스크톱 헤더 (`GL-1`·`GL-2`)
 
 | 요소 | 규칙 |
 |---|---|
 | 고정 | sticky, 라이트 표면 + 하단 hairline |
-| 좌 → 우 | 로고(infinity, 허브로 이동·최상단) · `Cashback ˅` · `Rewards Hub ˅` · `Discover ˅`. 계산기는 `Cashback` 하위 메뉴이며 상단 단독 `Calculator` 메뉴 없음 |
+| 좌 → 우 | 로고(infinity, 누르면 홈 — 회원 홈 · 게스트 프리로그인 랜딩, 기존 서비스 동작) · `Cashback ˅` · `Rewards Hub ˅` · `Discover ˅`. 계산기는 `Cashback` 하위 메뉴이며 상단 단독 `Calculator` 메뉴 없음 |
 | 우측 (로그인) | 알림 벨(안 읽음 점) · 아바타 · 테마 · 언어 지구본 |
 | 우측 (비로그인) | `Login`(보조) · `Sign up`(주) · 테마 · 지구본 |
 | `Cashback` 동작 | **`Cashback`·`Rewards Hub`·`Discover` 클릭(라벨·chevron) = 이동 없이 패널 펼침, 펼친 채 유지 — 다시 클릭·바깥 클릭·Esc로 닫힘**(사용자 2026-11-27). `Cashback` 패널은 **2행 `Cashback Hub` · `Cashback Calculator`**(허브가 CEX·DEX·Brokers 포함, 단독 `Calculator` 메뉴 없음), 행 선택 시 닫힘 + 이동 |
@@ -3266,29 +3668,86 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 기존 Exchange Listing
 | 알림 피드·아바타 로드 실패 | 안 읽음 점 숨김, 벨은 사용 가능, 헤더 막지 않음 (❓ 권고) |
 | 모달 열린 채 테마·언어 변경 | 그 자리에서 교체, 모달 상태·입력값 유지 (❓ 권고) |
 
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 로고 `TetherMax`(PC·모바일 웹) | 회원은 홈, 게스트는 프리로그인 랜딩(`/{lang}`)으로 이동한다(기존 서비스 동작) | REQ-464 |
+| 알림 벨(회원) | 벨 아래 알림 패널(목록·날짜)을 열고 안 읽음이 있으면 빨간 점을 보이며, 피드 로드 실패 시 점만 숨긴다(기존 동작) | REQ-464 |
+| 계정 아이콘(PC, 회원) | 홈 위 오른쪽에 My Page 패널을 연다(기존 동작) | REQ-464 |
+| 테마 아이콘 | 라이트/다크를 전환하고 열린 모달의 상태·입력값을 유지한다(기존 동작) | REQ-464 |
+| 언어 아이콘(지구본) | 언어 메뉴(기존 14개 언어)를 펼쳐 고른 언어 경로 `/{lang}/…`로 이동하고, 현재 언어를 고르면 닫기만 한다(기존 동작) | REQ-464 |
+| 모바일 계정 아이콘(회원) | My Page 전체 화면을 연다(기존 동작) | REQ-464 |
+| 모바일 웹 앱 배너 | `Get App`은 앱 스토어를 새 탭으로 열고 ×는 배너를 닫는다(기존 동작) | REQ-464 |
+
 ### B-21-3 모바일 웹 드로어
 
-전체 높이 · (선택) 파트너 프로모션 배너 · 비로그인 환영 블록 `Welcome to TetherMax! Create an account or log in to start earning Cashback.` + `Log In` · `Sign Up` · 제품 5항목 `Cashback Hub, Events, Benefits, Cashback Calculator, Point`(`Cashback Hub` = 캐시백 허브 — CEX·DEX·Brokers 포함이라 `Brokers` 행 없음) · 테마·언어 행 · 법적 행 `Terms of Use`, `Privacy Policy` · 회사 행 `About TetherMax`, `Notices`, `Beginner's Guide`, `Affiliate Partner Inquiry` · 떠 있는 고객지원 컨트롤. 드로어가 데스크톱 헤더 메뉴를 **대체**(중복 아님).
+전체 높이 · 비로그인 환영 블록 `Welcome to TetherMax! Create an account or log in to start earning Cashback.` + `Log In` · `Sign Up` · 제품 5항목 `Cashback Hub, Events, Benefits, Cashback Calculator, Point`(`Cashback Hub` = 캐시백 허브 — CEX·DEX·Brokers 포함이라 `Brokers` 행 없음) · 테마·언어 행 · 법적 행 `Terms of Use`, `Privacy Policy` · 회사 행 `About TetherMax`, `Notices`, `Beginner's Guide`, `Affiliate Partner Inquiry` · 떠 있는 고객지원 컨트롤. 드로어가 데스크톱 헤더 메뉴를 **대체**(중복 아님).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 드로어 닫기 X | 드로어를 닫고 현재 화면을 유지한다(기존 동작) | REQ-465 |
+| 드로어 프로모 배너 | 두지 않는다(디자인·어드민 필드·목적지가 없음) | REQ-465 |
+| `Theme` 토글 | 라이트/다크를 전환한다(기존 동작) | REQ-465 |
+| `Language` 행 | 언어 바텀시트를 연다(기존 동작) | REQ-465 |
+| `Notices`(드로어·푸터) | 기존대로 Zendesk Help Center 공지를 새 탭으로 연다(사이트 안 공지 화면 신설 없음) | REQ-474 |
+| `Affiliate Partner Inquiry`(드로어) | Tally 제휴 문의 폼(`tally.so/r/obEp4N`)을 새 탭으로 연다(기존 동작) | REQ-474 |
+| 떠 있는 고객지원 버튼(헤드셋) | Zendesk 상담 위젯을 연다(기존 동작) | REQ-474 |
+| 언어 시트 행 | 고른 언어 경로로 이동하고 시트를 닫으며, 현재 언어는 체크 표시이고 누르면 닫기만 한다(기존 동작) | REQ-465 |
+| 언어 시트 바깥(딤) | 시트를 닫는다(기존 동작) | REQ-465 |
 
 ### B-21-4 푸터
 
 지원 연락처 + **복사 컨트롤** · Company·Legal 링크 그룹 · 소셜 채널 행. infinity 로고마크 유지.
 
-### B-21-5 Exchange Listings Page (`LS-1`~`LS-3`, 기존·재구축 안 함)
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 푸터 `Live Chat` | Zendesk 상담 위젯을 연다(기존 동작) | REQ-472 |
+| 푸터 `Notices` | Zendesk Help Center 공지를 새 탭으로 연다(드로어 `Notices`와 같음) | REQ-472 |
+| 푸터 `Affiliate Partner Inquiry` | Tally 제휴 문의 폼을 새 탭으로 연다(기존 동작) | REQ-472 |
+| 푸터 Legal `Terms of Service` | 이용약관 화면으로 이동한다(기존 푸터 라벨 그대로, 드로어 법적 행은 `Terms of Use` — REQ-474) | REQ-472 |
+| 푸터 소셜 아이콘 | 블로그(tistory)·YouTube·X·Telegram을 새 탭으로 연다(기존 4종) | REQ-472 |
+
+### B-21-5 거래소 목록 자리 — 허브 CEX 탭 (`LS-1`~`LS-3`)
 
 | 항목 | 규칙 |
 |---|---|
-| 진입 | 허브 CEX 라우트 행 |
-| DEX | **CEX만 나열.** 캐러셀 `Top Centralised Exchanges`·목록 `Centralised Exchanges`·필터 어디에도 DEX 추가 안 함(DEX는 DEX 개요와 허브 비교표에만) |
-| 목록 요소 | `Search for an exchange` · 칩 `Recommended` · `All` · `Cashback Boost` · `Events` · 표/카드 토글 |
-| 평점 (LS-2) | 표 `Avg. Cashback`과 `Live Campaigns` 사이 `Rating` 열(별·점수·흐린 리뷰 수). 리뷰 20개 미만이면 표 `-`, 카드 뷰 평점 생략 |
-| 헤더 (LS-3) | 목록 페이지도 GL-1 헤더 → Cashback 메뉴로 DEX 진입 가능. MAX-1373 Figma는 구 헤더(Exchanges, Events, Benefits, Cashback Preview, Point) — 수정 필요 |
+| 자리 | **별도 Exchange Listings Page 없음.** 캐시백 허브 CEX 탭(계산기 라우트 탭과 비교표 칩이 CEX로 선택된 허브)이 기존 거래소 목록 `/{lang}/affiliated` 자리를 대신함(결정 Q7, 사용자 2026-11-27) |
+| 진입 | 허브 CEX 라우트 행 · 거래소 목록으로 가던 기존 링크(홈·지갑 상세·게스트 조회 결과 `Top Partner Exchanges` `See All`, 게스트 조회 `No account? Join our partner exchange ⟶`) → 허브 CEX 탭 |
+| DEX | 허브 비교표 `Decentralised Exchanges` 칩과 DEX 개요에서 |
+| 평점 (LS-2) | 허브 비교표 `Rating` 열로 유지(B-5-8 — 리뷰 20개 미만 `-`, 카드 뷰 생략) |
+| 헤더 (LS-3) | 별도 목록 페이지가 없어 해당 없음(허브는 GL-1 헤더) |
 
-- 원본 부가서비스 1-E는 거래소 목록 `Top Popular`/`All Partner`에 DEX를 넣을지 "?"로 둠 — LS-1(CEX만)이 더 늦은 PRD 사양.
+**기존 목록 요소 처리**
+
+| 요소 | 처리 | 근거 |
+|---|---|---|
+| `Search for an exchange` | 허브 CEX 탭에서 유지 — 허브 비교표 검색(대소문자 무시·부분 일치, 0건 `No results found for {검색어}`) | B-5-8 · G-470 |
+| 표/카드 보기 전환 | 허브 CEX 탭에서 유지 — 허브 비교표 표/카드 토글 | B-5-8 |
+| 열 머리 정렬 | 허브 CEX 탭에서 유지 — `#` 제외 전 열, 재선택 시 역순 | B-5-8 |
+| `Rating` 열 | 허브 CEX 탭에서 유지 — 허브 비교표 `Rating` | B-5-8 · LS-2 |
+| 목록 전용 헤더(LS-3) | 없앰 — 허브는 GL-1 헤더 | B-21-2 |
+| 목록 안 `Top Partner Exchanges` `See All` | 없앰 — 목록 화면이 없음 | 결정 Q7 |
+| 목록 모바일 ← | 없앰 — 별도 화면이 없음 | 결정 Q7 |
+| 상단 배너 `Join Now` · 점 | ❓ 사용자 확인 #50 — 같은 어드민 「거래소 목록 상단 배너」는 DEX 개요 프로모션 배너로 쓰임(G-156 · G-463). 허브 CEX 탭에도 둘지 정해지지 않음 | B-6-4 |
+| 캐러셀 `Top Centralised Exchanges`(Top Partner 카드) | ❓ 사용자 확인 #50 — 허브에는 로고 그리드(B-5-8)가 있음 | B-5-8 |
+| 칩 `Recommended` · `All` · `Cashback Boost` · `Events` | ❓ 사용자 확인 #50 — 허브 비교표 칩은 `Centralised Exchanges` · `Decentralised Exchanges` · `Brokers`(`All` 없음) | B-5-8 |
+| 열 `Avg. Cashback` · `Live Campaigns` · `View Event` ↗ | ❓ 사용자 확인 #50 — 허브 비교표 열 구성과 다르고 `Live Campaigns`는 허브 숨김 요소 | B-5-8 |
+| 거래소 행 본문 클릭 | ❓ 사용자 확인 #50 — 기존 = 거래소 상세, 허브 행 끝은 `Join {partner}` 레퍼럴 새 탭 | B-5-8 |
 
 ### B-21-6 라우팅 · SEO
 
 허브·랜딩·venue 페이지에 실제 라우트 + 작성 메타데이터. venue 페이지 **FAQPage 구조화 데이터**(펼침 여부 무관, 게시 FAQ 전부), 허브 Organization 데이터. 슬러그는 키워드 기반·날짜 없음·첫 게시 후 제목과 분리, 변경 시 자동 리다이렉트(슬러그 고정 `MSG-9`와 어긋남 ❓). DEX 상세 페이지는 동적 sitemap 색인 대상. SEO 페이지 경로 템플릿은 Exchange Type에 따라 분기(DEX는 CEX `exchangeDetail`이 아니라 DEX 상세 경로).
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 404 `Back to Home` | 게스트는 프리로그인 랜딩, 회원은 홈으로 이동한다(기존 동작) | REQ-467 |
 
 근거: 11.txt GL-1·GL-2·LS-1~LS-3 (p.1~2, p.39~41), 08.txt:154~238·1491~1505, 09.txt EC-NAV-1~5, 05.txt:5083-5173, 화면_수정_필요_목록:243-249
 
@@ -3303,8 +3762,15 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 기존 Exchange Listing
 | 하단 내비 | 5항목 `Home, Events, Benefits, Exchanges, Point`(08.txt는 `Exchanges` — 표기 통일 ❓). 활성 항목은 **라벨 굵기 + 색 둘 다** |
 | Cashback 진입 | **사용자 메뉴에서 진입**(앱의 모든 Cashback 제품 단일 진입점) → 앱에 Brokers·CEX 목록이 처음 노출됨 |
 | 모순 | 분석 `DX-AP-01 dexcashback_navi_app` = "Cashback is selected in the app bottom navigation" ↔ GN-6 사용자 메뉴. 또 GN-6이 단일 진입점이라면서 `Exchange` 탭 유지 — 앱에서 DEX로 가는 경로 미정의 ❓ |
-| 미지원 페이지 | 앱 빌드가 아직 지원하지 않는 Cashback 페이지는 인앱 브라우저로 웹 경로, 빈 화면 금지 (❓ 권고) |
-| 외부 링크 실패 | 앱에서 DEX로 나가는 링크(`Join {DEX}` 등) 실패·외부 브라우저 없음 → 다이얼로그·카드를 열어 둔 채 링크 복사 + `Open {DEX}`. **출금은 절대 DEX를 열지 않음** (❓ 권고) |
+| 미지원 페이지 | 앱 빌드가 아직 지원하지 않는 Cashback 페이지는 인앱 브라우저로 웹 경로, 빈 화면 금지 |
+| 외부 링크 | 앱에서 DEX로 나가는 링크(`Join {DEX}` 등)는 외부 브라우저로 열리므로 앱 쪽 실패 다이얼로그가 없음(G-216). **출금은 절대 DEX를 열지 않음** |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 인앱 브라우저 닫기 X | 인앱 브라우저를 닫고 직전 앱 화면(Cashback 진입 메뉴)으로 돌아간다 | REQ-470 |
+| 앱 필수 업데이트 `Update Now` | 앱 스토어 업데이트 페이지를 열며 닫기는 없다(기존 동작) | REQ-470 |
 
 ### B-22-2 앱·모바일 웹 화면 차이 (이 부록 범위)
 
@@ -3614,7 +4080,7 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 기존 Exchange Listing
 | ID | 요구 |
 |---|---|
 | 백필 (NFR-1) | 기존 거래소 레코드(활성·비활성 **전부**)에 `Exchange Type = CEX`를 **한 번** 쓰고 다른 값은 건드리지 않음. **멱등**(두 번 돌려도 변화 없음)·**롤백 가능**, 끝난 뒤 유형 `None` 레코드 0건. **운영 DB 복사본에서 리허설** 먼저. 마이그레이션 전후 유형 필터 결과 동일. 이후 nullable 아님 |
-| 회귀 금지 (NFR-2) | 배포 후 CEX 목록 페이지·프리로그인 랜딩·모든 캐시백 리포트가 배포 전과 **같은 내용.** 다르면 결함 |
+| 회귀 금지 (NFR-2) | 배포 후 프리로그인 랜딩·모든 캐시백 리포트가(기존 거래소 목록은 허브 CEX 탭으로 대체 — REQ-466) 배포 전과 **같은 내용.** 다르면 결함 |
 | 성능 (NFR-3) | 거래소 목록·**Account List(약 85,000행)**·연동 관리(약 700행)는 유형 필터를 걸어도 **2초 이내.** 유형 컬럼은 읽을 때 계산하지 않고 **인덱스.** 필터 없이도 컬럼 추가 전보다 느려지면 안 됨 |
 | 하위 호환 | 하위 모듈은 거래소 **이름으로 유형을 짐작하지 않고** Exchange Type 필드만 읽음. 이 필드를 모르는 소비자는 무시해도 안전해야 함 |
 
@@ -4755,7 +5221,7 @@ DEX 랜딩 glance 아래 전폭 캐러셀. 슬라이드 = 「거래소 목록 �
 | Exchange Type | 라우트 분류 · **파트너 수 계산** · 비교표 필터 · 연동 플로우 입력란(UID/지갑) · SEO 경로 |
 | maker / taker fee · 할인율 | 계산기 · 비교표 `Final Taker`/`Final Maker` · Venue 카드 · 상세 요금 단계 표 |
 | 캐시백율(%) | 비교표 `Cashback` · `UP TO {n}%` · `/payback` 카드 · `{요율}` 치환 |
-| 레퍼럴 링크 (`EXT-10`) | `Get Started` · `Join {partner}` · `Join Now` · `Sign up here` · 모든 아웃바운드 |
+| 레퍼럴 링크 (`EXT-10`) | `Get Started` · `Join {partner}` · `Join Now` · `Register here` · 모든 아웃바운드 |
 | 노출 여부 · 연동 가능 · 순위 | 목록 노출·순서 · 연동 한도 산식 |
 | `주기` · `요일` · `업데이트(UTC)` | 연동 성공 화면 정산 배지·시각 · `/payback` 결과 `Schedule`·`Payout Time`(테더맥스 DB 계정에 금액이 적립되는 시점, 샘플 `Daily`·`07:00`, Lighter 주 1회 월) · 캐시백 타임라인. `업데이트(UTC)` = 파트너 API `update_time`과 같은 값 |
 | 제한 지역 | 국가별 노출 제어 |
@@ -4812,6 +5278,13 @@ DEX 랜딩 glance 아래 전폭 캐러셀. 슬라이드 = 「거래소 목록 �
 | REQ-124 | `[UID 연동하기]` 이동 | D-1-7 |
 | REQ-125 | `이벤트 리워드 확인하기` | D-1-8 |
 | JOB-07 탈퇴 | TUID 탈퇴 시 모든 보드 참여 `WITHDRAWN`, 리워드 미지급(기존 PRD "탈퇴 시 UID는 비회원 전환") | DEX 지갑도 같음 — 탈퇴 시 `WITHDRAWN` + 리워드 미지급 (G-085) |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 게이지·연속 카드 `?` 아이콘 | 체크 방법 툴팁을 hover·클릭으로 연다(기존 맥스보드 목업) | REQ-642 |
+| 맥스보드 404 버튼 | 기존 404 화면 그대로다(`Back to Home`, G-471) | REQ-642 |
 
 근거: 사용자 요구사항정의서 v1.7 REQ-022~131, 사용자 API스펙 API-003·JOB-01·06·07, 맥스보드_DEX_반영사항 5~6장
 
@@ -5219,7 +5692,7 @@ DEX에는 "캐시백 배치"가 없고 파트너 원장 수신 → 테더맥스 
 | 트리거 | 거래소별 주소 검증 실패, 레퍼럴 귀속 미확인, 이미 연동된 지갑 등으로 연동이 거부된 경우 (**Lighter Standard 삭제**, 판정 H-22). 사유 분기는 D-5-2 표 |
 | 카테고리 · 주기 · 시각 | `- (Sent regardless of consent)` · `Trigger timing` · `immediately` |
 | 도메인 | 기존 UID 연동 완료 메일과 같은 도메인 (G-294) |
-| 이동 경로 | `해당 DEX 연동 모달` |
+| 이동 경로 | `해당 DEX가 선택된 연동 모달`(메일 버튼 링크, 사용자 2026-11-27) |
 | 제목 | `[TetherMax] 지갑 연동에 실패했어요` / `[TetherMax] Wallet Binding Failed` |
 | 메모 | '레퍼럴 귀속 미확인'은 영구 거부 — 재시도를 권하는 문구 금지. '이미 연동된 지갑'은 고객센터로만 풀린다. CEX 대응 메일 = 피그마 템플릿 `UID 연동 실패` |
 
@@ -5272,6 +5745,13 @@ DEX에는 "캐시백 배치"가 없고 파트너 원장 수신 → 테더맥스 
 ### D-6-2 공용 껍데기
 
 파란 배너(공용) → **H2 제목**(교체) → **본문 한 줄**(교체) → 가변 영역(로그인 메일 = 코드 박스 / 연동 메일 = 라벨·값 2쌍) → 고객센터 링크(공용) → 소셜 4종 · 안내문 · © 2026(공용). 배너는 피그마(일러스트)와 실물(앰배서더 윤시윤)이 다르지만 둘 다 공용 자산이라 DEX 신규 제작 없음.
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 메일 본문·푸터 고객센터 링크 | 기존 공용 템플릿 링크 그대로다 | REQ-657 |
+| 메일 푸터 소셜 아이콘 | 공용 4종이다(D-6-2) | REQ-657 |
 
 ### D-6-3 한국어 문구
 
@@ -5372,6 +5852,15 @@ DEX(ko): 메일 제목은 `[TetherMax] 지갑 연동이 완료됐어요`(EMAIL 3
 | 25 | 맥스보드 랭킹 수상 — 랭킹 리워드 대상 TUID만(어뷰징 제외·탈퇴 미발송), 랭킹 ON 보드만 | Email Marketing Consent · 06:10 · 결과 발표 시작일 · Sub Domain | `{exchange} 맥스보드 랭킹 {rank}위 수상을 축하해요!` / `Congratulations on ranking #{rank} on {exchange} MAX BOARD!` | 같음. 본문에 순위·랭킹 리워드 금액·지급일 |
 | 26·27 | Aster 만료 예정 · 만료 | 동의 무관 | D-8 | 보류 |
 | 28~32 | DEX 전용 | — | D-5 | — |
+
+**화면 요소 동작**
+
+| 요소 | 동작 · 조건 · 피드백 | REQ |
+|---|---|---|
+| 소유권 메일 본문 링크 `account ownership verification.` | 홈의 그 지갑 행으로 이동하며(행 탭 → `Verify Ownership to Reclaim This Wallet`) EN·KO 본문 모두 같은 링크를 둔다 | REQ-733 |
+| 리그 메일 17·19 `View Competition Results` | 16·18과 같이 17은 팀 리그 페이지, 19는 개인 리그 페이지로 이동한다 | REQ-675 |
+| 맥스보드 메일 25 `View MAX BOARD` | 24와 같은 `Benefits Details (MAX BOARD Page)`로 이동한다 | REQ-675 |
+| T34 가입 환영 메일 `[My Page]` | 마이 페이지로 이동한다(기존 T34 링크 그대로) | REQ-675 |
 
 ### D-7-3 그 외 기존 알림 관련
 
@@ -6352,7 +6841,7 @@ EdgeX는 "확인을 받으면 엔드포인트·인증·서명·푸시 포맷·�
 | NFR | 항목 | 요구 (수용 기준) | 처리 |
 |---|---|---|---|
 | NFR-1 | 마이그레이션 안전 | `Exchange Type` 백필은 **한 번** 실행 · **멱등**(두 번 돌려도 변화 없음) · **롤백 가능.** 기존 레코드 전부(활성·비활성)에 `CEX`를 쓰고 **다른 필드는 건드리지 않음.** 완료 후 유형이 None인 레코드 0건. **운영 DB 복사본에서 리허설 후** 운영 반영 | 유지. 기존 브로커 레코드 처리 ❓ (본문 9-1에서 Broker 값 제거) |
-| NFR-2 | 회귀 금지 | 이 릴리스 전부터 있던 페이지·모듈·리포트는 4장에 명시된 변경 외에는 **표시 내용이 바뀌면 안 됨.** CEX 목록 페이지 · 프리로그인 랜딩 · 모든 캐시백 리포트가 배포 전과 같아야 하고, **차이는 "허용된 부작용"이 아니라 결함** | 유지 (본문 P9와 같은 원칙) |
+| NFR-2 | 회귀 금지 | 이 릴리스 전부터 있던 페이지·모듈·리포트는 4장에 명시된 변경 외에는 **표시 내용이 바뀌면 안 됨.** 프리로그인 랜딩 · 모든 캐시백 리포트가 배포 전과 같아야 하고(기존 거래소 목록은 허브 CEX 탭으로 대체 — B-21-5), **차이는 "허용된 부작용"이 아니라 결함** | 유지 (본문 P9와 같은 원칙) |
 | NFR-3 | 목록 성능 | 거래소 목록 · 계정(UID) 리스트 · 연동 관리 목록은 **유형 필터를 걸어도 2초 안에** 응답. 현재 규모 UID 약 85,000행 · 연동 약 700행. 유형 컬럼은 읽을 때 계산하지 말고 **인덱스.** 필터를 안 걸었을 때도 컬럼 추가 전보다 느려지면 안 됨 | 유지 |
 | NFR-4 | 콘텐츠·설정 저장 감사 | 순위 수정 · DEX Landing Page · 콘텐츠 에디터 · Spending Estimate 저장마다 **운영자 · 시각 · 편집 언어 · 이전 값 · 새 값.** 기록 없는 변경 불허 | 수정 — 원문 대상의 `Brokers`·`Edit Compare Brokers Content`는 폐기(브로커 어드민 없음, `C-5`) |
 | NFR-6 | 서버 검증 일치 | 4장의 모든 제약(거래량 범위 · 요율 제약 · 글자 수 · URL 접두 규칙 · 업로드 형식·비율)을 **UI와 서버 양쪽**에서 검사. API로 직접 보내도 **UI와 같은 사유로** 거부 | 유지 |
@@ -6486,7 +6975,7 @@ EdgeX는 "확인을 받으면 엔드포인트·인증·서명·푸시 포맷·�
 
 | 규칙 | 내용 |
 |---|---|
-| 하나의 서비스 | 모든 파트너 외부 링크는 하드코딩 링크가 아니라 **하나의 귀속 서비스로 해석.** 대상: 허브 계산기 버튼 · 라우트 패널 · 파트너 마크 그리드 · 비교표 `Join {partner}` · venue 카드 · 상세 히어로·마지막 띠 · Link Account `Sign up here` · 앱 파트너 카드 · `/payback` `Start {platform} Cashback` |
+| 하나의 서비스 | 모든 파트너 외부 링크는 하드코딩 링크가 아니라 **하나의 귀속 서비스로 해석.** 대상: 라우트 패널 · 파트너 마크 그리드 · 비교표 `Join {partner}` · venue 카드 · 상세 히어로·마지막 띠 · Link Account `Register here` · 앱 파트너 카드 · `/payback` `Start {platform} Cashback` |
 | 원천 | 파트너 레코드가 레퍼럴 링크·코드를 보관(DEX = 거래소 레코드 `테더맥스 레퍼럴 링크`, 본문 9-2). 상업 재협상 = **필드 1개 변경** |
 | 캠페인 파라미터 | 서비스가 **페이지 · 배치 위치**를 식별하는 캠페인 파라미터를 붙여 목적지 반환, **새 탭**으로 엶 |
 | 식별자 금지 | 사용자 식별자(지갑 주소·UID·회원 ID)를 목적지 URL에 **절대 붙이지 않음** |
@@ -6608,7 +7097,7 @@ EdgeX는 "확인을 받으면 엔드포인트·인증·서명·푸시 포맷·�
 | dexw32 | `weblink_search` | linking | `link_search_{result}` | `Search exchanges` 사용. result = one / multiple / none. **정착 시, 쿼리 텍스트 없음** | 유지 |
 | dexw33 | `weblink_validation_fail` | linking | `link_fail_{reason}` | UID·지갑 주소 입력란이 제출 전 검증 실패(LW-3, LW-16). 파트너 · 실패 유형 | 유지 (실패 유형 = F-2-3 순서) |
 | dexw34 | `weblink_created` | conversion | `link_created_{type}` | 연동 생성 + 성공 상태 표시(지갑은 `Account Link Completed`). type = uid / wallet. 파트너 | 유지 |
-| dexw35 | `weblink_register` | outbound | `link_register_{partner}` | Link Account의 `Don't have an account yet? Sign up here`. type(cex/dex) | 유지 |
+| dexw35 | `weblink_register` | outbound | `link_register_{partner}` | Link Account의 `Don't have an account yet? Register here`. type(cex/dex) | 유지 |
 | dexw38 | `webownership_claim_start` | linking | `ownership_start_{venue}` | 사용 중 지갑 소유권 신청 시작 | 구현 (본문 5-10) |
 | dexw39 | `webownership_guide_step` | engagement | `ownership_step_{n}` | 녹화 가이드 스텝 조회 | 구현 |
 | dexw40 | `webownership_upload` | linking | `ownership_upload_{outcome}` | 녹화 업로드 완료·실패, 파일 유형·크기 구간 | 구현 |
@@ -7035,7 +7524,7 @@ PRD 작성자가 Confluence 원문을 고칠 때 쓰는 표입니다. **유지**
 | `CH-16` 요율 입력 | 수정 — 거래소 레코드 | C-18 |
 | `CH-19` DEX 데이터 지연 | 사용자 화면 표시 없음 — 지연 감지는 운영 알림(G-348) | F-2-4 |
 | `RT-1`~`RT-8` | 유지 (`RT-6` 라우트 행 마크는 정적, 자동 캐러셀은 서비스 소개) | M-22 |
-| `LS-1`~`LS-3` | 유지 — CEX 목록에 DEX 추가 안 함 | — |
+| `LS-1`~`LS-3` | 수정 — 별도 목록 페이지 없음, 허브 CEX 탭이 대신함(`LS-2` `Rating`은 허브 비교표) | B-21-5 |
 | `PB-1`~`PB-9` | 유지 — `PB-5` ❓ · `PB-2` 브로커 ❓ | M-14 |
 
 #### 12 Learn and Earn Quiz

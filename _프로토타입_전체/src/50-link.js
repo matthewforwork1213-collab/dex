@@ -175,7 +175,7 @@ document.addEventListener('keydown',event=>{
 
 R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (웹 꽉 찬 모달 · 앱 바텀시트)',fu:['FU-013'],shell:false,
  states:[
-  {id:'normal',label:'진입: 홈 체크리스트 — 선택 없음 (S3-2) · 모바일 시트 All',figma:{pc:'28960:127765',mo:'28969:126953'},note:'V2.2 <code>link/SEL#normal</code> · <code>link/SHEET#normal</code> · <code>link/GRID#normal</code>. 웹 = Figma S3-2 「Link Account modal (live)」 기본 상태(Select a partner · Link Account 비활성). 모바일 = 연동 폼 위 선택 시트(Top Partner · All exchanges (23))'},
+  {id:'normal',label:'진입 — 첫 거래소 WOO X Pro 기본 선택 (G-379)',figma:{pc:'28960:127765',mo:'28969:126953'},note:'V2.2 <code>link/SEL#normal</code> · <code>link/SHEET#normal</code> · <code>link/GRID#normal</code>. 웹 = Figma S3-2 「Link Account modal (live)」 기본 상태(Select a partner · Link Account 비활성). 모바일 = 연동 폼 위 선택 시트(Top Partner · All exchanges (23))'},
   {id:'dexlist',label:'홈 Linked Accounts 푸터 → 공통 선택기 All',figma:{pc:'28960:127381',mo:'28969:126953'}},
   {id:'all',label:'기존 연동 폼의 검색 팝오버 · All',figma:{pc:'28960:127381',mo:'28969:126953'}},
   {id:'uid',label:'UID 입력 화면에서 연 공통 선택기',figma:{pc:'28960:127381',mo:'28969:126953'}},
@@ -194,15 +194,12 @@ R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (�
   const mo=S.vp==='mo';
   if(st==='intro'){
    const body=`<p class="h6" style="margin:0">${T('Have you registered a trading account with the TetherMax referral code?')}</p><p class="b1 c2" style="margin:0">${T('You must link your account to receive USDT from TetherMax.','테더맥스에서 USDT를 받으려면 거래 계정 연동이 꼭 필요해요.')}</p>`;
-   return C.overlay('home.main',linkModal(body,`${C.btn(T('Yes, I have one!'),{full:true,go:'link.select:normal'})}${C.btn(T('No, not yet!'),{v:'outlined',c:'black',full:true})}${signUp()}`));
+   return C.overlay('home.main',linkModal(body,`${C.btn(T('Yes, I have one!'),{full:true,go:'link.select:normal'})}${C.btn(T('No, not yet!'),{v:'outlined',c:'black',full:true,go:'link.select:normal'})}${signUp()}`));
   }
+  if(st==='normal')return uidLinkForm('empty');   // 결정 12차: 연동 모달 첫 상태 = 첫 거래소(WOO X Pro) 기본 선택 — 실서비스와 같음
   if(mo){
    const origin={uid:'link.uid:empty',uidFilled:'link.uid:filled'}[st]||'link.addr:empty';
    return C.overlay(origin,moSheet(st==='all'?'normal':st,origin));
-  }
-  if(st==='normal'){ // Figma S3-2: 선택 전 기본 상태
-   const body=`<div class="col" style="gap:16px">${webExchangeField(null)}<p class="cap c2" style="margin:0">${T('Select the partner you trade on to see how to link your account.')}</p></div>`;
-   return C.overlay('home.main',linkModal(body,`${C.btn(T('Link Account','거래 계정 연동하기'),{full:true,disabled:true})}${signUp()}`));
   }
   return uidLinkForm(st==='uidFilled'?'filled':'empty',st==='all'?'normal':st);
  }});
@@ -218,7 +215,7 @@ function uidGuide(mo,d){
 
 function uidLinkForm(st,openPicker){
  const mo=S.vp==='mo',filled=st==='filled',fmtErr=st==='formatError';
- const d=WEB_CEX.includes(selectedExchange)||cexBy(selectedExchange)?selectedExchange:'Bitget';
+ const d=WEB_CEX.includes(selectedExchange)||cexBy(selectedExchange)?selectedExchange:WEB_CEX[0];   // 첫 상태 = 목록 첫 거래소 기본 선택(WOO X Pro, G-379 · 결정 12차)
  const sel=mo?`<button type="button" class="sel" style="border-color:var(--input-border);padding:16px 12px" data-go="link.select:${filled?'uidFilled':'uid'}">${webMark(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`:webExchangeField(d,openPicker);
  const field=C.field({label:null,value:filled?'1234567':fmtErr?'12345abc':null,ph:T('Enter your UID'),focus:filled,error:null});
  const reg=`<p class="b1 med" style="margin:0;text-align:center;padding:8px 0">${T('Don’t have an account yet?')} <a class="cb" style="cursor:pointer" data-go="auth.signup">${T('Register here')}</a></p>`;
@@ -330,7 +327,7 @@ R.screen({id:'link.captcha',group:'link',title:'캡차',route:'/link (모달)',f
  ],
  render(st){
   const mo=S.vp==='mo';
-  if(st==='success')return splash('success',T('Verification Success'),T('Verification is complete. We’re checking your referral.'),`${mo?C.btn(T('Close','닫기'),{full:true,go:'link.result:pending'}):C.btn(T('Back to Home'),{full:true,go:'home.main'})}${help()}`,{close:'link.addr:valid'});
+  if(st==='success')return splash('success',T('Verification Success'),T('Verification is complete. We’re checking your referral.'),`${C.btn(T('Back to Home'),{full:true,go:'home.main'})}${help()}`,{close:'home.main'});
   const layer=`<div style="position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;justify-content:center;align-items:flex-start;padding-top:${mo?213:152}px">${puzzle()}</div>`;
   if(st==='normal'){
    if(mo)return `<div style="position:relative;height:812px;overflow:hidden">${renderInner('link.addr:valid')}${layer}</div>`;
