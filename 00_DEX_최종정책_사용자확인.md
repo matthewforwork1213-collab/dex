@@ -53,12 +53,13 @@
 | 47 | 랭킹 DEX 행에 금액이 없는 경우 별도 라벨이 필요합니까? | 디자인 확인 | 랭킹 DEX 행 | B-9 |
 | 48 | 빈 홈 카드 문구는 원문 치환 `cashbacks keep coming`입니까, `cashback keeps coming`입니까? | 현재 문서 3곳 `cashbacks` | 문구만 | A-9 · B-3-1 · B-22-2 |
 | 49 | V2 제안서 발송일·수신 확인, EdgeX·Lighter v1.1 사본, ApeX v1.6·Aster v1.3 발송일 기록을 줄 수 있습니까? | 표는 PDF 생성일·파일명 기준. 사본이 없어 EdgeX 요청 세부는 v1.2 초안 기준 | 기록 정확도(구현은 안 막음) | E-0 · E-6-0 |
-| 50 | 별도 Exchange Listings Page 없이 허브 CEX 탭이 대신할 때(결정 Q7), 기존 목록 요소 중 아래 것을 허브 CEX 탭에 옮깁니까? 상단 배너 `Join Now`·점 · 캐러셀 `Top Centralised Exchanges` · 칩 `Recommended`·`All`·`Cashback Boost`·`Events` · 열 `Avg. Cashback`·`Live Campaigns`·`View Event` ↗ · 거래소 행 본문 클릭(기존 = 거래소 상세) | 옮김 / 없앰(요소별). 검색·보기 전환·정렬·`Rating`은 허브 비교표로 유지, 목록 전용 헤더·목록 안 `See All`·목록 모바일 ←은 없앰으로 정리됨 | 허브 CEX 탭 구성 | REQ-475 · B-21-5 |
+| 51 | DEX 개요 프로모션 배너 전용 어드민 모달(입력 구성은 기존 「거래소 목록 상단 배너」와 같음, 저장소 분리)을 어디에 둡니까? | 권장안: `Cashback Products > DEX Landing Page` 화면의 `DEX 개요 배너` 버튼 → 모달 / 다른 위치 | 어드민 화면 배치(입력 구성·저장소 분리는 확정) | G-156 · C-9-6 · REQ-735 |
 
 ## 이미 답이 있어 뺀 것
 
 | 원래 항목 | 근거 |
 |---|---|
+| #50 별도 Exchange Listings Page 없이 허브 CEX 탭이 대신할 때 기존 목록 요소를 옮길지 | 사용자 2026-11-27 — 기존 CEX 거래소 목록 페이지(`/{lang}/affiliated`)를 그대로 유지하므로 목록 요소는 모두 기존 페이지에 있음(B-21-5 · REQ-466 · REQ-475) |
 | G-014 senya 10-19를 공식 확인으로 볼지 (R5) | 해소 판정. `messages.html` 원문 확인 |
 | G-195 확인 중 지갑 목록 제외에 이의 있는지 (R5) | 본문 P8 · 5-5, 사용자 10-27 #218 |
 | 지갑 상세 외 `Account Link Required` 제목 (K01#19 · R1) | 알림_DEX_반영 6-2 「`UID` 중립어 확정, 디자인 반영」 → G-202 확정 |

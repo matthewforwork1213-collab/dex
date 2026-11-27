@@ -74,8 +74,6 @@
 | 53 | 랭킹 목록 아래 | 캡션 | Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback. | 랭킹 리워드만으로는 출금할 수 없어요. 같은 계정의 캐시백과 1:1로 매칭돼요. | 신규 | balance #36 · 정책 4-1 |
 | 54 | 캐시백 요약 · 연동 전 출금 행 | 유형명 | Claim Amount (before linking) | 연동 전 출금 | 신규(STG 유형값 `Claim Amount` 바탕) | G-426 · G-418 |
 | 96 | 허브 계산기 · DEX 상세 계산기 · 수수료 없는 등급(Lighter Standard · Aster maker) | 수치 자리 안내 | {DEX} charges no fee on this trade type, so there's nothing to return. | {DEX}는 이 거래 유형에 수수료가 없어 돌려드릴 캐시백이 없어요. | EN 정책 권고 원문(EC-CALC-6) · KO 신규 | G-145 · REQ-296 · 결정 11차 |
-| 96 | 허브 계산기 · DEX 상세 계산기 · 수수료 없는 등급(Lighter Standard · Aster maker) | 수치 자리 안내 | {DEX} charges no fee on this trade type, so there's nothing to return. | {DEX}는 이 거래 유형에 수수료가 없어 돌려드릴 캐시백이 없어요. | EN 정책 권고 원문(EC-CALC-6) · KO 신규 | G-145 · REQ-296 · 결정 11차 |
-| 96 | 허브 계산기 · DEX 상세 계산기 · 수수료 없는 등급(Lighter Standard · Aster maker) | 수치 자리 안내 | {DEX} charges no fee on this trade type, so there's nothing to return. | {DEX}는 이 거래 유형에 수수료가 없어 돌려드릴 캐시백이 없어요. | EN 정책 권고 원문(EC-CALC-6) · KO 신규 | G-145 · REQ-296 · 결정 11차 |
 
 ## 3. 리워드 · 초대 · 쿠폰 · 맥스보드 · 콘텐츠 · 메일
 
@@ -115,18 +113,6 @@
 | 100 | 맥스보드 · 자격 없음(참여 계정이 끊긴 뒤) | 본문 | You have no eligible {exchange} account. Link a new account to participate again. | 참여할 수 있는 {거래소} 거래 계정이 없어요. 새 거래 계정을 연동하면 다시 참여할 수 있어요. | EN 원본 `[EN draft]`의 UID → account · KO 정책 D-1-6 원문 | G-323 · REQ-655 · 결정 11차 |
 | 101 | 혜택 상세(맥스보드) · 리워드 영역 | 안내 | Board rewards are paid together with your exchange cashback, so they can't be withdrawn on their own. | 보드 리워드는 거래소 캐시백과 함께 지급돼요. 리워드만 따로 출금할 수는 없어요. | 신규 | G-324 · REQ-645 · 결정 11차 |
 | 102 | Cashback Basics · 소제목 | 소제목 | Claim cashback and rewards | 국문 언어팩 확인 | 기존 아티클 소제목 `Withdraw cashback and rewards`의 동작어를 Claim으로(요청·동작 = Claim) | REQ-714 · 정책 8-24 S-10 · 결정 11차 |
-| 97 | FCM 101 · EMAIL 31 · 사유 = 레퍼럴 아님 | 사유 문구 | This wallet isn't registered with TetherMax's referral, so it can't earn cashback. | 테더맥스 레퍼럴로 가입한 지갑이 아니라 캐시백을 받을 수 없어요. | 신규 | G-285 · REQ-662 · 결정 11차 |
-| 98 | FCM 101 · EMAIL 31 · 사유 = 이미 사용 중 | 사유 문구 | This wallet is already linked to another account. | 다른 계정에 이미 연동된 지갑이에요. | 신규 | G-285 · REQ-662 · 결정 11차 |
-| 99 | FCM 101 · EMAIL 31 · 사유 = 확인 불가 | 사유 문구 | We couldn't verify this wallet. Please contact support. | 지갑을 확인할 수 없어요. 고객센터로 문의해 주세요. | 신규 | G-285 · REQ-662 · 결정 11차 |
-| 100 | 맥스보드 · 자격 없음(참여 계정이 끊긴 뒤) | 본문 | You have no eligible {exchange} account. Link a new account to participate again. | 참여할 수 있는 {거래소} 거래 계정이 없어요. 새 거래 계정을 연동하면 다시 참여할 수 있어요. | EN 원본 `[EN draft]`의 UID → account · KO 정책 D-1-6 원문 | G-323 · REQ-655 · 결정 11차 |
-| 101 | 혜택 상세(맥스보드) · 리워드 영역 | 안내 | Board rewards are paid together with your exchange cashback, so they can't be withdrawn on their own. | 보드 리워드는 거래소 캐시백과 함께 지급돼요. 리워드만 따로 출금할 수는 없어요. | 신규 | G-324 · REQ-645 · 결정 11차 |
-| 102 | Cashback Basics · 소제목 | 소제목 | Claim cashback and rewards | 국문 언어팩 확인 | 기존 아티클 소제목 `Withdraw cashback and rewards`의 동작어를 Claim으로(요청·동작 = Claim) | REQ-714 · 정책 8-24 S-10 · 결정 11차 |
-| 97 | FCM 101 · EMAIL 31 · 사유 = 레퍼럴 아님 | 사유 문구 | This wallet isn't registered with TetherMax's referral, so it can't earn cashback. | 테더맥스 레퍼럴로 가입한 지갑이 아니라 캐시백을 받을 수 없어요. | 신규 | G-285 · REQ-662 · 결정 11차 |
-| 98 | FCM 101 · EMAIL 31 · 사유 = 이미 사용 중 | 사유 문구 | This wallet is already linked to another account. | 다른 계정에 이미 연동된 지갑이에요. | 신규 | G-285 · REQ-662 · 결정 11차 |
-| 99 | FCM 101 · EMAIL 31 · 사유 = 확인 불가 | 사유 문구 | We couldn't verify this wallet. Please contact support. | 지갑을 확인할 수 없어요. 고객센터로 문의해 주세요. | 신규 | G-285 · REQ-662 · 결정 11차 |
-| 100 | 맥스보드 · 자격 없음(참여 계정이 끊긴 뒤) | 본문 | You have no eligible {exchange} account. Link a new account to participate again. | 참여할 수 있는 {거래소} 거래 계정이 없어요. 새 거래 계정을 연동하면 다시 참여할 수 있어요. | EN 원본 `[EN draft]`의 UID → account · KO 정책 D-1-6 원문 | G-323 · REQ-655 · 결정 11차 |
-| 101 | 혜택 상세(맥스보드) · 리워드 영역 | 안내 | Board rewards are paid together with your exchange cashback, so they can't be withdrawn on their own. | 보드 리워드는 거래소 캐시백과 함께 지급돼요. 리워드만 따로 출금할 수는 없어요. | 신규 | G-324 · REQ-645 · 결정 11차 |
-| 102 | Cashback Basics · 소제목 | 소제목 | Claim cashback and rewards | 국문 언어팩 확인 | 기존 아티클 소제목 `Withdraw cashback and rewards`의 동작어를 Claim으로(요청·동작 = Claim) | REQ-714 · 정책 8-24 S-10 · 결정 11차 |
 | 103 | 알림 패널(PC) · 알림 페이지 `/alarm`(모바일) | 제목 | Notifications | 알림 | 언어팩 `alarm title` | REQ-464 · 알림목록_정의 1장 |
 | 104 | 알림 패널 · 알림 0건 / 목록 조회 실패 | 빈 상태 제목 · 설명 | No Notifications · Youre all caught up. Well notify you when there`s an update. | 알림 없음 · 모든 소식을 확인하셨습니다. 업데이트가 있으면 알려드릴게요. | 언어팩 `no Notifications` · `no Notifications desc` (영문 원문 그대로 — 오기 수정 여부 알림목록_정의 N-4) | REQ-464 · REQ-471 |
 | 105 | 알림 패널 · 기존 알림 항목(CEX) | 제목 · 본문 | `💡 UID linking failed` / `{exchange} {UID} linking failed. Please try again.` · `🎉 New Event Registered!` / `New {exchange} event you might like has just been added.` · `💡 Withdrawal completed` / `{exchange} {UID} — {amount} USDT has been withdrawn as requested.` · `💡 Withdrawal failed` / `{exchange} {UID} — withdrawal of {amount} USDT failed.` · `⚡ New exchange listed` / `👏👏 {exchange} has just been added to TetherMax.` | 국문 언어팩 확인 | 기존 서비스 문구(dev 실측 · 실서비스 수집본 2026-11-26~27) | REQ-464 · 알림목록_정의 3-1 |
@@ -146,5 +132,5 @@
 | 91 | 지역 차단 이유 문구 | 본문 | 값 미정(G-089) | 값 미정(G-089) | 값 미정 | G-367 · G-089(지역 판정 신호 미정) |
 | 92 | 거래소 가이드 단계 제목·설명(Lighter 외 DEX · Step 2 잘못된 체인 경고) | 본문 | (어드민 거래소 가이드 입력 — 표본: `Open {DEX} and copy the wallet address from your account. Paste it above.`) | (표본: `{DEX}에서 계정의 지갑 주소를 복사해 위에 붙여넣으세요.`) | 운영 입력값 | G-443 · REQ-533 |
 | 93 | 프리로그인 랜딩 Hero DEX · `Promo Tagline` · `CTA Button Title` · `Total Savings` / DEX 상세 Plus 요율 · 카드 표본 요율 | 라벨 · 버튼 · 수치 | (운영자 입력 EN·KO · 레코드 `total_savings_rate`) | (운영자 입력) | 운영 입력값 | REQ-288 · REQ-060 · G-466 |
-| 94 | 모바일 드로어 · 프로모 배너 / DEX 개요 배너 | 이미지 · 제목 · 내용 | (기존 어드민 「거래소 목록 상단 배너」 입력 — 한·영) | (같음) | 운영 입력값 | G-156 · D7 2차 |
+| 94 | DEX 개요 프로모션 배너(`DX-14`) | 이미지 · 제목 · 내용 · 링크 | (DEX 개요 배너 전용 어드민 입력 — 한·영, 입력 구성은 기존 「거래소 목록 상단 배너」와 같음) | (같음) | 운영 입력값 | G-156 · REQ-735 |
 | 95 | 이용약관 6.8 · 개인정보처리방침 (b) 지갑 주소·DEX 거래 기록 · (c) 게스트 조회 처리 범위 / ApeX·Aster 정산 주기 표기(`Daily` 여부 · 공개 시각) | 약관 · 칸 | 값 미정(G-425 법무 문안) / 값 미정(G-025 · G-036) | 값 미정(G-425) / 값 미정(G-025 · G-036) | 값 미정 | G-425 🔴 · G-025 ⏳ · G-036 ⏳ |

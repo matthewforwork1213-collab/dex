@@ -368,6 +368,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 
 - 운영자 편집 영역은 API-127 `areas`와 같은 키(REQ-628, 정책 C-12-3): `hero`(`title` = H1 · `lede` = 리드) · `sectionButtons` · `trust` · `venueArea` · `comparisonRows` · `stepsArea`·`steps` · `educationTiles` · `learnAndEarn` · `finalCta`. 비운 칸은 언어팩 기본 문구로 채워 준다(G-366). 파트너 카드 `card`(Line 1~3) · `learnMoreUrl` · `getStartedUrl`은 거래소별 Edit Landing Content(API-128 `LANDING_CARD`) — 카드에는 오퍼 3줄만(G-157). `partnerCountText`·`riskNotice`(G-155)는 고정 문구, 히어로 배경 등 빌드 에셋은 응답에 없다.
 - `metrics`: 실패 시 24시간은 마지막 값(`stale: true`), 그 뒤 `null`(영역 숨김, REQ-323). 24H 거래량 출처 G-349 확정: `api.llama.fi/summary/derivatives/{slug}` · 캐시 24시간 · 24시간 뒤 숨김.
+- `promoBanners`: DEX 개요 배너 전용 저장소(어드민 API-138)의 항목을 표시 순서대로, 회원 언어의 한/영 값(`title` · `content` · `linkUrl`)으로 준다(REQ-324 · REQ-735). 기존 「거래소 목록 상단 배너」(CEX 거래소 목록 상단 배너)는 읽지 않는다. 게시 항목이 없으면 `promoBanners: []` → 배너 미렌더.
 - `venues[]`에는 상태 값을 두지 않는다 — 비노출 DEX는 응답에서 빠지고(G-162), 점검 상태도 없다(G-460). 노출 DEX가 0이면 `venues: []`.
 - 히어로 리드는 G-154의 언어별 확정 문구를 사용한다. 위험 고지는 언어팩 고정 문구(G-155)로 표시한다. 비교 문구는 `Your DEX cashback does not.`(G-401), 퀴즈 보상은 이벤트 리워드 매칭 규칙(G-158)을 따른다. 벤토 이미지는 최종 디자인 자산(G-159)을 사용한다. 선택 콘텐츠 값이 비면 해당 요소만 숨긴다.
 

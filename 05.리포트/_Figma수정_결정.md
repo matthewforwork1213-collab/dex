@@ -45,7 +45,7 @@
 
 | # | 결정 |
 |---|---|
-| D7 | 프로모 배너 **넣는다** — 관리는 기존 어드민 「거래소 목록 상단 배너」(이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가)를 그대로 사용(G-156 해소) |
+| D7 | 프로모 배너 **넣는다** — 관리는 DEX 개요 배너 전용 어드민(입력 구성은 기존 「거래소 목록 상단 배너」와 같음: 이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가), 저장소 분리(G-156 · 아래 「DEX 개요 배너 어드민」) |
 | D4 | GNB `Cashback ▾` = **Cashback Hub · Cashback Calculator**. 계산기는 Cashback 하위 메뉴 — 상단 단독 `Calculator` 메뉴 없음 |
 | N16 | 누적 캐시백 카드(기존 MAXOP-731, [MAX-7] 페이지 22913:1054295 — DEX(revision) 페이지에는 없음) 캡션은 Account 규칙 적용: `Sum of {n} linked accounts · Update times vary by exchange`(타임존 라벨 없음, G-191) |
 
@@ -96,7 +96,7 @@
 | Q2 G-449 | Q1로 해소(화면 없음) |
 | Q3 G-451 | 홈 `Using multiple platforms? Link more accounts` → Link Account 연동 모달(웹 모달 · 모바일 꽉 찬 모달). 홈 `See All` → 연동 계정 목록 모달(기존 9401:160223 — 거래소별 묶음 · 계정 수 · 거래소 합계 · 계정별 금액 · 상태 점 · `Close`), 표기는 UID가 아니라 **Accounts**(`Linked Accounts {n}` · `{n} Total` · `{n} accounts`) |
 | Q4 G-451 | 홈 Linked Accounts 행 상태별 표시는 기존 디자인(9401:87675 — 거래소별 UID 행 · 상태 점 · 진행 중 시계 아이콘)에 이미 정의 — 그대로 |
-| Q7 G-463 | 거래소 목록이 캐시백 허브로 바뀌므로 문제 없음 — 같은 배너 사용(A) |
+| Q7 G-463 | 기존 CEX 거래소 목록 페이지(`/{lang}/affiliated`)를 그대로 두므로 그 상단 배너는 「거래소 목록 상단 배너」 그대로, DEX 개요 프로모 배너는 전용 어드민(아래 「CEX 거래소 목록 페이지」 · 「DEX 개요 배너 어드민」) |
 | Q9 | A — 쿠폰 계정 선택 모달은 계정이 1개여도 선택 없이 뜸(지금 Figma처럼) |
 | Q5 G-460 | **점검 중 상태를 다루지 않음** — 테더맥스가 DEX 점검 여부를 알 수 없음. 연동을 시도해 실패하면 기존 연동 실패 오류 메시지만 보여 줌. 점검 표시 배지·`Link Wallet` 숨김 없음(G-162의 상세 적용 없음) |
 | Q6 G-460 | **B** — 확인 중 지갑만 있는 회원의 DEX 상세 오퍼 박스에 「확인 중」 상태 표시(비활성). 참고: 귀속 확인은 대부분 즉시 응답이라 이 상태는 짧게 나타남 |
@@ -122,7 +122,7 @@
 |---|---|
 | 컴포넌트 안에 줄을 넣어야 하는 항목 | **A — DEX(revision) 해당 화면 인스턴스만 분리(detach)해 수정**, 컴포넌트 메인·다른 페이지는 고치지 않음 |
 | 기존 원본이 없는 화면(퀴즈 모바일 상태 · Cashback Basics 모바일 · 혜택 상세 회원 모바일 CTA · 모바일 홈 첫 연동) | **가장 가까운 기존 컴포넌트로 그림** |
-| 프로토타입 방향 | **실사이트 수집본(`_프로토타입_실사이트/`) + DEX 합치기, 실제 사이트처럼 작동**(입력·검증·토스트·탭·애니메이션). 캐시백 허브가 거래소 목록(`/en/affiliated`) 자리 |
+| 프로토타입 방향 | **실사이트 수집본(`_프로토타입_실사이트/`) + DEX 합치기, 실제 사이트처럼 작동**(입력·검증·토스트·탭·애니메이션). 거래소 목록(`/en/affiliated`)은 기존 CEX 거래소 목록 페이지 그대로, 캐시백 허브는 별도 페이지 |
 
 ## Figma 2차 남은 항목 (2026-11-27 8차)
 
@@ -198,7 +198,7 @@
 | 화면 목록판(`full.html`) 표시 | 왼쪽 LNB를 빼고 실사이트처럼 — 화면을 고정 틀로 자르지 않고 전체 폭·전체 높이로. 상단 로그인 상태(게스트·회원 연동 0·회원 연동) 전환 시 그 상태의 화면으로 바뀜(예: 은색 테더맥스 로고 히어로 랜딩은 게스트 전용) |
 | 연동 모달 가입 중간 안내 `Start by signing up for Lighter?` | 없음 — 가입 링크는 바로 선택한 거래소 레퍼럴 가입 새 탭 |
 | 연동 모달 가입 링크 문구 | `Don't have an account yet? Register here`(실서비스) |
-| 허브 CEX 라우트 행 목적지 | 허브 CEX 탭(별도 Exchange Listings 페이지 없음) |
+| 허브 CEX 라우트 행 목적지 | `Centralised exchanges` 행·화살표 → 기존 CEX 거래소 목록 페이지(`/{lang}/affiliated`, 현재 탭). 허브 안 CEX 탭으로 스크롤·포커스하지 않음 |
 | REQ-039 비활성 버튼 조건 안내 예외 | 계산기 `Next`·`Check Results`, 소유권 `Submit Claim` — 조건 안내 없이 비활성만(기존 화면) |
 | EMAIL 31 버튼 링크 | 해당 DEX가 선택된 연동 모달로(문서대로, Figma 메일에 링크 추가) |
 | 테더맥스 포인트(TP) 진입 (2026-11-27) | 소개 페이지(`/en/tethermax-point-introduction`)는 게스트·회원 모두 볼 수 있음. CTA = 스크롤하면 나타나는 고정 버튼 `Check My TP` — 회원 → 포인트 페이지(`/en/tethermax-point`), 게스트 → 가입(`/en/signup`). 게스트가 포인트 페이지를 직접 열면 소개 페이지로. 근거 www-dev 실측 · Figma [MAX-659] TetherMax Point(13033:27246) |
@@ -209,6 +209,8 @@
 | Brokers 페이지 (2026-11-27) | `/brokers` · `/brokers/learn` · `/brokers/compare` · `/brokers/rs-finance` · `/brokers/infinox` 모두 유지(실서비스·Figma [MAX-]FX V2 그대로). 없애는 것은 GNB `Cashback ▾`의 `Brokers` 진입뿐(D4) |
 | 허브 Brokers 비교표 `Join {broker}` | 브로커 상세(`/{lang}/brokers/{slug}`, 현재 탭) — 허브 `Join` 전체 규칙과 같음 |
 | 혜택 상세 상태 (2026-11-27) | 쿠폰을 주는 혜택은 상세마다 **수행 전 / 수행 후 쿠폰 미수령 / 수행 후 쿠폰 수령** 3상태를 정의. 그 밖에 텍스트가 바뀌는 상태는 모두 정의. 기존 정책 중 DEX로 바뀌어야 하는 부분(용어·조건·대상)은 반영 |
+| CEX 거래소 목록 페이지 (2026-11-27) | 기존 거래소 목록 `/{lang}/affiliated`(Exchange Listings)를 실서비스 화면·동작 그대로 유지 — 검색 · 칩 · 정렬 · `Rating` · 상단 배너 · `Top Centralised Exchanges` 캐러셀 · 행 클릭 = 거래소 상세 변경 없음, CEX만 나열(DEX는 DEX 개요). 거래소 목록으로 가던 링크는 기존대로 이 페이지: 홈·지갑 상세·게스트 조회 결과 `Top Partner Exchanges` `See All` · 게스트 조회 `No account? Join our partner exchange ⟶` · 프리로그인 랜딩 `Browse Partner Exchange` · 앱 하단 탭 `Exchanges`. 허브는 이 자리를 대신하지 않음(허브 URL ❓ IA-Q5), GNB `Cashback ▾` = `Cashback Hub` · `Cashback Calculator`(D4). 정책 B-21-5 · REQ-466 · REQ-475 |
+| DEX 개요 배너 어드민 (2026-11-27) | 기존 어드민 「거래소 목록 상단 배너」 모달은 CEX 거래소 목록 상단 배너 전용(변경 없음, 회귀 테스트만). DEX 개요 프로모션 배너(`DX-14`, REQ-324)는 전용 어드민 모달 — 입력 구성은 기존 모달과 같음(이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가), 저장소 분리. 게시 항목이 없으면 배너 미렌더. 위치 ❓ 사용자 확인 #51 — 권장안: `Cashback Products > DEX Landing Page` 화면의 `DEX 개요 배너` 버튼 → 모달. 정책 B-6-4 · C-9-6 · G-156 · REQ-735 · API-138 |
 
 ## 문구 기준 (사용자 2026-11-27)
 

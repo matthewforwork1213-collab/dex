@@ -529,7 +529,7 @@ API-007 · API-109 · API-115 · JOB-D05 · JOB-D07 · JOB-D10은 이 표를 기
 | `Exclusive For Members` 카드(웹 `Join Now`·모바일 카드) | 그 혜택 상세로 이동하며 웹·모바일이 같다 | REQ-284 |
 | `Limited Time Offers` `See All` | `/events`로 이동한다(기존 동작) | REQ-284 |
 | `Limited Time Offers` 카드 `Join Now` | 그 이벤트 외부 링크를 새 탭으로 연다(기존 동작) | REQ-284 |
-| 홈 `Top Partner Exchanges` `See All` | 허브 CEX 탭(기존 거래소 목록 자리, 결정 Q7)으로 이동한다 | REQ-284 |
+| 홈 `Top Partner Exchanges` `See All` | CEX 거래소 목록 페이지(`/{lang}/affiliated`)로 이동한다(기존 동작) | REQ-284 |
 | 홈 `Top Partner Exchanges` 거래소 카드 | 그 거래소 상세로 이동한다(기존 동작) | REQ-284 |
 
 ## 8-2. 게스트 홈 · 서비스 소개
@@ -1000,6 +1000,8 @@ PRD 숫자 설정: 탭 CEX / DEX · `Default Exchange` · `Select Partner` · Mi
 | 벤토 타일 | 태그 · 제목 · 설명 · 이미지. 기본 4, 2~6 가변(시연값, 상한 G-265 확정: Key Features 4 고정 · 가이드 1~5단계 · FAQ 섹션 1~7 · 랜딩 단계 2~5 · 비교 행 3~10 · 설명 카드 2~5) |
 | Learn & Earn | 말머리 태그 · 제목 · 설명 · 버튼 표시명 |
 | 마지막 CTA 띠 | 제목 · 설명 · 버튼 표시명 · 버튼 링크 |
+
+파트너 프로모션 배너(`DX-14`)는 9개 영역과 별도로 **DEX 개요 배너 모달**에서 입력한다(C-9-6).
 
 ### 거래소 상세 콘텐츠 (`EDC` — 파트너별)
 
@@ -2042,12 +2044,12 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 |---|---|---|
 | 푸터 Company `Claim Cashback` | PC·모바일 게스트 푸터 모두에 두고 `/{lang}/search` 비회원 조회로 이동한다 | REQ-175 |
 | 조회 입력칸 `?` 아이콘 | 기존 `What is UID?` 안내 팝업을 연다(기존 동작) | REQ-175 |
-| `No account? Join our partner exchange ⟶` | 허브 CEX 탭(기존 거래소 목록 `/affiliated` 자리, 결정 Q7)으로 이동한다 | REQ-175 |
+| `No account? Join our partner exchange ⟶` | CEX 거래소 목록 페이지(`/{lang}/affiliated`)로 이동한다(기존 동작) | REQ-175 |
 | 조회 하단 띠 `Email address` 입력 | 입력한 이메일을 가입 화면에 채운다(기존 동작) | REQ-175 |
 | 거래소 선택 닫기 X | 선택 없이 닫는다(기존 동작) | REQ-175 |
 | 거래소 선택 `Search for an exchange` | 입력대로 목록을 거르고 0건이면 `No results found for {검색어}`를 보인다 | REQ-175 |
 | 거래소 선택 CEX/DEX 필터 | 연동 선택기와 같은 `All`/`CEX`/`DEX` 칩으로 거른다(REQ-055·056 규칙) | REQ-175 |
-| 결과 `Top Partner Exchanges` `See All` | 허브 CEX 탭(기존 거래소 목록 자리)으로 이동한다 | REQ-179 |
+| 결과 `Top Partner Exchanges` `See All` | CEX 거래소 목록 페이지(`/{lang}/affiliated`)로 이동한다(기존 동작) | REQ-179 |
 | 결과 Top Partner 타일 | 그 거래소 상세로 이동한다(기존 동작) | REQ-179 |
 | 결과 타일 › | 다음 타일로 넘긴다(기존 동작) | REQ-179 |
 | 결과 `Exclusive For Members` `See All` | 혜택 목록으로 이동한다(기존 동작) | REQ-179 |
@@ -2378,7 +2380,7 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 | 리뷰 유도 `Write a review, get 2 USDT` | 지갑 상세 위에 기존 리뷰 작성 모달을 연다(DEX 상세로 이동하지 않음) | REQ-278 |
 | `Exclusive Benefit` `See All` | 혜택 목록 `/benefits`로 이동한다 | REQ-278 |
 | `Exclusive Benefit` 카드(웹 `Join Now`·모바일 카드) | 그 혜택 상세로 이동하며 웹·모바일이 같다 | REQ-278 |
-| 지갑 상세 `Top Partner Exchanges` `See All` | 허브 CEX 탭으로 이동한다(홈과 같음) | REQ-278 |
+| 지갑 상세 `Top Partner Exchanges` `See All` | CEX 거래소 목록 페이지(`/{lang}/affiliated`)로 이동한다(홈과 같음) | REQ-278 |
 | 지갑 상세 모바일 뒤로 | 이전 화면으로 돌아가고 이전 화면이 없으면 홈으로 간다 | REQ-276 |
 | 지갑 상세 잔액 조회 실패 | 기존 빈 상태로 두며 오류 Alert·`Try again`을 두지 않는다(G-459) | REQ-277 |
 | 지갑 상세 헤더 DEX 축약 지갑 주소 | 모바일은 탭, PC는 호버하면 전체 주소를 기존 어두운 툴팁(거래소 상세 `Total Savings` ⓘ 툴팁과 같은 모양, 제목·`Close` 없음)으로 보이고, 바깥 탭·마우스 이탈로 닫히며 복사 아이콘은 그대로 둔다(사용자 2026-11-27) | REQ-276 |
@@ -2619,7 +2621,7 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 요소 | 원문·규칙 |
 |---|---|
 | 섹션 머리 (RT-1) | 제목 `Pick where you trade`(좌) · 설명 `Every route pays back a share of your trading fees. Open one to see its partners and rates.`(우, 같은 줄). 모바일은 설명이 제목 아래 |
-| 목록 (RT-2) | 점선 구분 3행. 순서 `Decentralised exchanges` → `Centralised exchanges` → `Brokers`(모든 허브 상태·모든 카드 라우트에서 고정). 행 = 3D 아이콘(`Swap`·`Stack`·`Chart`) · 라우트명 + 한 줄 설명 · `PARTNERS` 로고 + 캡션 · `UP TO` 최고 요율 + 캡션 · 둥근 화살표 버튼. hover = 회색 채움 + 화살표 파란 원. 행/화살표 선택 → **현재 탭** 이동: DEX → DEX 랜딩, CEX → 허브 CEX 탭(별도 목록 페이지 없음, B-21-5), Brokers → Brokers 페이지. 모바일 = 아이콘·이름 / 파트너 / 요율 순으로 쌓음 |
+| 목록 (RT-2) | 점선 구분 3행. 순서 `Decentralised exchanges` → `Centralised exchanges` → `Brokers`(모든 허브 상태·모든 카드 라우트에서 고정). 행 = 3D 아이콘(`Swap`·`Stack`·`Chart`) · 라우트명 + 한 줄 설명 · `PARTNERS` 로고 + 캡션 · `UP TO` 최고 요율 + 캡션 · 둥근 화살표 버튼. hover = 회색 채움 + 화살표 파란 원. 행/화살표 선택 → **현재 탭** 이동: DEX → DEX 랜딩, CEX → CEX 거래소 목록 페이지 `/{lang}/affiliated`(B-21-5), Brokers → Brokers 페이지. 모바일 = 아이콘·이름 / 파트너 / 요율 순으로 쌓음 |
 | 목록 주석 | `"Up to" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.` |
 | DEX 행 (RT-4) | `Decentralised exchanges` / `For traders who keep their own keys` / 로고 Lighter·ApeX·EdgeX·Aster(레코드) / 세 번째 줄 = CEX와 같은 지급 조건 문구(본문 8-3), 원본 캡션 `Paste your wallet, never connect`는 자리 이동 / `UP TO {n}%` + `trading fee cashback` |
 | CEX 행 (RT-3) | `Centralised exchanges` / `For futures traders on exchanges` / 로고 두 줄 / `Paid daily, withdraw from 10 USDT`(10 서버값) / `UP TO {n}%` + `futures cashback` |
@@ -2731,16 +2733,16 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 항목 | 규칙 |
 |---|---|
 | 위치 | glance 아래 전폭 캐러셀 + 아래 점 표시(슬라이드 수만큼) |
-| 슬라이드 | 「거래소 목록 상단 배너」 항목 1개 = 이미지 · 제목 · 내용 · 링크(회원 언어의 한/영 값) |
+| 슬라이드 | DEX 개요 배너 항목 1개 = 이미지 · 제목 · 내용 · 링크(회원 언어의 한/영 값) |
 | 링크 | 항목의 한/영 링크를 새 탭으로 |
 | 빈 상태 | **게시된 슬라이드가 없으면 배너를 렌더하지 않고 빈 공간도 남기지 않음** |
-| 관리 | 기존 어드민 「거래소 목록 상단 배너」 모달(이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가)을 그대로 쓴다(G-156). 새 입력 화면·필드 없음 |
+| 관리 | **DEX 개요 배너 전용 어드민 모달**(G-156). 입력 구성은 기존 「거래소 목록 상단 배너」 모달과 같음(이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가). 「거래소 목록 상단 배너」는 CEX 거래소 목록 상단 배너 전용으로 변경 없음. 모달 위치 ❓ 사용자 확인 #51 — 권장안: `Cashback Products > DEX Landing Page` 화면(C-9-2)의 `DEX 개요 배너` 버튼 → 모달(C-9-6) |
 
 **화면 요소 동작**
 
 | 요소 | 동작 · 조건 · 피드백 | REQ |
 |---|---|---|
-| 프로모션 배너 캐러셀 점·넘김 | 기존 거래소 목록 상단 배너 캐러셀과 같게 동작한다(같은 어드민 배너, D7·Q7) | REQ-324 |
+| 프로모션 배너 캐러셀 점·넘김 | 기존 CEX 거래소 목록 상단 배너 캐러셀과 같게 동작한다(D7) | REQ-324 |
 
 근거: 10.txt DX-14 (p.4)
 
@@ -3646,7 +3648,7 @@ TP 적립 공식(출금이 트리거, DEX 출금에도 같은 공식):
 
 ### B-21-1 사이트맵
 
-Cashback Landing(허브) → **Centralised Exchanges**(= 허브 CEX 탭. 허브가 기존 거래소 목록 `/{lang}/affiliated` 자리를 대신하며 별도 Exchange Listings Page·CEX 개요 페이지 없음 — 결정 Q7, 사용자 2026-11-27) · **Decentralised Exchanges Overview** · Brokers · **Cashback Calculator**(`/payback`, 독립 제품). DEX Overview → DEX Detailed Page → 귀속 코드가 미리 채워진 파트너 가입 페이지. 테더맥스 안에서 지갑 생성·브리지·입금·거래 실행 없음(모든 경로는 파트너 사이트/앱에서 끝남). 허브 비교표 외 DEX 전용 비교 페이지 없음.
+Cashback Landing(허브) → **Centralised Exchanges**(= 기존 CEX 거래소 목록 페이지 `/{lang}/affiliated` 직행, CEX 개요 페이지 없음 — B-21-5) · **Decentralised Exchanges Overview** · Brokers · **Cashback Calculator**(`/payback`, 독립 제품). DEX Overview → DEX Detailed Page → 귀속 코드가 미리 채워진 파트너 가입 페이지. 테더맥스 안에서 지갑 생성·브리지·입금·거래 실행 없음(모든 경로는 파트너 사이트/앱에서 끝남). 허브 비교표 외 DEX 전용 비교 페이지 없음.
 
 ### B-21-2 데스크톱 헤더 (`GL-1`·`GL-2`)
 
@@ -3706,32 +3708,30 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 허브 CEX 탭. 허브�
 | 푸터 Legal `Terms of Service` | 이용약관 화면으로 이동한다(기존 푸터 라벨 그대로, 드로어 법적 행은 `Terms of Use` — REQ-474) | REQ-472 |
 | 푸터 소셜 아이콘 | 블로그(tistory)·YouTube·X·Telegram을 새 탭으로 연다(기존 4종) | REQ-472 |
 
-### B-21-5 거래소 목록 자리 — 허브 CEX 탭 (`LS-1`~`LS-3`)
+### B-21-5 CEX 거래소 목록 페이지 (`LS-1`~`LS-3`, 기존 페이지 유지)
 
 | 항목 | 규칙 |
 |---|---|
-| 자리 | **별도 Exchange Listings Page 없음.** 캐시백 허브 CEX 탭(계산기 라우트 탭과 비교표 칩이 CEX로 선택된 허브)이 기존 거래소 목록 `/{lang}/affiliated` 자리를 대신함(결정 Q7, 사용자 2026-11-27) |
-| 진입 | 허브 CEX 라우트 행 · 거래소 목록으로 가던 기존 링크(홈·지갑 상세·게스트 조회 결과 `Top Partner Exchanges` `See All`, 게스트 조회 `No account? Join our partner exchange ⟶`) → 허브 CEX 탭 |
-| DEX | 허브 비교표 `Decentralised Exchanges` 칩과 DEX 개요에서 |
-| 평점 (LS-2) | 허브 비교표 `Rating` 열로 유지(B-5-8 — 리뷰 20개 미만 `-`, 카드 뷰 생략) |
-| 헤더 (LS-3) | 별도 목록 페이지가 없어 해당 없음(허브는 GL-1 헤더) |
+| 자리 | 기존 거래소 목록 `/{lang}/affiliated`(Exchange Listings)를 **재구축하지 않고 실서비스 화면·동작 그대로 유지**(사용자 2026-11-27). 사용자 화면 이름은 「CEX 거래소 목록 페이지」 |
+| 진입 | 허브 `Pick where you trade` `Centralised exchanges` 라우트 행·화살표(현재 탭, B-5-6) · 거래소 목록으로 가던 기존 링크 그대로 — 홈·지갑 상세·게스트 조회 결과 `Top Partner Exchanges` `See All`, 게스트 조회 `No account? Join our partner exchange ⟶`, 프리로그인 랜딩 `Browse Partner Exchange`, 앱 하단 탭 `Exchanges` |
+| DEX | **CEX만 나열.** 캐러셀 `Top Centralised Exchanges`·목록·칩 어디에도 DEX 추가 안 함(DEX는 DEX 개요와 허브 비교표에서) |
+| 평점 (LS-2) | `Rating` 열 현행 그대로(별·점수·흐린 리뷰 수, 리뷰 20개 미만이면 표 `-`, 카드 뷰 평점 생략) |
+| 헤더 (LS-3) | 목록 페이지도 GL-1 헤더 → `Cashback ˅`로 허브·DEX 진입 |
+| 허브와의 관계 | 캐시백 허브는 이 페이지를 대신하지 않음. 허브 비교표 `Centralised Exchanges` 칩은 허브 안 비교용 |
 
-**기존 목록 요소 처리**
+**기존 목록 요소** — 모두 유지(실서비스 그대로, DEX 추가 없음)
 
 | 요소 | 처리 | 근거 |
 |---|---|---|
-| `Search for an exchange` | 허브 CEX 탭에서 유지 — 허브 비교표 검색(대소문자 무시·부분 일치, 0건 `No results found for {검색어}`) | B-5-8 · G-470 |
-| 표/카드 보기 전환 | 허브 CEX 탭에서 유지 — 허브 비교표 표/카드 토글 | B-5-8 |
-| 열 머리 정렬 | 허브 CEX 탭에서 유지 — `#` 제외 전 열, 재선택 시 역순 | B-5-8 |
-| `Rating` 열 | 허브 CEX 탭에서 유지 — 허브 비교표 `Rating` | B-5-8 · LS-2 |
-| 목록 전용 헤더(LS-3) | 없앰 — 허브는 GL-1 헤더 | B-21-2 |
-| 목록 안 `Top Partner Exchanges` `See All` | 없앰 — 목록 화면이 없음 | 결정 Q7 |
-| 목록 모바일 ← | 없앰 — 별도 화면이 없음 | 결정 Q7 |
-| 상단 배너 `Join Now` · 점 | ❓ 사용자 확인 #50 — 같은 어드민 「거래소 목록 상단 배너」는 DEX 개요 프로모션 배너로 쓰임(G-156 · G-463). 허브 CEX 탭에도 둘지 정해지지 않음 | B-6-4 |
-| 캐러셀 `Top Centralised Exchanges`(Top Partner 카드) | ❓ 사용자 확인 #50 — 허브에는 로고 그리드(B-5-8)가 있음 | B-5-8 |
-| 칩 `Recommended` · `All` · `Cashback Boost` · `Events` | ❓ 사용자 확인 #50 — 허브 비교표 칩은 `Centralised Exchanges` · `Decentralised Exchanges` · `Brokers`(`All` 없음) | B-5-8 |
-| 열 `Avg. Cashback` · `Live Campaigns` · `View Event` ↗ | ❓ 사용자 확인 #50 — 허브 비교표 열 구성과 다르고 `Live Campaigns`는 허브 숨김 요소 | B-5-8 |
-| 거래소 행 본문 클릭 | ❓ 사용자 확인 #50 — 기존 = 거래소 상세, 허브 행 끝 `Join {partner}`도 거래소 상세 | B-5-8 |
+| 상단 배너 `Join Now` · 점 | 유지 — 기존 어드민 「거래소 목록 상단 배너」(CEX 거래소 목록 전용, C-2-1). DEX 개요 프로모션 배너와 저장소가 다름(B-6-4) | C-2-1 |
+| 캐러셀 `Top Centralised Exchanges` | 유지 — CEX만 | LS-1 |
+| `Search for an exchange` | 유지 — 대소문자 무시·부분 일치, 0건 `No results found for {검색어}` | G-470 |
+| 칩 `Recommended` · `All` · `Cashback Boost` · `Events` | 유지 | LS-1 |
+| 표/카드 보기 전환 | 유지 | LS-1 |
+| 열 머리 정렬 | 유지 — `Rating` · `Total Savings` · `Final Taker` 열 제목 | G-470 |
+| `Rating` 열 | 유지 | LS-2 |
+| 거래소 행 클릭 | 유지 — 그 거래소 상세 | 기존 동작 |
+| 그 밖의 요소(열 구성 · 목록 안 `Top Partner Exchanges` `See All` · 모바일 ← 등) | 유지 | 사용자 2026-11-27 |
 
 ### B-21-6 라우팅 · SEO
 
@@ -4074,7 +4074,7 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 허브 CEX 탭. 허브�
 | ID | 요구 |
 |---|---|
 | 백필 (NFR-1) | 기존 거래소 레코드(활성·비활성 **전부**)에 `Exchange Type = CEX`를 **한 번** 쓰고 다른 값은 건드리지 않음. **멱등**(두 번 돌려도 변화 없음)·**롤백 가능**, 끝난 뒤 유형 `None` 레코드 0건. **운영 DB 복사본에서 리허설** 먼저. 마이그레이션 전후 유형 필터 결과 동일. 이후 nullable 아님 |
-| 회귀 금지 (NFR-2) | 배포 후 프리로그인 랜딩·모든 캐시백 리포트가(기존 거래소 목록은 허브 CEX 탭으로 대체 — REQ-466) 배포 전과 **같은 내용.** 다르면 결함 |
+| 회귀 금지 (NFR-2) | 배포 후 CEX 거래소 목록 페이지·프리로그인 랜딩·모든 캐시백 리포트가 배포 전과 **같은 내용.** 다르면 결함 |
 | 성능 (NFR-3) | 거래소 목록·**Account List(약 85,000행)**·연동 관리(약 700행)는 유형 필터를 걸어도 **2초 이내.** 유형 컬럼은 읽을 때 계산하지 않고 **인덱스.** 필터 없이도 컬럼 추가 전보다 느려지면 안 됨 |
 | 하위 호환 | 하위 모듈은 거래소 **이름으로 유형을 짐작하지 않고** Exchange Type 필드만 읽음. 이 필드를 모르는 소비자는 무시해도 안전해야 함 |
 
@@ -4092,7 +4092,8 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 허브 CEX 탭. 허브�
 | 컬럼 | 번호 · 영문명 · 아이콘 · 로고 · 노출 여부(`노출`/`비노출`) · 노출순위 · 추천여부(`O`/`X`) · **Exchange Type** · 수정·삭제 |
 | 데이터 | 유형 필터 없이 읽으면 CEX·DEX 레코드를 함께 받음(별도 테이블·병렬 모듈 없음) |
 | as-at 경고 | 90일 초과 레코드는 이 목록에 경고(C-2-2) |
-| `거래소 목록 상단 배너` · `인기 이벤트` 모달 | **변경 없음**(회귀 테스트만). DEX 포함(G-255). `거래소 목록 상단 배너` 항목은 DEX 개요 프로모 배너에도 노출(G-156) |
+| `거래소 목록 상단 배너` 모달 | **변경 없음**(회귀 테스트만). CEX 거래소 목록 페이지(`/{lang}/affiliated`) 상단 배너 전용(B-21-5). DEX 개요 프로모션 배너는 전용 어드민(C-9-6, G-156) |
+| `인기 이벤트` 모달 | **변경 없음**(회귀 테스트만). DEX 포함(G-255) |
 | `주목할 거래소`(`Featured Exchange`) 모달 | 반복 항목 = **필수 `Exchange Selection` 드롭다운 + 필수 한/영 제목·내용**, 드래그 핸들, 삭제 선택. `Exchange Selection`에 **DEX 포함**, 저장 시 작성한 제목으로 featured 자리에 렌더 |
 
 근거: 08_어드민 423-427·524-526, 04.txt LST-1·LST-2·LST-5~7
@@ -5029,7 +5030,14 @@ DEX Account ID · `Rebate Coin` 컬럼 없음(항상 USDC). 업로드 값은 **�
 
 ### C-9-6. 프로모션 배너 (`DX-14`)
 
-DEX 랜딩 glance 아래 전폭 캐러셀. 슬라이드 = 「거래소 목록 상단 배너」 항목(이미지 · 제목 · 내용 · 링크 새 탭). **게시된 항목이 없으면 배너를 렌더하지 않고 빈 공간도 남기지 않음.** 항목은 기존 어드민 「거래소 목록 상단 배너」 모달(이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가)에서 입력한다(G-156).
+DEX 랜딩 glance 아래 전폭 캐러셀. 슬라이드 = DEX 개요 배너 항목(이미지 · 제목 · 내용 · 링크 새 탭). **게시된 항목이 없으면 배너를 렌더하지 않고 빈 공간도 남기지 않음.** 항목은 **DEX 개요 배너 전용 어드민 모달**에서 입력한다(G-156).
+
+| 항목 | 내용 |
+|---|---|
+| 위치 | ❓ 사용자 확인 #51 — 권장안: `Cashback Products > DEX Landing Page` 화면(C-9-2)의 `DEX 개요 배너` 버튼 → 모달 |
+| 입력 | 기존 「거래소 목록 상단 배너」 모달과 같은 구성 — 항목마다 이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가. 검증도 기존 모달과 같음 |
+| 저장소 | 「거래소 목록 상단 배너」와 분리. 이 모달 저장은 CEX 거래소 목록 상단 배너를 바꾸지 않고, 「거래소 목록 상단 배너」 저장은 DEX 개요 배너를 바꾸지 않음 |
+| 사용자 화면 | DEX 개요 프로모션 배너 캐러셀(B-6-4) |
 
 근거: 10.txt DX-14(A4)
 
@@ -5159,6 +5167,7 @@ DEX 랜딩 glance 아래 전폭 캐러셀. 슬라이드 = 「거래소 목록 �
 | at a glance **카드 순서** | 현재 Lighter → Aster → EdgeX → ApeX | HC → BO | `At a Glance Priority` 모달(C-9-2) |
 | at a glance 로고·이름·`Up to`+요율 | — | BO | 레코드 |
 | at a glance 거래량·TVL | 더미 `$1.485B` · `$1.12B` | LIVE | DefiLlama |
+| 파트너 프로모션 배너(`DX-14`) 이미지·제목·내용·링크 | — | BO | DEX 개요 배너 모달(C-9-6) |
 | 비교 섹션 제목·리드·패널 제목 | `Who holds your money changes. Your cashback does not.`(`DEX` 포함 여부 G-401 확정: `Your DEX cashback does not.`(PRD), C-12-5) · `On an exchange, the exchange holds your funds. On a DEX, you do. TetherMax only follows the address you paste.` · `ON AN EXCHANGE` / `The exchange holds them` · `ON A DEX` / `You hold the keys` | LANG | 언어팩 (에디터는 비교 행만) |
 | 비교 행 6 × (항목 · CEX · DEX) | `Who holds your funds` (`The exchange` / `You, in your own wallet`) · `How you sign up` (`Account with an identity check` / `Email or a wallet, no KYC check`) · `How you link to TetherMax` (`Your exchange UID` / `Your wallet address, pasted`) · `Where cashback is paid` (`Your TetherMax balance` / `Your TetherMax balance`) · `Where you withdraw` (`On TetherMax, from 10 USDT` / `On TetherMax, from 10 USDT, to your linked wallet`) · `Event and invite rewards` (`Yes` / `Yes`) | BO | 비교 행(항목·CEX·DEX, 3~10). 최소액은 서버값 변수 |
 | 3D lock · seam badge | `3D lock (arrives on the DEX side)` 278×278 · `seam badge (key crosses here)` | ASSET | 빌드 |
@@ -6835,7 +6844,7 @@ EdgeX는 "확인을 받으면 엔드포인트·인증·서명·푸시 포맷·�
 | NFR | 항목 | 요구 (수용 기준) | 처리 |
 |---|---|---|---|
 | NFR-1 | 마이그레이션 안전 | `Exchange Type` 백필은 **한 번** 실행 · **멱등**(두 번 돌려도 변화 없음) · **롤백 가능.** 기존 레코드 전부(활성·비활성)에 `CEX`를 쓰고 **다른 필드는 건드리지 않음.** 완료 후 유형이 None인 레코드 0건. **운영 DB 복사본에서 리허설 후** 운영 반영 | 유지. 기존 브로커 레코드 처리 ❓ (본문 9-1에서 Broker 값 제거) |
-| NFR-2 | 회귀 금지 | 이 릴리스 전부터 있던 페이지·모듈·리포트는 4장에 명시된 변경 외에는 **표시 내용이 바뀌면 안 됨.** 프리로그인 랜딩 · 모든 캐시백 리포트가 배포 전과 같아야 하고(기존 거래소 목록은 허브 CEX 탭으로 대체 — B-21-5), **차이는 "허용된 부작용"이 아니라 결함** | 유지 (본문 P9와 같은 원칙) |
+| NFR-2 | 회귀 금지 | 이 릴리스 전부터 있던 페이지·모듈·리포트는 4장에 명시된 변경 외에는 **표시 내용이 바뀌면 안 됨.** CEX 거래소 목록 페이지 · 프리로그인 랜딩 · 모든 캐시백 리포트가 배포 전과 같아야 하고, **차이는 "허용된 부작용"이 아니라 결함** | 유지 (본문 P9와 같은 원칙) |
 | NFR-3 | 목록 성능 | 거래소 목록 · 계정(UID) 리스트 · 연동 관리 목록은 **유형 필터를 걸어도 2초 안에** 응답. 현재 규모 UID 약 85,000행 · 연동 약 700행. 유형 컬럼은 읽을 때 계산하지 말고 **인덱스.** 필터를 안 걸었을 때도 컬럼 추가 전보다 느려지면 안 됨 | 유지 |
 | NFR-4 | 콘텐츠·설정 저장 감사 | 순위 수정 · DEX Landing Page · 콘텐츠 에디터 · Spending Estimate 저장마다 **운영자 · 시각 · 편집 언어 · 이전 값 · 새 값.** 기록 없는 변경 불허 | 수정 — 원문 대상의 `Brokers`·`Edit Compare Brokers Content`는 폐기(브로커 어드민 없음, `C-5`) |
 | NFR-6 | 서버 검증 일치 | 4장의 모든 제약(거래량 범위 · 요율 제약 · 글자 수 · URL 접두 규칙 · 업로드 형식·비율)을 **UI와 서버 양쪽**에서 검사. API로 직접 보내도 **UI와 같은 사유로** 거부 | 유지 |
@@ -7518,7 +7527,7 @@ PRD 작성자가 Confluence 원문을 고칠 때 쓰는 표입니다. **유지**
 | `CH-16` 요율 입력 | 수정 — 거래소 레코드 | C-18 |
 | `CH-19` DEX 데이터 지연 | 사용자 화면 표시 없음 — 지연 감지는 운영 알림(G-348) | F-2-4 |
 | `RT-1`~`RT-8` | 유지 (`RT-6` 라우트 행 마크는 정적, 자동 캐러셀은 서비스 소개) | M-22 |
-| `LS-1`~`LS-3` | 수정 — 별도 목록 페이지 없음, 허브 CEX 탭이 대신함(`LS-2` `Rating`은 허브 비교표) | B-21-5 |
+| `LS-1`~`LS-3` | 유지 — 기존 CEX 거래소 목록 페이지(`/{lang}/affiliated`) 그대로, DEX 추가 안 함 | B-21-5 |
 | `PB-1`~`PB-9` | 유지 — `PB-5` ❓ · `PB-2` 브로커 ❓ | M-14 |
 
 #### 12 Learn and Earn Quiz
@@ -7917,7 +7926,7 @@ PRD 작성자에게 검토 PDF·피드백 문서를 넘길 때 **함께 가면 �
 | G-153 | ~~이유 카드 `exchange event challenges`~~ | 확정: 그대로 — 챌린지가 DEX도 포함 (사용자 2026-11-24) |
 | G-154 | ~~DEX 랜딩 히어로 리드 대체 문구~~ | 확정: `Trade with your own wallet on the DEX. Paste your wallet address into TetherMax and we pay your cashback into your TetherMax balance.` / `내 지갑으로 DEX에서 거래하고, 테더맥스에 지갑 주소만 붙여넣으면 캐시백을 테더맥스 잔액으로 드려요.` (사용자 2026-11-25) |
 | G-155 | ~~DEX 랜딩 위험 고지 관리 위치~~ | 확정: 고정 문구(언어팩) — 에디터 필드 없음 (사용자 2026-11-25) |
-| G-156 | ~~프로모 배너(`DX-14`) 관리 자리~~ | 확정: DEX 개요 프로모 배너를 넣고, 관리는 기존 어드민 「거래소 목록 상단 배너」 모달(이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가)을 그대로 쓴다. DEX Landing Page 화면에 별도 영역 없음 (사용자 2026-11-26) |
+| G-156 | ~~프로모 배너(`DX-14`) 관리 자리~~ | 확정: DEX 개요 프로모 배너를 넣고, 관리는 **DEX 개요 배너 전용 어드민 모달**로 한다. 입력 구성은 기존 「거래소 목록 상단 배너」 모달과 같다(이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가). 저장소는 「거래소 목록 상단 배너」(CEX 거래소 목록 상단 배너 전용)와 분리. 모달 위치는 사용자 확인 #51(권장안: `Cashback Products > DEX Landing Page` 화면(C-9-2)의 `DEX 개요 배너` 버튼 → 모달) (사용자 2026-11-27) |
 | G-157 | ~~venue 카드 입금 칩 · 혜택 줄 표시 위치~~ | 확정: 상세에만 표시(카드는 오퍼 3줄만) (사용자 2026-11-25) |
 | G-158 | ~~Learn and Earn 띠의 퀴즈 보상 언급~~ | 확정: 언급 — 퀴즈 보상 규칙(이벤트 리워드 · 매칭)과 같은 표현일 때 (사용자 2026-11-25) |
 | G-159 | ~~벤토 1 · 3 · 4 이미지~~ | 확정: 디자이너 결정 — `magnific_*`는 시안용, 최종 이미지는 디자인 산출물 (사용자 2026-11-25) |
@@ -8027,7 +8036,7 @@ PRD 작성자에게 검토 PDF·피드백 문서를 넘길 때 **함께 가면 �
 | G-252 | ~~Lighter 요율표 과거 주 추가 차단~~ | 확정: 과거 주 추가 차단 (사용자 2026-11-25) |
 | G-253 | 거래소 목록 단일 소스 여부 | 화면별 하드코딩인지 개발 확인(어드민 작업량의 전제) | 어드민 작업량 | 본문 2장 |
 | G-254 | ~~거래소 순위의 그룹 화면 해석~~ | 확정: 명시한다 — 그룹 화면은 그룹 안 상대 순서 (사용자 2026-11-25) |
-| G-255 | ~~`주목할 거래소` · `인기 이벤트` · `거래소 목록 상단 배너`에 DEX 포함~~ | 확정: 주목할 거래소 · 인기 이벤트 · 거래소 목록 상단 배너에 DEX 포함 (사용자 2026-11-25) |
+| G-255 | ~~`주목할 거래소` · `인기 이벤트` · `거래소 목록 상단 배너`에 DEX 포함~~ | 확정: 주목할 거래소 · 인기 이벤트에 DEX 포함 (사용자 2026-11-25). 거래소 목록 상단 배너는 CEX 거래소 목록 상단 배너 전용으로 변경 없음 — DEX 프로모션은 DEX 개요 배너(G-156) (사용자 2026-11-27) |
 | G-256 | ~~`DEX 계정 생성 가이드` 섹션 신설~~ | 확정: 안 함 — 지갑 주소 찾기 가이드 + 상세 단계 가이드로 충분 (사용자 2026-11-25) |
 | G-257 | ~~가이드 편집기 언어 수가 영역마다 다를 때 `EDC-25` 영향 범위~~ | 확정: 필수 언어(EN · KO)만으로 DEX 미제공 판정 (사용자 2026-11-25) |
 | G-258 | ~~`Promotion Visibility` · 아웃링크 모달 관리의 DEX 판정~~ | 확정: 기존 방식 그대로 DEX 포함(화면 미확인 — 개발 확인) (사용자 2026-11-25) |
@@ -8213,14 +8222,14 @@ PRD 작성자에게 검토 PDF·피드백 문서를 넘길 때 **함께 가면 �
 | G-460 | ~~DEX 상세 오퍼 박스 상태~~ | 확정: 점검 상태를 다루지 않음 · 확인 중 지갑만 있는 회원 = `Trying to link`(비활성)(사용자 2026-11-26). `리뷰 쓰기` = 기존 리뷰 작성 모달, 이미 작성했으면 숨김 · 모바일 = 하단 고정 바 (사용자 2026-11-27) |
 | G-461 | ~~리뷰 상태~~ | 확정: 기존 CEX 리뷰 동작 그대로 (사용자 2026-11-27) |
 | G-462 | ~~DEX 랜딩 상태~~ | 확정: 빈 값 · 0곳이면 그 요소 숨김. `Sign Up Now` 복귀 = DEX 랜딩 (사용자 2026-11-27) |
-| G-463 | ~~프로모 배너 상태 · 노출 위치~~ | 확정: 거래소 목록이 캐시백 허브로 바뀌므로 「거래소 목록 상단 배너」 항목을 같은 배너로 그대로 쓴다 (사용자 2026-11-26) |
+| G-463 | ~~프로모 배너 상태 · 노출 위치~~ | 확정: DEX 개요 프로모 배너는 DEX 개요에만 노출하고 항목은 DEX 개요 배너 전용 어드민(G-156)에서 입력한다. 기존 CEX 거래소 목록 페이지(`/{lang}/affiliated`)는 그대로 유지되고 그 상단 배너는 기존 「거래소 목록 상단 배너」 (사용자 2026-11-27) |
 | G-464 | ~~국가 제한 상세 직접 진입~~ | 확정: 비노출 상세와 같게 `Page Not Found`. 게스트 → 로그인 시 목록 재조회 (사용자 2026-11-27) |
 | G-465 | ~~DEX 상세 부가 동작~~ | 확정: 기존 CEX 상세와 같은 컴포넌트 동작. 미등록 슬롯 · 이유 카드 4장 미만 = 있는 만큼만 표시 (사용자 2026-11-27) |
 | G-466 | ~~서비스 소개 · 프리로그인 랜딩~~ | 확정: `Hero Exchange`에 DEX도 지정 가능, 같은 Hero 카드(사용자 2026-11-26). 로고 클릭 = 그 거래소 상세 · 로고 실패 = 이름 텍스트 · 서비스 소개 계산기 DEX 포함 · `DEXs` 탭 0곳 = 탭 숨김 (사용자 2026-11-27) |
 | G-467 | ~~`/payback` 상태~~ | 확정: 기존 `/payback` 동작 그대로, `DEX` 칩 0개면 칩 숨김 (사용자 2026-11-27) |
 | G-468 | ~~언어 전환과 운영자 콘텐츠 재조회~~ | 확정: 허용 — NFR-002(언어 전환 시 네트워크 호출 0)의 예외 (사용자 2026-11-27) |
 | G-469 | ~~공통 셸 동작~~ | 확정: 기존 셸 동작 그대로 (사용자 2026-11-27) |
-| G-470 | ~~Exchange Listings 동작~~ | 확정: 현행 그대로 — 검색은 대소문자 무시 · 부분 일치, 결과 없으면 `No results found for {검색어}`(DEX 이름도 같음). `Rating` · `Total Savings` · `Final Taker` 열 제목을 누르면 정렬 (사용자 2026-11-26 기존 그대로 원칙, STG `/en/affiliated` 확인) |
+| G-470 | ~~Exchange Listings 동작~~ | 확정: CEX 거래소 목록 페이지(`/{lang}/affiliated`) 현행 그대로 — 검색은 대소문자 무시 · 부분 일치, 결과 없으면 `No results found for {검색어}`(DEX 이름도 같음). `Rating` · `Total Savings` · `Final Taker` 열 제목을 누르면 정렬 (사용자 2026-11-26 기존 그대로 원칙 · 2026-11-27 기존 목록 페이지 유지, STG `/en/affiliated` 확인) |
 | G-471 | ~~공지 · 404 · 점검 페이지~~ | 확정: 모두 기존 그대로 — 공지 0건 = 기존 빈 상태, 점검 페이지 전환 · 복귀 = 기존, 수신거부 결과 = 기존, 앱 404 = 기존 404 화면 (사용자 2026-11-27) |
 | G-472 | ~~글로벌 리그 상태~~ | 확정: 끊긴 지갑은 G-388 처리 · 확인 중 계정은 선택 불가(`selectable: false`, 사유 문구 없음) · 리더보드 지갑 표시 = 축약 표기 (사용자 2026-11-27) |
 | G-473 | ~~맥스보드 상태~~ | 확정: 참여 기간 아님 · 동시 요청 문구 없음, 불러오기 실패 = 공통 오류(사용자 2026-11-26). 등록 성공 = 기존 피드백 · 자동 새로고침 없음 · 일부 API(MB-API-003 · 005) 실패 = 공통 오류 · 참여 계정 1 / ≤5 / >5 분기는 REQ-406에 넣음 (사용자 2026-11-27) |

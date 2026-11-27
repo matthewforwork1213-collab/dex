@@ -120,7 +120,7 @@
 
 ## API 엔드포인트 목록
 
-엔드포인트 37개 + 내부 작업 14개.
+엔드포인트 38개 + 내부 작업 14개.
 
 | API-ID | Method | URL | 기능명 | 관련 기능 ID | 구분 | 상태 |
 |---|---|---|---|---|---|---|
@@ -157,6 +157,7 @@
 | API-135 | GET | `/api/admin/dex/reports` | DEX 리포팅 | FA-026 · FA-055 · BA-030 · BA-057 · BA-086 | 신규 | 일부 미정 |
 | API-136 | 기존 | 기존 퀴즈 이벤트 등록·수정 API | 퀴즈 이벤트 설정 (DEX 거래소 · 점수별 보상) | FA-062 · BA-093 | 기존·변경 ⚠경로 | G-205 확정: 콘텐츠(문항·해설·아티클)는 운영 작성 · 보상 단계 금액은 백오피스 설정 · 제출 시 완료(점수 무관), 재응시 없음 |
 | API-137 | 기존 | 기존 `Ownership Verification` 큐 조회·승인·거절 API | 소유 확인 큐 — DEX 지갑 신청 포함 | FA-047 · BA-013 · BA-078 | 기존·변경 ⚠경로 | G-063 확정: 1차 출시 미도입 — 기존 CEX처럼 캡차만. REQ-073 다이얼로그·어드민 제한 타입 추가 안 함 |
+| API-138 | GET·PUT | `/api/admin/cashback-products/dex-landing/promo-banners` | DEX 개요 배너 조회·저장 | FA-065 · BA-095 | 신규 | 확정 (모달 위치 ❓ 사용자 확인 #51) |
 | MB-API-115 | GET | `/api/admin/maxboard/exchanges` | 맥스보드 생성 거래소 목록 | FA-019 · FA-061 · BA-045 · BA-092 | 기존·변경 | G-317 확정: ① 목록에서 뺌(Lighter 보류 중) · G-318 확정: `LIGHTER` · `APEX` · `EDGEX` · `ASTER`(기존 대문자 규칙) |
 | API-201 | POST | `/api/webhooks/dex/apex` | ApeX 웹훅 수신 | BA-025 · BA-028 | 신규 | ❓ G-024 |
 | API-202 | POST | `/api/webhooks/dex/edgex` | EdgeX 웹훅 수신 (로드맵) | BA-025 · BA-029 | 신규 | ⏳ G-033 |
@@ -1119,7 +1120,7 @@
 |---|---|
 | Method | GET · PUT |
 | URL | `/api/admin/cashback-products/dex-landing` |
-| 설명 | `DEX Landing Page Listings`(Priority · DEX)와 9개 영역 콘텐츠를 조회·저장한다. `Add DEX`는 활성이면서 랜딩에 없는 DEX만, 레퍼럴 링크·정산 통화가 없으면 추가 불가 |
+| 설명 | `DEX Landing Page Listings`(Priority · DEX)와 9개 영역 콘텐츠를 조회·저장한다. `Add DEX`는 활성이면서 랜딩에 없는 DEX만, 레퍼럴 링크·정산 통화가 없으면 추가 불가. 프로모션 배너(`DX-14`) 항목은 API-138 |
 | 구분 | 신규 |
 | 권한 | Master · Operator · PM |
 | 관련 기능 | FA-027 · FA-064 · FA-065 · BA-058 · BA-094 · BA-095 |
@@ -1506,6 +1507,43 @@
 | 403 | `FORBIDDEN` | 권한 없음 |
 | 409 | `ALREADY_ACTIONED` | 다른 운영자가 먼저 처리 · 10분 자동 실패 후 판정 시도 |
 | 422 | `VALIDATION_ERROR` | 거절 사유 없음 |
+
+#### API-138. DEX 개요 배너 조회·저장
+
+| 항목 | 내용 |
+|---|---|
+| Method | GET · PUT |
+| URL | `/api/admin/cashback-products/dex-landing/promo-banners` |
+| 설명 | DEX 개요 프로모션 배너(`DX-14`) 항목을 조회·저장한다(REQ-735). 입력 구성은 기존 「거래소 목록 상단 배너」 모달과 같다 — 항목마다 이미지 · 제목/내용 한·영 · 한/영 링크, 항목 추가. 저장소는 「거래소 목록 상단 배너」와 분리하며, 그 배너의 기존 API·데이터는 바꾸지 않는다(REQ-502). 사용자 화면은 API-003 `promoBanners`로 읽는다 |
+| 구분 | 신규 |
+| 권한 | Master · Operator · PM (DEX Landing Page 화면과 같음) |
+| 관련 기능 | FA-065 · BA-095 |
+
+**Request (PUT)**
+
+| 파라미터 | 타입 | 필수 | 설명 |
+|---|---|---|---|
+| version | integer | 필수 | 동시 편집 검사 |
+| items | object[] | 필수 | 표시 순서대로. `[{ "imageMediaId": "md_…", "title": { "ko": "…", "en": "…" }, "content": { "ko": "…", "en": "…" }, "linkUrl": { "ko": "https://…", "en": "https://…" } }]`. 빈 배열 = 게시 항목 없음(DEX 개요 배너 미렌더, REQ-324) |
+| reason | string | 선택 | |
+
+**Response (200 OK)**
+
+```json
+{ "status": "success", "data": { "version": 4, "items": [ { "bannerId": "pb_…", "imageUrl": "…", "title": { "ko": "…", "en": "…" }, "content": { "ko": "…", "en": "…" }, "linkUrl": { "ko": "https://…", "en": "https://…" } } ] }, "meta": { "requestId": "req_…" } }
+```
+
+- 항목 필드의 필수 여부·글자 수·이미지 규격 검증은 기존 「거래소 목록 상단 배너」 모달과 같다. 이미지는 API-129로 올린 미디어 ID.
+- 저장 후 API-003 `promoBanners`에 반영된다(사용자 API 캐시는 저장할 때 무효화, 정책 C-9-1 캐시 규칙).
+- 모달을 여는 어드민 화면 위치는 ❓ 사용자 확인 #51(권장안: `Cashback Products > DEX Landing Page` 화면의 `DEX 개요 배너` 버튼). 위치가 바뀌어도 이 API 계약은 같다.
+
+**에러 Response**
+
+| 상태 코드 | 에러 코드 | 조건 |
+|---|---|---|
+| 400 | `VALIDATION_ERROR` | 기존 「거래소 목록 상단 배너」 모달과 같은 필수·규격 검증 실패 |
+| 403 | `FORBIDDEN` | 권한 없음 |
+| 409 | `VERSION_CONFLICT` | 동시 편집 |
 
 #### MB-API-115. 맥스보드 생성 거래소 목록
 
