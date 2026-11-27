@@ -2,9 +2,9 @@
 
 | 항목 | 내용 |
 |---|---|
-| 생성 | 2026-11-27 22:47 · `python -I _프로토타입_전체/tools/figma-diff.py` (스크립트가 이 문서를 통째로 다시 씁니다) |
+| 생성 | 2026-11-27 23:00 · `python -I _프로토타입_전체/tools/figma-diff.py` (스크립트가 이 문서를 통째로 다시 씁니다) |
 | 프로토타입 | `_프로토타입_전체/_latest.html` — 모든 화면 × 상태 × PC·모바일을 실제 브라우저로 렌더(디자인 보기 · 주석 숨김 · 상태에 맞는 로그인 상태) |
-| Figma 기준 | 상태의 `figma.pc` / `figma.mo` 노드. 문구 출처: 정밀 캐시 `ref/figma_text.json` 있음 439노드 → 오프라인 색인 `ref/figma_pages/*.xml`(2026-11-27 파일 기준) → 색인 이후 수정 `05.리포트/Figma수정결과_*.md` 13개(문구 교체 107 · 숨김 30 · 새 프레임 60) |
+| Figma 기준 | 상태의 `figma.pc` / `figma.mo` 노드. 문구 출처: 정밀 캐시 `ref/figma_text.json` 있음 439노드 → 오프라인 색인 `ref/figma_pages/*.xml`(2026-11-27 파일 기준) → 색인 이후 수정 `05.리포트/Figma수정결과_*.md` 14개(문구 교체 107 · 숨김 32 · 새 프레임 65) |
 | 예외 | `_프로토타입_전체/tools/figma-diff-exceptions.json` 규칙 98개 — 결정 기록으로 의도적으로 다르게 한 것. 결과에서 빼고 8장에 따로 적음 |
 
 ## 1. 요약
@@ -14,13 +14,13 @@
 | 화면 · 상태 (문서 화면 제외) | 78 화면 · 440 상태 |
 | 대조한 상태×뷰 | **569** (Figma 출처: 정밀 444 · 색인 124 · 보정 1) |
 | 디자인 없음 | 상태 96 (PC·모바일 모두 없음) · 한쪽 뷰만 있음 119 — 7장 |
-| **일치율** (Figma 문구 기준) | **99.6%** — Figma 문구 8782개 중 일치 8481 |
+| **일치율** (Figma 문구 기준) | **99.6%** — Figma 문구 8776개 중 일치 8483 |
 | **누락** (Figma에만) | **22** |
 | **문구 다름** | **12** |
-| **추가** (프로토타입에만) | **950** |
+| **추가** (프로토타입에만) | **953** |
 | 문제 없는 상태×뷰 | 324 / 569 |
-| 예외로 뺀 건 | 319 |
-| 위치·크기 (기하 모드) | 대조한 상태×뷰 113 · 2px 넘게 어긋난 요소 38건(카드 높이 16 · 안쪽 왼쪽 여백 9 · 가로 위치 5 · 안쪽 세로 위치(중심) 4 · 요소 간격 4) — 5장 |
+| 예외로 뺀 건 | 311 |
+| 위치·크기 (기하 모드) | 대조한 상태×뷰 113 · 2px 넘게 어긋난 요소 10건(안쪽 왼쪽 여백 10) — 5장 |
 | 확인 불가 | Figma 색인에서 내부가 안 보이는 인스턴스 186개(버튼 34 · 칩 0 · 탭 2 · 입력 3 · 블록 147) · 그래서 판정을 보류한 프로토타입 문구 2329개 |
 
 ### 읽는 법
@@ -33,7 +33,7 @@
 | 제외 | 숫자·금액·날짜·주소·마스킹 ID·거래소 이름 같은 표본 값, Figma의 이름뿐인 레이어(`Button`·`Label`·`Description`·`h6`·`headline (DX-1)` 등), GNB·푸터(공통 셸 화면 `cmn.*`에서만 대조 — 프로토타입은 `header.gnb`·`footer`·`.mo-top`·`.mo-nav`, Figma는 셸 레이어 하위 또는 좌표 캐시의 상단 GNB 띠(PC 64px · 모바일 56px, 상태 표시줄 있으면 +44px)·하단 푸터 영역. 문구·위치 대조 모두) | — |
 | 출처 | 정밀 = Figma 실제 문구 · 색인 = 텍스트 레이어 이름(자동 이름 = 문구라서 대부분 맞지만, 이름을 바꾼 레이어는 틀릴 수 있음) · 보정 = 색인 이후 새 프레임이라 수정결과 문서의 문구로만 대조(누락만 판정) | — |
 
-> 정밀 모드: Figma 쪽 문구는 정밀 캐시(2026-11-27T22:33 수신, 439노드 — 인스턴스 안 버튼·칩·탭 라벨까지 실제 문구)를 우선 쓰고, 캐시에 없는 노드만 색인(레이어 이름)으로 대조합니다. 출처별 수는 위 「대조한 상태×뷰」. 색인으로 남은 노드는 인스턴스 내부를 못 봐서 「확인 불가」로 셉니다.
+> 정밀 모드: Figma 쪽 문구는 정밀 캐시(2026-11-27T22:53 수신, 439노드 — 인스턴스 안 버튼·칩·탭 라벨까지 실제 문구)를 우선 쓰고, 캐시에 없는 노드만 색인(레이어 이름)으로 대조합니다. 출처별 수는 위 「대조한 상태×뷰」. 색인으로 남은 노드는 인스턴스 내부를 못 봐서 「확인 불가」로 셉니다.
 
 ## 2. 상위 문제 20건
 
@@ -446,13 +446,13 @@ Figma [11572:247028](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-D
 | `dex.detail:apex` ApeX | PC | [29357:148976](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-148976) (정밀) | 추가 6 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` |
 | `dex.detail:apex` ApeX | 모바일 | [29360:145980](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145980) (정밀) | 추가 8 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Verified` · `A question about linking` |
 | `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | PC | [29357:143619](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-143619) (정밀) | 추가 7 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Start Earning Cashback with Lighter` |
-| `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) (정밀) | 추가 9 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Frequent traders notice the cashback on Premium fees.` · `Verified` · 외 1 |
+| `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) (정밀) | 추가 8 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Verified` · `A question about linking` |
 | `dex.detail:step2` 단계 가이드 Step 2 (Lighter) | PC | [29386:137364](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-137364) (정밀) | 추가 6 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` |
 | `dex.detail:step3` 단계 가이드 Step 3 (Lighter) | PC | [29357:144968](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-144968) (정밀) | 추가 6 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` |
 | `dex.detail:step3` 단계 가이드 Step 3 (Lighter) | 모바일 | [29360:142096](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-142096) (정밀) | 추가 8 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Verified` · `A question about linking` |
 | `dex.detail:faq2` FAQ 두 구역 펼침 — Withdrawals & Account Management | PC | [29367:138679](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-138679) (정밀) | 추가 10 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `A question about linking` · `Does it support ApeX too? I linked my Lighter wallet already and I am not sure whether a s` · 외 2 |
 | `dex.detail:reviewsEmpty` 리뷰 없음 (G-169) | PC | [29367:137704](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-137704) (정밀) | 추가 7 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (0)` · `No reviews yet` |
-| `dex.detail:reviewsEmpty` 리뷰 없음 (G-169) | 모바일 | [29369:136809](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29369-136809) (정밀) | 추가 3 | [버튼] `Auto Claim` · `My review` · `No reviews yet` |
+| `dex.detail:reviewsEmpty` 리뷰 없음 (G-169) | 모바일 | [29369:136809](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29369-136809) (정밀) | 추가 7 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (0)` · `No reviews yet` |
 
 ### 10. 캐시백 요약 · 랭킹
 
@@ -614,7 +614,7 @@ Figma [11572:247028](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-D
 | 5. 거래 계정 연동 | 61 | 16 | 100% | 0 | 0 | 114 | 0 |
 | 6. 소유권 인증 | 32 | 20 | 100% | 0 | 0 | 14 | 0 |
 | 7. 캐시백 허브 | 23 | 3 | 100% | 2 | 1 | 77 | 1 |
-| 8. DEX 개요 · 상세 | 30 | 11 | 100% | 0 | 0 | 136 | 0 |
+| 8. DEX 개요 · 상세 | 30 | 11 | 100% | 0 | 0 | 139 | 0 |
 | 9. 계산기 (/payback) | 19 | 19 | 100% | 0 | 0 | 0 | 33 |
 | 10. 캐시백 요약 · 랭킹 | 21 | 15 | 100% | 0 | 0 | 24 | 0 |
 | 11. 친구 초대 · 파트너 허브 | 17 | 13 | 99% | 1 | 2 | 14 | 4 |
@@ -639,28 +639,25 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 | 항목 | 값 |
 |---|---|
 | 대조한 상태×뷰 | 113 |
-| 짝지은 요소 · 카드 | 4840 · 899 |
-| 어긋남(>2px) | **38** — 카드 높이 16 · 안쪽 왼쪽 여백 9 · 가로 위치 5 · 안쪽 세로 위치(중심) 4 · 요소 간격 4 |
+| 짝지은 요소 · 카드 | 4844 · 899 |
+| 어긋남(>2px) | **10** — 안쪽 왼쪽 여백 10 |
 | 그중 40px 넘음 | 0 — 대개 여백이 아니라 배치 구조가 다름(다른 열·다른 카드 안에 있음). 표에 「배치 다름」으로 표시 |
 
-### 5.1 상위 문제 10건
+### 5.1 상위 문제 7건
 
 어긋남 크기(요소당 최대 40px로 잘라 합산) 큰 순, 같은 Figma 프레임은 한 번만. 대표 이슈 = 여백·간격 이슈 중 가장 큰 것.
 
 | # | 화면:상태 | 뷰 | Figma | 폭(Figma/프로토) | 이슈 수 | 대표 이슈 |
 |---|---|---|---|---|---|---|
-| 1 | `dex.detail:normal` 게스트 — EdgeX | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) | 1440/1440 | 6 | 요소 간격 `$# cashback returned to you → cashback c` 273→276px (Δ+3) |
-| 2 | `dex.detail:aster` Aster | PC | [29357:147710](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-147710) | 1440/1440 | 6 | 요소 간격 `$# cashback returned to you → cashback c` 273→276px (Δ+3) |
-| 3 | `dex.detail:apex` ApeX | PC | [29357:148976](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-148976) | 1440/1440 | 6 | 요소 간격 `$# cashback returned to you → cashback c` 273→276px (Δ+3) |
-| 4 | `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) | 375/375 | 2 | 안쪽 왼쪽 여백 `#fee` 202→197px (Δ-5) |
-| 5 | `dex.detail:step3` 단계 가이드 Step 3 (Lighter) | 모바일 | [29360:142096](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-142096) | 375/375 | 2 | 안쪽 왼쪽 여백 `#fee` 202→197px (Δ-5) |
-| 6 | `dex.detail:normal` 게스트 — EdgeX | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 375/375 | 3 | 안쪽 왼쪽 여백 `#cashback` 253→248px (Δ-5) |
-| 7 | `dex.detail:reviewsEmpty` 리뷰 없음 (G-169) | 모바일 | [29369:136809](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29369-136809) | 375/375 | 1 | 가로 위치 `dex` (Δ+12) |
-| 8 | `dex.detail:aster` Aster | 모바일 | [29360:145006](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145006) | 375/375 | 2 | 안쪽 왼쪽 여백 `#fee` 194→191px (Δ-3) |
-| 9 | `dex.detail:apex` ApeX | 모바일 | [29360:145980](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145980) | 375/375 | 2 | 안쪽 왼쪽 여백 `#fee` 192→189px (Δ-3) |
-| 10 | `hub.main:normal` 게스트 · DEX 탭 계산기 (H1) | 모바일 | [29515:137400](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-137400) | 375/375 | 1 | 안쪽 왼쪽 여백 `per year $#` 124→127px (Δ+3) |
+| 1 | `dex.detail:normal` 게스트 — EdgeX | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 375/375 | 3 | 안쪽 왼쪽 여백 `#cashback` 253→248px (Δ-5) |
+| 2 | `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) | 375/375 | 1 | 안쪽 왼쪽 여백 `#fee` 202→197px (Δ-5) |
+| 3 | `dex.detail:step3` 단계 가이드 Step 3 (Lighter) | 모바일 | [29360:142096](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-142096) | 375/375 | 1 | 안쪽 왼쪽 여백 `#fee` 202→197px (Δ-5) |
+| 4 | `hub.main:normal` 게스트 · DEX 탭 계산기 (H1) | PC | [28960:126884](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-126884) | 1440/1440 | 1 | 안쪽 왼쪽 여백 `per year $#` 144→147px (Δ+3) |
+| 5 | `hub.main:cex` 게스트 · CEX 탭 (H1-CEX, Bybit $100,000) | 모바일 | [29515:144850](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-144850) | 375/375 | 1 | 안쪽 왼쪽 여백 `per year $#` 126→123px (Δ-3) |
+| 6 | `dex.detail:aster` Aster | 모바일 | [29360:145006](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145006) | 375/375 | 1 | 안쪽 왼쪽 여백 `#fee` 194→191px (Δ-3) |
+| 7 | `dex.detail:apex` ApeX | 모바일 | [29360:145980](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145980) | 375/375 | 1 | 안쪽 왼쪽 여백 `#fee` 192→189px (Δ-3) |
 
-#### 5.1.1 `dex.detail:normal` · PC — 요소 간격 `$# cashback returned to you → cashback comes from `
+#### 5.1.1 `dex.detail:normal` · 모바일 — 안쪽 왼쪽 여백 `#cashback`
 
 | 프로토타입 | Figma |
 |---|---|
@@ -668,14 +665,11 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 
 | 구분 | 대상 | Figma | 프로토타입 | Δ |
 |---|---|---|---|---|
-| 카드 높이 | `how much you get back` | (192,1041) 1056×840 | (192,1111) 1056×843 | +3 |
-| 카드 높이 | `you trade on %` | (208,1604) 317×209 | (208,1674) 317×212 | +3 |
-| 카드 높이 | `% pays a settlement` | (561,1604) 317×209 | (561,1674) 317×212 | +3 |
-| 카드 높이 | `% gives cashback` | (915,1604) 317×209 | (915,1674) 317×212 | +3 |
-| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 798px | 801px | +3 |
-| 요소 간격 | `$# cashback returned to you → cashback comes from ` | 273px | 276px | +3 |
+| 안쪽 왼쪽 여백 | `#cashback` | 253px | 248px | -5 |
+| 안쪽 왼쪽 여백 | `#fee` | 200px | 196px | -4 |
+| 안쪽 왼쪽 여백 | `highest rated` | 189px | 186px | -3 |
 
-#### 5.1.2 `dex.detail:aster` · PC — 요소 간격 `$# cashback returned to you → cashback comes from `
+#### 5.1.2 `dex.detail:lighter` · 모바일 — 안쪽 왼쪽 여백 `#fee`
 
 | 프로토타입 | Figma |
 |---|---|
@@ -683,14 +677,9 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 
 | 구분 | 대상 | Figma | 프로토타입 | Δ |
 |---|---|---|---|---|
-| 카드 높이 | `how much you get back` | (192,1041) 1056×840 | (192,1173) 1056×843 | +3 |
-| 카드 높이 | `you trade on %` | (208,1604) 317×209 | (208,1736) 317×212 | +3 |
-| 카드 높이 | `% pays a settlement` | (561,1604) 317×209 | (561,1736) 317×212 | +3 |
-| 카드 높이 | `% gives cashback` | (915,1604) 317×209 | (915,1736) 317×212 | +3 |
-| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 798px | 801px | +3 |
-| 요소 간격 | `$# cashback returned to you → cashback comes from ` | 273px | 276px | +3 |
+| 안쪽 왼쪽 여백 | `#fee` | 202px | 197px | -5 |
 
-#### 5.1.3 `dex.detail:apex` · PC — 요소 간격 `$# cashback returned to you → cashback comes from `
+#### 5.1.3 `dex.detail:step3` · 모바일 — 안쪽 왼쪽 여백 `#fee`
 
 | 프로토타입 | Figma |
 |---|---|
@@ -698,14 +687,9 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 
 | 구분 | 대상 | Figma | 프로토타입 | Δ |
 |---|---|---|---|---|
-| 카드 높이 | `how much you get back` | (192,1041) 1056×840 | (192,1173) 1056×843 | +3 |
-| 카드 높이 | `you trade on %` | (208,1604) 317×209 | (208,1736) 317×212 | +3 |
-| 카드 높이 | `% pays a settlement` | (561,1604) 317×209 | (561,1736) 317×212 | +3 |
-| 카드 높이 | `% gives cashback` | (915,1604) 317×209 | (915,1736) 317×212 | +3 |
-| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 798px | 801px | +3 |
-| 요소 간격 | `$# cashback returned to you → cashback comes from ` | 273px | 276px | +3 |
+| 안쪽 왼쪽 여백 | `#fee` | 202px | 197px | -5 |
 
-#### 5.1.4 `dex.detail:lighter` · 모바일 — 안쪽 왼쪽 여백 `#fee`
+#### 5.1.4 `hub.main:normal` · PC — 안쪽 왼쪽 여백 `per year $#`
 
 | 프로토타입 | Figma |
 |---|---|
@@ -713,10 +697,9 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 
 | 구분 | 대상 | Figma | 프로토타입 | Δ |
 |---|---|---|---|---|
-| 가로 위치 | `dex` | (141,201) 26×18 | (153,154) 25×15 | +12 |
-| 안쪽 왼쪽 여백 | `#fee` | 202px | 197px | -5 |
+| 안쪽 왼쪽 여백 | `per year $#` | 144px | 147px | +3 |
 
-#### 5.1.5 `dex.detail:step3` · 모바일 — 안쪽 왼쪽 여백 `#fee`
+#### 5.1.5 `hub.main:cex` · 모바일 — 안쪽 왼쪽 여백 `per year $#`
 
 | 프로토타입 | Figma |
 |---|---|
@@ -724,10 +707,9 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 
 | 구분 | 대상 | Figma | 프로토타입 | Δ |
 |---|---|---|---|---|
-| 가로 위치 | `dex` | (141,201) 26×18 | (153,148) 25×15 | +12 |
-| 안쪽 왼쪽 여백 | `#fee` | 202px | 197px | -5 |
+| 안쪽 왼쪽 여백 | `per year $#` | 126px | 123px | -3 |
 
-#### 5.1.6 `dex.detail:normal` · 모바일 — 안쪽 왼쪽 여백 `#cashback`
+#### 5.1.6 `dex.detail:aster` · 모바일 — 안쪽 왼쪽 여백 `#fee`
 
 | 프로토타입 | Figma |
 |---|---|
@@ -735,11 +717,9 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 
 | 구분 | 대상 | Figma | 프로토타입 | Δ |
 |---|---|---|---|---|
-| 안쪽 왼쪽 여백 | `#cashback` | 253px | 248px | -5 |
-| 안쪽 왼쪽 여백 | `#fee` | 200px | 196px | -4 |
-| 안쪽 왼쪽 여백 | `highest rated` | 189px | 186px | -3 |
+| 안쪽 왼쪽 여백 | `#fee` | 194px | 191px | -3 |
 
-#### 5.1.7 `dex.detail:reviewsEmpty` · 모바일 — 가로 위치 `dex`
+#### 5.1.7 `dex.detail:apex` · 모바일 — 안쪽 왼쪽 여백 `#fee`
 
 | 프로토타입 | Figma |
 |---|---|
@@ -747,39 +727,7 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 
 | 구분 | 대상 | Figma | 프로토타입 | Δ |
 |---|---|---|---|---|
-| 가로 위치 | `dex` | (141,201) 26×18 | (153,148) 25×15 | +12 |
-
-#### 5.1.8 `dex.detail:aster` · 모바일 — 안쪽 왼쪽 여백 `#fee`
-
-| 프로토타입 | Figma |
-|---|---|
-| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_08_figma.jpg) |
-
-| 구분 | 대상 | Figma | 프로토타입 | Δ |
-|---|---|---|---|---|
-| 가로 위치 | `dex` | (141,201) 26×18 | (135,154) 25×15 | -6 |
-| 안쪽 왼쪽 여백 | `#fee` | 194px | 191px | -3 |
-
-#### 5.1.9 `dex.detail:apex` · 모바일 — 안쪽 왼쪽 여백 `#fee`
-
-| 프로토타입 | Figma |
-|---|---|
-| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_09_figma.jpg) |
-
-| 구분 | 대상 | Figma | 프로토타입 | Δ |
-|---|---|---|---|---|
-| 가로 위치 | `dex` | (141,201) 26×18 | (135,153) 25×15 | -6 |
 | 안쪽 왼쪽 여백 | `#fee` | 192px | 189px | -3 |
-
-#### 5.1.10 `hub.main:normal` · 모바일 — 안쪽 왼쪽 여백 `per year $#`
-
-| 프로토타입 | Figma |
-|---|---|
-| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_10_figma.jpg) |
-
-| 구분 | 대상 | Figma | 프로토타입 | Δ |
-|---|---|---|---|---|
-| 안쪽 왼쪽 여백 | `per year $#` | 124px | 127px | +3 |
 
 ### 5.2 상태×뷰별 어긋남
 
@@ -792,23 +740,23 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 | `calc.p2:none` | PC | [29194:120700](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29194-120700) | 10 | 0 | — |
 | `calc.p2:normal` | 모바일 | [29194:121368](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29194-121368) | 5 | 0 | — |
 | `calc.p2:normal` | PC | [29194:120700](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29194-120700) | 10 | 0 | — |
-| `dex.detail:apex` | 모바일 | [29360:145980](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145980) | 107 | 2 | 가로 위치 1 · 안쪽 왼쪽 여백 1 |
-| `dex.detail:apex` | PC | [29357:148976](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-148976) | 116 | 6 | 카드 높이 4 · 안쪽 세로 위치(중심) 1 · 요소 간격 1 |
-| `dex.detail:aster` | 모바일 | [29360:145006](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145006) | 107 | 2 | 가로 위치 1 · 안쪽 왼쪽 여백 1 |
-| `dex.detail:aster` | PC | [29357:147710](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-147710) | 115 | 6 | 카드 높이 4 · 안쪽 세로 위치(중심) 1 · 요소 간격 1 |
-| `dex.detail:edgex` | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 105 | 1 | 안쪽 왼쪽 여백 1 |
-| `dex.detail:edgex` | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) | 113 | 6 | 카드 높이 4 · 안쪽 세로 위치(중심) 1 · 요소 간격 1 |
+| `dex.detail:apex` | 모바일 | [29360:145980](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145980) | 109 | 1 | 안쪽 왼쪽 여백 1 |
+| `dex.detail:apex` | PC | [29357:148976](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-148976) | 116 | 0 | — |
+| `dex.detail:aster` | 모바일 | [29360:145006](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145006) | 108 | 1 | 안쪽 왼쪽 여백 1 |
+| `dex.detail:aster` | PC | [29357:147710](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-147710) | 115 | 0 | — |
+| `dex.detail:edgex` | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 106 | 1 | 안쪽 왼쪽 여백 1 |
+| `dex.detail:edgex` | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) | 113 | 0 | — |
 | `dex.detail:faq2` | PC | [29367:138679](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-138679) | 115 | 0 | — |
-| `dex.detail:lighter` | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) | 115 | 2 | 가로 위치 1 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:lighter` | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) | 117 | 1 | 안쪽 왼쪽 여백 1 |
 | `dex.detail:lighter` | PC | [29357:143619](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-143619) | 122 | 0 | — |
 | `dex.detail:moderation` | 모바일 | [27392:1062](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=27392-1062) | 2 | 0 | — |
 | `dex.detail:moderation` | PC | [27392:937](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=27392-937) | 2 | 0 | — |
-| `dex.detail:normal` | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 112 | 3 | 안쪽 왼쪽 여백 3 |
-| `dex.detail:normal` | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) | 118 | 6 | 카드 높이 4 · 안쪽 세로 위치(중심) 1 · 요소 간격 1 |
-| `dex.detail:reviewsEmpty` | 모바일 | [29369:136809](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29369-136809) | 84 | 1 | 가로 위치 1 |
+| `dex.detail:normal` | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 113 | 3 | 안쪽 왼쪽 여백 3 |
+| `dex.detail:normal` | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) | 118 | 0 | — |
+| `dex.detail:reviewsEmpty` | 모바일 | [29369:136809](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29369-136809) | 80 | 0 | — |
 | `dex.detail:reviewsEmpty` | PC | [29367:137704](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-137704) | 83 | 0 | — |
 | `dex.detail:step2` | PC | [29386:137364](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-137364) | 123 | 0 | — |
-| `dex.detail:step3` | 모바일 | [29360:142096](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-142096) | 116 | 2 | 가로 위치 1 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:step3` | 모바일 | [29360:142096](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-142096) | 117 | 1 | 안쪽 왼쪽 여백 1 |
 | `dex.detail:step3` | PC | [29357:144968](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-144968) | 122 | 0 | — |
 | `dex.detail:unlinked` | PC | [28969:129666](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28969-129666) | 12 | 0 | — |
 | `dex.overview:lighter` | 모바일 | [29363:135072](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29363-135072) | 120 | 0 | — |
@@ -846,7 +794,7 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 | `hub.main:brokers` | 모바일 | [29515:146538](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-146538) | 73 | 0 | — |
 | `hub.main:cards` | 모바일 | [29515:137400](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-137400) | 77 | 0 | — |
 | `hub.main:cards` | PC | [22807:98684](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=22807-98684) | 0 | 0 | — |
-| `hub.main:cex` | 모바일 | [29515:144850](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-144850) | 122 | 0 | — |
+| `hub.main:cex` | 모바일 | [29515:144850](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-144850) | 122 | 1 | 안쪽 왼쪽 여백 1 |
 | `hub.main:cexBelowMin` | 모바일 | [29515:140513](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-140513) | 109 | 0 | — |
 | `hub.main:cexPanel` | 모바일 | [29515:138815](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-138815) | 110 | 0 | — |
 | `hub.main:dexBelowMin` | 모바일 | [29515:140513](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-140513) | 41 | 0 | — |
@@ -855,8 +803,8 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 | `hub.main:member` | PC | [28960:126890](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-126890) | 59 | 0 | — |
 | `hub.main:noLedger` | 모바일 | [29515:138107](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-138107) | 66 | 0 | — |
 | `hub.main:noLedger` | PC | [28960:126890](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-126890) | 59 | 0 | — |
-| `hub.main:normal` | 모바일 | [29515:137400](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-137400) | 77 | 1 | 안쪽 왼쪽 여백 1 |
-| `hub.main:normal` | PC | [28960:126884](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-126884) | 70 | 0 | — |
+| `hub.main:normal` | 모바일 | [29515:137400](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29515-137400) | 77 | 0 | — |
+| `hub.main:normal` | PC | [28960:126884](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-126884) | 70 | 1 | 안쪽 왼쪽 여백 1 |
 | `landing.main:normal` | PC | [28960:128375](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-128375) | 110 | 0 | — |
 | `league.main:card` | 모바일 | [29185:121059](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29185-121059) | 1 | 0 | — |
 | `league.main:card` | PC | [29185:121040](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29185-121040) | 4 | 0 | — |
@@ -1288,8 +1236,8 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 110노드)
 | EX-A27 | `dex.detail:apex`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 7 |
 | EX-A28 | `dex.detail:step3`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 5 |
 | EX-A29 | `dex.detail:reviewsEmpty`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 5 |
-| EX-A31 | `dex.detail` mo | any | `/^(Cashback arrives at the same time every day／The fee discount is wide enough that frequent traders notice it／I linked my wallet already and I am not sure whether a second DEX needs a separate verification step)\.?$/i` | 모바일 프레임의 리뷰 본문 표본(`Does it support ApeX too?` 카드)과 Lighter 모바일 D1(29360:146954)의 AI 리뷰 요약 표본이 PC 프레임(28960:127454)과 다름(Figma 9차 ②는 요약 2줄·리뷰 카드 1장만 PC 표본으로) — 같은 서버 데이터라 PC 표본으로 통일 (_Figma수정_결정.md 9차 #4(요약 `every day`) · #5(표본 값은 같은 화면의 다른 값과 일관)) | 8 |
-| EX-A32 | `dex.detail:aster` mo | missing | `Indices & ETFs` | Figma 모바일 D5에 `Indices & ETFs` 칩이 남아 있음(9차 ③는 중복 `Forex`·입금 `Crypto`만 숨김) — PC D5(29357:147710)에는 없음. 거래소 콘텐츠 레코드는 하나(PC 칩 기준) (REQ-357(거래소별 콘텐츠 레코드)) | 1 |
+| EX-A31 | `dex.detail:lighter` mo | any | `/^I linked my wallet already and I am not sure whether a second DEX needs a separate verification step\.?$/i` | Figma Lighter 모바일 D1(29360:146954)의 리뷰 본문 표본만 PC(`Does it support ApeX too? I linked my Lighter wallet…`)와 다름 — 같은 서버 데이터라 PC 표본으로 통일 (REQ-357(거래소별 콘텐츠 레코드) · 05.리포트/Figma수정결과_11차.md ③(다른 모바일 7프레임은 PC 표본)) | 1 |
+| EX-A48 | `dex.detail:lighter` mo | geom | `` | EX-A31과 같음 — Figma 29360:146954 리뷰 본문 표본이 2줄이라 `Read more`가 한 줄 위(PC 표본은 3줄) (EX-A31) | 0 |
 | EX-A34 | `dex.detail`  | missing | `After discount` | Aster·ApeX 표본 레코드는 할인율 0 — `After discount` 행은 할인율이 0보다 클 때만(2행 표시) (_Figma수정_결정.md 9차 「오퍼 박스 할인 단계 (2026-11-27)」 · REQ-339) | 4 |
 | EX-A35 | `dex.detail:reviewsEmpty`  | missing | `Be the first to review.` | 리뷰 0건 문구는 확정 `No reviews yet` (00_DEX_최종정책.md 부록 G G-169(사용자 2026-11-25)) | 2 |
 | EX-A37 | `dex.detail:aster`  | geom | `` | EX-A21과 같음 — 로그인 토글을 따르는 상태라 회원 기준 렌더, Figma(게스트)의 리뷰 안내 카드가 없어 그 아래 정렬 탭·리뷰 항목이 위로 옴. 같은 배치는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」 · 정책 B-7-8(리뷰 작성 안내는 게스트·미연동)) | 0 |
