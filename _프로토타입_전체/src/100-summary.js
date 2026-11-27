@@ -59,18 +59,19 @@ function calendar(d){
  const cells=[];for(let i=0;i<first;i++)cells.push('<span></span>');
  for(let n=1;n<=len;n++){
   const future=may&&n>d.today;const on=n===d.sel;
-  const vals=(d.days[n]||[]).map(v=>`<span class="tnum" style="font-size:${mo()?9:11}px;line-height:1.3;color:${amtColor(v)}">${v}</span>`).join('');
-  cells.push(`<div class="col" style="align-items:center;gap:2px;min-height:${mo()?70:57}px;padding-top:4px"><span class="b2 tnum" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;${on?'border:1px solid var(--text-primary);':''}${future?'color:var(--text-disabled)':''}">${n}</span>${vals}</div>`)}
- const wk=['S','M','T','W','T','F','S'].map(x=>`<span class="b2 c2" style="text-align:center">${x}</span>`).join('');
- return `<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:4px">${wk}${cells.join('')}</div>`}
+  const vals=(d.days[n]||[]).map(v=>`<span class="tnum" style="font-size:${mo()?9:11}px;line-height:${mo()?1.3:'14px'};color:${amtColor(v)}">${v}</span>`).join('');
+  cells.push(`<div class="col" style="align-items:center;gap:2px;min-height:${mo()?70:56}px;padding-top:4px"><span class="b2 tnum" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;${on?'border:1px solid var(--text-primary);':''}${future?'color:var(--text-disabled)':''}">${n}</span>${vals}</div>`)}
+ const wk=['S','M','T','W','T','F','S'].map(x=>`<span class="b2 c2" style="text-align:center${mo()?'':';padding-bottom:14px'}">${x}</span>`).join('');
+ // PC 간격 = Figma CS1(28960:127133): 월 머리 → 요일 32px · 요일 → 첫 행 숫자 40px · 행 간격 58px · 마지막 행 숫자 → 월간 카드 79px
+ return `<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:${mo()?4:2}px${mo()?'':';margin-top:10px;padding-bottom:4px'}">${wk}${cells.join('')}</div>`}
 function monthCard(d){return `<div>${monthCard0(d)}</div>`}
 function monthCard0(d){
- const cap=`<p class="c2" style="margin:8px 0 0;font-size:${mo()?10:11}px;line-height:1.4">All amounts are shown in USDT. Cashback a DEX pays in USDC is shown 1:1 in USDT. Each calendar day shows the net amount.</p>`;
+ const cap=`<p class="c2" style="margin:8px 0 0;font-size:${mo()?10:11}px;line-height:${mo()?1.4:'13px'}">All amounts are shown in USDT. Cashback a DEX pays in USDC is shown 1:1 in USDT. Each calendar day shows the net amount.</p>`;
  const head=`<span class="b2 semi" style="line-height:20px">Monthly total cashback</span>`;
  if(!d.card)return `<div style="border:1px solid var(--divider);border-radius:8px;padding:16px" class="col">${head}<span class="cap c2">There is no cashback history for this month.</span></div>${cap}`;
  const [r,w,n]=d.card;
  const line=(k,v,c)=>`<div class="row between" style="margin-top:8px;line-height:20px"><span class="cap c2" style="line-height:20px">${k}</span><span class="b2 semi tnum" style="line-height:20px;color:${c}">${v} USDT</span></div>`;
- return `<div style="border:1px solid var(--divider);border-radius:8px;padding:16px;gap:0" class="col">${head}${line('Received',r,'var(--blue)')}${line('Withdrawn',w,w==='0.00'?'var(--text-primary)':'var(--error)')}<hr class="divider" style="margin:9px 0"><div class="row between" style="line-height:24px"><span class="cap c2" style="line-height:20px">Net</span><span class="sub1 semi tnum" style="line-height:24px">${n} USDT</span></div></div>${cap}`}
+ return `<div style="border:1px solid var(--divider);border-radius:8px;padding:${mo()?'16px':'16px 16px 15px'};gap:0" class="col">${head}${line('Received',r,'var(--blue)')}${line('Withdrawn',w,w==='0.00'?'var(--text-primary)':'var(--error)')}<hr class="divider" style="margin:${mo()?9:8}px 0"><div class="row between" style="line-height:24px"><span class="cap c2" style="line-height:20px">Net</span><span class="sub1 semi tnum" style="line-height:24px">${n} USDT</span></div></div>${cap}`}
 function dayRow(r){
  const acct=r.w?`Wallet ${mo()?addr(r.w):r.w}`:r.id;
  const v=r.pending?'—':`${r.v} USDT`;
@@ -134,7 +135,7 @@ R.screen({id:'summary.main',group:'summary',title:'캐시백 요약',route:'/cas
   return `<div style="max-width:1088px;margin:0 auto;padding:88px 0 120px">${delayed?`<div class="mb24">${delayed}</div>`:''}
    <div style="display:grid;grid-template-columns:347px minmax(0,1fr);gap:24px;align-items:start">
     ${box(filters(st))}
-    ${box(`<div class="col" style="gap:24px">${cal}${monthCard(d)}<div class="col g12">${dayList(d,st)}</div></div>`,{p:24})}
+    ${box(`<div class="col" style="gap:24px">${cal}${monthCard(d)}<div class="col" style="gap:10px">${dayList(d,st)}</div></div>`,{p:24})}
    </div></div>`;
  }});
 

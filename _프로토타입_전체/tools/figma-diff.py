@@ -633,7 +633,14 @@ def geom_compare(fg, pg, tol, vp=None):
             if not ps: continue
             j = len(fs & ps) / len(fs | ps)
             if j >= 0.5 and (best is None or j > best[0] or (j == best[0] and pc[2] * pc[3] < best[1][2] * best[1][3])): best = (j, pc)
-        if best: cpairs.append((fc, best[1], fs & {i for i, (k, a, b, _) in enumerate(items) if _inside(b, best[1])}))
+        if best: cpairs.append((fc, best[1], fs & {i for i, (k, a, b, _) in enumerate(items) if _inside(b, best[1])}, best[0]))
+    # 프로토타입 카드 하나에는 Figma 카드 하나만: 여러 Figma 카드가 같은 카드를 고르면 문구 겹침(j)이 가장 큰 것, 같으면 넓이가 가장 가까운 것
+    # (예: Figma 달력 상자 717×695와 그 안의 월간 카드 669×150이 둘 다 프로토타입 월간 카드를 고르면 월간 카드끼리만 짝 — 달력 상자 안 나머지 문구는 바깥 카드 기준)
+    win = {}
+    for fc, pc, idx, j in cpairs:
+        sc = (j, -abs(fc[2] * fc[3] - pc[2] * pc[3]))
+        if tuple(pc) not in win or sc > win[tuple(pc)]: win[tuple(pc)] = sc
+    cpairs = [(fc, pc, idx) for fc, pc, idx, j in cpairs if win[tuple(pc)] == (j, -abs(fc[2] * fc[3] - pc[2] * pc[3]))]
     # 같은 Figma 카드가 여러 겹이면 가장 작은 카드만(안쪽 카드 기준 여백)
     inner = {}
     for fc, pc, idx in cpairs:

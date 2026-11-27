@@ -55,7 +55,7 @@ function ovHero(list){
  const copy=`<div class="col" style="gap:${mo()?16:32}px">
   <h1 style="margin:0;max-width:480px;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;letter-spacing:-.5px">Trade onchain,${mo()?' ':'<br>'}keep your cashback</h1>
   <div class="col" style="gap:8px">${marks}<div class="col" style="gap:2px"><span class="b2 semi">${list.length} partner DEXs you can start earning Cashback with</span><span class="b2 c2">${T('Trade with your own wallet on the DEX. Paste your wallet address into TetherMax and we pay your cashback into your TetherMax balance.','내 지갑으로 DEX에서 거래하고, 테더맥스에 지갑 주소만 붙여넣으면 캐시백을 테더맥스 잔액으로 드려요.')}</span></div></div>
-  <div class="row" style="gap:16px">${C.btn('DEX Overview',{cls:mo()?'grow':''}).replace('<button','<button data-scroll-to="dex-venues"')}${outlinedP('Guide to DEX').replace('<button','<button data-scroll-to="dex-steps"')}</div></div>`;
+  <div class="row" style="gap:16px">${C.btn('DEX Overview',{cls:mo()?'grow':''}).replace('<button','<button data-scroll-to="dex-venues"')}${outlinedP('Guide to DEX').replace('<button','<button data-scroll-to="dex-steps"').replace('style="border-color:var(--blue)"',mo()?'style="border-color:var(--blue);flex:1 1 0"':'style="border-color:var(--blue)"')}</div></div>`;
  const risk=`<p class="cap c2" style="margin:0;max-width:720px">※ Decentralized trading carries risks, including smart contract vulnerabilities, slippage, MEV, and potential loss of funds. Please conduct your own research prior to trading onchain.</p>`;
  if(mo())return `<section style="background:linear-gradient(180deg,#eef2f8 0%,#e6edf8 70%,#fff 100%)"><div style="height:300px;background:url(${A('dex-ov-hero.jpg')}) 78% 30%/auto 420px no-repeat"></div><div class="col" style="gap:24px;padding:0 16px 40px">${copy}${risk}</div></section>`;
  return `<section style="position:relative;height:810px;background:#eef2f8 url(${A('dex-ov-hero.jpg')}) center/cover no-repeat"><div style="position:absolute;left:max(120px, calc((100% - 1440px) / 2 + 120px));top:150px">${copy}</div><div style="position:absolute;left:max(120px, calc((100% - 1440px) / 2 + 120px));bottom:20px">${risk}</div></section>`;   // 넓은 화면: 1440 틀 가운데(실사이트 규칙)
@@ -78,16 +78,16 @@ function ovGlance(list,c){
 }
 function ovBanner(){
  const dots=`<img src="${A('dex-ov-dots.svg')}" style="width:44px;height:6px;margin:0 auto" alt="">`;
- const copy=`<div class="col" style="gap:24px;${mo()?'padding:24px 16px':'padding:0 48px;height:350px;justify-content:center;max-width:521px'}">
+ const copy=`<div class="col" style="gap:${mo()?10:24}px;${mo()?'padding:24px 16px 20px':'padding:0 48px;height:350px;justify-content:center;max-width:521px'}">
   <div class="row" style="gap:12px">${C.dex('Aster',40)}<span style="font-size:24px;line-height:1.334;font-weight:600;color:#fff">Aster</span></div>
   <div class="col" style="gap:0"><span style="font-size:24px;line-height:1.334;font-weight:700;color:#fff">Trade with Aster and get Cashback!</span><span style="font-size:20px;line-height:1.6;font-weight:500;color:#e6e7e9">Win up to 2,000,000 USDT</span></div>
   <div>${C.btn('Join Now')}</div></div>`;
- const box=mo()?`<div style="background:#151515;border-radius:8px;overflow:hidden"><div style="height:120px;background:url(${A('dex-ov-banner-mo.jpg')}) center/cover"></div>${copy}</div>`
+ const box=mo()?`<div style="background:#151515;border-radius:8px;overflow:hidden"><div style="height:130px;background:url(${A('dex-ov-banner-mo.jpg')}) center/cover"></div>${copy}</div>`
   :`<div style="background:#151515 url(${A('dex-ov-banner.jpg')}) right center/auto 100% no-repeat;border-radius:8px;overflow:hidden;height:350px">${copy}</div>`;
  return `<section style="background:#fff;padding:0 0 ${mo()?8:24}px">${wrap(`<div class="col" style="gap:24px">${box}${dots}</div>`)}${C.note('프로모 배너(DX-14) — Figma 그대로. 배너는 어드민 DEX Landing Page 프로모 배너 영역에서 관리(G-156). 게시 슬라이드 0개면 렌더하지 않음(상태 <code>noBanner</code>)')}</section>`;
 }
 function venueCard(d,c,i){
- const box=(k,v)=>`<div style="flex:1 1 0;min-width:0;border:1px solid var(--divider);border-radius:8px;padding:10px 12px" class="col g4"><span class="cap c2">${k}</span><span class="b2 semi">${v}</span></div>`;
+ const box=(k,v)=>`<div style="flex:1 1 0;min-width:0;border:1px solid var(--divider);border-radius:8px;padding:10px 12px" class="col g4"><span class="cap c2">${k}</span><span class="b2 semi"${/^(TVL|24H Vol)$/.test(k)?' style="line-height:23px"':''}>${v}</span></div>`;
  const stats=[box('Final Taker',pct(fin(d,'taker'))),box('Final Maker',pct(fin(d,'maker')))];
  if(c!=='defiHidden')stats.push(box('TVL',DEFI.tvl),box('24H Vol',DEFI.vol));
  if(mo())return venueCardMo(d,c);
@@ -95,7 +95,7 @@ function venueCard(d,c,i){
  const bd=mo()?'padding:24px 0;border-bottom:1px solid var(--divider)':`padding:40px ${left?'40px 40px 0':'0 40px 40px'};${left?'border-right:1px solid var(--divider);':''}`;
  return `<div class="col" data-m-lift style="gap:16px;${bd}">
   <div class="row between"><div class="row" style="gap:12px">${C.dex(d.name,40)}<span class="h5">${d.name}</span></div><div class="col" style="gap:0;align-items:flex-end"><span class="cap c2">Cashback up to</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${d.rate}%</span></div></div>
-  <div class="row" style="gap:8px;align-items:stretch;${mo()?'flex-wrap:wrap':''}">${stats.join('')}</div>
+  <div class="row" style="gap:8px;align-items:flex-start;${mo()?'flex-wrap:wrap':''}">${stats.join('')}</div>
   ${c==='maint'&&d.id==='aster'?C.note('점검·일시 연동 불가(G-162 확정): 카드·상세는 그대로 노출하고 가입 링크(<code>Get Started</code>)도 유지. 연동 진입만 숨긴다 — 랜딩 카드에는 연동 버튼이 없어 화면 차이 없음'):''}
   <div class="row" style="gap:12px">${outlinedP('Learn More',{size:'md',go:'dex.detail:'+d.id,full:true})}<button class="btn contained primary md full">Get Started${ext()}</button></div></div>`;
 }
@@ -103,19 +103,19 @@ function venueCard(d,c,i){
 const vStars=()=>`<span class="row" style="gap:0">${[1,2,3].map(()=>`<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px" alt="">`).join('')}<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px;clip-path:inset(0 50% 0 0)" alt=""><img src="${A('dex-dt-ic-star-empty.svg')}" style="width:14px;height:14px" alt=""></span><span class="b2">4.0</span><span class="b2 c2">(23)</span>`;
 const vHead=(d,stars)=>`<div class="row" style="gap:${mo()?8:8}px">${C.dex(d.name,mo()?32:24)}<span class="${mo()?'b1':'h5'} semi">${d.name}</span>${stars?`<span class="row" style="gap:6px;margin-left:${mo()?8:12}px">${vStars()}</span>`:''}</div>`;
 const vUpTo=d=>`<span class="b1 semi cb">Up to ${d.rate}% cashback</span>`;
-const vFees=d=>`<div class="row" style="gap:24px"><span class="row" style="gap:6px"><span class="b2 c2">Final Taker</span><span class="b2 semi">${pct(fin(d,'taker'))}</span></span><span class="row" style="gap:6px"><span class="b2 c2">Final Maker</span><span class="b2 semi">${pct(fin(d,'maker'))}</span></span></div>`;
+const vFees=d=>`<div class="row" style="gap:24px;${mo()?'justify-content:space-between':''}"><span class="row" style="gap:${mo()?4:6}px"><span class="b2 c2">Final Taker</span><span class="b2 semi">${pct(fin(d,'taker'))}</span></span><span class="row" style="gap:${mo()?4:6}px"><span class="b2 c2">Final Maker</span><span class="b2 semi">${pct(fin(d,'maker'))}</span></span></div>`;
 function listRow(d){
  const btn=`<button class="btn contained black lg${mo()?' full':''}" data-go="dex.detail:${d.id}">View ${d.name}</button>`;
- if(mo())return `<div style="border:1px solid var(--divider);border-radius:8px;padding:15px;background:#fff" class="col">
+ if(mo())return `<div style="border:1px solid var(--divider);border-radius:8px;padding:15px;background:#fff;gap:0" class="col">
   <div class="col" style="gap:12px">${vHead(d,true)}${vUpTo(d)}</div><hr class="divider" style="margin:12px 0">${vFees(d)}<div style="height:12px"></div>${btn}</div>`;
- return `<div style="border:1px solid var(--divider);border-radius:8px;padding:17px 19px 19px;background:#fff" class="col">
+ return `<div style="border:1px solid var(--divider);border-radius:8px;padding:17px 19px 19px;background:#fff;gap:0" class="col">
   <div class="row between"><div class="col" style="gap:6px">${vHead(d,true)}${vUpTo(d)}</div>${btn}</div>
   <hr class="divider" style="margin:10px 0">${vFees(d)}</div>`;
 }
 // 모바일 기본(카드) 뷰 — 29363:135072: 머리(마크·이름 / Up to) · 구분선 · Final Taker/Maker · TVL·24H Vol 칸 · Learn More / Get Started
 function venueCardMo(d,c){
- const box=(k,v)=>`<div style="flex:1 1 0;min-width:0;border:1px solid var(--divider);border-radius:8px;padding:10px 12px" class="col g4"><span class="cap c2">${k}</span><span class="b2 semi">${v}</span></div>`;
- return `<div class="col" data-m-lift data-dex-card="${d.id}" style="border:1px solid var(--divider);border-radius:8px;padding:15px;background:#fff">
+ const box=(k,v)=>`<div style="flex:1 1 0;min-width:0;border:1px solid var(--divider);border-radius:8px;padding:10px 12px" class="col g4"><span class="cap c2">${k}</span><span class="b2 semi"${/^(TVL|24H Vol)$/.test(k)?' style="line-height:23px"':''}>${v}</span></div>`;
+ return `<div class="col" data-m-lift data-dex-card="${d.id}" style="border:1px solid var(--divider);border-radius:8px;padding:15px;background:#fff;gap:0">
   <div class="col" style="gap:12px">${vHead(d,false)}${vUpTo(d)}</div><hr class="divider" style="margin:12px 0">${vFees(d)}
   ${c==='defiHidden'?'':`<div class="row" style="gap:8px;margin-top:12px">${box('TVL',DEFI.tvl)}${box('24H Vol',DEFI.vol)}</div>`}
   ${c==='maint'&&d.id==='aster'?C.note('점검·일시 연동 불가(G-162 확정): 카드·상세는 그대로 노출하고 가입 링크(<code>Get Started</code>)도 유지. 연동 진입만 숨긴다'):''}
@@ -123,8 +123,8 @@ function venueCardMo(d,c){
 }
 function ovVenues(list,c){
  const isList=c==='list';   // 모바일도 기본은 카드(29363:135072), 리스트는 전환 시(29363:136978)
- const desc=isList||mo()?'Join through our referral and link your wallet address. TVL and 24H volume from DefiLlama.':'Pick one, join through our link, then paste your wallet address. TVL and 24H volume from DefiLlama.';
- const sw=`<button class="icon-btn" title="${isList?'grid':'list'}">${isList?`<span style="display:grid;grid-template-columns:8px 8px;gap:3px">${'<i style="width:8px;height:8px;border-radius:2px;background:rgba(0,0,0,.56)"></i>'.repeat(4)}</span>`:`<img src="${A('dex-ov-ic-list.svg')}" style="width:24px;height:24px" alt="">`}</button>`;
+ const desc=isList||mo()?'Join through our referral and link your wallet address.<br>TVL and 24H volume from DefiLlama.':'Pick one, join through our link, then paste your wallet address. TVL and 24H volume from DefiLlama.';
+ const sw=`<button class="icon-btn" title="${isList?'grid':'list'}">${isList?`<span style="display:grid;grid-template-columns:8px 8px;gap:3px;width:24px;height:24px;place-content:center">${'<i style="width:8px;height:8px;border-radius:2px;background:rgba(0,0,0,.56)"></i>'.repeat(4)}</span>`:`<img src="${A('dex-ov-ic-list.svg')}" style="width:24px;height:24px" alt="">`}</button>`;
  const head=mo()?`<div class="col" style="gap:8px"><div class="row between" style="align-items:flex-start"><h2 id="dex-venues" tabindex="-1" class="h3" style="margin:0;font-size:34px;line-height:1.235;outline:0">Our Partner Decentralised Exchanges</h2>${sw}</div><p class="b2 c2" style="margin:0">${desc}</p></div>`
   :`<div class="row" style="gap:120px;align-items:flex-end;justify-content:space-between"><h2 id="dex-venues" tabindex="-1" class="h3" style="margin:0;width:560px;outline:0">Our Partner Decentralised Exchanges</h2><div class="row" style="gap:16px"><p class="b1 c2" style="margin:0;width:460px;text-align:right">${desc}</p>${sw}</div></div>`;
  const ds=list.map(id=>DX[id]);
@@ -139,14 +139,14 @@ function ovVenues(list,c){
  return `<section style="background:#fff;padding:${mo()?'32px 0':'32px 0 120px'}">${wrap(`<div class="col" style="gap:${mo()?24:48}px">${head}${body}${stale}${hid}${odd}</div>`)}</section>`;
 }
 function ovCompare(){
- const row=(k,v,dex,chip)=>`<div class="col" style="gap:4px;border-top:1px solid var(--divider);padding:16px 0"><span class="cap c2">${k}</span><span style="${dex?'font-size:20px;line-height:1.6;font-weight:600;letter-spacing:.15px':'font-size:16px;line-height:1.5'}">${v}</span>${chip?`<span class="cap cb" style="border:1px solid var(--blue);border-radius:999px;padding:0 8px;align-self:flex-start;margin-top:4px">${chip}</span>`:''}</div>`;
+ const row=(k,v,dex,chip)=>`<div class="col" style="gap:4px;border-top:1px solid var(--divider);padding:16px 0"><span class="cap c2" style="line-height:20px">${k}</span><span style="${dex?'font-size:20px;line-height:1.6;font-weight:600;letter-spacing:.15px':'font-size:16px;line-height:1.5'}">${v}</span>${chip?`<span class="cap cb" style="border:1px solid var(--blue);border-radius:999px;padding:0 8px;align-self:flex-start;margin-top:4px">${chip}</span>`:''}</div>`;
  // 비교 행 = 정책 8-4 · REQ-327 · Figma 최신 OA(29361:137628). 최소액 10은 서버값 표본
  const ex=[['Who holds your funds','The exchange'],['How you sign up','Account with an identity check'],['How you link to TetherMax','Your exchange UID'],['Where cashback is paid','Your TetherMax balance'],['Where you withdraw','On TetherMax, from 10 USDT'],['Event and invite rewards','Yes']];
  const dx=[['Who holds your funds','You, in your own wallet'],['How you sign up','Email or a wallet, no KYC check'],['How you link to TetherMax','Your wallet address, pasted'],['Where cashback is paid','Your TetherMax balance','Your Cashback'],['Where you withdraw','On TetherMax, from 10 USDT, to your linked wallet'],['Event and invite rewards','Yes']];
- const panel=(dex)=>`<div style="position:relative;flex:1 1 0;min-width:0;background:#fff;border:${dex?'2px solid var(--blue)':'1px solid var(--divider)'};border-radius:8px;padding:${mo()?'40px':'40px 40px 16px'};box-shadow:${dex?'0 16px 40px rgba(26,64,217,.14)':'0 10px 20px rgba(0,0,0,.06)'};gap:0" class="col">
-  <div class="col" style="gap:8px">${eyebrow(dex?'ON A DEX':'ON AN EXCHANGE',dex?'var(--blue)':'var(--text-secondary)')}<span style="font-size:${mo()?24:34}px;line-height:1.235;letter-spacing:.25px">${dex?'You hold the keys':'The exchange holds them'}</span></div><div style="height:24px"></div>
+ const panel=(dex)=>`<div style="position:relative;flex:1 1 0;min-width:0;background:#fff;border:${dex?'2px solid var(--blue)':'1px solid var(--divider)'};border-radius:8px;padding:${mo()?'24px 20px 25px':'40px 40px 16px'};box-shadow:${dex?'0 16px 40px rgba(26,64,217,.14)':'0 10px 20px rgba(0,0,0,.06)'};gap:0" class="col">
+  <div class="col" style="gap:8px">${eyebrow(dex?'ON A DEX':'ON AN EXCHANGE',dex?'var(--blue)':'var(--text-secondary)')}<span style="font-size:${mo()?24:34}px;line-height:${mo()?'32px':1.235};letter-spacing:.25px">${dex?'You hold the keys':'The exchange holds them'}</span></div><div style="height:24px"></div>
   ${(dex?dx:ex).map(r=>row(r[0],r[1],dex,r[2])).join('')}
-  ${dex?`<img src="${A('dex-ov-lock.webp')}" style="position:absolute;${mo()?'right:16px;top:-24px;width:80px;height:80px':'right:-48px;top:-86px;width:278px;height:278px'};pointer-events:none" alt="">`:''}</div>`;
+  ${dex?`<img src="${A('dex-ov-lock.webp')}" style="position:absolute;${mo()?'right:-6px;top:-37px;width:128px;height:128px':'right:-48px;top:-86px;width:278px;height:278px'};pointer-events:none" alt="">`:''}</div>`;
  const seam=`<div style="${mo()?'align-self:center;margin:-36px 0':'position:absolute;left:570px;top:330px'};z-index:2;width:60px;height:60px;border-radius:999px;background:var(--blue);display:flex;align-items:center;justify-content:center"><img src="${A('dex-ov-ic-arrow.svg')}" style="width:28px;height:28px;${mo()?'transform:rotate(90deg)':''}" alt=""></div>`;
  const stage=mo()?`<div class="col" style="gap:0">${panel(false)}${seam}${panel(true)}</div>`:`<div style="position:relative;display:flex;gap:24px">${panel(false)}${panel(true)}${seam}</div>`;
  return `<section style="background:#fff;padding:${mo()?'48px 0':'80px 0 96px'}">${wrap(`<div class="col" style="gap:56px;align-items:stretch"><div class="col center" style="gap:16px;align-items:center"><h2 style="margin:0;font-weight:400;font-size:${mo()?28:48}px;line-height:1.167">Who holds your money changes.<br>Your DEX cashback does not.</h2><p class="b1 c2" style="margin:0;max-width:640px">On an exchange, the exchange holds your funds. On a DEX, you do. TetherMax only follows the address you paste.</p></div>${stage}</div>`)}</section>`;
@@ -155,32 +155,32 @@ function ovSteps(){
  const st=[['STEP 1','Create a Web 3 Wallet','Install a self-custody wallet, or sign up on the DEX with email to get a wallet made for you.','About 2 minutes','dex-ov-step1.webp'],
   ['STEP 2','Join the DEX through our link','Deposit funds and connect your wallet on the DEX via the TetherMax referral, then paste your address in TetherMax.','About 3 minutes','dex-ov-step2.webp'],
   ['STEP 3','Trade & get rewarded','TetherMax credits your cashback to your balance. Eligible balances of 10 USDT or more are paid to your linked wallet.','From your next trade','dex-ov-step3.webp']];
- const step=([c,t,b,m,img])=>`<div class="col" style="flex:1 1 0;min-width:0;gap:16px;align-items:center;text-align:center"><div style="width:220px;height:${mo()?200:208}px;display:flex;align-items:center;justify-content:center;overflow:visible"><img src="${A(img)}" style="width:190px;height:${img.endsWith('step3.webp')?'auto':'190px'};max-height:240px;object-fit:contain" alt=""></div>
+ const step=([c,t,b,m,img])=>`<div class="col" style="flex:1 1 0;min-width:0;gap:16px;align-items:center;text-align:center"><div style="width:220px;height:${mo()?143:208}px;${mo()?'margin-bottom:2px;':''}display:flex;align-items:center;justify-content:center;overflow:visible"><img src="${A(img)}" style="width:${mo()?(img.endsWith('step3.webp')?165:143):190}px;height:${img.endsWith('step3.webp')?'auto':mo()?'143px':'190px'};max-height:240px;object-fit:contain" alt=""></div>
   <span style="border:1px solid var(--blue);border-radius:999px;padding:4px 12px;color:var(--blue);font-size:14px;line-height:24px;font-weight:500">${c}</span><span class="h5">${t}</span><span class="b1 c2">${b}</span><span class="cap c2">${m}</span></div>`;
- const card=`<div style="background:#fff;border:1px solid var(--divider);border-radius:8px;padding:${mo()?'32px 24px':'48px'};box-shadow:0 10px 24px rgba(0,0,0,.05)" class="col g32">${mo()?'':`<img src="${A('dex-ov-progress.svg')}" style="width:100%;height:24px" alt="">`}<div style="display:flex;${mo()?'flex-direction:column;gap:40px':'gap:32px'}">${st.map(step).join('')}</div></div>`;
- return `<section style="background:#fff;padding:${mo()?'48px 0':'120px 0 96px'}">${wrap(`<div class="col" style="gap:48px;align-items:center"><h2 id="dex-steps" tabindex="-1" style="margin:0;font-weight:400;font-size:${mo()?24:48}px;line-height:1.167;text-align:center;outline:0">A simple 3 step path</h2><div style="align-self:stretch">${card}</div>${outlinedP('See partner DEXs').replace('<button','<button data-scroll-to="dex-venues"')}</div>`)}</section>`;
+ const card=`<div style="background:#fff;border:1px solid var(--divider);border-radius:8px;padding:${mo()?'31px 20px 21px':'48px'};box-shadow:0 10px 24px rgba(0,0,0,.05)" class="col g32">${mo()?'':`<img src="${A('dex-ov-progress.svg')}" style="width:100%;height:24px" alt="">`}<div style="display:flex;${mo()?'flex-direction:column;gap:37px':'gap:32px'}">${st.map(step).join('')}</div></div>`;
+ return `<section style="background:#fff;padding:${mo()?'48px 0':'120px 0 96px'}">${wrap(`<div class="col" style="gap:${mo()?24:48}px;align-items:center"><h2 id="dex-steps" tabindex="-1" style="margin:0;font-weight:400;font-size:${mo()?24:48}px;line-height:1.167;text-align:center;outline:0">A simple 3 step path</h2><div style="align-self:stretch">${card}</div>${outlinedP('See partner DEXs').replace('<button','<button data-scroll-to="dex-venues"')}</div>`)}</section>`;
 }
 function ovBento(){
- const tile=(o)=>`<div style="position:relative;${mo()?'':`flex:0 0 ${o.w}px;`}height:${mo()?(o.h>420?340:320):o.h}px;border-radius:8px;overflow:${mo()?'visible':'hidden'};${o.blue?'background:var(--blue)':'background:#fff;border:1px solid var(--divider)'}">
+ const tile=(o)=>`<div style="position:relative;${mo()?'':`flex:0 0 ${o.w}px;`}height:${mo()?340:o.h}px;border-radius:8px;overflow:${mo()?'visible':'hidden'};${o.blue?'background:var(--blue)':'background:#fff;border:1px solid var(--divider)'}">
   <img src="${A(o.img)}" style="position:absolute;${o.ip};pointer-events:none" alt="">
-  <div class="col" style="position:absolute;left:${mo()?20:40}px;right:${mo()?20:40}px;bottom:${mo()?24:(o.blue||o.h>420)?40:24}px;gap:12px;max-width:420px">${eyebrow(o.k,o.blue?'rgba(255,255,255,.87)':'var(--blue)')}<span style="font-size:${mo()?24:o.big?48:34}px;line-height:${o.big?1.167:1.235};color:${o.blue?'rgba(255,255,255,.87)':'var(--text-primary)'}">${o.t}</span><span class="b1" style="color:${o.blue?'rgba(255,255,255,.6)':'var(--text-secondary)'}">${o.b}</span></div></div>`;
- const T1={w:700,h:460,big:1,k:'CUSTODY',t:'You hold the keys.',b:'Your collateral stays under your control. No one can freeze it, and no one can restore it for you.',img:'dex-ov-bento-wallet.webp',ip:mo()?'right:16px;top:8px;width:160px':'left:120px;top:-71px;width:402px'};
- const T2={w:476,h:460,k:'ORDER BOOK',t:'Onchain order book',b:'Onchain matching via rollup or sequencer for verification.',img:'dex-ov-bento-chart.webp',ip:mo()?'right:16px;top:16px;width:160px':'left:180px;top:11px;width:270px;border-radius:21px'};
- const T3={w:476,h:400,k:'PAYOUT',t:'Paid to your TetherMax balance',b:'Your trades are tracked through our referral. TetherMax pays the cashback into your TetherMax balance.',img:'dex-ov-bento-plane.webp',ip:mo()?'right:8px;top:-20px;width:180px':'left:180px;top:-58px;width:315px'};
- const T4={w:700,h:400,big:1,blue:1,k:'TRADING COSTS',t:"Low fees don't always mean low trading costs",b:'Compare liquidity, slippage, funding, and gas, not just the advertised fee.',img:'dex-ov-bento-calc.webp',ip:mo()?'right:8px;top:-20px;width:180px':'left:398px;top:-59px;width:310px'};
+  <div class="col" style="position:absolute;left:${mo()?20:40}px;right:${mo()?20:40}px;bottom:${mo()?24:(o.blue||o.h>420)?40:24}px;gap:12px;max-width:420px">${eyebrow(o.k,o.blue?'rgba(255,255,255,.87)':'var(--blue)')}<span style="font-size:${mo()?24:o.big?48:34}px;line-height:${mo()?'32px':o.big?1.167:1.235};color:${o.blue?'rgba(255,255,255,.87)':'var(--text-primary)'}">${o.t}</span><span class="b1" style="color:${o.blue?'rgba(255,255,255,.6)':'var(--text-secondary)'}">${o.b}</span></div></div>`;
+ const T1={w:700,h:460,big:1,k:'CUSTODY',t:'You hold the keys.',b:'Your collateral stays under your control. No one can freeze it, and no one can restore it for you.',img:'dex-ov-bento-wallet.webp',ip:mo()?'right:8px;top:8px;width:180px':'left:120px;top:-71px;width:402px'};
+ const T2={w:476,h:460,k:'ORDER BOOK',t:'Onchain order book',b:'Onchain matching via rollup or sequencer for verification.',img:'dex-ov-bento-chart.webp',ip:mo()?'right:8px;top:8px;width:180px':'left:180px;top:11px;width:270px;border-radius:21px'};
+ const T3={w:476,h:400,k:'PAYOUT',t:'Paid to your TetherMax balance',b:'Your trades are tracked through our referral. TetherMax pays the cashback into your TetherMax balance.',img:'dex-ov-bento-plane.webp',ip:mo()?'right:8px;top:8px;width:180px':'left:180px;top:-58px;width:315px'};
+ const T4={w:700,h:400,big:1,blue:1,k:'TRADING COSTS',t:"Low fees don't always mean low trading costs",b:'Compare liquidity, slippage, funding, and gas, not just the advertised fee.',img:'dex-ov-bento-calc.webp',ip:mo()?'right:8px;top:8px;width:180px':'left:398px;top:-59px;width:310px'};
  const body=mo()?`<div class="col" style="gap:12px">${[T1,T2,T3,T4].map(tile).join('')}</div>`:`<div class="col" style="gap:24px"><div class="row" style="gap:24px;align-items:stretch">${tile(T1)}${tile(T2)}</div><div class="row" style="gap:24px;align-items:stretch">${tile(T3)}${tile(T4)}</div></div>`;
  return `<section style="background:#fff;padding:${mo()?'24px 0 48px':'24px 0 120px'}">${wrap(body)}</section>`;
 }
 function ovLearn(){
- const copy=`<div class="col" style="gap:16px;flex:1 1 0;min-width:0">${eyebrow('LEARN AND EARN')}<span style="font-size:${mo()?24:48}px;line-height:1.167">Learn DEX trading in short lessons.</span><span class="b1 c2">Complete a quiz to earn a coupon. Redeem it on a linked account as an event reward. It matches trading cashback 1:1.</span></div>`;
+ const copy=`<div class="col" style="gap:16px;flex:1 1 0;min-width:0">${eyebrow('LEARN AND EARN')}<span style="font-size:${mo()?24:48}px;line-height:${mo()?'32px':1.167}">Learn DEX trading in short lessons.</span><span class="b1 c2">Complete a quiz to earn a coupon. Redeem it on a linked account as an event reward. It matches trading cashback 1:1.</span></div>`;
  const btn=outlinedP('Start learning',{go:'quiz.list',full:mo()});
- const card=mo()?`<div style="position:relative;background:#fff;border:1px solid var(--divider);border-radius:8px;padding:120px 20px 24px;margin-top:60px" class="col g24"><img src="${A('dex-ov-rocket.webp')}" style="position:absolute;left:50%;top:-60px;transform:translateX(-50%);width:180px" alt="">${copy}${btn}</div>`
+ const card=mo()?`<div style="position:relative;background:#fff;border:1px solid var(--divider);border-radius:8px;padding:99px 20px 24px;margin-top:80px" class="col g24"><img src="${A('dex-ov-rocket.webp')}" style="position:absolute;left:50%;top:-74px;transform:translateX(-50%);width:200px" alt="">${copy}${btn}</div>`
   :`<div style="position:relative;background:#fff;border:1px solid var(--divider);border-radius:8px;padding:48px 56px 48px 330px;display:flex;gap:48px;align-items:center"><img src="${A('dex-ov-rocket.webp')}" style="position:absolute;left:-56px;top:-52px;width:416px;height:416px" alt="">${copy}${btn}</div>`;
  return `<section style="background:#fff;padding:0 0 ${mo()?40:120}px">${wrap(card)}${C.note('Learn and Earn 본문은 Figma 인스턴스 문구(쿠폰·이벤트 리워드 매칭 1:1). G-158 확정(퀴즈 보상 규칙과 같은 표현일 때 언급)과 일치. <code>Start learning</code> → Beginner’s Guide DEX 트랙(REQ-330)')}</section>`;
 }
 function ovWhy(){
  const r=[['dex-ov-why-support.png','Support in 2 minutes','Responsive customer support, query attended in 2 minutes.','Speak to us','support.main'],['dex-ov-why-events.png','More cashback from events','Earn more cashbacks by completing tasks and exchange event challenges.','See Benefits','benefits.list'],['dex-ov-why-invite.png','Invite friends, earn more','Grow your cashback when you invite partners and friends.','Find out more','invite.main']];
- const card=([img,t,b,l,go])=>`<div class="col" style="flex:1 1 0;min-width:0;gap:12px;background:#fff;border:1px solid var(--divider);border-radius:8px;padding:28px"><img src="${A(img)}" style="width:72px;height:72px" alt=""><span class="h6">${t}</span><span class="b1 c2">${b}</span><a class="b2 semi cb" data-go="${go}" style="cursor:pointer">${l}&nbsp; →</a></div>`;
+ const card=([img,t,b,l,go])=>`<div class="col" style="flex:1 1 0;min-width:0;gap:12px;background:#fff;border:1px solid var(--divider);border-radius:8px;padding:${mo()?20:28}px"><img src="${A(img)}" style="width:72px;height:72px" alt=""><span class="h6"${mo()?' style="margin-top:-16px;line-height:32px"':''}>${t}</span><span class="b1 c2">${b}</span><a class="b2 semi cb" data-go="${go}" style="cursor:pointer">${l}&nbsp; →</a></div>`;
  return `<section style="background:#fff;padding:${mo()?'0 0 48px':'24px 0 96px'}">${wrap(`<div class="col" style="gap:32px"><span class="h5">Why sign up with TetherMax?</span><div style="display:flex;${mo()?'flex-direction:column;gap:12px':'gap:24px'}">${r.map(card).join('')}</div></div>`)}</section>`;
 }
 function ovCta(){
@@ -338,7 +338,7 @@ function dtClosing(d){
 }
 function dtFaq(d,c){
  const ico=open=>`<span style="width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:24px;color:var(--action-active)">${open?'−':'+'}</span>`;
- const tail=d.cur==='USDC'||d.id==='edgex'?' Shown in USDT, 1:1 with USDC.':' Amounts are shown in USDT.';
+ const tail=d.cur==='USDC'||d.id==='edgex'?' Shown in USDT, 1:1 with USDC.':' Shown in USDT.';   // Figma D5·D6(29357:147710 · 29357:148976) FAQ 첫 답변 — 운영자 입력 예시
  const secs=['General Partnership','Cashback & Referral Rewards','Points Program & Airdrop','Account Types & Eligibility','Prohibited Activity & Compliance','Withdrawals & Account Management','Contact & Support'];
  // 펼친 구역: 첫 구역(REQ-350) · faq2 상태는 6번째 `Withdrawals & Account Management`도(Figma CT-29 ② 29367:138679 — 운영자 입력 예시)
  const qa={0:[`How does TetherMax cashback work on ${d.name}?`,`Join ${d.name} through the TetherMax link and trade. Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.${tail}`],
@@ -406,7 +406,7 @@ function dtDrawer(d,maker){
   <hr class="divider" style="margin:0"></div>`;
 }
 function dtPage(c){
- const id=['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='step2'||c==='signupReturn'||c==='faq2'?'lighter':'edgex';
+ const id=['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='step2'||c==='signupReturn'||c==='faq2'||c==='reviewsEmpty'?'lighter':'edgex';   // 리뷰 없음 = Figma D3 Reviews 0(Lighter)
  const d=DX[id];
  const member=c==='normal'?'guest':c==='unlinked'?'unlinked':c==='linked'?'linked':c==='signupReturn'?'return':c==='pendingLink'?'pending':({guest:'guest',s3:'unlinked',s4:'linked'}[S.auth]||'guest');
  const maker=c==='maker';

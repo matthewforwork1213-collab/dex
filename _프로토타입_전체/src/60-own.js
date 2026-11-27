@@ -138,7 +138,7 @@ function ownHome(st){
 }
 R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유자 재청구',route:'/ (홈 연동 계정)',fu:['FU-027','FU-028'],shell:false,
  states:[
-  {id:'review',label:'소유 확인중 (O11)',figma:{pc:'28960:127709',mo:'28982:126253'},note:'V2.2 <code>own/O11#normal</code>'},
+  {id:'review',label:'소유 확인중 (O11)',figma:{pc:'29453:143874',mo:'28982:126253'},note:'V2.2 <code>own/O11#normal</code>'},
   {id:'approved',label:'승인 — Ownership Verification Complete (O12)',figma:{pc:'29205:124141',mo:'28982:126268'},note:'V2.2 <code>own/O11#approved</code>'},
   {id:'rejected',label:'거절 — Ownership Verification Unsuccessful (O13)',figma:{pc:'29205:124663',mo:'28982:126283'},note:'V2.2 <code>own/O11#rejected</code>'},
   {id:'unlinked',label:'이전 보유자 · 연동 해제 행 (O14)',figma:{pc:'28960:127727',mo:'12783:404139'},note:'V2.2 <code>own/O14#normal</code>. 모바일 = [기존 MAX-561] mWeb Unlinked and UID claim by others(행 아래 경고 Alert + 오른쪽 화살표) — DEX 모바일 프레임 없음'},
