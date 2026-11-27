@@ -381,7 +381,7 @@ const TODAY = { y: 2026, m: 4, d: 26 };
 const SM = { y: 2026, m: 4, sel: 26, F: { ex: 'all', acc: null, ty: null }, D: null, open: null };
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const BASE = [
-  ['2026-05-05', 'Bitget', 'claim', -15], ['2026-05-12', 'Bitget', 'claim', -11.8], ['2026-05-25', 'Bitget', 'ex', 25], ['2026-05-25', 'EdgeX', 'pending'],
+  ['2026-05-05', 'Bitget', 'claim', -15], ['2026-05-12', 'Bitget', 'claim', -11.8], ['2026-05-25', 'Bitget', 'ex', 25],
   ['2026-05-26', 'Bitget', 'ex', 25], ['2026-05-26', 'Lighter', 'ex', 12.4], ['2026-05-26', 'Bitget', 'claim', -20],
   ['2026-04-20', 'Bitget', 'ev', 50, 'BTC Prediction Reward'], ['2026-04-20', 'Bitget', 'ev', 50, 'Cashback Challenge Reward'], ['2026-04-20', 'EdgeX', 'ev', 50, 'Cashback Challenge Reward'],
   ['2025-10-14', 'Bitget', 'ex', 8.2], ['2025-10-21', 'Bitget', 'ex', 3.1]];
@@ -409,10 +409,10 @@ function sumData() {
   const rows = ledger().filter(r => r.d.startsWith(pre) && applied(r, F));
   const days = {}; let rec = 0, wd = 0;
   rows.forEach(r => { const n = +r.d.slice(8); if (r.k === 'pending') { (days[n] = days[n] || { v: 0, p: 0, any: 0 }).p = 1; return } const o = days[n] = days[n] || { v: 0, p: 0, any: 0 }; o.v += r.v; o.any = 1; if (r.v > 0) rec += r.v; else wd += r.v });
-  const dm = {}; Object.entries(days).forEach(([n, o]) => { dm[n] = []; if (o.any) dm[n].push(sgn(Math.round(o.v * 100) / 100)); if (o.p) dm[n].push('P') });
+  const dm = {}; Object.entries(days).forEach(([n, o]) => { dm[n] = []; if (o.any) dm[n].push(sgn(Math.round(o.v * 100) / 100)); });
   const isCur = SM.y === TODAY.y && SM.m === TODAY.m;
   const TY = SUMX.TY;
-  const dayRows = rows.filter(r => +r.d.slice(8) === SM.sel).map(r => ({ p: r.a.ex, w: r.a.type === 'DEX' ? r.a.id : null, id: r.a.type === 'CEX' ? 'UID ' + r.a.id : null, t: r.k === 'pending' ? 'DEX data pending' : r.k === 'ex' ? TY.ex() : r.k === 'claim' ? TY.claim() : r.name, v: r.k === 'pending' ? '—' : sgn(r.v), pending: r.k === 'pending' }));
+  const dayRows = rows.filter(r => +r.d.slice(8) === SM.sel).map(r => ({ p: r.a.ex, w: r.a.type === 'DEX' ? r.a.id : null, id: r.a.type === 'CEX' ? 'UID ' + r.a.id : null, t: r.k === 'ex' ? TY.ex() : r.k === 'claim' ? TY.claim() : r.name, v: sgn(r.v) }));
   const any = rows.some(r => r.k !== 'pending');
   const acct = F.acc && F.acc.size === 1 && !ledger().some(r => F.acc.has(r.a.key));
   return { month: `${MON[SM.m]} ${SM.y}`, y: SM.y, m: SM.m, isCur, today: TODAY.d, sel: SM.sel, days: dm, card: any ? [sgn(rec), sgn(wd).replace('+', wd === 0 ? '' : '+'), sgn(rec + wd)] : null, rows: dayRows, acct };

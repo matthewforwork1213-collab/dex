@@ -19,7 +19,7 @@ const tabBar=(items,on,o={})=>`<div class="tabs" style="${o.style||''}">${items.
 // =====================================================================
 const MBC=[['Cashback',2,'USDT'],['Cashback',3,'USDT'],['Streak',3,'Days'],['Cashback',5,'USDT'],['Streak',4,'Days'],['Cashback',4,'USDT'],['Streak',7,'Days'],['Cashback',5,'USDT'],['Cashback',8,'USDT']];
 const PHASE={join:'pre',noEligible:'pre',reselect:'pre',reselNone:'pre',failToast:'pre',confirm:'pre',preopen:'open',preopenNo:'open',
- normal:'run',today:'run',delayed:'run',complete:'done',final:'done',tally:'end',result:'end',excluded:'end',payout:'end'};
+ normal:'run',today:'run',complete:'done',final:'done',tally:'end',result:'end',excluded:'end',payout:'end'};
 const mbAlertTop=(tone,t,b)=>`<div style="background:${tone==='err'?'#fdd':'#ffe0b2'};border-radius:8px;padding:10px 16px;margin-top:24px"><div class="b2 semi" style="color:${tone==='err'?'#c62828':'#663c00'}">${t}</div><div class="cap" style="color:${tone==='err'?'#c62828':'#663c00'}">${b}</div></div>`;
 function mbTabs(){return `<div style="background:#fff;border-bottom:1px solid var(--divider)">${wrap(tabBar([['o','Overview'],['b','Bingo missions'],['r','Rewards & ranking'],['n','Rules']],'o',{style:'border-bottom:0'}))}</div>`}
 function mbTimer(){const box=v=>`<span style="display:inline-flex;align-items:center;justify-content:center;min-width:${MO()?48:60}px;height:${MO()?36:42}px;padding:0 6px;background:#fff;border-radius:8px;box-shadow:inset 0 1px 2px rgba(0,0,0,.25);font-size:${MO()?20:24}px;font-weight:700">${v}</span>`;const c=`<span class="h6 c2" style="font-weight:700">:</span>`;
@@ -91,7 +91,6 @@ function mbSection2(st){
  if(st==='join'||st==='failToast')notice=mbNotice('blue',T('You Have an Eligible wallet','참여할 수 있는 지갑이 있어요'),'Join now and the cashback you have received since Oct 3, 09:00 is added to your Bingo Gauge right away.');
  if(st==='preopen')notice=mbNotice('blue',T('You Have an Eligible wallet','참여할 수 있는 지갑이 있어요'),'You can participate from Oct 3, 09:00. Cashback you receive during the event is added to your Bingo Gauge automatically.');
  if(st==='preopenNo'||st==='noEligible')notice=mbNotice('brown',T('No Eligible EdgeX wallet','참여할 수 있는 EdgeX 지갑이 없어요'),T('Only EdgeX wallets registered on TetherMax on or after Sep 3, 09:00 can participate. Link a new EdgeX wallet to join.','9월 3일 09:00 이후 테더맥스에 등록된 EdgeX 지갑만 참여할 수 있어요. EdgeX 지갑을 새로 연동하면 참여할 수 있어요.'));
- if(st==='delayed')notice=mbNotice('brown',T('Cashback Update Delayed','캐시백 반영이 지연되고 있어요'),'Your Bingo Gauge will be filled automatically once the update is complete.');
  if(st==='tally')notice=mbNotice('brown','Calculating','The participation period has ended. Results will be announced on Oct 28, 09:00.');
  const pay=T('Event rewards will be paid to your participating wallet from Oct 31, 09:00.','10월 31일 09:00부터 참여 지갑으로 이벤트 리워드가 지급돼요.');
  if(st==='result'||st==='excluded')notice=mbNotice('navy','Rewards Confirmed',pay);
@@ -100,7 +99,7 @@ function mbSection2(st){
  const info=t=>`<div class="row g8 b2" style="color:rgba(255,255,255,.85)"><span style="width:16px;height:16px;border:1.5px solid currentColor;border-radius:50%;font-size:10px;display:inline-flex;align-items:center;justify-content:center;flex:none">i</span>${t}</div>`;
  let below='';
  const nb=(a,b)=>`<div class="grid2" style="gap:16px">${[['Next Bingo',a],['Full Board',b]].map(([l,v])=>`<div class="row between" style="background:#1f45d6;border-radius:12px;padding:14px 20px;color:#fff"><span class="b2 semi">${l}</span><span class="b2 semi">${v}</span></div>`).join('')}</div>`;
- if(ph==='run')below=nb('1 cell','7 cell')+(st==='delayed'?C.note('지연 안내 노출 중에는 <code>Updated once a day</code>를 숨김(REQ-640: 지연 안내가 우선). Figma는 둘 다 보임 — 정책 우선'):info(T('Updated once a day','하루 한 번 업데이트돼요')));
+ if(ph==='run')below=nb('1 cell','7 cell')+info(T('Updated once a day','하루 한 번 업데이트돼요'));
  if(st==='complete')below=nb('-','0 cell')+info(T('Rankings are updated daily.','랭킹은 매일 업데이트돼요'))+C.note('완성 직후(랭킹 ON): 국문 = 정책 문구(REQ-654), 영문 = 문구표_DEX');
  if(st==='final')below=nb('-','0 cell')+info(T('Final rankings will be shown when results are announced · Oct 28, 09:00','최종 순위는 결과 발표 때 확인할 수 있어요 · 10월 28일 09:00'));
  if(ph==='end')below=info('The participation period has ended, so cells can no longer be checked.');
@@ -144,7 +143,6 @@ R.screen({id:'maxboard.main',group:'rewards',title:'맥스보드 (DEX 보드)',r
   {id:'join',label:'참여 가능 · 자격 있음',figma:{pc:'29062:111024',mo:'29062:111380'},note:'Figma에만 있는 상태 — 원본 EligibilityState <code>NOT_REGISTERED</code>(정책 D-1-5)라 넣음'},
   {id:'normal',label:'참여 중 — 하루 한 번 업데이트돼요',figma:{pc:'28537:449610',mo:'28537:458145'},note:'[기존 MAX-] Bingo 「참여 기간 · 참여 중」 · V2.2 <code>mb/BOARD#normal</code>. 기존 쪽 UID 표현은 지갑으로(REQ-655)'},
   {id:'today',label:'참여 중 · 오늘 마감',note:'재사용 — [기존 MAX-] Bingo 「참여 기간 · 참여 중」(28537:449610 · 458145) + 일정 줄. <code>Ends Today</code>/<code>오늘 마감</code>(REQ-639)은 Figma에 없는 문구 · V2.2 <code>mb/BOARD#today</code>'},
-  {id:'delayed',label:'정산 지연 (캐시백 반영 지연)',figma:{pc:'29062:111741',mo:'29062:112159'},note:'V2.2 <code>mb/BOARD#delayed</code>'},
   {id:'complete',label:'보드 완성 (랭킹 ON)',figma:{pc:'29064:10322',mo:'29064:10687'},note:'V2.2 <code>mb/BOARD#complete</code> · Figma 프레임은 상단 히어로 없이 시작 — 히어로는 참여 중 모양을 씀'},
   {id:'final',label:'마지막 날 Batch 후 완성',note:'재사용 — DEX 보드 완성(29064:10322 · 10687 = 기존 「참여 중 (빙고판 완성)」 28537:450028)에 최종 순위 안내 한 줄(원문 없음) · V2.2 <code>mb/BOARD#final</code>'},
   {id:'tally',label:'집계 · 참여자',figma:{pc:'29064:12448',mo:'29064:12826'},note:'Figma에만 있는 상태 — 원본 PRD 단계 「집계」(정책 D-1-4·REQ-110)'},

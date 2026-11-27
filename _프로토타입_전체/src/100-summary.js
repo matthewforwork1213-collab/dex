@@ -34,7 +34,7 @@ const rowsNormal=()=>[
 ];
 // 상태별 표본(Figma 값 그대로. 캘린더 칸 = 그날 순액 REQ-378)
 function sumData(st){
- const base={month:'May 2026',today:26,sel:26,days:{5:['−15.00'],12:['−11.80'],25:['P'],26:['+17.40']},card:['+50.00','−40.00','+10.00'],rows:rowsNormal()};
+ const base={month:'May 2026',today:26,sel:26,days:{5:['−15.00'],12:['−11.80'],26:['+17.40']},card:['+50.00','−40.00','+10.00'],rows:rowsNormal()};
  const big={days:{5:['+12.10K','−20.00'],6:['+150.01M'],26:['+150.00']},card:['+150.02M','−40.00','+150.02M']};
  switch(st){
   case 'otherDay':return {...base,sel:12,rows:[{p:'Bitget',id:'UID ******7462',t:TY.claim(),v:'−11.80'}]};
@@ -44,7 +44,6 @@ function sumData(st){
    {p:'EdgeX',w:W_EDGEX,t:'Cashback Challenge Reward',v:'+50.00'}]};
   case 'noDay':return {...base,...big,days:{5:['+12.10K','−20.00'],6:['+150.01M']},rows:[]};
   case 'noMonth':return {...base,days:{},card:null,rows:[]};
-  case 'pending':return {...base,sel:25,rows:[{p:'Bitget',id:'UID ******7462',t:TY.ex(),v:'+25.00'},{p:'EdgeX',w:W_EDGEX,t:'DEX data pending',v:'—',pending:true}],days:{...base.days,25:['+25.00','P']}};
   case 'returned':return {...base,days:{...base.days,26:['+137.40']},rows:[...rowsNormal(),{p:'EdgeX',w:W_EDGEX,t:'Withdrawal returned',v:'+120.00'}]};
   case 'lighter':return {...base,sel:25,today:26,days:{...base.days,25:['+30.00']},rows:[{p:'Lighter',w:W_LIGHTER,t:'Credited',v:'+30.00'},{p:'Lighter',w:W_LIGHTER,t:'Withheld',v:'5.00',muted:true}]};
   case 'oneEmpty':return {...base,days:{},card:null,rows:[],acct:true};
@@ -58,7 +57,7 @@ function calendar(d){
  const cells=[];for(let i=0;i<first;i++)cells.push('<span></span>');
  for(let n=1;n<=len;n++){
   const future=may&&n>d.today;const on=n===d.sel;
-  const vals=(d.days[n]||[]).map(v=>v==='P'?`<span style="font-size:11px;line-height:1.3;color:var(--warning)">DEX data pending</span>`:`<span class="tnum" style="font-size:${mo()?9:11}px;line-height:1.3;color:${amtColor(v)}">${v}</span>`).join('');
+  const vals=(d.days[n]||[]).map(v=>`<span class="tnum" style="font-size:${mo()?9:11}px;line-height:1.3;color:${amtColor(v)}">${v}</span>`).join('');
   cells.push(`<div class="col" style="align-items:center;gap:2px;min-height:${mo()?70:57}px;padding-top:4px"><span class="b2 tnum" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;${on?'border:1px solid var(--text-primary);':''}${future?'color:var(--text-disabled)':''}">${n}</span>${vals}</div>`)}
  const wk=['S','M','T','W','T','F','S'].map(x=>`<span class="b2 c2" style="text-align:center">${x}</span>`).join('');
  return `<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:4px">${wk}${cells.join('')}</div>`}
@@ -107,13 +106,12 @@ function typesSheet(){
 R.screen({id:'summary.main',group:'summary',title:'캐시백 요약',route:'/cashback-summary',fu:['FU-060','FU-061','FU-062'],
  shell:{accent:true,back:'home.main',moTitle:['Cashback Summary','캐시백 요약'],noNav:true},
  states:[
-  {id:'normal',label:'월 보기 — 필터 · 캘린더 · 월간 카드 · 일별 목록 (CS1)',figma:{pc:'28960:127133',mo:'29065:6687'},note:'V2.2 hist/SUM#normal · Figma CS1 표본값. 25일 `DEX data pending`(REQ-373)'},
+  {id:'normal',label:'월 보기 — 필터 · 캘린더 · 월간 카드 · 일별 목록 (CS1)',figma:{pc:'28960:127133',mo:'29065:6687'},note:'V2.2 hist/SUM#normal · Figma CS1 표본값'},
   {id:'otherDay',label:'다른 날 선택 (CS2)',figma:{pc:'28960:127139'},note:'Figma에만 있는 상태(날짜 선택은 REQ-371 기본 동작). CS2 프레임은 하단이 잘려 일별 목록은 CS1 형식으로 구성'},
   {id:'eventDay',label:'이벤트 리워드 날 · 큰 금액 축약 (CS3)',figma:{pc:'28960:127145'},note:'Figma에만 있는 상태(이벤트 리워드 행 REQ-371). 26일 칸은 Figma `+5.00` 대신 일별 순액 +150.00(REQ-378)'},
   {id:'dexRange',label:'거래소 범위 DEX 전체',note:'V2.2 hist/SUM#dexRange — 거래소 드롭다운은 Figma 없음(CS6에 계정·유형만)'},
   {id:'account',label:'계정 필터 드롭다운 (CS6 All Accounts)',figma:{pc:'29265:120180'},note:'V2.2 hist/SUM#account · 좁은 목록이라 지갑은 축약(REQ-366 — 전체 보기·복사 가능)'},
   {id:'types',label:'유형 다중 선택 (CS6 All Types)',figma:{pc:'29265:120387',mo:'29065:6366'},note:'V2.2 hist/SUM#types · 유형값은 정책(REQ-367·G-365·G-418): Exchange Cashback / Event Reward / Claim Amount'},
-  {id:'pending',label:'DEX data pending — 0 아님',note:'V2.2 hist/SUM#pending · REQ-373·377 · G-059 — 원장 미도착 DEX는 0 대신 라벨, 합계 제외'},
   {id:'returned',label:'Withdrawal returned 행',note:'V2.2 hist/SUM#returned · G-113 확정: 복원된 날 `+` 부호 행'},
   {id:'lighter',label:'Lighter Credited · Withheld (온보딩 후)',note:'V2.2 hist/SUM#lighter · G-181 정산 월요일 날짜로 기록 · G-059 상태명 · Withheld는 합계 제외. Lighter 보류(G-100 온보딩 때 재확인)'},
   {id:'noMonth',label:'활동 없는 달 (CS5)',figma:{pc:'28960:127157'},note:'V2.2 hist/SUM#noMonth · REQ-375'},
