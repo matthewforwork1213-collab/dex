@@ -92,6 +92,8 @@ function closeProductModal(){
  if(config.local==='points'){state.pointPartner=null;state.saved.featuredOpen=false;state.previewCase='normal';render();$(legacyHost).querySelector('[data-action=pointEdit],[data-action=featuredOpen]')?.focus({preventScroll:true});return;}
  if(config.local==='league'){state.previewCase='normal';state.leagueSelected='';render();return;}
  if(config.local==='margin'){state.marginModalClosed=true;state.previewCase='closed';render();return;}
+ // 같은 화면의 모달 상태 → 닫으면 그 화면 기본 상태로(다른 화면으로 이동하지 않음)
+ if(config.local==='case'){state.previewCase='normal';render();if(config.focus)$(legacyHost).querySelector(config.focus)?.focus({preventScroll:true});return;}
  let destination=config.close||config.background||(MODE==='admin'?'ex/EX-1':'home/S4');
  if(MODE==='user'&&route.startsWith('wd/')&&state.guest)destination='link/E4';
  nav(destination,false);

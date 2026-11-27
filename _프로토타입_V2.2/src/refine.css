@@ -156,6 +156,14 @@ html{scrollbar-gutter:stable}
 @media (max-width:720px){.ct .row2{grid-template-columns:1fr}}
 .ct .v22-dlgact{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
 .ct .btn.sec,.ct button.btn.sec{background:#fff;color:#2b2f45;border:1px solid #c9cddc}
+/* V2.2 백오피스 · DEX 개요 배너 모달(REQ-735) — 오버레이는 .ct 밖이라 같은 규칙을 모달 범위로 */
+.v22-promo-dlg .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
+.v22-promo-dlg .row2>*{min-width:0}
+.v22-promo-dlg .v22-dlgact{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.v22-promo-dlg .btn.sec,.v22-promo-dlg button.btn.sec{background:#fff;color:#2b2f45;border:1px solid #c9cddc}
+.v22-promo-item{margin-bottom:10px}
+.v22-promo-item .ch{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.v22-promo-item .ch h4{margin:0}
 /* V2.2 백오피스 목록·배지·탭 */
 .ct .li{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid #eceef4}
 .ct .li .nm{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}

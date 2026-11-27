@@ -306,7 +306,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 
 - `upToRate` = 그 라우트에서 요율 있는 파트너 중 최고 계산값(REQ-297). 요율 있는 파트너가 0이면 `partners: []`, `upToRate: null`.
 - `spendingEstimateTexts` = 운영자가 Spending Estimate에서 편집한 문구(REQ-626, API-130 `texts`). 요청 `lang`의 문구, 없으면 영어. 편집 언어는 EN·KO 필수, RU·ID 선택(G-261).
-- `defaultPartnerNo` = 운영자가 `Default Exchange`(API-130)에 지정한 활성 파트너(REQ-295). 지정 예정값 CEX = Bybit · Brokers = RS Finance, DEX = 활성 DEX 중 운영자 지정(G-142 확정: 요율 없는 기본 파트너면 첫 설정 파트너로 + 백오피스 경고. CEX 기본은 Bybit(REQ-295 지정 예정값)·G-146 확정: 로그인 시 잔액이 가장 큰 연동 파트너를 미리 선택). 슬라이더 범위는 운영자 설정값(G-148).
+- `defaultPartnerNo` = 운영자가 `Default Exchange`(API-130)에 지정한 활성 파트너(REQ-295). 지정 예정값 CEX = Bybit, DEX = 활성 DEX 중 운영자 지정(G-142 확정: 요율 없는 기본 파트너면 첫 설정 파트너로 + 백오피스 경고. CEX 기본은 Bybit(REQ-295 지정 예정값)·G-146 확정: 로그인 시 잔액이 가장 큰 연동 파트너를 미리 선택). 슬라이더 범위는 운영자 설정값(G-148). `BROKERS` 라우트 값(기본 파트너 RS Finance 포함)은 하드코딩(어드민 관리 없음, G-400).
 - `rating.count` < 20이면 프론트가 `-` 표시(REQ-313).
 - `spendingEstimate.{탭}.partners[]` = 파트너마다 저장한 거래량 범위(`Min. spend`·`Max spend`, REQ-627). 그 탭의 활성 파트너만 들어 있다. 파트너를 바꾸면 프론트가 이 배열의 범위로 슬라이더를 바꾸고 추가 호출 없이 재계산한다(REQ-294). `defaultVolume`·`ticks`는 탭 단위로 내려 주며, 파트너 범위 밖이면 범위 안으로 클램프한다.
 
