@@ -29,7 +29,7 @@ function memberOf(slug) {
 }
 function withSD(o, f) { window.SITED = o; try { return f() } finally { window.SITED = null } }
 const site2 = {
-  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/tp-intro': 'TetherMax Point | TetherMax', '/events': 'TetherMax and Crypto Exchange Events | Cashback', '/benefits': 'Benefits | TetherMax' }[p] || (/^\/benefits\//.test(p) ? 'Benefits | TetherMax' : undefined) },
+  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/tp-intro': 'TetherMax Point | TetherMax', '/events': 'TetherMax and Crypto Exchange Events | Cashback', '/benefits': 'Benefits | TetherMax', '/search': 'TetherMax', '/search/result': 'TetherMax' }[p] || (/^\/benefits\//.test(p) ? 'Benefits | TetherMax' : undefined) },
   dexLanding() { S.auth = isMember() ? 's3' : 'guest'; return withSD({ guest: !isMember(), list: SD.list }, () => renderInner('dex.overview:' + (isMember() ? 'member' : 'normal'))) },
   dexDetail(slug) {
     if (SD.slug !== slug) Object.assign(SD, { slug, maker: false, vol: 400000, step: 0, faq: new Set([0]), sort: 0 });
@@ -40,6 +40,8 @@ const site2 = {
   render(p, q) {
     if (p === '/payback') return calcHTML(q || {});
     if (p === '/tp-intro') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('tp.intro:normal') }   // TP 소개(dev 기준) — 게스트·회원 같은 화면, CTA만 다름
+    // 비회원 캐시백 조회(FU-012 · 목록판 guest.search / guest.result 그대로, 동작은 30-guest.js 공통). 회원은 실사이트처럼 홈
+    if (p === '/search' || p === '/search/result') { if (isMember()) { navReal('/en'); return '' } S.auth = 'guest'; return p === '/search' ? renderInner('guest.search:search') : renderInner('guest.result:' + (q && ['above', 'below', 'zero', 'belowcex'].includes(q.st) ? q.st : 'above')) }
     if (p === '/events') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('events.list:exchange') }   // 이벤트(결정 D3 3탭 · Figma A1 필터) — 목록판 events.list 그대로, 동작은 04-behave 공통
     if (p === '/benefits') { S.auth = isMember() ? 's4' : 'guest'; const ok = q && q.st && (isMember() ? ['normal', 'doneEmpty'] : ['guestOn', 'guest']).includes(q.st); return renderInner('benefits.list:' + (ok ? q.st : isMember() ? 'normal' : 'guestOn')) }
     // 혜택 상세(_프로토타입_전체/src/125-benefits.js) — /benefits/{혜택}?st={상태}. 상태가 로그인 상태와 안 맞으면 그 혜택의 게스트·회원 첫 상태
@@ -66,6 +68,8 @@ const site2 = {
     if (id === 'dex.detail' && st === 'drawer') { openHow(); return true }
     if (id === 'dex.detail' && st === 'close') { closeLayer(); return true }
     if (id === 'summary.main') { go2('/summary'); return true }
+    if (id === 'guest.search' && !API.MODAL && !window.PT_EMBED) { go2('/search'); return true }   // 동작판만(목록판은 목록판 화면으로) — 푸터 Claim Cashback · 결과 Search again(입력 유지는 30-guest.js)
+    if (id === 'guest.result' && !API.MODAL && !window.PT_EMBED) { go2('/search/result', { st }); return true }
     if (id === 'benefits.detail' && st) { go2('/benefits/' + st.split('-')[0], { st }); return true }   // 혜택 상세 — 목록 행·상세 안 버튼
     if (id === 'benefits.list') { go2('/benefits', st ? { st } : null); return true }
     if (/^calc./.test(id)) return calcGo(id, st);

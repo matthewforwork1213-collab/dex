@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27T23:11",
+ "generated": "2026-11-27T23:35",
  "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
  "results": [
   {
@@ -1279,7 +1279,7 @@
     },
     {
      "t": "Select an exchange first",
-     "kind": "text"
+     "kind": "input"
     },
     {
      "t": "Check cashback",
@@ -1449,7 +1449,7 @@
     },
     {
      "t": "Select an exchange first",
-     "kind": "text"
+     "kind": "input"
     },
     {
      "t": "Check cashback",
