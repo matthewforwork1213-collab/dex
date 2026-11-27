@@ -26,7 +26,6 @@
     if (/\/login$/.test(PAGE) && /log ?in|sign ?in|continue|next|^ok$/i.test(l)) { post({ auth: 'member', nav: ORIGIN + '/en', toast: '로그인 완료 (프로토타입)' }); return }
     if (/\/signup$/.test(PAGE) && /sign ?up|join|next|continue|verify|send|confirm|submit|create/i.test(l)) { post({ auth: 'member', nav: ORIGIN + '/en', toast: '가입 완료 (프로토타입)' }); return }
     if (l === 'Link UID') return dexLink();   // DEX 연결: 같은 연동 모달
-    if (l === 'Cashback' && PT.auth === 'member') return nav(ORIGIN + '/en/affiliated');   // DEX 연결: 캐시백 허브
     if (/log ?out|sign ?out/i.test(l)) { post({ auth: 'guest', nav: ORIGIN + '/en', toast: '로그아웃 (프로토타입)' }); return }
     toast(l ? '「' + l + '」 처리됨 (프로토타입)' : '처리됨 (프로토타입)');
   }
@@ -85,6 +84,24 @@
     return null;
   }
 
+  function navDrop(btn) { var d = btn.nextElementSibling; return d && /__Dropdown/.test(d.className) ? d : null }
+  function navSet(btn, open) {
+    var d = navDrop(btn); if (!d) return;
+    var oc = btn.className.match(/(\S+__)NavMenu/), cls = oc ? oc[1] + 'open' : null;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (cls) { btn.classList.toggle(cls, open); var ar = btn.querySelector('[class*="__NavArrow"]'); if (ar) ar.classList.toggle(cls, open) }
+    d.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (open) d.removeAttribute('inert'); else d.setAttribute('inert', '');
+    d.style.height = open ? 'auto' : '0px'; d.style.opacity = open ? '1' : '0'; d.style.visibility = open ? 'visible' : 'hidden';
+  }
+  function navClose(except) { document.querySelectorAll('[class*="__NavMenu"][aria-expanded="true"]').forEach(function (x) { if (x !== except) navSet(x, false) }) }
+  function navToggle(btn) {
+    if (!navDrop(btn)) return false;
+    var open = btn.getAttribute('aria-expanded') !== 'true';
+    navClose(btn); navSet(btn, open); return true;
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') navClose() });
+
   document.addEventListener('click', function (e) {
     var t = e.target;
     var dis = disabledAt(e.clientX, e.clientY);
@@ -96,6 +113,9 @@
     if (t.closest('[data-dex-own]')) return;
     var lrow = PT.key === 'en' && PT.auth === 'member' && t.closest('[class*="__LinkedUidRow"]');
     if (lrow) { e.preventDefault(); e.stopPropagation(); return dexRowOpen(lrow) }
+    var nm = t.closest('[class*="__NavMenu"]');   // GNB 드롭다운(Cashback · Rewards Hub · Discover) — 모든 페이지·회원/게스트에서 펼침/접힘
+    if (nm && navToggle(nm)) { e.preventDefault(); e.stopPropagation(); return }
+    if (!t.closest('[class*="__Dropdown"]')) navClose();
     var b = t.closest('[data-pt-sig]');
     var a = t.closest('a[href]');
     if (b && !(a && b.contains(a))) {
