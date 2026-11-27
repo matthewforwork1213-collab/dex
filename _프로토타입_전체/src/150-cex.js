@@ -66,5 +66,14 @@ R.screen({id:'auth.signup',group:'cex',title:'회원가입 (기존 · 첫 단계
  ],
  render(st){if(st==='otp'||st==='otpGuest')return withOtp(signup(st==='otpGuest'?'guest':'normal'));if(st==='invite')return `<div style="position:relative">${signup('invite')}<div class="scrim pt-fixed center" style="align-items:center;justify-content:center">${inviteModal()}</div></div>`+C.note('초대 코드 미리 채운 가입 → 가입 완료 뒤 초대 보상 안내 모달(Figma 프레임 = 모달)');return signup(st)+C.note(st==='guest'?'게스트 복귀 가입: 가입 성공 → 조회한 거래소·계정으로 돌아가 연동(REQ-178).':'Figma 원문 그대로(PC <code>Log in</code> · 모바일 <code>Log In</code>).')}});
 
-// 거래소 목록(cex.list)은 기존 실서비스 페이지(/{lang}/affiliated — 결정 2026-11-27 목록 페이지 유지) → 목록판에서는 실동작판 수집본을 새 탭으로(01-core go)
+// 기존 CEX 거래소 목록(/{lang}/affiliated — 결정 2026-11-27 목록 페이지 유지) · CEX 거래소 상세 — 실서비스 수집본(_프로토타입_실사이트/pages)을 목록판 안에서 그대로 띄운다.
+// 수집본 안의 클릭은 수집본 런타임(pt-runtime.js)이 부모(목록판)로 보내고, 목록판이 해당 화면으로 이동한다(01-core 메시지 처리). 행 전체 클릭 = 거래소 상세
+const SNAP_EX=['binance','bingx','bitget','bitunix','blofin','bybit','deepcoin','flipster','gate','htx','lbank','mexc','okx','toobit','woo-x-pro','zoomex'];
+window.snapFrame=(key,state)=>`<iframe class="pt-snap" data-snap="${key}" title="실서비스 수집본" src="../_프로토타입_실사이트/pages/${S.auth==='guest'?'guest':'member'}__${key}.${S.vp}${state?'.'+state:''}.html" style="display:block;width:100%;height:calc(100vh - var(--pt-bar-h,48px));border:0;background:#fff"></iframe>`;
+R.screen({id:'cex.list',group:'cex',title:'CEX 거래소 목록 (기존)',route:'/affiliated',fu:[],shell:false,
+ states:[{id:'normal',label:'기본 — 실서비스 수집본(행 클릭 = 거래소 상세)'}],
+ render(){return snapFrame('en__affiliated')}});
+R.screen({id:'cex.detail',group:'cex',title:'CEX 거래소 상세 (기존)',route:'/exchangeDetail/{slug}-referral',fu:[],shell:false,
+ states:SNAP_EX.map(x=>({id:x,label:x+' — 실서비스 수집본'})),
+ render(st){return snapFrame('en__exchangeDetail__'+(SNAP_EX.includes(st)?st:'bybit')+'-referral')}});
 

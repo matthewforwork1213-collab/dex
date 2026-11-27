@@ -1,6 +1,6 @@
 {
  "source": "use_figma",
- "fetched": "2026-11-27T22:53",
+ "fetched": "2026-11-27T23:05",
  "nodes": {
   "22442:219830": {
    "name": "MAX1216 / detail / S6 Empty — 0 reviews / light",
@@ -56280,7 +56280,7 @@
   "29360:146954": {
    "name": "DEX / Mobile / detail / D1 Key features / dark",
    "w": 375,
-   "h": 8149,
+   "h": 8169,
    "hidden": false,
    "overlay": false,
    "texts": [
@@ -56937,7 +56937,7 @@
      "kind": "shell"
     },
     {
-     "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
+     "t": "Does it support ApeX too? I linked my Lighter wallet already and I am not sure whether a second DEX needs a separate verification step.",
      "kind": "text"
     },
     {

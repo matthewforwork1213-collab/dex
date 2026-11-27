@@ -139,7 +139,8 @@ function render(){
  if(EM)EM.unmount();
  if(mt)EM.mount(fr,mt);
  else{const k=EM?EM.stash():null;fr.innerHTML=renderInner(sc.id+':'+state.id);if(k)EM.unstash(k)}
- const h=`#${sc.id}/${state.id}`;if(location.hash!==h)history.replaceState(null,'',h);
+ // 화면 이동(go)은 브라우저 기록에 쌓아 뒤로가기 = 이전 화면(실제 사이트처럼). 상태 고르기·로그인 전환·보기 전환은 기록을 바꾸기만
+ const h=`#${sc.id}/${state.id}`;if(location.hash!==h){if(S._push)history.pushState(null,'',h);else history.replaceState(null,'',h)}S._push=false;
  document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;syncStateAuth();if(AUTH_ONLY_GUEST.includes(S.screen)&&S.auth!=='guest'){S.auth='guest';save()}else if((AUTH_ONLY_MEMBER.includes(S.screen)||/^(link|own)\./.test(S.screen))&&S.auth==='guest'){S.auth='s4';save()}render()};   // 상태를 직접 고르면 로그인 상태를 그 화면에 맞춤
  document.getElementById('pt-design').onchange=e=>{S.design=e.target.checked;save();render()};
  document.querySelectorAll('[data-vp]').forEach(x=>x.onclick=()=>{S.vp=x.dataset.vp;save();render()});
@@ -155,18 +156,18 @@ const HIST=[];
 function go(key,o={}){if(!key)return;
  if(key==='@authdone'){const from=S.screen,st=S.state;S.auth=from==='auth.signup'?'s3':'s4';save();const k=S.after||(st==='guest'?'guest.result:handoff':S.auth==='s3'?'home.main:s3':'home.main');S.after=null;return go(k,{noPush:true})}
  if(window.PT_EMBED)PT_EMBED.restore();
- if(key.startsWith('back:')){const p=HIST.pop();return go(p||key.slice(5),{noPush:true})}
+ if(key.startsWith('back:')){if(HIST.length){HIST.pop();history.back();return}return go(key.slice(5),{noPush:true})}   // 화면 안 ← = 브라우저 뒤로와 같음
  // 브로커 상세·Brokers 페이지는 프로토타입 안 화면(155-brokers.js — 결정 12차 Brokers 페이지 유지 · 허브 Join {broker} = 브로커 상세 현재 탭)
  if(key.startsWith('brkd:')&&R.byId['brokers.detail']){const b=key.slice(5);return go('brokers.detail:'+({rs:'rsFinance','rs-finance':'rsFinance'}[b]||b),o)}
  if(/^brokers\.list(:|$)/.test(key)&&R.byId['brokers.main'])return go('brokers.main',o);
- // 기존 CEX 거래소 목록(/{lang}/affiliated — 결정 2026-11-27 목록 페이지 유지)·CEX 거래소 상세는 기존 실서비스 페이지 → 실동작판 수집본을 새 탭으로
- if(key==='cex.list'||/^cexd:/.test(key)){const CS={blockfin:'blofin',biofin:'blofin',woox:'woo-x-pro'},id=key.split(':')[1];window.open(snapUrl(key==='cex.list'?'en__affiliated':'en__exchangeDetail__'+(CS[id]||id)+'-referral'),'_blank','noopener');window.PT_LAST_OPEN=key;return}
+ // CEX 거래소 상세(cexd:{거래소}) = 목록판 안 수집본 화면 cex.detail(기존 CEX 거래소 목록 cex.list도 같음 — 결정 2026-11-27)
+ if(/^cexd:/.test(key)){const CS={blockfin:'blofin',biofin:'blofin',woox:'woo-x-pro','woo x pro':'woo-x-pro'},id=String(key.split(':')[1]||'').toLowerCase();return go('cex.detail:'+(CS[id]||id),o)}
  if(/^brkd:/.test(key)){const BS={rs:'rs-finance'},id=key.slice(5);window.open('https://tethermax.io/en/brokers/'+(BS[id]||id),'_blank','noopener');window.PT_LAST_OPEN=key;return}
  if(!o.noPush&&S.screen)HIST.push(S.screen+(S.state?':'+S.state:''));if(HIST.length>50)HIST.shift();
  const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}document.body.classList.remove('pt-side-open');S.screen=id;S.state=st||(AUTH_STATE[id]?AUTH_STATE[id][S.auth]:null);   // 상태를 안 정하면 지금 로그인 상태의 화면
  // 지금 로그인 상태로는 볼 수 없는 화면이면 실제로 보게 되는 화면으로(게스트 전용 ↔ 회원 전용)
  const to=(id==='home.main'&&!st&&S.auth==='guest')?['landing.main','normal']:(AUTH_ONLY_GUEST.includes(id)&&S.auth!=='guest')||((AUTH_ONLY_MEMBER.includes(id)||/^(link|own)./.test(id))&&S.auth==='guest')?authTarget(id,st,S.auth):null;if(to){if(to[0]==='auth.login')S.after=key;S.screen=to[0];S.state=to[1]}
- render();window.scrollTo(0,0)}
+ S._push=!o.noPush;render();window.scrollTo(0,0)}
 // 로그인 상태 전환 → 그 상태에서 사용자가 실제로 보게 되는 화면(결정 12차). [화면, 상태] 또는 null(그대로)
 const AUTH_ONLY_GUEST=['landing.main','guest.entry','guest.search','guest.result','guest.modal','auth.login','auth.signup','invite.landing'];
 const AUTH_ONLY_MEMBER=['summary.main','ranking.main','invite.main','partner.hub','coupon.box','home.wallet','home.timeline','wd.reflect','my.main','league.main','maxboard.main','challenge.detail','tp.main'];
@@ -202,7 +203,14 @@ function appBase(){return '../_프로토타입_실사이트/dex/app.html'}
 function snapUrl(k){return '../_프로토타입_실사이트/index.html#key='+encodeURIComponent(k)+'&auth='+(S.auth==='guest'?'guest':'member')}   // _프로토타입_전체/_latest.html · prototype/full.html 모두 DEX 바로 아래
 function liveFrame(r){const au=S.auth==='guest'?'guest':'member';return `<iframe id="pt-live" title="실제 동작판" src="${appBase()}?auth=${au}${r}" style="display:block;width:100%;height:calc(100vh - var(--pt-bar-h,48px));border:0;background:#fff"></iframe>`}
 const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point-introduction/,'tp.intro'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'cex.list'],[/^\/en\/dex\/?$/,'dex.overview']];
-window.PT_REAL_NAV=url=>{let p='';try{p=new URL(url).pathname}catch(x){p=String(url)}const cx=/^\/en\/exchangeDetail\/(.+)-referral/.exec(p);if(cx)return go('cexd:'+cx[1]);const hit=REAL2SCREEN.find(([re])=>re.test(p));if(hit){const t=typeof hit[1]==='function'?hit[1]():hit[1];go(t);return}window.open(url,'_blank','noopener');window.PT_LAST_OPEN=url};
+window.PT_REAL_NAV=url=>{let p='';try{p=new URL(url).pathname}catch(x){p=String(url)}const cx=/^\/en\/exchangeDetail\/(.+)-referral/.exec(p);if(cx)return go('cexd:'+cx[1]);const hit=REAL2SCREEN.find(([re])=>re.test(p));if(hit){const t=typeof hit[1]==='function'?hit[1]():hit[1];go(t);return}let h='';try{h=new URL(url).host}catch(x){}if(h==='tethermax.io'&&/^\/en\//.test(p)){window.open(snapUrl(p.replace(/^\/|\/$/g,'').replace(/\//g,'__')),'_blank','noopener');window.PT_LAST_OPEN=url;return}window.open(url,'_blank','noopener');window.PT_LAST_OPEN=url};
+// 목록판 안 수집본(cex.list · cex.detail)에서 온 메시지: 이동은 목록판 화면으로, 상태 스냅숏은 같은 틀에서 교체
+window.addEventListener('message',e=>{const m=e.data||{};if(!m.pt||!/^cex\.(list|detail)$/.test(S.screen))return;
+ if(m.nav)return PT_REAL_NAV(m.nav);
+ if(m.go){const k=String(m.go);const x=/^en__exchangeDetail__(.+)-referral$/.exec(k);if(x)return go('cexd:'+x[1]);if(k==='en__affiliated')return go('cex.list');return PT_REAL_NAV('https://tethermax.io/'+k.replace(/__/g,'/'))}
+ if(m.state){const f=document.querySelector('iframe.pt-snap');if(f)f.outerHTML=snapFrame(f.dataset.snap,m.state);return}
+ if(m.dexLink)return go(S.auth==='guest'?'auth.login':'link.select');
+});
 window.addEventListener('message',e=>{const m=e.data||{};if(!m.pt||!S.live)return;
  if(m.auth){S.auth=m.auth==='member'?(S.auth==='guest'?'s4':S.auth):'guest';save()}
  if(m.nav){let p='';try{p=new URL(m.nav).pathname}catch(x){p=String(m.nav)}

@@ -20,6 +20,22 @@
   }
   function label(el) { return ((el && (el.innerText || el.getAttribute('aria-label') || el.value)) || '').trim().replace(/\s+/g, ' ').slice(0, 40) }
 
+  // 거래소 목록(ExchangeList) — 왼쪽 이름 열 · 오른쪽 값 열(Section) · 배경 줄(Background)이 열 단위로 나뉜 구조. 같은 순번 = 같은 거래소
+  function exRowHref(t) {
+    var tb = t.closest('[class*="ExchangeList-module"][class*="__Table"]'); if (!tb) return null;
+    var cell = t.closest('[class*="__LeftSideItem"],[class*="__Cell"],[class*="__BackgroundItem"]'); if (!cell || !tb.contains(cell)) return null;
+    var sib = [].filter.call(cell.parentElement.children, function (c) { return !/__(LeftSideHeader|Header|BackgroundHeader)/.test(String(c.className)) });
+    var i = sib.indexOf(cell); if (i < 0) return null;
+    var items = tb.querySelectorAll('[class*="__LeftSideItem"]'), it = items[i], a = it && it.querySelector('a[data-orig-href]');
+    return a ? a.getAttribute('data-orig-href') : null;
+  }
+  (function () {   // 행 전체가 눌리는 곳임을 보여 줌(기존 사이트와 같은 손가락 커서)
+    if (!/^en__affiliated$/.test(PT.key)) return;
+    var st2 = document.createElement('style');
+    st2.textContent = '[class*="ExchangeList-module"][class*="__LeftSideItem"],[class*="ExchangeList-module"][class*="__Cell"]{cursor:pointer}';
+    document.head.appendChild(st2);
+  })();
+
   // ---- 「정상 처리」 규칙
   function generic(btn) {
     var l = label(btn);
@@ -169,6 +185,8 @@
     if (t.closest('[class*="__LinkedFooter"]')) { e.preventDefault(); e.stopPropagation(); return dexLink() }   // DEX 연결
     if (t.closest('[class*="__SideButton"]')) { e.preventDefault(); e.stopPropagation(); return post({ dexLink: { mode: 'drawer' } }) }   // DEX 연결: 모바일 드로어(결정 D4 구성)
     if (t.closest('[data-dex-own]')) return;
+    var xrow = /^en__affiliated$/.test(PT.key) && !t.closest('a[href],button') && exRowHref(t);   // 거래소 목록 행 본문 클릭 → 거래소 상세(기존 동작, 결정 2026-11-27 목록 페이지 유지)
+    if (xrow) { e.preventDefault(); e.stopPropagation(); return nav(xrow) }
     var lrow = PT.key === 'en' && PT.auth === 'member' && t.closest('[class*="__LinkedUidRow"]');
     var ban = PT.key === 'en' && PT.auth === 'member' && t.closest('[data-dex-ban]');
     if (ban) { e.preventDefault(); e.stopPropagation(); return rowBannerClick(ban.getAttribute('data-dex-ban')) }
