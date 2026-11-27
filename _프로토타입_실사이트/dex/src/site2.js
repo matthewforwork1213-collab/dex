@@ -80,10 +80,7 @@ window.SITE2 = site2;
 
 // ---------------- 랜딩 ----------------
 function landingEnhance() {
-  // glance · 카드 요율 카운트업(화면에 들어올 때)
-  const nums = leafNums(app).filter(e => /^\d+%$/.test(e.textContent.trim()));
-  const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { io.unobserve(x.target); countUp(x.target, 0, 700) } }), { threshold: .4 });
-  nums.forEach(n => io.observe(n));
+  // 요율 큰 숫자 = 공통 모듈 숫자 굴림(03-motion.js)
   carousel();
 }
 // 프로모 배너 캐러셀 — 슬라이드: Figma DEX 배너(Aster) + 실사이트 거래소 목록 상단 배너(Bitget, 같은 어드민 배너 — 결정 D7 · Q7)
@@ -244,7 +241,7 @@ document.addEventListener('click', e => {
   if (b && /^Write a (R|r)eview/.test(label)) { stop(); return toast('리뷰 작성 화면 — 다음 회차') }
   const cp = t.closest('[data-copy]'); if (cp) { stop(); return copyText(cp.dataset.copy) }
   const v = t.closest('[data-dex-view]');
-  if (v) { stop(); SD.list = v.dataset.dexView === 'list'; return renderPage({ keepScroll: true }) }
+  if (v) { stop(); SD.list = v.dataset.dexView === 'list'; renderPage({ keepScroll: true }); const c = $('[data-dex-card]', app); return UI.swapFx(c && c.parentElement) }
   const card = t.closest('[data-dex-card]');
   if (card && !b && p === '/dex') { stop(); return goRoute('/dex/' + card.dataset.dexCard) }
   const tg = t.closest('[data-tog]');
@@ -340,7 +337,7 @@ function openSeeAll() {
     window.SITELOGO = Object.assign({}, SEE.logos);
     openCustom(() => { window.SITEA = seeAllRows(); window.SITEAF = SEE.chip; try { return HOMEX.seeAllModal() } finally { window.SITEA = null } }, S.vp === 'mo' ? 'full' : 'center', {   // 모바일 = 꽉 찬 모달(Figma 29449:145601)
       bind(box) {
-        $$('.chip', box).forEach(c => { const k = c.textContent.trim(); if (!['All', 'CEX', 'DEX'].includes(k)) return; c.dataset.site = 'chip'; c.onclick = e => { e.stopPropagation(); SEE.chip = k; const y = ($('[style*="overflow-y:auto"]', box) || {}).scrollTop; API.renderLayer(); } });
+        $$('.chip', box).forEach(c => { const k = c.textContent.trim(); if (!['All', 'CEX', 'DEX'].includes(k)) return; c.dataset.site = 'chip'; c.onclick = e => { e.stopPropagation(); SEE.chip = k; API.renderLayer({ swap: '[data-see-all] [style*="overflow-y:auto"]' }); } });
         // 계정 행 → 지갑/UID 상세
         $$('.row.between', box).forEach(r => {
           const t = (r.firstElementChild || r).textContent; const m = t.match(/(UID (\S+)|Wallet (0x\w{4})…(\w{4}))/); if (!m) return;
@@ -448,7 +445,13 @@ function sumEnhance() {
   $$('[data-sm-sel]', app).forEach(w => { const t = w.firstElementChild; t.tabIndex = 0; t.setAttribute('role', 'button'); t.setAttribute('aria-haspopup', 'listbox'); t.setAttribute('aria-expanded', 'false'); t.setAttribute('data-ui-trigger', '') });
   const m = $('[data-sm-month]', app); if (m) { m.tabIndex = 0; m.setAttribute('role', 'button'); m.setAttribute('aria-haspopup', 'listbox'); m.setAttribute('data-ui-trigger', '') }
 }
-function sumRerender() { renderPage({ keepScroll: true }) }
+function sumCol() { let e = $('[data-sm-month]', app); while (e && !e.querySelector('[data-day]')) e = e.parentElement; return e }
+function sumRerender(kind) {
+  renderPage({ keepScroll: true });
+  const col = sumCol(); if (!col) return;
+  const kids = Array.from(col.children).filter(c => !c.querySelector('[data-sm-month]'));
+  UI.swapFx(kind === 'day' ? kids.slice(-1) : kids, { stagger: 30 });
+}
 // 필터 셀렉트 — 공통 UI.dropdown. 거래소: 하나 고르면 닫힘. 거래 계정·유형: 여러 개 체크(열린 채 유지), 바깥·Esc로 닫힘
 function smMenuHTML(k) {
   const D = SM.D, { mItem, logo } = SUMX, accs = sumAccounts();
@@ -500,7 +503,7 @@ document.addEventListener('click', e => {
     });
     return;
   }
-  if ((x = hit('[data-day]'))) { const n = +x.dataset.day; if (SM.y === TODAY.y && SM.m === TODAY.m && n > TODAY.d) return; stop(); SM.sel = n; return sumRerender() }
+  if ((x = hit('[data-day]'))) { const n = +x.dataset.day; if (SM.y === TODAY.y && SM.m === TODAY.m && n > TODAY.d) return; stop(); SM.sel = n; return sumRerender('day') }
 }, true);
 
 // =====================================================================
@@ -515,6 +518,7 @@ function ownHTML() {
   const st = SO.file ? 'uploaded' : ['normal', 's2', 's3'][SO.step];
   return renderInner('own.verify:' + st);
 }
+function ownSwap() { const g = $('img', app).find(i => /own-guide|own-ic-upload|own-ic-delete/.test(i.src)); let c = g; for (let k = 0; c && k < 3; k++) c = c.parentElement; UI.swapFx(c || app.firstElementChild) }
 function ownEnhance() {
   if (SO.file) $$('span', app).forEach(sp => { if (sp.textContent.trim() === 'lighter-ownership.mp4') sp.textContent = SO.file.name; if (/^3\.2 MB/.test(sp.textContent.trim()) && sp.children.length) sp.firstChild.textContent = mb(SO.file.size) });
   if (!SO.file) { const dots = $('img[src*="own-mo-step"]', app); }
@@ -543,7 +547,7 @@ function upload(f) {
       const tick = () => {
         const k = Math.min(1, (performance.now() - t0) / dur); $('i', bar).style.width = (k * 100) + '%'; $('span', bar).textContent = Math.floor(k * 100) + '%';
         if (k < 1) return requestAnimationFrame(tick);
-        L.busy = false; SO.file = { name: f.name, size: f.size }; closeLayer(); setTimeout(() => renderPage({ keepScroll: true }), 210);
+        L.busy = false; SO.file = { name: f.name, size: f.size }; closeLayer(); setTimeout(() => { renderPage({ keepScroll: true }); ownSwap() }, 210);
       };
       requestAnimationFrame(tick);
     }
@@ -560,7 +564,7 @@ function ownGo(st, inLayer) {
   if (st === 'uploading') { if (L.open) closeLayer(); pickFile(); return true }
   if (st === 'confirm') { openCustom(() => ownDialog('confirm'), 'center'); return true }
   if (st === 'uploaded') { closeLayer(); return true }
-  if (st === 's3' && SO.file) { SO.file = null; renderPage({ keepScroll: true }); return true }   // 파일 제거(×) · 업로드 실패 OK
+  if (st === 's3' && SO.file) { SO.file = null; renderPage({ keepScroll: true }); ownSwap(); return true }   // 파일 제거(×) · 업로드 실패 OK
   if (['normal', 's2', 's3'].includes(st)) { if (L.open) closeLayer(); SO.step = { normal: 0, s2: 1, s3: 2 }[st]; renderPage({ keepScroll: true }); const g = $$('img', app).find(i => /own-guide/.test(i.src)); if (g) fadeIn(g.parentElement.parentElement); return true }
   return true;
 }
@@ -635,8 +639,9 @@ function calcEnhance() {
   const g = $('[data-calc-gage]', app);
   if (g) { const to = g.style.width; if (CK.lastFill != null && CK.lastFill !== to) { g.style.transition = 'none'; g.style.width = CK.lastFill; void g.offsetWidth; g.style.transition = 'width .3s ease-in-out'; g.style.width = to } CK.lastFill = to }
   if (CK.step === 'p3') calcBindProfile();
-  // 화면 전환은 라이브처럼 즉시(페이드 없음)
+  // 단계 교체: 본문(진행 바 아래)이 아래 8px에서 떠오름 300ms — 실사이트는 즉시 교체, 사용자 요구(자연스러운 전환)로 토큰 적용
   app.classList.remove('enter');
+  const pg = $('[data-calc-page]', app); if (pg && pg.children[1]) UI.swapFx(pg.children[1]);
 }
 // 2단계 — 타일 단일 선택 · Next 활성 · 칩 필터
 document.addEventListener('click', e => {
@@ -651,7 +656,7 @@ document.addEventListener('click', e => {
     return;
   }
   const ch = t.closest('[data-calc-chip]');
-  if (ch) { e.preventDefault(); e.stopPropagation(); if (CK.chip === ch.dataset.calcChip) return; CK.chip = ch.dataset.calcChip; renderPage({ keepScroll: true }); return }
+  if (ch) { e.preventDefault(); e.stopPropagation(); if (CK.chip === ch.dataset.calcChip) return; CK.chip = ch.dataset.calcChip; renderPage({ keepScroll: true }); UI.swapFx($('[data-calc-selection]', app)); return }
   const cv = t.closest('[data-calc-chipv]');
   if (cv) { e.preventDefault(); e.stopPropagation(); const [k, v] = cv.dataset.calcChipv.split(':'); calcSet(k, +v, true); return }
   const fq = t.closest('[data-calc-freq]');

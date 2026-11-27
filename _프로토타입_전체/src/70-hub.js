@@ -158,7 +158,7 @@ function routes(){
  const rows=[
   {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'cex.list'},
   {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
-  {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:''},
+  {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:'brokers.list'},
  ];
  const row=r=>{const on=r.k==='DEX';
   const lg=`<div class="row wrap" style="gap:12px 0;max-width:${mo()?"320px":"250px"}">${r.logos.map(l=>`<span style="margin-right:-6px;display:inline-flex;border-radius:50%">${l}</span>`).join('')}</div>`;
@@ -168,9 +168,9 @@ function routes(){
    const lgm=`<div class="row wrap" style="gap:12px 0">${r.logos.map(l=>`<span style="margin-right:-6px;display:inline-flex;border-radius:50%">${l}</span>`).join('')}</div>`;
    const bottom=r.k==='CEX'?`<div class="col" style="gap:12px"><span class="b2 med c2" style="line-height:24px">PARTNERS</span>${lgm}<div class="row between" style="align-items:flex-start;gap:12px"><span class="b2 c2" style="max-width:165px;margin-top:23px">${r.cap}</span>${rt}</div></div>`
     :`<div class="row between" style="align-items:flex-start;gap:12px"><div class="col" style="gap:12px"><span class="b2 med c2" style="line-height:24px">PARTNERS</span>${lgm}${r.k==='DEX'?'':`<span class="b2 c2">${r.cap}</span>`}</div>${rt}</div>`;
-   return `<div class="col"${at}background:#fff;border-radius:8px;padding:20px 16px;gap:16px"><div class="row" style="gap:12px"><img src="${A(r.ic)}" alt="" style="width:56px;height:56px;border-radius:12px"><div class="col grow" style="gap:8px"><span class="h6" style="line-height:32px">${r.name}</span><span class="b2 c2">${r.sub}</span></div>${go}</div>${bottom}</div>`}
+   return `<div class="col" data-m-lift${at}background:#fff;border-radius:8px;padding:20px 16px;gap:16px"><div class="row" style="gap:12px"><img src="${A(r.ic)}" alt="" style="width:56px;height:56px;border-radius:12px"><div class="col grow" style="gap:8px"><span class="h6" style="line-height:32px">${r.name}</span><span class="b2 c2">${r.sub}</span></div>${go}</div>${bottom}</div>`}
   const rate=`<div class="col" style="gap:0"><span class="b2 med c2" style="line-height:24px">UP TO</span><span class="h2${on?' cb':''}">${upTo(r.k)}%</span><span class="b2 c2">${r.unit}</span></div>`;
-  return `<div class="row"${at}background:#fff;border-radius:8px;padding:32px 24px;gap:32px"><img src="${A(r.ic)}" alt="" style="width:96px;height:96px;border-radius:16px;flex:none"><div class="col" style="width:360px;gap:8px;flex:none"><span class="h5">${r.name}</span><span class="b1 c2">${r.sub}</span></div><div class="col" style="width:260px;gap:12px;flex:none"><span class="b2 med c2" style="line-height:24px">PARTNERS</span>${lg}<span class="b2 c2">${r.cap}</span></div><div class="grow">${rate}</div>${go}</div>`};
+  return `<div class="row" data-m-lift${at}background:#fff;border-radius:8px;padding:32px 24px;gap:32px"><img src="${A(r.ic)}" alt="" style="width:96px;height:96px;border-radius:16px;flex:none"><div class="col" style="width:360px;gap:8px;flex:none"><span class="h5">${r.name}</span><span class="b1 c2">${r.sub}</span></div><div class="col" style="width:260px;gap:12px;flex:none"><span class="b2 med c2" style="line-height:24px">PARTNERS</span>${lg}<span class="b2 c2">${r.cap}</span></div><div class="grow">${rate}</div>${go}</div>`};
  const t=T('Pick where you trade','어디서 거래하시나요?'),d='Every route pays back a share of your trading fees. Open one to see its partners and rates.';
  const head=mo()?`<div class="col" style="gap:12px"><h2 class="h3" style="margin:0;font-size:34px">${t}</h2><p class="b2 c2" style="margin:0">${d}</p></div>`
   :`<div class="row between" style="align-items:flex-start;gap:120px"><h2 class="h3" style="margin:0;width:504px">${t}</h2><p class="b1 c2" style="margin:8px 0 0;width:576px">${d}</p></div>`;
@@ -206,7 +206,7 @@ function compare(chip,c){
    <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div></div>`).join('')}</div>`+
    (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정 · Figma 모바일 H1). 카드 전체가 그 거래소 상세로 이동(정책 B-5-8).'));
  }else if(view==='card'){
-  const card=p=>`<div class="col" style="background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
+  const card=p=>`<div class="col" data-m-lift style="background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
    <div class="row" style="align-items:center;gap:16px"><div class="col" style="gap:6px"><div class="row" style="gap:16px"><span class="row" style="gap:8px">${plogo(p,24)}<span style="font-size:20px;line-height:1.6;font-weight:700;letter-spacing:.15px">${esc(p.name)}</span></span>${hp(p)}</div>
     <span class="row" style="gap:4px"><span class="b1 semi cb">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span><img src="${A('hub-ic-info16.svg')}" alt="" style="width:16px;height:16px"></span></div><span class="grow"></span>${C.btn(`Join ${esc(p.name)}`,{go:go(p)})}</div>
    <div style="height:1px;background:var(--divider)"></div>

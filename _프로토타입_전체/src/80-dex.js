@@ -55,7 +55,7 @@ function ovHero(list){
   <h1 style="margin:0;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;letter-spacing:-.5px">Trade onchain,${mo()?' ':'<br>'}keep your cashback</h1>
   <p class="b1 c2" style="margin:-8px 0 0">${T('Trade with your own wallet on the DEX. Paste your wallet address into TetherMax and we pay your cashback into your TetherMax balance.','내 지갑으로 DEX에서 거래하고, 테더맥스에 지갑 주소만 붙여넣으면 캐시백을 테더맥스 잔액으로 드려요.')}</p>
   <div class="col" style="gap:8px">${marks}<div class="col" style="gap:2px"><span class="b2 semi">${list.length} partner DEXs you can start earning Cashback with</span><span class="b2 c2">Trade on the DEX. Paste your address on TetherMax.</span></div></div>
-  <div class="row" style="gap:16px">${C.btn('DEX Overview',{cls:mo()?'grow':''})}${outlinedP('Guide to DEX')}</div></div>`;
+  <div class="row" style="gap:16px">${C.btn('DEX Overview',{cls:mo()?'grow':''}).replace('<button','<button data-scroll-to="dex-venues"')}${outlinedP('Guide to DEX').replace('<button','<button data-scroll-to="dex-steps"')}</div></div>`;
  const risk=`<p class="cap c2" style="margin:0;max-width:720px">※ Decentralized trading carries risks, including smart contract vulnerabilities, slippage, MEV, and potential loss of funds. Please conduct your own research prior to trading onchain.</p>`;
  if(mo())return `<section style="background:linear-gradient(180deg,#eef2f8 0%,#e6edf8 70%,#fff 100%)"><div style="height:300px;background:url(${A('dex-ov-hero.jpg')}) 78% 30%/auto 420px no-repeat"></div><div class="col" style="gap:24px;padding:0 16px 40px">${copy}${risk}</div></section>`;
  return `<section style="position:relative;height:810px;background:#eef2f8 url(${A('dex-ov-hero.jpg')}) center/cover no-repeat"><div style="position:absolute;left:120px;top:150px">${copy}</div><div style="position:absolute;left:120px;bottom:20px">${risk}</div></section>`;
@@ -88,7 +88,7 @@ function venueCard(d,c,i){
  if(c!=='defiHidden')stats.push(box('TVL',DEFI.tvl),box('24H Vol',DEFI.vol));
  const left=i%2===0;
  const bd=mo()?'padding:24px 0;border-bottom:1px solid var(--divider)':`padding:40px ${left?'40px 40px 0':'0 40px 40px'};${left?'border-right:1px solid var(--divider);':''}`;
- return `<div class="col" style="gap:16px;${bd}">
+ return `<div class="col" data-m-lift style="gap:16px;${bd}">
   <div class="row between"><div class="row" style="gap:12px">${C.dex(d.name,40)}<span class="h5">${d.name}</span></div><div class="col" style="gap:0;align-items:flex-end"><span class="cap c2">Cashback up to</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${d.rate}%</span></div></div>
   <div class="row" style="gap:8px;align-items:stretch;${mo()?'flex-wrap:wrap':''}">${stats.join('')}</div>
   ${c==='maint'&&d.id==='aster'?C.note('점검·일시 연동 불가(G-162 확정): 카드·상세는 그대로 노출하고 가입 링크(<code>Get Started</code>)도 유지. 연동 진입만 숨긴다 — 랜딩 카드에는 연동 버튼이 없어 화면 차이 없음'):''}
@@ -105,8 +105,8 @@ function ovVenues(list,c){
  const isList=c==='list'||mo();
  const desc=isList?'Join through our referral and link your wallet address. TVL and 24H volume from DefiLlama.':'Pick one, join through our link, then paste your wallet address. TVL and 24H volume from DefiLlama.';
  const sw=`<button class="icon-btn" title="${isList?'grid':'list'}">${isList?`<span style="display:grid;grid-template-columns:8px 8px;gap:3px">${'<i style="width:8px;height:8px;border-radius:2px;background:rgba(0,0,0,.56)"></i>'.repeat(4)}</span>`:`<img src="${A('dex-ov-ic-list.svg')}" style="width:24px;height:24px" alt="">`}</button>`;
- const head=mo()?`<div class="col" style="gap:8px"><div class="row between" style="align-items:flex-start"><h2 class="h3" style="margin:0;font-size:34px;line-height:1.235">Our Partner Decentralised Exchanges</h2>${sw}</div><p class="b2 c2" style="margin:0">${desc}</p></div>`
-  :`<div class="row" style="gap:120px;align-items:flex-end;justify-content:space-between"><h2 class="h3" style="margin:0;width:560px">Our Partner Decentralised Exchanges</h2><div class="row" style="gap:16px"><p class="b1 c2" style="margin:0;width:460px;text-align:right">${desc}</p>${sw}</div></div>`;
+ const head=mo()?`<div class="col" style="gap:8px"><div class="row between" style="align-items:flex-start"><h2 id="dex-venues" tabindex="-1" class="h3" style="margin:0;font-size:34px;line-height:1.235;outline:0">Our Partner Decentralised Exchanges</h2>${sw}</div><p class="b2 c2" style="margin:0">${desc}</p></div>`
+  :`<div class="row" style="gap:120px;align-items:flex-end;justify-content:space-between"><h2 id="dex-venues" tabindex="-1" class="h3" style="margin:0;width:560px;outline:0">Our Partner Decentralised Exchanges</h2><div class="row" style="gap:16px"><p class="b1 c2" style="margin:0;width:460px;text-align:right">${desc}</p>${sw}</div></div>`;
  const ds=list.map(id=>DX[id]);
  let body;
  if(isList)body=`<div class="col" style="gap:${mo()?12:16}px">${ds.map(listRow).join('')}</div>`;
@@ -136,7 +136,7 @@ function ovSteps(){
  const step=([c,t,b,m,img])=>`<div class="col" style="flex:1 1 0;min-width:0;gap:16px;align-items:center;text-align:center"><div style="width:220px;height:200px;display:flex;align-items:center;justify-content:center;overflow:visible"><img src="${A(img)}" style="width:190px;height:${img.endsWith('step3.webp')?'auto':'190px'};max-height:240px;object-fit:contain" alt=""></div>
   <span style="border:1px solid var(--blue);border-radius:999px;padding:4px 12px;color:var(--blue);font-size:14px;line-height:24px;font-weight:500">${c}</span><span class="h5">${t}</span><span class="b1 c2">${b}</span><span class="cap c2">${m}</span></div>`;
  const card=`<div style="background:#fff;border:1px solid var(--divider);border-radius:8px;padding:${mo()?'32px 24px':'48px'};box-shadow:0 10px 24px rgba(0,0,0,.05)" class="col g32">${mo()?'':`<img src="${A('dex-ov-progress.svg')}" style="width:100%;height:24px" alt="">`}<div style="display:flex;${mo()?'flex-direction:column;gap:40px':'gap:32px'}">${st.map(step).join('')}</div></div>`;
- return `<section style="background:#fff;padding:${mo()?'48px 0':'120px 0 96px'}">${wrap(`<div class="col" style="gap:48px;align-items:center"><h2 style="margin:0;font-weight:400;font-size:${mo()?24:48}px;line-height:1.167;text-align:center">A simple 3 step path</h2><div style="align-self:stretch">${card}</div>${outlinedP('See partner DEXs')}</div>`)}</section>`;
+ return `<section style="background:#fff;padding:${mo()?'48px 0':'120px 0 96px'}">${wrap(`<div class="col" style="gap:48px;align-items:center"><h2 id="dex-steps" tabindex="-1" style="margin:0;font-weight:400;font-size:${mo()?24:48}px;line-height:1.167;text-align:center;outline:0">A simple 3 step path</h2><div style="align-self:stretch">${card}</div>${outlinedP('See partner DEXs').replace('<button','<button data-scroll-to="dex-venues"')}</div>`)}</section>`;
 }
 function ovBento(){
  const tile=(o)=>`<div style="position:relative;${mo()?'':`flex:0 0 ${o.w}px;`}height:${mo()?(o.h>420?340:320):o.h}px;border-radius:8px;overflow:${mo()?'visible':'hidden'};${o.blue?'background:var(--blue)':'background:#fff;border:1px solid var(--divider)'}">
@@ -202,7 +202,7 @@ R.screen({id:'dex.overview',group:'dex',title:'DEX 개요 (랜딩)',route:'/dex'
 // =====================================================================
 // DEX 상세 (/dex/{slug}) — 공용 템플릿 FU-054 ~ FU-059
 // =====================================================================
-const box1056=(inner,o={})=>`<div style="padding:${mo()?'0':'20px 0'};${o.outer||''}"><div style="width:100%;max-width:1056px;margin:0 auto;background:${o.bg||'#fff'};border-radius:${mo()?0:8}px;${o.noShadow?'':'box-shadow:0 10px 20px rgba(0,0,0,.04);'}padding:${o.pad||(mo()?'24px 16px':'24px')};box-sizing:border-box;${o.style||''}">${inner}</div></div>`;
+const box1056=(inner,o={})=>`<div style="padding:${mo()?'0':'20px 0'};${o.outer||''}"><div data-m-reveal style="width:100%;max-width:1056px;margin:0 auto;background:${o.bg||'#fff'};border-radius:${mo()?0:8}px;${o.noShadow?'':'box-shadow:0 10px 20px rgba(0,0,0,.04);'}padding:${o.pad||(mo()?'24px 16px':'24px')};box-sizing:border-box;${o.style||''}">${inner}</div></div>`;
 const toggle=(a,b,on)=>`<div style="background:rgba(207,216,220,.2);border-radius:4px;padding:4px;display:inline-flex;height:32px;box-sizing:border-box">${[a,b].map((x,i)=>`<span style="padding:0 8px;display:flex;align-items:center;font-size:14px;font-weight:500;border-radius:4px;${i===on?'background:#fff;color:var(--text-primary)':'color:var(--text-secondary)'}">${x}</span>`).join('')}</div>`;
 const numBadge=(n,on)=>`<span style="width:20px;height:20px;border-radius:100px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;${on?'background:var(--blue);color:#fff':'background:#f2f2f5;color:var(--tm-secondary-dark)'}">${n}</span>`;
 function offerBox(d,member,maker){

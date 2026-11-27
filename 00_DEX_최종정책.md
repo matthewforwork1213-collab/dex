@@ -3260,15 +3260,15 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 기존 Exchange Listing
 | 좌 → 우 | 로고(infinity, 허브로 이동·최상단) · `Cashback ˅` · `Rewards Hub ˅` · `Discover ˅`. 계산기는 `Cashback` 하위 메뉴이며 상단 단독 `Calculator` 메뉴 없음 |
 | 우측 (로그인) | 알림 벨(안 읽음 점) · 아바타 · 테마 · 언어 지구본 |
 | 우측 (비로그인) | `Login`(보조) · `Sign up`(주) · 테마 · 지구본 |
-| `Cashback` 동작 | **클릭(라벨·chevron) = Cashback 랜딩 이동, 패널은 hover로 열림.** `Rewards Hub`·`Discover`는 chevron 클릭 시 하위 메뉴 드롭다운. 패널은 **2행 `Cashback Hub` · `Cashback Calculator`**(허브가 CEX·DEX·Brokers를 모두 포함), 열린 동안 chevron 반전, 행 선택 시 닫힘 + 이동 |
-| 터치 | hover 외 **탭으로도 열림** — 같은 탭이 라벨 이동과 패널 열기 중 무엇인지 미정의 ❓ |
+| `Cashback` 동작 | **`Cashback`·`Rewards Hub`·`Discover` 클릭(라벨·chevron) = 이동 없이 패널 펼침, 펼친 채 유지 — 다시 클릭·바깥 클릭·Esc로 닫힘**(사용자 2026-11-27). `Cashback` 패널은 **2행 `Cashback Hub` · `Cashback Calculator`**(허브가 CEX·DEX·Brokers 포함, 단독 `Calculator` 메뉴 없음), 행 선택 시 닫힘 + 이동 |
+| 터치 | 탭 = 패널 열기(라벨 이동 없음) |
 | 접힘 | 데스크톱 브레이크포인트 아래에서 두 줄로 감싸지 않고 모바일 드로어로 접힘 |
 | 알림 피드·아바타 로드 실패 | 안 읽음 점 숨김, 벨은 사용 가능, 헤더 막지 않음 (❓ 권고) |
 | 모달 열린 채 테마·언어 변경 | 그 자리에서 교체, 모달 상태·입력값 유지 (❓ 권고) |
 
 ### B-21-3 모바일 웹 드로어
 
-전체 높이 · (선택) 파트너 프로모션 배너 · 비로그인 환영 블록 `Welcome to TetherMax! Create an account or log in to start earning Cashback.` + `Log In` · `Sign Up` · 제품 6항목 `Exchanges, Brokers, Events, Benefits, Cashback Calculator, Point`(`Exchanges` = Cashback Hub로 이동) · 테마·언어 행 · 법적 행 `Terms of Use`, `Privacy Policy` · 회사 행 `About TetherMax`, `Notices`, `Beginner's Guide`, `Affiliate Partner Inquiry` · 떠 있는 고객지원 컨트롤. 드로어가 데스크톱 헤더 메뉴를 **대체**(중복 아님).
+전체 높이 · (선택) 파트너 프로모션 배너 · 비로그인 환영 블록 `Welcome to TetherMax! Create an account or log in to start earning Cashback.` + `Log In` · `Sign Up` · 제품 5항목 `Cashback Hub, Events, Benefits, Cashback Calculator, Point`(`Cashback Hub` = 캐시백 허브 — CEX·DEX·Brokers 포함이라 `Brokers` 행 없음) · 테마·언어 행 · 법적 행 `Terms of Use`, `Privacy Policy` · 회사 행 `About TetherMax`, `Notices`, `Beginner's Guide`, `Affiliate Partner Inquiry` · 떠 있는 고객지원 컨트롤. 드로어가 데스크톱 헤더 메뉴를 **대체**(중복 아님).
 
 ### B-21-4 푸터
 

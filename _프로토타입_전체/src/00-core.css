@@ -1,5 +1,11 @@
 /* TetherMax 전체 프로토타입 — Figma UI-UX Design(MUI + Wanted Sans) 토큰 */
 :root{
+  /* 모션 토큰 — 05.리포트/모션명세_DEX.md(값 = 라이브 tethermax.io 측정). JS(site-ui.js UI.T)가 이 값을 읽는다 */
+  --m-fast:.15s; --m-base:.2s; --m-modal:.22s; --m-drawer:.28s; --m-std:.3s; --m-slow:.4s; --m-ripple:.55s;
+  --e-std:cubic-bezier(.4,0,.2,1); --e-io:cubic-bezier(.42,0,.58,1); --e-out:cubic-bezier(0,0,.58,1);
+  --m-shift:8px; --m-modal-shift:30px;
+  --m-reveal:.5s; --e-reveal:var(--e-out); --m-reveal-shift:48px;
+  --m-roll:1.1s; --e-roll:cubic-bezier(.22,1,.36,1); --m-roll-stagger:80ms; --m-tip:.133s; --m-carousel:.3s;
   --blue:#0031c6; --blue-contrast:#fff; --blue-accentlight:rgba(187,226,255,.2);
   --black:#1c1c1e; --black-light:#3c3c3f; --black-outlined:rgba(28,28,30,.5);
   --tm-secondary-dark:#5d6067;
@@ -228,3 +234,6 @@ img{display:block;max-width:100%}
 .note b{font-weight:700}
 .tbd{display:inline;background:#fff1f2;color:#be123c;border:1px dashed #fda4af;border-radius:4px;padding:0 4px;font-size:.92em}
 body.design .note{display:none!important}
+
+/* 움직임 줄이기 설정이면 전환 생략(모션 명세 「공통 규칙」) */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}

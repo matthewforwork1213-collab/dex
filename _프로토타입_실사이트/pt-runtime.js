@@ -5,12 +5,18 @@
   var post = function (m) { m.pt = 1; parent.postMessage(m, '*'); };
   var PAGE = '/' + (PT.key || '').replace(/__/g, '/');
 
+  // 모션 토큰 — 05.리포트/모션명세_DEX.md(라이브 측정): 팝업 220ms · 드로어 280ms · 내용 교체 300ms, 움직임 줄이기면 생략
+  var MT = { modal: 220, drawer: 280, std: 300, io: 'cubic-bezier(.42,0,.58,1)' };
+  var RMQ = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)');
+  function reduced() { return !!(RMQ && RMQ.matches) }
+  function anim(el, kf, d) { if (!el || reduced() || !el.animate) return null; try { return el.animate(kf, { duration: d, easing: MT.io, fill: 'both' }) } catch (x) { return null } }
   function toast(t) {
     var el = document.createElement('div');
     el.textContent = t;
     el.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:2147483647;background:rgba(17,19,24,.92);color:#fff;font:13px/1.4 system-ui,sans-serif;padding:10px 16px;border-radius:8px;max-width:86vw;box-shadow:0 4px 16px rgba(0,0,0,.25);pointer-events:none';
     document.body.appendChild(el);
-    setTimeout(function () { el.remove() }, 2200);
+    anim(el, [{ opacity: 0, transform: 'translate(-50%,30px)' }, { opacity: 1, transform: 'translate(-50%,0)' }], MT.modal);
+    setTimeout(function () { var a = anim(el, [{ opacity: 1 }, { opacity: 0 }], MT.modal); if (a) a.onfinish = function () { el.remove() }; else el.remove() }, 2200);
   }
   function label(el) { return ((el && (el.innerText || el.getAttribute('aria-label') || el.value)) || '').trim().replace(/\s+/g, ' ').slice(0, 40) }
 
@@ -40,15 +46,35 @@
     document.head.appendChild(s);
   }
   function show(id) {
-    closeLayers();
+    closeLayers(true);
     var p = frags[id];
     var st = document.createElement('style'); st.setAttribute('data-pt-layer', id); st.textContent = p.css; document.head.appendChild(st);
     var box = document.createElement('div'); box.className = 'pt-layer'; box.setAttribute('data-pt-layer', id); box.innerHTML = p.html;
     document.body.appendChild(box);
+    layerIn(box);
     scrollLock(true);
     post({ layer: id });
   }
-  function closeLayers() { document.querySelectorAll('[data-pt-layer]').forEach(function (e) { e.remove() }); scrollLock(false); post({ layer: '' }) }
+  function layerIn(box) {
+    var side = box.querySelector('[class*="SideMenu"]');
+    if (side) return anim(side, [{ transform: 'translateX(100%)' }, { transform: 'none' }], MT.drawer);
+    anim(box, [{ opacity: 0 }, { opacity: 1 }], MT.modal);
+    var pop = box.querySelector('[class*="CenterPopup"],[class*="Popup"]:not([class*="PopupManager"]),[role=dialog],[class*="Modal"]');
+    if (pop) anim(pop, [{ transform: 'translateY(30px)' }, { transform: 'none' }], MT.modal);
+  }
+  // 닫기: 열 때의 반대(팝업 위로 30px + 페이드 · 드로어 오른쪽으로). now = 다른 레이어로 바로 바꿀 때
+  function closeLayers(now) {
+    document.querySelectorAll('[data-pt-layer]').forEach(function (e) {
+      if (now || e.tagName === 'STYLE' || reduced()) return e.remove();
+      if (e._closing) return; e._closing = 1; e.style.pointerEvents = 'none';
+      var side = e.querySelector('[class*="SideMenu"]');
+      var a = side ? anim(side, [{ transform: 'none' }, { transform: 'translateX(100%)' }], MT.drawer) : anim(e, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-30px)' }], MT.modal);
+      var st = document.querySelector('style[data-pt-layer="' + e.getAttribute('data-pt-layer') + '"]');
+      var done = function () { e.remove(); if (st) st.remove() };
+      if (a) a.onfinish = done; else done();
+    });
+    scrollLock(false); post({ layer: '' });
+  }
   // 스크롤 잠금: 모달·메뉴·드로어 조각이 열렸을 때만(실사이트 MUI Modal = body overflow hidden)
   function scrollLock(on) { document.documentElement.style.overflow = on ? 'hidden' : '' }
   function onLayerClick(e, layer) {
@@ -863,6 +889,7 @@
       if (RS.line) { var ln = document.createElement('p'); ln.setAttribute('data-dex-ban', x.id); ln.setAttribute('data-own-elapsed', x.ts || ''); ln.style.cssText = 'margin:-4px 0 8px 44px;font-size:12px;line-height:1.66;letter-spacing:.4px;color:rgba(0,0,0,.6)'; ln.innerHTML = 'Ownership verification in progress · <span class="tnum">' + elapsed(x.ts) + '</span>'; r.after(ln) }
       if (x.id === st.justLinked) mark = r;
     });
+    if (o && o.quiet) [].forEach.call(top.querySelectorAll('[data-dex-row],[data-dex-ban]'), function (e) { anim(e, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], MT.std) });
     rowHelp(st.accounts);
     var bal = [].filter.call(document.querySelectorAll('p'), function (p) { return p.textContent.trim() === 'Total Cashback Balance' })[0];
     var bv = bal && bal.previousElementSibling;

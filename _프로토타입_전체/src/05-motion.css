@@ -1,0 +1,20 @@
+/* 공통 모션 CSS — 화면 목록판·실제 동작판 공용(03-motion.js와 짝). 값 = 00-core.css 모션 토큰, 근거 = 05.리포트/모션명세_DEX.md */
+/* 버튼 — 실사이트 MUI 버튼: 배경·그림자 .3s, hover 그림자, 누르면 물결(03-motion.js) */
+.btn{transition:background-color var(--m-std),box-shadow var(--m-std),color var(--m-std),border-color var(--m-std)}
+.btn.contained.primary:not([disabled]):hover{box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px rgba(0,0,0,.14),0 1px 10px rgba(0,0,0,.12)}
+.icon-btn{transition:background var(--m-fast)}
+.chip{transition:background-color var(--m-std),color var(--m-std),border-color var(--m-std)}
+.ui-ripples{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none;z-index:0}
+.ui-ripple{position:absolute;border-radius:50%;background:currentColor;opacity:0;transform:scale(0)}
+/* 카드 hover 떠오름 — 실사이트 EventCard · ServiceIntroBenefitCard: translateY(-2px), transform .2s */
+[data-m-lift]{transition:transform var(--m-base),box-shadow var(--m-base),background-color var(--m-base)}
+[data-m-lift]:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.1)}
+/* 스크롤 진입 페이드업 — 실사이트 거래소 상세 섹션: 48px · 약 0.5s ease-out */
+.m-rv{opacity:0;transform:translateY(var(--m-reveal-shift))}
+.m-rv.m-in{opacity:1;transform:none;transition:opacity var(--m-reveal) var(--e-reveal),transform var(--m-reveal) var(--e-reveal)}
+/* 숫자 굴림 — 실사이트 홈 RollingNumber */
+.m-roll{display:inline-flex;overflow:hidden;vertical-align:bottom}
+.m-roll-col{display:inline-block;overflow:hidden;height:100%}
+.m-roll-track{display:flex;flex-direction:column;will-change:transform}
+/* 툴팁 — 실사이트 MUI Tooltip */
+.ui-tip{position:fixed;z-index:3000;max-width:300px;background:rgba(97,97,97,.92);color:#fff;font-size:11px;line-height:1.4;font-weight:500;padding:4px 8px;border-radius:4px;white-space:pre-line;pointer-events:none;opacity:0;transform:scale(.75);transition:opacity var(--m-base) var(--e-std),transform var(--m-tip) var(--e-std)}

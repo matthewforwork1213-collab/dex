@@ -4,6 +4,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
 <style>/* TetherMax 전체 프로토타입 — Figma UI-UX Design(MUI + Wanted Sans) 토큰 */
 :root{
+  /* 모션 토큰 — 05.리포트/모션명세_DEX.md(값 = 라이브 tethermax.io 측정). JS(site-ui.js UI.T)가 이 값을 읽는다 */
+  --m-fast:.15s; --m-base:.2s; --m-modal:.22s; --m-drawer:.28s; --m-std:.3s; --m-slow:.4s; --m-ripple:.55s;
+  --e-std:cubic-bezier(.4,0,.2,1); --e-io:cubic-bezier(.42,0,.58,1); --e-out:cubic-bezier(0,0,.58,1);
+  --m-shift:8px; --m-modal-shift:30px;
+  --m-reveal:.5s; --e-reveal:var(--e-out); --m-reveal-shift:48px;
+  --m-roll:1.1s; --e-roll:cubic-bezier(.22,1,.36,1); --m-roll-stagger:80ms; --m-tip:.133s; --m-carousel:.3s;
   --blue:#0031c6; --blue-contrast:#fff; --blue-accentlight:rgba(187,226,255,.2);
   --black:#1c1c1e; --black-light:#3c3c3f; --black-outlined:rgba(28,28,30,.5);
   --tm-secondary-dark:#5d6067;
@@ -233,6 +239,30 @@ img{display:block;max-width:100%}
 .tbd{display:inline;background:#fff1f2;color:#be123c;border:1px dashed #fda4af;border-radius:4px;padding:0 4px;font-size:.92em}
 body.design .note{display:none!important}
 
+/* 움직임 줄이기 설정이면 전환 생략(모션 명세 「공통 규칙」) */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
+/* 공통 모션 CSS — 화면 목록판·실제 동작판 공용(03-motion.js와 짝). 값 = 00-core.css 모션 토큰, 근거 = 05.리포트/모션명세_DEX.md */
+/* 버튼 — 실사이트 MUI 버튼: 배경·그림자 .3s, hover 그림자, 누르면 물결(03-motion.js) */
+.btn{transition:background-color var(--m-std),box-shadow var(--m-std),color var(--m-std),border-color var(--m-std)}
+.btn.contained.primary:not([disabled]):hover{box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px rgba(0,0,0,.14),0 1px 10px rgba(0,0,0,.12)}
+.icon-btn{transition:background var(--m-fast)}
+.chip{transition:background-color var(--m-std),color var(--m-std),border-color var(--m-std)}
+.ui-ripples{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none;z-index:0}
+.ui-ripple{position:absolute;border-radius:50%;background:currentColor;opacity:0;transform:scale(0)}
+/* 카드 hover 떠오름 — 실사이트 EventCard · ServiceIntroBenefitCard: translateY(-2px), transform .2s */
+[data-m-lift]{transition:transform var(--m-base),box-shadow var(--m-base),background-color var(--m-base)}
+[data-m-lift]:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.1)}
+/* 스크롤 진입 페이드업 — 실사이트 거래소 상세 섹션: 48px · 약 0.5s ease-out */
+.m-rv{opacity:0;transform:translateY(var(--m-reveal-shift))}
+.m-rv.m-in{opacity:1;transform:none;transition:opacity var(--m-reveal) var(--e-reveal),transform var(--m-reveal) var(--e-reveal)}
+/* 숫자 굴림 — 실사이트 홈 RollingNumber */
+.m-roll{display:inline-flex;overflow:hidden;vertical-align:bottom}
+.m-roll-col{display:inline-block;overflow:hidden;height:100%}
+.m-roll-track{display:flex;flex-direction:column;will-change:transform}
+/* 툴팁 — 실사이트 MUI Tooltip */
+.ui-tip{position:fixed;z-index:3000;max-width:300px;background:rgba(97,97,97,.92);color:#fff;font-size:11px;line-height:1.4;font-weight:500;padding:4px 8px;border-radius:4px;white-space:pre-line;pointer-events:none;opacity:0;transform:scale(.75);transition:opacity var(--m-base) var(--e-std),transform var(--m-tip) var(--e-std)}
+
 /* 프로토타입 도구 */
 #pt{display:grid;grid-template-columns:280px 1fr;height:100vh}
 #pt-side{background:#111318;color:#cfd3dc;overflow:auto;font-size:13px;padding-bottom:40px}
@@ -435,6 +465,133 @@ R.group('email','14. 사용자 이메일',140);
 R.group('cex','15. 기존 테더맥스 (CEX·계정·마이)',150);
 
 })()}catch(e){console.error('02-groups.js',e);(window.PT_ERR=window.PT_ERR||[]).push('02-groups.js: '+e.message)}
+</script>
+<script>// ===== 03-motion.js =====
+try{(()=>{
+// 03-motion.js — 공통 모션(화면 목록판 full.html · 실제 동작판 dex/app.html 공용)
+// 값은 CSS 토큰(00-core.css :root --m-* · --e-*), 명세 05.리포트/모션명세_DEX.md. 실사이트 측정값을 쓴다.
+// 화면이 다시 그려질 때마다(목록판 상태 전환 · 동작판 페이지 이동) 새 요소에 자동으로 붙는다(MutationObserver).
+(function () {
+if (window.MOTION) return;
+const css = () => getComputedStyle(document.documentElement);
+const ms = k => { const v = css().getPropertyValue(k).trim(); return v.endsWith('ms') ? parseFloat(v) : v.endsWith('s') ? parseFloat(v) * 1000 : 0 };
+const tok = k => css().getPropertyValue(k).trim();
+const RM = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+const reduced = () => !!(RM && RM.matches);
+const M = window.MOTION = { reduced, ms, tok };
+
+// ---- 1) 버튼 누름 물결 — MUI TouchRipple(실사이트 측정 550ms · cubic-bezier(.4,0,.2,1)), 크기 변화 없음
+document.addEventListener('pointerdown', e => {
+  const b = e.target.closest && e.target.closest('.btn,.icon-btn,[data-ripple]');
+  if (!b || b.disabled || b.classList.contains('disabled') || e.button > 0 || reduced()) return;
+  if (getComputedStyle(b).position === 'static') b.style.position = 'relative';
+  let wrap = b.querySelector(':scope > .ui-ripples');
+  if (!wrap) { wrap = document.createElement('span'); wrap.className = 'ui-ripples'; b.appendChild(wrap) }
+  const r = b.getBoundingClientRect(), center = b.classList.contains('icon-btn');
+  const x = center ? r.width / 2 : e.clientX - r.left, y = center ? r.height / 2 : e.clientY - r.top;
+  const d = 2 * Math.max(Math.hypot(x, y), Math.hypot(r.width - x, y), Math.hypot(x, r.height - y), Math.hypot(r.width - x, r.height - y));
+  const s = document.createElement('span'); s.className = 'ui-ripple';
+  s.style.cssText = `width:${d}px;height:${d}px;left:${x - d / 2}px;top:${y - d / 2}px`;
+  wrap.appendChild(s);
+  const dur = ms('--m-ripple') || 550, ease = tok('--e-std') || 'ease';
+  try { s.animate([{ transform: 'scale(0)', opacity: .1 }, { transform: 'scale(1)', opacity: .3 }], { duration: dur, easing: ease, fill: 'forwards' }) } catch (x) { }
+  const out = () => { document.removeEventListener('pointerup', out, true); document.removeEventListener('pointercancel', out, true); try { const a = s.animate([{ opacity: .3 }, { opacity: 0 }], { duration: dur, easing: ease, fill: 'forwards' }); a.onfinish = () => s.remove() } catch (x) { s.remove() } };
+  document.addEventListener('pointerup', out, true); document.addEventListener('pointercancel', out, true);
+}, true);
+
+// ---- 2) 툴팁([data-tip]) — MUI Tooltip(실사이트: 불투명도 .2s · 크기 .133s, 회색 rgba(97,97,97,.92) · 11px · 최대 300px)
+let tipEl = null, tipFor = null, tipT = 0;
+function tipHide() { clearTimeout(tipT); tipFor = null; if (!tipEl) return; const el = tipEl; tipEl = null; el.style.opacity = 0; el.style.transform = 'scale(.75)'; setTimeout(() => el.remove(), 200) }
+function tipShow(t) {
+  if (tipFor === t) return; tipHide(); tipFor = t;
+  tipT = setTimeout(() => {
+    if (tipFor !== t || !t.isConnected) return;
+    const el = document.createElement('div'); el.className = 'ui-tip'; el.setAttribute('role', 'tooltip'); el.textContent = t.dataset.tip;
+    document.body.appendChild(el);
+    const r = t.getBoundingClientRect(), w = el.offsetWidth, h = el.offsetHeight;
+    let left = Math.max(8, Math.min(window.innerWidth - w - 8, r.left + r.width / 2 - w / 2));
+    let top = r.bottom + 14; if (top + h > window.innerHeight - 8) top = r.top - h - 14;
+    el.style.left = left + 'px'; el.style.top = top + 'px';
+    el.style.transformOrigin = `${r.left + r.width / 2 - left}px ${top > r.top ? 'top' : 'bottom'}`;
+    void el.offsetWidth; el.style.opacity = 1; el.style.transform = 'none';
+    tipEl = el;
+  }, 100);
+}
+document.addEventListener('mouseover', e => { const t = e.target.closest && e.target.closest('[data-tip]'); if (t) tipShow(t); else if (tipFor) tipHide() });
+document.addEventListener('focusin', e => { const t = e.target.closest && e.target.closest('[data-tip]'); if (t) tipShow(t) });
+document.addEventListener('focusout', e => { if (tipFor && e.target === tipFor) tipHide() });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && tipFor) tipHide() });
+window.addEventListener('scroll', () => { if (tipFor) tipHide() }, { passive: true });
+
+// ---- 3) 스크롤 진입 페이드업([data-m-reveal]) — 실사이트 거래소 상세 섹션: 불투명도 0→1 + 아래 48px → 제자리, 약 0.5s ease-out
+//      처음 화면에 이미 보이는 섹션은 그대로 둔다(실사이트와 같음)
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { io.unobserve(x.target); x.target.classList.add('m-in') } }), { threshold: .12 }) : null;
+function reveal(root) {
+  root.querySelectorAll('[data-m-reveal]:not([data-m-done])').forEach(el => {
+    el.setAttribute('data-m-done', '');
+    if (reduced() || !io) return;
+    const r = el.getBoundingClientRect(); if (r.top < window.innerHeight) return;
+    el.classList.add('m-rv'); io.observe(el);
+  });
+}
+
+// ---- 4) 숫자 굴림(큰 % 숫자) — 실사이트 홈 RollingNumber: 자리마다 0~9 띠가 transform 1.1s cubic-bezier(.22,1,.36,1)로 굴러 멈춤, 자리 간 80ms 지연
+//      대상: 글자 크기 28px 이상인 「숫자%」 단독 요소(허브 `UP TO n%` · DEX 개요 요율 · DEX 상세 `Trading fees cashback up to n%`)
+const rio = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { rio.unobserve(x.target); roll(x.target) } }), { threshold: .4 }) : null;
+function rollPrep(root) {
+  if (reduced() || !rio) return;
+  root.querySelectorAll('span,div,b,strong').forEach(el => {
+    if (el.children.length || el.hasAttribute('data-m-roll')) return;
+    const t = el.textContent.trim(); if (!/^\d{1,3}%$/.test(t)) return;
+    if (parseFloat(getComputedStyle(el).fontSize) < 28) return;
+    el.setAttribute('data-m-roll', t); rio.observe(el);
+  });
+}
+function roll(el) {
+  const t = el.getAttribute('data-m-roll'), fs = getComputedStyle(el).fontSize, lh = getComputedStyle(el).lineHeight;
+  const H = lh === 'normal' ? parseFloat(fs) * 1.2 : parseFloat(lh);
+  const dur = ms('--m-roll') || 1100, ease = tok('--e-roll') || 'ease-out', step = ms('--m-roll-stagger') || 80;
+  el.textContent = ''; el.classList.add('m-roll'); el.style.height = H + 'px';
+  [...t].forEach((ch, i) => {
+    if (!/\d/.test(ch)) { const s = document.createElement('span'); s.textContent = ch; el.appendChild(s); return }
+    const col = document.createElement('span'); col.className = 'm-roll-col';
+    const track = document.createElement('span'); track.className = 'm-roll-track';
+    track.innerHTML = Array.from({ length: 20 }, (_, k) => `<span style="height:${H}px;line-height:${H}px">${k % 10}</span>`).join('');
+    col.appendChild(track); el.appendChild(col);
+    const target = 10 + +ch;   // 한 바퀴 넘겨 멈춤
+    track.style.transform = 'translateY(0)';
+    requestAnimationFrame(() => requestAnimationFrame(() => { track.style.transition = `transform ${dur}ms ${ease} ${i * step}ms`; track.style.transform = `translateY(${-target * H}px)` }));
+  });
+  el.setAttribute('aria-label', t);
+  setTimeout(() => { el.textContent = t; el.classList.remove('m-roll'); el.style.height = '' }, dur + t.length * step + 50);
+}
+
+// ---- 5) 같은 화면 안 섹션 이동([data-scroll-to="id"]) — 정책 B-6: 부드러운 스크롤 + 고정 헤더 높이 보정 + 섹션 제목으로 포커스
+function scroller(el) { for (let p = el.parentElement; p && p !== document.body; p = p.parentElement) { const o = getComputedStyle(p).overflowY; if (/(auto|scroll)/.test(o) && p.scrollHeight > p.clientHeight) return p } return null }
+function headH(el) { let h = 0; document.querySelectorAll('.gnb, header, [data-mo-top], .mo-top').forEach(x => { const c = getComputedStyle(x); if (/(sticky|fixed)/.test(c.position) && x.getBoundingClientRect().height < 200) h = Math.max(h, x.getBoundingClientRect().height) }); return h }
+window.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('[data-scroll-to]'); if (!b) return;
+  const t = document.getElementById(b.getAttribute('data-scroll-to')); if (!t) return;
+  e.preventDefault(); e.stopImmediatePropagation();
+  const sc = scroller(t), off = headH(t) + 16, beh = reduced() ? 'auto' : 'smooth';
+  if (sc) sc.scrollTo({ top: t.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - off, behavior: beh });
+  else window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - off, behavior: beh });
+  try { t.focus({ preventScroll: true }) } catch (x) { }
+}, true);
+
+// ---- 붙이기: 처음 + 화면이 바뀔 때마다
+function scan(root) { reveal(root); rollPrep(root) }
+let pend = false;
+const run = () => { pend = false; scan(document) };
+// 화면 밖 렌더 점검(JSDOM — IntersectionObserver · requestAnimationFrame 없음)에서는 붙일 것이 없으니 감시도 하지 않는다
+if ('IntersectionObserver' in window && window.requestAnimationFrame) {
+  new MutationObserver(() => { if (!pend) { pend = true; requestAnimationFrame(run) } }).observe(document.documentElement, { childList: true, subtree: true });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else requestAnimationFrame(run);
+}
+M.scan = scan;
+})();
+
+})()}catch(e){console.error('03-motion.js',e);(window.PT_ERR=window.PT_ERR||[]).push('03-motion.js: '+e.message)}
 </script>
 <script>// ===== 10-common.js =====
 try{(()=>{
@@ -3585,7 +3742,7 @@ function routes(){
  const rows=[
   {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'cex.list'},
   {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
-  {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:''},
+  {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:'brokers.list'},
  ];
  const row=r=>{const on=r.k==='DEX';
   const lg=`<div class="row wrap" style="gap:12px 0;max-width:${mo()?"320px":"250px"}">${r.logos.map(l=>`<span style="margin-right:-6px;display:inline-flex;border-radius:50%">${l}</span>`).join('')}</div>`;
@@ -3595,9 +3752,9 @@ function routes(){
    const lgm=`<div class="row wrap" style="gap:12px 0">${r.logos.map(l=>`<span style="margin-right:-6px;display:inline-flex;border-radius:50%">${l}</span>`).join('')}</div>`;
    const bottom=r.k==='CEX'?`<div class="col" style="gap:12px"><span class="b2 med c2" style="line-height:24px">PARTNERS</span>${lgm}<div class="row between" style="align-items:flex-start;gap:12px"><span class="b2 c2" style="max-width:165px;margin-top:23px">${r.cap}</span>${rt}</div></div>`
     :`<div class="row between" style="align-items:flex-start;gap:12px"><div class="col" style="gap:12px"><span class="b2 med c2" style="line-height:24px">PARTNERS</span>${lgm}${r.k==='DEX'?'':`<span class="b2 c2">${r.cap}</span>`}</div>${rt}</div>`;
-   return `<div class="col"${at}background:#fff;border-radius:8px;padding:20px 16px;gap:16px"><div class="row" style="gap:12px"><img src="${A(r.ic)}" alt="" style="width:56px;height:56px;border-radius:12px"><div class="col grow" style="gap:8px"><span class="h6" style="line-height:32px">${r.name}</span><span class="b2 c2">${r.sub}</span></div>${go}</div>${bottom}</div>`}
+   return `<div class="col" data-m-lift${at}background:#fff;border-radius:8px;padding:20px 16px;gap:16px"><div class="row" style="gap:12px"><img src="${A(r.ic)}" alt="" style="width:56px;height:56px;border-radius:12px"><div class="col grow" style="gap:8px"><span class="h6" style="line-height:32px">${r.name}</span><span class="b2 c2">${r.sub}</span></div>${go}</div>${bottom}</div>`}
   const rate=`<div class="col" style="gap:0"><span class="b2 med c2" style="line-height:24px">UP TO</span><span class="h2${on?' cb':''}">${upTo(r.k)}%</span><span class="b2 c2">${r.unit}</span></div>`;
-  return `<div class="row"${at}background:#fff;border-radius:8px;padding:32px 24px;gap:32px"><img src="${A(r.ic)}" alt="" style="width:96px;height:96px;border-radius:16px;flex:none"><div class="col" style="width:360px;gap:8px;flex:none"><span class="h5">${r.name}</span><span class="b1 c2">${r.sub}</span></div><div class="col" style="width:260px;gap:12px;flex:none"><span class="b2 med c2" style="line-height:24px">PARTNERS</span>${lg}<span class="b2 c2">${r.cap}</span></div><div class="grow">${rate}</div>${go}</div>`};
+  return `<div class="row" data-m-lift${at}background:#fff;border-radius:8px;padding:32px 24px;gap:32px"><img src="${A(r.ic)}" alt="" style="width:96px;height:96px;border-radius:16px;flex:none"><div class="col" style="width:360px;gap:8px;flex:none"><span class="h5">${r.name}</span><span class="b1 c2">${r.sub}</span></div><div class="col" style="width:260px;gap:12px;flex:none"><span class="b2 med c2" style="line-height:24px">PARTNERS</span>${lg}<span class="b2 c2">${r.cap}</span></div><div class="grow">${rate}</div>${go}</div>`};
  const t=T('Pick where you trade','어디서 거래하시나요?'),d='Every route pays back a share of your trading fees. Open one to see its partners and rates.';
  const head=mo()?`<div class="col" style="gap:12px"><h2 class="h3" style="margin:0;font-size:34px">${t}</h2><p class="b2 c2" style="margin:0">${d}</p></div>`
   :`<div class="row between" style="align-items:flex-start;gap:120px"><h2 class="h3" style="margin:0;width:504px">${t}</h2><p class="b1 c2" style="margin:8px 0 0;width:576px">${d}</p></div>`;
@@ -3633,7 +3790,7 @@ function compare(chip,c){
    <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div></div>`).join('')}</div>`+
    (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정 · Figma 모바일 H1). 카드 전체가 그 거래소 상세로 이동(정책 B-5-8).'));
  }else if(view==='card'){
-  const card=p=>`<div class="col" style="background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
+  const card=p=>`<div class="col" data-m-lift style="background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
    <div class="row" style="align-items:center;gap:16px"><div class="col" style="gap:6px"><div class="row" style="gap:16px"><span class="row" style="gap:8px">${plogo(p,24)}<span style="font-size:20px;line-height:1.6;font-weight:700;letter-spacing:.15px">${esc(p.name)}</span></span>${hp(p)}</div>
     <span class="row" style="gap:4px"><span class="b1 semi cb">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span><img src="${A('hub-ic-info16.svg')}" alt="" style="width:16px;height:16px"></span></div><span class="grow"></span>${C.btn(`Join ${esc(p.name)}`,{go:go(p)})}</div>
    <div style="height:1px;background:var(--divider)"></div>
@@ -3760,7 +3917,7 @@ function ovHero(list){
   <h1 style="margin:0;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;letter-spacing:-.5px">Trade onchain,${mo()?' ':'<br>'}keep your cashback</h1>
   <p class="b1 c2" style="margin:-8px 0 0">${T('Trade with your own wallet on the DEX. Paste your wallet address into TetherMax and we pay your cashback into your TetherMax balance.','내 지갑으로 DEX에서 거래하고, 테더맥스에 지갑 주소만 붙여넣으면 캐시백을 테더맥스 잔액으로 드려요.')}</p>
   <div class="col" style="gap:8px">${marks}<div class="col" style="gap:2px"><span class="b2 semi">${list.length} partner DEXs you can start earning Cashback with</span><span class="b2 c2">Trade on the DEX. Paste your address on TetherMax.</span></div></div>
-  <div class="row" style="gap:16px">${C.btn('DEX Overview',{cls:mo()?'grow':''})}${outlinedP('Guide to DEX')}</div></div>`;
+  <div class="row" style="gap:16px">${C.btn('DEX Overview',{cls:mo()?'grow':''}).replace('<button','<button data-scroll-to="dex-venues"')}${outlinedP('Guide to DEX').replace('<button','<button data-scroll-to="dex-steps"')}</div></div>`;
  const risk=`<p class="cap c2" style="margin:0;max-width:720px">※ Decentralized trading carries risks, including smart contract vulnerabilities, slippage, MEV, and potential loss of funds. Please conduct your own research prior to trading onchain.</p>`;
  if(mo())return `<section style="background:linear-gradient(180deg,#eef2f8 0%,#e6edf8 70%,#fff 100%)"><div style="height:300px;background:url(${A('dex-ov-hero.jpg')}) 78% 30%/auto 420px no-repeat"></div><div class="col" style="gap:24px;padding:0 16px 40px">${copy}${risk}</div></section>`;
  return `<section style="position:relative;height:810px;background:#eef2f8 url(${A('dex-ov-hero.jpg')}) center/cover no-repeat"><div style="position:absolute;left:120px;top:150px">${copy}</div><div style="position:absolute;left:120px;bottom:20px">${risk}</div></section>`;
@@ -3793,7 +3950,7 @@ function venueCard(d,c,i){
  if(c!=='defiHidden')stats.push(box('TVL',DEFI.tvl),box('24H Vol',DEFI.vol));
  const left=i%2===0;
  const bd=mo()?'padding:24px 0;border-bottom:1px solid var(--divider)':`padding:40px ${left?'40px 40px 0':'0 40px 40px'};${left?'border-right:1px solid var(--divider);':''}`;
- return `<div class="col" style="gap:16px;${bd}">
+ return `<div class="col" data-m-lift style="gap:16px;${bd}">
   <div class="row between"><div class="row" style="gap:12px">${C.dex(d.name,40)}<span class="h5">${d.name}</span></div><div class="col" style="gap:0;align-items:flex-end"><span class="cap c2">Cashback up to</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${d.rate}%</span></div></div>
   <div class="row" style="gap:8px;align-items:stretch;${mo()?'flex-wrap:wrap':''}">${stats.join('')}</div>
   ${c==='maint'&&d.id==='aster'?C.note('점검·일시 연동 불가(G-162 확정): 카드·상세는 그대로 노출하고 가입 링크(<code>Get Started</code>)도 유지. 연동 진입만 숨긴다 — 랜딩 카드에는 연동 버튼이 없어 화면 차이 없음'):''}
@@ -3810,8 +3967,8 @@ function ovVenues(list,c){
  const isList=c==='list'||mo();
  const desc=isList?'Join through our referral and link your wallet address. TVL and 24H volume from DefiLlama.':'Pick one, join through our link, then paste your wallet address. TVL and 24H volume from DefiLlama.';
  const sw=`<button class="icon-btn" title="${isList?'grid':'list'}">${isList?`<span style="display:grid;grid-template-columns:8px 8px;gap:3px">${'<i style="width:8px;height:8px;border-radius:2px;background:rgba(0,0,0,.56)"></i>'.repeat(4)}</span>`:`<img src="${A('dex-ov-ic-list.svg')}" style="width:24px;height:24px" alt="">`}</button>`;
- const head=mo()?`<div class="col" style="gap:8px"><div class="row between" style="align-items:flex-start"><h2 class="h3" style="margin:0;font-size:34px;line-height:1.235">Our Partner Decentralised Exchanges</h2>${sw}</div><p class="b2 c2" style="margin:0">${desc}</p></div>`
-  :`<div class="row" style="gap:120px;align-items:flex-end;justify-content:space-between"><h2 class="h3" style="margin:0;width:560px">Our Partner Decentralised Exchanges</h2><div class="row" style="gap:16px"><p class="b1 c2" style="margin:0;width:460px;text-align:right">${desc}</p>${sw}</div></div>`;
+ const head=mo()?`<div class="col" style="gap:8px"><div class="row between" style="align-items:flex-start"><h2 id="dex-venues" tabindex="-1" class="h3" style="margin:0;font-size:34px;line-height:1.235;outline:0">Our Partner Decentralised Exchanges</h2>${sw}</div><p class="b2 c2" style="margin:0">${desc}</p></div>`
+  :`<div class="row" style="gap:120px;align-items:flex-end;justify-content:space-between"><h2 id="dex-venues" tabindex="-1" class="h3" style="margin:0;width:560px;outline:0">Our Partner Decentralised Exchanges</h2><div class="row" style="gap:16px"><p class="b1 c2" style="margin:0;width:460px;text-align:right">${desc}</p>${sw}</div></div>`;
  const ds=list.map(id=>DX[id]);
  let body;
  if(isList)body=`<div class="col" style="gap:${mo()?12:16}px">${ds.map(listRow).join('')}</div>`;
@@ -3841,7 +3998,7 @@ function ovSteps(){
  const step=([c,t,b,m,img])=>`<div class="col" style="flex:1 1 0;min-width:0;gap:16px;align-items:center;text-align:center"><div style="width:220px;height:200px;display:flex;align-items:center;justify-content:center;overflow:visible"><img src="${A(img)}" style="width:190px;height:${img.endsWith('step3.webp')?'auto':'190px'};max-height:240px;object-fit:contain" alt=""></div>
   <span style="border:1px solid var(--blue);border-radius:999px;padding:4px 12px;color:var(--blue);font-size:14px;line-height:24px;font-weight:500">${c}</span><span class="h5">${t}</span><span class="b1 c2">${b}</span><span class="cap c2">${m}</span></div>`;
  const card=`<div style="background:#fff;border:1px solid var(--divider);border-radius:8px;padding:${mo()?'32px 24px':'48px'};box-shadow:0 10px 24px rgba(0,0,0,.05)" class="col g32">${mo()?'':`<img src="${A('dex-ov-progress.svg')}" style="width:100%;height:24px" alt="">`}<div style="display:flex;${mo()?'flex-direction:column;gap:40px':'gap:32px'}">${st.map(step).join('')}</div></div>`;
- return `<section style="background:#fff;padding:${mo()?'48px 0':'120px 0 96px'}">${wrap(`<div class="col" style="gap:48px;align-items:center"><h2 style="margin:0;font-weight:400;font-size:${mo()?24:48}px;line-height:1.167;text-align:center">A simple 3 step path</h2><div style="align-self:stretch">${card}</div>${outlinedP('See partner DEXs')}</div>`)}</section>`;
+ return `<section style="background:#fff;padding:${mo()?'48px 0':'120px 0 96px'}">${wrap(`<div class="col" style="gap:48px;align-items:center"><h2 id="dex-steps" tabindex="-1" style="margin:0;font-weight:400;font-size:${mo()?24:48}px;line-height:1.167;text-align:center;outline:0">A simple 3 step path</h2><div style="align-self:stretch">${card}</div>${outlinedP('See partner DEXs').replace('<button','<button data-scroll-to="dex-venues"')}</div>`)}</section>`;
 }
 function ovBento(){
  const tile=(o)=>`<div style="position:relative;${mo()?'':`flex:0 0 ${o.w}px;`}height:${mo()?(o.h>420?340:320):o.h}px;border-radius:8px;overflow:${mo()?'visible':'hidden'};${o.blue?'background:var(--blue)':'background:#fff;border:1px solid var(--divider)'}">
@@ -3907,7 +4064,7 @@ R.screen({id:'dex.overview',group:'dex',title:'DEX 개요 (랜딩)',route:'/dex'
 // =====================================================================
 // DEX 상세 (/dex/{slug}) — 공용 템플릿 FU-054 ~ FU-059
 // =====================================================================
-const box1056=(inner,o={})=>`<div style="padding:${mo()?'0':'20px 0'};${o.outer||''}"><div style="width:100%;max-width:1056px;margin:0 auto;background:${o.bg||'#fff'};border-radius:${mo()?0:8}px;${o.noShadow?'':'box-shadow:0 10px 20px rgba(0,0,0,.04);'}padding:${o.pad||(mo()?'24px 16px':'24px')};box-sizing:border-box;${o.style||''}">${inner}</div></div>`;
+const box1056=(inner,o={})=>`<div style="padding:${mo()?'0':'20px 0'};${o.outer||''}"><div data-m-reveal style="width:100%;max-width:1056px;margin:0 auto;background:${o.bg||'#fff'};border-radius:${mo()?0:8}px;${o.noShadow?'':'box-shadow:0 10px 20px rgba(0,0,0,.04);'}padding:${o.pad||(mo()?'24px 16px':'24px')};box-sizing:border-box;${o.style||''}">${inner}</div></div>`;
 const toggle=(a,b,on)=>`<div style="background:rgba(207,216,220,.2);border-radius:4px;padding:4px;display:inline-flex;height:32px;box-sizing:border-box">${[a,b].map((x,i)=>`<span style="padding:0 8px;display:flex;align-items:center;font-size:14px;font-weight:500;border-radius:4px;${i===on?'background:#fff;color:var(--text-primary)':'color:var(--text-secondary)'}">${x}</span>`).join('')}</div>`;
 const numBadge=(n,on)=>`<span style="width:20px;height:20px;border-radius:100px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;${on?'background:var(--blue);color:#fff':'background:#f2f2f5;color:var(--tm-secondary-dark)'}">${n}</span>`;
 function offerBox(d,member,maker){

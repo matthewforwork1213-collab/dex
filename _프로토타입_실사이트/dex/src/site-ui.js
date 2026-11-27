@@ -12,7 +12,37 @@ const T = {
   ripple: 550                    // MUI TouchRipple
 };
 const E = { out: 'cubic-bezier(0,0,.58,1)', io: 'cubic-bezier(.42,0,.58,1)', mui: 'cubic-bezier(.4,0,.2,1)' };
+// 모션 토큰은 CSS 변수(00-core.css :root)가 원본 — 여기 값은 그 변수를 읽어 덮어쓴다(명세 05.리포트/모션명세_DEX.md와 1:1)
+(function readTokens() {
+  const cs = getComputedStyle(document.documentElement), ms = v => { v = (v || '').trim(); return v.endsWith('ms') ? parseFloat(v) : v.endsWith('s') ? parseFloat(v) * 1000 : NaN };
+  const m = k => ms(cs.getPropertyValue(k));
+  const set = (k, v) => { if (!isNaN(v)) T[k] = v };
+  set('ddOpen', m('--m-base')); set('slide', m('--m-fast')); set('collapse', m('--m-std')); set('modal', m('--m-modal')); set('drawer', m('--m-drawer')); set('ripple', m('--m-ripple'));
+  T.fast = m('--m-fast') || 150; T.base = m('--m-base') || 200; T.std = m('--m-std') || 300; T.slow = m('--m-slow') || 400;
+  T.shift = parseFloat(cs.getPropertyValue('--m-shift')) || 8;
+  ['std', 'io', 'out'].forEach(k => { const v = cs.getPropertyValue('--e-' + k).trim(); if (v) E[k === 'std' ? 'mui' : k] = v });
+})();
 const UI = window.UI = { T, E };
+// 움직임 줄이기 설정이면 모든 전환 생략
+const RM = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+UI.reduced = () => !!(RM && RM.matches);
+// 내용 교체 전환(같은 자리의 내용이 바뀔 때): 불투명도 0→1 + 아래 8px → 제자리, 300ms ease-in-out(토큰 --m-std · --e-io · --m-shift)
+UI.swapFx = function (els, o = {}) {
+  if (UI.reduced()) return;
+  (Array.isArray(els) ? els : [els]).filter(Boolean).forEach((el, i) => {
+    try { el.animate([{ opacity: 0, transform: `translateY(${o.shift != null ? o.shift : T.shift}px)` }, { opacity: 1, transform: 'none' }], { duration: o.dur || T.std, easing: E.io, delay: (o.stagger || 0) * i, fill: 'backwards' }) } catch (e) { }
+  });
+};
+// 교차 페이드: 이전 모습(유령)을 위에 겹쳐 사라지게 하고 새 요소는 나타나게(400ms — 라이브 온보딩 이미지 opacity .4s)
+UI.crossFx = function (oldEl, newEl, o = {}) {
+  if (UI.reduced() || !oldEl || !newEl) return;
+  const d = o.dur || T.slow;
+  try {
+    oldEl.style.pointerEvents = 'none';
+    oldEl.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `scale(${o.outScale || 1.02})` }], { duration: d, easing: E.io, fill: 'forwards' }).onfinish = () => oldEl.remove();
+    newEl.animate([{ opacity: 0, transform: `translateY(${o.shift != null ? o.shift : 12}px) scale(${o.inScale || .97})` }, { opacity: 1, transform: 'none' }], { duration: d, easing: E.io, fill: 'backwards' });
+  } catch (e) { oldEl.remove() }
+};
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 // ---------------------------------------------------------------- 드롭다운
@@ -57,6 +87,7 @@ function place(anchor, host, panel, o) {
 function anim(panel, open) {
   const k = [{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }, { opacity: 1, clipPath: 'inset(0 0 0 0)' }];
   if (panel._a) { try { panel._a.cancel() } catch (e) { } }
+  if (UI.reduced()) return null;
   try { return (panel._a = panel.animate(open ? k : k.reverse(), { duration: open ? T.ddOpen : T.ddClose, easing: E.out })) } catch (e) { return null }
 }
 function mark(fromMouse) {
@@ -234,6 +265,7 @@ UI.collapse = function (el, open, o = {}) {
   if (el._ca) { el._ca.cancel(); el._ca = null }
   const cs = el.style;
   if (open) { cs.display = o.display || ''; }
+  if (UI.reduced()) { cs.display = open ? (o.display || '') : 'none'; return }
   const h = el.scrollHeight;
   const from = open ? 0 : h, to = open ? h : 0;
   cs.overflow = 'hidden';
@@ -247,7 +279,7 @@ UI.collapse = function (el, open, o = {}) {
 UI.heightFx = function (getEl, render) {
   const old = getEl(); const h0 = old ? old.getBoundingClientRect().height : null;
   render();
-  const el = getEl(); if (!el || h0 == null) return;
+  const el = getEl(); if (!el || h0 == null || UI.reduced()) return;
   const h1 = el.getBoundingClientRect().height; if (Math.abs(h1 - h0) < 1) return;
   el.style.overflow = 'hidden';
   try { const a = el.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: T.collapse, easing: E.io }); a.onfinish = () => { el.style.overflow = '' } } catch (e) { el.style.overflow = '' }
@@ -256,7 +288,7 @@ UI.heightFx = function (getEl, render) {
 // ---------------------------------------------------------------- 세그먼트 토글 전환(Taker/Maker 등)
 // 다시 그린 뒤 이전 선택 칸의 인라인 스타일에서 새 스타일로 .2s 전환(실사이트 ToggleBtn `all .2s`)
 UI.toggleFx = function (items, prevIndex) {
-  if (prevIndex == null || prevIndex < 0) return;
+  if (prevIndex == null || prevIndex < 0 || UI.reduced()) return;
   const now = items.map(x => x.getAttribute('style') || '');
   const cur = items.findIndex((x, i) => i !== prevIndex && /background:#fff/.test(now[i]));
   if (cur < 0 || !items[prevIndex]) return;
@@ -264,51 +296,9 @@ UI.toggleFx = function (items, prevIndex) {
   items[prevIndex].setAttribute('style', b); items[cur].setAttribute('style', a);
   items.forEach(x => { x.style.transition = 'none' });
   void items[0].offsetWidth;
-  items[prevIndex].setAttribute('style', a + ';transition:background .2s,color .2s,box-shadow .2s');
-  items[cur].setAttribute('style', b + ';transition:background .2s,color .2s,box-shadow .2s');
+  items[prevIndex].setAttribute('style', a + ';transition:background var(--m-base),color var(--m-base),box-shadow var(--m-base)');
+  items[cur].setAttribute('style', b + ';transition:background var(--m-base),color var(--m-base),box-shadow var(--m-base)');
 };
 
-// ---------------------------------------------------------------- 툴팁([data-tip]) — 실사이트 MUI Tooltip
-// 회색 rgba(97,97,97,.92) · 흰 글자 11px · 여백 4px 8px · 최대 300px, 아래쪽 가운데, 불투명도 .2s + 크기 .133s. hover·키보드 포커스로 열고 벗어나면 닫힘
-let tipEl = null, tipFor = null, tipT = 0;
-function tipHide() { clearTimeout(tipT); tipFor = null; if (!tipEl) return; const el = tipEl; tipEl = null; el.style.opacity = 0; el.style.transform = 'scale(.75)'; setTimeout(() => el.remove(), 200) }
-function tipShow(t) {
-  if (tipFor === t) return; tipHide(); tipFor = t;
-  tipT = setTimeout(() => {
-    if (tipFor !== t || !t.isConnected) return;
-    const el = document.createElement('div'); el.className = 'ui-tip'; el.setAttribute('role', 'tooltip'); el.textContent = t.dataset.tip;
-    document.body.appendChild(el);
-    const r = t.getBoundingClientRect(), w = el.offsetWidth, h = el.offsetHeight;
-    let left = r.left + r.width / 2 - w / 2; left = Math.max(8, Math.min(window.innerWidth - w - 8, left));
-    let top = r.bottom + 14; if (top + h > window.innerHeight - 8) top = r.top - h - 14;
-    el.style.left = left + 'px'; el.style.top = top + 'px';
-    el.style.transformOrigin = `${r.left + r.width / 2 - left}px ${top > r.top ? 'top' : 'bottom'}`;
-    void el.offsetWidth; el.style.opacity = 1; el.style.transform = 'none';
-    tipEl = el;
-  }, 100);
-}
-document.addEventListener('mouseover', e => { const t = e.target.closest && e.target.closest('[data-tip]'); if (t) tipShow(t); else if (tipFor) tipHide() });
-document.addEventListener('focusin', e => { const t = e.target.closest && e.target.closest('[data-tip]'); if (t) tipShow(t) });
-document.addEventListener('focusout', e => { if (tipFor && e.target === tipFor) tipHide() });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && tipFor) tipHide() });
-window.addEventListener('scroll', () => { if (tipFor) tipHide() }, { passive: true });
-
-// ---------------------------------------------------------------- 버튼 물결(MUI TouchRipple 550ms)
-document.addEventListener('pointerdown', e => {
-  const b = e.target.closest && e.target.closest('.btn,.icon-btn,[data-ripple]');
-  if (!b || b.disabled || b.classList.contains('disabled') || e.button > 0) return;
-  if (getComputedStyle(b).position === 'static') b.style.position = 'relative';
-  let wrap = b.querySelector(':scope > .ui-ripples');
-  if (!wrap) { wrap = document.createElement('span'); wrap.className = 'ui-ripples'; b.appendChild(wrap) }
-  const r = b.getBoundingClientRect();
-  const center = b.classList.contains('icon-btn');
-  const x = center ? r.width / 2 : e.clientX - r.left, y = center ? r.height / 2 : e.clientY - r.top;
-  const d = 2 * Math.max(Math.hypot(x, y), Math.hypot(r.width - x, y), Math.hypot(x, r.height - y), Math.hypot(r.width - x, r.height - y));
-  const s = document.createElement('span'); s.className = 'ui-ripple';
-  s.style.cssText = `width:${d}px;height:${d}px;left:${x - d / 2}px;top:${y - d / 2}px`;
-  wrap.appendChild(s);
-  try { s.animate([{ transform: 'scale(0)', opacity: .1 }, { transform: 'scale(1)', opacity: .3 }], { duration: T.ripple, easing: E.mui, fill: 'forwards' }) } catch (x) { }
-  const out = () => { document.removeEventListener('pointerup', out, true); document.removeEventListener('pointercancel', out, true); try { const a = s.animate([{ opacity: .3 }, { opacity: 0 }], { duration: T.ripple, easing: E.mui, fill: 'forwards' }); a.onfinish = () => s.remove() } catch (x) { s.remove() } };
-  document.addEventListener('pointerup', out, true); document.addEventListener('pointercancel', out, true);
-}, true);
+// 툴팁 · 버튼 물결은 공통 모듈 _프로토타입_전체/src/03-motion.js(화면 목록판과 같은 코드)
 })();
