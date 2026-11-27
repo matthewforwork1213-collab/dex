@@ -11,7 +11,7 @@ const short = a => a.slice(0, 6) + '…' + a.slice(-4);
 const app = document.getElementById('app');
 // Get Started · Join Now: 레퍼럴 링크는 어드민 입력값(미보유) — 프로토타입은 각 DEX 공식 사이트를 새 탭으로 연다
 const OFFICIAL = { lighter: 'https://lighter.xyz', apex: 'https://omni.apex.exchange', edgex: 'https://www.edgex.exchange', aster: 'https://www.asterdex.com' };
-const REAL_ROUTE = { '/hub': '/en/affiliated', '/dex': '/en/dex', '/summary': '/en/rewardHistory', '/account': '/en/account', '/ownership': '/en/ownership-verification' };
+const REAL_ROUTE = { '/benefits': '/en/benefits', '/hub': '/en/affiliated', '/dex': '/en/dex', '/summary': '/en/rewardHistory', '/account': '/en/account', '/ownership': '/en/ownership-verification' };
 // 모달 모드(셸 레이어 iframe)에서 페이지 이동은 셸에 맡긴다
 function go2(path, q) {
   if (API.MODAL) { closeLayer(true); const real = REAL_ROUTE[path] || (path.startsWith('/dex/') ? '/en' + path : '/en'); return post({ nav: API.ORIGIN + real + (q && q.tab ? '?tab=' + q.tab : '') }) }
@@ -29,7 +29,7 @@ function memberOf(slug) {
 }
 function withSD(o, f) { window.SITED = o; try { return f() } finally { window.SITED = null } }
 const site2 = {
-  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/tp-intro': 'TetherMax Point | TetherMax', '/benefits': 'Benefits | TetherMax' }[p] },
+  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/tp-intro': 'TetherMax Point | TetherMax', '/benefits': 'Benefits | TetherMax' }[p] || (/^\/benefits\//.test(p) ? 'Benefits | TetherMax' : undefined) },
   dexLanding() { S.auth = isMember() ? 's3' : 'guest'; return withSD({ guest: !isMember(), list: SD.list }, () => renderInner('dex.overview:' + (isMember() ? 'member' : 'normal'))) },
   dexDetail(slug) {
     if (SD.slug !== slug) Object.assign(SD, { slug, maker: false, vol: 400000, step: 0, faq: new Set([0]), sort: 0 });
@@ -40,7 +40,9 @@ const site2 = {
   render(p, q) {
     if (p === '/payback') return calcHTML(q || {});
     if (p === '/tp-intro') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('tp.intro:normal') }   // TP 소개(dev 기준) — 게스트·회원 같은 화면, CTA만 다름
-    if (p === '/benefits') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('benefits.list:' + (isMember() ? 'normal' : 'guestOn')) }   // GNB Rewards Hub ▾ Benefits (사용자 2026-11-27)
+    if (p === '/benefits') { S.auth = isMember() ? 's4' : 'guest'; const ok = q && q.st && (isMember() ? ['normal', 'doneEmpty'] : ['guestOn', 'guest']).includes(q.st); return renderInner('benefits.list:' + (ok ? q.st : isMember() ? 'normal' : 'guestOn')) }
+    // 혜택 상세(_프로토타입_전체/src/125-benefits.js) — /benefits/{혜택}?st={상태}. 상태가 로그인 상태와 안 맞으면 그 혜택의 게스트·회원 첫 상태
+    if (/^\/benefits\/[a-z]+$/.test(p)) { S.auth = isMember() ? 's4' : 'guest'; return renderInner('benefits.detail:' + (window.BD_STATE ? BD_STATE(p.split('/')[2], q && q.st, isMember()) : 'uid-before')) }
     if (p === '/summary') { if (!isMember()) { navReal('/en/login'); return '' } S.auth = 's4'; return withSum(() => renderInner('summary.main:normal')) }
     if (p === '/account') { if (!isMember()) { navReal('/en/login'); return '' } return accountHTML() }
     if (p === '/ownership') { if (!isMember()) { navReal('/en/login'); return '' } return ownHTML() }
@@ -62,6 +64,8 @@ const site2 = {
     if (id === 'dex.detail' && st === 'drawer') { openHow(); return true }
     if (id === 'dex.detail' && st === 'close') { closeLayer(); return true }
     if (id === 'summary.main') { go2('/summary'); return true }
+    if (id === 'benefits.detail' && st) { go2('/benefits/' + st.split('-')[0], { st }); return true }   // 혜택 상세 — 목록 행·상세 안 버튼
+    if (id === 'benefits.list') { go2('/benefits', st ? { st } : null); return true }
     if (/^calc./.test(id)) return calcGo(id, st);
     // 행 배너·이슈 모달(결정 10차): 수동 연동 실패 사유 · 문제 안내. 모달 안 Link 버튼 → 연동 모달
     if (id === 'home.main' && ['linkFail', 'linkFailWallet', 'issue', 'issueWallet'].includes(st)) { const dex = /Wallet$/.test(st); openCustom(() => /^link/.test(st) ? HOMEX.failDialog(dex) : HOMEX.issueDialog(dex), 'center'); return true }

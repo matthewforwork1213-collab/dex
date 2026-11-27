@@ -72,7 +72,7 @@ function calcCard(route,o={}){
   body=`<div class="col" style="gap:12px;padding:24px 0;align-items:center;text-align:center"><span class="h6">Estimate unavailable</span>${C.btn('Try again',{v:'outlined',c:'primary',size:'md'})}</div>`;
  }else{
   let fees,cb,after,feeSub,cbLbl,afterLbl='Trading fees after cashback';
-  if(route==='Brokers'){fees=60;cb=42;after=18;feeSub='RS Finance commission, $30.00 / lot';cbLbl='Cashback, $21.00 / lot';afterLbl='Trading cost after cashback'}
+  if(route==='Brokers'){const bv=window.SITEH?HB_VOL:200000,lots=bv/100000,cl=parseFloat(String(p.comm).replace(/[^\d.]/g,'')),cbl=fl2(cl-parseFloat(String(p.disc).replace(/[^\d.]/g,'')));fees=fl2(lots*cl);cb=fl2(lots*cbl);after=fl2(fees-cb);feeSub=`${esc(p.name)} commission, ${usd(cl)} / lot`;cbLbl=`Cashback, ${usd(cbl)} / lot`;afterLbl='Trading cost after cashback'}
   else{fees=fl2(HB_VOL*p.taker/100);cb=fl2(fees*p.rate/100);after=fl2(fees-cb);
    feeSub=route==='CEX'?`${esc(p.name)} taker fee, ${pct4(p.taker)}`:`${esc(p.name)}${p.tier?' '+p.tier:''} taker, ${pct4(p.taker)}`;cbLbl=`Cashback, ${p.rate}%`}
   body=`${lineKV('Trading fees',feeSub,usd(fees))}
@@ -141,8 +141,8 @@ function hero(right,route){
  const bg='background:radial-gradient(ellipse 60% 55% at 76% 52%,#9ccbf0 0%,rgba(156,203,240,0) 70%),linear-gradient(160deg,#cfe9ff 0%,#bbe2ff 45%,#a9d6f7 100%)';
  const copy=`<div class="col" style="gap:${mo()?12:24}px"><h1 class="h2" style="margin:0;${mo()?'font-size:36px;line-height:1.2':'width:560px'}">Trade, Earn Back. Repeat.</h1><p class="${mo()?'b2':'b1'} c2" style="margin:0;${mo()?'':'width:480px'}">Compare cashback opportunities across exchanges and brokers in one place.</p></div>`;
  if(mo())return `<section style="${bg};padding:32px 16px 40px" class="col g24">${copy}<div class="row center"><img src="${A(badge[route])}" alt="" style="width:200px;height:200px;object-fit:contain"></div><div style="position:relative">${right}</div></section>`;
- return `<section style="position:relative;height:922px;${bg}">
-  <div style="position:absolute;inset:0;overflow:hidden">
+ return `<section style="position:relative;height:922px;overflow:hidden;${bg}"><div style="position:relative;max-width:1440px;height:922px;margin:0 auto">
+  <div style="position:absolute;inset:0">
   <img src="${A('hub-badge-glow.svg')}" alt="" style="position:absolute;left:96px;top:552px;width:536px;height:186px">
   <img src="${A(badge[order[0]])}" alt="" style="position:absolute;left:-132px;top:432px;width:240px;height:240px;opacity:.45;object-fit:contain">
   <img src="${A('hub-badge-shadow.svg')}" alt="" style="position:absolute;left:111px;top:593px;width:507px;height:288px">
@@ -150,7 +150,7 @@ function hero(right,route){
   <img src="${A(badge[order[2]])}" alt="" style="position:absolute;left:572px;top:432px;width:240px;height:240px;opacity:.45;object-fit:contain"></div>
   <div style="position:absolute;left:120px;top:88px">${copy}</div>
   <div style="position:absolute;left:712px;top:72px">${right}</div>
- </section>`}
+ </div></section>`}
 
 // ---------- 라우트 선택 블록 FU-047 ----------
 function routes(){
@@ -192,7 +192,9 @@ function compare(chip,c){
  const es=c==='emptySearch';
  const search=`<div class="row" style="gap:12px"><div class="row grow" style="border:${es?'2px solid var(--blue)':'1px solid var(--input-border)'};border-radius:4px;padding:${es?'7px 11px':'8px 12px'};gap:8px;background:#fff"><img src="${A('hub-ic-search.svg')}" alt="" style="width:24px;height:24px"><span class="b2 grow ${es?'':'c3'}" style="line-height:20px">${es?'Hyperliquid':ph}</span>${es?`<span title="Clear" style="cursor:pointer;display:inline-flex">${ic('close')}</span>`:''}</div>${toggle}</div>`;
  const go=p=>chip==='DEX'?`dex.detail:${p.id}`:chip==='CEX'?'cexd:'+p.id:'brkd:'+p.id;   // 그 파트너의 테더맥스 상세(CEX·브로커 = 기존 상세 페이지)
- const join=p=>C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',go:go(p)});
+ const joinGo=p=>brk?go(p):'';
+ const refAttr=p=>brk?'':` data-ref-signup="${esc(p.name)}"`;
+ const join=p=>C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} `);
  const hp=p=>p===top?C.badge('Highest payout','blue'):'';
  const sortIc=`<img src="${A('hub-sort.svg')}" alt="" style="width:5px;height:8px;margin-left:6px;display:inline-block;vertical-align:middle">`;
  const box='background:#fff;border-radius:8px;box-shadow:0 10px 20px rgba(0,0,0,.06)';
@@ -203,12 +205,12 @@ function compare(chip,c){
   // Figma 모바일 카드: 로고·이름·chevron / Up to N% cashback ⓘ / Final Taker · Final Maker
   body=`<div class="col" style="gap:16px">${list.map(p=>`<div class="col" style="${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px"><div class="row" style="gap:8px">${plogo(p,32)}<span class="b1 semi grow">${esc(p.name)}</span>${hp(p)}</div>
    <span class="b1 semi">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span><hr class="divider">
-   <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div>${C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',full:true,go:go(p)})}</div>`).join('')}</div>`+
+   <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div>${C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',full:true,go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} `)}</div>`).join('')}</div>`+
    (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정). 카드 끝 전폭 <code>Join {partner}</code> → 그 파트너 상세(정책 B-5-8)'));
  }else if(view==='card'){
   const card=p=>`<div class="col" data-m-lift style="background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
    <div class="row" style="align-items:center;gap:16px"><div class="col" style="gap:6px"><div class="row" style="gap:16px"><span class="row" style="gap:8px">${plogo(p,24)}<span style="font-size:20px;line-height:1.6;font-weight:700;letter-spacing:.15px">${esc(p.name)}</span></span>${hp(p)}</div>
-    <span class="row" style="gap:4px"><span class="b1 semi cb">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span></span></div><span class="grow"></span>${C.btn(`Join ${esc(p.name)}`,{go:go(p)})}</div>
+    <span class="row" style="gap:4px"><span class="b1 semi cb">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span></span></div><span class="grow"></span>${C.btn(`Join ${esc(p.name)}`,{go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} `)}</div>
    <div style="height:1px;background:var(--divider)"></div>
    <div class="row between b2"><span class="row" style="gap:6px"><span class="c2">${brk?'Commission':'Final Taker'}</span><b class="semi">${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span class="row" style="gap:6px"><span class="c2">${brk?'Discounted':'Final Maker'}</span><b class="semi">${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div></div>`;
   body=`<div class="col" style="gap:16px">${list.map(card).join('')}</div>`+

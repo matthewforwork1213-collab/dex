@@ -123,3 +123,13 @@ M.scan = scan;
 
 // TP 소개 고정 CTA `Check My TP` — 맨 위에서는 없고 스크롤하면 나타남(dev 측정)
 if (typeof window !== 'undefined' && window.addEventListener) window.addEventListener('scroll', () => { const c = document.querySelector('[data-tp-cta]'); if (c) c.classList.toggle('on', window.scrollY > 120) }, { passive: true });
+
+// 캐러셀([data-car] · [data-car-track] · [data-car-slide] · [data-car-dot]) — 3초마다 다음, 마지막 → 처음, 마우스 올리면 멈춤, 점 누르면 그 슬라이드(결정 2026-11-27 · 이벤트 상단 배너)
+(function () {
+  if (typeof document === 'undefined' || !window.setInterval) return;
+  const dotsOf = c => { let d = c.nextElementSibling; while (d && !d.matches('[data-car-dots]')) d = d.querySelector && d.querySelector('[data-car-dots]') || d.nextElementSibling; return d || (c.parentElement && c.parentElement.querySelector('[data-car-dots]')) };
+  const show = (c, i) => { const tr = c.querySelector('[data-car-track]'), n = c.querySelectorAll('[data-car-slide]').length; if (!tr || n < 2) return; i = (i + n) % n; c.dataset.carI = i; tr.style.transform = 'translateX(' + (-100 * i) + '%)';
+    const ds = dotsOf(c); if (ds) ds.querySelectorAll('[data-car-dot]').forEach((d, k) => { d.style.width = k === i ? '24px' : '6px'; d.style.background = k === i ? 'var(--blue)' : 'var(--divider)' }) };
+  setInterval(() => { document.querySelectorAll('[data-car]').forEach(c => { if (c.matches(':hover') || document.hidden) return; show(c, (+c.dataset.carI || 0) + 1) }) }, 3000);
+  document.addEventListener('click', e => { const d = e.target.closest && e.target.closest('[data-car-dot]'); if (!d) return; const c = d.closest('[data-car-dots]').parentElement.querySelector('[data-car]'); if (c) show(c, +d.dataset.carDot) });
+})();

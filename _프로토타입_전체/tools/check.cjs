@@ -8,10 +8,12 @@ const errs=[];const vc=new VirtualConsole();vc.on('jsdomError',e=>{if(!/Could no
 const dom=new JSDOM(fs.readFileSync(file,'utf8'),{url:'https://offline.invalid/',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc,beforeParse(w){w.PT_NO_MOUNT=true;w.alert=()=>{};w.HTMLElement.prototype.scrollIntoView=()=>{};try{Object.defineProperty(w,'localStorage',{value:{getItem:()=>null,setItem:()=>{}}})}catch(e){}}});
 const w=dom.window,R=w.R;let n=0;const ban=[/페이백/,/payback(?!\))/i,/rebate/i,/non-member/i,/disconnect/i];
 const missing=new Set();
+(async()=>{
 for(const sc of R.screens){if(!sc.id.startsWith(prefix))continue;
  for(const st of sc.states)for(const vp of ['pc','mo'])for(const lang of ['en','ko']){
   w.eval(`S.vp=${JSON.stringify(vp)};S.lang=${JSON.stringify(lang)};S.screen=${JSON.stringify(sc.id)};S.state=${JSON.stringify(st.id)};`);
   try{w.eval('render()')}catch(e){errs.push(`${sc.id}:${st.id} ${vp}/${lang} 예외 ${e.message}`);continue}
+  await new Promise(r=>setImmediate(r));   // 렌더마다 MutationObserver 기록을 비움(동기 반복에서 메모리 폭증 방지)
   const fr=w.document.getElementById('pt-frame');const t=fr.textContent;n++;
   if(/없는 화면:|at Object\.render|Error:/.test(t))errs.push(`${sc.id}:${st.id} ${vp}/${lang} 렌더 오류: ${t.slice(0,160)}`);
   for(const el of fr.querySelectorAll('[data-go]')){const g=el.getAttribute('data-go');if(g&&!/^(cexd|brkd|back|@)/.test(g)&&!R.byId[g.split(':')[0]])missing.add(g.split(':')[0])}
@@ -23,3 +25,5 @@ console.log(`렌더 ${n}건 · 화면 ${R.screens.length} · 오류 ${errs.lengt
 errs.slice(0,80).forEach(e=>console.log(' -',e));
 if(missing.size)console.log('아직 없는 이동 대상(다른 담당이 만들 수 있음):',[...missing].sort().join(', '));
 process.exitCode=errs.length?1:0;
+try{dom.window.close()}catch(e){};process.exit(errs.length?1:0);
+})();   // 자동 넘김·카운트다운 타이머가 남아도 점검은 끝냄

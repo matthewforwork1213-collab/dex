@@ -202,3 +202,10 @@
 | REQ-039 비활성 버튼 조건 안내 예외 | 계산기 `Next`·`Check Results`, 소유권 `Submit Claim` — 조건 안내 없이 비활성만(기존 화면) |
 | EMAIL 31 버튼 링크 | 해당 DEX가 선택된 연동 모달로(문서대로, Figma 메일에 링크 추가) |
 | 테더맥스 포인트(TP) 진입 (2026-11-27) | 소개 페이지(`/en/tethermax-point-introduction`)는 게스트·회원 모두 볼 수 있음. CTA = 스크롤하면 나타나는 고정 버튼 `Check My TP` — 회원 → 포인트 페이지(`/en/tethermax-point`), 게스트 → 가입(`/en/signup`). 게스트가 포인트 페이지를 직접 열면 소개 페이지로. 근거 www-dev 실측 · Figma [MAX-659] TetherMax Point(13033:27246) |
+| 계산기 Summary `Start {거래소} Cashback` (2026-11-27) | 외부 가입 새 탭이 아니라 **그 거래소 상세 페이지로 이동**(CEX = 거래소 상세, DEX = DEX 상세) |
+| 이벤트 페이지 상단 배너 캐러셀 | 3초마다 자동으로 넘김 |
+| 축약 지갑 주소 전체 보기 (2026-11-27) | **DEX 지갑 주소에만 적용**(CEX UID에는 툴팁 없음). 축약 주소(`0x7a3F…51e9`)를 **모바일은 탭, PC는 호버**하면 전체 주소가 **기존 어두운 툴팁**(거래소 상세 `Total Savings` ⓘ 툴팁과 같은 모양 — 제목·`Close` 없는 말풍선)으로 표시. 복사 아이콘은 그대로. 카드형 `Wallet address` 팝오버는 쓰지 않음(모바일 랭킹 주소 팝오버 포함) **행 전체가 상세로 가는 목록(홈 Linked Accounts 행 · See All 모달 행)에는 툴팁 없음**, 주소 밑줄 표시도 없음 |
+| 홈 누적 캐시백 블록(MAXOP-731) | 없음 — 이번 범위에서 제외. Figma DEX(revision) 홈·프로토타입에서 빼고 N16 캡션 결정은 효력 없음 |
+| Brokers 페이지 (2026-11-27) | `/brokers` · `/brokers/learn` · `/brokers/compare` · `/brokers/rs-finance` · `/brokers/infinox` 모두 유지(실서비스·Figma [MAX-]FX V2 그대로). 없애는 것은 GNB `Cashback ▾`의 `Brokers` 진입뿐(D4) |
+| 허브 Brokers 비교표 `Join {broker}` | 브로커 상세(`/{lang}/brokers/{slug}`, 현재 탭) — 브로커만의 예외. CEX·DEX `Join`은 레퍼럴 가입 새 탭 유지(12차) |
+| 혜택 상세 상태 (2026-11-27) | 쿠폰을 주는 혜택은 상세마다 **수행 전 / 수행 후 쿠폰 미수령 / 수행 후 쿠폰 수령** 3상태를 정의. 그 밖에 텍스트가 바뀌는 상태는 모두 정의. 기존 정책 중 DEX로 바뀌어야 하는 부분(용어·조건·대상)은 반영 |

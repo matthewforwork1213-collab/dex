@@ -35,6 +35,7 @@
     if (path === '/ownership') return 'own.verify:normal';
     if (path === '/account') return 'home.wallet:normal';
     if (path === '/benefits') return 'benefits.list';
+    const bd = /^\/benefits\/([a-z]+)$/.exec(path); if (bd) return 'benefits.detail:' + (window.BD_STATE ? BD_STATE(bd[1], q.st, S.auth !== 'guest') : 'uid-before');   // 혜택 상세(125-benefits.js)
     if (path === '/tp-intro') return 'tp.intro:normal';
     return null;
   }
@@ -79,8 +80,10 @@
         if (!on) return false;
         if (/^(message|popstate|storage|hashchange)$/.test(e.type)) return false;
         const t = e.target; if (!t || !t.closest || t === document || t === window) return true;
-        if (t === document.body || t === document.documentElement) return !/click|pointer|mouse/.test(e.type);
-        return !!t.closest('#app,#layer,.ui-dd,.site-toast,.site-pop,.site-help,[data-ui-host]');
+        if (t.closest('#pt-bar,#pt-side')) return false;   // 도구줄·화면 목록은 목록판 것
+        if (!/click|pointer|mouse|touch/.test(e.type)) return true;   // 키보드(Esc 등)·스크롤 = 화면이 열려 있으면 받음
+        if (t.closest('#app,#layer,.ui-dd,.site-toast,.site-pop,.site-help,[data-ui-host]')) return true;
+        return /^(click|pointerdown|mousedown|touchstart)$/.test(e.type) && !t.closest('button,a,[role=button]');   // 화면 바깥(회색 여백) 클릭 = 열린 드롭다운 닫기 등
       };
       EventTarget.prototype.addEventListener = function (type, h, o) {
         if ((this === document || this === window) && typeof h === 'function') { const g = function (e) { if (scope(e)) return h.call(this, e) }; return orig.call(this, type, g, o) }

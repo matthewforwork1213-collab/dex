@@ -6,3 +6,4 @@ body.pt-embed .site-layer.open{top:var(--pt-bar-h,48px)}
 body.pt-mo.pt-embed .site-layer.open{left:50%;right:auto;width:390px;max-width:100%;transform:translateX(-50%)}
 body.pt-mo.pt-embed .site-layer.k-side .site-box{width:390px;max-width:100%}
 body.pt-embed:not(.pt-mo) .site-layer.k-side .site-box{top:var(--pt-bar-h,48px)}
+body.pt-mo .site-toast{bottom:16px;max-width:335px;width:calc(390px - 40px);font-size:13px;line-height:18px;gap:8px}

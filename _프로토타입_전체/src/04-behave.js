@@ -46,6 +46,30 @@ function support() {
 function closeSupport() { const w = document.getElementById('bh-chat'); if (!w) return; w.classList.remove('in'); setTimeout(() => w.remove(), 240) }
 window.ptSupport = support;
 
+// ---- 축약 지갑 주소(0x1234…abcd) → 전체 주소 툴팁 — 기존 어두운 툴팁(.ui-tip, 거래소 상세 ⓘ 툴팁과 같은 컴포넌트) 재사용
+// 모바일 = 탭(바깥 탭으로 닫힘) · PC = 호버(마우스 이탈로 닫힘). 축약 주소가 나오는 모든 화면(결정 2026-11-27). 행 클릭(상세 이동)과 분리
+const SHORT_RE = /^0x[0-9a-fA-F]{4}…[0-9a-fA-F]{4}$/;
+function fullOf(el) {
+  if (el.dataset && el.dataset.addr) return el.dataset.addr;
+  const t = txt(el).replace(/^(Wallet|지갑)s+/, ''); if (!SHORT_RE.test(t)) return null;
+  const [a, b] = t.toLowerCase().split('…'); return (window.PT_ADDRS || []).find(x => x.toLowerCase().startsWith(a) && x.toLowerCase().endsWith(b)) || null;
+}
+function addrEl(t) { if (!t.closest || t.closest('[data-go],[data-see-all],[data-dex-row],.site-hoverrow,[class*="__LinkedUidRow"]')) return null;   // 행 클릭 = 상세(툴팁 없음)
+  let e = t.closest('[data-addr]'); if (e) return e; e = t; for (let k = 0; e && k < 2; k++, e = e.parentElement) { if (e.children.length <= 1 && fullOf(e)) return e } return null }
+const isMo = () => document.body.classList.contains('pt-mo') || document.body.classList.contains('vp-mo') || window.innerWidth <= 1024;
+function addrTip(el, toggle) {
+  const old = document.querySelector('.ui-tip[data-addr-tip]'); if (old) { const same = old._for === el; old.remove(); if (same && toggle) return }
+  const full = fullOf(el); if (!full) return;
+  const t = document.createElement('div'); t.className = 'ui-tip'; t.setAttribute('data-addr-tip', ''); t.setAttribute('role', 'tooltip'); t._for = el;
+  t.style.cssText = 'position:fixed;z-index:3002;opacity:1';
+  t.textContent = full; document.body.appendChild(t);
+  const r = el.getBoundingClientRect(); t.style.left = Math.max(8, Math.min(r.left + r.width / 2 - t.offsetWidth / 2, innerWidth - t.offsetWidth - 8)) + 'px'; t.style.top = (r.bottom + 6) + 'px';
+}
+const tipOff = () => { const tip = document.querySelector('.ui-tip[data-addr-tip]'); if (tip) tip.remove() };
+document.addEventListener('mouseover', e => { if (isMo()) return; const el = e.target && e.target.closest ? addrEl(e.target) : null; if (el) addrTip(el, false); else if (document.querySelector('.ui-tip[data-addr-tip]') && !(e.target.closest && e.target.closest('[data-addr-tip]'))) tipOff() });
+window.addEventListener('scroll', tipOff, { passive: true });
+window.ptAddrTip = addrTip;
+
 // ---- 가입 링크 `Register here` = 선택 거래소의 테더맥스 레퍼럴 가입 새 탭(REQ-053 · 결정 2026-11-27) ----
 // 레퍼럴 주소는 어드민 거래소 데이터 값. 프로토타입 소스에 있는 값만 쓰고, 없는 거래소는 주소를 지어내지 않는다
 const REF = { Lighter: 'https://app.lighter.xyz/?referral=TETHERMAX' };
@@ -68,6 +92,9 @@ window.addEventListener('click', e => {
     stop(); if (n && URLS.sns[n]) open(URLS.sns[n]); else toast('기존 푸터에 없는 소셜 — 링크 없음 (프로토타입)'); return;
   }
   if (t.closest('.fmail')) { stop(); return copy('support@tethermax.io') }
+  const ad = addrEl(t);
+  if (ad) { stop(); return isMo() ? addrTip(ad, true) : null }   // 모바일 = 탭 · PC = 호버(누르면 이동하지 않음)
+  if (!t.closest('[data-addr-tip]')) tipOff();
   if (t.closest('[data-full-flow]')) {
     stop(); const toFlow = () => { const f = document.getElementById('dex-flow'); if (!f) return; const off = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pt-bar-h')) || 0) + 80; const rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - off, behavior: rm ? 'auto' : 'smooth' }) };
     if (SITE() && window.SITE_API) { SITE_API.closeLayer(); setTimeout(toFlow, 320) } else if (!SITE() && window.go && S.screen === 'dex.detail') { go('dex.detail:' + (S.auth === 'guest' ? 'normal' : S.auth === 's3' ? 'unlinked' : 'linked'), { noPush: true }); setTimeout(toFlow, 50) }
@@ -113,6 +140,11 @@ document.addEventListener('click', e => {
   if (t.closest('[data-paste]')) { e.preventDefault(); return go('link.addr:valid') }
   // 이메일 인증 Paste(목록판) — 6칸을 채우고 Verify 활성
   if (t.closest('[data-otp-paste]')) { e.preventDefault(); fr.querySelectorAll('[data-otp-i]').forEach((x, i) => x.value = '123456'[i]); const v = fr.querySelector('[data-otp-verify]'); if (v) v.disabled = false; return }
+  // 이벤트 탭 전환(REQ-437): 밑줄 이동 · 목록 교체
+  const evt = t.closest('[data-ev-tab]');
+  if (evt) { const k = evt.dataset.evTab; fr.querySelectorAll('[data-ev-tab]').forEach(x => x.classList.toggle('on', x === evt));
+    const lists = [...fr.querySelectorAll('[data-ev-list]')], to = lists.find(l => l.dataset.evList === k); if (!to || !to.hidden) return;
+    lists.forEach(l => { l.hidden = l !== to }); if (to.animate && !(window.UI && UI.reduced && UI.reduced())) to.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' }); return }
   // 거래소 이벤트 필터(Figma 29069:6595): 칩 = 그룹 거르기 · 체크 = 선택 · 셀렉트 `{첫 거래소}+{n}` · 모바일 Apply (n)
   const evc = t.closest('[data-ev-chip]');
   if (evc) { const box = evc.closest('[data-ev-filter]'), k = evc.dataset.evChip; box.querySelectorAll('[data-ev-chip]').forEach(x => x.classList.toggle('on', x === evc));

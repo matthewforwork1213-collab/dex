@@ -61,7 +61,7 @@ const shIc=(f,cls='ic')=>`<img class="${cls}" src="${A(f)}" alt="">`;
 function gnb(active,o={}){
  const authed=S.auth!=='guest';
  const nav=Object.entries(NAV).map(([k,n])=>`<div class="ni${o.open===k?' open':''}"><a class="${active===k||o.open===k?'on':''}" data-nav-toggle role="button" aria-haspopup="true">${T(n.en,n.ko)}${ic('arrow-drop-down')}</a><div class="gnb-dd">${n.items.map(([go,en,ko])=>`<a data-go="${go}">${T(en,ko)}</a>`).join('')}</div></div>`).join('');
- const right=authed?`<button class="icon-btn" data-go="${o.bellGo||'cmn.header:unread'}" title="Notifications">${shIc('cmn-ic-bell.svg')}</button><button class="icon-btn" data-go="my.main" title="My">${shIc('cmn-ic-account.svg')}</button>`
+ const right=authed?`<button class="icon-btn" data-go="${o.bellGo||'cmn.header:unread'}" title="Notifications">${shIc('cmn-ic-bell.svg')}${window.NOTIFY?NOTIFY.dot('pc'):''}</button><button class="icon-btn" data-go="my.main" title="My">${shIc('cmn-ic-account.svg')}</button>`
   :`${C.btn(T('Login','로그인'),{v:'outlined',go:'auth.login'})}${C.btn(T('Sign Up','회원가입'),{go:'auth.signup'})}`;
  return `<header class="gnb"><div class="row g24"><img src="${A('logo.svg')}" style="width:142px;height:16px;cursor:pointer" data-go="${authed?'home.main':'landing.main'}" alt="TetherMax"><nav class="nav">${nav}</nav></div><div class="right">${right}<button class="icon-btn">${ic('light-mode')}</button><button class="icon-btn" data-lang>${ic('language')}</button></div></header>`}
 // 푸터 — PC FooterA 28967:127334 · 모바일 Footer/mWeb 29062:118042 · 게스트 모바일 Company 3행 = Claim Cashback(29072:1797)
@@ -79,7 +79,7 @@ function footer(){
 // title/back이 있으면 그 아래 제목 행 29102:120517(← + h6)을 붙인다 — 기존 mWeb 하위 화면 구조
 function moTop(title,back){
  const authed=S.auth!=='guest';
- const right=authed?`<div class="row" style="gap:6px"><button class="icon-btn mt-ib" data-go="my.main">${shIc('cmn-ic-account-f.svg')}</button><button class="icon-btn mt-ib" data-go="cmn.drawer:member">${shIc('cmn-ic-menu-f.svg')}</button></div>`
+ const right=authed?`<div class="row" style="gap:6px"><button class="icon-btn mt-ib" data-notify-bell title="Notifications">${shIc('cmn-ic-bell.svg')}${window.NOTIFY?NOTIFY.dot('mo'):''}</button><button class="icon-btn mt-ib" data-go="my.main">${shIc('cmn-ic-account-f.svg')}</button><button class="icon-btn mt-ib" data-go="cmn.drawer:member">${shIc('cmn-ic-menu-f.svg')}</button></div>`
   :`<button class="icon-btn" data-go="cmn.drawer:normal">${shIc('cmn-ic-menu.svg')}</button>`;
  const bar=`<div class="mo-top"><img src="${A('logo.svg')}" style="width:142px;height:16px;cursor:pointer" data-go="${authed?'home.main':'landing.main'}" alt="TetherMax">${right}</div>`;
  const tt=title?`<div class="mo-title">${back?`<button class="icon-btn" data-go="${back}">${shIc('cmn-ic-back.svg')}</button>`:''}<span>${title}</span></div>`:'';
@@ -140,7 +140,7 @@ function render(){
  if(mt)EM.mount(fr,mt);
  else{const k=EM?EM.stash():null;fr.innerHTML=renderInner(sc.id+':'+state.id);if(k)EM.unstash(k)}
  const h=`#${sc.id}/${state.id}`;if(location.hash!==h)history.replaceState(null,'',h);
- document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;if(AUTH_ONLY_GUEST.includes(S.screen)&&S.auth!=='guest'){S.auth='guest';save()}else if((AUTH_ONLY_MEMBER.includes(S.screen)||/^(link|own)\./.test(S.screen))&&S.auth==='guest'){S.auth='s4';save()}render()};   // 상태를 직접 고르면 로그인 상태를 그 화면에 맞춤
+ document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;syncStateAuth();if(AUTH_ONLY_GUEST.includes(S.screen)&&S.auth!=='guest'){S.auth='guest';save()}else if((AUTH_ONLY_MEMBER.includes(S.screen)||/^(link|own)\./.test(S.screen))&&S.auth==='guest'){S.auth='s4';save()}render()};   // 상태를 직접 고르면 로그인 상태를 그 화면에 맞춤
  document.getElementById('pt-design').onchange=e=>{S.design=e.target.checked;save();render()};
  document.querySelectorAll('[data-vp]').forEach(x=>x.onclick=()=>{S.vp=x.dataset.vp;save();render()});
  document.querySelectorAll('[data-lg]').forEach(x=>x.onclick=()=>{S.lang=x.dataset.lg;save();render()});
@@ -215,6 +215,8 @@ document.addEventListener('click',e=>{
  const g=e.target.closest('[data-go]');if(g&&window.PT_EMBED&&PT_EMBED.on()&&PT_EMBED.owns(g)){e.preventDefault();if(g.dataset.go)PT_EMBED.go(g.dataset.go);return}if(g&&g.dataset.go!==undefined){e.preventDefault();if(g.dataset.after)S.after=g.dataset.after;if(g.dataset.go)go(g.dataset.go);else if(S.screen){const sc=R.byId[S.screen];if(sc.closeTo)go(sc.closeTo)}return}
  if(e.target.closest('[data-lang]')){S.lang=S.lang==='en'?'ko':'en';save();render()}});
 // 주소(#)로 직접 연 화면도 지금 로그인 상태로 볼 수 없으면 실제로 보게 되는 화면으로(결정 12차 — 게스트 전용 랜딩을 회원 상태로 그리지 않음)
-function fixAuthView(){const id=S.screen,st=S.state;if(!id)return;const to=(AUTH_ONLY_GUEST.includes(id)&&S.auth!=='guest')||((AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id))&&S.auth==='guest')?authTarget(id,st,S.auth):null;if(to){if(to[0]==='auth.login')S.after=id+(st?':'+st:'');S.screen=to[0];S.state=to[1]}}
+function syncStateAuth(){const m=AUTH_STATE[S.screen];if(!m||!S.state)return;const ks=Object.keys(m).filter(k=>m[k]===S.state);if(ks.length&&!ks.includes(S.auth)){S.auth=ks[ks.length-1];save()}}
+window.syncStateAuth=syncStateAuth;
+function fixAuthView(){syncStateAuth();const id=S.screen,st=S.state;if(!id)return;const to=(AUTH_ONLY_GUEST.includes(id)&&S.auth!=='guest')||((AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id))&&S.auth==='guest')?authTarget(id,st,S.auth):null;if(to){if(to[0]==='auth.login')S.after=id+(st?':'+st:'');S.screen=to[0];S.state=to[1]}}
 window.addEventListener('hashchange',()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]&&(m[0]!==S.screen||m[1]!==S.state)){S.screen=m[0];S.state=m[1]||null;fixAuthView();render()}});
 window.PT_START=()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]){S.screen=m[0];S.state=m[1]||null}fixAuthView();render()};

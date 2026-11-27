@@ -22,3 +22,6 @@
 .m-rv[data-m-reveal="x"]{transform:translateX(var(--m-reveal-shift))}
 [data-tp-cta]{opacity:0;pointer-events:none;transition:opacity var(--m-std,.3s) var(--e-out,ease-out)}
 [data-tp-cta].on{opacity:1;pointer-events:auto}
+[data-ev-list][hidden],[data-more-row][hidden],[data-mb-sched-body][hidden]{display:none!important}
+/* 축약 지갑 주소 전체 툴팁 — Figma 8538:123923(꼬리 없는 변형): #616161 90% · 모서리 4 · 4/8 · Medium 12 · 140% · 가운데 · 폭 200 */
+.ui-tip[data-addr-tip]{width:200px;max-width:200px;box-sizing:border-box;background:rgba(97,97,97,.9);border-radius:4px;padding:4px 8px;font-size:12px;font-weight:500;line-height:1.4;text-align:center;color:#fff;white-space:normal;word-break:break-all}

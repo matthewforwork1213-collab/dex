@@ -3,7 +3,7 @@
 
   python -I tools/figma-fetch.py              # REST: 환경 변수 FIGMA_TOKEN 필요. 프로토타입이 참조하는 모든 노드를 받음
   python -I tools/figma-fetch.py --ids        # 노드 id 목록만 출력(Figma MCP use_figma 경로용) → tools/out/figma-ids.json
-  python -I tools/figma-fetch.py --merge F    # tools/figma-text-dump.js 결과(JSON)를 캐시에 합침
+  python -I tools/figma-fetch.py --merge F    # tools/figma-text-dump.js 결과(압축 줄 모음 또는 JSON)를 캐시에 합침 → figma_text.json(+ figma_geom.json)
 
 캐시 형식: {"fetched": ISO, "source": "rest|use_figma", "nodes": {"<id>": {"name","w","h","hidden","texts":[{"t","kind"}]}}}
 토큰은 파일에 저장하지 않는다.
@@ -17,6 +17,40 @@ CACHE = ROOT / 'ref' / 'figma_text.json'
 FILE_KEY = 'hsa3bSV9QmFTe2jsf6tzTm'
 KIND = [('button', re.compile(r'button|variant=|^cta', re.I)), ('chip', re.compile(r'chip', re.I)),
         ('tab', re.compile(r'\btabs?\b|<tab', re.I)), ('input', re.compile(r'textfield|input|select|toggle|autocomplete|search', re.I))]
+
+
+_LZK = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+
+def unlz(s):
+    """figma-text-dump.js의 LZ(base64) 압축 풀기 (lz-string compressToBase64 형식)"""
+    vals = [_LZK.index(ch) for ch in s]
+    st = {'pos': 0, 'val': vals[0] if vals else 0, 'idx': 1}
+
+    def rb(n):
+        r, p = 0, 1
+        for _ in range(n):
+            bit = (st['val'] >> (5 - st['pos'])) & 1
+            st['pos'] += 1
+            if st['pos'] == 6:
+                st['pos'] = 0; st['val'] = vals[st['idx']] if st['idx'] < len(vals) else 0; st['idx'] += 1
+            if bit: r |= p
+            p <<= 1
+        return r
+    d = {0: 0, 1: 1, 2: 2}; enl, dsz, nb = 4, 4, 3
+    nx = rb(2)
+    if nx == 2: return ''
+    c = chr(rb(8 if nx == 0 else 16)); d[3] = c; w = c; res = [c]
+    while True:
+        cc = rb(nb)
+        if cc in (0, 1):
+            d[dsz] = chr(rb(8 if cc == 0 else 16)); cc = dsz; dsz += 1; enl -= 1
+        elif cc == 2:
+            return ''.join(res)
+        if enl == 0: enl = 2 ** nb; nb += 1
+        e = d[cc] if cc in d else (w + w[0])
+        res.append(e); d[dsz] = w + e[0]; dsz += 1; enl -= 1; w = e
+        if enl == 0: enl = 2 ** nb; nb += 1
 
 
 def kind_of(names):
@@ -99,12 +133,36 @@ if __name__ == '__main__':
         json.dump(ids, io.open(TOOLS / 'out' / 'figma-ids.json', 'w', encoding='utf-8'))
         print(len(ids), '개 →', TOOLS / 'out' / 'figma-ids.json')
     elif a and a[0] == '--merge':
-        src = json.load(io.open(a[1], encoding='utf-8'))
-        if isinstance(src, str): src = json.loads(src)
+        raw = io.open(a[1], encoding='utf-8').read().strip()
         c = load_cache(); n = 0
-        for nid, v in src.get('nodes', {}).items():
-            if v and not v.get('missing'): c['nodes'][nid] = v; n += 1
+        if raw.startswith('{"s"') or '\n{"s"' in raw:
+            # figma-text-dump.js 압축 결과(한 줄에 하나) → 문구 캐시 + 좌표 캐시
+            gpath = ROOT / 'ref' / 'figma_geom.json'
+            geom = json.load(io.open(gpath, encoding='utf-8')) if gpath.exists() else {'nodes': {}}
+            kmap = {'b': 'button', 'c': 'chip', 't': 'tab', 'i': 'input', '': 'text'}
+            for ln in raw.splitlines():
+                ln = ln.strip()
+                if not ln.startswith('{'): continue
+                d = json.loads(ln)
+                recs = json.loads(unlz(d['z']).encode('utf-16-le', 'surrogatepass').decode('utf-16-le'))
+                for r in recs:
+                    if r[0] == '__shell' or r[1] != 1: continue
+                    nid, _, name, w, h, hid, ov, X, E = r
+                    texts, gt = [], []
+                    for x in X:
+                        t, k, rect = (x, '', None) if isinstance(x, str) else (x[0], x[1] if len(x) > 1 else '', x[2:6] if len(x) >= 6 else None)
+                        texts.append({'t': t, 'kind': kmap.get(k, 'text')})
+                        if rect: gt.append([t, kmap.get(k, 'text')] + rect)
+                    c['nodes'][nid] = {'name': name, 'w': w, 'h': h, 'hidden': bool(hid), 'overlay': bool(ov), 'texts': texts}; n += 1
+                    if isinstance(E, list): geom['nodes'][nid] = {'name': name, 'w': w, 'h': h, 'texts': gt, 'els': E}
+            geom['fetched'] = datetime.datetime.now().isoformat(timespec='minutes')
+            json.dump(geom, io.open(gpath, 'w', encoding='utf-8'), ensure_ascii=False)
+        else:
+            src = json.loads(raw)
+            if isinstance(src, str): src = json.loads(src)
+            for nid, v in src.get('nodes', {}).items():
+                if v and not v.get('missing'): c['nodes'][nid] = v; n += 1
         print('합침', n)
-        save_cache(c, src.get('source', 'use_figma'))
+        save_cache(c, 'use_figma')
     else:
         fetch_rest(referenced_ids())

@@ -172,8 +172,6 @@
     var lrow = PT.key === 'en' && PT.auth === 'member' && t.closest('[class*="__LinkedUidRow"]');
     var ban = PT.key === 'en' && PT.auth === 'member' && t.closest('[data-dex-ban]');
     if (ban) { e.preventDefault(); e.stopPropagation(); return rowBannerClick(ban.getAttribute('data-dex-ban')) }
-    var addr = lrow && t.closest('[class*="__LinkedUidNumber"]');
-    if (addr && /^Wallet /.test(addr.textContent)) { e.preventDefault(); e.stopPropagation(); return addrPop(addr, lrow.getAttribute('data-dex-row')) }
     if (lrow) { e.preventDefault(); e.stopPropagation(); return dexRowOpen(lrow) }
     var nm = t.closest('[class*="__NavMenu"]');   // GNB 드롭다운(Cashback · Rewards Hub · Discover) — 모든 페이지·회원/게스트에서 펼침/접힘
     if (nm && navToggle(nm)) { e.preventDefault(); e.stopPropagation(); return }
@@ -239,9 +237,22 @@
     if (PT.stateSig) settleOpen(document);
     post({ loaded: PT.snap, title: document.title });
     scrollFree();
-    dexInject({}); dexMenu(); dexCopy(); dexPartners();
+    dexInject({}); dexMenu(); dexCopy(); dexPartners(); notifyInit();
     exCalcInit(); stepsInit();
   });
+  // 알림 목록(회원 헤더 벨 · 모바일 NotiBell) — 화면 목록판과 같은 모듈(_프로토타입_전체/src/135-notify.js)을 그대로 불러 쓴다(05.리포트/알림목록_정의.md)
+  // 수집본의 벨은 수집 때 연 패널(실서비스 마케팅 푸시 목록)을 띄웠다 → 정의한 패널로 바꾼다. DEX 알림은 연동 계정(dex-state.js)에서 만든다
+  function notifyInit() {
+    if (PT.auth !== 'member' || !document.querySelector('[class*="__AlarmButton"],[class*="__NotiBell"]')) return;
+    var load = function (src, f) { var s = document.createElement('script'); s.src = src; s.onload = f; document.head.appendChild(s) };
+    var go = function (g, x) {
+      var Sx = window.DEXSTATE, st = Sx && Sx.load(), a = st && x && x.acc && st.accounts.filter(function (y) { return y.id === x.acc.id && y.ex === x.acc.ex })[0];
+      if (g === 'wallet' && a && (a.st === 'ok' || a.st === 'zero')) { st.view = { ex: a.ex, type: a.type, id: a.id, a: a.a || 0, b: a.b || null, st: a.st }; st.viewLogo = null; Sx.save(st); return post({ nav: ORIGIN + '/en/account' }) }   // 지갑 상세(홈 행과 같은 경로)
+      post({ nav: ORIGIN + '/en' });
+    };
+    var start = function () { window.NOTIFY && NOTIFY.site({ accounts: function () { return window.DEXSTATE ? DEXSTATE.load().accounts : [] }, go: go }) };
+    load('../../_프로토타입_전체/src/135-notify.js', function () { if (window.DEXSTATE) start(); else load('../dex/dex-state.js', start) });
+  }
   // 보완표(pt-acts.js): 같은 요소의 다른 뷰포트 수집 결과 · 전 페이지에서 같은 라벨의 이동 대상
   (function () { var s = document.createElement('script'); s.src = '../pt-acts.js'; document.head.appendChild(s) })();
 
@@ -834,14 +845,16 @@
     if (a.st === 'unlinked') return dex ? centerPopup('Verify Ownership to Reclaim This Wallet', 'This wallet address was unlinked after another user verified ownership. If it belongs to you, submit a new claim.', [['Submit Wallet Ownership', 'reclaim'], ['Remove Wallet', 'remove']])
       : centerPopup('Verify Ownership to Reclaim This UID', 'This UID was unlinked after another user verified ownership. If it belongs to you, submit a new claim.', [['Submit UID Ownership', 'reclaim'], ['Remove UID', 'remove']]);   // O15(REQ-729)
   }
-  function addrPop(el, id) {
-    var old = document.getElementById('pt-addr'); if (old) { old.remove(); if (old.getAttribute('data-id') === id) return }
-    var p = document.createElement('div'); p.id = 'pt-addr'; p.setAttribute('data-id', id); var r = el.getBoundingClientRect();
-    p.style.cssText = 'position:fixed;z-index:2147483000;left:' + Math.max(8, r.left) + 'px;top:' + (r.bottom + 6) + 'px;max-width:320px;background:#fff;border-radius:4px;box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);padding:8px 12px;font:12px/1.5 inherit;word-break:break-all;display:flex;gap:8px;align-items:flex-start';
-    p.innerHTML = '<span>' + id + '</span><button type="button" style="border:0;background:none;color:#0031c6;cursor:pointer;font:inherit;font-weight:600;flex:none">Copy</button>';
-    p.querySelector('button').onclick = function (ev) { ev.stopPropagation(); try { navigator.clipboard.writeText(id) } catch (x) { } p.remove(); toast('Copied.') };
-    document.body.appendChild(p); setTimeout(function () { document.addEventListener('click', function h() { p.remove(); document.removeEventListener('click', h, true) }, true) }, 0);
+  // 축약 지갑 주소 → 전체 주소 툴팁(어두운 MUI Tooltip 모양 — 화면 목록판 .ui-tip과 같은 값). 모바일 탭 · PC 호버, 바깥 탭·마우스 이탈로 닫힘(결정 2026-11-27)
+  function addrPop(el, id, toggle) {
+    var old = document.getElementById('pt-addr'); if (old) { old.remove(); if (toggle && old.getAttribute('data-id') === id) return }
+    var p = document.createElement('div'); p.id = 'pt-addr'; p.setAttribute('data-id', id); p.setAttribute('role', 'tooltip'); var r = el.getBoundingClientRect();
+    p.style.cssText = 'position:fixed;z-index:2147483000;width:200px;box-sizing:border-box;background:rgba(97,97,97,.9);color:#fff;font:500 12px/1.4 inherit;text-align:center;padding:4px 8px;border-radius:4px;word-break:break-all;pointer-events:none';
+    p.textContent = id; document.body.appendChild(p);
+    p.style.left = Math.max(8, Math.min(r.left + r.width / 2 - p.offsetWidth / 2, innerWidth - p.offsetWidth - 8)) + 'px'; p.style.top = (r.bottom + 6) + 'px';
+    if (toggle) setTimeout(function () { document.addEventListener('click', function h() { p.remove(); document.removeEventListener('click', h, true) }, true) }, 0);
   }
+
   function rowIssue(a) { popAcc = a; centerPopup(a.type === 'DEX' ? 'There is a problem with this wallet.' : 'There is a problem with this UID.', 'Please contact our support team for assistance.', [['Contact Support', 'support']]) }   // Figma 29447:144506 · 144810 — 파란 버튼 1개 + 닫기 X
   // 테스트용 도움말(왼쪽 아래): 연동 계정 행 상태 바꿔 보기 · 소유권 심사 결과(승인/거절)
   function rowHelp(accs) {

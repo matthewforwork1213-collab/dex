@@ -171,15 +171,12 @@ R.screen({id:'ranking.main',group:'summary',title:'캐시백 랭킹',route:'/ben
   {id:'normal',label:'순위 매겨짐 (RK2)',figma:{pc:'28960:127207'},note:'V2.2 rk/RANK#normal(사이드 패널 부분) · 행에 금액 없음(REQ-383) · CEX는 UID, DEX는 Wallet 접두(Figma 메모)'},
   {id:'unranked',label:'순위 미집계 – (RK1)',figma:{pc:'28960:127201',mo:'29065:6980'},note:'Figma에만 있는 상태 — Figma 메모 「순위 미집계는 –로 표시」, REQ-383 순위 밖 `–`'},
   {id:'empty',label:'자격 계정 없음 (RK3)',figma:{pc:'28960:127213',mo:'29065:4998'},note:'V2.2 rk/RANK#empty · REQ-383'},
-  {id:'wallet',label:'지갑 주소 전체 보기',figma:{pc:'28984:126296'},note:'Figma `Wallet address` 행(3종 중 0x91c4…a07b) — 축약 지갑의 전체 주소 보기(REQ-366 원칙)'},
+  {id:'wallet',label:'지갑 주소 전체 보기 — 툴팁',figma:{pc:'28984:126296'},note:'축약 지갑 주소를 누르면(모바일) · 올리면(PC) 전체 주소 툴팁(어두운 툴팁 — 결정 2026-11-27, 대화상자 아님)'},
   {id:'board',label:'월간 순위 CEX+DEX 한 목록 (혜택 랭킹 카드)',figma:{pc:'26651:60616',mo:'25849:1340946'},note:'[기존 MAX-468] MAXOP-805 랭킹 카드. V2.2 rk/RANK#normal(순위표 부분)'},
   {id:'dex',label:'순위표 DEX 칩',note:'V2.2 rk/RANK#dex — 칩 필터 디자인 없음. 카드는 [기존 MAX-468] MAXOP-805 재사용'},
  ],
  render(st){
   if(st==='board'||st==='dex')return rkBoard(st);
-  if(st==='wallet'){
-   const dlg=`<div class="dialog" style="width:510px;padding:20px 20px 12px;text-align:left"><div class="h6" style="font-size:20px">Wallet address</div><div class="b1" style="word-break:break-all">${W_ASTER.replace('0x','0×')}</div><div class="row" style="justify-content:flex-end"><button class="btn text primary md" data-go="ranking.main:normal">Close</button></div></div>`;
-   return `<div style="position:relative;min-height:${mo()?812:900}px">${rkOverlay(rkPanel('normal'))}<div class="scrim center" style="z-index:30;align-items:center">${dlg}</div></div>`;
-  }
+  if(st==='wallet')return rkOverlay(rkPanel('normal'));
   return rkOverlay(rkPanel(st));
  }});

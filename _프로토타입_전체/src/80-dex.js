@@ -58,7 +58,7 @@ function ovHero(list){
   <div class="row" style="gap:16px">${C.btn('DEX Overview',{cls:mo()?'grow':''}).replace('<button','<button data-scroll-to="dex-venues"')}${outlinedP('Guide to DEX').replace('<button','<button data-scroll-to="dex-steps"')}</div></div>`;
  const risk=`<p class="cap c2" style="margin:0;max-width:720px">※ Decentralized trading carries risks, including smart contract vulnerabilities, slippage, MEV, and potential loss of funds. Please conduct your own research prior to trading onchain.</p>`;
  if(mo())return `<section style="background:linear-gradient(180deg,#eef2f8 0%,#e6edf8 70%,#fff 100%)"><div style="height:300px;background:url(${A('dex-ov-hero.jpg')}) 78% 30%/auto 420px no-repeat"></div><div class="col" style="gap:24px;padding:0 16px 40px">${copy}${risk}</div></section>`;
- return `<section style="position:relative;height:810px;background:#eef2f8 url(${A('dex-ov-hero.jpg')}) center/cover no-repeat"><div style="position:absolute;left:120px;top:150px">${copy}</div><div style="position:absolute;left:120px;bottom:20px">${risk}</div></section>`;
+ return `<section style="position:relative;height:810px;background:#eef2f8 url(${A('dex-ov-hero.jpg')}) center/cover no-repeat"><div style="position:absolute;left:max(120px, calc((100% - 1440px) / 2 + 120px));top:150px">${copy}</div><div style="position:absolute;left:max(120px, calc((100% - 1440px) / 2 + 120px));bottom:20px">${risk}</div></section>`;   // 넓은 화면: 1440 틀 가운데(실사이트 규칙)
 }
 function ovGlance(list,c){
  const card=(name,rate,mark)=>`<div style="flex:${mo()||c==='overflow'?'0 0 288px':'1 1 0'};min-width:0;background:#fff;border:1px solid var(--divider);border-radius:16px;padding:24px;display:flex;align-items:center;justify-content:space-between">

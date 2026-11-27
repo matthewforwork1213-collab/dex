@@ -60,7 +60,7 @@ const REAL = {
   'summary.main': '/en/rewardHistory', 'guest.search': '/en/search', 'coupon.box': '/en/coupon',
   'brokers.list': '/en/brokers'   // 허브 라우트 Brokers 행 → Brokers 페이지(정책 B-5 RT-2)
 };
-const CEX_SLUG = { bitget: 'bitget', okx: 'okx', bybit: 'bybit', binance: 'binance', mexc: 'mexc', gate: 'gate', deepcoin: 'deepcoin', bingx: 'bingx', lbank: 'lbank', zoomex: 'zoomex', bitunix: 'bitunix', blockfin: 'blofin', biofin: 'blofin', kucoin: 'kucoin', bitmex: 'bitmex', bvox: 'bvox' };
+const CEX_SLUG = { bitget: 'bitget', okx: 'okx', bybit: 'bybit', binance: 'binance', mexc: 'mexc', gate: 'gate', deepcoin: 'deepcoin', bingx: 'bingx', lbank: 'lbank', zoomex: 'zoomex', bitunix: 'bitunix', blockfin: 'blofin', biofin: 'blofin', kucoin: 'kucoin', bitmex: 'bitmex', bvox: 'bvox', woox: 'woo-x-pro', toobit: 'toobit', flipster: 'flipster', htx: 'htx' };
 const NEXT = { 'own.verify': '소유권 인증', 'home.wallet': '지갑 상세', 'home.timeline': '캐시백 타임라인', 'ranking.main': '캐시백 랭킹', 'partner.hub': '파트너 허브', 'maxboard.main': '맥스보드' };
 
 // ---------------- 경로 ----------------
@@ -199,7 +199,7 @@ window.siteCopy = copyText;
 // =====================================================================
 // 캐시백 허브 — 계산기 · 라우트 · 비교표 · 잔액 패널 (FU-045 ~ FU-048)
 // =====================================================================
-const H = { route: 'DEX', pid: { DEX: 'lighter', CEX: 'bybit', Brokers: 'rs' }, vol: { DEX: 100000, CEX: 100000, Brokers: 100000 }, view: 'table', q: '', sort: null, loading: false };
+const H = { route: 'DEX', pid: { DEX: 'lighter', CEX: 'bybit', Brokers: 'rs' }, vol: { DEX: 100000, CEX: 100000, Brokers: 200000 }, view: 'table', q: '', sort: null, loading: false };
 const RANGE = { DEX: [1000, 250000], CEX: [10000, 500000], Brokers: [10000, 20000000] };
 const STEP = { DEX: 1000, CEX: 5000, Brokers: 10000 };
 window.SITEH = {
@@ -249,7 +249,7 @@ function bindRight() {
   // 월 거래량 값 = 표시 전용(슬라이더로만 조정 — 🔴 #26 권장 A)
   // 거래량 슬라이더 — 공통 UI.slider(손잡이 SVG 30px 안의 원 중심 = (15,14))
   const sl = $('[data-hub-slider]', box);
-  if (sl && sl.dataset.hubSlider !== 'Brokers') {
+  if (sl) {   // CEX · DEX · Brokers 세 탭 모두(사용자 확인 2026-11-27)
     const r = H.route, [a, b] = RANGE[r];
     UI.slider(sl, {
       value: H.vol[r], min: a, max: b, step: STEP[r], label: 'Monthly trading volume', inset: 15, halo: { x: 15, y: 14, size: 20 },

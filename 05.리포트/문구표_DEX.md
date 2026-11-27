@@ -8,9 +8,9 @@
 
 | 구분 | 행 수 | 설명 |
 |---|---|---|
-| 총 행 | **96** | 같은 뜻의 빈칸은 한 행으로 묶음 |
-| 언어팩 재사용 | **8** | 키의 국문·영문을 그대로 씀(`페이백`→`캐시백` 치환만 허용) |
-| 기존 문구 재사용 | **12** | STG · 기존 Figma · 이메일 템플릿 · 확정 정책 원문 · 기존 홈 행 배너·모달(DEX 행은 `UID`→`wallet` ✏️) |
+| 총 행 | **99** | 같은 뜻의 빈칸은 한 행으로 묶음 |
+| 언어팩 재사용 | **10** | 키의 국문·영문을 그대로 씀(`페이백`→`캐시백` 치환만 허용) |
+| 기존 문구 재사용 | **13** | STG · 기존 Figma · 이메일 템플릿 · 확정 정책 원문 · 기존 홈 행 배너·모달(DEX 행은 `UID`→`wallet` ✏️) |
 | 신규 작성 | **62** | 언어팩 키를 UID→Account 등으로 고친 것(출처 칸에 바탕 키 표기)과, 영문은 정책 원문이 있고 국문만 새로 쓴 것(G-367 등) 포함 |
 | 표시 없음(결정) | **9** | 사용자 결정으로 문구·상태를 두지 않음 |
 | 운영 입력값 | **3** | 어드민·레코드가 채우는 값 — 문구표 대상 아님(프로토타입은 표본) |
@@ -127,6 +127,9 @@
 | 100 | 맥스보드 · 자격 없음(참여 계정이 끊긴 뒤) | 본문 | You have no eligible {exchange} account. Link a new account to participate again. | 참여할 수 있는 {거래소} 거래 계정이 없어요. 새 거래 계정을 연동하면 다시 참여할 수 있어요. | EN 원본 `[EN draft]`의 UID → account · KO 정책 D-1-6 원문 | G-323 · REQ-655 · 결정 11차 |
 | 101 | 혜택 상세(맥스보드) · 리워드 영역 | 안내 | Board rewards are paid together with your exchange cashback, so they can't be withdrawn on their own. | 보드 리워드는 거래소 캐시백과 함께 지급돼요. 리워드만 따로 출금할 수는 없어요. | 신규 | G-324 · REQ-645 · 결정 11차 |
 | 102 | Cashback Basics · 소제목 | 소제목 | Claim cashback and rewards | 국문 언어팩 확인 | 기존 아티클 소제목 `Withdraw cashback and rewards`의 동작어를 Claim으로(요청·동작 = Claim) | REQ-714 · 정책 8-24 S-10 · 결정 11차 |
+| 103 | 알림 패널(PC) · 알림 페이지 `/alarm`(모바일) | 제목 | Notifications | 알림 | 언어팩 `alarm title` | REQ-464 · 알림목록_정의 1장 |
+| 104 | 알림 패널 · 알림 0건 / 목록 조회 실패 | 빈 상태 제목 · 설명 | No Notifications · Youre all caught up. Well notify you when there`s an update. | 알림 없음 · 모든 소식을 확인하셨습니다. 업데이트가 있으면 알려드릴게요. | 언어팩 `no Notifications` · `no Notifications desc` (영문 원문 그대로 — 오기 수정 여부 알림목록_정의 N-4) | REQ-464 · REQ-471 |
+| 105 | 알림 패널 · 기존 알림 항목(CEX) | 제목 · 본문 | `💡 UID linking failed` / `{exchange} {UID} linking failed. Please try again.` · `🎉 New Event Registered!` / `New {exchange} event you might like has just been added.` · `💡 Withdrawal completed` / `{exchange} {UID} — {amount} USDT has been withdrawn as requested.` · `💡 Withdrawal failed` / `{exchange} {UID} — withdrawal of {amount} USDT failed.` · `⚡ New exchange listed` / `👏👏 {exchange} has just been added to TetherMax.` | 국문 언어팩 확인 | 기존 서비스 문구(dev 실측 · 실서비스 수집본 2026-11-26~27) | REQ-464 · 알림목록_정의 3-1 |
 
 ## 4. 표시 없음(결정) · 운영 입력값 · 값 미정
 

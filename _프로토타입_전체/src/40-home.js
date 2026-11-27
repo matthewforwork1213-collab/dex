@@ -88,12 +88,12 @@ function balanceCard(o={}){
  return `<div style="background:#fff;border-radius:8px;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;overflow:hidden;min-height:72px;display:flex;align-items:center;gap:8px;padding:${o.sub?'12px':'0'} 0 ${o.sub?'12px':'0'} 58px">
   <img src="${HA('tokens.png')}" style="position:absolute;left:-48px;top:-11px;width:106px;height:106px;object-fit:cover" alt="">
   <div class="grow" style="min-width:0"><div class="b1 semi">${o.raw||amt+' USDT'}</div><div style="font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">Total Cashback Balance</div>${o.sub||''}</div>
-  <button class="btn contained md" disabled style="margin-right:${S.vp==='mo'?12:0}px;padding:8px 24px">Auto Claim</button></div>`}
+  <button class="btn contained md" disabled style="margin-right:0;padding:8px 24px">Auto Claim</button></div>`}
 
 // 행: 로고 · 이름 · (상태 점 + 식별자) · 칩 · 금액. 웹은 `Wallet` 라벨, 앱·모바일웹은 주소만(REQ-271)
 function accRow(a,o={}){
  const st=ST[a.st||'ok'];const cex=isCex(a.ex);const app=o.app;
- const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:`<span data-addr="${esc(a.id)}" role="button" tabindex="0" style="cursor:pointer;text-decoration:underline dotted">${short(a.id)}</span>`}`;
+ const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:short(a.id)}`;
  const amt=a.amt==null?'-':a.amt;
  const amtHtml=amt==='-'?`<span class="b1 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi">${n2(amt)}</span><span class="b2 c2">USDT</span></span>`;
  const go=a.st==='issue'?` data-go="home.main:${cex?'issue':'issueWallet'}" style="cursor:pointer;`:a.st==='unlinked'?` data-go="${cex?'own.home:reclaimUid':'own.home:reclaim'}" style="cursor:pointer;`:cex||a.st!=='ok'&&a.st!=null?'':` data-go="home.wallet:normal" style="cursor:pointer;`;
@@ -110,7 +110,7 @@ function linkedCard(rows,o={}){
   :rows.map((a,i)=>o.max&&i>=o.max?`<div data-more-row hidden>${accRow(a,{app,full:o.full})}</div>`:accRow(a,{app,full:o.full})).join('');
  const more=o.max&&rows.length>o.max?`<button class="btn text black sm full" data-more>${T('Show More','더보기')}</button>`:'';
  const line=`<hr class="divider" style="margin:0">`;
- const cum=o.cum===false||o.loading||S.vp==='mo'?'':`${line}${cumulative(rows)}`;
+ const cum='';   // 누적 캐시백 블록(MAXOP-731) 없음 — 결정 2026-11-27
  return `<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:12px">
   <div class="row between"><span class="b1 semi">Linked Accounts</span><button class="btn text primary sm" style="padding:4px 5px" data-go="home.main:seeAll">See All</button></div>
   ${o.top||''}<div class="col" style="gap:12px">${list}</div>${more}
@@ -410,7 +410,7 @@ R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wa
  render(st,ctx){
   const [A0,B0]=ctx.state.ab;const pending=st==='pending';
   const head=`<div style="background:#fff;border-radius:8px;padding:12px 16px" class="row between">
-   <div class="row" style="gap:8px">${C.dex('Lighter',30)}<div class="col" style="gap:0"><span class="b2 semi">Lighter</span><span class="row" style="gap:4px"><span style="font-size:12px;line-height:12px;color:var(--text-secondary)">${short(WAL.lighter)}</span><button class="icon-btn" style="padding:2px">${hic('copy',16)}</button></span></div></div>
+   <div class="row" style="gap:8px">${C.dex('Lighter',30)}<div class="col" style="gap:0"><span class="b2 semi">Lighter</span><span class="row" style="gap:4px"><span data-addr="${WAL.lighter}" style="font-size:12px;line-height:12px;color:var(--text-secondary)">${short(WAL.lighter)}</span><button class="icon-btn" style="padding:2px">${hic('copy',16)}</button></span></div></div>
    ${pending?hChip('연동 시도중이에요','prog'):hChip(T('Active','연동 완료'),'done')}</div>`;
   const left=`${head}${walletBalance(A0,B0,{loading:st==='loading',error:st==='error',pending,totalClaimed:st==='totalClaimed'})}${earningTimeline()}
    ${st==='totalClaimed'?C.note('Total Claimed = 테더맥스를 통해 지급된 누계(G-053). 디자인 없음 — 잔액 카드 작은 행으로 둠'):''}
@@ -423,7 +423,7 @@ R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wa
  }});
 
 // ---------- 캐시백 타임라인 · 누적 캐시백 (FU-041) — 디자인 없음, V2.2 내용 ----------
-R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 · 누적 캐시백 (섹션)',route:'/ (홈 · 지갑 상세 안 섹션)',fu:['FU-041'],shell:{accent:true,moNav:'home'},
+R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 (섹션)',route:'/ (홈 · 지갑 상세 안 섹션)',fu:['FU-041'],shell:{accent:true,moNav:'home'},
  states:[
   {id:'normal',label:'EdgeX Daily D+1',figma:{pc:'26047:56579',mo:'26047:56579'},note:'기존 Earning Timeline 3단계(Start Trading · Cut-off Time · Updated), 캐러셀 없음 — 결정 N16·N17·N19 · REQ-282 · 289. 홈·지갑 상세 안의 섹션(별도 화면 아님 · 뒤로 없음)'},
   {id:'apex',label:'ApeX D+2',note:'같은 3단계 — 날짜만 주기대로'},
@@ -435,7 +435,7 @@ R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 · 누�
   const tl=earningTimeline(ex[0],ex[1])+(st==='warning'?C.alert('warn','','거래소별로 순차 지급하고 있어서 몇 분 더 걸릴 수 있어요.'):'');
   const cum=`<div style="background:#fff;border-radius:8px;padding:16px">${cumulative([R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'}])}</div>`;
   const w=S.vp==='mo'?'100%':'343px';
-  return `<div style="padding:${S.vp==='mo'?'16px':'40px 0 80px'};display:flex;justify-content:center"><div class="col g16" style="width:${w}">${tl}${cum}</div></div>`;
+  return `<div style="padding:${S.vp==='mo'?'16px':'40px 0 80px'};display:flex;justify-content:center"><div class="col g16" style="width:${w}">${tl}</div></div>`;
  }});
 
 // ---------- 선차감 · 복원 반영 위치 (FU-034 · 035) ----------
