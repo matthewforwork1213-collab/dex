@@ -1,0 +1,3703 @@
+{
+ "generated": "2026-11-27T22:17",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "normal",
+   "label": "게스트 · DEX 탭 계산기 (H1)",
+   "vp": "pc",
+   "node": "28960:126884",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H1 Guest, DEX route (S1) / Light (main)",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 49,
+   "nP": 50,
+   "matched": 49,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3423,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 70,
+    "cards": 9,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "normal",
+   "label": "게스트 · DEX 탭 계산기 (H1)",
+   "vp": "mo",
+   "node": "29515:137400",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H1 Guest, DEX route (S1) / Light (main)",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 51,
+   "nP": 52,
+   "matched": 51,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 77,
+    "cards": 10,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "cex",
+   "label": "게스트 · CEX 탭 (H1-CEX, Bybit $100,000)",
+   "vp": "pc",
+   "node": "28960:126944",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H1-CEX Guest, calculator on Exchanges (S1) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 51,
+   "nP": 52,
+   "matched": 51,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4278,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "cex",
+   "label": "게스트 · CEX 탭 (H1-CEX, Bybit $100,000)",
+   "vp": "mo",
+   "node": "29515:144850",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H1-CEX Guest, calculator on Exchanges (S1) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 53,
+   "nP": 54,
+   "matched": 53,
+   "missing": [],
+   "added": [
+    {
+     "t": "Up to 50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 122,
+    "cards": 22,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "brokers",
+   "label": "게스트 · Brokers 칩 비교표 (H1-Broker)",
+   "vp": "pc",
+   "node": "28960:126950",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H1-Broker Guest, calculator on Brokers (S1) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 54,
+   "nP": 55,
+   "matched": 54,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3271,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "brokers",
+   "label": "게스트 · Brokers 칩 비교표 (H1-Broker)",
+   "vp": "mo",
+   "node": "29515:146538",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H1-Broker Guest, calculator on Brokers (S1) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 59,
+   "nP": 57,
+   "matched": 56,
+   "missing": [
+    {
+     "t": "Never connect a wallet",
+     "kind": "text"
+    },
+    {
+     "t": "1 lot",
+     "kind": "text"
+    }
+   ],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [
+    {
+     "figma": "Monthly lots traded",
+     "proto": "Monthly trading volume",
+     "ratio": 0.63,
+     "kind": "input"
+    }
+   ],
+   "excepted": [],
+   "geom": {
+    "issues": [
+     {
+      "type": "카드 높이",
+      "label": "cashback estimate",
+      "figma": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "proto": [
+       16,
+       480,
+       343,
+       822
+      ],
+      "d": -4,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "trading fees",
+      "figma": [
+       36,
+       979,
+       251,
+       24
+      ],
+      "proto": [
+       36,
+       905,
+       92,
+       19
+      ],
+      "d": -3,
+      "fv": 437,
+      "pv": 434,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "rs finance commission, $# / lot",
+      "figma": [
+       36,
+       1005,
+       251,
+       20
+      ],
+      "proto": [
+       36,
+       931,
+       199,
+       14
+      ],
+      "d": -3,
+      "fv": 461,
+      "pv": 458,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "cashback, $# / lot",
+      "figma": [
+       36,
+       1045,
+       238,
+       24
+      ],
+      "proto": [
+       36,
+       971,
+       162,
+       19
+      ],
+      "d": -3,
+      "fv": 503,
+      "pv": 500,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "paid to your % balance",
+      "figma": [
+       36,
+       1071,
+       238,
+       23
+      ],
+      "proto": [
+       36,
+       997,
+       208,
+       16
+      ],
+      "d": -3,
+      "fv": 528,
+      "pv": 525,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "trading cost after cashback",
+      "figma": [
+       36,
+       1134,
+       254,
+       24
+      ],
+      "proto": [
+       36,
+       1058,
+       210,
+       19
+      ],
+      "d": -4,
+      "fv": 592,
+      "pv": 588,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "estimated monthly cashback",
+      "figma": [
+       36,
+       1178,
+       222,
+       24
+      ],
+      "proto": [
+       36,
+       1102,
+       222,
+       19
+      ],
+      "d": -4,
+      "fv": 636,
+      "pv": 632,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "per day $#",
+      "figma": [
+       36,
+       1268,
+       89,
+       20
+      ],
+      "proto": [
+       36,
+       1192,
+       91,
+       16
+      ],
+      "d": -4,
+      "fv": 724,
+      "pv": 720,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "per year $#",
+      "figma": [
+       141,
+       1268,
+       114,
+       20
+      ],
+      "proto": [
+       143,
+       1192,
+       108,
+       16
+      ],
+      "d": -4,
+      "fv": 724,
+      "pv": 720,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "$# / lot",
+      "figma": [
+       266,
+       2975,
+       77,
+       20
+      ],
+      "proto": [
+       33,
+       2921,
+       78,
+       16
+      ],
+      "d": -233,
+      "fv": 250,
+      "pv": 17,
+      "card": [
+       16,
+       2866,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       2789,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "$# / lot",
+      "figma": [
+       266,
+       2975,
+       77,
+       20
+      ],
+      "proto": [
+       33,
+       2921,
+       78,
+       16
+      ],
+      "d": 21,
+      "fv": 119,
+      "pv": 140,
+      "card": [
+       16,
+       2866,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       2789,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "$# / lot",
+      "figma": [
+       275,
+       2995,
+       68,
+       20
+      ],
+      "proto": [
+       166,
+       2921,
+       69,
+       16
+      ],
+      "d": -109,
+      "fv": 259,
+      "pv": 150,
+      "card": [
+       16,
+       2866,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       2789,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "$# / lot",
+      "figma": [
+       276,
+       3200,
+       67,
+       20
+      ],
+      "proto": [
+       33,
+       3132,
+       120,
+       36
+      ],
+      "d": -243,
+      "fv": 260,
+      "pv": 17,
+      "card": [
+       16,
+       3091,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       3020,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "$# / lot",
+      "figma": [
+       276,
+       3200,
+       67,
+       20
+      ],
+      "proto": [
+       33,
+       3132,
+       120,
+       36
+      ],
+      "d": 11,
+      "fv": 119,
+      "pv": 130,
+      "card": [
+       16,
+       3091,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       3020,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "$# / lot",
+      "figma": [
+       276,
+       3220,
+       67,
+       20
+      ],
+      "proto": [
+       161,
+       3153,
+       68,
+       16
+      ],
+      "d": -115,
+      "fv": 260,
+      "pv": 145,
+      "card": [
+       16,
+       3091,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       3020,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "discounted commission",
+      "figma": [
+       32,
+       2995,
+       154,
+       20
+      ],
+      "proto": [
+       166,
+       2901,
+       153,
+       16
+      ],
+      "d": 134,
+      "fv": 16,
+      "pv": 150,
+      "card": [
+       16,
+       2866,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       2789,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "discounted commission",
+      "figma": [
+       32,
+       2995,
+       154,
+       20
+      ],
+      "proto": [
+       166,
+       2901,
+       153,
+       16
+      ],
+      "d": -19,
+      "fv": 139,
+      "pv": 120,
+      "card": [
+       16,
+       2866,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       2789,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "discounted commission",
+      "figma": [
+       32,
+       3220,
+       154,
+       20
+      ],
+      "proto": [
+       161,
+       3132,
+       153,
+       16
+      ],
+      "d": 129,
+      "fv": 16,
+      "pv": 145,
+      "card": [
+       16,
+       3091,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       3020,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "discounted commission",
+      "figma": [
+       32,
+       3220,
+       154,
+       20
+      ],
+      "proto": [
+       161,
+       3132,
+       153,
+       16
+      ],
+      "d": -19,
+      "fv": 139,
+      "pv": 120,
+      "card": [
+       16,
+       3091,
+       343,
+       213
+      ],
+      "pcard": [
+       16,
+       3020,
+       343,
+       215
+      ]
+     },
+     {
+      "type": "버튼 높이",
+      "label": "rs finance",
+      "figma": [
+       36,
+       742,
+       303,
+       54
+      ],
+      "proto": [
+       36,
+       669,
+       303,
+       50
+      ],
+      "d": -4
+     },
+     {
+      "type": "안쪽 위 여백",
+      "label": "learn more",
+      "figma": [
+       36,
+       1308,
+       303,
+       48
+      ],
+      "proto": [
+       36,
+       1230,
+       303,
+       48
+      ],
+      "d": -4,
+      "fv": 754,
+      "pv": 750,
+      "card": [
+       16,
+       554,
+       343,
+       826
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       822
+      ]
+     }
+    ],
+    "pairs": 73,
+    "cards": 8,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "member",
+   "label": "로그인 · 연동 0 — 이유 카드 없음 (H2)",
+   "vp": "pc",
+   "node": "28960:126890",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H2 Signed in, nothing linked (S3) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s3",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 39,
+   "nP": 41,
+   "matched": 39,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 2973,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 59,
+    "cards": 6,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "cashback estimate",
+      "figma": [
+       712,
+       136,
+       608,
+       774
+      ],
+      "proto": [
+       712,
+       142,
+       608,
+       820
+      ],
+      "d": 46,
+      "card": [
+       712,
+       136,
+       608,
+       774
+      ],
+      "pcard": [
+       712,
+       142,
+       608,
+       820
+      ],
+      "rule": "EX-A17"
+     }
+    ]
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "member",
+   "label": "로그인 · 연동 0 — 이유 카드 없음 (H2)",
+   "vp": "mo",
+   "node": "29515:138107",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H2 Signed in, nothing linked (S3) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s3",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 41,
+   "nP": 43,
+   "matched": 41,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 66,
+    "cards": 7,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "cashback estimate",
+      "figma": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "proto": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "d": 53,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "rule": "EX-A17"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "trading fees after cashback",
+      "figma": [
+       36,
+       1121,
+       250,
+       24
+      ],
+      "proto": [
+       36,
+       1058,
+       210,
+       19
+      ],
+      "d": -23,
+      "fv": 611,
+      "pv": 588,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "rule": "EX-A17"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "estimated monthly cashback",
+      "figma": [
+       36,
+       1165,
+       222,
+       24
+      ],
+      "proto": [
+       36,
+       1102,
+       222,
+       19
+      ],
+      "d": -23,
+      "fv": 655,
+      "pv": 632,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "rule": "EX-A17"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "per day $#",
+      "figma": [
+       36,
+       1255,
+       88,
+       20
+      ],
+      "proto": [
+       36,
+       1192,
+       90,
+       16
+      ],
+      "d": -23,
+      "fv": 743,
+      "pv": 720,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "rule": "EX-A17"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "per year $#",
+      "figma": [
+       140,
+       1255,
+       103,
+       20
+      ],
+      "proto": [
+       142,
+       1192,
+       101,
+       16
+      ],
+      "d": -23,
+      "fv": 743,
+      "pv": 720,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "rule": "EX-A17"
+     },
+     {
+      "type": "안쪽 위 여백",
+      "label": "learn more",
+      "figma": [
+       36,
+       1295,
+       303,
+       48
+      ],
+      "proto": [
+       36,
+       1306,
+       303,
+       48
+      ],
+      "d": 53,
+      "fv": 773,
+      "pv": 826,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "rule": "EX-A17"
+     },
+     {
+      "type": "요소 간격",
+      "label": "cashback, #% → trading fees after cashback",
+      "figma": [
+       36,
+       1121,
+       250,
+       24
+      ],
+      "proto": [
+       36,
+       1058,
+       210,
+       19
+      ],
+      "d": -25,
+      "fv": 112,
+      "pv": 87,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "rule": "EX-A17"
+     },
+     {
+      "type": "요소 간격",
+      "label": "per year $# → learn more",
+      "figma": [
+       36,
+       1295,
+       303,
+       48
+      ],
+      "proto": [
+       36,
+       1306,
+       303,
+       48
+      ],
+      "d": 76,
+      "fv": 54,
+      "pv": 130,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       898
+      ],
+      "rule": "EX-A17"
+     }
+    ]
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "cexPanel",
+   "label": "CEX UID 연동 — CEX 잔액 패널 (H3)",
+   "vp": "pc",
+   "node": "28960:126896",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H3 Signed in, exchange UID linked (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 40,
+   "nP": 41,
+   "matched": 40,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3828,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "cexPanel",
+   "label": "CEX UID 연동 — CEX 잔액 패널 (H3)",
+   "vp": "mo",
+   "node": "29515:138815",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H3 Signed in, exchange UID linked (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 42,
+   "nP": 43,
+   "matched": 42,
+   "missing": [],
+   "added": [
+    {
+     "t": "Up to 50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [
+     {
+      "type": "카드 높이",
+      "label": "your cashback",
+      "figma": [
+       16,
+       522,
+       343,
+       692
+      ],
+      "proto": [
+       16,
+       474,
+       343,
+       689
+      ],
+      "d": -3,
+      "card": [
+       16,
+       522,
+       343,
+       692
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       689
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "claimable # usdt",
+      "figma": [
+       36,
+       1068,
+       148,
+       20
+      ],
+      "proto": [
+       36,
+       1019,
+       147,
+       16
+      ],
+      "d": -3,
+      "fv": 556,
+      "pv": 553,
+      "card": [
+       16,
+       522,
+       343,
+       692
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       689
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "minimum # usdt",
+      "figma": [
+       200,
+       1068,
+       116,
+       20
+      ],
+      "proto": [
+       199,
+       1019,
+       116,
+       16
+      ],
+      "d": -3,
+      "fv": 556,
+      "pv": 553,
+      "card": [
+       16,
+       522,
+       343,
+       692
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       689
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "cashback is paid to your % balance",
+      "figma": [
+       36,
+       1170,
+       303,
+       20
+      ],
+      "proto": [
+       36,
+       1121,
+       264,
+       14
+      ],
+      "d": -4,
+      "fv": 658,
+      "pv": 654,
+      "card": [
+       16,
+       522,
+       343,
+       692
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       689
+      ]
+     }
+    ],
+    "pairs": 110,
+    "cards": 20,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "cexBelowMin",
+   "label": "CEX 잔액 10 USDT 미만 (H4)",
+   "vp": "pc",
+   "node": "28960:126902",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H4 Exchange balance under 10 USDT (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 40,
+   "nP": 41,
+   "matched": 39,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3828,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "You can claim cashback if you receive an additional 3.00 USDT in exchange Cashback. ⇄ You can claim if you receive an additional 3.00 USDT in exchange cashback.",
+     "rule": "EX-A01"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "cexBelowMin",
+   "label": "CEX 잔액 10 USDT 미만 (H4)",
+   "vp": "mo",
+   "node": "29515:140513",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H4 Exchange balance under 10 USDT (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 42,
+   "nP": 43,
+   "matched": 41,
+   "missing": [],
+   "added": [
+    {
+     "t": "Up to 50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "You can claim cashback if you receive an additional 3.00 USDT in exchange Cashback. ⇄ You can claim if you receive an additional 3.00 USDT in exchange cashback.",
+     "rule": "EX-A01"
+    }
+   ],
+   "geom": {
+    "issues": [
+     {
+      "type": "카드 높이",
+      "label": "your cashback",
+      "figma": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "proto": [
+       16,
+       474,
+       343,
+       765
+      ],
+      "d": -11,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       765
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "minimum # usdt",
+      "figma": [
+       36,
+       1132,
+       116,
+       20
+      ],
+      "proto": [
+       36,
+       1075,
+       116,
+       16
+      ],
+      "d": -11,
+      "fv": 620,
+      "pv": 609,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       765
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "cashback is claimed automatically once your claimable amount reaches # usdt",
+      "figma": [
+       36,
+       1234,
+       303,
+       40
+      ],
+      "proto": [
+       36,
+       1177,
+       264,
+       34
+      ],
+      "d": -12,
+      "fv": 732,
+      "pv": 720,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       765
+      ]
+     },
+     {
+      "type": "요소 간격",
+      "label": "from events. invitation rewards are separate → minimum # usdt",
+      "figma": [
+       36,
+       1132,
+       116,
+       20
+      ],
+      "proto": [
+       36,
+       1075,
+       116,
+       16
+      ],
+      "d": -10,
+      "fv": 137,
+      "pv": 127,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       765
+      ]
+     }
+    ],
+    "pairs": 109,
+    "cards": 20,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "dexPanel",
+   "label": "DEX 잔액 패널 — EdgeX 지갑 연동 (H8)",
+   "vp": "pc",
+   "node": "29354:139273",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H8 EdgeX wallet linked (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 12,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 36,
+   "nP": 39,
+   "matched": 36,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 3,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "dexPanel",
+   "label": "DEX 잔액 패널 — EdgeX 지갑 연동 (H8)",
+   "vp": "mo",
+   "node": "29515:144188",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H8 EdgeX wallet linked (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 38,
+   "nP": 41,
+   "matched": 38,
+   "missing": [],
+   "added": [
+    {
+     "t": "Claimable 12.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total claimed",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 63,
+    "cards": 8,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "your cashback",
+      "figma": [
+       16,
+       522,
+       343,
+       644
+      ],
+      "proto": [
+       16,
+       480,
+       343,
+       726
+      ],
+      "d": 82,
+      "card": [
+       16,
+       522,
+       343,
+       644
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       726
+      ],
+      "rule": "EX-A42"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "paid to your % balance",
+      "figma": [
+       36,
+       976,
+       209,
+       20
+      ],
+      "proto": [
+       36,
+       1006,
+       208,
+       16
+      ],
+      "d": 70,
+      "fv": 464,
+      "pv": 534,
+      "card": [
+       16,
+       522,
+       343,
+       644
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       726
+      ],
+      "rule": "EX-A42"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "minimum # usdt",
+      "figma": [
+       36,
+       1000,
+       116,
+       20
+      ],
+      "proto": [
+       36,
+       1042,
+       116,
+       16
+      ],
+      "d": 82,
+      "fv": 488,
+      "pv": 570,
+      "card": [
+       16,
+       522,
+       343,
+       644
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       726
+      ],
+      "rule": "EX-A42"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "cashback is sent automatically to your linked % wallet",
+      "figma": [
+       36,
+       1102,
+       303,
+       40
+      ],
+      "proto": [
+       36,
+       1144,
+       264,
+       34
+      ],
+      "d": 81,
+      "fv": 600,
+      "pv": 681,
+      "card": [
+       16,
+       522,
+       343,
+       644
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       726
+      ],
+      "rule": "EX-A42"
+     },
+     {
+      "type": "요소 간격",
+      "label": "reported by % → paid to your % balance",
+      "figma": [
+       36,
+       976,
+       209,
+       20
+      ],
+      "proto": [
+       36,
+       1006,
+       208,
+       16
+      ],
+      "d": 69,
+      "fv": 60,
+      "pv": 129,
+      "card": [
+       16,
+       522,
+       343,
+       644
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       726
+      ],
+      "rule": "EX-A42"
+     },
+     {
+      "type": "요소 간격",
+      "label": "paid to your % balance → minimum # usdt",
+      "figma": [
+       36,
+       1000,
+       116,
+       20
+      ],
+      "proto": [
+       36,
+       1042,
+       116,
+       16
+      ],
+      "d": 12,
+      "fv": 24,
+      "pv": 36,
+      "card": [
+       16,
+       522,
+       343,
+       644
+      ],
+      "pcard": [
+       16,
+       480,
+       343,
+       726
+      ],
+      "rule": "EX-A42"
+     }
+    ]
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "dexBelowMin",
+   "label": "최소액 미만 — 넛지 (H4 · DEX & CEX)",
+   "vp": "pc",
+   "node": "28960:126902",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H4 Exchange balance under 10 USDT (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 40,
+   "nP": 42,
+   "matched": 35,
+   "missing": [],
+   "added": [
+    {
+     "t": "Reported by EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Claimable 7.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total claimed",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback is sent automatically to your linked EdgeX wallet.",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3828,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "From your Bybit trades",
+     "rule": "EX-A02"
+    },
+    {
+     "type": "missing",
+     "t": "BVOX",
+     "rule": "EX-A02"
+    },
+    {
+     "type": "missing",
+     "t": "Join BVOX",
+     "rule": "EX-A02"
+    },
+    {
+     "type": "diff",
+     "t": "You can claim cashback if you receive an additional 3.00 USDT in exchange Cashback. ⇄ You can claim if you receive an additional 3.00 USDT in exchange cashback.",
+     "rule": "EX-A01"
+    },
+    {
+     "type": "diff",
+     "t": "Search for a partner ⇄ Search for a DEX",
+     "rule": "EX-A02"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "dexBelowMin",
+   "label": "최소액 미만 — 넛지 (H4 · DEX & CEX)",
+   "vp": "mo",
+   "node": "29515:140513",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H4 Exchange balance under 10 USDT (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 42,
+   "nP": 44,
+   "matched": 36,
+   "missing": [],
+   "added": [
+    {
+     "t": "Reported by EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Claimable 7.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total claimed",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback is sent automatically to your linked EdgeX wallet.",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "From your Bybit trades",
+     "rule": "EX-A02"
+    },
+    {
+     "type": "missing",
+     "t": "BVOX",
+     "rule": "EX-A02"
+    },
+    {
+     "type": "missing",
+     "t": "Join BVOX",
+     "rule": "EX-A02"
+    },
+    {
+     "type": "diff",
+     "t": "You can claim cashback if you receive an additional 3.00 USDT in exchange Cashback. ⇄ You can claim if you receive an additional 3.00 USDT in exchange cashback.",
+     "rule": "EX-A01"
+    },
+    {
+     "type": "diff",
+     "t": "Compare cashback across 16 exchanges ⇄ Compare cashback across 4 DEXs",
+     "rule": "EX-A02"
+    },
+    {
+     "type": "diff",
+     "t": "Search for a partner ⇄ Search for a DEX",
+     "rule": "EX-A02"
+    }
+   ],
+   "geom": {
+    "issues": [
+     {
+      "type": "카드 높이",
+      "label": "your cashback",
+      "figma": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "proto": [
+       16,
+       474,
+       343,
+       934
+      ],
+      "d": 158,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       934
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "total event reward",
+      "figma": [
+       36,
+       956,
+       224,
+       24
+      ],
+      "proto": [
+       36,
+       933,
+       140,
+       19
+      ],
+      "d": 22,
+      "fv": 446,
+      "pv": 468,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       934
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "from events. invitation rewards are separate",
+      "figma": [
+       36,
+       982,
+       224,
+       46
+      ],
+      "proto": [
+       36,
+       959,
+       204,
+       36
+      ],
+      "d": 20,
+      "fv": 483,
+      "pv": 503,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       934
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "minimum # usdt",
+      "figma": [
+       36,
+       1132,
+       116,
+       20
+      ],
+      "proto": [
+       36,
+       1184,
+       116,
+       16
+      ],
+      "d": 98,
+      "fv": 620,
+      "pv": 718,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       934
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "cashback is claimed automatically once your claimable amount reaches # usdt",
+      "figma": [
+       36,
+       1234,
+       303,
+       40
+      ],
+      "proto": [
+       36,
+       1286,
+       264,
+       34
+      ],
+      "d": 97,
+      "fv": 732,
+      "pv": 829,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       934
+      ]
+     },
+     {
+      "type": "요소 간격",
+      "label": "total exchange cashback → total event reward",
+      "figma": [
+       36,
+       956,
+       224,
+       24
+      ],
+      "proto": [
+       36,
+       933,
+       140,
+       19
+      ],
+      "d": 21,
+      "fv": 66,
+      "pv": 87,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       934
+      ]
+     },
+     {
+      "type": "요소 간격",
+      "label": "from events. invitation rewards are separate → minimum # usdt",
+      "figma": [
+       36,
+       1132,
+       116,
+       20
+      ],
+      "proto": [
+       36,
+       1184,
+       116,
+       16
+      ],
+      "d": 78,
+      "fv": 137,
+      "pv": 215,
+      "card": [
+       16,
+       522,
+       343,
+       776
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       934
+      ]
+     }
+    ],
+    "pairs": 41,
+    "cards": 4,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "dexError",
+   "label": "패널 로드 실패 (H7 — CEX 탭 시안을 DEX로)",
+   "vp": "pc",
+   "node": "28960:126920",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H7 Balance did not load (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 34,
+   "nP": 34,
+   "matched": 30,
+   "missing": [],
+   "added": [
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3828,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Exchange",
+     "rule": "EX-A03"
+    },
+    {
+     "type": "missing",
+     "t": "BVOX",
+     "rule": "EX-A03"
+    },
+    {
+     "type": "missing",
+     "t": "Join BVOX",
+     "rule": "EX-A03"
+    },
+    {
+     "type": "diff",
+     "t": "Search for a partner ⇄ Search for a DEX",
+     "rule": "EX-A03"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "dexError",
+   "label": "패널 로드 실패 (H7 — CEX 탭 시안을 DEX로)",
+   "vp": "mo",
+   "node": "29515:142500",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H7 Balance did not load (S4) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 36,
+   "nP": 36,
+   "matched": 32,
+   "missing": [],
+   "added": [
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "BVOX",
+     "rule": "EX-A03"
+    },
+    {
+     "type": "missing",
+     "t": "Join BVOX",
+     "rule": "EX-A03"
+    },
+    {
+     "type": "diff",
+     "t": "Compare cashback across 16 exchanges ⇄ Compare cashback across 4 DEXs",
+     "rule": "EX-A03"
+    },
+    {
+     "type": "diff",
+     "t": "Search for a partner ⇄ Search for a DEX",
+     "rule": "EX-A03"
+    }
+   ],
+   "geom": {
+    "issues": [
+     {
+      "type": "카드 높이",
+      "label": "your cashback",
+      "figma": [
+       16,
+       522,
+       343,
+       408
+      ],
+      "proto": [
+       16,
+       474,
+       343,
+       473
+      ],
+      "d": 65,
+      "card": [
+       16,
+       522,
+       343,
+       408
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       473
+      ]
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "we could not load your cashback. please try again",
+      "figma": [
+       36,
+       886,
+       303,
+       20
+      ],
+      "proto": [
+       36,
+       905,
+       300,
+       14
+      ],
+      "d": 64,
+      "fv": 374,
+      "pv": 438,
+      "card": [
+       16,
+       522,
+       343,
+       408
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       473
+      ]
+     },
+     {
+      "type": "요소 간격",
+      "label": "cashback could not load → we could not load your cashback. please try again",
+      "figma": [
+       36,
+       886,
+       303,
+       20
+      ],
+      "proto": [
+       36,
+       905,
+       300,
+       14
+      ],
+      "d": 64,
+      "fv": 104,
+      "pv": 168,
+      "card": [
+       16,
+       522,
+       343,
+       408
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       473
+      ]
+     }
+    ],
+    "pairs": 37,
+    "cards": 4,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "noLedger",
+   "label": "원장 미수신 DEX → 계산기 (H2와 같은 화면)",
+   "vp": "pc",
+   "node": "28960:126890",
+   "src": "정밀",
+   "node_name": "DEX / Web / Hub H2 Signed in, nothing linked (S3) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 39,
+   "nP": 41,
+   "matched": 39,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 2973,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 59,
+    "cards": 6,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "cashback estimate",
+      "figma": [
+       712,
+       136,
+       608,
+       774
+      ],
+      "proto": [
+       712,
+       136,
+       608,
+       820
+      ],
+      "d": 46,
+      "card": [
+       712,
+       136,
+       608,
+       774
+      ],
+      "pcard": [
+       712,
+       136,
+       608,
+       820
+      ],
+      "rule": "EX-A18"
+     }
+    ]
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "noLedger",
+   "label": "원장 미수신 DEX → 계산기 (H2와 같은 화면)",
+   "vp": "mo",
+   "node": "29515:138107",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H2 Signed in, nothing linked (S3) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 41,
+   "nP": 43,
+   "matched": 41,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 66,
+    "cards": 7,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "cashback estimate",
+      "figma": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "proto": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "d": 53,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "rule": "EX-A18"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "trading fees after cashback",
+      "figma": [
+       36,
+       1121,
+       250,
+       24
+      ],
+      "proto": [
+       36,
+       1052,
+       210,
+       19
+      ],
+      "d": -23,
+      "fv": 611,
+      "pv": 588,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "rule": "EX-A18"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "estimated monthly cashback",
+      "figma": [
+       36,
+       1165,
+       222,
+       24
+      ],
+      "proto": [
+       36,
+       1096,
+       222,
+       19
+      ],
+      "d": -23,
+      "fv": 655,
+      "pv": 632,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "rule": "EX-A18"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "per day $#",
+      "figma": [
+       36,
+       1255,
+       88,
+       20
+      ],
+      "proto": [
+       36,
+       1186,
+       88,
+       16
+      ],
+      "d": -23,
+      "fv": 743,
+      "pv": 720,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "rule": "EX-A18"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "per year $#",
+      "figma": [
+       140,
+       1255,
+       103,
+       20
+      ],
+      "proto": [
+       140,
+       1186,
+       103,
+       16
+      ],
+      "d": -23,
+      "fv": 743,
+      "pv": 720,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "rule": "EX-A18"
+     },
+     {
+      "type": "안쪽 위 여백",
+      "label": "learn more",
+      "figma": [
+       36,
+       1295,
+       303,
+       48
+      ],
+      "proto": [
+       36,
+       1300,
+       303,
+       48
+      ],
+      "d": 53,
+      "fv": 773,
+      "pv": 826,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "rule": "EX-A18"
+     },
+     {
+      "type": "요소 간격",
+      "label": "cashback, #% → trading fees after cashback",
+      "figma": [
+       36,
+       1121,
+       250,
+       24
+      ],
+      "proto": [
+       36,
+       1052,
+       210,
+       19
+      ],
+      "d": -25,
+      "fv": 112,
+      "pv": 87,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "rule": "EX-A18"
+     },
+     {
+      "type": "요소 간격",
+      "label": "per year $# → learn more",
+      "figma": [
+       36,
+       1295,
+       303,
+       48
+      ],
+      "proto": [
+       36,
+       1300,
+       303,
+       48
+      ],
+      "d": 76,
+      "fv": 54,
+      "pv": 130,
+      "card": [
+       16,
+       522,
+       343,
+       845
+      ],
+      "pcard": [
+       16,
+       474,
+       343,
+       898
+      ],
+      "rule": "EX-A18"
+     }
+    ]
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "cards",
+   "label": "게스트 · 비교표 카드 뷰 (평점 생략)",
+   "vp": "pc",
+   "node": "22807:98684",
+   "src": "정밀",
+   "node_name": "MAX1216 / list / CMT-08 Exchange list — CARD view / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 24,
+   "nP": 48,
+   "matched": 4,
+   "missing": [],
+   "added": [
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "CASHBACK ESTIMATE",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly trading volume",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter Premium taker, 0.0280%",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback, 20%",
+     "kind": "text"
+    },
+    {
+     "t": "Paid to your TetherMax balance",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees after cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Estimated monthly cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Per day $0.18",
+     "kind": "text"
+    },
+    {
+     "t": "Per year $67.20",
+     "kind": "text"
+    },
+    {
+     "t": "Learn More",
+     "kind": "button"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 4 exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at $100,000 monthly trading volume, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    },
+    {
+     "t": "Why sign up with TetherMax?",
+     "kind": "text"
+    },
+    {
+     "t": "Support in 2 minutes",
+     "kind": "text"
+    },
+    {
+     "t": "Responsive customer support, query attended in 2 minutes.",
+     "kind": "text"
+    },
+    {
+     "t": "Speak to us →",
+     "kind": "text"
+    },
+    {
+     "t": "More cashback from events",
+     "kind": "text"
+    },
+    {
+     "t": "Earn more cashbacks by completing tasks and exchange event challenges.",
+     "kind": "text"
+    },
+    {
+     "t": "See Benefits →",
+     "kind": "text"
+    },
+    {
+     "t": "Invite friends, earn more",
+     "kind": "text"
+    },
+    {
+     "t": "Grow your cashback when you invite partners and friends.",
+     "kind": "text"
+    },
+    {
+     "t": "Find out more →",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3200,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Bitget 2026 King of Traders (KOT)",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Win up to 2,000,000 USDT",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "See All",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "54% Total Savings",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Recommended",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "All",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Bitget x TetherMax",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "View Bitget",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Promoted",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Limited Time Offers",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Trade to win up to $100K prize pool",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Rewards",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Ends in",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Sign up, deposit & trade to get $14,410",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Become a VIP & enjoy the benefits.",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Voucher",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "missing",
+     "t": "Claim VIP2 Trial",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "diff",
+     "t": "Search for an exchange ⇄ Search for a DEX",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "diff",
+     "t": "Cashback Boost ⇄ cashback",
+     "rule": "EX-A05"
+    },
+    {
+     "type": "diff",
+     "t": "Join Now ⇄ Join EdgeX",
+     "rule": "EX-A05"
+    }
+   ],
+   "geom": {
+    "issues": [],
+    "pairs": 0,
+    "cards": 0,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "cards",
+   "label": "게스트 · 비교표 카드 뷰 (평점 생략)",
+   "vp": "mo",
+   "node": "29515:137400",
+   "src": "정밀",
+   "node_name": "DEX / Mobile / Hub H1 Guest, DEX route (S1) / Light (main)",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 11,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 51,
+   "nP": 52,
+   "matched": 51,
+   "missing": [],
+   "added": [
+    {
+     "t": "Highest payout",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 77,
+    "cards": 10,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "hub.main",
+   "group": "hub",
+   "title": "캐시백 허브",
+   "state": "emptySearch",
+   "label": "비교표 빈 검색",
+   "vp": "mo",
+   "node": "5145:50887",
+   "src": "색인",
+   "node_name": "allPartnerExchanges",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {
+    "input": 1
+   },
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 2,
+   "nP": 48,
+   "matched": 1,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 44,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "All Partner Exchanges ⇄ Centralised exchanges",
+     "rule": "EX-A06"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": true
+  }
+ ],
+ "nodesign": [
+  {
+   "screen": "hub.main",
+   "state": "dexPartial",
+   "label": "A=3 · B=8 — 일부만 출금",
+   "group": "hub"
+  },
+  {
+   "screen": "hub.main",
+   "state": "dexLoading",
+   "label": "패널 로딩",
+   "group": "hub"
+  },
+  {
+   "screen": "hub.main",
+   "state": "dexMulti",
+   "label": "같은 DEX 복수 지갑 +N",
+   "group": "hub"
+  },
+  {
+   "screen": "hub.main",
+   "state": "aster",
+   "label": "Aster — USDT value at payout",
+   "group": "hub"
+  },
+  {
+   "screen": "hub.main",
+   "state": "totalClaimed",
+   "label": "Total claimed (G-053 유지)",
+   "group": "hub"
+  },
+  {
+   "screen": "hub.main",
+   "state": "rateFail",
+   "label": "요율 서비스 실패",
+   "group": "hub"
+  },
+  {
+   "screen": "hub.main",
+   "state": "lighterAccruing",
+   "label": "Lighter 주중 「집계 전」 (G-100)",
+   "group": "hub"
+  }
+ ],
+ "oneside": [
+  {
+   "screen": "hub.main",
+   "state": "emptySearch",
+   "label": "비교표 빈 검색",
+   "missing_vp": "pc",
+   "has": "5145:50887",
+   "group": "hub"
+  }
+ ],
+ "geom_top": [
+  {
+   "i": 1,
+   "node": "29515:146538",
+   "screen": "hub.main",
+   "state": "brokers",
+   "vp": "mo",
+   "type": "안쪽 위 여백",
+   "label": "learn more",
+   "crop": [
+    16,
+    554,
+    343,
+    826
+   ]
+  },
+  {
+   "i": 2,
+   "node": "29515:140513",
+   "screen": "hub.main",
+   "state": "dexBelowMin",
+   "vp": "mo",
+   "type": "요소 간격",
+   "label": "total exchange cashback → total event reward",
+   "crop": [
+    16,
+    522,
+    343,
+    776
+   ]
+  },
+  {
+   "i": 3,
+   "node": "29515:142500",
+   "screen": "hub.main",
+   "state": "dexError",
+   "vp": "mo",
+   "type": "요소 간격",
+   "label": "cashback could not load → we could not load your cashback. please try again",
+   "crop": [
+    16,
+    522,
+    343,
+    408
+   ]
+  },
+  {
+   "i": 4,
+   "node": "29515:138815",
+   "screen": "hub.main",
+   "state": "cexPanel",
+   "vp": "mo",
+   "type": "안쪽 세로 위치(중심)",
+   "label": "cashback is paid to your % balance",
+   "crop": [
+    16,
+    522,
+    343,
+    692
+   ]
+  }
+ ]
+}

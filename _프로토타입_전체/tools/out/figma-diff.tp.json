@@ -1,0 +1,210 @@
+{
+ "generated": "2026-11-27T22:12",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "tp.main",
+   "group": "rewards",
+   "title": "테더맥스 포인트 (TP)",
+   "state": "tp",
+   "label": "TP 탭 — Available TP · How To Earn · FAQ",
+   "vp": "pc",
+   "node": "29365:134702",
+   "src": "정밀",
+   "node_name": "TP · 포인트 내역 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 19,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 14,
+   "nP": 22,
+   "matched": 10,
+   "missing": [],
+   "added": [
+    {
+     "t": "TetherMax Points (TP)",
+     "kind": "tab"
+    },
+    {
+     "t": "What exactly is TetherMax Point (TP)?",
+     "kind": "text"
+    },
+    {
+     "t": "Where can I use TP? Can I cash it out?",
+     "kind": "text"
+    },
+    {
+     "t": "How do I start earning points?",
+     "kind": "text"
+    },
+    {
+     "t": "Does a larger cashback amount mean more points?",
+     "kind": "text"
+    },
+    {
+     "t": "Is there an extra benefit for inviting friends?",
+     "kind": "text"
+    },
+    {
+     "t": "Why does the earning rate change depending on the timing?",
+     "kind": "text"
+    },
+    {
+     "t": "Do accumulated points have an expiration date?",
+     "kind": "text"
+    },
+    {
+     "t": "Why are earning rates different from exchange?",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "How To Earn TetherMax Point (TP)? ⇄ How To Earn TetherMax Points (TP)?",
+     "rule": "EX-C18"
+    },
+    {
+     "type": "diff",
+     "t": "Top trending exchange ⇄ Top trending exchanges",
+     "rule": "EX-C18"
+    },
+    {
+     "type": "diff",
+     "t": "Trade with Bitget ⇄ Trade WOO X Pro",
+     "rule": "EX-C18"
+    },
+    {
+     "type": "diff",
+     "t": "Withdraw Cashback ⇄ Exchange Cashback",
+     "rule": "EX-C18"
+    }
+   ],
+   "geom": {
+    "issues": [],
+    "pairs": 14,
+    "cards": 3,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "tp.main",
+   "group": "rewards",
+   "title": "테더맥스 포인트 (TP)",
+   "state": "tp",
+   "label": "TP 탭 — Available TP · How To Earn · FAQ",
+   "vp": "mo",
+   "node": "29062:114572",
+   "src": "정밀",
+   "node_name": "TP · 포인트 내역 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 20,
+   "nP": 23,
+   "matched": 15,
+   "missing": [],
+   "added": [
+    {
+     "t": "TetherMax Points (TP)",
+     "kind": "tab"
+    },
+    {
+     "t": "What exactly is TetherMax Point (TP)?",
+     "kind": "text"
+    },
+    {
+     "t": "TP is an exclusive bonus reward provided to TetherMax members. While your existing 100% USDT cashback benefits remain unchanged, you will accumulate additional TP based on your cashback amount.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 2343,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "How To Earn TetherMax Point (TP)? ⇄ How To Earn TetherMax Points (TP)?",
+     "rule": "EX-C18"
+    },
+    {
+     "type": "diff",
+     "t": "Top trending exchange ⇄ Top trending exchanges",
+     "rule": "EX-C18"
+    },
+    {
+     "type": "diff",
+     "t": "Why are earning rates different by exchange? ⇄ Why are earning rates different from exchange?",
+     "rule": "EX-C18"
+    },
+    {
+     "type": "diff",
+     "t": "Trade with Bitget ⇄ Trade WOO X Pro",
+     "rule": "EX-C18"
+    },
+    {
+     "type": "diff",
+     "t": "Withdraw Cashback ⇄ Exchange Cashback",
+     "rule": "EX-C18"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  }
+ ],
+ "nodesign": [
+  {
+   "screen": "tp.intro",
+   "state": "normal",
+   "label": "소개 — 게스트·회원 같은 화면 (dev 기준)",
+   "group": "rewards"
+  },
+  {
+   "screen": "tp.main",
+   "state": "history",
+   "label": "Earning History 칩 — 기간 · 빈 상태",
+   "group": "rewards"
+  }
+ ],
+ "oneside": [],
+ "geom_top": []
+}

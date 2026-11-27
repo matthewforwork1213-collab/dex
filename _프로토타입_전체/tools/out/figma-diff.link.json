@@ -1,0 +1,3490 @@
+{
+ "generated": "2026-11-27T22:25",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "dexlist",
+   "label": "홈 Linked Accounts 푸터 → 공통 선택기 All",
+   "vp": "pc",
+   "node": "28960:127381",
+   "src": "정밀",
+   "node_name": "DEX / link / L17 홈 다른 계정 추가 · 공통 거래소 검색 / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 12,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter DEX",
+     "kind": "button"
+    },
+    {
+     "t": "Enter your UID",
+     "kind": "input"
+    },
+    {
+     "t": "Steps to link UID",
+     "kind": "text"
+    },
+    {
+     "t": "Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "dexlist",
+   "label": "홈 Linked Accounts 푸터 → 공통 선택기 All",
+   "vp": "mo",
+   "node": "28969:126953",
+   "src": "정밀",
+   "node_name": "Link / Select an exchange / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 10,
+   "matched": 9,
+   "missing": [],
+   "added": [
+    {
+     "t": "Lighter DEX",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget 54% Total Savings",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX 60% Total Savings",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "dex",
+      "figma": [
+       24,
+       751,
+       93,
+       10
+      ],
+      "proto": [
+       25,
+       754,
+       19,
+       12
+      ],
+      "d": 4,
+      "fv": 584,
+      "pv": 588,
+      "card": [
+       0,
+       172,
+       375,
+       640
+      ],
+      "pcard": [
+       0,
+       172,
+       375,
+       640
+      ]
+     }
+    ],
+    "pairs": 10,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "all",
+   "label": "기존 연동 폼의 검색 팝오버 · All",
+   "vp": "pc",
+   "node": "28960:127381",
+   "src": "정밀",
+   "node_name": "DEX / link / L17 홈 다른 계정 추가 · 공통 거래소 검색 / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 12,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter DEX",
+     "kind": "button"
+    },
+    {
+     "t": "Enter your UID",
+     "kind": "input"
+    },
+    {
+     "t": "Steps to link UID",
+     "kind": "text"
+    },
+    {
+     "t": "Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true,
+   "same_node": [
+    "link.select:dexlist",
+    "link.select:uid",
+    "link.select:uidFilled"
+   ]
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "all",
+   "label": "기존 연동 폼의 검색 팝오버 · All",
+   "vp": "mo",
+   "node": "28969:126953",
+   "src": "정밀",
+   "node_name": "Link / Select an exchange / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 10,
+   "matched": 9,
+   "missing": [],
+   "added": [
+    {
+     "t": "Lighter DEX",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget 54% Total Savings",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX 60% Total Savings",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "dex",
+      "figma": [
+       24,
+       751,
+       93,
+       10
+      ],
+      "proto": [
+       25,
+       754,
+       19,
+       12
+      ],
+      "d": 4,
+      "fv": 584,
+      "pv": 588,
+      "card": [
+       0,
+       172,
+       375,
+       640
+      ],
+      "pcard": [
+       0,
+       172,
+       375,
+       640
+      ]
+     }
+    ],
+    "pairs": 10,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "uid",
+   "label": "UID 입력 화면에서 연 공통 선택기",
+   "vp": "pc",
+   "node": "28960:127381",
+   "src": "정밀",
+   "node_name": "DEX / link / L17 홈 다른 계정 추가 · 공통 거래소 검색 / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 12,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter DEX",
+     "kind": "button"
+    },
+    {
+     "t": "Enter your UID",
+     "kind": "input"
+    },
+    {
+     "t": "Steps to link UID",
+     "kind": "text"
+    },
+    {
+     "t": "Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "uid",
+   "label": "UID 입력 화면에서 연 공통 선택기",
+   "vp": "mo",
+   "node": "28969:126953",
+   "src": "정밀",
+   "node_name": "Link / Select an exchange / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 10,
+   "matched": 9,
+   "missing": [],
+   "added": [
+    {
+     "t": "Lighter DEX",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget 54% Total Savings",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX 60% Total Savings",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "dex",
+      "figma": [
+       24,
+       751,
+       93,
+       10
+      ],
+      "proto": [
+       25,
+       754,
+       19,
+       12
+      ],
+      "d": 4,
+      "fv": 584,
+      "pv": 588,
+      "card": [
+       0,
+       172,
+       375,
+       640
+      ],
+      "pcard": [
+       0,
+       172,
+       375,
+       640
+      ]
+     }
+    ],
+    "pairs": 10,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "uidFilled",
+   "label": "UID 입력 후 연 공통 선택기",
+   "vp": "pc",
+   "node": "28960:127381",
+   "src": "정밀",
+   "node_name": "DEX / link / L17 홈 다른 계정 추가 · 공통 거래소 검색 / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 12,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter DEX",
+     "kind": "button"
+    },
+    {
+     "t": "Enter your UID",
+     "kind": "input"
+    },
+    {
+     "t": "Steps to link UID",
+     "kind": "text"
+    },
+    {
+     "t": "Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "uidFilled",
+   "label": "UID 입력 후 연 공통 선택기",
+   "vp": "mo",
+   "node": "28969:126953",
+   "src": "정밀",
+   "node_name": "Link / Select an exchange / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 10,
+   "matched": 9,
+   "missing": [],
+   "added": [
+    {
+     "t": "Lighter DEX",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget 54% Total Savings",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX 60% Total Savings",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "dex",
+      "figma": [
+       24,
+       751,
+       93,
+       10
+      ],
+      "proto": [
+       25,
+       754,
+       19,
+       12
+      ],
+      "d": 4,
+      "fv": 584,
+      "pv": 588,
+      "card": [
+       0,
+       172,
+       375,
+       640
+      ],
+      "pcard": [
+       0,
+       172,
+       375,
+       640
+      ]
+     }
+    ],
+    "pairs": 10,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "cex",
+   "label": "칩 CEX",
+   "vp": "pc",
+   "node": "29192:119719",
+   "src": "정밀",
+   "node_name": "PC · 연동 검색 팝오버 · CEX 필터",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 11,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Enter your UID",
+     "kind": "input"
+    },
+    {
+     "t": "Steps to link UID",
+     "kind": "text"
+    },
+    {
+     "t": "Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "cex",
+   "label": "칩 CEX",
+   "vp": "mo",
+   "node": "28986:126528",
+   "src": "정밀",
+   "node_name": "Link / Filter CEX / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 9,
+   "matched": 9,
+   "missing": [],
+   "added": [
+    {
+     "t": "Bitget 54% Total Savings",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX 60% Total Savings",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 6,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "dex",
+   "label": "칩 DEX (배지 없음)",
+   "vp": "pc",
+   "node": "29192:119723",
+   "src": "정밀",
+   "node_name": "PC · 연동 검색 팝오버 · DEX 필터",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 10,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Enter your UID",
+     "kind": "input"
+    },
+    {
+     "t": "Steps to link UID",
+     "kind": "text"
+    },
+    {
+     "t": "Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "dex",
+   "label": "칩 DEX (배지 없음)",
+   "vp": "mo",
+   "node": "28986:126557",
+   "src": "정밀",
+   "node_name": "Link / Filter DEX / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 6,
+   "matched": 6,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "one",
+   "label": "검색 결과 1건",
+   "vp": "mo",
+   "node": "29051:104415",
+   "src": "정밀",
+   "node_name": "Link / 거래소 검색 · DEX 필터 one result / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 6,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Search exchanges",
+     "kind": "input"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "many",
+   "label": "검색 결과 여러 건",
+   "vp": "mo",
+   "node": "29051:104229",
+   "src": "정밀",
+   "node_name": "Link / 거래소 검색 · DEX 필터 multiple results / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 6,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Search exchanges",
+     "kind": "input"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.select",
+   "group": "link",
+   "title": "거래소 선택",
+   "state": "dexbit",
+   "label": "DEX 칩에서 «bit» → 0건",
+   "vp": "mo",
+   "node": "29051:104597",
+   "src": "정밀",
+   "node_name": "Link / 거래소 검색 · DEX 필터 no results / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 8,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Search exchanges",
+     "kind": "input"
+    },
+    {
+     "t": "0 exchanges found",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.uid",
+   "group": "link",
+   "title": "CEX UID 입력 (기존)",
+   "state": "empty",
+   "label": "빈 값 — Next 비활성",
+   "vp": "pc",
+   "node": "9105:196091",
+   "src": "정밀",
+   "node_name": "Link UID",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 6,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.uid",
+   "group": "link",
+   "title": "CEX UID 입력 (기존)",
+   "state": "empty",
+   "label": "빈 값 — Next 비활성",
+   "vp": "mo",
+   "node": "29051:100488",
+   "src": "정밀",
+   "node_name": "Link / Bitget UID · existing mobile form / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 6,
+   "matched": 4,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 4,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "link.uid",
+   "group": "link",
+   "title": "CEX UID 입력 (기존)",
+   "state": "filled",
+   "label": "UID 입력 완료 — Next 활성 (게스트 조회 handoffcex 포함)",
+   "vp": "pc",
+   "node": "9287:185462",
+   "src": "정밀",
+   "node_name": "Web",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 6,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Enter your UID",
+     "kind": "input"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.uid",
+   "group": "link",
+   "title": "CEX UID 입력 (기존)",
+   "state": "filled",
+   "label": "UID 입력 완료 — Next 활성 (게스트 조회 handoffcex 포함)",
+   "vp": "mo",
+   "node": "9105:188659",
+   "src": "정밀",
+   "node_name": "mWeb/LP",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 3,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 6,
+   "matched": 4,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Enter your UID",
+     "kind": "input"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 5,
+    "cards": 0,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "empty",
+   "label": "빈 값 — 안내 보임, Next 비활성 (L2)",
+   "vp": "pc",
+   "node": "28960:127275",
+   "src": "정밀",
+   "node_name": "DEX / link / L2 Paste address, empty / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 8,
+   "nP": 11,
+   "matched": 8,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "empty",
+   "label": "빈 값 — 안내 보임, Next 비활성 (L2)",
+   "vp": "mo",
+   "node": "28969:126986",
+   "src": "정밀",
+   "node_name": "Link / Enter wallet address / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 9,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 6,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "valid",
+   "label": "유효 주소 — Next 활성 (L3)",
+   "vp": "pc",
+   "node": "28960:127279",
+   "src": "정밀",
+   "node_name": "DEX / link / L3 Valid address / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 10,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "valid",
+   "label": "유효 주소 — Next 활성 (L3)",
+   "vp": "mo",
+   "node": "28969:126996",
+   "src": "정밀",
+   "node_name": "Link / Valid address / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 8,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "e2",
+   "label": "빈 값 제출 — Enter your wallet address.",
+   "vp": "pc",
+   "node": "28980:132144",
+   "src": "정밀",
+   "node_name": "Address validation / Empty",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 9,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "ws",
+   "label": "주소 안 공백 — Remove spaces… (L4)",
+   "vp": "pc",
+   "node": "28980:132242",
+   "src": "정밀",
+   "node_name": "Address validation / Internal whitespace",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 7,
+   "nP": 11,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "ws",
+   "label": "주소 안 공백 — Remove spaces… (L4)",
+   "vp": "mo",
+   "node": "28969:127006",
+   "src": "정밀",
+   "node_name": "Link / Invalid address / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 7,
+   "nP": 10,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "case",
+   "label": "다른 형식 · 대소문자 원문 유지 — 오류 없음",
+   "vp": "pc",
+   "node": "28980:132193",
+   "src": "정밀",
+   "node_name": "Address input / Preserve original case",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 7,
+   "nP": 11,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true,
+   "same_node": []
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "rejected",
+   "label": "거래소가 주소 거절 — 입력 유지",
+   "vp": "pc",
+   "node": "28980:132291",
+   "src": "정밀",
+   "node_name": "Address validation / Partner rejected address",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 10,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "e6",
+   "label": "ENS·이름 입력",
+   "vp": "pc",
+   "node": "28980:132340",
+   "src": "정밀",
+   "node_name": "Address validation / Name instead of address",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 7,
+   "nP": 11,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.addr",
+   "group": "link",
+   "title": "지갑 주소 입력",
+   "state": "e7",
+   "label": "제로 주소",
+   "vp": "pc",
+   "node": "28980:132389",
+   "src": "정밀",
+   "node_name": "Address validation / Zero address",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 10,
+   "matched": 6,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Paste your wallet address",
+     "kind": "input"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.captcha",
+   "group": "link",
+   "title": "캡차",
+   "state": "normal",
+   "label": "GEETEST 퍼즐 (L5)",
+   "vp": "pc",
+   "node": "28960:127287",
+   "src": "정밀",
+   "node_name": "DEX / link / L5 Captcha / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 8,
+   "nP": 11,
+   "matched": 8,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true,
+   "same_node": []
+  },
+  {
+   "screen": "link.captcha",
+   "group": "link",
+   "title": "캡차",
+   "state": "normal",
+   "label": "GEETEST 퍼즐 (L5)",
+   "vp": "mo",
+   "node": "28969:127016",
+   "src": "정밀",
+   "node_name": "Link / Captcha / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 2,
+   "nP": 10,
+   "matched": 2,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 8,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "link.captcha",
+   "group": "link",
+   "title": "캡차",
+   "state": "success",
+   "label": "Verification Success",
+   "vp": "pc",
+   "node": "28966:124154",
+   "src": "정밀",
+   "node_name": "Link Account / Verification success",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.captcha",
+   "group": "link",
+   "title": "캡차",
+   "state": "success",
+   "label": "Verification Success",
+   "vp": "mo",
+   "node": "28969:127073",
+   "src": "정밀",
+   "node_name": "Link / Verification success / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.proc",
+   "group": "link",
+   "title": "처리 중 (Processing Your Account)",
+   "state": "normal",
+   "label": "귀속 조회 중 — 최소 1초 (L6)",
+   "vp": "pc",
+   "node": "28960:127293",
+   "src": "정밀",
+   "node_name": "DEX / link / L6 Processing (request wait ≥1s) / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.proc",
+   "group": "link",
+   "title": "처리 중 (Processing Your Account)",
+   "state": "normal",
+   "label": "귀속 조회 중 — 최소 1초 (L6)",
+   "vp": "mo",
+   "node": "25963:14034",
+   "src": "정밀",
+   "node_name": "mWeb/LP/SPLASH/INTEGRATION_PROCESSING",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 2,
+   "nP": 4,
+   "matched": 0,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    },
+    {
+     "t": "Need help? Contact Support",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "Your UID is being processed. You'll be notified once linking is complete. ⇄ Your account is being processed. You'll be notified once linking is complete.",
+     "rule": "EX-02"
+    },
+    {
+     "type": "diff",
+     "t": "Processing Your UID ⇄ Processing Your Account",
+     "rule": "EX-02"
+    }
+   ],
+   "geom": {
+    "issues": [],
+    "pairs": 1,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "link.proc",
+   "group": "link",
+   "title": "처리 중 (Processing Your Account)",
+   "state": "prelink",
+   "label": "연동 전 잔액 출금 대기",
+   "vp": "pc",
+   "node": "28966:124158",
+   "src": "정밀",
+   "node_name": "Link Account / Pre-link payout pending",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.proc",
+   "group": "link",
+   "title": "처리 중 (Processing Your Account)",
+   "state": "prelink",
+   "label": "연동 전 잔액 출금 대기",
+   "vp": "mo",
+   "node": "28969:127087",
+   "src": "정밀",
+   "node_name": "Link / Pre-link payout pending / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "normal",
+   "label": "레퍼럴 아님 — Unable to Link Account (L8)",
+   "vp": "pc",
+   "node": "28960:127301",
+   "src": "정밀",
+   "node_name": "DEX / link / L8 Not joined through TetherMax / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 6,
+    "cards": 1,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "normal",
+   "label": "레퍼럴 아님 — Unable to Link Account (L8)",
+   "vp": "mo",
+   "node": "28969:127125",
+   "src": "정밀",
+   "node_name": "Link / Referral not eligible / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 6,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "inuse",
+   "label": "타인 사용 중 — Account Already in Use (L9)",
+   "vp": "pc",
+   "node": "28960:127305",
+   "src": "정밀",
+   "node_name": "DEX / link / L9 Wallet already in use / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "inuse",
+   "label": "타인 사용 중 — Account Already in Use (L9)",
+   "vp": "mo",
+   "node": "28969:127109",
+   "src": "정밀",
+   "node_name": "Link / Wallet already in use / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "cooldown",
+   "label": "최근 소유권 인증 — Verification Limit Reached (L12)",
+   "vp": "pc",
+   "node": "28960:127322",
+   "src": "정밀",
+   "node_name": "DEX / link / L12 Verification limit reached / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "cooldown",
+   "label": "최근 소유권 인증 — Verification Limit Reached (L12)",
+   "vp": "mo",
+   "node": "28969:127132",
+   "src": "정밀",
+   "node_name": "Link / Verification limit / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "mine",
+   "label": "본인 이미 추가 — You’ve Already Added This Account (L14)",
+   "vp": "pc",
+   "node": "28960:127340",
+   "src": "정밀",
+   "node_name": "DEX / link / L14 Wallet already added / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 3,
+   "matched": 3,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "mine",
+   "label": "본인 이미 추가 — You’ve Already Added This Account (L14)",
+   "vp": "mo",
+   "node": "28969:127139",
+   "src": "정밀",
+   "node_name": "Link / Wallet already added / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 3,
+   "matched": 3,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "other",
+   "label": "기타 실패 — Unable to Link Account (L13)",
+   "vp": "pc",
+   "node": "28960:127331",
+   "src": "정밀",
+   "node_name": "DEX / link / L13 Unable to link wallet, contact support / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 3,
+   "matched": 3,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "other",
+   "label": "기타 실패 — Unable to Link Account (L13)",
+   "vp": "mo",
+   "node": "28969:127153",
+   "src": "정밀",
+   "node_name": "Link / L13 Unable to Link Account (LINK_REJECTED · FAILED_ISSUE_UID) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 3,
+   "matched": 3,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "unavailable",
+   "label": "선택 뒤 연동 불가로 바뀐 거래소",
+   "vp": "mo",
+   "node": "28969:127153",
+   "src": "정밀",
+   "node_name": "Link / L13 Unable to Link Account (LINK_REJECTED · FAILED_ISSUE_UID) / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 3,
+   "matched": 3,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "limit",
+   "label": "한도 초과 — Trading account limit reached (L15)",
+   "vp": "pc",
+   "node": "28960:127349",
+   "src": "정밀",
+   "node_name": "DEX / link / L15 Wallet limit reached / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Need help? Contact Support",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "limit",
+   "label": "한도 초과 — Trading account limit reached (L15)",
+   "vp": "mo",
+   "node": "28969:127118",
+   "src": "정밀",
+   "node_name": "Link / Trading account limit / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Need help? Contact Support",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "pending",
+   "label": "확인 중 — manual_link_pending (L11)",
+   "vp": "pc",
+   "node": "28960:127313",
+   "src": "정밀",
+   "node_name": "DEX / link / L11 Checking (PROCESSING · PARTNER_LOOKUP) / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "pending",
+   "label": "확인 중 — manual_link_pending (L11)",
+   "vp": "mo",
+   "node": "28969:127080",
+   "src": "정밀",
+   "node_name": "Link / Checking referral / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 4,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "prelinkFail",
+   "label": "연동 전 잔액 출금 실패 = 연동 실패",
+   "vp": "pc",
+   "node": "28966:124162",
+   "src": "정밀",
+   "node_name": "Link Account / Pre-link payout failed",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.result",
+   "group": "link",
+   "title": "연동 결과",
+   "state": "prelinkFail",
+   "label": "연동 전 잔액 출금 실패 = 연동 실패",
+   "vp": "mo",
+   "node": "28969:127094",
+   "src": "정밀",
+   "node_name": "Link / Pre-link payout failed / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.done",
+   "group": "link",
+   "title": "연동 성공",
+   "state": "weekly",
+   "label": "Lighter — Weekly (L7)",
+   "vp": "pc",
+   "node": "28960:127297",
+   "src": "정밀",
+   "node_name": "DEX / link / L7 Wallet linked / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 7,
+   "matched": 2,
+   "missing": [],
+   "added": [
+    {
+     "t": "Weekly · Next update 26.11.30 09:00",
+     "kind": "text"
+    },
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    },
+    {
+     "t": "Account linked successfully",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Linked successfully.\n\nWallet  0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9\nDaily  ·  Next update 26.11.30 09:00",
+     "rule": "EX-B17"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "link.done",
+   "group": "link",
+   "title": "연동 성공",
+   "state": "weekly",
+   "label": "Lighter — Weekly (L7)",
+   "vp": "mo",
+   "node": "28969:127101",
+   "src": "정밀",
+   "node_name": "Link / Wallet linked / Light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 7,
+   "matched": 2,
+   "missing": [],
+   "added": [
+    {
+     "t": "Weekly settlement · Monday",
+     "kind": "text"
+    },
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    },
+    {
+     "t": "Account linked successfully",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Linked successfully.\n\nWallet  0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9\nDaily  ·  Next update 26.11.27 09:00",
+     "rule": "EX-B17"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.done",
+   "group": "link",
+   "title": "연동 성공",
+   "state": "normal",
+   "label": "EdgeX · Daily",
+   "vp": "pc",
+   "node": "28960:127861",
+   "src": "정밀",
+   "node_name": "UID link result / Splash / mWeb 375",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 7,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    },
+    {
+     "t": "Account linked successfully",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 4,
+    "cards": 1,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.done",
+   "group": "link",
+   "title": "연동 성공",
+   "state": "apex",
+   "label": "ApeX — Daily (G-025 롤업 합의 전제)",
+   "vp": "pc",
+   "node": "28960:127861",
+   "src": "정밀",
+   "node_name": "UID link result / Splash / mWeb 375",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 6,
+   "matched": 2,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    },
+    {
+     "t": "Account linked successfully",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Linked successfully.\n\nWallet  0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9\nDaily  ·  Next update 26.11.26 09:00",
+     "rule": "EX-B17"
+    }
+   ],
+   "geom": {
+    "issues": [],
+    "pairs": 4,
+    "cards": 1,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.done",
+   "group": "link",
+   "title": "연동 성공",
+   "state": "apexIdPending",
+   "label": "ApeX AccountID 미반환 — 회원에게는 연동 완료",
+   "vp": "pc",
+   "node": "28960:127861",
+   "src": "정밀",
+   "node_name": "UID link result / Splash / mWeb 375",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 7,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    },
+    {
+     "t": "Account linked successfully",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 4,
+    "cards": 1,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "link.lguide",
+   "group": "link",
+   "title": "Lighter 가이드 (보류)",
+   "state": "normal",
+   "label": "Lighter 가이드 Step 3 — Plus·Premium 안내 (D2)",
+   "vp": "pc",
+   "node": "29357:145019",
+   "src": "정밀",
+   "node_name": "guide",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 11,
+   "nP": 11,
+   "matched": 11,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 816,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  }
+ ],
+ "nodesign": [
+  {
+   "screen": "link.select",
+   "state": "normal",
+   "label": "진입 — 첫 거래소 WOO X Pro 기본 선택 (G-379)",
+   "group": "link"
+  },
+  {
+   "screen": "link.select",
+   "state": "none",
+   "label": "검색 결과 없음 (All 칩)",
+   "group": "link"
+  },
+  {
+   "screen": "link.select",
+   "state": "region",
+   "label": "지역 제한 DEX — 목록에서 제외",
+   "group": "link"
+  },
+  {
+   "screen": "link.select",
+   "state": "fail",
+   "label": "파트너 목록 로드 실패 (캐시 없음)",
+   "group": "link"
+  },
+  {
+   "screen": "link.select",
+   "state": "intro",
+   "label": "STG 웹 진입 질문",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "kept",
+   "label": "실패 후 주소 유지",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "hub",
+   "label": "허브 진입 — 그 거래소 미리 선택",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "lighter",
+   "label": "Lighter 상세 진입 — 거래소 미리 선택",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "apex",
+   "label": "ApeX 상세 진입 — 거래소 미리 선택",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "edgex",
+   "label": "EdgeX 상세 진입 — 거래소 미리 선택",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "aster",
+   "label": "Aster 상세 진입 — 거래소 미리 선택",
+   "group": "link"
+  },
+  {
+   "screen": "link.signup",
+   "state": "return",
+   "label": "3 Return — 상세로 돌아와 Link Wallet → 미리 선택된 연동 모달",
+   "group": "link"
+  },
+  {
+   "screen": "link.captcha",
+   "state": "retry",
+   "label": "퍼즐 실패·만료 — 주소 유지 재시도",
+   "group": "link"
+  },
+  {
+   "screen": "link.done",
+   "state": "truncated",
+   "label": "180일 넘는 기록 — Cashback shown from",
+   "group": "link"
+  }
+ ],
+ "oneside": [
+  {
+   "screen": "link.select",
+   "state": "one",
+   "label": "검색 결과 1건",
+   "missing_vp": "pc",
+   "has": "29051:104415",
+   "group": "link"
+  },
+  {
+   "screen": "link.select",
+   "state": "many",
+   "label": "검색 결과 여러 건",
+   "missing_vp": "pc",
+   "has": "29051:104229",
+   "group": "link"
+  },
+  {
+   "screen": "link.select",
+   "state": "dexbit",
+   "label": "DEX 칩에서 «bit» → 0건",
+   "missing_vp": "pc",
+   "has": "29051:104597",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "e2",
+   "label": "빈 값 제출 — Enter your wallet address.",
+   "missing_vp": "mo",
+   "has": "28980:132144",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "case",
+   "label": "다른 형식 · 대소문자 원문 유지 — 오류 없음",
+   "missing_vp": "mo",
+   "has": "28980:132193",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "rejected",
+   "label": "거래소가 주소 거절 — 입력 유지",
+   "missing_vp": "mo",
+   "has": "28980:132291",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "e6",
+   "label": "ENS·이름 입력",
+   "missing_vp": "mo",
+   "has": "28980:132340",
+   "group": "link"
+  },
+  {
+   "screen": "link.addr",
+   "state": "e7",
+   "label": "제로 주소",
+   "missing_vp": "mo",
+   "has": "28980:132389",
+   "group": "link"
+  },
+  {
+   "screen": "link.result",
+   "state": "unavailable",
+   "label": "선택 뒤 연동 불가로 바뀐 거래소",
+   "missing_vp": "pc",
+   "has": "28969:127153",
+   "group": "link"
+  },
+  {
+   "screen": "link.done",
+   "state": "normal",
+   "label": "EdgeX · Daily",
+   "missing_vp": "mo",
+   "has": "28960:127861",
+   "group": "link"
+  },
+  {
+   "screen": "link.done",
+   "state": "apex",
+   "label": "ApeX — Daily (G-025 롤업 합의 전제)",
+   "missing_vp": "mo",
+   "has": "28960:127861",
+   "group": "link"
+  },
+  {
+   "screen": "link.done",
+   "state": "apexIdPending",
+   "label": "ApeX AccountID 미반환 — 회원에게는 연동 완료",
+   "missing_vp": "mo",
+   "has": "28960:127861",
+   "group": "link"
+  },
+  {
+   "screen": "link.lguide",
+   "state": "normal",
+   "label": "Lighter 가이드 Step 3 — Plus·Premium 안내 (D2)",
+   "missing_vp": "mo",
+   "has": "29357:145019",
+   "group": "link"
+  }
+ ],
+ "geom_top": [
+  {
+   "i": 1,
+   "node": "28969:126953",
+   "screen": "link.select",
+   "state": "dexlist",
+   "vp": "mo",
+   "type": "안쪽 세로 위치(중심)",
+   "label": "dex",
+   "crop": [
+    0,
+    172,
+    375,
+    640
+   ]
+  }
+ ]
+}

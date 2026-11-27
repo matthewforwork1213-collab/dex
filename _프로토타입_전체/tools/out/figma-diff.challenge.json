@@ -1,0 +1,235 @@
+{
+ "generated": "2026-11-27T22:13",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "challenge.detail",
+   "group": "rewards",
+   "title": "캐시백 챌린지 상세",
+   "state": "normal",
+   "label": "레벨 1 (0%)",
+   "vp": "pc",
+   "node": "10981:85015",
+   "src": "정밀",
+   "node_name": "Web",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 7,
+   "nP": 14,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Claim 5 USDT Coupon",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 984,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "challenge.detail",
+   "group": "rewards",
+   "title": "캐시백 챌린지 상세",
+   "state": "progress",
+   "label": "게이지 진행 (35%)",
+   "vp": "pc",
+   "node": "10981:85020",
+   "src": "정밀",
+   "node_name": "Web",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 7,
+   "nP": 14,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Claim 5 USDT Coupon",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "challenge.detail",
+   "group": "rewards",
+   "title": "캐시백 챌린지 상세",
+   "state": "progress",
+   "label": "게이지 진행 (35%)",
+   "vp": "mo",
+   "node": "10739:232621",
+   "src": "정밀",
+   "node_name": "mWeb/allPartnerExchange",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 7,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Complete level 1 reward to unlock",
+     "kind": "text"
+    },
+    {
+     "t": "Claim 5 USDT Coupon",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Unlocks after signing up",
+     "rule": "EX-C12"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "challenge.detail",
+   "group": "rewards",
+   "title": "캐시백 챌린지 상세",
+   "state": "pick",
+   "label": "보상 받을 계정 선택",
+   "vp": "pc",
+   "node": "10981:85017",
+   "src": "정밀",
+   "node_name": "Web",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 7,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Centralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX · Wallet",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "Select a UID to receive the reward ⇄ Select an account to receive the reward",
+     "rule": "EX-C11"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": true,
+   "same_node": []
+  }
+ ],
+ "nodesign": [],
+ "oneside": [
+  {
+   "screen": "challenge.detail",
+   "state": "normal",
+   "label": "레벨 1 (0%)",
+   "missing_vp": "mo",
+   "has": "10981:85015",
+   "group": "rewards"
+  },
+  {
+   "screen": "challenge.detail",
+   "state": "pick",
+   "label": "보상 받을 계정 선택",
+   "missing_vp": "mo",
+   "has": "10981:85017",
+   "group": "rewards"
+  }
+ ],
+ "geom_top": []
+}

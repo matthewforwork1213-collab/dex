@@ -16,7 +16,8 @@ Figma 쪽 문구 출처(우선순위)
          고정 높이 글상자는 실제 글줄 범위(줄 수 × 줄 높이, 세로 정렬 반영)를 좌표로 남긴다 — 측정 방식 차이는 예외가 아니라 여기서 걸러진다.
          색인(레이어 이름) 출처는 MEMO_NAME으로 설계 메모만 뺀다(불투명도·가림은 색인으로 알 수 없어 정밀 덤프가 필요).
 예외     tools/figma-diff-exceptions.json — 결정 기록·정책 REQ로 의도적으로 다르게 한 것만(근거 위치 필수). 결과에서 빼고 따로 센다.
-결과     05.리포트/프로토타입_Figma_자동대조.md · _img/ · tools/out/figma-diff.json
+결과     05.리포트/프로토타입_Figma_자동대조.md · _img/ · tools/out/figma-diff.json(전체) · figma-diff.<접두사>.json(접두사 실행)
+부분 프레임  Figma 화면 프레임이 푸터까지 그리지 않았으면 프레임 높이(+40px) 아래 프로토타입 문구는 「추가」로 세지 않는다(frame_cut)
 """
 import sys, os, re, io, json, glob, html, unicodedata, difflib, pathlib, datetime, collections, argparse
 
@@ -40,6 +41,8 @@ ap.add_argument('--geom-cache', default=str(ROOT / 'ref' / 'figma_geom.json'))
 ap.add_argument('--no-geom', action='store_true')
 ap.add_argument('--geom-tol', type=float, default=2.0)
 ARGS = ap.parse_args()
+# 기계용 결과: 전체 실행 = tools/out/figma-diff.json · 접두사 실행 = tools/out/figma-diff.<접두사>.json(담당별 동시 실행이 서로 덮어쓰지 않게)
+OUT_JSON = TOOLS / 'out' / ('figma-diff.json' if not ARGS.prefix else 'figma-diff.' + re.sub(r'[^\w.-]+', '_', ARGS.prefix).strip('.') + '.json')
 
 # ───────────────────────── 공통: 정규화 · 데이터성 판정 ─────────────────────────
 def norm(t):
@@ -239,7 +242,7 @@ if os.path.exists(ARGS.text_cache):
     except Exception as e:
         print('정밀 문구 캐시를 읽지 못함:', e)
 
-BACKDROP = re.compile(r'^(backdrop|scrim|dim|overlay)\b|/ scrim$|\bbackdrop$', re.I)
+BACKDROP = re.compile(r'^(backdrop|scrim|dim|overlay)\b|/ scrim$|\bbackdrop$|· 배경$', re.I)
 # 정밀 문구 중 화면 문구가 아닌 것: 여백 표시 컴포넌트(Top·Left…·세로 글자), 모바일 브라우저 주소창, 컴포넌트 기본 글자(Chip·Tab·Label)
 PRECISE_NOISE = re.compile(r'^(top|bottom|left|right|center|chip|tab|label|button|text|title|value|placeholder)$|^https?://(www\.)?tethermax\.io/?$|^(\S\n)+\S$', re.I)
 
@@ -462,20 +465,21 @@ EXTRACT_JS = r"""
   const vis = el => (!el.checkVisibility || el.checkVisibility({checkVisibilityCSS: true}));
   const out = [];
   // 영문 렌더 안의 국문은 개발 메모·미정 자리표시라 대조하지 않는다
-  const push = (t, kind) => { t = (t || '').replace(/\s+/g, ' ').trim(); if (!t || /^\[.*\]$/.test(t) && /미정|미수신/.test(t) || lang === 'en' && /[가-힣]/.test(t)) return; out.push({t, kind}); };
+  const top0 = root.getBoundingClientRect().top;
+  const push = (t, kind, el) => { t = (t || '').replace(/\s+/g, ' ').trim(); if (!t || /^\[.*\]$/.test(t) && /미정|미수신/.test(t) || lang === 'en' && /[가-힣]/.test(t)) return; out.push({t, kind, y: el ? Math.round(el.getBoundingClientRect().top - top0) : null}); };
   const isLeafBlock = el => { for (const d of el.querySelectorAll('*')) { if (!INLINE.has(d.tagName) || kindOf(d) || d.tagName === 'INPUT') return false; } return true; };
   const walk = el => {
     if (el.matches(SKIP)) return;
     if (!withShell && el.matches(SHELL)) return;
     if (!vis(el)) return;
-    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { if (el.placeholder) push(el.placeholder, 'input'); if (el.value) push(el.value, 'input'); return; }
-    if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; if (o) push(o.text, 'input'); return; }
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { if (el.placeholder) push(el.placeholder, 'input', el); if (el.value) push(el.value, 'input', el); return; }
+    if (el.tagName === 'SELECT') { const o = el.options[el.selectedIndex]; if (o) push(o.text, 'input', el); return; }
     const k = kindOf(el);
-    if (k) { push(el.innerText, k); return; }
+    if (k) { push(el.innerText, k, el); return; }
     let own = ''; for (const c of el.childNodes) if (c.nodeType === 3) own += c.textContent;
     // 한 문장 안의 굵게·링크처럼 글자와 인라인 요소가 섞인 경우만 한 덩어리로. 글자 없이 span만 나란히 있으면(라벨·값) 따로 센다
-    if (isLeafBlock(el) && (own.trim() || el.children.length <= 1)) { push(el.innerText, el.closest('.tf, label') ? 'input' : 'text'); return; }
-    push(own, el.closest('.tf') ? 'input' : 'text');
+    if (isLeafBlock(el) && (own.trim() || el.children.length <= 1)) { push(el.innerText, el.closest('.tf, label') ? 'input' : 'text', el); return; }
+    push(own, el.closest('.tf') ? 'input' : 'text', el);
     for (const c of el.children) walk(c);
   };
   walk(root);
@@ -539,6 +543,18 @@ for _fg in GEOM.values():
     _body_any |= {akey(t[0]) for t in _fg['texts'] if not screen_sized(_fg['w'], _fg['h'], 'pc' if _fg['w'] >= 1000 else 'mo')}
 SHELL_ONLY -= _body_any
 
+def frame_cut(fs, nid, vp):
+    """부분 프레임 범위: Figma 화면 프레임이 페이지 끝(푸터)까지 그리지 않았으면 → 프레임 높이 + 40px(이 아래의 프로토타입 문구는 「추가」로 세지 않음).
+    예: 회원 오퍼 박스 프레임(1440×695)처럼 페이지 위쪽만 그린 시안. 페이지 끝까지 그린 프레임(푸터 있음)은 None"""
+    h = fs.get('h') or 0
+    if not h: return None
+    fg = GEOM.get(nid)
+    if fg and screen_sized(fg['w'], fg['h'], vp):
+        if shell_band(fg, vp)[1] is not None: return None
+    elif sum(1 for x in PRECISE.get(nid, {}).get('texts', fs['texts']) if FOOTER_ANCHOR.match(norm(x['t']))) >= 3:   # 셸 빼기 전 원래 문구로
+        return None
+    return h + 40
+
 def drop_shell(fs, nid, vp):
     """Figma 문구에서 GNB·푸터 문구를 뺀다 → 뺀 개수"""
     if not screen_sized(fs['w'], fs['h'], vp): return 0   # 배경 위 모달 프레임이어도 화면 크기면 GNB·푸터는 뺀다(프로토타입은 모달만 봄)
@@ -549,8 +565,9 @@ def drop_shell(fs, nid, vp):
     return before - len(fs['texts'])
 
 GEOM_JS = r"""
-([scopeOverlay, withShell]) => {
+([scopeOverlay, withShell, onlyOv]) => {
   const fr = document.getElementById('pt-frame');
+  const ov = onlyOv ? fr.querySelector('.scrim.pt-fixed') : null;   // 바텀시트: 흐린 배경 뒤 화면은 재지 않는다(Figma도 배경 앞만 덤프)
   let root = fr;
   if (scopeOverlay) { const s = fr.querySelector('.modal, .dialog, .sheet, .toast') || fr.querySelector('.scrim'); if (s) root = s; }
   const o = root.getBoundingClientRect();
@@ -562,6 +579,7 @@ GEOM_JS = r"""
   for (const el of root.querySelectorAll('*')) {
     if (el.closest(SKIP) || !vis(el)) continue;
     if (!withShell && el.closest(SHELL)) continue;
+    if (ov && !ov.contains(el)) continue;
     let own = false; for (const c of el.childNodes) if (c.nodeType === 3 && c.textContent.trim()) { own = true; break; }
     if (own) {
       const rg = document.createRange(); rg.selectNodeContents(el); const r = rg.getBoundingClientRect();
@@ -614,6 +632,14 @@ def geom_compare(fg, pg, tol, vp=None):
     keep_e = lambda e: vis_f(e[2:6]) and not (vp and e[0] in ('shell', 's')) and not (band and in_shell(e[2:6], e[0], e[1], band))
     fg = {**fg, 'texts': [t for t in fg['texts'] if keep_t(t)], 'els': [e for e in fg['els'] if keep_e(e)]}
     ok = lambda t: not is_data(t) and len(re.findall(r'[a-z가-힣]', akey(t))) >= 3   # 숫자·금액 같은 표본 값은 짝이 모호해서 뺌
+    # 화면보다 작은(컴포넌트 크기) 프레임인데 프로토타입 쪽이 화면 전체 원점이면(모달이 아닌 카드·섹션), 같은 문구 짝의 위치 차이 중앙값만큼 옮겨 원점을 맞춘다
+    if vp and not screen_sized(fg['w'], fg['h'], vp):
+        pr0 = _pair([(akey(t), r) for t, k, *r in fg['texts'] if ok(t)], [(akey(t), r) for t, r in pg['texts'] if ok(t)])
+        if pr0:
+            dx = sorted(b[0] - a[0] for k, a, b in pr0)[len(pr0) // 2]; dy = sorted(b[1] - a[1] for k, a, b in pr0)[len(pr0) // 2]
+            if abs(dx) > tol or abs(dy) > tol:
+                mv = lambda r: [r[0] - dx, r[1] - dy] + list(r[2:])
+                pg = {**pg, 'texts': [(t, mv(r)) for t, r in pg['texts']], 'els': [(k, lb, mv(r)) for k, lb, r in pg['els']], 'cards': [mv(r) for r in pg['cards']]}
     ft = [(akey(t), r) for t, k, *r in fg['texts'] if ok(t)]
     pt = [(akey(t), r) for t, r in pg['texts'] if ok(t)]
     fb = [(akey(lb), r) for k, lb, *r in fg['els'] if k in ('b', 'c', 't', 'i') and akey(lb)]
@@ -762,12 +788,19 @@ def main():
                     r = pages[vp].evaluate(EXTRACT_JS, [sc['id'], st['id'], vp, lang, scope_overlay, with_shell])
                     P = r['items']
                     geo = None
-                    if nid in GEOM and not r.get('err') and not PRECISE.get(nid, {}).get('overlay'):   # 배경 위 모달 프레임은 뒤 화면과 겹쳐 짝이 틀어지므로 뺀다
+                    # 바텀시트: 배경 위 프레임이라도 화면 크기 프레임에 화면 폭 카드가 프레임 아래 끝에 붙어 있으면 위치를 잰다.
+                    #   프로토타입 시트는 뷰포트 아래(고정 배치)에 붙으므로 뷰포트 높이를 Figma 프레임 높이로 맞춘 뒤 잰다
+                    fgm = GEOM.get(nid)
+                    bsheet = bool(fgm and PRECISE.get(nid, {}).get('overlay') and screen_sized(fgm['w'], fgm['h'], vp) and
+                                  any(e[0] == 'card' and e[2] <= 1 and e[4] >= fgm['w'] - 2 and e[3] > 0 and abs(e[3] + e[5] - fgm['h']) <= 2 for e in fgm['els']))
+                    if nid in GEOM and not r.get('err') and (not PRECISE.get(nid, {}).get('overlay') or bsheet):   # 배경 위 모달 프레임(바텀시트 제외)은 뒤 화면과 겹쳐 짝이 틀어지므로 뺀다
                         gpage = geo_page(vp, GEOM[nid]['w'] if screen_sized(GEOM[nid]['w'], GEOM[nid]['h'], vp) else (1440 if vp == 'pc' else 375))   # 컴포넌트 크기 프레임은 화면 폭(1440·375)에서 그 요소만 잰다
+                        if bsheet: gpage.set_viewport_size({'width': int(fgm['w']), 'height': int(fgm['h'])})
                         gpage.evaluate(EXTRACT_JS, [sc['id'], st['id'], vp, lang, False, with_shell])
                         gpage.wait_for_timeout(50)
                         g_scope = not screen_sized(GEOM[nid]['w'], GEOM[nid]['h'], vp)
-                        pgm = gpage.evaluate(GEOM_JS, [g_scope, with_shell])
+                        pgm = gpage.evaluate(GEOM_JS, [g_scope, with_shell, bsheet])
+                        if bsheet: gpage.set_viewport_size({'width': int(fgm['w']), 'height': 1000})
                         gi, npair, ncard = geom_compare(GEOM[nid], pgm, ARGS.geom_tol, None if with_shell else vp)
                         geo = {'issues': gi, 'pairs': npair, 'cards': ncard, 'fw': GEOM[nid]['w'], 'pw': pgm['fw'], 'scope': g_scope}
                         gx = [(i, geom_rule(sc['id'], st['id'], vp, i)) for i in gi]
@@ -792,7 +825,9 @@ def main():
                             (exc.append({'type': typ, 't': x['t'], 'rule': ru['id']}) if ru else o.append(x))
                         return o
                     cmpd['missing'] = keep(cmpd['missing'], 'missing')
-                    cmpd['added'] = keep(cmpd['added'], 'added')
+                    cut = frame_cut(fs, nid, vp) if full and not r.get('scoped') and not sc['id'].startswith('cmn.') else None   # 공통 셸 프레임은 셸 자체가 대상
+                    below = [x for x in cmpd['added'] if cut is not None and x.get('y') is not None and x['y'] >= cut]
+                    cmpd['added'] = keep([x for x in cmpd['added'] if x not in below], 'added')
                     dd = []
                     for fx, px, ratio in cmpd['diff']:
                         ru = find_rule(sc['id'], st['id'], vp, 'diff', fx['t'], px['t'])
@@ -804,7 +839,7 @@ def main():
                                     'opaque': dict(op), 'generic': fs['generic'], 'replaced': fs['replaced'], 'allow_added': sorted(allow),
                                     'nF': cmpd['nF'], 'nP': cmpd['nP'], 'matched': cmpd['matched'],
                                     'missing': [{'t': x['t'], 'kind': x['kind']} for x in cmpd['missing']],
-                                    'added': [{'t': x['t'], 'kind': x['kind']} for x in cmpd['added']],
+                                    'added': [{'t': x['t'], 'kind': x['kind']} for x in cmpd['added']], 'below_frame': len(below), 'frame_cut': cut,
                                     'unverifiable': len(cmpd['unverifiable']), 'diff': cmpd['diff'], 'excepted': exc, 'geom': geo,
                                     'scope_overlay': bool(scope_overlay)})
         # 상위 문제 캡처
@@ -1045,7 +1080,7 @@ def write_report(reg, results, nodesign, oneside, top, shots):
           '| 캡처 없이 빠르게 | `python -I tools/figma-diff.py --no-shots` |',
           '| 다른 빌드 파일로 | `python -I tools/figma-diff.py --html TetherMax_전체프로토타입_YYYYMMDD_HHMM.html` |',
           '| 위치·크기 대조 끄기 · 허용 오차 | `--no-geom` · `--geom-tol 2` (기본 2px). Figma 좌표 캐시 `ref/figma_geom.json`에 있는 노드만 대조 |',
-          '| 기계용 결과 | `tools/out/figma-diff.json` (상태×뷰별 누락·추가·다름·예외·위치 이슈) |',
+          '| 기계용 결과 | 전체 실행 `tools/out/figma-diff.json` · 접두사 실행 `tools/out/figma-diff.<접두사>.json`(담당별 동시 실행이 덮어쓰지 않게) — 상태×뷰별 누락·추가·다름·예외·위치 이슈·`below_frame`(부분 프레임 높이 아래라 「추가」에서 뺀 수) |',
           '| 예외 추가 | `tools/figma-diff-exceptions.json`의 `rules`에 `{"id","scope","vp","type","figma"/"proto"/"equiv","reason","ref"}` 추가. `scope` = `*` · `화면id` · `화면id:상태` · `그룹접두사.` · `접두사*` / `type` = `missing`·`added`·`diff`·`any` / 문구는 정규화 후 같거나 포함(6자 이상), `/정규식/i`도 됨. **근거(결정 기록 위치)가 없으면 넣지 않는다** |',
           '',
           '## 10. Figma 최신 색인으로 다시 돌리는 법', '',
@@ -1066,7 +1101,8 @@ if __name__ == '__main__':
                'nodesign': nodesign, 'oneside': oneside,
                'geom_top': [{'i': i, 'node': x['node'], 'screen': x['screen'], 'state': x['state'], 'vp': x['vp'], 'type': iss['type'],
                              'label': iss['label'], 'crop': iss.get('card') or iss['figma']} for i, (x, iss) in enumerate(geom_top(results), 1)]},
-              io.open(TOOLS / 'out' / 'figma-diff.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+              io.open(OUT_JSON, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    print(OUT_JSON)
     if not ARGS.no_report:
         rate, mis, add, dif = write_report(reg, results, nodesign, oneside, top, shots)
         print(f'대조 {len(results)} 상태×뷰 · 일치율 {rate:.1f}% · 누락 {mis} · 다름 {dif} · 추가 {add} · 디자인 없음 {len(nodesign)}')

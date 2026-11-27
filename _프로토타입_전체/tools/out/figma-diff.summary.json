@@ -1,0 +1,530 @@
+{
+ "generated": "2026-11-27T22:24",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "normal",
+   "label": "월 보기 — 필터 · 캘린더 · 월간 카드 · 일별 목록 (CS1)",
+   "vp": "pc",
+   "node": "28960:127133",
+   "src": "정밀",
+   "node_name": "DEX / CS1 Month view / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 16,
+   "nP": 16,
+   "matched": 16,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 1680,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 20,
+    "cards": 10,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "normal",
+   "label": "월 보기 — 필터 · 캘린더 · 월간 카드 · 일별 목록 (CS1)",
+   "vp": "mo",
+   "node": "29065:6687",
+   "src": "정밀",
+   "node_name": "캐시백 요약 · 캘린더",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 12,
+   "nP": 17,
+   "matched": 11,
+   "missing": [],
+   "added": [
+    {
+     "t": "Monthly total cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Received",
+     "kind": "text"
+    },
+    {
+     "t": "Withdrawn",
+     "kind": "text"
+    },
+    {
+     "t": "Net",
+     "kind": "text"
+    },
+    {
+     "t": "All amounts are shown in USDT. Cashback a DEX pays in USDC is shown 1:1 in USDT. Each calendar day shows the net amount.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 1235,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "All Cashback Types ⇄ All Types",
+     "rule": "EX-B8"
+    }
+   ],
+   "geom": {
+    "issues": [],
+    "pairs": 15,
+    "cards": 6,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "otherDay",
+   "label": "다른 날 선택 (CS2)",
+   "vp": "pc",
+   "node": "28960:127139",
+   "src": "정밀",
+   "node_name": "DEX / CS2 Month view, other day selected / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 13,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Monthly total cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Received",
+     "kind": "text"
+    },
+    {
+     "t": "Withdrawn",
+     "kind": "text"
+    },
+    {
+     "t": "Net",
+     "kind": "text"
+    },
+    {
+     "t": "All amounts are shown in USDT. Cashback a DEX pays in USDC is shown 1:1 in USDT. Each calendar day shows the net amount.",
+     "kind": "text"
+    },
+    {
+     "t": "Date",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Exchange Cashback",
+     "rule": "EX-B23"
+    },
+    {
+     "type": "missing",
+     "t": "Lighter Wallet 0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9",
+     "rule": "EX-B23"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "eventDay",
+   "label": "이벤트 리워드 날 · 큰 금액 축약 (CS3)",
+   "vp": "pc",
+   "node": "28960:127145",
+   "src": "정밀",
+   "node_name": "DEX / CS3 Event reward day / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s3",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 11,
+   "nP": 16,
+   "matched": 11,
+   "missing": [],
+   "added": [
+    {
+     "t": "Monthly total cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Received",
+     "kind": "text"
+    },
+    {
+     "t": "Withdrawn",
+     "kind": "text"
+    },
+    {
+     "t": "Net",
+     "kind": "text"
+    },
+    {
+     "t": "All amounts are shown in USDT. Cashback a DEX pays in USDC is shown 1:1 in USDT. Each calendar day shows the net amount.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "account",
+   "label": "계정 필터 드롭다운 (CS6 All Accounts)",
+   "vp": "pc",
+   "node": "29265:120180",
+   "src": "정밀",
+   "node_name": "All Accounts",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 3,
+   "nP": 16,
+   "matched": 3,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 13,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "types",
+   "label": "유형 다중 선택 (CS6 All Types)",
+   "vp": "pc",
+   "node": "29265:120387",
+   "src": "정밀",
+   "node_name": "All Types",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 4,
+   "nP": 17,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 13,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "types",
+   "label": "유형 다중 선택 (CS6 All Types)",
+   "vp": "mo",
+   "node": "29065:6366",
+   "src": "정밀",
+   "node_name": "캐시백 요약 · 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 6,
+   "nP": 20,
+   "matched": 6,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 14,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "noMonth",
+   "label": "활동 없는 달 (CS5)",
+   "vp": "pc",
+   "node": "28960:127157",
+   "src": "정밀",
+   "node_name": "DEX / CS5 Empty month / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 11,
+   "nP": 11,
+   "matched": 11,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 1236,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "summary.main",
+   "group": "summary",
+   "title": "캐시백 요약",
+   "state": "noDay",
+   "label": "활동 없는 날 · 큰 금액 (CS4)",
+   "vp": "pc",
+   "node": "28960:127151",
+   "src": "정밀",
+   "node_name": "DEX / CS4 Large amounts, empty day / light",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 13,
+   "nP": 13,
+   "matched": 13,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 1236,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  }
+ ],
+ "nodesign": [
+  {
+   "screen": "summary.main",
+   "state": "dexRange",
+   "label": "거래소 범위 DEX 전체",
+   "group": "summary"
+  },
+  {
+   "screen": "summary.main",
+   "state": "returned",
+   "label": "Withdrawal returned 행",
+   "group": "summary"
+  },
+  {
+   "screen": "summary.main",
+   "state": "lighter",
+   "label": "Lighter Credited · Withheld (온보딩 후)",
+   "group": "summary"
+  },
+  {
+   "screen": "summary.main",
+   "state": "oneEmpty",
+   "label": "계정 1개 선택 빈 상태",
+   "group": "summary"
+  },
+  {
+   "screen": "summary.main",
+   "state": "old",
+   "label": "180일 넘은 달",
+   "group": "summary"
+  }
+ ],
+ "oneside": [
+  {
+   "screen": "summary.main",
+   "state": "otherDay",
+   "label": "다른 날 선택 (CS2)",
+   "missing_vp": "mo",
+   "has": "28960:127139",
+   "group": "summary"
+  },
+  {
+   "screen": "summary.main",
+   "state": "eventDay",
+   "label": "이벤트 리워드 날 · 큰 금액 축약 (CS3)",
+   "missing_vp": "mo",
+   "has": "28960:127145",
+   "group": "summary"
+  },
+  {
+   "screen": "summary.main",
+   "state": "account",
+   "label": "계정 필터 드롭다운 (CS6 All Accounts)",
+   "missing_vp": "mo",
+   "has": "29265:120180",
+   "group": "summary"
+  },
+  {
+   "screen": "summary.main",
+   "state": "noMonth",
+   "label": "활동 없는 달 (CS5)",
+   "missing_vp": "mo",
+   "has": "28960:127157",
+   "group": "summary"
+  },
+  {
+   "screen": "summary.main",
+   "state": "noDay",
+   "label": "활동 없는 날 · 큰 금액 (CS4)",
+   "missing_vp": "mo",
+   "has": "28960:127151",
+   "group": "summary"
+  }
+ ],
+ "geom_top": []
+}

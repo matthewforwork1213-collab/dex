@@ -1,0 +1,185 @@
+{
+ "generated": "2026-11-27T22:13",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "about.intro",
+   "group": "landing",
+   "title": "서비스 소개",
+   "state": "normal",
+   "label": "기본 — 파트너 캐러셀(DEX 포함) · 출금 피드 · 거래 계정 문구",
+   "vp": "pc",
+   "node": "28960:129521",
+   "src": "정밀",
+   "node_name": "Service intro / PC / Light (DEX)",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 31,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 97,
+   "nP": 102,
+   "matched": 97,
+   "missing": [],
+   "added": [
+    {
+     "t": "DEX",
+     "kind": "badge"
+    },
+    {
+     "t": "🔥 for new traders",
+     "kind": "text"
+    },
+    {
+     "t": "Select a partner ▾",
+     "kind": "text"
+    },
+    {
+     "t": "Trade Frequency ▾",
+     "kind": "text"
+    },
+    {
+     "t": "Calculate",
+     "kind": "button"
+    },
+    {
+     "t": "ⓘ Actual savings may vary depending on your maker/taker ratio.",
+     "kind": "text"
+    },
+    {
+     "t": "Events",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in 45 M 37 S",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 15947,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "about.feed",
+   "group": "landing",
+   "title": "실시간 출금 피드",
+   "state": "normal",
+   "label": "CEX·DEX 시간순 · DEX 배지 · 마스킹",
+   "vp": "pc",
+   "node": "28960:128520",
+   "src": "정밀",
+   "node_name": "Frame 1984078442",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 11,
+   "matched": 9,
+   "missing": [],
+   "added": [
+    {
+     "t": "DEX",
+     "kind": "badge"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 702,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false,
+   "same_node": []
+  }
+ ],
+ "nodesign": [
+  {
+   "screen": "about.intro",
+   "state": "loading",
+   "label": "피드 불러오는 중",
+   "group": "landing"
+  },
+  {
+   "screen": "about.intro",
+   "state": "empty",
+   "label": "피드 없음",
+   "group": "landing"
+  },
+  {
+   "screen": "about.intro",
+   "state": "error",
+   "label": "피드 실패",
+   "group": "landing"
+  },
+  {
+   "screen": "about.feed",
+   "state": "loading",
+   "label": "불러오는 중",
+   "group": "landing"
+  },
+  {
+   "screen": "about.feed",
+   "state": "empty",
+   "label": "내역 없음",
+   "group": "landing"
+  },
+  {
+   "screen": "about.feed",
+   "state": "error",
+   "label": "불러오기 실패",
+   "group": "landing"
+  }
+ ],
+ "oneside": [
+  {
+   "screen": "about.intro",
+   "state": "normal",
+   "label": "기본 — 파트너 캐러셀(DEX 포함) · 출금 피드 · 거래 계정 문구",
+   "missing_vp": "mo",
+   "has": "28960:129521",
+   "group": "landing"
+  },
+  {
+   "screen": "about.feed",
+   "state": "normal",
+   "label": "CEX·DEX 시간순 · DEX 배지 · 마스킹",
+   "missing_vp": "mo",
+   "has": "28960:128520",
+   "group": "landing"
+  }
+ ],
+ "geom_top": []
+}

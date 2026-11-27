@@ -89,13 +89,13 @@ def from_rest(doc):
 
     def walk(n, names):
         if n.get('visible') is False: return
-        if re.search(r'^(backdrop|scrim|dim|overlay)\b|/ scrim$|\bbackdrop$', n.get('name', ''), re.I) and names: return
+        if re.search(r'^(backdrop|scrim|dim|overlay)\b|/ scrim$|\bbackdrop$|· 배경$', n.get('name', ''), re.I) and names: return
         if n.get('type') == 'TEXT':
             texts.append({'t': n.get('characters', ''), 'kind': kind_of(names)}); return
         for c in n.get('children', []): walk(c, ([n.get('name', '')] + names)[:4])
     walk(doc, [])
     bb = doc.get('absoluteBoundingBox') or {}
-    bd = re.compile(r'^(backdrop|scrim|dim|overlay)\b|/ scrim$|\bbackdrop$', re.I)
+    bd = re.compile(r'^(backdrop|scrim|dim|overlay)\b|/ scrim$|\bbackdrop$|· 배경$', re.I)
     kids = doc.get('children', [])
     overlay = any(bd.search(c.get('name', '')) for c in kids) or any(bd.search(g.get('name', '')) for c in kids for g in c.get('children', []))
     return {'name': doc.get('name', ''), 'w': bb.get('width', 0), 'h': bb.get('height', 0), 'hidden': doc.get('visible') is False,

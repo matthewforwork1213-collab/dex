@@ -1,0 +1,90 @@
+{
+ "generated": "2026-11-27T22:13",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "landing.main",
+   "group": "landing",
+   "title": "프리로그인 랜딩",
+   "state": "normal",
+   "label": "기본 — Our Partners·Featured에 DEX 포함 (PLP)",
+   "vp": "pc",
+   "node": "28960:128375",
+   "src": "정밀",
+   "node_name": "Landing / Desktop / Light (DEX)",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "guest",
+   "render_err": null,
+   "opaque": {},
+   "generic": 20,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 74,
+   "nP": 77,
+   "matched": 74,
+   "missing": [],
+   "added": [
+    {
+     "t": "DEX",
+     "kind": "badge"
+    },
+    {
+     "t": "Ends in 45 M 37 S",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 6988,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 110,
+    "cards": 19,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false,
+   "same_node": []
+  }
+ ],
+ "nodesign": [
+  {
+   "screen": "landing.main",
+   "state": "heroDex",
+   "label": "Hero Exchange = DEX",
+   "group": "landing"
+  },
+  {
+   "screen": "landing.main",
+   "state": "inactive",
+   "label": "Featured·Hero 파트너 비활성",
+   "group": "landing"
+  }
+ ],
+ "oneside": [
+  {
+   "screen": "landing.main",
+   "state": "normal",
+   "label": "기본 — Our Partners·Featured에 DEX 포함 (PLP)",
+   "missing_vp": "mo",
+   "has": "28960:128375",
+   "group": "landing"
+  }
+ ],
+ "geom_top": []
+}

@@ -1,0 +1,2406 @@
+{
+ "generated": "2026-11-27T22:12",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "join",
+   "label": "참여 가능 · 자격 있음",
+   "vp": "pc",
+   "node": "29062:111024",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 가능 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 48,
+   "nP": 51,
+   "matched": 48,
+   "missing": [],
+   "added": [
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4037,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "join",
+   "label": "참여 가능 · 자격 있음",
+   "vp": "mo",
+   "node": "29062:111380",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 가능 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 48,
+   "nP": 52,
+   "matched": 48,
+   "missing": [],
+   "added": [
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 5626,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "normal",
+   "label": "참여 중 — 하루 한 번 업데이트돼요",
+   "vp": "pc",
+   "node": "28537:449610",
+   "src": "색인",
+   "node_name": "PC · 참여 기간 · 참여 중",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {
+    "shell": 1,
+    "tab": 1,
+    "button": 3,
+    "content": 1
+   },
+   "generic": 4,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 50,
+   "nP": 60,
+   "matched": 48,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 4127.0,
+   "unverifiable": 11,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Total Ranking Pool",
+     "rule": "EX-C04"
+    },
+    {
+     "type": "diff",
+     "t": "Only UIDs of the board's exchange registered on TetherMax within 30 days before the participation start date can participate in MAX BOARD. A UID that has participated in the same MAX BOARD cannot participate again. Each MAX BOARD allows one UID to receive event rewards, and it cannot be changed once set. If your participating UID can no longer participate during the participation period, for example because its ownership is transferred to another account, your progress on that MAX BOARD will start over. Only cashback from trading counts toward the Bingo Gauge. Event rewards are not included. Cashback is updated once a day, and the update time may vary depending on the exchange. Cashback updated on the last day of the participation period is included. Checked cells cannot be canceled or moved to another cell. Event rewards are paid in USDT to your participating UID after the payout period starts. If ownership of the participating UID is transferred to another account before payout, the event rewards will be forfeited. If fraudulent participation is detected, you may be excluded from event rewards without notice. Event rewards are not paid to users who have deleted their account. All dates and times are based on UTC. This event may be changed or terminated without prior notice due to the circumstances of the Company or its affiliates. ⇄ Only accounts of the board's exchange registered on TetherMax within 30 days before the participation start date can participate in MAX BOARD. An account that has participated in the same MAX BOARD cannot participate again. Each MAX BOARD allows one account to receive event rewards, and it cannot be changed once set. If your participating account can no longer participate during the participation period, for example because its ownership is transferred to another account, your progress on that MAX BOARD will start over. Only cashback from trading counts toward the Bingo Gauge. Event rewards are not included. Cashback is updated once a day, and the update time may vary depending on the exchange. Cashback updated on the last day of the participation period is included. Checked cells cannot be canceled or moved to another cell. Event rewards are paid in USDT to your participating account after the payout period starts. If ownership of the participating account is transferred to another account before payout, the event rewards will be forfeited. If fraudulent participation is detected, you may be excluded from event rewards without notice. Event rewards are not paid to users who have deleted their account. All dates and times are based on UTC. This event may be changed or terminated without prior notice due to the circumstances of the Company or its affiliates.",
+     "rule": "EX-C05"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "normal",
+   "label": "참여 중 — 하루 한 번 업데이트돼요",
+   "vp": "mo",
+   "node": "28537:458145",
+   "src": "색인",
+   "node_name": "MO · 참여 기간 · 참여 중",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {
+    "shell": 1,
+    "tab": 1,
+    "button": 3,
+    "content": 1
+   },
+   "generic": 4,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 50,
+   "nP": 61,
+   "matched": 48,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 6258.0791015625,
+   "unverifiable": 12,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Total Ranking Pool",
+     "rule": "EX-C04"
+    },
+    {
+     "type": "diff",
+     "t": "Only UIDs of the board's exchange registered on TetherMax within 30 days before the participation start date can participate in MAX BOARD. A UID that has participated in the same MAX BOARD cannot participate again. Each MAX BOARD allows one UID to receive event rewards, and it cannot be changed once set. If your participating UID can no longer participate during the participation period, for example because its ownership is transferred to another account, your progress on that MAX BOARD will start over. Only cashback from trading counts toward the Bingo Gauge. Event rewards are not included. Cashback is updated once a day, and the update time may vary depending on the exchange. Cashback updated on the last day of the participation period is included. Checked cells cannot be canceled or moved to another cell. Event rewards are paid in USDT to your participating UID after the payout period starts. If ownership of the participating UID is transferred to another account before payout, the event rewards will be forfeited. If fraudulent participation is detected, you may be excluded from event rewards without notice. Event rewards are not paid to users who have deleted their account. All dates and times are based on UTC. This event may be changed or terminated without prior notice due to the circumstances of the Company or its affiliates. ⇄ Only accounts of the board's exchange registered on TetherMax within 30 days before the participation start date can participate in MAX BOARD. An account that has participated in the same MAX BOARD cannot participate again. Each MAX BOARD allows one account to receive event rewards, and it cannot be changed once set. If your participating account can no longer participate during the participation period, for example because its ownership is transferred to another account, your progress on that MAX BOARD will start over. Only cashback from trading counts toward the Bingo Gauge. Event rewards are not included. Cashback is updated once a day, and the update time may vary depending on the exchange. Cashback updated on the last day of the participation period is included. Checked cells cannot be canceled or moved to another cell. Event rewards are paid in USDT to your participating account after the payout period starts. If ownership of the participating account is transferred to another account before payout, the event rewards will be forfeited. If fraudulent participation is detected, you may be excluded from event rewards without notice. Event rewards are not paid to users who have deleted their account. All dates and times are based on UTC. This event may be changed or terminated without prior notice due to the circumstances of the Company or its affiliates.",
+     "rule": "EX-C05"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "complete",
+   "label": "보드 완성 (랭킹 ON)",
+   "vp": "pc",
+   "node": "29064:10322",
+   "src": "정밀",
+   "node_name": "맥스보드 · 보드 완성 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 47,
+   "nP": 63,
+   "matched": 47,
+   "missing": [],
+   "added": [
+    {
+     "t": "Overview",
+     "kind": "tab"
+    },
+    {
+     "t": "Bingo missions",
+     "kind": "tab"
+    },
+    {
+     "t": "Rewards & ranking",
+     "kind": "tab"
+    },
+    {
+     "t": "Rules",
+     "kind": "tab"
+    },
+    {
+     "t": "All benefits",
+     "kind": "button"
+    },
+    {
+     "t": "October EdgeX MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Fill your bingo with cashback and earn USDT rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Maximum Bingo Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "text"
+    },
+    {
+     "t": "Event schedule",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in D-10 Oct 24, 08:59",
+     "kind": "text"
+    },
+    {
+     "t": "View schedule",
+     "kind": "button"
+    },
+    {
+     "t": "✓ Full Board Complete",
+     "kind": "text"
+    },
+    {
+     "t": "i Rankings are updated daily.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 3,
+   "frame_cut": 2829,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "complete",
+   "label": "보드 완성 (랭킹 ON)",
+   "vp": "mo",
+   "node": "29064:10687",
+   "src": "정밀",
+   "node_name": "맥스보드 · 보드 완성 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 47,
+   "nP": 64,
+   "matched": 47,
+   "missing": [],
+   "added": [
+    {
+     "t": "MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Overview",
+     "kind": "tab"
+    },
+    {
+     "t": "Bingo missions",
+     "kind": "tab"
+    },
+    {
+     "t": "Rewards & ranking",
+     "kind": "tab"
+    },
+    {
+     "t": "Rules",
+     "kind": "tab"
+    },
+    {
+     "t": "All benefits",
+     "kind": "button"
+    },
+    {
+     "t": "October EdgeX MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Fill your bingo with cashback and earn USDT rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Maximum Bingo Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "text"
+    },
+    {
+     "t": "Event schedule",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in D-10 Oct 24, 08:59",
+     "kind": "text"
+    },
+    {
+     "t": "View schedule",
+     "kind": "button"
+    },
+    {
+     "t": "✓ Full Board Complete",
+     "kind": "text"
+    },
+    {
+     "t": "i Rankings are updated daily.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 4,
+   "frame_cut": 4093,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "tally",
+   "label": "집계 · 참여자",
+   "vp": "pc",
+   "node": "29064:12448",
+   "src": "정밀",
+   "node_name": "맥스보드 · 집계 · 참여자 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 53,
+   "nP": 56,
+   "matched": 53,
+   "missing": [],
+   "added": [
+    {
+     "t": "i The participation period has ended, so cells can no longer be checked.",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4055,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "tally",
+   "label": "집계 · 참여자",
+   "vp": "mo",
+   "node": "29064:12826",
+   "src": "정밀",
+   "node_name": "맥스보드 · 집계 · 참여자 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 51,
+   "nP": 57,
+   "matched": 51,
+   "missing": [],
+   "added": [
+    {
+     "t": "i The participation period has ended, so cells can no longer be checked.",
+     "kind": "text"
+    },
+    {
+     "t": "My Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "You have no rewards because you did not complete a bingo.",
+     "kind": "text"
+    },
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 6032,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "result",
+   "label": "결과 발표 · 참여자 (지급일 안내)",
+   "vp": "pc",
+   "node": "29064:13201",
+   "src": "정밀",
+   "node_name": "맥스보드 · 결과 발표 · 참여자 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 55,
+   "nP": 58,
+   "matched": 55,
+   "missing": [],
+   "added": [
+    {
+     "t": "i The participation period has ended, so cells can no longer be checked.",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4055,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "result",
+   "label": "결과 발표 · 참여자 (지급일 안내)",
+   "vp": "mo",
+   "node": "29064:13579",
+   "src": "정밀",
+   "node_name": "맥스보드 · 결과 발표 · 참여자 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 55,
+   "nP": 59,
+   "matched": 55,
+   "missing": [],
+   "added": [
+    {
+     "t": "i The participation period has ended, so cells can no longer be checked.",
+     "kind": "text"
+    },
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 6148,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "excluded",
+   "label": "결과 발표 · 제외",
+   "vp": "pc",
+   "node": "29064:14754",
+   "src": "정밀",
+   "node_name": "맥스보드 · 결과 발표 · 제외 / PC = 결과 발표 · 참여자와 같음",
+   "found": true,
+   "fig_hidden": true,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 0,
+   "nP": 55,
+   "matched": 0,
+   "missing": [],
+   "added": [
+    {
+     "t": "Overview",
+     "kind": "tab"
+    },
+    {
+     "t": "Bingo missions",
+     "kind": "tab"
+    },
+    {
+     "t": "Rewards & ranking",
+     "kind": "tab"
+    },
+    {
+     "t": "Rules",
+     "kind": "tab"
+    },
+    {
+     "t": "All benefits",
+     "kind": "button"
+    },
+    {
+     "t": "October EdgeX MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Fill your bingo with cashback and earn USDT rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Total Ranking Pool",
+     "kind": "text"
+    },
+    {
+     "t": "Maximum Bingo Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Reward Distribution",
+     "kind": "text"
+    },
+    {
+     "t": "10.31, From 09:00",
+     "kind": "text"
+    },
+    {
+     "t": "Event schedule",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards paid from Oct 31, 09:00",
+     "kind": "text"
+    },
+    {
+     "t": "View schedule",
+     "kind": "button"
+    },
+    {
+     "t": "01 / BINGO MISSION",
+     "kind": "text"
+    },
+    {
+     "t": "Earn Cashback. Complete your bingo.",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards for each completed row or column",
+     "kind": "text"
+    },
+    {
+     "t": "How to Check Your Bingo Cells",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback cells and Streak cells have different requirements.",
+     "kind": "text"
+    },
+    {
+     "t": "Use Your Gauge for Cashback Cells",
+     "kind": "text"
+    },
+    {
+     "t": "The USDT amount shown on a cell is deducted from your gauge.",
+     "kind": "text"
+    },
+    {
+     "t": "Available Bingo Gauge",
+     "kind": "text"
+    },
+    {
+     "t": "Checking closed after participation ended",
+     "kind": "text"
+    },
+    {
+     "t": "Reach a Streak to Check Streak Cells",
+     "kind": "text"
+    },
+    {
+     "t": "Streak cells do not use your gauge.",
+     "kind": "text"
+    },
+    {
+     "t": "Current Cashback Streak",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback Streak",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards Confirmed",
+     "kind": "text"
+    },
+    {
+     "t": "Event Rewards will be paid to your participating account from Oct 31, 09:00.",
+     "kind": "text"
+    },
+    {
+     "t": "My Bingo Board",
+     "kind": "text"
+    },
+    {
+     "t": "/ 9 checked",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Streak",
+     "kind": "text"
+    },
+    {
+     "t": "Full Board Reward for All 9 Cells",
+     "kind": "text"
+    },
+    {
+     "t": "i The participation period has ended, so cells can no longer be checked.",
+     "kind": "text"
+    },
+    {
+     "t": "02 / REWARDS",
+     "kind": "text"
+    },
+    {
+     "t": "Your completed bingo. Your rewards.",
+     "kind": "text"
+    },
+    {
+     "t": "My Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "You have no rewards because you did not complete a bingo.",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking Reward",
+     "kind": "text"
+    },
+    {
+     "t": "Full Board Only",
+     "kind": "chip"
+    },
+    {
+     "t": "Among traders who complete the Full Board, Ranking Rewards go to those with the most total cashback during the event.",
+     "kind": "text"
+    },
+    {
+     "t": "Total Ranking Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "View by Place",
+     "kind": "text"
+    },
+    {
+     "t": "2nd",
+     "kind": "chip"
+    },
+    {
+     "t": "Total Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "1st",
+     "kind": "chip"
+    },
+    {
+     "t": "3rd",
+     "kind": "chip"
+    },
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Trader",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking Reward (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "Only accounts of the board's exchange registered on TetherMax within 30 days before the participation start date can participate in MAX BOARD. An account that has participated in the same MAX BOARD cannot participate again. Each MAX BOARD allows one account to receive event rewards, and it cannot be changed once set. If your participating account can no longer participate during the participation period, for example because its ownership is transferred to another account, your progress on that MAX BOARD will start over. Only cashback from trading counts toward the Bingo Gauge. Event rewards are not included. Cashback is updated once a day, and the update time may vary depending on the exchange. Cashback updated on the last day of the participation period is included. Checked cells cannot be canceled or moved to another cell. Event rewards are paid in USDT to your participating account after the payout period starts. If ownership of the participating account is transferred to another account before payout, the event rewards will be forfeited. If fraudulent participation is detected, you may be excluded from event rewards without notice. Event rewards are not paid to users who have deleted their account. All dates and times are based on UTC. This event may be changed or terminated without prior notice due to the circumstances of the Company or its affiliates.",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3913,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "excluded",
+   "label": "결과 발표 · 제외",
+   "vp": "mo",
+   "node": "29064:15127",
+   "src": "정밀",
+   "node_name": "맥스보드 · 결과 발표 · 제외 / 모바일 = 결과 발표 · 참여자와 같음",
+   "found": true,
+   "fig_hidden": true,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 0,
+   "nP": 56,
+   "matched": 0,
+   "missing": [],
+   "added": [
+    {
+     "t": "MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Overview",
+     "kind": "tab"
+    },
+    {
+     "t": "Bingo missions",
+     "kind": "tab"
+    },
+    {
+     "t": "Rewards & ranking",
+     "kind": "tab"
+    },
+    {
+     "t": "Rules",
+     "kind": "tab"
+    },
+    {
+     "t": "All benefits",
+     "kind": "button"
+    },
+    {
+     "t": "October EdgeX MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Fill your bingo with cashback and earn USDT rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Total Ranking Pool",
+     "kind": "text"
+    },
+    {
+     "t": "Maximum Bingo Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Reward Distribution",
+     "kind": "text"
+    },
+    {
+     "t": "10.31, From 09:00",
+     "kind": "text"
+    },
+    {
+     "t": "Event schedule",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards paid from Oct 31, 09:00",
+     "kind": "text"
+    },
+    {
+     "t": "View schedule",
+     "kind": "button"
+    },
+    {
+     "t": "01 / BINGO MISSION",
+     "kind": "text"
+    },
+    {
+     "t": "Earn Cashback. Complete your bingo.",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards for each completed row or column",
+     "kind": "text"
+    },
+    {
+     "t": "How to Check Your Bingo Cells",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback cells and Streak cells have different requirements.",
+     "kind": "text"
+    },
+    {
+     "t": "Use Your Gauge for Cashback Cells",
+     "kind": "text"
+    },
+    {
+     "t": "The USDT amount shown on a cell is deducted from your gauge.",
+     "kind": "text"
+    },
+    {
+     "t": "Available Bingo Gauge",
+     "kind": "text"
+    },
+    {
+     "t": "Checking closed after participation ended",
+     "kind": "text"
+    },
+    {
+     "t": "Reach a Streak to Check Streak Cells",
+     "kind": "text"
+    },
+    {
+     "t": "Streak cells do not use your gauge.",
+     "kind": "text"
+    },
+    {
+     "t": "Current Cashback Streak",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback Streak",
+     "kind": "text"
+    },
+    {
+     "t": "Rewards Confirmed",
+     "kind": "text"
+    },
+    {
+     "t": "Event Rewards will be paid to your participating account from Oct 31, 09:00.",
+     "kind": "text"
+    },
+    {
+     "t": "My Bingo Board",
+     "kind": "text"
+    },
+    {
+     "t": "/ 9 checked",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Streak",
+     "kind": "text"
+    },
+    {
+     "t": "Full Board Reward for All 9 Cells",
+     "kind": "text"
+    },
+    {
+     "t": "i The participation period has ended, so cells can no longer be checked.",
+     "kind": "text"
+    },
+    {
+     "t": "02 / REWARDS",
+     "kind": "text"
+    },
+    {
+     "t": "Your completed bingo. Your rewards.",
+     "kind": "text"
+    },
+    {
+     "t": "My Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "You have no rewards because you did not complete a bingo.",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking Reward",
+     "kind": "text"
+    },
+    {
+     "t": "Full Board Only",
+     "kind": "chip"
+    },
+    {
+     "t": "Among traders who complete the Full Board, Ranking Rewards go to those with the most total cashback during the event.",
+     "kind": "text"
+    },
+    {
+     "t": "Total Ranking Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "View by Place",
+     "kind": "text"
+    },
+    {
+     "t": "1st",
+     "kind": "chip"
+    },
+    {
+     "t": "Total Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "2nd",
+     "kind": "chip"
+    },
+    {
+     "t": "3rd",
+     "kind": "chip"
+    },
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Trader",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking Reward (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "Only accounts of the board's exchange registered on TetherMax within 30 days before the participation start date can participate in MAX BOARD. An account that has participated in the same MAX BOARD cannot participate again. Each MAX BOARD allows one account to receive event rewards, and it cannot be changed once set. If your participating account can no longer participate during the participation period, for example because its ownership is transferred to another account, your progress on that MAX BOARD will start over. Only cashback from trading counts toward the Bingo Gauge. Event rewards are not included. Cashback is updated once a day, and the update time may vary depending on the exchange. Cashback updated on the last day of the participation period is included. Checked cells cannot be canceled or moved to another cell. Event rewards are paid in USDT to your participating account after the payout period starts. If ownership of the participating account is transferred to another account before payout, the event rewards will be forfeited. If fraudulent participation is detected, you may be excluded from event rewards without notice. Event rewards are not paid to users who have deleted their account. All dates and times are based on UTC. This event may be changed or terminated without prior notice due to the circumstances of the Company or its affiliates.",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 6046,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "payout",
+   "label": "지급 기간 — 이벤트 리워드 확인하기",
+   "vp": "pc",
+   "node": "29064:13958",
+   "src": "정밀",
+   "node_name": "맥스보드 · 지급 기간 · 참여자 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 58,
+   "nP": 61,
+   "matched": 58,
+   "missing": [],
+   "added": [
+    {
+     "t": "i The participation period has ended, so cells can no longer be checked.",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4128,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "payout",
+   "label": "지급 기간 — 이벤트 리워드 확인하기",
+   "vp": "mo",
+   "node": "29064:14356",
+   "src": "정밀",
+   "node_name": "맥스보드 · 지급 기간 · 참여자 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 58,
+   "nP": 62,
+   "matched": 58,
+   "missing": [],
+   "added": [
+    {
+     "t": "i The participation period has ended, so cells can no longer be checked.",
+     "kind": "text"
+    },
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 6317,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "reselect",
+   "label": "참여 지갑 해제 · 재선택 가능",
+   "vp": "pc",
+   "node": "29064:8888",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 지갑 해제 · 재선택 가능 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 47,
+   "nP": 50,
+   "matched": 47,
+   "missing": [],
+   "added": [
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4085,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "reselect",
+   "label": "참여 지갑 해제 · 재선택 가능",
+   "vp": "mo",
+   "node": "29064:9244",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 지갑 해제 · 재선택 가능 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 47,
+   "nP": 51,
+   "matched": 47,
+   "missing": [],
+   "added": [
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 5570,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "pick",
+   "label": "참여 계정 선택 레이어 (Join NOW)",
+   "vp": "pc",
+   "node": "29330:190799",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 계정 선택 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 56,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Overview",
+     "kind": "tab"
+    },
+    {
+     "t": "Bingo missions",
+     "kind": "tab"
+    },
+    {
+     "t": "Rewards & ranking",
+     "kind": "tab"
+    },
+    {
+     "t": "Rules",
+     "kind": "tab"
+    },
+    {
+     "t": "All benefits",
+     "kind": "button"
+    },
+    {
+     "t": "October EdgeX MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Fill your bingo with cashback and earn USDT rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Total Ranking Pool",
+     "kind": "text"
+    },
+    {
+     "t": "Maximum Bingo Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "text"
+    },
+    {
+     "t": "Join NOW",
+     "kind": "button"
+    },
+    {
+     "t": "You can participate until Oct 24, 08:59.",
+     "kind": "text"
+    },
+    {
+     "t": "Event schedule",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in D-10 Oct 24, 08:59",
+     "kind": "text"
+    },
+    {
+     "t": "View schedule",
+     "kind": "button"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 36,
+   "frame_cut": 840,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "regConfirm",
+   "label": "등록 확인 팝업",
+   "vp": "pc",
+   "node": "29330:190851",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 계정 등록 확인 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 56,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Overview",
+     "kind": "tab"
+    },
+    {
+     "t": "Bingo missions",
+     "kind": "tab"
+    },
+    {
+     "t": "Rewards & ranking",
+     "kind": "tab"
+    },
+    {
+     "t": "Rules",
+     "kind": "tab"
+    },
+    {
+     "t": "All benefits",
+     "kind": "button"
+    },
+    {
+     "t": "October EdgeX MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Fill your bingo with cashback and earn USDT rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Total Ranking Pool",
+     "kind": "text"
+    },
+    {
+     "t": "Maximum Bingo Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "text"
+    },
+    {
+     "t": "Join NOW",
+     "kind": "button"
+    },
+    {
+     "t": "You can participate until Oct 24, 08:59.",
+     "kind": "text"
+    },
+    {
+     "t": "Event schedule",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in D-10 Oct 24, 08:59",
+     "kind": "text"
+    },
+    {
+     "t": "View schedule",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 36,
+   "frame_cut": 840,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "If you select a new account, your progress on this board starts over. You can't change it after registration.",
+     "rule": "EX-C07"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "repick",
+   "label": "참여 계정 재선택 레이어 (Select New Account)",
+   "vp": "pc",
+   "node": "29330:190799",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 계정 선택 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 55,
+   "matched": 3,
+   "missing": [],
+   "added": [
+    {
+     "t": "Overview",
+     "kind": "tab"
+    },
+    {
+     "t": "Bingo missions",
+     "kind": "tab"
+    },
+    {
+     "t": "Rewards & ranking",
+     "kind": "tab"
+    },
+    {
+     "t": "Rules",
+     "kind": "tab"
+    },
+    {
+     "t": "You Can No Longer Participate with This Account",
+     "kind": "text"
+    },
+    {
+     "t": "This account can no longer join this board.",
+     "kind": "text"
+    },
+    {
+     "t": "All benefits",
+     "kind": "button"
+    },
+    {
+     "t": "October EdgeX MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Fill your bingo with cashback and earn USDT rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Total Ranking Pool",
+     "kind": "text"
+    },
+    {
+     "t": "Maximum Bingo Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "text"
+    },
+    {
+     "t": "Select New Account",
+     "kind": "button"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 37,
+   "frame_cut": 840,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "confirm",
+   "label": "새 지갑 재선택 확인 팝업",
+   "vp": "pc",
+   "node": "28537:462948",
+   "src": "색인",
+   "node_name": "[PC] modal",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {
+    "content": 4
+   },
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 3,
+   "nP": 55,
+   "matched": 1,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 840.0,
+   "unverifiable": 54,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Bitget UID 48377210",
+     "rule": "EX-C06"
+    },
+    {
+     "type": "diff",
+     "t": "If you select a new UID, your progress on this board starts over. You can't change it after registration. ⇄ If you select a new account, your progress on this board starts over. You can’t change it after registration.",
+     "rule": "EX-02"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "confirm",
+   "label": "새 지갑 재선택 확인 팝업",
+   "vp": "mo",
+   "node": "28537:462988",
+   "src": "색인",
+   "node_name": "[MO] modal",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {
+    "content": 1
+   },
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 2,
+   "nP": 56,
+   "matched": 0,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 884.0,
+   "unverifiable": 55,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Bitget UID 48377210",
+     "rule": "EX-C06"
+    },
+    {
+     "type": "diff",
+     "t": "If you select a new UID, your progress on this board starts over. You can't change it after registration. ⇄ If you select a new account, your progress on this board starts over. You can’t change it after registration.",
+     "rule": "EX-02"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "reselNone",
+   "label": "참여 지갑 해제 · 선택지 없음",
+   "vp": "pc",
+   "node": "29064:9601",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 지갑 해제 · 선택지 없음 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 48,
+   "nP": 52,
+   "matched": 48,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "button"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4161,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "reselNone",
+   "label": "참여 지갑 해제 · 선택지 없음",
+   "vp": "mo",
+   "node": "29064:9961",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 지갑 해제 · 선택지 없음 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 48,
+   "nP": 53,
+   "matched": 48,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "button"
+    },
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 5646,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "noEligible",
+   "label": "참여 전 · 자격 지갑 없음",
+   "vp": "pc",
+   "node": "29064:8176",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 전 · 자격 없음 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 46,
+   "nP": 50,
+   "matched": 46,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "button"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4001,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "noEligible",
+   "label": "참여 전 · 자격 지갑 없음",
+   "vp": "mo",
+   "node": "29064:8531",
+   "src": "정밀",
+   "node_name": "맥스보드 · 참여 전 · 자격 없음 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 46,
+   "nP": 51,
+   "matched": 46,
+   "missing": [],
+   "added": [
+    {
+     "t": "Link Account",
+     "kind": "button"
+    },
+    {
+     "t": "Rank",
+     "kind": "text"
+    },
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 5590,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "failToast",
+   "label": "등록 실패 토스트",
+   "vp": "mo",
+   "node": "28537:459718",
+   "src": "색인",
+   "node_name": "toast",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {
+    "content": 1
+   },
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 0,
+   "nP": 53,
+   "matched": 0,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 884.0,
+   "unverifiable": 53,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "preopen",
+   "label": "사전공개 · 자격 있음",
+   "vp": "pc",
+   "node": "29064:7182",
+   "src": "정밀",
+   "node_name": "맥스보드 · 사전공개 · 자격 있음 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 40,
+   "nP": 43,
+   "matched": 40,
+   "missing": [],
+   "added": [
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3275,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "preopen",
+   "label": "사전공개 · 자격 있음",
+   "vp": "mo",
+   "node": "29064:7428",
+   "src": "정밀",
+   "node_name": "맥스보드 · 사전공개 · 자격 있음 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 40,
+   "nP": 44,
+   "matched": 40,
+   "missing": [],
+   "added": [
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4544,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "preopenNo",
+   "label": "사전공개 · 자격 없음",
+   "vp": "pc",
+   "node": "29064:7679",
+   "src": "정밀",
+   "node_name": "맥스보드 · 사전공개 · 자격 없음 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 40,
+   "nP": 43,
+   "matched": 40,
+   "missing": [],
+   "added": [
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3275,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "preopenNo",
+   "label": "사전공개 · 자격 없음",
+   "vp": "mo",
+   "node": "29064:7925",
+   "src": "정밀",
+   "node_name": "맥스보드 · 사전공개 · 자격 없음 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 40,
+   "nP": 44,
+   "matched": 40,
+   "missing": [],
+   "added": [
+    {
+     "t": "Notes",
+     "kind": "text"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4544,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "ended404",
+   "label": "종료 · 404",
+   "vp": "pc",
+   "node": "29064:15501",
+   "src": "정밀",
+   "node_name": "맥스보드 · 종료 · 404 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 2,
+   "nP": 3,
+   "matched": 2,
+   "missing": [],
+   "added": [
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 940,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "maxboard.main",
+   "group": "rewards",
+   "title": "맥스보드 (DEX 보드)",
+   "state": "ended404",
+   "label": "종료 · 404",
+   "vp": "mo",
+   "node": "29064:15511",
+   "src": "정밀",
+   "node_name": "맥스보드 · 종료 · 404 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 2,
+   "nP": 4,
+   "matched": 2,
+   "missing": [],
+   "added": [
+    {
+     "t": "MAX BOARD",
+     "kind": "text"
+    },
+    {
+     "t": "Back to Home",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  }
+ ],
+ "nodesign": [
+  {
+   "screen": "maxboard.main",
+   "state": "today",
+   "label": "참여 중 · 오늘 마감",
+   "group": "rewards"
+  },
+  {
+   "screen": "maxboard.main",
+   "state": "final",
+   "label": "마지막 날 Batch 후 완성",
+   "group": "rewards"
+  }
+ ],
+ "oneside": [
+  {
+   "screen": "maxboard.main",
+   "state": "pick",
+   "label": "참여 계정 선택 레이어 (Join NOW)",
+   "missing_vp": "mo",
+   "has": "29330:190799",
+   "group": "rewards"
+  },
+  {
+   "screen": "maxboard.main",
+   "state": "regConfirm",
+   "label": "등록 확인 팝업",
+   "missing_vp": "mo",
+   "has": "29330:190851",
+   "group": "rewards"
+  },
+  {
+   "screen": "maxboard.main",
+   "state": "repick",
+   "label": "참여 계정 재선택 레이어 (Select New Account)",
+   "missing_vp": "mo",
+   "has": "29330:190799",
+   "group": "rewards"
+  },
+  {
+   "screen": "maxboard.main",
+   "state": "failToast",
+   "label": "등록 실패 토스트",
+   "missing_vp": "pc",
+   "has": "28537:459718",
+   "group": "rewards"
+  }
+ ],
+ "geom_top": []
+}

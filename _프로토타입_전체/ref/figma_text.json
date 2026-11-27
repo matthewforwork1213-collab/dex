@@ -1,6 +1,6 @@
 {
  "source": "use_figma",
- "fetched": "2026-11-27T19:44",
+ "fetched": "2026-11-27T22:21",
  "nodes": {
   "22442:219830": {
    "name": "MAX1216 / detail / S6 Empty — 0 reviews / light",
@@ -8027,7 +8027,7 @@
      "kind": "text"
     },
     {
-     "t": "60% Total Savingst",
+     "t": "60% Total Savings",
      "kind": "text"
     }
    ]
@@ -9048,6 +9048,26 @@
    "overlay": false,
    "texts": [
     {
+     "t": "Cashback",
+     "kind": "shell"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "shell"
+    },
+    {
+     "t": "Discover",
+     "kind": "shell"
+    },
+    {
+     "t": "Login",
+     "kind": "shell"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "shell"
+    },
+    {
      "t": "Decentralised Exchanges",
      "kind": "text"
     },
@@ -9116,6 +9136,10 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "text"
+    },
+    {
      "t": "Without TetherMax",
      "kind": "text"
     },
@@ -9150,6 +9174,30 @@
     {
      "t": "Get Started",
      "kind": "button"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "text"
+    },
+    {
+     "t": "Key Features",
+     "kind": "shell"
+    },
+    {
+     "t": "Structure",
+     "kind": "shell"
+    },
+    {
+     "t": "Guide",
+     "kind": "shell"
+    },
+    {
+     "t": "Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Reviews (23)",
+     "kind": "shell"
     },
     {
      "t": "Why traders choose EdgeX",
@@ -9205,6 +9253,10 @@
     },
     {
      "t": "$22.40",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
      "kind": "text"
     },
     {
@@ -9292,12 +9344,20 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "shell"
+    },
+    {
      "t": "You trade on EdgeX",
      "kind": "text"
     },
     {
-     "t": "Your selected $400K volume on a Premium account generates an estimated $112 in taker fees.",
+     "t": "Your selected $400K volume generates an estimated $112 in taker fees.",
      "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "shell"
     },
     {
      "t": "EdgeX pays a settlement",
@@ -9306,6 +9366,10 @@
     {
      "t": "Eligible trading activity generates a settlement for the referring partner.",
      "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -9321,6 +9385,10 @@
     },
     {
      "t": "Step by step guide on starting your trading journey on EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "1",
      "kind": "text"
     },
     {
@@ -9524,6 +9592,10 @@
      "kind": "text"
     },
     {
+     "t": "·",
+     "kind": "text"
+    },
+    {
      "t": "Cashback reaches my TetherMax balance every day.",
      "kind": "text"
     },
@@ -9532,11 +9604,19 @@
      "kind": "text"
     },
     {
-     "t": "Frequent traders notice the cashback on Premium fees.",
+     "t": "·",
+     "kind": "text"
+    },
+    {
+     "t": "Frequent traders notice the cashback on fees.",
      "kind": "text"
     },
     {
      "t": "(7 reviews)",
+     "kind": "text"
+    },
+    {
+     "t": "·",
      "kind": "text"
     },
     {
@@ -9728,6 +9808,10 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "button"
+    },
+    {
      "t": "2",
      "kind": "button"
     },
@@ -9750,6 +9834,46 @@
     {
      "t": "7",
      "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@TetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
     }
    ]
   },
@@ -17375,7 +17499,7 @@
      "kind": "text"
     },
     {
-     "t": "Install a self-custody wallet, or sign up on Lighter with email to get a wallet made for you. Keep your 12-word recovery phrase private. TetherMax never asks for your private key, seed phrase, or a wallet signature.",
+     "t": "Install a self-custody wallet, or sign up on Lighter with email to get a wallet made for you. Keep your 12-word recovery phrase private. TetherMax never asks for a private key, recovery phrase or wallet signature.",
      "kind": "text"
     },
     {
@@ -25123,7 +25247,7 @@
      "kind": "text"
     },
     {
-     "t": "60% Total Savingst",
+     "t": "60% Total Savings",
      "kind": "text"
     }
    ]
@@ -26230,60 +26354,8 @@
    "w": 375,
    "h": 850,
    "hidden": false,
-   "overlay": false,
+   "overlay": true,
    "texts": [
-    {
-     "t": "Check your cashback",
-     "kind": "text"
-    },
-    {
-     "t": "Choose your exchange and enter your UID or wallet address to check your cashback.",
-     "kind": "text"
-    },
-    {
-     "t": "Select exchange",
-     "kind": "text"
-    },
-    {
-     "t": "Select an exchange",
-     "kind": "text"
-    },
-    {
-     "t": "Select an exchange first",
-     "kind": "text"
-    },
-    {
-     "t": "Check cashback",
-     "kind": "button"
-    },
-    {
-     "t": "No account? Join our partner exchange",
-     "kind": "button"
-    },
-    {
-     "t": "Don't leave your cashback behind.",
-     "kind": "text"
-    },
-    {
-     "t": "Sign up or log in and link this trading account to receive your cashback.",
-     "kind": "text"
-    },
-    {
-     "t": "Email address",
-     "kind": "input"
-    },
-    {
-     "t": "Sign Up Now",
-     "kind": "button"
-    },
-    {
-     "t": "Sign up in the app and earn more cashback",
-     "kind": "text"
-    },
-    {
-     "t": "Get the App",
-     "kind": "button"
-    },
     {
      "t": "Select Exchange",
      "kind": "text"
@@ -43335,64 +43407,8 @@
    "w": 375,
    "h": 850,
    "hidden": false,
-   "overlay": false,
+   "overlay": true,
    "texts": [
-    {
-     "t": "Check your cashback",
-     "kind": "text"
-    },
-    {
-     "t": "Choose your exchange and enter your UID or wallet address to check your cashback.",
-     "kind": "text"
-    },
-    {
-     "t": "Select exchange",
-     "kind": "text"
-    },
-    {
-     "t": "Select an exchange",
-     "kind": "text"
-    },
-    {
-     "t": "Select an exchange first",
-     "kind": "text"
-    },
-    {
-     "t": "Check cashback",
-     "kind": "button"
-    },
-    {
-     "t": "No account? Join our partner exchange",
-     "kind": "button"
-    },
-    {
-     "t": "Don't leave your cashback behind.",
-     "kind": "text"
-    },
-    {
-     "t": "Sign up or log in and link this trading account to receive your cashback.",
-     "kind": "text"
-    },
-    {
-     "t": "Email address",
-     "kind": "input"
-    },
-    {
-     "t": "Sign Up Now",
-     "kind": "button"
-    },
-    {
-     "t": "9:41",
-     "kind": "text"
-    },
-    {
-     "t": "Sign up in the app and earn more cashback",
-     "kind": "text"
-    },
-    {
-     "t": "Get the App",
-     "kind": "button"
-    },
     {
      "t": "Select Exchange",
      "kind": "text"
@@ -43496,64 +43512,8 @@
    "w": 375,
    "h": 850,
    "hidden": false,
-   "overlay": false,
+   "overlay": true,
    "texts": [
-    {
-     "t": "Check your cashback",
-     "kind": "text"
-    },
-    {
-     "t": "Choose your exchange and enter your UID or wallet address to check your cashback.",
-     "kind": "text"
-    },
-    {
-     "t": "Select exchange",
-     "kind": "text"
-    },
-    {
-     "t": "Select an exchange",
-     "kind": "text"
-    },
-    {
-     "t": "Select an exchange first",
-     "kind": "text"
-    },
-    {
-     "t": "Check cashback",
-     "kind": "button"
-    },
-    {
-     "t": "No account? Join our partner exchange",
-     "kind": "button"
-    },
-    {
-     "t": "Don't leave your cashback behind.",
-     "kind": "text"
-    },
-    {
-     "t": "Sign up or log in and link this trading account to receive your cashback.",
-     "kind": "text"
-    },
-    {
-     "t": "Email address",
-     "kind": "input"
-    },
-    {
-     "t": "Sign Up Now",
-     "kind": "button"
-    },
-    {
-     "t": "9:41",
-     "kind": "text"
-    },
-    {
-     "t": "Sign up in the app and earn more cashback",
-     "kind": "text"
-    },
-    {
-     "t": "Get the App",
-     "kind": "button"
-    },
     {
      "t": "Select Exchange",
      "kind": "text"
@@ -50876,23 +50836,23 @@
    "texts": [
     {
      "t": "Cashback",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Rewards Hub",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Discover",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Login",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -51020,23 +50980,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Aster",
@@ -51184,19 +51144,19 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on Aster",
      "kind": "text"
     },
     {
-     "t": "Your selected $400K volume on a Premium account generates an estimated $112 in taker fees.",
+     "t": "Your selected $400K volume generates an estimated $112 in taker fees.",
      "kind": "text"
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Aster pays a settlement",
@@ -51208,7 +51168,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -51447,7 +51407,7 @@
      "kind": "text"
     },
     {
-     "t": "Frequent traders notice the cashback on Premium fees.",
+     "t": "Frequent traders notice the cashback on fees.",
      "kind": "text"
     },
     {
@@ -51676,43 +51636,43 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@TetherMax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Privacy Policy",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Terms of Use",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     }
    ]
   },
@@ -51725,23 +51685,23 @@
    "texts": [
     {
      "t": "Cashback",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Rewards Hub",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Discover",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Login",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -51873,23 +51833,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose ApeX",
@@ -52037,19 +51997,19 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on ApeX",
      "kind": "text"
     },
     {
-     "t": "Your selected $400K volume on a Premium account generates an estimated $112 in taker fees.",
+     "t": "Your selected $400K volume generates an estimated $112 in taker fees.",
      "kind": "text"
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "ApeX pays a settlement",
@@ -52061,7 +52021,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -52300,7 +52260,7 @@
      "kind": "text"
     },
     {
-     "t": "Frequent traders notice the cashback on Premium fees.",
+     "t": "Frequent traders notice the cashback on fees.",
      "kind": "text"
     },
     {
@@ -52529,43 +52489,43 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@TetherMax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Privacy Policy",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Terms of Use",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     }
    ]
   },
@@ -53393,13 +53353,13 @@
   "29360:144056": {
    "name": "DEX / Mobile / detail / D4 EdgeX key features / light",
    "w": 375,
-   "h": 7845,
+   "h": 7825,
    "hidden": false,
    "overlay": false,
    "texts": [
     {
      "t": "9:41",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -53511,23 +53471,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose EdgeX",
@@ -53643,19 +53603,19 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on EdgeX",
      "kind": "text"
     },
     {
-     "t": "Your selected $400K volume on a Premium account generates an estimated $112 in taker fees.",
+     "t": "Your selected $400K volume generates an estimated $112 in taker fees.",
      "kind": "text"
     },
     {
      "t": "2",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "EdgeX pays a settlement",
@@ -53667,7 +53627,7 @@
     },
     {
      "t": "3",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -53979,27 +53939,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "A question about linking",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
@@ -54039,27 +53999,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "몇 군데 비교하고 여기로 정했어요",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "여러 거래소를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 같은 시간에 들어오고 출금이 막힌 적도 없습니다.",
@@ -54123,39 +54083,39 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@tethermax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
@@ -54174,13 +54134,13 @@
   "29360:145006": {
    "name": "DEX / Mobile / detail / D5 Aster key features / light",
    "w": 375,
-   "h": 7885,
+   "h": 7865,
    "hidden": false,
    "overlay": false,
    "texts": [
     {
      "t": "9:41",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -54316,23 +54276,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Aster",
@@ -54448,19 +54408,19 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on Aster",
      "kind": "text"
     },
     {
-     "t": "Your selected $400K volume on a Premium account generates an estimated $112 in taker fees.",
+     "t": "Your selected $400K volume generates an estimated $112 in taker fees.",
      "kind": "text"
     },
     {
      "t": "2",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Aster pays a settlement",
@@ -54472,7 +54432,7 @@
     },
     {
      "t": "3",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -54784,27 +54744,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "A question about linking",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
@@ -54844,27 +54804,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "몇 군데 비교하고 여기로 정했어요",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "여러 거래소를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 같은 시간에 들어오고 출금이 막힌 적도 없습니다.",
@@ -54928,39 +54888,39 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@tethermax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
@@ -54979,13 +54939,13 @@
   "29360:145980": {
    "name": "DEX / Mobile / detail / D6 ApeX key features / light",
    "w": 375,
-   "h": 7885,
+   "h": 7865,
    "hidden": false,
    "overlay": false,
    "texts": [
     {
      "t": "9:41",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -55121,23 +55081,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose ApeX",
@@ -55253,19 +55213,19 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on ApeX",
      "kind": "text"
     },
     {
-     "t": "Your selected $400K volume on a Premium account generates an estimated $112 in taker fees.",
+     "t": "Your selected $400K volume generates an estimated $112 in taker fees.",
      "kind": "text"
     },
     {
      "t": "2",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "ApeX pays a settlement",
@@ -55277,7 +55237,7 @@
     },
     {
      "t": "3",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -55589,27 +55549,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "A question about linking",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
@@ -55649,27 +55609,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "몇 군데 비교하고 여기로 정했어요",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "여러 거래소를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 같은 시간에 들어오고 출금이 막힌 적도 없습니다.",
@@ -55733,39 +55693,39 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@tethermax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
@@ -58073,10 +58033,8806 @@
      "kind": "text"
     }
    ]
+  },
+  "29184:118620": {
+   "name": "PC · 회원 Summary · 자동 지급 차감 반영",
+   "w": 1440,
+   "h": 4280,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Cashback",
+     "kind": "shell"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "GLOBAL LEAGUE",
+     "kind": "text"
+    },
+    {
+     "t": "Stand A Chance To Win A Share Of",
+     "kind": "text"
+    },
+    {
+     "t": "TOTAL PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "250,000",
+     "kind": "text"
+    },
+    {
+     "t": "Join Team",
+     "kind": "button"
+    },
+    {
+     "t": "Banner\nImage",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Summary",
+     "kind": "tab"
+    },
+    {
+     "t": "Team League",
+     "kind": "tab"
+    },
+    {
+     "t": "Participants",
+     "kind": "text"
+    },
+    {
+     "t": "Opening soon",
+     "kind": "text"
+    },
+    {
+     "t": "Countries",
+     "kind": "text"
+    },
+    {
+     "t": "Calculating",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "30.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Teams",
+     "kind": "text"
+    },
+    {
+     "t": "Forming",
+     "kind": "text"
+    },
+    {
+     "t": "Prize Money By Rank",
+     "kind": "text"
+    },
+    {
+     "t": "1st Prize",
+     "kind": "text"
+    },
+    {
+     "t": "175,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "2nd Prize",
+     "kind": "text"
+    },
+    {
+     "t": "175,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "3rd Prize",
+     "kind": "text"
+    },
+    {
+     "t": "175,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "4th",
+     "kind": "text"
+    },
+    {
+     "t": "75,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "5th",
+     "kind": "text"
+    },
+    {
+     "t": "65,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "Top 3 Teams",
+     "kind": "text"
+    },
+    {
+     "t": "165K USDT",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "165K USDT",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "165K USDT",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "Team Leaderboard",
+     "kind": "text"
+    },
+    {
+     "t": "All Countries",
+     "kind": "input"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Team",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "4",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "5",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "6",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "7",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "8",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "9",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "10",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "League Schedule",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 10 — Mar 13",
+     "kind": "text"
+    },
+    {
+     "t": "P1 Early Bird",
+     "kind": "text"
+    },
+    {
+     "t": "LIVE",
+     "kind": "chip"
+    },
+    {
+     "t": "Mar 14 — Mar 17",
+     "kind": "text"
+    },
+    {
+     "t": "P2 Recruitment",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 18 — Mar 24",
+     "kind": "text"
+    },
+    {
+     "t": "P3 Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 25",
+     "kind": "text"
+    },
+    {
+     "t": "P3 Pending",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 26",
+     "kind": "text"
+    },
+    {
+     "t": "P3 Results",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 27",
+     "kind": "text"
+    },
+    {
+     "t": "P6 Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Event Rules",
+     "kind": "text"
+    },
+    {
+     "t": "Members who join a team during the Early Bird phase will receive a 10% score multiplier for the first 3 days of the Competition phase(including the team leader). \nEach 1 USDT in commission cashback earned during the competition counts as 1 point. Event and invitation rewards do not count. \nA team must have at least 3 members (including the leader) by the end of the Recruitment phase to participate in the Competition phase. \nTeam creation and joining are each limited to once per day (UTC). Re-joining or re-creating a team on the same day after leaving/deleting is not permitted. \nAs a team leader who created a team last season, if your contribution score is zero, you will be unable to create a team this season. \nDashboard statistics (excluding total cashback) are updated every 15 minutes, while the leaderboard is updated daily at the local time shown above. \nTo join this EdgeX league, link an EdgeX wallet. \nYour participating wallet cannot be changed during Early Bird, Recruitment or Competition (P1–P3). \n10% of the team prize is allocated to the Team Leader first. The remaining amount is distributed pro-rata among all team members (including the leader) based on their contribution. \nAny fraudulent activities, such as self-trading, may result in disqualification from prize payouts or forced deletion of the team without prior notice. \nTeam names and logo images can only be modified once per season. Inappropriate content may be replaced at the administrator's discretion. \nThis event is subject to change or early termination without prior notice, depending on the circumstances of the company or its affiliates. \nPeriod Description \nPre-launch: Period during which the event page is made public \nEarly Bird: Period during which teams can be created and members can join \nRecruitment: Period during which teams can be created and members can join \nCompetition: Period during which scores are reflected and rankings can be improved \nJudging: Period during which ineligible participants are verified and excluded from the winners \nResults: Period during which the final winners are confirmed and announced following judging \nReward Distribution: The period during which prizes are distributed to the winners",
+     "kind": "text"
+    },
+    {
+     "t": "Consultation : Chat Support (00:00 - 24:00)\r\nEmail : support@tetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29184:118995": {
+   "name": "모바일 · 회원 Summary · 자동 지급 차감 반영",
+   "w": 375,
+   "h": 3167,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Banner\nImage",
+     "kind": "text"
+    },
+    {
+     "t": "GLOBAL LEAGUE",
+     "kind": "text"
+    },
+    {
+     "t": "Stand A Chance To Win A Share Of",
+     "kind": "text"
+    },
+    {
+     "t": "TOTAL PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "250,000",
+     "kind": "text"
+    },
+    {
+     "t": "Join Team",
+     "kind": "button"
+    },
+    {
+     "t": "Summary",
+     "kind": "tab"
+    },
+    {
+     "t": "Team League",
+     "kind": "tab"
+    },
+    {
+     "t": "Participants",
+     "kind": "text"
+    },
+    {
+     "t": "Opening soon",
+     "kind": "text"
+    },
+    {
+     "t": "Countries",
+     "kind": "text"
+    },
+    {
+     "t": "Global",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "30.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Teams",
+     "kind": "text"
+    },
+    {
+     "t": "Forming",
+     "kind": "text"
+    },
+    {
+     "t": "Prize Money By Rank",
+     "kind": "text"
+    },
+    {
+     "t": "1st Prize",
+     "kind": "text"
+    },
+    {
+     "t": "175,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "2nd Prize",
+     "kind": "text"
+    },
+    {
+     "t": "125,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "3rd Prize",
+     "kind": "text"
+    },
+    {
+     "t": "105,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "4th",
+     "kind": "text"
+    },
+    {
+     "t": "75,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "5th",
+     "kind": "text"
+    },
+    {
+     "t": "65,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "Top 3 Teams",
+     "kind": "text"
+    },
+    {
+     "t": "100K USDT",
+     "kind": "text"
+    },
+    {
+     "t": "GB",
+     "kind": "text"
+    },
+    {
+     "t": "165K USDT",
+     "kind": "text"
+    },
+    {
+     "t": "KR",
+     "kind": "text"
+    },
+    {
+     "t": "100K USDT",
+     "kind": "text"
+    },
+    {
+     "t": "VN",
+     "kind": "text"
+    },
+    {
+     "t": "Team Leaderboard",
+     "kind": "text"
+    },
+    {
+     "t": "Next Update: 22:30",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Team",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "4",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "5",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "6",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "7",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "8",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "9",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "10",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "League Schedule",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 10 — Mar 13",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 14 — Mar 17",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 18 — Mar 24",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 25",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 26",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 27",
+     "kind": "text"
+    },
+    {
+     "t": "P1 Early Bird",
+     "kind": "text"
+    },
+    {
+     "t": "LIVE",
+     "kind": "chip"
+    },
+    {
+     "t": "P2 Recruitment",
+     "kind": "text"
+    },
+    {
+     "t": "P3 Competition",
+     "kind": "text"
+    },
+    {
+     "t": "P4 Pending",
+     "kind": "text"
+    },
+    {
+     "t": "P5 Results",
+     "kind": "text"
+    },
+    {
+     "t": "P6 Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Event Rules",
+     "kind": "text"
+    },
+    {
+     "t": "Members who join a team during the Early Bird phase will receive a 10% score multiplier for the first 3 days of the Competition phase(including the team leader). \nEach 1 USDT in commission cashback earned during the competition counts as 1 point. Event and invitation rewards do not count. \nA team must have at least 3 members (including the leader) by the end of the Recruitment phase to participate in the Competition phase. \nTeam creation and joining are each limited to once per day (UTC). Re-joining or re-creating a team on the same day after leaving/deleting is not permitted. \nAs a team leader who created a team last season, if your contribution score is zero, you will be unable to create a team this season. \nDashboard statistics (excluding total cashback) are updated every 15 minutes, while the leaderboard is updated daily at the local time shown above. \nTo join this EdgeX league, link an EdgeX wallet. \nYour participating wallet cannot be changed during Early Bird, Recruitment or Competition (P1–P3). \n10% of the team prize is allocated to the Team Leader first. The remaining amount is distributed pro-rata among all team members (including the leader) based on their contribution. \nAny fraudulent activities, such as self-trading, may result in disqualification from prize payouts or forced deletion of the team without prior notice. \nTeam names and logo images can only be modified once per season. Inappropriate content may be replaced at the administrator's discretion. \nThis event is subject to change or early termination without prior notice, depending on the circumstances of the company or its affiliates. \nPeriod Description \nPre-launch: Period during which the event page is made public \nEarly Bird: Period during which teams can be created and members can join \nRecruitment: Period during which teams can be created and members can join \nCompetition: Period during which scores are reflected and rankings can be improved \nJudging: Period during which ineligible participants are verified and excluded from the winners \nResults: Period during which the final winners are confirmed and announced following judging \nReward Distribution: The period during which prizes are distributed to the winners",
+     "kind": "text"
+    },
+    {
+     "t": "Show More",
+     "kind": "button"
+    },
+    {
+     "t": "Consultation: Chat Support (00:00 - 24:00)\r\nEmail: support@tetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29183:117206": {
+   "name": "PC · 팀 리더보드",
+   "w": 1440,
+   "h": 2704,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Cashback",
+     "kind": "shell"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "Summary",
+     "kind": "tab"
+    },
+    {
+     "t": "Team League",
+     "kind": "tab"
+    },
+    {
+     "t": "175,000",
+     "kind": "text"
+    },
+    {
+     "t": "TEAM PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Create Team",
+     "kind": "button"
+    },
+    {
+     "t": "All Teams",
+     "kind": "text"
+    },
+    {
+     "t": "Next Update: 22:30",
+     "kind": "text"
+    },
+    {
+     "t": "Search",
+     "kind": "input"
+    },
+    {
+     "t": "All Countries",
+     "kind": "input"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Team",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "4",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "5",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "6",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "7",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "8",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "9",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "10",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "Event Rules",
+     "kind": "text"
+    },
+    {
+     "t": "Members who join a team during the Early Bird phase will receive a 10% score multiplier for the first 3 days of the Competition phase(including the team leader). \nEach 1 USDT in commission cashback earned during the competition counts as 1 point. Event and invitation rewards do not count. \nA team must have at least 3 members (including the leader) by the end of the Recruitment phase to participate in the Competition phase. \nTeam creation and joining are each limited to once per day (UTC). Re-joining or re-creating a team on the same day after leaving/deleting is not permitted. \nAs a team leader who created a team last season, if your contribution score is zero, you will be unable to create a team this season. \nDashboard statistics (excluding total cashback) are updated every 15 minutes, while the leaderboard is updated daily at the local time shown above. \nTo join this EdgeX league, link an EdgeX wallet. \nYour participating wallet cannot be changed during Early Bird, Recruitment or Competition (P1–P3). \n10% of the team prize is allocated to the Team Leader first. The remaining amount is distributed pro-rata among all team members (including the leader) based on their contribution. \nAny fraudulent activities, such as self-trading, may result in disqualification from prize payouts or forced deletion of the team without prior notice. \nTeam names and logo images can only be modified once per season. Inappropriate content may be replaced at the administrator's discretion. \nThis event is subject to change or early termination without prior notice, depending on the circumstances of the company or its affiliates. \nPeriod Description \nPre-launch: Period during which the event page is made public \nEarly Bird: Period during which teams can be created and members can join \nRecruitment: Period during which teams can be created and members can join \nCompetition: Period during which scores are reflected and rankings can be improved \nJudging: Period during which ineligible participants are verified and excluded from the winners \nResults: Period during which the final winners are confirmed and announced following judging \nReward Distribution: The period during which prizes are distributed to the winners",
+     "kind": "text"
+    },
+    {
+     "t": "Consultation : Chat Support (00:00 - 24:00)\r\nEmail : support@tetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29183:117421": {
+   "name": "모바일 · 팀 리더보드",
+   "w": 375,
+   "h": 1918,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Summary",
+     "kind": "tab"
+    },
+    {
+     "t": "Team League",
+     "kind": "tab"
+    },
+    {
+     "t": "175,000",
+     "kind": "text"
+    },
+    {
+     "t": "TEAM PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Create Team",
+     "kind": "button"
+    },
+    {
+     "t": "All Teams",
+     "kind": "text"
+    },
+    {
+     "t": "Next Update: 22:30",
+     "kind": "text"
+    },
+    {
+     "t": "Search",
+     "kind": "input"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Team",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "4",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "5",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "6",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "7",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "8",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "9",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "10",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "109 members",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "Event Rules",
+     "kind": "text"
+    },
+    {
+     "t": "Members who join a team during the Early Bird phase will receive a 10% score multiplier for the first 3 days of the Competition phase(including the team leader). \nEach 1 USDT in commission cashback earned during the competition counts as 1 point. Event and invitation rewards do not count. \nA team must have at least 3 members (including the leader) by the end of the Recruitment phase to participate in the Competition phase. \nTeam creation and joining are each limited to once per day (UTC). Re-joining or re-creating a team on the same day after leaving/deleting is not permitted. \nAs a team leader who created a team last season, if your contribution score is zero, you will be unable to create a team this season. \nDashboard statistics (excluding total cashback) are updated every 15 minutes, while the leaderboard is updated daily at the local time shown above. \nTo join this EdgeX league, link an EdgeX wallet. \nYour participating wallet cannot be changed during Early Bird, Recruitment or Competition (P1–P3). \n10% of the team prize is allocated to the Team Leader first. The remaining amount is distributed pro-rata among all team members (including the leader) based on their contribution. \nAny fraudulent activities, such as self-trading, may result in disqualification from prize payouts or forced deletion of the team without prior notice. \nTeam names and logo images can only be modified once per season. Inappropriate content may be replaced at the administrator's discretion. \nThis event is subject to change or early termination without prior notice, depending on the circumstances of the company or its affiliates. \nPeriod Description \nPre-launch: Period during which the event page is made public \nEarly Bird: Period during which teams can be created and members can join \nRecruitment: Period during which teams can be created and members can join \nCompetition: Period during which scores are reflected and rankings can be improved \nJudging: Period during which ineligible participants are verified and excluded from the winners \nResults: Period during which the final winners are confirmed and announced following judging \nReward Distribution: The period during which prizes are distributed to the winners",
+     "kind": "text"
+    },
+    {
+     "t": "Show More",
+     "kind": "button"
+    },
+    {
+     "t": "Consultation: Chat Support (00:00 - 24:00)\r\nEmail: support@tetherMax.io",
+     "kind": "text"
+    },
+    {
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "9:41",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29183:117629": {
+   "name": "PC · 개인 리더보드",
+   "w": 1440,
+   "h": 2472,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Cashback",
+     "kind": "shell"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "text"
+    },
+    {
+     "t": "Discover",
+     "kind": "text"
+    },
+    {
+     "t": "Summary",
+     "kind": "tab"
+    },
+    {
+     "t": "Individual League",
+     "kind": "tab"
+    },
+    {
+     "t": "75,000",
+     "kind": "text"
+    },
+    {
+     "t": "INDIVIDUAL PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Register",
+     "kind": "button"
+    },
+    {
+     "t": "Individual Rankings",
+     "kind": "text"
+    },
+    {
+     "t": "Next Update: 22:30",
+     "kind": "text"
+    },
+    {
+     "t": "Search",
+     "kind": "input"
+    },
+    {
+     "t": "All Countries",
+     "kind": "input"
+    },
+    {
+     "t": "My Score",
+     "kind": "button"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Traders",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "4",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "5",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "6",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "7",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "8",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "9",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "10",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439",
+     "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "Event Rules",
+     "kind": "text"
+    },
+    {
+     "t": "You must click the \"Join Event\" button before the competition starts to be eligible for participation. \nUsers who register during the Early Bird period will receive a 10% bonus on contribution points for the first 3 days of the competition (P3). \nEach 1 USDT in commission cashback earned during the competition counts as 1 point. Event and invitation rewards do not count. \nDashboard statistics (excluding total cashback) are updated every 15 minutes, while the leaderboard is updated daily at the local time shown above. \nTo join this EdgeX league, link an EdgeX wallet. \nYour participating wallet cannot be changed during Early Bird, Recruitment or Competition (P1–P3). \nAny detection of unfair practices, such as wash trading, may lead to disqualification from prize eligibility, forced removal from the team, and other penalties. \nDisclaimers: This event is subject to change or early termination without prior notice, depending on the circumstances of the company or its affiliates. \nPeriod Description \na. Pre-launch: The period during which the event page is made public \nb. Early Bird: Early bird registration period \nc. Recruitment: Registration period \nd. Competition: Period during which scores are reflected and rankings can be improved \ne. Pending: Period during which ineligible participants are verified and excluded from the winners \nf. Results: Period during which the final winners are confirmed and announced following judging \ng. Reward Distribution: The period during which prizes are distributed to the winners",
+     "kind": "text"
+    },
+    {
+     "t": "Consultation : Chat Support (00:00 - 24:00)\r\nEmail : support@tetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29183:117845": {
+   "name": "모바일 · 개인 리더보드",
+   "w": 375,
+   "h": 1918,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Summary",
+     "kind": "tab"
+    },
+    {
+     "t": "Individual League",
+     "kind": "tab"
+    },
+    {
+     "t": "75,000",
+     "kind": "text"
+    },
+    {
+     "t": "INDIVIDUAL PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Register",
+     "kind": "button"
+    },
+    {
+     "t": "Individual Rankings",
+     "kind": "text"
+    },
+    {
+     "t": "My Score",
+     "kind": "button"
+    },
+    {
+     "t": "Next Update: 22:30",
+     "kind": "text"
+    },
+    {
+     "t": "Search",
+     "kind": "input"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Traders",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "4",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "5",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "6",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "7",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "8",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "9",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "10",
+     "kind": "text"
+    },
+    {
+     "t": "10****10",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    },
+    {
+     "t": "50,439.01",
+     "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "Event Rules",
+     "kind": "text"
+    },
+    {
+     "t": "You must click the \"Join Event\" button before the competition starts to be eligible for participation. \nUsers who register during the Early Bird period will receive a 10% bonus on contribution points for the first 3 days of the competition (P3). \nEach 1 USDT in commission cashback earned during the competition counts as 1 point. Event and invitation rewards do not count. \nDashboard statistics (excluding total cashback) are updated every 15 minutes, while the leaderboard is updated daily at the local time shown above. \nTo join this EdgeX league, link an EdgeX wallet. \nYour participating wallet cannot be changed during Early Bird, Recruitment or Competition (P1–P3). \nAny detection of unfair practices, such as wash trading, may lead to disqualification from prize eligibility, forced removal from the team, and other penalties. \nDisclaimers: This event is subject to change or early termination without prior notice, depending on the circumstances of the company or its affiliates. \nPeriod Description \na. Pre-launch: The period during which the event page is made public \nb. Early Bird: Early bird registration period \nc. Recruitment: Registration period \nd. Competition: Period during which scores are reflected and rankings can be improved \ne. Pending: Period during which ineligible participants are verified and excluded from the winners \nf. Results: Period during which the final winners are confirmed and announced following judging \ng. Reward Distribution: The period during which prizes are distributed to the winners",
+     "kind": "text"
+    },
+    {
+     "t": "Show More",
+     "kind": "button"
+    },
+    {
+     "t": "Consultation: Chat Support (00:00 - 24:00)\r\nEmail: support@tetherMax.io",
+     "kind": "text"
+    },
+    {
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "kind": "text"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "9:41",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29365:134702": {
+   "name": "TP · 포인트 내역 / PC",
+   "w": 1440,
+   "h": 2034,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "TetherMax Point (TP)",
+     "kind": "tab"
+    },
+    {
+     "t": "Invite Friends",
+     "kind": "tab"
+    },
+    {
+     "t": "Available TP",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 TP",
+     "kind": "text"
+    },
+    {
+     "t": "TP",
+     "kind": "chip"
+    },
+    {
+     "t": "Earning History",
+     "kind": "chip"
+    },
+    {
+     "t": "Join the TetherMax Rewards Ecosystem",
+     "kind": "text"
+    },
+    {
+     "t": "Learn More",
+     "kind": "button"
+    },
+    {
+     "t": "How To Earn TetherMax Point (TP)?",
+     "kind": "text"
+    },
+    {
+     "t": "Trade with Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "Top trending exchange",
+     "kind": "text"
+    },
+    {
+     "t": "Withdraw Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "TP earned upon withdrawal",
+     "kind": "text"
+    },
+    {
+     "t": "Invite Friends",
+     "kind": "text"
+    },
+    {
+     "t": "Earn TP for every friend who trades via your referral link",
+     "kind": "text"
+    },
+    {
+     "t": "FAQs",
+     "kind": "text"
+    },
+    {
+     "t": "What exactly is TP (TetherMax Point)?",
+     "kind": "shell"
+    },
+    {
+     "t": "TP is an exclusive bonus reward provided to tetherMax members. While your existing 100% USDT cashback benefits remain unchanged, you will accumulate additional TP based on your cashback amount.",
+     "kind": "text"
+    },
+    {
+     "t": "Where can I use TP? Can I cash it out?",
+     "kind": "shell"
+    },
+    {
+     "t": "How do I start earning points?",
+     "kind": "shell"
+    },
+    {
+     "t": "Does a larger cashback amount mean more points?",
+     "kind": "shell"
+    },
+    {
+     "t": "Is there an extra benefit for inviting friends?",
+     "kind": "shell"
+    },
+    {
+     "t": "Why does the earning rate change depending on the timing?",
+     "kind": "shell"
+    },
+    {
+     "t": "Cashback",
+     "kind": "shell"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "shell"
+    },
+    {
+     "t": "Discover",
+     "kind": "shell"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@TetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29194:119460": {
+   "name": "이벤트 · 거래소 이벤트 / 모바일",
+   "w": 375,
+   "h": 1950,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Events",
+     "kind": "text"
+    },
+    {
+     "t": "BioFin Cashback Boost",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 85% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Win up to 80,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Special Events",
+     "kind": "tab"
+    },
+    {
+     "t": "Exclusive",
+     "kind": "tab"
+    },
+    {
+     "t": "Exchange Events",
+     "kind": "tab"
+    },
+    {
+     "t": "All Exchanges",
+     "kind": "input"
+    },
+    {
+     "t": "EdgeX trading event",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "5.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "121",
+     "kind": "text"
+    },
+    {
+     "t": "D",
+     "kind": "text"
+    },
+    {
+     "t": "02",
+     "kind": "text"
+    },
+    {
+     "t": "H",
+     "kind": "text"
+    },
+    {
+     "t": "00",
+     "kind": "text"
+    },
+    {
+     "t": "M",
+     "kind": "text"
+    },
+    {
+     "t": "30",
+     "kind": "text"
+    },
+    {
+     "t": "S",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Gold, Silver, Oil & Stock Futures Zero Fees",
+     "kind": "text"
+    },
+    {
+     "t": "MEXC",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "0-Fee Mega Cash Reward",
+     "kind": "text"
+    },
+    {
+     "t": "121",
+     "kind": "text"
+    },
+    {
+     "t": "D",
+     "kind": "text"
+    },
+    {
+     "t": "02",
+     "kind": "text"
+    },
+    {
+     "t": "H",
+     "kind": "text"
+    },
+    {
+     "t": "00",
+     "kind": "text"
+    },
+    {
+     "t": "M",
+     "kind": "text"
+    },
+    {
+     "t": "30",
+     "kind": "text"
+    },
+    {
+     "t": "S",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Trade to earn $500,000 prize pool",
+     "kind": "text"
+    },
+    {
+     "t": "Kucoin",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "$500,000.00",
+     "kind": "text"
+    },
+    {
+     "t": "121",
+     "kind": "text"
+    },
+    {
+     "t": "D",
+     "kind": "text"
+    },
+    {
+     "t": "02",
+     "kind": "text"
+    },
+    {
+     "t": "H",
+     "kind": "text"
+    },
+    {
+     "t": "00",
+     "kind": "text"
+    },
+    {
+     "t": "M",
+     "kind": "text"
+    },
+    {
+     "t": "30",
+     "kind": "text"
+    },
+    {
+     "t": "S",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Trade to earn $500,000 prize pool",
+     "kind": "text"
+    },
+    {
+     "t": "Kucoin",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "$500,000.00",
+     "kind": "text"
+    },
+    {
+     "t": "121",
+     "kind": "text"
+    },
+    {
+     "t": "D",
+     "kind": "text"
+    },
+    {
+     "t": "02",
+     "kind": "text"
+    },
+    {
+     "t": "H",
+     "kind": "text"
+    },
+    {
+     "t": "00",
+     "kind": "text"
+    },
+    {
+     "t": "M",
+     "kind": "text"
+    },
+    {
+     "t": "30",
+     "kind": "text"
+    },
+    {
+     "t": "S",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "text"
+    }
+   ]
+  },
+  "29190:123385": {
+   "name": "거래소 이벤트 필터 / PC · CEX",
+   "w": 335,
+   "h": 312,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "All CEX exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    }
+   ]
+  },
+  "29190:123416": {
+   "name": "거래소 이벤트 필터 / PC · DEX",
+   "w": 335,
+   "h": 174,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "All DEX exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    }
+   ]
+  },
+  "29190:123474": {
+   "name": "거래소 이벤트 필터 / 모바일 · CEX",
+   "w": 375,
+   "h": 560,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Select Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "All CEX exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "Close",
+     "kind": "text"
+    },
+    {
+     "t": "Apply (1)",
+     "kind": "text"
+    }
+   ]
+  },
+  "29190:123515": {
+   "name": "거래소 이벤트 필터 / 모바일 · DEX",
+   "w": 375,
+   "h": 560,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Select Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "All DEX exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Close",
+     "kind": "text"
+    },
+    {
+     "t": "Apply (1)",
+     "kind": "text"
+    }
+   ]
+  },
+  "29190:126577": {
+   "name": "쿠폰 · 계정 선택 / 모바일 · CEX",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": true,
+   "texts": [
+    {
+     "t": "Select an account to apply this coupon",
+     "kind": "text"
+    },
+    {
+     "t": "Once applied, it cannot be changed.",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "UID 123456789",
+     "kind": "text"
+    },
+    {
+     "t": "UID 936582739",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ]
+  },
+  "29190:126833": {
+   "name": "쿠폰 · 계정 선택 / 모바일 · DEX",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": true,
+   "texts": [
+    {
+     "t": "Select an account to apply this coupon",
+     "kind": "text"
+    },
+    {
+     "t": "Once applied, it cannot be changed.",
+     "kind": "text"
+    },
+    {
+     "t": "All",
+     "kind": "text"
+    },
+    {
+     "t": "CEX",
+     "kind": "text"
+    },
+    {
+     "t": "DEX",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "EdgeX · Wallet\n0xa410556c2A1C829d890122682B21F623b02122F0",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ]
+  },
+  "29183:118054": {
+   "name": "PC · 팀 생성 지갑 선택",
+   "w": 480,
+   "h": 422,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Create team",
+     "kind": "text"
+    },
+    {
+     "t": "Select an EdgeX wallet to create a team.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xa410556c2A1C829d890122682B21F623b02122F0",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ]
+  },
+  "29183:118079": {
+   "name": "모바일 · 팀 생성 지갑 선택",
+   "w": 375,
+   "h": 653,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Create team",
+     "kind": "text"
+    },
+    {
+     "t": "Select an EdgeX wallet to create a team.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xa410556c2A1C829d890122682B21F623b02122F0",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x44a6f9c2B41dE8806f5a1b3C9E4d2F07A6b8cB44",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xA4118ad78983a694f204F9DF9018Bb7c544588AC",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ]
+  },
+  "29183:118116": {
+   "name": "PC · 팀 참가 지갑 선택",
+   "w": 480,
+   "h": 422,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Join team",
+     "kind": "text"
+    },
+    {
+     "t": "Select an EdgeX wallet to join this team.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xa410556c2A1C829d890122682B21F623b02122F0",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ]
+  },
+  "29183:118141": {
+   "name": "모바일 · 팀 참가 지갑 선택",
+   "w": 375,
+   "h": 653,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Join team",
+     "kind": "text"
+    },
+    {
+     "t": "Select an EdgeX wallet to join this team.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xa410556c2A1C829d890122682B21F623b02122F0",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x44a6f9c2B41dE8806f5a1b3C9E4d2F07A6b8cB44",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xA4118ad78983a694f204F9DF9018Bb7c544588AC",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ]
+  },
+  "29183:118178": {
+   "name": "PC · 개인전 참가 지갑 선택",
+   "w": 480,
+   "h": 422,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Register",
+     "kind": "text"
+    },
+    {
+     "t": "Select an EdgeX wallet to register for the individual league.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xa410556c2A1C829d890122682B21F623b02122F0",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ]
+  },
+  "29183:118203": {
+   "name": "모바일 · 개인전 참가 지갑 선택",
+   "w": 375,
+   "h": 673,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Register",
+     "kind": "text"
+    },
+    {
+     "t": "Select an EdgeX wallet to register for the individual league.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xa410556c2A1C829d890122682B21F623b02122F0",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x44a6f9c2B41dE8806f5a1b3C9E4d2F07A6b8cB44",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0xA4118ad78983a694f204F9DF9018Bb7c544588AC",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ]
+  },
+  "29183:118240": {
+   "name": "팀 생성 · 자격 미충족",
+   "w": 375,
+   "h": 282,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Unable to create team",
+     "kind": "text"
+    },
+    {
+     "t": "You can create a team if you are a TetherMax Affiliate, your linked accounts have earned at least 500 USDT in commission cashback in total, or they have earned at least 100 USDT in the last 30 days. CEX and DEX cashback count.",
+     "kind": "text"
+    },
+    {
+     "t": "OK",
+     "kind": "text"
+    }
+   ]
+  },
+  "29183:118258": {
+   "name": "참가 · 해당 거래소 지갑 미연동",
+   "w": 375,
+   "h": 182,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "EdgeX wallet required",
+     "kind": "text"
+    },
+    {
+     "t": "Link your EdgeX wallet to join the league.",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "text"
+    },
+    {
+     "t": "Link",
+     "kind": "text"
+    }
+   ]
+  },
+  "29185:119073": {
+   "name": "PC · 참가 지갑 변경 불가",
+   "w": 480,
+   "h": 286,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Participating wallet",
+     "kind": "text"
+    },
+    {
+     "t": "Your participating wallet cannot be changed during P1–P3.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    },
+    {
+     "t": "Close",
+     "kind": "button"
+    }
+   ]
+  },
+  "29185:119099": {
+   "name": "모바일 · 참가 지갑 변경 불가",
+   "w": 375,
+   "h": 341,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Participating wallet",
+     "kind": "text"
+    },
+    {
+     "t": "Your participating wallet cannot be changed during P1–P3.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Wallet\n0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69",
+     "kind": "text"
+    },
+    {
+     "t": "Close",
+     "kind": "button"
+    }
+   ]
+  },
+  "29185:121040": {
+   "name": "PC · 혜택 목록 · EdgeX 리그 카드",
+   "w": 343,
+   "h": 296,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "TetherMax Global League with EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    }
+   ]
+  },
+  "29185:121059": {
+   "name": "모바일 · 혜택 목록 · EdgeX 리그 카드",
+   "w": 180,
+   "h": 203,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "TetherMax Global League with EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "View league",
+     "kind": "text"
+    }
+   ]
+  },
+  "29420:138295": {
+   "name": "Home / mWeb / S3 · Empty home card",
+   "w": 375,
+   "h": 1945,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback Balance",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    },
+    {
+     "t": "Link once and cashback keeps coming",
+     "kind": "text"
+    },
+    {
+     "t": "Link Account",
+     "kind": "button"
+    },
+    {
+     "t": "Exclusive For Members",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Guess Bitcoin Price",
+     "kind": "text"
+    },
+    {
+     "t": "Win Up to 1,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Earn More Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Earn extra USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Limited Time Offers",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Trade to win up to $100K prize pool",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "$100,000.00",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "chip"
+    },
+    {
+     "t": "45",
+     "kind": "chip"
+    },
+    {
+     "t": "M",
+     "kind": "chip"
+    },
+    {
+     "t": "37",
+     "kind": "chip"
+    },
+    {
+     "t": "S",
+     "kind": "chip"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Top Partner Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "54% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "55% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Service",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    },
+    {
+     "t": "https://TetherMax.io",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29453:143874": {
+   "name": "DEX / own / O11 Review in progress / light",
+   "w": 1440,
+   "h": 900,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Cashback",
+     "kind": "shell"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "shell"
+    },
+    {
+     "t": "Discover",
+     "kind": "shell"
+    },
+    {
+     "t": "5,137.70 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback Balance",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    },
+    {
+     "t": "Linked Accounts",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "●  UID 685432171",
+     "kind": "text"
+    },
+    {
+     "t": "14.00",
+     "kind": "text"
+    },
+    {
+     "t": "USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "●  Wallet 0x7a3f…51e9",
+     "kind": "text"
+    },
+    {
+     "t": "-",
+     "kind": "text"
+    },
+    {
+     "t": "Ownership verification in progress · 06:46",
+     "kind": "text"
+    },
+    {
+     "t": "ApeX",
+     "kind": "text"
+    },
+    {
+     "t": "●  Wallet 0x91c4…a07b",
+     "kind": "text"
+    },
+    {
+     "t": "14.00",
+     "kind": "text"
+    },
+    {
+     "t": "USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Aster",
+     "kind": "text"
+    },
+    {
+     "t": "●  Wallet 0x5e0d…c2f4",
+     "kind": "text"
+    },
+    {
+     "t": "3.20",
+     "kind": "text"
+    },
+    {
+     "t": "USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Using multiple platforms? Link more accounts",
+     "kind": "button"
+    },
+    {
+     "t": "Exclusive For Members",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Predict Bitcoin price and win up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 1,000.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Earn More Cashback.  Earn Extra USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 37 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Ongoing",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Limited Time Offers",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Trade to win up to $100K prize pool",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "$100,000.00",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "chip"
+    },
+    {
+     "t": "45",
+     "kind": "chip"
+    },
+    {
+     "t": "M",
+     "kind": "chip"
+    },
+    {
+     "t": "37",
+     "kind": "chip"
+    },
+    {
+     "t": "S",
+     "kind": "chip"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Become a VIP & enjoy the benefits.",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Voucher",
+     "kind": "text"
+    },
+    {
+     "t": "Claim VIP2 Trial",
+     "kind": "text"
+    },
+    {
+     "t": "--",
+     "kind": "text"
+    },
+    {
+     "t": "D",
+     "kind": "text"
+    },
+    {
+     "t": "16",
+     "kind": "text"
+    },
+    {
+     "t": "H",
+     "kind": "text"
+    },
+    {
+     "t": "00",
+     "kind": "text"
+    },
+    {
+     "t": "M",
+     "kind": "text"
+    },
+    {
+     "t": "30",
+     "kind": "text"
+    },
+    {
+     "t": "S",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Top Partner Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "54% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "55% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "65% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@TetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "12783:404139": {
+   "name": "mWeb/landingPage",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "5,000.50 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback Balance",
+     "kind": "text"
+    },
+    {
+     "t": "Withdraw",
+     "kind": "button"
+    },
+    {
+     "t": "Linked UID",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "-",
+     "kind": "text"
+    },
+    {
+     "t": "UID 685432171",
+     "kind": "text"
+    },
+    {
+     "t": "This UID has been unlinked. Tap to verify ownership and reclaim it.",
+     "kind": "text"
+    },
+    {
+     "t": "Using multiple exchanges? Link more UIDs",
+     "kind": "text"
+    },
+    {
+     "t": "Exclusive For Members",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Guess Bitcoin Price",
+     "kind": "text"
+    },
+    {
+     "t": "Win Up to 1,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Earn More Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Earn extra USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Limited Time Offers",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Trade to win up to $100K prize pool",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "$100,000.00",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "chip"
+    },
+    {
+     "t": "45",
+     "kind": "chip"
+    },
+    {
+     "t": "M",
+     "kind": "chip"
+    },
+    {
+     "t": "37",
+     "kind": "chip"
+    },
+    {
+     "t": "S",
+     "kind": "chip"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Top Partner Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "54% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "55% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Service",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    },
+    {
+     "t": "https://TetherMax.io",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "shell"
+    }
+   ]
+  },
+  "9287:185462": {
+   "name": "Web",
+   "w": 1440,
+   "h": 900,
+   "hidden": false,
+   "overlay": true,
+   "texts": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "input"
+    },
+    {
+     "t": "1234567",
+     "kind": "input"
+    },
+    {
+     "t": "Steps to link UID",
+     "kind": "text"
+    },
+    {
+     "t": "Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    },
+    {
+     "t": "Don’t have an account yet? Register here",
+     "kind": "button"
+    }
+   ]
+  },
+  "9105:188659": {
+   "name": "mWeb/LP",
+   "w": 375,
+   "h": 812,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Link your exchange UID",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "input"
+    },
+    {
+     "t": "1234567",
+     "kind": "input"
+    },
+    {
+     "t": "Steps to link UID",
+     "kind": "text"
+    },
+    {
+     "t": "Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "text"
+    },
+    {
+     "t": "https://tethermax.io",
+     "kind": "text"
+    },
+    {
+     "t": "Next",
+     "kind": "button"
+    },
+    {
+     "t": "Don’t have an account yet? Register here",
+     "kind": "button"
+    }
+   ]
+  },
+  "26047:56579": {
+   "name": "Step=1",
+   "w": 343,
+   "h": 280,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Earning Timeline",
+     "kind": "shell"
+    },
+    {
+     "t": "Step 1",
+     "kind": "text"
+    },
+    {
+     "t": "Step 2",
+     "kind": "text"
+    },
+    {
+     "t": "Step 3",
+     "kind": "text"
+    },
+    {
+     "t": "Sep 28 19:00",
+     "kind": "text"
+    },
+    {
+     "t": "Make your first trading transaction",
+     "kind": "text"
+    },
+    {
+     "t": "All trading fees will be consolidated for the next 24 hours.",
+     "kind": "text"
+    }
+   ]
+  },
+  "26651:60616": {
+   "name": "MAXOP-805 / Ranking card with reward messages / PC 1440 (card width 928)",
+   "w": 928,
+   "h": 332,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Your September Cashback Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Rankings are updated daily at 00:01",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "UID 1210910640",
+     "kind": "text"
+    },
+    {
+     "t": "2nd place",
+     "kind": "text"
+    },
+    {
+     "t": "You're in the reward zone.",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "UID 617755618866586639",
+     "kind": "text"
+    },
+    {
+     "t": "Top 100%",
+     "kind": "text"
+    },
+    {
+     "t": "Trade more to get a reward.",
+     "kind": "text"
+    },
+    {
+     "t": "WOO X Pro",
+     "kind": "text"
+    },
+    {
+     "t": "UID 99902035",
+     "kind": "text"
+    },
+    {
+     "t": "-",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "UID 1375493648",
+     "kind": "text"
+    },
+    {
+     "t": "-",
+     "kind": "text"
+    }
+   ]
+  },
+  "29330:208569": {
+   "name": "Home / mWeb / S4 DEX",
+   "w": 375,
+   "h": 1945,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "148.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback Balance",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    },
+    {
+     "t": "Linked Accounts",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "14.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UID 685432171",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "120.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "0x7a3f…51e9",
+     "kind": "text"
+    },
+    {
+     "t": "ApeX",
+     "kind": "text"
+    },
+    {
+     "t": "14.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "0x91c4…a07b",
+     "kind": "text"
+    },
+    {
+     "t": "Trading on multiple exchanges? Link more",
+     "kind": "text"
+    },
+    {
+     "t": "Exclusive For Members",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Guess Bitcoin Price",
+     "kind": "text"
+    },
+    {
+     "t": "Win Up to 1,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Earn More Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Earn extra USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Limited Time Offers",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Trade to win up to $100K prize pool",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "$100,000.00",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "chip"
+    },
+    {
+     "t": "45",
+     "kind": "chip"
+    },
+    {
+     "t": "M",
+     "kind": "chip"
+    },
+    {
+     "t": "37",
+     "kind": "chip"
+    },
+    {
+     "t": "S",
+     "kind": "chip"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Top Partner Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "54% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "55% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Service",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    },
+    {
+     "t": "https://TetherMax.io",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29381:137457": {
+   "name": "Home / mWeb / S4 DEX · After first link (Lighter)",
+   "w": 375,
+   "h": 1945,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "28.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback Balance",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    },
+    {
+     "t": "Linked Accounts",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "14.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UID 685432171",
+     "kind": "text"
+    },
+    {
+     "t": "ApeX",
+     "kind": "text"
+    },
+    {
+     "t": "14.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "0x91c4…a07b",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "0x7a3f…51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Trading on multiple exchanges? Link more",
+     "kind": "text"
+    },
+    {
+     "t": "Exclusive For Members",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Guess Bitcoin Price",
+     "kind": "text"
+    },
+    {
+     "t": "Win Up to 1,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Earn More Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Earn extra USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Limited Time Offers",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Trade to win up to $100K prize pool",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "$100,000.00",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "chip"
+    },
+    {
+     "t": "45",
+     "kind": "chip"
+    },
+    {
+     "t": "M",
+     "kind": "chip"
+    },
+    {
+     "t": "37",
+     "kind": "chip"
+    },
+    {
+     "t": "S",
+     "kind": "chip"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Top Partner Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "54% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "55% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Service",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    },
+    {
+     "t": "https://TetherMax.io",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Account linked successfully",
+     "kind": "text"
+    }
+   ]
+  },
+  "29330:198486": {
+   "name": "Frame",
+   "w": 718,
+   "h": 154,
+   "hidden": true,
+   "overlay": false,
+   "texts": []
+  },
+  "5947:87400": {
+   "name": "Frame",
+   "w": 343,
+   "h": 164,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "Earning Timeline",
+     "kind": "text"
+    },
+    {
+     "t": "Start Trading",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 17 00:00 UTC",
+     "kind": "text"
+    },
+    {
+     "t": "Cut-off Time",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 18 00:00 UTC",
+     "kind": "text"
+    },
+    {
+     "t": "Updated",
+     "kind": "text"
+    },
+    {
+     "t": "Mar 18 10:50 UTC",
+     "kind": "text"
+    }
+   ]
+  },
+  "29515:137400": {
+   "name": "DEX / Mobile / Hub H1 Guest, DEX route (S1) / Light (main)",
+   "w": 375,
+   "h": 5069,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "CASHBACK ESTIMATE",
+     "kind": "text"
+    },
+    {
+     "t": "CEXs",
+     "kind": "text"
+    },
+    {
+     "t": "DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "input"
+    },
+    {
+     "t": "Lighter",
+     "kind": "input"
+    },
+    {
+     "t": "Monthly trading volume",
+     "kind": "input"
+    },
+    {
+     "t": "$100,000",
+     "kind": "input"
+    },
+    {
+     "t": "$1K",
+     "kind": "text"
+    },
+    {
+     "t": "$250K",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter Premium taker, 0.0280%",
+     "kind": "text"
+    },
+    {
+     "t": "$28.00",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback, 20%",
+     "kind": "text"
+    },
+    {
+     "t": "Paid to your TetherMax balance",
+     "kind": "text"
+    },
+    {
+     "t": "−$5.60",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees after cashback",
+     "kind": "text"
+    },
+    {
+     "t": "$22.40",
+     "kind": "text"
+    },
+    {
+     "t": "Estimated monthly cashback",
+     "kind": "text"
+    },
+    {
+     "t": "$5.60",
+     "kind": "text"
+    },
+    {
+     "t": "Per day $0.18",
+     "kind": "text"
+    },
+    {
+     "t": "Per year $67.20",
+     "kind": "text"
+    },
+    {
+     "t": "Learn More",
+     "kind": "input"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "30%",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "90%",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "84%",
+     "kind": "text"
+    },
+    {
+     "t": "cashback",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 4 DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at $100,000 monthly trading volume, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Search for a DEX",
+     "kind": "input"
+    },
+    {
+     "t": "CEX",
+     "kind": "chip"
+    },
+    {
+     "t": "DEX",
+     "kind": "chip"
+    },
+    {
+     "t": "Brokers",
+     "kind": "chip"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0266%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0105%",
+     "kind": "text"
+    },
+    {
+     "t": "Join EdgeX",
+     "kind": "button"
+    },
+    {
+     "t": "ApeX",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0350%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0140%",
+     "kind": "text"
+    },
+    {
+     "t": "Join ApeX",
+     "kind": "button"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0224%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0032%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Lighter",
+     "kind": "button"
+    },
+    {
+     "t": "Aster",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0280%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0000%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Aster",
+     "kind": "button"
+    },
+    {
+     "t": "Why sign up with TetherMax?",
+     "kind": "text"
+    },
+    {
+     "t": "Support in 2 minutes",
+     "kind": "text"
+    },
+    {
+     "t": "Responsive customer support, query attended in 2 minutes.",
+     "kind": "text"
+    },
+    {
+     "t": "Speak to us  →",
+     "kind": "text"
+    },
+    {
+     "t": "More cashback from events",
+     "kind": "text"
+    },
+    {
+     "t": "Earn more cashbacks by completing tasks and exchange event challenges.",
+     "kind": "text"
+    },
+    {
+     "t": "See Benefits  →",
+     "kind": "text"
+    },
+    {
+     "t": "Invite friends, earn more",
+     "kind": "text"
+    },
+    {
+     "t": "Grow your cashback when you invite partners and friends.",
+     "kind": "text"
+    },
+    {
+     "t": "Find out more  →",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29515:138107": {
+   "name": "DEX / Mobile / Hub H2 Signed in, nothing linked (S3) / Light",
+   "w": 375,
+   "h": 4262,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "CASHBACK ESTIMATE",
+     "kind": "text"
+    },
+    {
+     "t": "CEXs",
+     "kind": "text"
+    },
+    {
+     "t": "DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "input"
+    },
+    {
+     "t": "Lighter",
+     "kind": "input"
+    },
+    {
+     "t": "Monthly trading volume",
+     "kind": "input"
+    },
+    {
+     "t": "$100,000",
+     "kind": "input"
+    },
+    {
+     "t": "$1K",
+     "kind": "text"
+    },
+    {
+     "t": "$250K",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees",
+     "kind": "text"
+    },
+    {
+     "t": "Lighter Premium taker, 0.0280%",
+     "kind": "text"
+    },
+    {
+     "t": "$28.00",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback, 20%",
+     "kind": "text"
+    },
+    {
+     "t": "Paid to your TetherMax balance    Minimum 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "−$5.60",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees after cashback",
+     "kind": "text"
+    },
+    {
+     "t": "$22.40",
+     "kind": "text"
+    },
+    {
+     "t": "Estimated monthly cashback",
+     "kind": "text"
+    },
+    {
+     "t": "$5.60",
+     "kind": "text"
+    },
+    {
+     "t": "Per day $0.18",
+     "kind": "text"
+    },
+    {
+     "t": "Per year $67.20",
+     "kind": "text"
+    },
+    {
+     "t": "Learn More",
+     "kind": "input"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "30%",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "90%",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "84%",
+     "kind": "text"
+    },
+    {
+     "t": "cashback",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 4 DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at $100,000 monthly trading volume, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Search for a DEX",
+     "kind": "input"
+    },
+    {
+     "t": "CEX",
+     "kind": "chip"
+    },
+    {
+     "t": "DEX",
+     "kind": "chip"
+    },
+    {
+     "t": "Brokers",
+     "kind": "chip"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0266%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0105%",
+     "kind": "text"
+    },
+    {
+     "t": "Join EdgeX",
+     "kind": "button"
+    },
+    {
+     "t": "ApeX",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0350%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0140%",
+     "kind": "text"
+    },
+    {
+     "t": "Join ApeX",
+     "kind": "button"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0224%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0032%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Lighter",
+     "kind": "button"
+    },
+    {
+     "t": "Aster",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0280%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0000%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Aster",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29515:138815": {
+   "name": "DEX / Mobile / Hub H3 Signed in, exchange UID linked (S4) / Light",
+   "w": 375,
+   "h": 6601,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "YOUR CASHBACK",
+     "kind": "text"
+    },
+    {
+     "t": "CEXs",
+     "kind": "text"
+    },
+    {
+     "t": "DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "input"
+    },
+    {
+     "t": "Bybit",
+     "kind": "input"
+    },
+    {
+     "t": "Total available cashback",
+     "kind": "text"
+    },
+    {
+     "t": "32.40 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total exchange cashback",
+     "kind": "text"
+    },
+    {
+     "t": "From your Bybit trades",
+     "kind": "text"
+    },
+    {
+     "t": "28.40 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total event reward",
+     "kind": "text"
+    },
+    {
+     "t": "From events. Invitation rewards are separate.",
+     "kind": "text"
+    },
+    {
+     "t": "4.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Claimable 32.40 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Minimum 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback is paid to your TetherMax balance.",
+     "kind": "text"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "30%",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "90%",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "84%",
+     "kind": "text"
+    },
+    {
+     "t": "cashback",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 16 exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at $100,000 monthly trading volume, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Search for a partner",
+     "kind": "input"
+    },
+    {
+     "t": "CEX",
+     "kind": "chip"
+    },
+    {
+     "t": "DEX",
+     "kind": "chip"
+    },
+    {
+     "t": "Brokers",
+     "kind": "chip"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0300%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bitget",
+     "kind": "button"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "25% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0375%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Join OKX",
+     "kind": "button"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "45% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0303%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0110%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bybit",
+     "kind": "button"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0400%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0160%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Binance",
+     "kind": "button"
+    },
+    {
+     "t": "MEXC",
+     "kind": "text"
+    },
+    {
+     "t": "40% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0120%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0000%",
+     "kind": "text"
+    },
+    {
+     "t": "Join MEXC",
+     "kind": "button"
+    },
+    {
+     "t": "Gate",
+     "kind": "text"
+    },
+    {
+     "t": "35% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0325%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0130%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Gate",
+     "kind": "button"
+    },
+    {
+     "t": "DeepCoin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0180%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join DeepCoin",
+     "kind": "button"
+    },
+    {
+     "t": "BingX",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0250%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BingX",
+     "kind": "button"
+    },
+    {
+     "t": "BitMEX",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BitMEX",
+     "kind": "button"
+    },
+    {
+     "t": "LBank",
+     "kind": "text"
+    },
+    {
+     "t": "65% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0210%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0070%",
+     "kind": "text"
+    },
+    {
+     "t": "Join LBank",
+     "kind": "button"
+    },
+    {
+     "t": "BlockFin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BlockFin",
+     "kind": "button"
+    },
+    {
+     "t": "Kucoin",
+     "kind": "text"
+    },
+    {
+     "t": "65% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0175%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0070%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Kucoin",
+     "kind": "button"
+    },
+    {
+     "t": "Zoomex",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0250%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Zoomex",
+     "kind": "button"
+    },
+    {
+     "t": "Bitunix",
+     "kind": "text"
+    },
+    {
+     "t": "85% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0075%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0030%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bitunix",
+     "kind": "button"
+    },
+    {
+     "t": "BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BioFin",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX",
+     "kind": "text"
+    },
+    {
+     "t": "60% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0200%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0080%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BVOX",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29515:140513": {
+   "name": "DEX / Mobile / Hub H4 Exchange balance under 10 USDT (S4) / Light",
+   "w": 375,
+   "h": 6685,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "YOUR CASHBACK",
+     "kind": "text"
+    },
+    {
+     "t": "CEXs",
+     "kind": "text"
+    },
+    {
+     "t": "DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "input"
+    },
+    {
+     "t": "Bybit",
+     "kind": "input"
+    },
+    {
+     "t": "Total available cashback",
+     "kind": "text"
+    },
+    {
+     "t": "7.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total exchange cashback",
+     "kind": "text"
+    },
+    {
+     "t": "From your Bybit trades",
+     "kind": "text"
+    },
+    {
+     "t": "5.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total event reward",
+     "kind": "text"
+    },
+    {
+     "t": "From events. Invitation rewards are separate.",
+     "kind": "text"
+    },
+    {
+     "t": "2.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "You can claim cashback if you receive an additional 3.00 USDT in exchange Cashback.",
+     "kind": "text"
+    },
+    {
+     "t": "Minimum 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback is claimed automatically once your claimable amount reaches 10 USDT.",
+     "kind": "text"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "30%",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "90%",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "84%",
+     "kind": "text"
+    },
+    {
+     "t": "cashback",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 16 exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at $100,000 monthly trading volume, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Search for a partner",
+     "kind": "input"
+    },
+    {
+     "t": "CEX",
+     "kind": "chip"
+    },
+    {
+     "t": "DEX",
+     "kind": "chip"
+    },
+    {
+     "t": "Brokers",
+     "kind": "chip"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0300%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bitget",
+     "kind": "button"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "25% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0375%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Join OKX",
+     "kind": "button"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "45% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0303%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0110%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bybit",
+     "kind": "button"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0400%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0160%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Binance",
+     "kind": "button"
+    },
+    {
+     "t": "MEXC",
+     "kind": "text"
+    },
+    {
+     "t": "40% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0120%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0000%",
+     "kind": "text"
+    },
+    {
+     "t": "Join MEXC",
+     "kind": "button"
+    },
+    {
+     "t": "Gate",
+     "kind": "text"
+    },
+    {
+     "t": "35% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0325%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0130%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Gate",
+     "kind": "button"
+    },
+    {
+     "t": "DeepCoin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0180%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join DeepCoin",
+     "kind": "button"
+    },
+    {
+     "t": "BingX",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0250%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BingX",
+     "kind": "button"
+    },
+    {
+     "t": "BitMEX",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BitMEX",
+     "kind": "button"
+    },
+    {
+     "t": "LBank",
+     "kind": "text"
+    },
+    {
+     "t": "65% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0210%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0070%",
+     "kind": "text"
+    },
+    {
+     "t": "Join LBank",
+     "kind": "button"
+    },
+    {
+     "t": "BlockFin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BlockFin",
+     "kind": "button"
+    },
+    {
+     "t": "Kucoin",
+     "kind": "text"
+    },
+    {
+     "t": "65% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0175%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0070%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Kucoin",
+     "kind": "button"
+    },
+    {
+     "t": "Zoomex",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0250%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Zoomex",
+     "kind": "button"
+    },
+    {
+     "t": "Bitunix",
+     "kind": "text"
+    },
+    {
+     "t": "85% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0075%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0030%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bitunix",
+     "kind": "button"
+    },
+    {
+     "t": "BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BioFin",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX",
+     "kind": "text"
+    },
+    {
+     "t": "60% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0200%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0080%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BVOX",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29515:142500": {
+   "name": "DEX / Mobile / Hub H7 Balance did not load (S4) / Light",
+   "w": 375,
+   "h": 6317,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "YOUR CASHBACK",
+     "kind": "text"
+    },
+    {
+     "t": "CEXs",
+     "kind": "text"
+    },
+    {
+     "t": "DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "input"
+    },
+    {
+     "t": "Bybit",
+     "kind": "input"
+    },
+    {
+     "t": "Cashback could not load",
+     "kind": "text"
+    },
+    {
+     "t": "Try again",
+     "kind": "text"
+    },
+    {
+     "t": "We could not load your cashback. Please try again.",
+     "kind": "text"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "30%",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "90%",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "84%",
+     "kind": "text"
+    },
+    {
+     "t": "cashback",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 16 exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at $100,000 monthly trading volume, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Search for a partner",
+     "kind": "input"
+    },
+    {
+     "t": "CEX",
+     "kind": "chip"
+    },
+    {
+     "t": "DEX",
+     "kind": "chip"
+    },
+    {
+     "t": "Brokers",
+     "kind": "chip"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0300%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bitget",
+     "kind": "button"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "25% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0375%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Join OKX",
+     "kind": "button"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "45% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0303%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0110%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bybit",
+     "kind": "button"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0400%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0160%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Binance",
+     "kind": "button"
+    },
+    {
+     "t": "MEXC",
+     "kind": "text"
+    },
+    {
+     "t": "40% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0120%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0000%",
+     "kind": "text"
+    },
+    {
+     "t": "Join MEXC",
+     "kind": "button"
+    },
+    {
+     "t": "Gate",
+     "kind": "text"
+    },
+    {
+     "t": "35% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0325%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0130%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Gate",
+     "kind": "button"
+    },
+    {
+     "t": "DeepCoin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0180%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join DeepCoin",
+     "kind": "button"
+    },
+    {
+     "t": "BingX",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0250%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BingX",
+     "kind": "button"
+    },
+    {
+     "t": "BitMEX",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BitMEX",
+     "kind": "button"
+    },
+    {
+     "t": "LBank",
+     "kind": "text"
+    },
+    {
+     "t": "65% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0210%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0070%",
+     "kind": "text"
+    },
+    {
+     "t": "Join LBank",
+     "kind": "button"
+    },
+    {
+     "t": "BlockFin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BlockFin",
+     "kind": "button"
+    },
+    {
+     "t": "Kucoin",
+     "kind": "text"
+    },
+    {
+     "t": "65% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0175%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0070%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Kucoin",
+     "kind": "button"
+    },
+    {
+     "t": "Zoomex",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0250%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Zoomex",
+     "kind": "button"
+    },
+    {
+     "t": "Bitunix",
+     "kind": "text"
+    },
+    {
+     "t": "85% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0075%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0030%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bitunix",
+     "kind": "button"
+    },
+    {
+     "t": "BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BioFin",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX",
+     "kind": "text"
+    },
+    {
+     "t": "60% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0200%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0080%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BVOX",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29515:144188": {
+   "name": "DEX / Mobile / Hub H8 EdgeX wallet linked (S4) / Light",
+   "w": 375,
+   "h": 4061,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "YOUR CASHBACK",
+     "kind": "text"
+    },
+    {
+     "t": "CEXs",
+     "kind": "text"
+    },
+    {
+     "t": "DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "input"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "input"
+    },
+    {
+     "t": "Total available cashback",
+     "kind": "text"
+    },
+    {
+     "t": "3.10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total exchange cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Reported by EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "3.10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Paid to your TetherMax balance",
+     "kind": "text"
+    },
+    {
+     "t": "Minimum 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback is sent automatically to your linked EdgeX wallet.",
+     "kind": "text"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "30%",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "90%",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "84%",
+     "kind": "text"
+    },
+    {
+     "t": "cashback",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 4 DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at $100,000 monthly trading volume, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Search for a DEX",
+     "kind": "input"
+    },
+    {
+     "t": "CEX",
+     "kind": "chip"
+    },
+    {
+     "t": "DEX",
+     "kind": "chip"
+    },
+    {
+     "t": "Brokers",
+     "kind": "chip"
+    },
+    {
+     "t": "EdgeX",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0266%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0105%",
+     "kind": "text"
+    },
+    {
+     "t": "Join EdgeX",
+     "kind": "button"
+    },
+    {
+     "t": "ApeX",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 30% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0350%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0140%",
+     "kind": "text"
+    },
+    {
+     "t": "Join ApeX",
+     "kind": "button"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0224%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0032%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Lighter",
+     "kind": "button"
+    },
+    {
+     "t": "Aster",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0280%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0000%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Aster",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29515:144850": {
+   "name": "DEX / Mobile / Hub H1-CEX Guest, calculator on Exchanges (S1) / Light",
+   "w": 375,
+   "h": 7561,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "CASHBACK ESTIMATE",
+     "kind": "text"
+    },
+    {
+     "t": "CEXs",
+     "kind": "text"
+    },
+    {
+     "t": "DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "input"
+    },
+    {
+     "t": "Bybit",
+     "kind": "input"
+    },
+    {
+     "t": "Monthly trading volume",
+     "kind": "input"
+    },
+    {
+     "t": "$100,000",
+     "kind": "input"
+    },
+    {
+     "t": "$10K",
+     "kind": "text"
+    },
+    {
+     "t": "$500K",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit taker fee, 0.0550%",
+     "kind": "text"
+    },
+    {
+     "t": "$55.00",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback, 45%",
+     "kind": "text"
+    },
+    {
+     "t": "Paid to your TetherMax balance",
+     "kind": "text"
+    },
+    {
+     "t": "−$24.75",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees after cashback",
+     "kind": "text"
+    },
+    {
+     "t": "$30.25",
+     "kind": "text"
+    },
+    {
+     "t": "Estimated monthly cashback",
+     "kind": "text"
+    },
+    {
+     "t": "$24.75",
+     "kind": "text"
+    },
+    {
+     "t": "Per day $0.82",
+     "kind": "text"
+    },
+    {
+     "t": "Per year $297.00",
+     "kind": "text"
+    },
+    {
+     "t": "Learn More",
+     "kind": "input"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "30%",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "90%",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "84%",
+     "kind": "text"
+    },
+    {
+     "t": "cashback",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 16 exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at $100,000 monthly trading volume, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Search for a partner",
+     "kind": "input"
+    },
+    {
+     "t": "CEX",
+     "kind": "chip"
+    },
+    {
+     "t": "DEX",
+     "kind": "chip"
+    },
+    {
+     "t": "Brokers",
+     "kind": "chip"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0300%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bitget",
+     "kind": "button"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "25% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0375%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Join OKX",
+     "kind": "button"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "45% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0303%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0110%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bybit",
+     "kind": "button"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "20% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0400%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0160%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Binance",
+     "kind": "button"
+    },
+    {
+     "t": "MEXC",
+     "kind": "text"
+    },
+    {
+     "t": "40% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0120%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0000%",
+     "kind": "text"
+    },
+    {
+     "t": "Join MEXC",
+     "kind": "button"
+    },
+    {
+     "t": "Gate",
+     "kind": "text"
+    },
+    {
+     "t": "35% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0325%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0130%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Gate",
+     "kind": "button"
+    },
+    {
+     "t": "DeepCoin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0180%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join DeepCoin",
+     "kind": "button"
+    },
+    {
+     "t": "BingX",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0250%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BingX",
+     "kind": "button"
+    },
+    {
+     "t": "BitMEX",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BitMEX",
+     "kind": "button"
+    },
+    {
+     "t": "LBank",
+     "kind": "text"
+    },
+    {
+     "t": "65% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0210%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0070%",
+     "kind": "text"
+    },
+    {
+     "t": "Join LBank",
+     "kind": "button"
+    },
+    {
+     "t": "BlockFin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BlockFin",
+     "kind": "button"
+    },
+    {
+     "t": "Kucoin",
+     "kind": "text"
+    },
+    {
+     "t": "65% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0175%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0070%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Kucoin",
+     "kind": "button"
+    },
+    {
+     "t": "Zoomex",
+     "kind": "text"
+    },
+    {
+     "t": "50% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0250%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0100%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Zoomex",
+     "kind": "button"
+    },
+    {
+     "t": "Bitunix",
+     "kind": "text"
+    },
+    {
+     "t": "85% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0075%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0030%",
+     "kind": "text"
+    },
+    {
+     "t": "Join Bitunix",
+     "kind": "button"
+    },
+    {
+     "t": "BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "70% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0150%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0060%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BioFin",
+     "kind": "button"
+    },
+    {
+     "t": "BVOX",
+     "kind": "text"
+    },
+    {
+     "t": "60% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Final Taker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0200%",
+     "kind": "text"
+    },
+    {
+     "t": "Final Maker",
+     "kind": "text"
+    },
+    {
+     "t": "0.0080%",
+     "kind": "text"
+    },
+    {
+     "t": "Join BVOX",
+     "kind": "button"
+    },
+    {
+     "t": "Why sign up with TetherMax?",
+     "kind": "text"
+    },
+    {
+     "t": "Support in 2 minutes",
+     "kind": "text"
+    },
+    {
+     "t": "Responsive customer support, query attended in 2 minutes.",
+     "kind": "text"
+    },
+    {
+     "t": "Speak to us  →",
+     "kind": "text"
+    },
+    {
+     "t": "More cashback from events",
+     "kind": "text"
+    },
+    {
+     "t": "Earn more cashbacks by completing tasks and exchange event challenges.",
+     "kind": "text"
+    },
+    {
+     "t": "See Benefits  →",
+     "kind": "text"
+    },
+    {
+     "t": "Invite friends, earn more",
+     "kind": "text"
+    },
+    {
+     "t": "Grow your cashback when you invite partners and friends.",
+     "kind": "text"
+    },
+    {
+     "t": "Find out more  →",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
+  },
+  "29515:146538": {
+   "name": "DEX / Mobile / Hub H1-Broker Guest, calculator on Brokers (S1) / Light",
+   "w": 375,
+   "h": 4767,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Trade, Earn Back. Repeat.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback opportunities across exchanges and brokers in one place.",
+     "kind": "text"
+    },
+    {
+     "t": "Never connect a wallet",
+     "kind": "text"
+    },
+    {
+     "t": "CASHBACK ESTIMATE",
+     "kind": "text"
+    },
+    {
+     "t": "CEXs",
+     "kind": "text"
+    },
+    {
+     "t": "DEXs",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNER",
+     "kind": "input"
+    },
+    {
+     "t": "RS Finance",
+     "kind": "input"
+    },
+    {
+     "t": "Monthly lots traded",
+     "kind": "input"
+    },
+    {
+     "t": "2 lots",
+     "kind": "input"
+    },
+    {
+     "t": "1 lot",
+     "kind": "text"
+    },
+    {
+     "t": "100 lots",
+     "kind": "text"
+    },
+    {
+     "t": "Trading fees",
+     "kind": "text"
+    },
+    {
+     "t": "RS Finance commission, $30.00 / lot",
+     "kind": "text"
+    },
+    {
+     "t": "$60.00",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback, $21.00 / lot",
+     "kind": "text"
+    },
+    {
+     "t": "Paid to your TetherMax balance",
+     "kind": "text"
+    },
+    {
+     "t": "−$42.00",
+     "kind": "text"
+    },
+    {
+     "t": "Trading cost after cashback",
+     "kind": "text"
+    },
+    {
+     "t": "$18.00",
+     "kind": "text"
+    },
+    {
+     "t": "Estimated monthly cashback",
+     "kind": "text"
+    },
+    {
+     "t": "$42.00",
+     "kind": "text"
+    },
+    {
+     "t": "Per day $1.40",
+     "kind": "text"
+    },
+    {
+     "t": "Per year $504.00",
+     "kind": "text"
+    },
+    {
+     "t": "Learn More",
+     "kind": "input"
+    },
+    {
+     "t": "Pick where you trade",
+     "kind": "text"
+    },
+    {
+     "t": "Every route pays back a share of your trading fees. Open one to see its partners and rates.",
+     "kind": "text"
+    },
+    {
+     "t": "Decentralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For traders who keep their own keys",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "30%",
+     "kind": "text"
+    },
+    {
+     "t": "trading fee cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Centralised exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "For futures traders on exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Claimed automatically from 10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "90%",
+     "kind": "text"
+    },
+    {
+     "t": "futures cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Brokers",
+     "kind": "text"
+    },
+    {
+     "t": "For forex and CFD traders",
+     "kind": "text"
+    },
+    {
+     "t": "PARTNERS",
+     "kind": "text"
+    },
+    {
+     "t": "Forex, commodities and indices",
+     "kind": "text"
+    },
+    {
+     "t": "UP TO",
+     "kind": "text"
+    },
+    {
+     "t": "84%",
+     "kind": "text"
+    },
+    {
+     "t": "cashback",
+     "kind": "text"
+    },
+    {
+     "t": "\"Up to\" is the highest rate among the partners on that route. Each partner's own rate is in the table and on its page.",
+     "kind": "text"
+    },
+    {
+     "t": "Compare cashback across 2 brokers",
+     "kind": "text"
+    },
+    {
+     "t": "Monthly cashback at 2 lots a month, from the calculator above.",
+     "kind": "text"
+    },
+    {
+     "t": "Search for a broker",
+     "kind": "input"
+    },
+    {
+     "t": "CEX",
+     "kind": "chip"
+    },
+    {
+     "t": "DEX",
+     "kind": "chip"
+    },
+    {
+     "t": "Brokers",
+     "kind": "chip"
+    },
+    {
+     "t": "RS Finance",
+     "kind": "text"
+    },
+    {
+     "t": "$21 / lot cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Commission",
+     "kind": "text"
+    },
+    {
+     "t": "$30.00 / lot",
+     "kind": "text"
+    },
+    {
+     "t": "Discounted commission",
+     "kind": "text"
+    },
+    {
+     "t": "$9.00 / lot",
+     "kind": "text"
+    },
+    {
+     "t": "Join RS Finance",
+     "kind": "button"
+    },
+    {
+     "t": "INFINOX",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 84% off commission",
+     "kind": "text"
+    },
+    {
+     "t": "Commission",
+     "kind": "text"
+    },
+    {
+     "t": "$7.00 / lot",
+     "kind": "text"
+    },
+    {
+     "t": "Discounted commission",
+     "kind": "text"
+    },
+    {
+     "t": "$1.40 / lot",
+     "kind": "text"
+    },
+    {
+     "t": "Join INFINOX",
+     "kind": "button"
+    },
+    {
+     "t": "Why sign up with TetherMax?",
+     "kind": "text"
+    },
+    {
+     "t": "Support in 2 minutes",
+     "kind": "text"
+    },
+    {
+     "t": "Responsive customer support, query attended in 2 minutes.",
+     "kind": "text"
+    },
+    {
+     "t": "Speak to us  →",
+     "kind": "text"
+    },
+    {
+     "t": "More cashback from events",
+     "kind": "text"
+    },
+    {
+     "t": "Earn more cashbacks by completing tasks and exchange event challenges.",
+     "kind": "text"
+    },
+    {
+     "t": "See Benefits  →",
+     "kind": "text"
+    },
+    {
+     "t": "Invite friends, earn more",
+     "kind": "text"
+    },
+    {
+     "t": "Grow your cashback when you invite partners and friends.",
+     "kind": "text"
+    },
+    {
+     "t": "Find out more  →",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    }
+   ]
   }
  },
  "missing": [
   "28960:125521",
   "28960:125522"
+ ],
+ "notes": [
+  "2026-11-27 Figma 8차 ②: 28960:127454 · 29357:147710 · 29357:148976 · 29360:144056 · 29360:145006 · 29360:145980 설명 카드 1 · 요약 줄 문장을 use_figma로 읽은 현재 문구로 교체(좌표는 이전 덤프)",
+  "2026-11-27 Figma 8차 ③: 28960:127422 가이드 1단계 본문을 use_figma로 읽은 현재 문구로 교체"
  ]
 }

@@ -1,0 +1,1311 @@
+{
+ "generated": "2026-11-27T22:12",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "summary",
+   "label": "Summary 탭 — 회원 · 자동 지급 차감 반영",
+   "vp": "pc",
+   "node": "29184:118620",
+   "src": "정밀",
+   "node_name": "PC · 회원 Summary · 자동 지급 차감 반영",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 5,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 37,
+   "nP": 49,
+   "matched": 37,
+   "missing": [],
+   "added": [
+    {
+     "t": "👥 Participants",
+     "kind": "text"
+    },
+    {
+     "t": "🌐 Countries",
+     "kind": "text"
+    },
+    {
+     "t": "↗ Total Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "🏁 Teams",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 4320,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 44,
+    "cards": 20,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "summary",
+   "label": "Summary 탭 — 회원 · 자동 지급 차감 반영",
+   "vp": "mo",
+   "node": "29184:118995",
+   "src": "정밀",
+   "node_name": "모바일 · 회원 Summary · 자동 지급 차감 반영",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 4,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 40,
+   "nP": 52,
+   "matched": 40,
+   "missing": [],
+   "added": [
+    {
+     "t": "👥 Participants",
+     "kind": "text"
+    },
+    {
+     "t": "🌐 Countries",
+     "kind": "text"
+    },
+    {
+     "t": "↗ Total Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "🏁 Teams",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 3207,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 42,
+    "cards": 16,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "normal",
+   "label": "팀 리더보드 (Team League)",
+   "vp": "pc",
+   "node": "29183:117206",
+   "src": "정밀",
+   "node_name": "PC · 팀 리더보드",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 5,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 14,
+   "nP": 26,
+   "matched": 14,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 2744,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 23,
+    "cards": 13,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "normal",
+   "label": "팀 리더보드 (Team League)",
+   "vp": "mo",
+   "node": "29183:117421",
+   "src": "정밀",
+   "node_name": "모바일 · 팀 리더보드",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 2,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 16,
+   "nP": 27,
+   "matched": 14,
+   "missing": [],
+   "added": [
+    {
+     "t": "Global League",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 1958,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Consultation: Chat Support (00:00 - 24:00)\r\nEmail: support@tetherMax.io",
+     "rule": "EX-C08"
+    },
+    {
+     "type": "missing",
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "rule": "EX-C08"
+    }
+   ],
+   "geom": {
+    "issues": [],
+    "pairs": 24,
+    "cards": 12,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "individual",
+   "label": "개인 리더보드 (Individual League)",
+   "vp": "pc",
+   "node": "29183:117629",
+   "src": "정밀",
+   "node_name": "PC · 개인 리더보드",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 5,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 15,
+   "nP": 23,
+   "matched": 15,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 2512,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 25,
+    "cards": 13,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "individual",
+   "label": "개인 리더보드 (Individual League)",
+   "vp": "mo",
+   "node": "29183:117845",
+   "src": "정밀",
+   "node_name": "모바일 · 개인 리더보드",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 2,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 17,
+   "nP": 24,
+   "matched": 15,
+   "missing": [],
+   "added": [
+    {
+     "t": "Global League",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 1958,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Consultation: Chat Support (00:00 - 24:00)\r\nEmail: support@tetherMax.io",
+     "rule": "EX-C08"
+    },
+    {
+     "type": "missing",
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "rule": "EX-C08"
+    }
+   ],
+   "geom": {
+    "issues": [],
+    "pairs": 26,
+    "cards": 12,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "create",
+   "label": "팀 생성 (자격 있음 → Create Team)",
+   "vp": "pc",
+   "node": "2913:24305",
+   "src": "색인",
+   "node_name": "Desktop - 1",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {
+    "input": 1,
+    "button": 2
+   },
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "chip",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 12,
+   "matched": 9,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 3,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "create",
+   "label": "팀 생성 (자격 있음 → Create Team)",
+   "vp": "mo",
+   "node": "2913:24073",
+   "src": "색인",
+   "node_name": "mWeb/Home",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {
+    "input": 1
+   },
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "tab",
+    "text"
+   ],
+   "nF": 9,
+   "nP": 13,
+   "matched": 9,
+   "missing": [],
+   "added": [
+    {
+     "t": "Global League",
+     "kind": "text"
+    },
+    {
+     "t": "Cancel",
+     "kind": "button"
+    },
+    {
+     "t": "Confirm",
+     "kind": "button"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 852.0,
+   "unverifiable": 1,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "unable",
+   "label": "팀 생성 · 자격 미충족",
+   "vp": "mo",
+   "node": "29183:118240",
+   "src": "정밀",
+   "node_name": "팀 생성 · 자격 미충족",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 3,
+   "nP": 3,
+   "matched": 3,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 2,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "createPick",
+   "label": "팀 생성 지갑 선택",
+   "vp": "pc",
+   "node": "29183:118054",
+   "src": "정밀",
+   "node_name": "PC · 팀 생성 지갑 선택",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 6,
+   "matched": 6,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 10,
+    "cards": 3,
+    "fw": 480,
+    "pw": 480,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "createPick",
+   "label": "팀 생성 지갑 선택",
+   "vp": "mo",
+   "node": "29183:118079",
+   "src": "정밀",
+   "node_name": "모바일 · 팀 생성 지갑 선택",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 32,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Global League",
+     "kind": "text"
+    },
+    {
+     "t": "Summary",
+     "kind": "text"
+    },
+    {
+     "t": "Team League",
+     "kind": "text"
+    },
+    {
+     "t": "TEAM PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Create Team",
+     "kind": "button"
+    },
+    {
+     "t": "All Teams",
+     "kind": "text"
+    },
+    {
+     "t": "Next Update: 22:30",
+     "kind": "text"
+    },
+    {
+     "t": "Search",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 15,
+   "frame_cut": 693,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 11,
+    "cards": 6,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "joinPick",
+   "label": "팀 참가 지갑 선택",
+   "vp": "pc",
+   "node": "29183:118116",
+   "src": "정밀",
+   "node_name": "PC · 팀 참가 지갑 선택",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 6,
+   "matched": 6,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 10,
+    "cards": 3,
+    "fw": 480,
+    "pw": 480,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "joinPick",
+   "label": "팀 참가 지갑 선택",
+   "vp": "mo",
+   "node": "29183:118141",
+   "src": "정밀",
+   "node_name": "모바일 · 팀 참가 지갑 선택",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 33,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Global League",
+     "kind": "text"
+    },
+    {
+     "t": "Summary",
+     "kind": "text"
+    },
+    {
+     "t": "Team League",
+     "kind": "text"
+    },
+    {
+     "t": "TEAM PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Create Team",
+     "kind": "button"
+    },
+    {
+     "t": "All Teams",
+     "kind": "text"
+    },
+    {
+     "t": "Next Update: 22:30",
+     "kind": "text"
+    },
+    {
+     "t": "Search",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "Dragon Squad",
+     "kind": "text"
+    },
+    {
+     "t": "Join team",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 15,
+   "frame_cut": 693,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 11,
+    "cards": 6,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "indPick",
+   "label": "개인전 참가 지갑 선택",
+   "vp": "pc",
+   "node": "29183:118178",
+   "src": "정밀",
+   "node_name": "PC · 개인전 참가 지갑 선택",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 6,
+   "nP": 6,
+   "matched": 6,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 10,
+    "cards": 3,
+    "fw": 480,
+    "pw": 480,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "indPick",
+   "label": "개인전 참가 지갑 선택",
+   "vp": "mo",
+   "node": "29183:118203",
+   "src": "정밀",
+   "node_name": "모바일 · 개인전 참가 지갑 선택",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 29,
+   "matched": 5,
+   "missing": [],
+   "added": [
+    {
+     "t": "Global League",
+     "kind": "text"
+    },
+    {
+     "t": "Summary",
+     "kind": "text"
+    },
+    {
+     "t": "INDIVIDUAL PRIZE POOL (USDT)",
+     "kind": "text"
+    },
+    {
+     "t": "Individual Rankings",
+     "kind": "text"
+    },
+    {
+     "t": "My Score",
+     "kind": "button"
+    },
+    {
+     "t": "Next Update: 22:30",
+     "kind": "text"
+    },
+    {
+     "t": "Search",
+     "kind": "text"
+    },
+    {
+     "t": "Ranking",
+     "kind": "text"
+    },
+    {
+     "t": "Traders",
+     "kind": "text"
+    },
+    {
+     "t": "Total Score",
+     "kind": "text"
+    },
+    {
+     "t": "South Korea",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 11,
+   "frame_cut": 713,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 11,
+    "cards": 6,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "notLinked",
+   "label": "해당 거래소 지갑 미연동",
+   "vp": "mo",
+   "node": "29183:118258",
+   "src": "정밀",
+   "node_name": "참가 · 해당 거래소 지갑 미연동",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 4,
+   "nP": 4,
+   "matched": 4,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 4,
+    "cards": 3,
+    "fw": 375,
+    "pw": 375,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "locked",
+   "label": "참가 지갑 변경 불가 (P1–P3)",
+   "vp": "pc",
+   "node": "29185:119073",
+   "src": "정밀",
+   "node_name": "PC · 참가 지갑 변경 불가",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 5,
+   "matched": 5,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 6,
+    "cards": 1,
+    "fw": 480,
+    "pw": 480,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "locked",
+   "label": "참가 지갑 변경 불가 (P1–P3)",
+   "vp": "mo",
+   "node": "29185:119099",
+   "src": "정밀",
+   "node_name": "모바일 · 참가 지갑 변경 불가",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": true,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 5,
+   "nP": 5,
+   "matched": 5,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 6,
+    "cards": 2,
+    "fw": 375,
+    "pw": 375,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "lighter",
+   "label": "Lighter 리그 (보류)",
+   "vp": "pc",
+   "node": "29183:117206",
+   "src": "정밀",
+   "node_name": "PC · 팀 리더보드",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 5,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 14,
+   "nP": 26,
+   "matched": 14,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": 2744,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 23,
+    "cards": 13,
+    "fw": 1440,
+    "pw": 1440,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "lighter",
+   "label": "Lighter 리그 (보류)",
+   "vp": "mo",
+   "node": "29183:117421",
+   "src": "정밀",
+   "node_name": "모바일 · 팀 리더보드",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 2,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 16,
+   "nP": 27,
+   "matched": 14,
+   "missing": [],
+   "added": [
+    {
+     "t": "Global League",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 1958,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "Consultation: Chat Support (00:00 - 24:00)\r\nEmail: support@tetherMax.io",
+     "rule": "EX-C08"
+    },
+    {
+     "type": "missing",
+     "t": "Announcements | Affiliate Partner Inquiry\nTerm of Use | Privacy Policy",
+     "rule": "EX-C08"
+    }
+   ],
+   "geom": {
+    "issues": [],
+    "pairs": 24,
+    "cards": 12,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "card",
+   "label": "혜택 목록 · EdgeX 리그 카드",
+   "vp": "pc",
+   "node": "29185:121040",
+   "src": "정밀",
+   "node_name": "PC · 혜택 목록 · EdgeX 리그 카드",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 3,
+   "nP": 3,
+   "matched": 3,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 4,
+    "cards": 0,
+    "fw": 343,
+    "pw": 1440,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "league.main",
+   "group": "rewards",
+   "title": "글로벌 리그",
+   "state": "card",
+   "label": "혜택 목록 · EdgeX 리그 카드",
+   "vp": "mo",
+   "node": "29185:121059",
+   "src": "정밀",
+   "node_name": "모바일 · 혜택 목록 · EdgeX 리그 카드",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 2,
+   "nP": 3,
+   "matched": 2,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 1,
+    "cards": 0,
+    "fw": 180,
+    "pw": 375,
+    "scope": true,
+    "excepted": []
+   },
+   "scope_overlay": true
+  }
+ ],
+ "nodesign": [],
+ "oneside": [
+  {
+   "screen": "league.main",
+   "state": "unable",
+   "label": "팀 생성 · 자격 미충족",
+   "missing_vp": "pc",
+   "has": "29183:118240",
+   "group": "rewards"
+  },
+  {
+   "screen": "league.main",
+   "state": "notLinked",
+   "label": "해당 거래소 지갑 미연동",
+   "missing_vp": "pc",
+   "has": "29183:118258",
+   "group": "rewards"
+  }
+ ],
+ "geom_top": []
+}

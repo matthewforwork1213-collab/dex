@@ -1,0 +1,729 @@
+{
+ "generated": "2026-11-27T22:12",
+ "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
+ "results": [
+  {
+   "screen": "events.list",
+   "group": "rewards",
+   "title": "이벤트",
+   "state": "exchange",
+   "label": "거래소 이벤트 탭",
+   "vp": "pc",
+   "node": "29062:112586",
+   "src": "정밀",
+   "node_name": "이벤트 · 거래소 이벤트 / PC",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 12,
+   "nP": 17,
+   "matched": 12,
+   "missing": [],
+   "added": [
+    {
+     "t": "B BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Total 150,000 USDT Przie Pool",
+     "kind": "text"
+    },
+    {
+     "t": "WSOT Vol & PnL Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 3,200,000 USDT",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 1691,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "events.list",
+   "group": "rewards",
+   "title": "이벤트",
+   "state": "exchange",
+   "label": "거래소 이벤트 탭",
+   "vp": "mo",
+   "node": "29194:119460",
+   "src": "정밀",
+   "node_name": "이벤트 · 거래소 이벤트 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 3,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 14,
+   "nP": 18,
+   "matched": 14,
+   "missing": [],
+   "added": [
+    {
+     "t": "B BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "Total 150,000 USDT Przie Pool",
+     "kind": "text"
+    },
+    {
+     "t": "WSOT Vol & PnL Trading Competition",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": 1990,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 18,
+    "cards": 5,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  },
+  {
+   "screen": "events.list",
+   "group": "rewards",
+   "title": "이벤트",
+   "state": "filterPc",
+   "label": "거래소 필터 (PC 셀렉트·목록)",
+   "vp": "pc",
+   "node": "29069:6595",
+   "src": "정밀",
+   "node_name": "거래소 이벤트 필터 / PC · 목록",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 6,
+   "nP": 23,
+   "matched": 6,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 17,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": true
+  },
+  {
+   "screen": "events.list",
+   "group": "rewards",
+   "title": "이벤트",
+   "state": "filterMo",
+   "label": "거래소 필터 (모바일 시트)",
+   "vp": "mo",
+   "node": "29069:6544",
+   "src": "정밀",
+   "node_name": "거래소 이벤트 필터 / 모바일",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 8,
+   "nP": 26,
+   "matched": 8,
+   "missing": [],
+   "added": [
+    {
+     "t": "Events",
+     "kind": "text"
+    },
+    {
+     "t": "B BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "BioFin Cashback Boost",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 85% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Total 150,000 USDT Przie Pool",
+     "kind": "text"
+    },
+    {
+     "t": "WSOT Vol & PnL Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 3,200,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Special Events",
+     "kind": "tab"
+    },
+    {
+     "t": "Exclusive",
+     "kind": "tab"
+    },
+    {
+     "t": "Exchange Events",
+     "kind": "tab"
+    },
+    {
+     "t": "EdgeX trading event",
+     "kind": "text"
+    },
+    {
+     "t": "Select Exchanges",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 4,
+   "frame_cut": 600,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "events.list",
+   "group": "rewards",
+   "title": "이벤트",
+   "state": "filterPcCex",
+   "label": "거래소 필터 · CEX 칩 (PC)",
+   "vp": "pc",
+   "node": "29190:123385",
+   "src": "정밀",
+   "node_name": "거래소 이벤트 필터 / PC · CEX",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 5,
+   "nP": 21,
+   "matched": 5,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 16,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 5,
+    "cards": 0,
+    "fw": 335,
+    "pw": 335,
+    "scope": true,
+    "excepted": [
+     {
+      "type": "가로 위치",
+      "label": "all",
+      "figma": [
+       12,
+       19,
+       64,
+       17
+      ],
+      "proto": [
+       17,
+       19,
+       17,
+       16
+      ],
+      "d": 5,
+      "rule": "EX-C19"
+     },
+     {
+      "type": "가로 위치",
+      "label": "all cex exchanges",
+      "figma": [
+       12,
+       63,
+       122,
+       20
+      ],
+      "proto": [
+       -6,
+       64,
+       119,
+       16
+      ],
+      "d": -18,
+      "rule": "EX-C19"
+     },
+     {
+      "type": "가로 위치",
+      "label": "centralised exchanges",
+      "figma": [
+       12,
+       100,
+       145,
+       16
+      ],
+      "proto": [
+       -6,
+       100,
+       129,
+       14
+      ],
+      "d": -18,
+      "rule": "EX-C19"
+     }
+    ]
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "events.list",
+   "group": "rewards",
+   "title": "이벤트",
+   "state": "filterPcDex",
+   "label": "거래소 필터 · DEX 칩 (PC)",
+   "vp": "pc",
+   "node": "29190:123416",
+   "src": "정밀",
+   "node_name": "거래소 이벤트 필터 / PC · DEX",
+   "found": true,
+   "fig_hidden": false,
+   "full": false,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [],
+   "nF": 5,
+   "nP": 21,
+   "matched": 5,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 16,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 5,
+    "cards": 0,
+    "fw": 335,
+    "pw": 335,
+    "scope": true,
+    "excepted": [
+     {
+      "type": "가로 위치",
+      "label": "all",
+      "figma": [
+       12,
+       19,
+       64,
+       17
+      ],
+      "proto": [
+       17,
+       19,
+       17,
+       16
+      ],
+      "d": 5,
+      "rule": "EX-C19"
+     },
+     {
+      "type": "가로 위치",
+      "label": "all dex exchanges",
+      "figma": [
+       12,
+       63,
+       121,
+       20
+      ],
+      "proto": [
+       -6,
+       64,
+       118,
+       16
+      ],
+      "d": -18,
+      "rule": "EX-C19"
+     },
+     {
+      "type": "가로 위치",
+      "label": "decentralised exchanges",
+      "figma": [
+       12,
+       100,
+       160,
+       16
+      ],
+      "proto": [
+       -6,
+       100,
+       143,
+       14
+      ],
+      "d": -18,
+      "rule": "EX-C19"
+     }
+    ]
+   },
+   "scope_overlay": true
+  },
+  {
+   "screen": "events.list",
+   "group": "rewards",
+   "title": "이벤트",
+   "state": "filterMoCex",
+   "label": "거래소 필터 · CEX 칩 (모바일)",
+   "vp": "mo",
+   "node": "29190:123474",
+   "src": "정밀",
+   "node_name": "거래소 이벤트 필터 / 모바일 · CEX",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 7,
+   "nP": 26,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Events",
+     "kind": "text"
+    },
+    {
+     "t": "B BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "BioFin Cashback Boost",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 85% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Total 150,000 USDT Przie Pool",
+     "kind": "text"
+    },
+    {
+     "t": "WSOT Vol & PnL Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 3,200,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Special Events",
+     "kind": "tab"
+    },
+    {
+     "t": "Exclusive",
+     "kind": "tab"
+    },
+    {
+     "t": "Exchange Events",
+     "kind": "tab"
+    },
+    {
+     "t": "All Exchanges",
+     "kind": "button"
+    },
+    {
+     "t": "EdgeX trading event",
+     "kind": "text"
+    },
+    {
+     "t": "Select Exchanges",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 4,
+   "frame_cut": 600,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 7,
+    "cards": 2,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false,
+   "same_node": []
+  },
+  {
+   "screen": "events.list",
+   "group": "rewards",
+   "title": "이벤트",
+   "state": "filterMoDex",
+   "label": "거래소 필터 · DEX 칩 (모바일)",
+   "vp": "mo",
+   "node": "29190:123515",
+   "src": "정밀",
+   "node_name": "거래소 이벤트 필터 / 모바일 · DEX",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 1,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 7,
+   "nP": 26,
+   "matched": 7,
+   "missing": [],
+   "added": [
+    {
+     "t": "Events",
+     "kind": "text"
+    },
+    {
+     "t": "B BioFin",
+     "kind": "text"
+    },
+    {
+     "t": "BioFin Cashback Boost",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 85% cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Total 150,000 USDT Przie Pool",
+     "kind": "text"
+    },
+    {
+     "t": "WSOT Vol & PnL Trading Competition",
+     "kind": "text"
+    },
+    {
+     "t": "Up to 3,200,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Special Events",
+     "kind": "tab"
+    },
+    {
+     "t": "Exclusive",
+     "kind": "tab"
+    },
+    {
+     "t": "Exchange Events",
+     "kind": "tab"
+    },
+    {
+     "t": "All Exchanges",
+     "kind": "button"
+    },
+    {
+     "t": "EdgeX trading event",
+     "kind": "text"
+    },
+    {
+     "t": "Select Exchanges",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 4,
+   "frame_cut": 600,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 7,
+    "cards": 2,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": false
+  }
+ ],
+ "nodesign": [],
+ "oneside": [
+  {
+   "screen": "events.list",
+   "state": "filterPc",
+   "label": "거래소 필터 (PC 셀렉트·목록)",
+   "missing_vp": "mo",
+   "has": "29069:6595",
+   "group": "rewards"
+  },
+  {
+   "screen": "events.list",
+   "state": "filterMo",
+   "label": "거래소 필터 (모바일 시트)",
+   "missing_vp": "pc",
+   "has": "29069:6544",
+   "group": "rewards"
+  },
+  {
+   "screen": "events.list",
+   "state": "filterPcCex",
+   "label": "거래소 필터 · CEX 칩 (PC)",
+   "missing_vp": "mo",
+   "has": "29190:123385",
+   "group": "rewards"
+  },
+  {
+   "screen": "events.list",
+   "state": "filterPcDex",
+   "label": "거래소 필터 · DEX 칩 (PC)",
+   "missing_vp": "mo",
+   "has": "29190:123416",
+   "group": "rewards"
+  },
+  {
+   "screen": "events.list",
+   "state": "filterMoCex",
+   "label": "거래소 필터 · CEX 칩 (모바일)",
+   "missing_vp": "pc",
+   "has": "29190:123474",
+   "group": "rewards"
+  },
+  {
+   "screen": "events.list",
+   "state": "filterMoDex",
+   "label": "거래소 필터 · DEX 칩 (모바일)",
+   "missing_vp": "pc",
+   "has": "29190:123515",
+   "group": "rewards"
+  }
+ ],
+ "geom_top": []
+}

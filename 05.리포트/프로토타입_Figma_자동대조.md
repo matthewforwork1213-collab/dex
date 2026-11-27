@@ -2,26 +2,26 @@
 
 | 항목 | 내용 |
 |---|---|
-| 생성 | 2026-11-27 21:37 · `python -I _프로토타입_전체/tools/figma-diff.py` (스크립트가 이 문서를 통째로 다시 씁니다) |
+| 생성 | 2026-11-27 22:21 · `python -I _프로토타입_전체/tools/figma-diff.py` (스크립트가 이 문서를 통째로 다시 씁니다) |
 | 프로토타입 | `_프로토타입_전체/_latest.html` — 모든 화면 × 상태 × PC·모바일을 실제 브라우저로 렌더(디자인 보기 · 주석 숨김 · 상태에 맞는 로그인 상태) |
-| Figma 기준 | 상태의 `figma.pc` / `figma.mo` 노드. 문구 출처: 정밀 캐시 `ref/figma_text.json` 있음 393노드 → 오프라인 색인 `ref/figma_pages/*.xml`(2026-11-27 파일 기준) → 색인 이후 수정 `05.리포트/Figma수정결과_*.md` 10개(문구 교체 102 · 숨김 29 · 새 프레임 42) |
-| 예외 | `_프로토타입_전체/tools/figma-diff-exceptions.json` 규칙 92개 — 결정 기록으로 의도적으로 다르게 한 것. 결과에서 빼고 8장에 따로 적음 |
+| Figma 기준 | 상태의 `figma.pc` / `figma.mo` 노드. 문구 출처: 정밀 캐시 `ref/figma_text.json` 있음 438노드 → 오프라인 색인 `ref/figma_pages/*.xml`(2026-11-27 파일 기준) → 색인 이후 수정 `05.리포트/Figma수정결과_*.md` 11개(문구 교체 105 · 숨김 29 · 새 프레임 50) |
+| 예외 | `_프로토타입_전체/tools/figma-diff-exceptions.json` 규칙 96개 — 결정 기록으로 의도적으로 다르게 한 것. 결과에서 빼고 8장에 따로 적음 |
 
 ## 1. 요약
 
 | 항목 | 값 |
 |---|---|
-| 화면 · 상태 (문서 화면 제외) | 4 화면 · 20 상태 |
-| 대조한 상태×뷰 | **38** (Figma 출처: 정밀 38) |
-| 디자인 없음 | 상태 0 (PC·모바일 모두 없음) · 한쪽 뷰만 있음 2 — 7장 |
-| **일치율** (Figma 문구 기준) | **100.0%** — Figma 문구 419개 중 일치 419 |
+| 화면 · 상태 (문서 화면 제외) | 2 화면 · 27 상태 |
+| 대조한 상태×뷰 | **30** (Figma 출처: 정밀 30) |
+| 디자인 없음 | 상태 9 (PC·모바일 모두 없음) · 한쪽 뷰만 있음 6 — 7장 |
+| **일치율** (Figma 문구 기준) | **100.0%** — Figma 문구 2529개 중 일치 2438 |
 | **누락** (Figma에만) | **0** |
 | **문구 다름** | **0** |
-| **추가** (프로토타입에만) | **51** |
-| 문제 없는 상태×뷰 | 7 / 38 |
-| 예외로 뺀 건 | 0 |
-| 위치·크기 (기하 모드) | 대조한 상태×뷰 0 · 2px 넘게 어긋난 요소 0건() — 5장 |
-| 확인 불가 | Figma 색인에서 내부가 안 보이는 인스턴스 0개(버튼 0 · 칩 0 · 탭 0 · 입력 0 · 블록 0) · 그래서 판정을 보류한 프로토타입 문구 0개 |
+| **추가** (프로토타입에만) | **120** |
+| 문제 없는 상태×뷰 | 11 / 30 |
+| 예외로 뺀 건 | 99 |
+| 위치·크기 (기하 모드) | 대조한 상태×뷰 26 · 2px 넘게 어긋난 요소 138건(안쪽 세로 위치(중심) 57 · 카드 높이 42 · 가로 위치 17 · 안쪽 왼쪽 여백 12 · 요소 간격 9 · 카드 폭 1) — 5장 |
+| 확인 불가 | Figma 색인에서 내부가 안 보이는 인스턴스 0개(버튼 0 · 칩 0 · 탭 0 · 입력 0 · 블록 0) · 그래서 판정을 보류한 프로토타입 문구 204개 |
 
 ### 읽는 법
 
@@ -33,97 +33,63 @@
 | 제외 | 숫자·금액·날짜·주소·마스킹 ID·거래소 이름 같은 표본 값, Figma의 이름뿐인 레이어(`Button`·`Label`·`Description`·`h6`·`headline (DX-1)` 등), GNB·푸터(공통 셸 화면 `cmn.*`에서만 대조 — 프로토타입은 `header.gnb`·`footer`·`.mo-top`·`.mo-nav`, Figma는 셸 레이어 하위 또는 좌표 캐시의 상단 GNB 띠(PC 64px · 모바일 56px, 상태 표시줄 있으면 +44px)·하단 푸터 영역. 문구·위치 대조 모두) | — |
 | 출처 | 정밀 = Figma 실제 문구 · 색인 = 텍스트 레이어 이름(자동 이름 = 문구라서 대부분 맞지만, 이름을 바꾼 레이어는 틀릴 수 있음) · 보정 = 색인 이후 새 프레임이라 수정결과 문서의 문구로만 대조(누락만 판정) | — |
 
-> 정밀 모드: Figma 쪽 문구는 정밀 캐시(2026-11-27T19:44 수신, 393노드 — 인스턴스 안 버튼·칩·탭 라벨까지 실제 문구)를 우선 쓰고, 캐시에 없는 노드만 색인(레이어 이름)으로 대조합니다. 출처별 수는 위 「대조한 상태×뷰」. 색인으로 남은 노드는 인스턴스 내부를 못 봐서 「확인 불가」로 셉니다.
+> 정밀 모드: Figma 쪽 문구는 정밀 캐시(2026-11-27T22:21 수신, 438노드 — 인스턴스 안 버튼·칩·탭 라벨까지 실제 문구)를 우선 쓰고, 캐시에 없는 노드만 색인(레이어 이름)으로 대조합니다. 출처별 수는 위 「대조한 상태×뷰」. 색인으로 남은 노드는 인스턴스 내부를 못 봐서 「확인 불가」로 셉니다.
 
-## 2. 상위 문제 3건
+## 2. 상위 문제 1건
 
 누락 + 문구 다름이 많은 순(추가는 동점 정리용). 같은 Figma 프레임 · 같은 내용의 상태는 한 번만 싣고 「같은 문제」로 묶음. 캡처: 왼쪽 프로토타입(디자인 보기, 위쪽 최대 2400px) · 오른쪽 Figma(기존 캡처 재사용, 없으면 「Figma 캡처 필요(연결 후)」).
 
 | # | 화면:상태 | 뷰 | Figma | 누락 | 다름 | 추가 | 대표 내용 |
 |---|---|---|---|---|---|---|---|
-| 1 | `guest.modal:picker` 거래소 선택 | PC | [29035:98030](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98030) | 0 | 0 | 6 | `Select an exchange` · `Select an exchange first` · [버튼] `Check cashback` · 외 3 |
-| 2 | `guest.result:above` 조회 성공 · 10 USDT 이상 | 모바일 | [29035:97855](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-97855) | 0 | 0 | 3 | `Sign up in the app and earn more cashback` · [버튼] `Get the App` · [버튼] `Sign up to link account` |
-| 3 | `guest.search:bad` 입력 오류 · 선택 거래소 기준 | PC | [29035:98401](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98401) | 0 | 0 | 1 | `No account? Join our partner exchange ⟶` |
+| 1 | `dex.detail:faq2` FAQ 두 구역 펼침 — Withdrawals & Account Management | PC | [29367:138679](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-138679) | 0 | 0 | 10 | [버튼] `Auto Claim` · `My review` · `Key Features` · 외 7 |
 
-### 2.1 `guest.modal:picker` · PC — 거래소 선택
+### 2.1 `dex.detail:faq2` · PC — FAQ 두 구역 펼침 — Withdrawals & Account Management
 
-Figma [29035:98030](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98030) `Web / Guest / picker · 거래소 선택` · 출처 정밀
+Figma [29367:138679](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-138679) `DEX / detail / D3 FAQ, reviews and terms / light · FAQ two sections open` · 출처 정밀
 
 | 프로토타입 | Figma |
 |---|---|
-| (캡처 생략) | Figma 캡처 필요(연결 후) |
+| (캡처 생략) | ![Figma](Figma수정결과_img/r2_CT29_after.jpg)<br>Figma 수정 후 캡처 |
 
-- 추가: `Select an exchange` · `Select an exchange first` · [버튼] `Check cashback` · `No account? Join our partner exchange ⟶` · `Don't leave your cashback behind.` · [버튼] `Lighter DEX`
-
-### 2.2 `guest.result:above` · 모바일 — 조회 성공 · 10 USDT 이상
-
-Figma [29035:97855](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-97855) `Mobile / Guest / above · 조회 성공 · 10 USDT 이상` · 출처 정밀
-
-| 프로토타입 | Figma |
-|---|---|
-| (캡처 생략) | ![Figma](Figma수정결과_img/r3_B5_guest_after.jpg)<br>Figma 수정 후 캡처 |
-
-- 추가: `Sign up in the app and earn more cashback` · [버튼] `Get the App` · [버튼] `Sign up to link account`
-
-### 2.3 `guest.search:bad` · PC — 입력 오류 · 선택 거래소 기준
-
-Figma [29035:98401](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98401) `Web / Guest / bad · 입력 오류 · 선택 거래소 기준` · 출처 정밀
-
-| 프로토타입 | Figma |
-|---|---|
-| (캡처 생략) | Figma 캡처 필요(연결 후) |
-
-- 추가: `No account? Join our partner exchange ⟶`
+- 추가: [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `A question about linking` · `Does it support ApeX too? I linked my Lighter wallet already and I am not sure whether a s` · `Translated from Korean` · `Show original`
 
 ## 3. 화면별 불일치 표
 
 이 표만 보면 됩니다. 한 행 = 상태 × 뷰 × 구분. 문제 없는 상태는 4장 집계에만 나옵니다.
 
-### 3. 비회원 캐시백 조회
+### 8. DEX 개요 · 상세
 
 | 화면:상태 | 뷰 | Figma 노드 | 구분 | 내용 |
 |---|---|---|---|---|
-| `guest.search:search` 검색 · 초기 | PC | [29035:97622](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-97622) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:search` 검색 · 초기 | 모바일 | [29035:97732](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-97732) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:emptydex` DEX 선택 · 입력 대기 | PC | [29037:102201](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29037-102201) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:emptydex` DEX 선택 · 입력 대기 | 모바일 | [29037:102272](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29037-102272) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:emptycex` CEX 선택 · 입력 대기 | PC | [29037:102332](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29037-102332) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:emptycex` CEX 선택 · 입력 대기 | 모바일 | [29037:102403](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29037-102403) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:dex` DEX · 지갑 주소 입력 완료 | PC | [29035:98155](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98155) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:dex` DEX · 지갑 주소 입력 완료 | 모바일 | [29035:98218](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98218) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:cex` CEX · UID 입력 완료 | PC | [29035:98278](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98278) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:cex` CEX · UID 입력 완료 | 모바일 | [29035:98341](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98341) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:bad` 입력 오류 · 선택 거래소 기준 | PC | [29035:98401](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98401) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:bad` 입력 오류 · 선택 거래소 기준 | 모바일 | [29035:98465](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98465) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:loading` 거래소 조회 중 | PC | [29035:98526](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98526) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.search:loading` 거래소 조회 중 | 모바일 | [29035:98580](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98580) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.result:above` 조회 성공 · 10 USDT 이상 | PC | [29035:97792](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-97792) (정밀) | 추가 1 | [버튼] `Sign up to link account` |
-| `guest.result:above` 조회 성공 · 10 USDT 이상 | 모바일 | [29035:97855](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-97855) (정밀) | 추가 3 | `Sign up in the app and earn more cashback` · [버튼] `Get the App` · [버튼] `Sign up to link account` |
-| `guest.result:below` 조회 성공 · 10 USDT 미만 | PC | [29035:98631](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98631) (정밀) | 추가 1 | [버튼] `Sign up to link account` |
-| `guest.result:below` 조회 성공 · 10 USDT 미만 | 모바일 | [29035:98694](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98694) (정밀) | 추가 3 | `Sign up in the app and earn more cashback` · [버튼] `Get the App` · [버튼] `Sign up to link account` |
-| `guest.result:zero` 조회 성공 · 잔액 0 | PC | [29035:98754](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98754) (정밀) | 추가 1 | [버튼] `Sign up to link account` |
-| `guest.result:zero` 조회 성공 · 잔액 0 | 모바일 | [29035:98817](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98817) (정밀) | 추가 3 | `Sign up in the app and earn more cashback` · [버튼] `Get the App` · [버튼] `Sign up to link account` |
-| `guest.result:belowcex` CEX · UID 잔액 조회 성공 | PC | [29035:99309](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-99309) (정밀) | 추가 1 | [버튼] `Sign up to link account` |
-| `guest.result:belowcex` CEX · UID 잔액 조회 성공 | 모바일 | [29035:99372](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-99372) (정밀) | 추가 3 | `Sign up in the app and earn more cashback` · [버튼] `Get the App` · [버튼] `Sign up to link account` |
-| `guest.result:handoff` 로그인 후 · 계정 미연동 (DEX) | PC | [29035:97915](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-97915) (정밀) | 추가 1 | [버튼] `Link account` |
-| `guest.result:handoff` 로그인 후 · 계정 미연동 (DEX) | 모바일 | [29035:97974](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-97974) (정밀) | 추가 2 | [버튼] `Get the App` · [버튼] `Link account` |
-| `guest.result:handoffcex` CEX · 로그인 후 같은 UID 연동 | PC | [29037:102463](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29037-102463) (정밀) | 추가 1 | [버튼] `Link account` |
-| `guest.result:handoffcex` CEX · 로그인 후 같은 UID 연동 | 모바일 | [29037:102530](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29037-102530) (정밀) | 추가 2 | [버튼] `Get the App` · [버튼] `Link account` |
-| `guest.modal:picker` 거래소 선택 | PC | [29035:98030](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98030) (정밀) | 추가 6 | `Select an exchange` · `Select an exchange first` · [버튼] `Check cashback` · `No account? Join our partner exchange ⟶` · `Don't leave your cashback behind.` · [버튼] `Lighter DEX` |
-| `guest.modal:picker` 거래소 선택 | 모바일 | [29035:98094](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98094) (정밀) | 추가 2 | `No account? Join our partner exchange ⟶` · [버튼] `Lighter DEX` |
-| `guest.modal:pickerCex` 거래소 선택 · CEX 필터 | 모바일 | [29179:116351](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29179-116351) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
-| `guest.modal:pickerDex` 거래소 선택 · DEX 필터 | PC | [29179:116130](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29179-116130) (정밀) | 추가 5 | `Select an exchange` · `Select an exchange first` · [버튼] `Check cashback` · `No account? Join our partner exchange ⟶` · `Don't leave your cashback behind.` |
-| `guest.modal:pickerDex` 거래소 선택 · DEX 필터 | 모바일 | [29179:116630](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29179-116630) (정밀) | 추가 1 | `No account? Join our partner exchange ⟶` |
+| `dex.detail:normal` 게스트 — EdgeX | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) (정밀) | 추가 4 | `Key Features` · `Structure` · `Policy` · `Reviews (23)` |
+| `dex.detail:normal` 게스트 — EdgeX | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) (정밀) | 추가 7 | `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Frequent traders notice the cashback on fees.` · `Verified` · `A question about linking` |
+| `dex.detail:edgex` EdgeX (회원 상태는 상단 토글) | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) (정밀) | 추가 6 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` |
+| `dex.detail:edgex` EdgeX (회원 상태는 상단 토글) | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) (정밀) | 추가 9 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Frequent traders notice the cashback on fees.` · `Verified` · 외 1 |
+| `dex.detail:unlinked` 회원 · 미연동 — Link Wallet | PC | [28969:129666](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28969-129666) (정밀) | 추가 10 | `DEX` · `EdgeX is a high-performance perpetual DEX built on StarkEx, combining CEX-level speed with` · `Cashback applies to eligible trading fees on EdgeX.` · `After discount` · `Key Features` · `Structure` · `Guide` · `Policy` · 외 2 |
+| `dex.detail:signupReturn` 가입 후 복귀 — Link Wallet 주 버튼 강조 | PC | [28960:127422](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127422) (정밀) | 추가 9 | `DEX` · `✓ Trade crypto, RWAs and pre IPO perps onchain` · `✓ Earn Lighter points while you trade` · `✓ Leverage up to 50x on selected markets` · `✓ 0% maker and taker fees on Standard accounts` · `Key Features` · `Structure` · `Policy` · 외 1 |
+| `dex.detail:linked` 회원 · 연동 완료 — Auto Claim · 리뷰 쓰기 | PC | [28969:129751](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28969-129751) (정밀) | 추가 9 | `DEX` · `EdgeX is a high-performance perpetual DEX built on StarkEx, combining CEX-level speed with` · `Cashback applies to eligible trading fees on EdgeX.` · `After discount` · `Key Features` · `Structure` · `Guide` · `Policy` · 외 1 |
+| `dex.detail:aster` Aster | PC | [29357:147710](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-147710) (정밀) | 추가 6 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` |
+| `dex.detail:aster` Aster | 모바일 | [29360:145006](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145006) (정밀) | 추가 9 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Frequent traders notice the cashback on fees.` · `Verified` · 외 1 |
+| `dex.detail:apex` ApeX | PC | [29357:148976](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-148976) (정밀) | 추가 6 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` |
+| `dex.detail:apex` ApeX | 모바일 | [29360:145980](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145980) (정밀) | 추가 9 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `Frequent traders notice the cashback on fees.` · `Verified` · 외 1 |
+| `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | PC | [29357:143619](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-143619) (정밀) | 추가 3 | [버튼] `Auto Claim` · `My review` · `Start Earning Cashback with Lighter` |
+| `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) (정밀) | 추가 3 | [버튼] `Auto Claim` · `My review` · `Frequent traders notice the cashback on Premium fees.` |
+| `dex.detail:step2` 단계 가이드 Step 2 (Lighter) | PC | [29386:137364](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-137364) (정밀) | 추가 7 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `TetherMax never asks for your private key, seed phrase, or a wallet signature.` |
+| `dex.detail:step3` 단계 가이드 Step 3 (Lighter) | PC | [29357:144968](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-144968) (정밀) | 추가 3 | [버튼] `Auto Claim` · `My review` · `TetherMax never asks for your private key, seed phrase, or a wallet signature.` |
+| `dex.detail:step3` 단계 가이드 Step 3 (Lighter) | 모바일 | [29360:142096](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-142096) (정밀) | 추가 4 | [버튼] `Auto Claim` · `My review` · `TetherMax never asks for your private key, seed phrase, or a wallet signature.` · `Frequent traders notice the cashback on Premium fees.` |
+| `dex.detail:faq2` FAQ 두 구역 펼침 — Withdrawals & Account Management | PC | [29367:138679](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-138679) (정밀) | 추가 10 | [버튼] `Auto Claim` · `My review` · `Key Features` · `Structure` · `Policy` · `Reviews (23)` · `A question about linking` · `Does it support ApeX too? I linked my Lighter wallet already and I am not sure whether a s` · 외 2 |
+| `dex.detail:reviewsEmpty` 리뷰 없음 (G-169) | PC | [29367:137704](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-137704) (정밀) | 추가 3 | [버튼] `Auto Claim` · `My review` · `No reviews yet` |
+| `dex.detail:reviewsEmpty` 리뷰 없음 (G-169) | 모바일 | [29369:136809](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29369-136809) (정밀) | 추가 3 | [버튼] `Auto Claim` · `My review` · `No reviews yet` |
 
 ## 4. 그룹별 집계
 
 | 그룹 | 상태×뷰 | 문제 없음 | 일치율 | 누락 | 다름 | 추가 | 확인 불가 인스턴스 |
 |---|---|---|---|---|---|---|---|
-| 3. 비회원 캐시백 조회 | 38 | 7 | 100% | 0 | 0 | 51 | 0 |
+| 8. DEX 개요 · 상세 | 30 | 11 | 100% | 0 | 0 | 120 | 0 |
 
 ## 5. 위치·크기 대조
 
-Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 58노드)에 있는 상태×뷰만 대조합니다. 프로토타입은 같은 상태를 디자인 보기로 렌더해 프레임(모달 프레임이면 모달 상자) 원점 기준 rect를 잽니다. 허용 오차 2px.
+Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 107노드)에 있는 상태×뷰만 대조합니다. 프로토타입은 같은 상태를 디자인 보기로 렌더해 프레임(모달 프레임이면 모달 상자) 원점 기준 rect를 잽니다. 허용 오차 2px.
 
 | 비교 | 짝 짓는 법 | 무엇을 봄 |
 |---|---|---|
@@ -134,7 +100,286 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 58노드)�
 
 > 한계: 글자 폭은 글꼴 렌더링 차이가 있어 문구의 폭은 보지 않습니다. 배경 화면 위에 모달을 그린 Figma 프레임은 뒤 화면 요소와 겹쳐 짝이 틀어지므로 대조하지 않습니다. 같은 라벨이 양쪽 개수가 다르면 짝을 짓지 않습니다. Figma 프레임 폭과 프로토타입 프레임 폭이 다르면 표의 「폭」 열에 함께 적습니다.
 
-대조한 상태×뷰 없음(좌표 캐시 없음 또는 `--no-geom`).
+| 항목 | 값 |
+|---|---|
+| 대조한 상태×뷰 | 26 |
+| 짝지은 요소 · 카드 | 2526 · 426 |
+| 어긋남(>2px) | **138** — 안쪽 세로 위치(중심) 57 · 카드 높이 42 · 가로 위치 17 · 안쪽 왼쪽 여백 12 · 요소 간격 9 · 카드 폭 1 |
+| 그중 40px 넘음 | 19 — 대개 여백이 아니라 배치 구조가 다름(다른 열·다른 카드 안에 있음). 표에 「배치 다름」으로 표시 |
+
+### 5.1 상위 문제 12건
+
+어긋남 크기(요소당 최대 40px로 잘라 합산) 큰 순, 같은 Figma 프레임은 한 번만. 대표 이슈 = 여백·간격 이슈 중 가장 큰 것.
+
+| # | 화면:상태 | 뷰 | Figma | 폭(Figma/프로토) | 이슈 수 | 대표 이슈 |
+|---|---|---|---|---|---|---|
+| 1 | `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) | 375/375 | 14 | 안쪽 왼쪽 여백 `#fee` 202→197px (Δ-5) |
+| 2 | `dex.detail:step3` 단계 가이드 Step 3 (Lighter) | 모바일 | [29360:142096](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-142096) | 375/375 | 14 | 안쪽 왼쪽 여백 `#fee` 202→197px (Δ-5) |
+| 3 | `dex.detail:reviewsEmpty` 리뷰 없음 (G-169) | 모바일 | [29369:136809](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29369-136809) | 375/375 | 13 | 카드 높이 `how much you get back` (Δ-20) |
+| 4 | `dex.detail:reviewsEmpty` 리뷰 없음 (G-169) | PC | [29367:137704](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-137704) | 1440/1440 | 13 | 요소 간격 `your selected $#k volume on a premium ac` 49→72px (Δ+23) |
+| 5 | `dex.detail:step3` 단계 가이드 Step 3 (Lighter) | PC | [29357:144968](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-144968) | 1440/1440 | 13 | 요소 간격 `your selected $#k volume on a premium ac` 49→72px (Δ+23) |
+| 6 | `dex.detail:lighter` Lighter — Premium/Plus (온보딩 후 — 보류) | PC | [29357:143619](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-143619) | 1440/1440 | 13 | 요소 간격 `your selected $#k volume on a premium ac` 49→72px (Δ+23) |
+| 7 | `dex.detail:aster` Aster | 모바일 | [29360:145006](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145006) | 375/375 | 11 | 안쪽 왼쪽 여백 `#fee` 194→191px (Δ-3) |
+| 8 | `dex.detail:apex` ApeX | 모바일 | [29360:145980](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145980) | 375/375 | 11 | 안쪽 왼쪽 여백 `#fee` 192→189px (Δ-3) |
+| 9 | `dex.detail:unlinked` 회원 · 미연동 — Link Wallet | PC | [28969:129666](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28969-129666) | 1440/1440 | 2 | 요소 간격 `final taker → after cashback` 92→134px (Δ+42 · 배치 다름) |
+| 10 | `dex.detail:normal` 게스트 — EdgeX | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 375/375 | 11 | 안쪽 왼쪽 여백 `#cashback` 253→248px (Δ-5) |
+| 11 | `dex.detail:apex` ApeX | PC | [29357:148976](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-148976) | 1440/1440 | 2 | 안쪽 왼쪽 여백 `crypto` 163→166px (Δ+3) |
+| 12 | `dex.detail:aster` Aster | PC | [29357:147710](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-147710) | 1440/1440 | 1 | 안쪽 세로 위치(중심) `after cashback` 158→114px (Δ-44 · 배치 다름) |
+
+#### 5.1.1 `dex.detail:lighter` · 모바일 — 안쪽 왼쪽 여백 `#fee`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_01_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 카드 높이 | `how much you get back` | (16,1893) 343×1295 | (16,1973) 343×1275 | -20 |
+| 가로 위치 | `dex` | (141,201) 26×18 | (153,154) 25×15 | +12 |
+| 안쪽 왼쪽 여백 | `#fee` | 202px | 197px | -5 |
+| 안쪽 세로 위치(중심) | `with %` | 300px | 296px | -4 |
+| 안쪽 세로 위치(중심) | `total volume` | 339px | 335px | -4 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 1233px | 1229px | -4 |
+| 카드 높이 | `you trade on %` | (32,2408) 311×232 | (32,2493) 311×229 | -3 |
+| 카드 높이 | `% pays a settlement` | (32,2648) 311×212 | (32,2730) 311×209 | -3 |
+| 카드 높이 | `% gives cashback` | (32,2868) 311×212 | (32,2947) 311×209 | -3 |
+| 안쪽 세로 위치(중심) | `where your cashback comes from` | 475px | 472px | -3 |
+| 가로 위치 · 배치 다름 | `pre-ipo` | (106,409) 48×18 | (302,330) 48×15 | +196 |
+| 가로 위치 · 배치 다름 | `forex` | (220,441) 34×18 | (106,394) 34×15 | -114 |
+| … | 외 2건 | | | |
+
+#### 5.1.2 `dex.detail:step3` · 모바일 — 안쪽 왼쪽 여백 `#fee`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_02_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 카드 높이 | `how much you get back` | (16,1893) 343×1295 | (16,1967) 343×1275 | -20 |
+| 가로 위치 | `dex` | (141,201) 26×18 | (153,148) 25×15 | +12 |
+| 안쪽 왼쪽 여백 | `#fee` | 202px | 197px | -5 |
+| 안쪽 세로 위치(중심) | `with %` | 300px | 296px | -4 |
+| 안쪽 세로 위치(중심) | `total volume` | 339px | 335px | -4 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 1233px | 1229px | -4 |
+| 카드 높이 | `you trade on %` | (32,2408) 311×232 | (32,2487) 311×229 | -3 |
+| 카드 높이 | `% pays a settlement` | (32,2648) 311×212 | (32,2724) 311×209 | -3 |
+| 카드 높이 | `% gives cashback` | (32,2868) 311×212 | (32,2941) 311×209 | -3 |
+| 안쪽 세로 위치(중심) | `where your cashback comes from` | 475px | 472px | -3 |
+| 가로 위치 · 배치 다름 | `pre-ipo` | (106,409) 48×18 | (302,324) 48×15 | +196 |
+| 가로 위치 · 배치 다름 | `forex` | (220,441) 34×18 | (106,388) 34×15 | -114 |
+| … | 외 2건 | | | |
+
+#### 5.1.3 `dex.detail:reviewsEmpty` · 모바일 — 카드 높이 `how much you get back`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_03_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 카드 높이 | `how much you get back` | (16,1893) 343×1295 | (16,1967) 343×1275 | -20 |
+| 가로 위치 | `dex` | (141,201) 26×18 | (153,148) 25×15 | +12 |
+| 안쪽 세로 위치(중심) | `with %` | 300px | 296px | -4 |
+| 안쪽 세로 위치(중심) | `total volume` | 339px | 335px | -4 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 1233px | 1229px | -4 |
+| 카드 높이 | `you trade on %` | (32,2408) 311×232 | (32,2487) 311×229 | -3 |
+| 카드 높이 | `% pays a settlement` | (32,2648) 311×212 | (32,2724) 311×209 | -3 |
+| 카드 높이 | `% gives cashback` | (32,2868) 311×212 | (32,2941) 311×209 | -3 |
+| 안쪽 세로 위치(중심) | `where your cashback comes from` | 475px | 472px | -3 |
+| 가로 위치 · 배치 다름 | `pre-ipo` | (106,409) 48×18 | (302,324) 48×15 | +196 |
+| 가로 위치 · 배치 다름 | `forex` | (220,441) 34×18 | (106,388) 34×15 | -114 |
+| 가로 위치 · 배치 다름 | `indices & etfs` | (106,441) 88×18 | (212,356) 88×15 | +106 |
+| … | 외 1건 | | | |
+
+#### 5.1.4 `dex.detail:reviewsEmpty` · PC — 요소 간격 `your selected $#k volume on a premium account gene`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_04_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 요소 간격 | `your selected $#k volume on a premium account gene` | 49px | 72px | +23 |
+| 카드 높이 | `how much you get back` | (192,1083) 1056×840 | (192,1251) 1056×860 | +20 |
+| 카드 높이 | `you trade on %` | (208,1646) 317×209 | (208,1811) 317×229 | +20 |
+| 카드 높이 | `% pays a settlement` | (561,1646) 317×209 | (561,1811) 317×229 | +20 |
+| 카드 높이 | `% gives cashback` | (915,1646) 317×209 | (915,1811) 317×229 | +20 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 798px | 818px | +20 |
+| 요소 간격 | `$# cashback returned to you → your selected $#k vo` | 224px | 220px | -4 |
+| 안쪽 왼쪽 여백 | `crypto` | 163px | 166px | +3 |
+| 안쪽 세로 위치(중심) | `final taker` | 22px | 25px | +3 |
+| 안쪽 세로 위치(중심) | `final maker` | 22px | 25px | +3 |
+| 안쪽 세로 위치(중심) | `after cashback` | 114px | 117px | +3 |
+| 안쪽 세로 위치(중심) | `your selected $#k volume on a premium account gene` | 749px | 746px | -3 |
+| … | 외 1건 | | | |
+
+#### 5.1.5 `dex.detail:step3` · PC — 요소 간격 `your selected $#k volume on a premium account gene`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_05_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 카드 높이 | `step by step guide on starting your trading journe` | (192,1963) 1056×736 | (192,2151) 1056×700 | -36 |
+| 요소 간격 | `your selected $#k volume on a premium account gene` | 49px | 72px | +23 |
+| 카드 높이 | `how much you get back` | (192,1083) 1056×840 | (192,1251) 1056×860 | +20 |
+| 카드 높이 | `you trade on %` | (208,1646) 317×209 | (208,1811) 317×229 | +20 |
+| 카드 높이 | `% pays a settlement` | (561,1646) 317×209 | (561,1811) 317×229 | +20 |
+| 카드 높이 | `% gives cashback` | (915,1646) 317×209 | (915,1811) 317×229 | +20 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 798px | 818px | +20 |
+| 요소 간격 | `$# cashback returned to you → your selected $#k vo` | 224px | 220px | -4 |
+| 안쪽 왼쪽 여백 | `crypto` | 163px | 166px | +3 |
+| 안쪽 세로 위치(중심) | `final taker` | 22px | 25px | +3 |
+| 안쪽 세로 위치(중심) | `final maker` | 22px | 25px | +3 |
+| 안쪽 세로 위치(중심) | `after cashback` | 114px | 117px | +3 |
+| … | 외 1건 | | | |
+
+#### 5.1.6 `dex.detail:lighter` · PC — 요소 간격 `your selected $#k volume on a premium account gene`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_06_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 요소 간격 | `your selected $#k volume on a premium account gene` | 49px | 72px | +23 |
+| 카드 높이 | `how much you get back` | (192,1083) 1056×840 | (192,1257) 1056×860 | +20 |
+| 카드 높이 | `you trade on %` | (208,1646) 317×209 | (208,1817) 317×229 | +20 |
+| 카드 높이 | `% pays a settlement` | (561,1646) 317×209 | (561,1817) 317×229 | +20 |
+| 카드 높이 | `% gives cashback` | (915,1646) 317×209 | (915,1817) 317×229 | +20 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 798px | 818px | +20 |
+| 요소 간격 | `$# cashback returned to you → your selected $#k vo` | 224px | 220px | -4 |
+| 안쪽 왼쪽 여백 | `crypto` | 163px | 166px | +3 |
+| 안쪽 세로 위치(중심) | `final taker` | 22px | 25px | +3 |
+| 안쪽 세로 위치(중심) | `final maker` | 22px | 25px | +3 |
+| 안쪽 세로 위치(중심) | `after cashback` | 114px | 117px | +3 |
+| 안쪽 세로 위치(중심) | `your selected $#k volume on a premium account gene` | 749px | 746px | -3 |
+| … | 외 1건 | | | |
+
+#### 5.1.7 `dex.detail:aster` · 모바일 — 안쪽 왼쪽 여백 `#fee`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_07_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 카드 높이 | `how much you get back` | (16,1673) 343×1275 | (16,1677) 343×1255 | -20 |
+| 가로 위치 | `dex` | (141,201) 26×18 | (135,154) 25×15 | -6 |
+| 안쪽 세로 위치(중심) | `with %` | 300px | 296px | -4 |
+| 안쪽 세로 위치(중심) | `total volume` | 339px | 335px | -4 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 1213px | 1209px | -4 |
+| 카드 높이 | `you trade on %` | (32,2188) 311×212 | (32,2197) 311×209 | -3 |
+| 카드 높이 | `% pays a settlement` | (32,2408) 311×212 | (32,2414) 311×209 | -3 |
+| 카드 높이 | `% gives cashback` | (32,2628) 311×212 | (32,2631) 311×209 | -3 |
+| 안쪽 세로 위치(중심) | `where your cashback comes from` | 475px | 472px | -3 |
+| 안쪽 왼쪽 여백 | `#fee` | 194px | 191px | -3 |
+| 안쪽 세로 위치(중심) · 배치 다름 | `after cashback` | 158px | 114px | -44 |
+
+#### 5.1.8 `dex.detail:apex` · 모바일 — 안쪽 왼쪽 여백 `#fee`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_08_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 카드 높이 | `how much you get back` | (16,1673) 343×1275 | (16,1677) 343×1255 | -20 |
+| 가로 위치 | `dex` | (141,201) 26×18 | (135,154) 25×15 | -6 |
+| 안쪽 세로 위치(중심) | `with %` | 300px | 296px | -4 |
+| 안쪽 세로 위치(중심) | `total volume` | 339px | 335px | -4 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 1213px | 1209px | -4 |
+| 카드 높이 | `you trade on %` | (32,2188) 311×212 | (32,2197) 311×209 | -3 |
+| 카드 높이 | `% pays a settlement` | (32,2408) 311×212 | (32,2414) 311×209 | -3 |
+| 카드 높이 | `% gives cashback` | (32,2628) 311×212 | (32,2631) 311×209 | -3 |
+| 안쪽 세로 위치(중심) | `where your cashback comes from` | 475px | 472px | -3 |
+| 안쪽 왼쪽 여백 | `#fee` | 192px | 189px | -3 |
+| 안쪽 세로 위치(중심) · 배치 다름 | `after cashback` | 158px | 114px | -44 |
+
+#### 5.1.9 `dex.detail:unlinked` · PC — 요소 간격 `final taker → after cashback`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_09_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 안쪽 세로 위치(중심) · 배치 다름 | `after cashback` | 114px | 157px | +43 |
+| 요소 간격 · 배치 다름 | `final taker → after cashback` | 92px | 134px | +42 |
+
+#### 5.1.10 `dex.detail:normal` · 모바일 — 안쪽 왼쪽 여백 `#cashback`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_10_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 카드 높이 | `how much you get back` | (16,1609) 343×1275 | (16,1540) 343×1255 | -20 |
+| 안쪽 왼쪽 여백 | `#cashback` | 253px | 248px | -5 |
+| 안쪽 세로 위치(중심) | `with %` | 300px | 296px | -4 |
+| 안쪽 세로 위치(중심) | `total volume` | 339px | 335px | -4 |
+| 안쪽 세로 위치(중심) | `cashback comes from eligible exchange partner sett` | 1213px | 1209px | -4 |
+| 안쪽 왼쪽 여백 | `#fee` | 200px | 196px | -4 |
+| 카드 높이 | `you trade on %` | (32,2124) 311×212 | (32,2060) 311×209 | -3 |
+| 카드 높이 | `% pays a settlement` | (32,2344) 311×212 | (32,2277) 311×209 | -3 |
+| 카드 높이 | `% gives cashback` | (32,2564) 311×212 | (32,2494) 311×209 | -3 |
+| 안쪽 세로 위치(중심) | `where your cashback comes from` | 475px | 472px | -3 |
+| 안쪽 왼쪽 여백 | `highest rated` | 189px | 186px | -3 |
+
+#### 5.1.11 `dex.detail:apex` · PC — 안쪽 왼쪽 여백 `crypto`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_11_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 안쪽 왼쪽 여백 | `crypto` | 163px | 166px | +3 |
+| 안쪽 세로 위치(중심) · 배치 다름 | `after cashback` | 158px | 114px | -44 |
+
+#### 5.1.12 `dex.detail:aster` · PC — 안쪽 세로 위치(중심) `after cashback`
+
+| 프로토타입 | Figma |
+|---|---|
+| (캡처 생략) | ![Figma](프로토타입_Figma_자동대조_img/g_12_figma.jpg) |
+
+| 구분 | 대상 | Figma | 프로토타입 | Δ |
+|---|---|---|---|---|
+| 안쪽 세로 위치(중심) · 배치 다름 | `after cashback` | 158px | 114px | -44 |
+
+### 5.2 상태×뷰별 어긋남
+
+| 화면:상태 | 뷰 | Figma | 짝 | 어긋남 | 유형 |
+|---|---|---|---|---|---|
+| `dex.detail:apex` | 모바일 | [29360:145980](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145980) | 105 | 11 | 안쪽 세로 위치(중심) 5 · 카드 높이 4 · 가로 위치 1 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:apex` | PC | [29357:148976](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-148976) | 116 | 2 | 안쪽 왼쪽 여백 1 · 안쪽 세로 위치(중심) 1 |
+| `dex.detail:aster` | 모바일 | [29360:145006](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-145006) | 102 | 11 | 안쪽 세로 위치(중심) 5 · 카드 높이 4 · 가로 위치 1 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:aster` | PC | [29357:147710](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-147710) | 115 | 1 | 안쪽 세로 위치(중심) 1 |
+| `dex.detail:edgex` | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 103 | 9 | 카드 높이 4 · 안쪽 세로 위치(중심) 4 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:edgex` | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) | 113 | 0 | — |
+| `dex.detail:lighter` | 모바일 | [29360:146954](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-146954) | 123 | 14 | 가로 위치 5 · 카드 높이 4 · 안쪽 세로 위치(중심) 4 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:lighter` | PC | [29357:143619](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-143619) | 127 | 13 | 안쪽 세로 위치(중심) 5 · 카드 높이 4 · 요소 간격 3 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:moderation` | 모바일 | [27392:1062](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=27392-1062) | 2 | 1 | 카드 폭 1 |
+| `dex.detail:moderation` | PC | [27392:937](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=27392-937) | 2 | 0 | — |
+| `dex.detail:normal` | 모바일 | [29360:144056](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-144056) | 107 | 11 | 카드 높이 4 · 안쪽 세로 위치(중심) 4 · 안쪽 왼쪽 여백 3 |
+| `dex.detail:normal` | PC | [28960:127454](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127454) | 118 | 10 | 안쪽 세로 위치(중심) 9 · 요소 간격 1 |
+| `dex.detail:reviewsEmpty` | 모바일 | [29369:136809](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29369-136809) | 84 | 13 | 가로 위치 5 · 카드 높이 4 · 안쪽 세로 위치(중심) 4 |
+| `dex.detail:reviewsEmpty` | PC | [29367:137704](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-137704) | 88 | 13 | 카드 높이 5 · 안쪽 세로 위치(중심) 5 · 요소 간격 2 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:step3` | 모바일 | [29360:142096](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29360-142096) | 123 | 14 | 가로 위치 5 · 카드 높이 4 · 안쪽 세로 위치(중심) 4 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:step3` | PC | [29357:144968](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29357-144968) | 128 | 13 | 카드 높이 5 · 안쪽 세로 위치(중심) 5 · 요소 간격 2 · 안쪽 왼쪽 여백 1 |
+| `dex.detail:unlinked` | PC | [28969:129666](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28969-129666) | 12 | 2 | 안쪽 세로 위치(중심) 1 · 요소 간격 1 |
+| `dex.overview:lighter` | 모바일 | [29363:135072](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29363-135072) | 120 | 0 | — |
+| `dex.overview:lighter` | PC | [29361:136089](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29361-136089) | 140 | 0 | — |
+| `dex.overview:list` | 모바일 | [29363:136978](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29363-136978) | 92 | 0 | — |
+| `dex.overview:list` | PC | [29361:138251](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29361-138251) | 92 | 0 | — |
+| `dex.overview:member` | 모바일 | [29363:136040](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29363-136040) | 88 | 0 | — |
+| `dex.overview:member` | PC | [29361:136789](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29361-136789) | 76 | 0 | — |
+| `dex.overview:normal` | 모바일 | [29363:135072](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29363-135072) | 102 | 0 | — |
+| `dex.overview:normal` | PC | [29361:137628](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29361-137628) | 126 | 0 | — |
+| `dex.overview:overflow` | PC | [28960:125542](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-125542) | 122 | 0 | — |
 
 ## 6. Figma 문구를 하나도 못 읽은 상태×뷰
 
@@ -145,17 +390,30 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 58노드)�
 
 ## 7. 디자인 없는 상태
 
-### 7.1 PC·모바일 모두 Figma 노드 없음 (0)
+### 7.1 PC·모바일 모두 Figma 노드 없음 (9)
 
 | 그룹 | 화면:상태 | 상태 |
 |---|---|---|
+| 8. DEX 개요 · 상세 | `dex.overview:defiStale` | DefiLlama 실패 — 마지막 캐시값 + 기준 시각 |
+| 8. DEX 개요 · 상세 | `dex.overview:defiHidden` | DefiLlama 24시간 넘게 실패 — 숨김 |
+| 8. DEX 개요 · 상세 | `dex.overview:noBanner` | 게시 배너 없음 — 렌더 안 함 |
+| 8. DEX 개요 · 상세 | `dex.overview:empty` | 노출 DEX 0개 — 영역 숨김 (G-160) |
+| 8. DEX 개요 · 상세 | `dex.overview:maint` | 특정 DEX 점검·일시 연동 불가 (G-162) |
+| 8. DEX 개요 · 상세 | `dex.detail:maker` | Maker 토글 (D4 토글 선택 변형 재사용) |
+| 8. DEX 개요 · 상세 | `dex.detail:drawer` | How this works 드로어 (REQ-344) |
+| 8. DEX 개요 · 상세 | `dex.detail:pendingLink` | 확인 중 지갑만 있음 — 연동 버튼 자리 비활성 「확인 중」 |
+| 8. DEX 개요 · 상세 | `dex.detail:offboarded` | DEX 오프보딩 — 랜딩 리다이렉트 |
 
-### 7.2 한쪽 뷰만 있음 (2)
+### 7.2 한쪽 뷰만 있음 (6)
 
 | 화면:상태 | 상태 | 없는 쪽 | 있는 쪽 노드 |
 |---|---|---|---|
-| `guest.modal:pickerCex` | 거래소 선택 · CEX 필터 | PC | [29179:116351](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29179-116351) |
-| `guest.entry:normal` | 모바일 홈 푸터 → Claim Cashback | PC | [29037:113704](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29037-113704) |
+| `dex.overview:overflow` | 파트너 8개 — glance 가로 넘침 (Figma 전용) | 모바일 | [28960:125542](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-125542) |
+| `dex.detail:unlinked` | 회원 · 미연동 — Link Wallet | 모바일 | [28969:129666](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28969-129666) |
+| `dex.detail:signupReturn` | 가입 후 복귀 — Link Wallet 주 버튼 강조 | 모바일 | [28960:127422](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127422) |
+| `dex.detail:linked` | 회원 · 연동 완료 — Auto Claim · 리뷰 쓰기 | 모바일 | [28969:129751](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28969-129751) |
+| `dex.detail:step2` | 단계 가이드 Step 2 (Lighter) | 모바일 | [29386:137364](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-137364) |
+| `dex.detail:faq2` | FAQ 두 구역 펼침 — Withdrawals & Account Management | 모바일 | [29367:138679](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-138679) |
 
 ## 8. 예외로 뺀 것
 
@@ -191,14 +449,14 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 58노드)�
 | EX-B5o | `own.home`  | diff | `Trading on multiple exchanges? Link more` | EX-B5와 같음(배경 = 회원 홈) (_Figma수정_결정.md Q3 G-451) | 0 |
 | EX-B8 | `summary.`  | diff | `all cashback types→all types` | 유형 셀렉트 기본값은 정책 문구 All Types (REQ-378 · 100-summary.js 머리 주석(정책 > Figma, README 반영 원칙)) | 0 |
 | EX-B9 | `home.main`  | diff | `browse partner exchange→browse partners · link your uid with us→link your account with us` | 모바일 근거 프레임은 기존 [MAX-7] 판 — DEX(revision) 웹 S3-1 문구(Account 규칙)로 통일 (_Figma수정_결정.md 용어 규칙(2026-11-26) · N5 · S3-1 28960:127759) | 0 |
-| EX-A08 | `dex.detail:edgex`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | 이 상태는 상단 로그인 토글을 따르는 공용 상태라 점검은 회원 기준으로 렌더 — Figma D4는 게스트 시안(게스트 리뷰 안내는 `dex.detail:normal`에서 일치) (_Figma수정_결정.md 12차 「화면 목록판 표시」(로그인 상태 전환 = 그 상태의 화면)) | 0 |
-| EX-A09 | `dex.detail:step2`  | missing | `/^(DEX／Sign up／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 단계 가이드 상태는 로그인 토글을 따르고 점검은 회원 기준 렌더 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 0 |
-| EX-A10 | `dex.detail:faq2`  | missing | `/^(Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — FAQ 상태는 로그인 토글을 따르고 점검은 회원 기준 렌더 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 0 |
-| EX-A11 | `dex.detail:unlinked`  | any | `/^(Lighter is a decentralized trading platform.*／Tokenised Equity／Pre-IPO／Commodities／Indices & ETFs／Forex／Fiat／Cashback applies to Premium and Plus accounts.*／Premium／Plus／Final Maker)$/i` | 회원 오퍼 박스 프레임(28969:129666)은 Lighter 예시 — 상태는 공용 템플릿의 EdgeX 상세라 Lighter 소개·자산 칩·Premium/Plus 토글이 없음(오퍼 박스 CTA만 참조) (README 반영 원칙(사용자 결정 2026-11-25) · 상태 정의 S5_14(29002:128667)) | 0 |
-| EX-A12 | `dex.detail:linked`  | any | `/^(Lighter is a decentralized trading platform.*／Tokenised Equity／Pre-IPO／Commodities／Indices & ETFs／Forex／Fiat／Cashback applies to Premium and Plus accounts.*／Premium／Plus／Final Maker)$/i` | EX-A11과 같음 — 회원 연동 완료 오퍼 박스 프레임(28969:129751)은 Lighter 예시 (README 반영 원칙(사용자 결정 2026-11-25) · 상태 정의 S5_15(29002:128699)) | 0 |
+| EX-A08 | `dex.detail:edgex`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | 이 상태는 상단 로그인 토글을 따르는 공용 상태라 점검은 회원 기준으로 렌더 — Figma D4는 게스트 시안(게스트 리뷰 안내는 `dex.detail:normal`에서 일치) (_Figma수정_결정.md 12차 「화면 목록판 표시」(로그인 상태 전환 = 그 상태의 화면)) | 7 |
+| EX-A09 | `dex.detail:step2`  | missing | `/^(DEX／Sign up／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 단계 가이드 상태는 로그인 토글을 따르고 점검은 회원 기준 렌더 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 3 |
+| EX-A10 | `dex.detail:faq2`  | missing | `/^(Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — FAQ 상태는 로그인 토글을 따르고 점검은 회원 기준 렌더 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 2 |
+| EX-A11 | `dex.detail:unlinked`  | any | `/^(Lighter is a decentralized trading platform.*／Tokenised Equity／Pre-IPO／Commodities／Indices & ETFs／Forex／Fiat／Cashback applies to Premium and Plus accounts.*／Premium／Plus／Final Maker)$/i` | 회원 오퍼 박스 프레임(28969:129666)은 Lighter 예시 — 상태는 공용 템플릿의 EdgeX 상세라 Lighter 소개·자산 칩·Premium/Plus 토글이 없음(오퍼 박스 CTA만 참조) (README 반영 원칙(사용자 결정 2026-11-25) · 상태 정의 S5_14(29002:128667)) | 11 |
+| EX-A12 | `dex.detail:linked`  | any | `/^(Lighter is a decentralized trading platform.*／Tokenised Equity／Pre-IPO／Commodities／Indices & ETFs／Forex／Fiat／Cashback applies to Premium and Plus accounts.*／Premium／Plus／Final Maker)$/i` | EX-A11과 같음 — 회원 연동 완료 오퍼 박스 프레임(28969:129751)은 Lighter 예시 (README 반영 원칙(사용자 결정 2026-11-25) · 상태 정의 S5_15(29002:128699)) | 11 |
 | EX-A14 | `dex.`  | missing | `/^content_CT-\d+_\*$/` | Figma content 계획 레이어 이름(`content_CT-nn_*`) — 화면 문구가 아님(figmaAnnotations와 같은 성격, 정밀 문구 캐시에 들어와 이름 필터가 안 걸림) (05.리포트/Figma수정결과 content 계획(CT-nn) 레이어 명명) | 0 |
-| EX-A15 | `dex.detail:lighter`  | missing | `/^(Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — Lighter 상태는 로그인 토글을 따르고 점검은 회원 기준 렌더 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 0 |
-| EX-A16 | `dex.detail:faq2`  | missing | `/^(This review is under moderation／It was flagged and is hidden while our team checks it against the review guidelines\.?)$/i` | CT-29 ② 프레임에 함께 그려진 내 리뷰 검토 중 카드는 별도 상태 `dex.detail:moderation`(27392:937)에서 그림 — FAQ 상태는 FAQ 두 구역 펼침만 (README 반영 원칙(사용자 결정 2026-11-25) · 상태 정의 S5_20(29002:128826)) | 0 |
+| EX-A15 | `dex.detail:lighter`  | missing | `/^(Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — Lighter 상태는 로그인 토글을 따르고 점검은 회원 기준 렌더 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 5 |
+| EX-A16 | `dex.detail:faq2`  | missing | `/^(This review is under moderation／It was flagged and is hidden while our team checks it against the review guidelines\.?)$/i` | CT-29 ② 프레임에 함께 그려진 내 리뷰 검토 중 카드는 별도 상태 `dex.detail:moderation`(27392:937)에서 그림 — FAQ 상태는 FAQ 두 구역 펼침만 (README 반영 원칙(사용자 결정 2026-11-25) · 상태 정의 S5_20(29002:128826)) | 2 |
 | EX-B01 | `brokers.`  | diff | `compare in one price→compare in one place · see the full picture committing→see the full picture before committing · experience leve→experience level · indices, , futures→indices, futures · product available→products available · 84% off→84%off · by "borrowing" from→by 'borrowing' from · using "disposable risk capital":money→using 'disposable risk capital': money · tethermax's ib link to activate your discount : registrations→tethermax`s ib link to activate your discount: registrations` | Brokers 페이지는 실서비스 문구 그대로 — Figma V2의 오탈자·띄어쓰기·따옴표 차이(실서비스가 고친 쪽) (_Figma수정_결정.md 12차 「Brokers 페이지 (2026-11-27)」 · 05.리포트/Brokers_페이지_정리안.md 1장(실서비스 = Figma V2, 다른 곳은 실서비스가 최신)) | 0 |
 | EX-B02 | `brokers.main` mo | any | `/^(FX is the market where one currency is traded against another\. A CFD lets you trade price movement without owning the underlying asset . making .*／Check fees, leverage, conditions, and all disclosures carefully before making any deposit\.／A CFD gives price exposure without ownership of the underlying asset\..*／Leveraged trading can amplify both gains and losses\. Review the product carefully before opening\.／Product terms, leverage limits, and availability differ significantly by jurisdiction\.／Whether you.re new to FX or comparing brokers for the first time, this keeps you informed\.／FX is one of the world.s largest financial markets, where currencies are traded in pairs\.／How it works／Read the basics)$/i` | 모바일 Figma의 줄인 문구 — 실서비스 모바일은 PC와 같은 문구(스냅숏 PC·모바일 문구 차이는 히어로 위험 고지 한 줄뿐) (_Figma수정_결정.md 12차 「Brokers 페이지 (2026-11-27)」 · 05.리포트/Brokers_페이지_정리안.md 1장(실서비스 = Figma V2, 다른 곳은 실서비스가 최신)) | 0 |
 | EX-B03 | `brokers.main`  | missing | `/^No\. FX is based on currency pairs and different market drivers\./i` | FAQ 첫 답변은 실서비스 원문(CFD 소유 설명) — Figma 답변은 옛 초안 (_Figma수정_결정.md 12차 「Brokers 페이지 (2026-11-27)」 · 05.리포트/Brokers_페이지_정리안.md 1장(실서비스 = Figma V2, 다른 곳은 실서비스가 최신)) | 0 |
@@ -213,6 +471,8 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 58노드)�
 | EX-B23 | `summary.main:otherDay`  | missing | `/^(2026\/05\/26 \(today\)／exchange cashback／lighter wallet 0x[0-9a-f]+)$/i` | CS2 프레임은 다른 날을 골라도 일별 목록이 오늘(26일) 그대로 — 선택한 날 목록을 보여 줌 (REQ-371(날짜 선택 = 그날 목록) · 100-summary.js otherDay 상태 메모) | 0 |
 | EX-B24 | `home.` mo | any | `/^(get extra usdt／earn more cashback when you sign up／\d+% cashback／\d+% total savings)$/i` | 모바일 근거 프레임(기존 [MAX-7] 22913:1051713 · 4248:33574 · 8582:154521 · 29474:136690)끼리 같은 카드의 표본 문구가 다름 — 웹 DEX(revision) HW1·PW1 라벨(`Earn extra USDT` · `n% Total Savings` · 지갑 상세 DEX 타일 `Up to n% cashback`)로 통일 (_Figma수정_결정.md 8차 「홈 누적 캐시백 블록 모바일 · 기존 원본이 없는 화면 = 지금 디자인 기조」 · HW1 28960:126108 · PW1 28960:125943) | 0 |
 | EX-B25 | `home.main` mo | missing | `/^\d+ uids$/i` | 같은 CEX 여러 UID 묶음 행 — 표본 계정에 같은 CEX가 둘 이상 없음(묶음 행은 연동 계정 목록 모달로, DEX는 지갑마다 행) (화면요소_정의_전수점검.md 🔴#14 · REQ-118 · REQ-271) | 0 |
+| EX-B26 | `own.home:unlinked` mo | missing | `/^withdraw$/i` | 출금 버튼 없음 — 잔액 카드는 비활성 Auto Claim(근거 프레임은 기존 [MAX-561] mWeb CEX UID 해제 행) (REQ-270 · EX-B2와 같은 근거) | 0 |
+| EX-B27 | `own.home:unlinked` mo | diff | `This UID has been unlinked. Tap to verify ownership and reclaim it.` | DEX 지갑 행은 지갑 문구 — 기존 모바일 프레임은 CEX UID 행(DEX 모바일 프레임 없음) (REQ-729(`This wallet has been unlinked. Tap to verify ownership and reclaim it.`)) | 0 |
 | EX-A17 | `hub.main:member`  | geom | `` | 로그인 계산기에는 `Paid to your TetherMax balance · Minimum 10 USDT` 줄이 더 있음(Figma H2에는 없음) — 카드가 그만큼 높음. 모바일 H2는 Cashback 하위 글상자가 한 줄인데 높이 46으로 그려져 아래 줄이 23px 내려가 있음(Figma 그리기 차이) (정책 B-5-2(10 USDT 최소 안내 = 서버값) · REQ-298) | 0 |
 | EX-A18 | `hub.main:noLedger`  | geom | `` | EX-A17과 같음 — 원장 미수신 DEX는 H2와 같은 로그인 계산기 (정책 B-5-2 · REQ-298 · REQ-299) | 0 |
 | EX-A19 | `hub.main` mo | geom | `` | 모바일 비교 카드 끝 전폭 `Join {partner}` 버튼만큼 높음 — Figma 모바일 카드(버튼 없이 chevron)는 정책과 달라 Figma 수정 대상 (정책 B-5-8 모바일 · 05.리포트/화면요소_정의_전수점검.md #46) | 0 |
@@ -220,23 +480,22 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 58노드)�
 | EX-A22 | `dex.detail:unlinked`  | geom | `` | 회원 미연동 오퍼 박스 프레임(28969:129666)은 Lighter 예시 — Lighter 전용 요소(자산 칩 6개 두 줄·Premium/Plus 토글·Taker/Maker 2열 단계 표)로 히어로·단계 표 높이와 칩 위치가 다름. 상태는 EdgeX 공용 템플릿(같은 배치는 `dex.detail:normal`에서 어긋남 0) (README 반영 원칙(사용자 결정 2026-11-25) · 상태 정의 S5_14(29002:128667) · EX-A11) | 0 |
 | EX-A23 | `dex.overview:normal` pc | geom | `` | venue 2열 격자 홀수 칸 — 마지막 카드는 왼쪽 칸 폭 그대로(빈칸 유지). Figma OA(29361:137628)는 마지막 EdgeX 카드를 두 칸 폭으로 늘림 (00_DEX_최종정책.md 부록 G G-168(사용자 2026-11-25: 마지막 칸 왼쪽 정렬, 빈칸 유지)) | 0 |
 | EX-A24 | `dex.overview` mo | geom | `` | Figma 모바일 OA(29363:135072 · 29363:136040)는 Lighter 포함 4개 — 정책상 Lighter 보류라 3개로 렌더해 glance 카드(230)와 venue 카드(343)의 TVL 칸 짝이 엇갈림(칸 크기 자체는 같음) (00_DEX_최종정책.md Lighter 온보딩 보류(G-428) · dex.overview:normal 상태 메모) | 0 |
-| EX-A25 | `dex.overview`  | added | `/^(Bitget Trading Competition／Total 150,000 USDT Przie Pool)$/` | 프로모 배너 캐러셀 두 번째 슬라이드 — 실사이트 거래소 목록 상단 배너(같은 어드민 배너, 원문 그대로). Figma는 첫 슬라이드(Aster)만 그림 (_Figma수정_결정.md D7 · Q7 G-463(같은 배너 사용)) | 0 |
-| EX-A26 | `dex.detail:aster`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 0 |
-| EX-A27 | `dex.detail:apex`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 0 |
-| EX-A28 | `dex.detail:step3`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 0 |
-| EX-A29 | `dex.detail:reviewsEmpty`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 0 |
-| EX-A30 | `dex.detail`  | diff | `/^(Frequent traders notice the cashback on Premium fees／Your selected \$400K volume on a Premium account generates an estimated \$112 in taker fees)\.?$/i` | EdgeX·Aster·ApeX Figma 프레임에 Lighter 전용 계정 등급(`Premium`)·Lighter 금액이 복사됨 — 등급은 Lighter만, 금액은 그 DEX 레코드 계산값 (REQ-359(EdgeX·Aster·ApeX는 등급 언급 없음) · 00_DEX_최종정책.md Lighter `Premium ／ Plus` 탭) | 0 |
-| EX-A31 | `dex.detail` mo | any | `/^(Cashback arrives at the same time every day／The fee discount is wide enough that frequent traders notice it／I linked my wallet already and I am not sure whether a second DEX needs a separate verification step)\.?$/i` | 모바일 프레임의 AI 리뷰 요약·리뷰 본문 표본이 PC 프레임(28960:127454)과 다름 — 같은 서버 데이터라 PC 표본으로 통일 (_Figma수정_결정.md 9차 #4(요약 `every day`) · #5(표본 값은 같은 화면의 다른 값과 일관)) | 0 |
-| EX-A32 | `dex.detail:aster` mo | missing | `Indices & ETFs` | Figma 모바일 D5 마켓 칩이 PC D5(29357:147710)와 다름 — 거래소 콘텐츠 레코드는 하나(PC 칩 기준) (REQ-357(거래소별 콘텐츠 레코드)) | 0 |
-| EX-A33 | `dex.detail:apex` mo | missing | `Forex` | Figma 모바일 D6 마켓 칩이 PC D6(29357:148976)와 다름 — 거래소 콘텐츠 레코드는 하나(PC 칩 기준) (REQ-357(거래소별 콘텐츠 레코드)) | 0 |
-| EX-A34 | `dex.detail`  | missing | `After discount` | Aster·ApeX 표본 레코드는 할인율 0 — `After discount` 행은 할인율이 0보다 클 때만(2행 표시) (_Figma수정_결정.md 9차 「오퍼 박스 할인 단계 (2026-11-27)」 · REQ-339) | 0 |
-| EX-A35 | `dex.detail:reviewsEmpty`  | missing | `Be the first to review.` | 리뷰 0건 문구는 확정 `No reviews yet` (00_DEX_최종정책.md 부록 G G-169(사용자 2026-11-25)) | 0 |
-| EX-A36 | `dex.detail:signupReturn`  | diff | `/never asks for your private key, seed phrase, or a wallet signature\.$/i` | 가입 후 복귀 프레임(28960:127422)은 이전 단계 가이드 본문 — 최신 D-프레임(29367:137704 등) Step 1 본문과 같게 둠. G-392 확정 문구는 가이드 하단 안내 줄로 따로 표시 (00_DEX_최종정책.md 부록 G G-392 · REQ-346) | 0 |
+| EX-A25 | `dex.overview`  | added | `/^(Bitget Trading Competition／Total 150,000 USDT Przie Pool)$/` | 프로모 배너 캐러셀 두 번째 슬라이드 — 실사이트 거래소 목록 상단 배너(같은 어드민 배너, 원문 그대로). Figma는 첫 슬라이드(Aster)만 그림 (_Figma수정_결정.md D7 · Q7 G-463(같은 배너 사용)) | 8 |
+| EX-A26 | `dex.detail:aster`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 7 |
+| EX-A27 | `dex.detail:apex`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 7 |
+| EX-A28 | `dex.detail:step3`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 5 |
+| EX-A29 | `dex.detail:reviewsEmpty`  | missing | `/^(Sign up／Already have an account\?／Log in or sign up to write a review／After signing up, link your \w+ wallet address to post \(anyone can read\))$/i` | EX-A08과 같음 — 상태는 상단 로그인 토글을 따르고 점검은 회원 기준으로 렌더 — Figma D-프레임은 게스트 시안(게스트 오퍼 버튼 · 리뷰 안내 · 모바일 하단 고정 가입 띠). 같은 요소는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」) | 5 |
+| EX-A31 | `dex.detail` mo | any | `/^(Cashback arrives at the same time every day／The fee discount is wide enough that frequent traders notice it／I linked my wallet already and I am not sure whether a second DEX needs a separate verification step)\.?$/i` | 모바일 프레임의 AI 리뷰 요약·리뷰 본문 표본이 PC 프레임(28960:127454)과 다름 — 같은 서버 데이터라 PC 표본으로 통일 (_Figma수정_결정.md 9차 #4(요약 `every day`) · #5(표본 값은 같은 화면의 다른 값과 일관)) | 18 |
+| EX-A32 | `dex.detail:aster` mo | missing | `Indices & ETFs` | Figma 모바일 D5 마켓 칩이 PC D5(29357:147710)와 다름 — 거래소 콘텐츠 레코드는 하나(PC 칩 기준) (REQ-357(거래소별 콘텐츠 레코드)) | 1 |
+| EX-A33 | `dex.detail:apex` mo | missing | `Forex` | Figma 모바일 D6 마켓 칩이 PC D6(29357:148976)와 다름 — 거래소 콘텐츠 레코드는 하나(PC 칩 기준) (REQ-357(거래소별 콘텐츠 레코드)) | 1 |
+| EX-A34 | `dex.detail`  | missing | `After discount` | Aster·ApeX 표본 레코드는 할인율 0 — `After discount` 행은 할인율이 0보다 클 때만(2행 표시) (_Figma수정_결정.md 9차 「오퍼 박스 할인 단계 (2026-11-27)」 · REQ-339) | 4 |
+| EX-A35 | `dex.detail:reviewsEmpty`  | missing | `Be the first to review.` | 리뷰 0건 문구는 확정 `No reviews yet` (00_DEX_최종정책.md 부록 G G-169(사용자 2026-11-25)) | 2 |
 | EX-A37 | `dex.detail:aster`  | geom | `` | EX-A21과 같음 — 로그인 토글을 따르는 상태라 회원 기준 렌더, Figma(게스트)의 리뷰 안내 카드가 없어 그 아래 정렬 탭·리뷰 항목이 위로 옴. 같은 배치는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」 · 정책 B-7-8(리뷰 작성 안내는 게스트·미연동)) | 0 |
 | EX-A38 | `dex.detail:apex`  | geom | `` | EX-A21과 같음 — 로그인 토글을 따르는 상태라 회원 기준 렌더, Figma(게스트)의 리뷰 안내 카드가 없어 그 아래 정렬 탭·리뷰 항목이 위로 옴. 같은 배치는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」 · 정책 B-7-8(리뷰 작성 안내는 게스트·미연동)) | 0 |
 | EX-A39 | `dex.detail:lighter`  | geom | `` | EX-A21과 같음 — 로그인 토글을 따르는 상태라 회원 기준 렌더, Figma(게스트)의 리뷰 안내 카드가 없어 그 아래 정렬 탭·리뷰 항목이 위로 옴. 같은 배치는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」 · 정책 B-7-8(리뷰 작성 안내는 게스트·미연동)) | 0 |
 | EX-A40 | `dex.detail:step3`  | geom | `` | EX-A21과 같음 — 로그인 토글을 따르는 상태라 회원 기준 렌더, Figma(게스트)의 리뷰 안내 카드가 없어 그 아래 정렬 탭·리뷰 항목이 위로 옴. 같은 배치는 게스트 상태 `dex.detail:normal`에서 대조 (_Figma수정_결정.md 12차 「화면 목록판 표시」 · 정책 B-7-8(리뷰 작성 안내는 게스트·미연동)) | 0 |
-| EX-A41 | `dex.detail` pc | geom | `` | Aster·ApeX 표본 레코드는 할인율 0이라 오퍼 박스 단계 표가 2행(Figma D5·D6는 `After discount` 포함 3행) — 단계 표·히어로 카드가 44px 낮음 (_Figma수정_결정.md 9차 「오퍼 박스 할인 단계 (2026-11-27)」 · EX-A34) | 0 |
+| EX-A41 | `dex.detail`  | geom | `` | Aster·ApeX 표본 레코드는 할인율 0이라 오퍼 박스 단계 표가 2행(Figma D5·D6는 `After discount` 포함 3행) — 단계 표·히어로 카드가 44px 낮음 (_Figma수정_결정.md 9차 「오퍼 박스 할인 단계 (2026-11-27)」 · EX-A34) | 0 |
+| EX-A42 | `hub.main:dexPanel` mo | geom | `` | 잔액 패널에 `Total claimed` 줄(테더맥스 지급 누계)이 있어 그 아래 줄이 82px 내려감 — 최신 모바일 H8(29515:144188)에는 이 줄이 없음 (00_DEX_최종정책.md 부록 G G-053(`Total claimed` 유지) · REQ-307) | 0 |
 | EX-C01 | `invite.main`  | missing | `View Coupons` | Figma 친구 초대·포인트 프레임의 `View Coupons` 버튼은 레이어 불투명도 0(화면에 보이지 않음) — 보이는 요소가 아님 (Figma 28960:126816 · 29365:134702 (버튼 Frame opacity 0, 2026-11-27 MCP 확인)) | 0 |
 | EX-C02 | `tp.main`  | missing | `View Coupons` | EX-C01과 같음 — 포인트 PC 프레임의 투명(불투명도 0) 버튼 (Figma 29365:134702 (opacity 0)) | 0 |
 | EX-C03 | `invite.main`  | diff | `Earn a portion of your friend's cashback rewards whenever they trade.` | How it works 3단계 끝 문구 확정 — 코드·링크 복사 토스트 프레임 2개만 옛 문구가 남아 있음 (ref/decisions_1125.json G-198 확정) | 0 |
@@ -253,6 +512,9 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 58노드)�
 | EX-C14 | `quiz.basics`  | missing | `/^• Minimum withdrawal: You can request a withdrawal once the combined balance/i` | Cashback Basics 요약·조건 문구는 Account 기준 · 자동 지급(Claim) 문구로 교체 확정 (_Figma수정_결정.md Q8 · N12 · 11차(Claim cashback and rewards) · 용어 규칙 D2) | 0 |
 | EX-C15 | `cmn.footer`  | diff | `Terms of Use` | 푸터 Legal 링크 이름은 실서비스 푸터 원문 `Terms of Service`(→ /terms/use). 드로어는 `Terms of Use` 유지 (05.리포트/화면요소_정의_전수점검.md cmn.footer `Terms of Service`(🔁 IA 1.1 TRM) · 실서비스 푸터 스냅숏) | 0 |
 | EX-C16 | `cmn.notfound`  | any | `/^(events／benefits／point／cashback preview／cashback hub／discover／rewards hub／exchanges?)$/i` | 404 근거 프레임([MAX-497])은 옛 GNB — 새 GNB 구성(Cashback ▾ · Rewards Hub ▾ · Discover ▾) (_Figma수정_결정.md D4 · A1 (EX-17과 같은 근거)) | 0 |
+| EX-C17 | `league.main:card`  | geom | `` | Figma 프레임(29185:121040 · 121059)은 혜택 카드 한 장만 그린 것 — 프로토타입은 같은 카드를 혜택 목록 자리(페이지 안 여백 포함)에 그려서 카드 안 배치는 같고 프레임 원점만 다름 (Figma 29185:121040 · 121059(카드 단독 프레임) · 29185:121232 리그 혜택 메모) | 0 |
+| EX-C18 | `tp.main`  | diff | `/^(How To Earn TetherMax Point \(TP\)\?／Top trending exchange／Trade with Bitget／Withdraw Cashback／Why are earning rates different by exchange\?)$/i` | 포인트 페이지는 실서비스 웹(dev /en/tethermax-point) 문구 그대로 — 웹에 있는 문구는 웹 우선 (사용자 확정 문구 기준(2026-11-27): ① 실제 웹 ② Figma ③ 정책 · _Figma수정_결정.md 12차 「테더맥스 포인트(TP) 진입」(dev 실측)) | 0 |
+| EX-C19 | `events.list`  | geom | `` | Figma 유형 칩은 글상자가 칩 폭(64)에 고정된 가운데 정렬이라 글상자 왼쪽 = 칩 왼쪽, 대조 도구는 프로토타입 글자 범위(가운데)를 잼 → 칩 3개의 차이가 중앙값 보정에 섞여 같은 패널의 행 글자까지 밀려 보임. 칩(64×32 · 간격 8 · 패널 안쪽 12)과 행 위치는 실측 일치(패널 왼쪽 +12) (Figma 29190:123385 · 123416(칩 글상자 64) · 프로토타입 실측(패널 889 → 칩·행 901)) | 0 |
 
 ## 9. 실행 방법
 
@@ -264,7 +526,7 @@ Figma 좌표 캐시 `ref/figma_geom.json`(주요 흐름 대표 상태 58노드)�
 | 캡처 없이 빠르게 | `python -I tools/figma-diff.py --no-shots` |
 | 다른 빌드 파일로 | `python -I tools/figma-diff.py --html TetherMax_전체프로토타입_YYYYMMDD_HHMM.html` |
 | 위치·크기 대조 끄기 · 허용 오차 | `--no-geom` · `--geom-tol 2` (기본 2px). Figma 좌표 캐시 `ref/figma_geom.json`에 있는 노드만 대조 |
-| 기계용 결과 | `tools/out/figma-diff.json` (상태×뷰별 누락·추가·다름·예외·위치 이슈) |
+| 기계용 결과 | 전체 실행 `tools/out/figma-diff.json` · 접두사 실행 `tools/out/figma-diff.<접두사>.json`(담당별 동시 실행이 덮어쓰지 않게) — 상태×뷰별 누락·추가·다름·예외·위치 이슈·`below_frame`(부분 프레임 높이 아래라 「추가」에서 뺀 수) |
 | 예외 추가 | `tools/figma-diff-exceptions.json`의 `rules`에 `{"id","scope","vp","type","figma"/"proto"/"equiv","reason","ref"}` 추가. `scope` = `*` · `화면id` · `화면id:상태` · `그룹접두사.` · `접두사*` / `type` = `missing`·`added`·`diff`·`any` / 문구는 정규화 후 같거나 포함(6자 이상), `/정규식/i`도 됨. **근거(결정 기록 위치)가 없으면 넣지 않는다** |
 
 ## 10. Figma 최신 색인으로 다시 돌리는 법

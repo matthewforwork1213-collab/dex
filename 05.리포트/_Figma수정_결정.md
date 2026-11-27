@@ -209,3 +209,13 @@
 | Brokers 페이지 (2026-11-27) | `/brokers` · `/brokers/learn` · `/brokers/compare` · `/brokers/rs-finance` · `/brokers/infinox` 모두 유지(실서비스·Figma [MAX-]FX V2 그대로). 없애는 것은 GNB `Cashback ▾`의 `Brokers` 진입뿐(D4) |
 | 허브 Brokers 비교표 `Join {broker}` | 브로커 상세(`/{lang}/brokers/{slug}`, 현재 탭) — 허브 `Join` 전체 규칙과 같음 |
 | 혜택 상세 상태 (2026-11-27) | 쿠폰을 주는 혜택은 상세마다 **수행 전 / 수행 후 쿠폰 미수령 / 수행 후 쿠폰 수령** 3상태를 정의. 그 밖에 텍스트가 바뀌는 상태는 모두 정의. 기존 정책 중 DEX로 바뀌어야 하는 부분(용어·조건·대상)은 반영 |
+
+## 문구 기준 (사용자 2026-11-27)
+
+| 순서 | 기준 |
+|---|---|
+| 1 | 실제 웹(tethermax.io · www-dev)에 있는 문구면 **웹을 따름** |
+| 2 | 웹에 없으면 **Figma를 따름** |
+| 3 | 웹에 없고 Figma에 있는데 **정책과 어긋나면 정책에 맞게 고침**(용어 규칙·확정 결정 포함) |
+
+적용 예: 단계 가이드 1단계 마지막 문장은 웹에 없음 → Figma D 프레임 문구(`TetherMax never asks for a private key, recovery phrase or wallet signature.`), 연동 모달 주소 찾기 안내는 Figma 연동 프레임 문구(= G-392 원문) — 각 화면의 Figma 문구 그대로.

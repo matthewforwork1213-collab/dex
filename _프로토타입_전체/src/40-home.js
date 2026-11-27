@@ -43,6 +43,8 @@ const ownElapsed=a=>{if(!a.ts)return '06:46';const s=Math.max(0,Math.floor((Date
 const ownLine=a=>`<div data-own-elapsed="${a.ts||''}" style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)">${T('Ownership verification in progress')} · <span class="tnum">${ownElapsed(a)}</span></div>`;
 // 행 아래 상태 배너 — 실서비스 연동 계정 목록(SelectMyExchangePopup StatusAlert): 모서리 4 · 좌우 10 · 12px 글자 · 오류 #fdeded/#5f2120 · 주의 #fff4e5/#663c00 · 오른쪽 화살표
 const SVG_ERR='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1m1 4h-2v-2h2z',SVG_WARN='M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z',SVG_CHEV='M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01';
+// 소유 확인 중 행 아래 안내 — Figma O11 29453:143874 `ownership notice`(MUI Alert info: #e5f6fd · 글자 #014361 14px/1.43 · InfoRounded 20 #0288d1 · 안쪽 6×16)
+const ownBanner=a=>`<div data-own-elapsed="${a.ts||''}" style="display:flex;background:#e5f6fd;border-radius:4px;padding:6px 16px;color:#014361"><span style="flex:none;display:flex;padding:7px 12px 7px 0;color:#0288d1">${svgI('M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 15c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1m1-8h-2V7h2z')}</span><p style="margin:0;padding:8px 0;font-size:14px;line-height:1.43;letter-spacing:.17px">${T('Ownership verification in progress')} · <span class="tnum">${ownElapsed(a)}</span></p></div>`;
 const svgI=(d,s=20)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" aria-hidden="true" style="display:block;fill:currentColor"><path d="${d}"/></svg>`;
 function rowBanner(a){
  const cex=isCex(a.ex);
@@ -78,7 +80,9 @@ function hShell(body,o={}){
  return `${gnb(o.nav)}<div class="page accent">${body}</div>${footer()}`}
 // 공통 오류 토스트(Figma 29449:145568 · 기존 [MAX-426] Error 토스트 — 실사이트 ToastPopup 모양): 429 · 중복 요청 · 잘못된 값
 const toastErr=()=>{const mo=S.vp==='mo';return `<div role="alert" style="position:absolute;left:50%;top:${mo?72:88}px;transform:translateX(-50%);width:${mo?343:360}px;z-index:15;border-radius:8px;background:#1c1c1e;box-shadow:0 16px 24px rgba(0,0,0,.14),0 6px 30px rgba(0,0,0,.12),0 8px 10px rgba(0,0,0,.2);display:flex;align-items:center;gap:16px;padding:12px 16px;color:#fff;font-size:13px;line-height:1.8;letter-spacing:-.13px"><span style="width:28px;height:28px;border-radius:50%;background:rgba(94,36,41,.55);display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:16px;height:16px;border-radius:50%;background:#e5484d;color:#1c1c1e;font-size:12px;font-weight:700;line-height:16px;text-align:center">×</span></span><span>${T('Something went wrong. Please try again.')}</span></div>`};
-const toastLinked=()=>`<div style="position:absolute;left:50%;top:${S.vp==='mo'?72:88}px;transform:translateX(-50%);width:${S.vp==='mo'?343:360}px;z-index:15;border-radius:8px;box-shadow:0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px rgba(0,0,0,.14),0 1px 18px rgba(0,0,0,.12);background:var(--blue);display:flex;align-items:center;padding:6px 16px"><span style="padding:7px 12px 7px 0;display:flex">${hic('toast-check',20)}</span><span class="b2 med" style="color:#fff;padding:8px 0;letter-spacing:.15px">Account linked successfully</span></div>`;
+// 모바일 = 기존 MAX-30 mWeb 토스트(Figma 29381:137457 Toast: #1c1c1e · 모서리 8 · 안쪽 12×16 · 아이콘 원 32 #303746 + 초록 체크 · 13px/1.8 흰 글자, 화면 아래쪽)
+const toastLinked=()=>S.vp==='mo'?`<div style="position:absolute;left:16px;right:16px;top:560px;z-index:15;border-radius:8px;box-shadow:0 8px 10px rgba(0,0,0,.2),0 6px 30px rgba(0,0,0,.12),0 16px 24px rgba(0,0,0,.14);background:#1c1c1e;display:flex;align-items:center;gap:16px;padding:12px 16px;overflow:hidden"><span style="width:32px;height:32px;border-radius:50%;background:#303746;display:flex;align-items:center;justify-content:center;flex:none;color:#00df80">${svgI('M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2M9.29 16.29 5.7 12.7a.996.996 0 0 1 0-1.41c.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0s.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0')}</span><span style="color:#fff;font-size:13px;line-height:1.8">Account linked successfully</span></div>`
+ :`<div style="position:absolute;left:50%;top:${S.vp==='mo'?72:88}px;transform:translateX(-50%);width:${S.vp==='mo'?343:360}px;z-index:15;border-radius:8px;box-shadow:0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px rgba(0,0,0,.14),0 1px 18px rgba(0,0,0,.12);background:var(--blue);display:flex;align-items:center;padding:6px 16px"><span style="padding:7px 12px 7px 0;display:flex">${hic('toast-check',20)}</span><span class="b2 med" style="color:#fff;padding:8px 0;letter-spacing:.15px">Account linked successfully</span></div>`;
 
 // ---------- 홈 왼쪽 열: 총액 카드 · Linked Accounts (Figma HW1 · S4-1) ----------
 function balanceCard(o={}){
@@ -88,27 +92,37 @@ function balanceCard(o={}){
  return `<div style="background:#fff;border-radius:8px;box-shadow:0 4px 10px rgba(0,0,0,.04);position:relative;overflow:hidden;min-height:72px;display:flex;align-items:center;gap:8px;padding:${o.sub?'12px':'0'} 0 ${o.sub?'12px':'0'} 58px">
   <img src="${HA('tokens.png')}" style="position:absolute;left:-48px;top:-11px;width:106px;height:106px;object-fit:cover" alt="">
   <div class="grow" style="min-width:0"><div class="b1 semi">${o.raw||amt+' USDT'}</div><div style="font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">Total Cashback Balance</div>${o.sub||''}</div>
-  <button class="btn contained md" disabled style="flex:none;min-width:119px;height:40px;margin:4px -3px 0 0;padding:8px 24px">Auto Claim</button></div>`}
+  <button class="btn contained md" disabled style="flex:none;${S.vp==='mo'?'min-width:103px;height:36px;margin:0 9px 0 0;padding:6px 16px':'min-width:119px;height:40px;margin:4px -3px 0 0;padding:8px 24px'}">Auto Claim</button></div>`}
 
 // 행: 로고 · 이름 · (상태 점 + 식별자) · 칩 · 금액. 웹은 `Wallet` 라벨, 앱·모바일웹은 주소만(REQ-271)
 function accRow(a,o={}){
  const st=ST[a.st||'ok'];const cex=isCex(a.ex);const app=o.app;
  const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:short(a.id)}`;
  const amt=a.amt==null?'-':a.amt;
+ if(S.vp==='mo'){
+  // 모바일 행 — DEX(revision) mWeb 홈 29330:208569: 로고 30 · 이름·금액 14 Medium · 둘째 줄 상태 점 8(왼쪽 10) + 식별자 12/16 · 행 70(위아래 8)
+  const go2=a.st==='issue'?`home.main:${cex?'issue':'issueWallet'}`:a.st==='unlinked'?(cex?'own.home:reclaimUid':'own.home:reclaim'):cex||a.st!=='ok'&&a.st!=null?'':'home.wallet:normal';
+  return `<div${go2?` data-go="${go2}"`:''} style="${go2?'cursor:pointer;':''}display:flex;flex-direction:column;gap:8px;padding:8px 0">
+   <div class="row" style="gap:8px;height:30px">${mark(a.ex,30)}<span class="grow" style="font-size:14px;line-height:20px;font-weight:500;color:rgba(0,0,0,.87)">${a.ex}</span><span class="tnum" style="font-size:14px;line-height:20px;font-weight:500;color:rgba(0,0,0,.87);white-space:nowrap">${amt==='-'?'-':n2(amt)+' USDT'}</span>${st.clock?CLOCK:''}</div>
+   <div class="row" style="gap:0;height:16px"><span style="width:28px;flex:none;display:flex;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:${DOT[st.tone]}"></span></span><span style="font-size:12px;line-height:16px;color:rgba(0,0,0,.6);min-width:0">${id}</span></div></div>${a.st==='own'?ownBanner(a):''}${rowBanner(a)}`}
  const amtHtml=amt==='-'?`<span class="b1 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi">${n2(amt)}</span><span class="b2 c2">USDT</span></span>`;
  const go=a.st==='issue'?` data-go="home.main:${cex?'issue':'issueWallet'}" style="cursor:pointer;`:a.st==='unlinked'?` data-go="${cex?'own.home:reclaimUid':'own.home:reclaim'}" style="cursor:pointer;`:cex||a.st!=='ok'&&a.st!=null?'':` data-go="home.wallet:normal" style="cursor:pointer;`;
  return `<div class="row g12"${go||' style="'}display:flex;padding:10px 12px;border-radius:12px;align-items:center">
   ${mark(a.ex,32)}
   <div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${a.ex}</span>
    <span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)"><span style="color:${DOT[st.tone]}">●</span>&nbsp; ${id}</span>
-   ${a.st==='own'?ownLine(a):''}${a.extra?`<span style="font-size:12px;line-height:1.5;color:var(--text-secondary)">${a.extra}</span>`:''}</div>
-  <div class="row" style="flex:none;gap:8px">${amtHtml}${st.clock?CLOCK:''}</div></div>${rowBanner(a)}`}
+   ${a.extra?`<span style="font-size:12px;line-height:1.5;color:var(--text-secondary)">${a.extra}</span>`:''}</div>
+  <div class="row" style="flex:none;gap:8px">${amtHtml}${st.clock?CLOCK:''}</div></div>${a.st==='own'?ownBanner(a):''}${rowBanner(a)}`}
 function linkedCard(rows,o={}){
  const app=o.app||S.vp==='mo';
  const foot=app?'Trading on multiple exchanges? Link more':'Using multiple platforms? Link more accounts';
  const list=o.loading?[1,2,3].map(()=>`<div class="row g12" style="padding:10px 12px"><span class="skel" style="width:32px;height:32px;border-radius:50%"></span><div class="col grow" style="gap:6px">${C.skel('40%',12)}${C.skel('70%',10)}</div>${C.skel('64px',14)}</div>`).join('')
   :rows.map((a,i)=>o.max&&i>=o.max?`<div data-more-row hidden>${accRow(a,{app,full:o.full})}</div>`:accRow(a,{app,full:o.full})).join('');
  const more=o.max&&rows.length>o.max?`<button class="btn text black sm full" data-more>${T('Show More','더보기')}</button>`:'';
+ if(S.vp==='mo')return `<div data-no-addr-tip style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:16px">
+  <div class="row between" style="height:28px"><span class="b1 semi">Linked Accounts</span><button class="btn text primary sm" style="padding:4px 5px" data-go="home.main:seeAll">See All</button></div>
+  ${o.top||''}<div class="col" style="gap:16px">${list}</div>${more}
+  <div class="row" style="border-top:1px solid var(--divider);padding-top:15px;gap:4px;cursor:pointer" data-go="link.select:all"><span style="width:30px;height:30px;flex:none;display:flex;align-items:center;justify-content:center;color:rgba(0,0,0,.6)">${svgI('M12 7c-.55 0-1 .45-1 1v3H8c-.55 0-1 .45-1 1s.45 1 1 1h3v3c0 .55.45 1 1 1s1-.45 1-1v-3h3c.55 0 1-.45 1-1s-.45-1-1-1h-3V8c0-.55-.45-1-1-1m0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8')}</span><span style="font-size:12px;line-height:17px;font-weight:500;color:rgba(0,0,0,.6)">${foot}</span></div></div>`;
  return `<div data-no-addr-tip style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:12px">
   <div class="row between"><span class="b1 semi">Linked Accounts</span><button class="btn text primary sm" style="padding:4px 5px" data-go="home.main:seeAll">See All</button></div>
   ${o.top||''}<div class="col" style="gap:12px">${list}</div>${more}
@@ -134,14 +148,14 @@ function memberEvents(tag,outlined){
 const moHead=(t,go,line)=>`<div class="row" style="gap:16px"><span class="b1 semi" style="white-space:nowrap">${t}</span>${line?'<span class="grow" style="height:1px;background:var(--divider)"></span>':'<span class="grow"></span>'}<button class="btn text primary sm" style="padding:4px 5px"${go?` data-go="${go}"`:''}>See All</button></div>`;
 function moMemberCards(tag='Bitget',title='Exclusive For Members'){
  const tg=tag==='Bitget'?`<img src="${HA('logo-bitget.png')}" style="width:24px;height:24px;border-radius:16px" alt="">`:C.dex(tag,24);
- const card=(img,t,s)=>`<div class="col grow" style="gap:8px;min-width:0" data-go="benefits.list"><div style="height:155px;border-radius:8px;background:#000;position:relative;overflow:hidden"><img src="${HA(img)}" style="position:absolute;left:50%;top:50%;width:120px;height:120px;transform:translate(-50%,-50%);object-fit:cover" alt="">
+ const card=(img,t,s)=>`<div class="col" style="gap:8px;flex:0 0 180px;min-width:0" data-go="benefits.list"><div style="height:155px;border-radius:8px;background:#000;position:relative;overflow:hidden"><img src="${HA(img)}" style="position:absolute;left:50%;top:50%;width:120px;height:120px;transform:translate(-50%,-50%);object-fit:cover" alt="">
   <span style="position:absolute;left:8px;top:123px;background:${tag==='Bitget'?'#00f0ff':'#fff'};border-radius:4px;padding:2px 4px;display:flex;align-items:center;max-height:24px">${tg}<span style="font-size:11px;line-height:1.38;letter-spacing:.16px;padding:0 4px">${tag}</span></span></div>
   <div class="col" style="gap:0"><span class="b2 semi">${t}</span><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)">${s}</span></div></div>`;
- return `<div class="col" style="gap:16px">${moHead(title,'benefits.list')}<div class="row" style="gap:16px;align-items:stretch">${card('mo-lotto.png','Guess Bitcoin Price','Win Up to 1,000 USDT')}${card('mo-piggy.png','Earn More Cashback','Earn extra USDT')}</div></div>`}
+ return `<div class="col" style="gap:16px">${moHead(title,'benefits.list')}<div class="row" style="gap:16px;align-items:stretch;overflow:hidden;margin-right:-16px">${card('mo-lotto.png','Guess Bitcoin Price','Win Up to 1,000 USDT')}${card('mo-piggy.png','Earn More Cashback','Earn extra USDT')}</div></div>`}
 function homeMainMo(tag='Bitget'){
  const head=moHead;
  const tg=tag==='Bitget'?`<img src="${HA('logo-bitget.png')}" style="width:24px;height:24px;border-radius:16px" alt="">`:C.dex(tag,24);
- const card=(img,t,s)=>`<div class="col grow" style="gap:8px;min-width:0" data-go="benefits.list"><div style="height:155px;border-radius:8px;background:#000;position:relative;overflow:hidden"><img src="${HA(img)}" style="position:absolute;left:50%;top:50%;width:120px;height:120px;transform:translate(-50%,-50%);object-fit:cover" alt="">
+ const card=(img,t,s)=>`<div class="col" style="gap:8px;flex:0 0 180px;min-width:0" data-go="benefits.list"><div style="height:155px;border-radius:8px;background:#000;position:relative;overflow:hidden"><img src="${HA(img)}" style="position:absolute;left:50%;top:50%;width:120px;height:120px;transform:translate(-50%,-50%);object-fit:cover" alt="">
   <span style="position:absolute;left:8px;top:123px;background:${tag==='Bitget'?'#00f0ff':'#fff'};border-radius:4px;padding:2px 4px;display:flex;align-items:center;max-height:24px">${tg}<span style="font-size:11px;line-height:1.38;letter-spacing:.16px;padding:0 4px">${tag}</span></span></div>
   <div class="col" style="gap:0"><span class="b2 semi">${t}</span><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)">${s}</span></div></div>`;
  const cd=x=>`<span style="background:rgba(207,216,220,.2);border-radius:4px;padding:4px;font-size:12px;line-height:12px;font-weight:500">${x}</span>`;
@@ -154,7 +168,7 @@ function homeMainMo(tag='Bitget'){
    ${moMemberCards(tag)}
    <div class="col" style="gap:16px;align-items:center">${`<div style="width:100%">${head('Limited Time Offers','events.list',true)}</div>`}<div style="width:100%">${comp}</div><img src="${HA('mo-dots.svg')}" style="width:44px;height:6px" alt=""></div></div>
   <div style="background:var(--bg-accent);padding:16px" class="col g16">${head('Top Partner Exchanges','hub.main:cex',true)}
-   <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:100px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500;letter-spacing:.14px">${p} Total Savings</span></div>`).join('')}</div></div></div>`}
+   <div class="row" style="gap:10px;overflow:hidden;align-items:flex-start;margin-right:-16px">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:108px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500;letter-spacing:.14px">${p} Total Savings</span></div>`).join('')}</div></div></div>`}
 function homeMain(){
  if(S.vp==='mo')return homeMainMo();
  const cd=(arr)=>arr.map((x,i)=>i%2?`<span style="padding:0 4px 0 2px">${x}</span>`:`<span style="background:rgba(255,224,178,.25);padding:0 4px;border-radius:4px">${x}</span>`).join('');
@@ -262,7 +276,7 @@ const HOME_STATES=[
  {id:'s3',label:'S3 연동 0 — 체크리스트 · Cashback Preview (S3-1)',figma:{pc:'28960:127759',mo:'29420:138295'},note:'모바일 = 앱·모바일웹 빈 홈 카드(REQ-267) DEX(revision) Home / mWeb / S3 · Empty home card 29420:138295. V2.2 home/S3#normal. L16(연동 화면 배경)도 이 화면'},
  {id:'s3App',label:'S3 앱·모바일웹 빈 홈 카드',figma:{mo:'29420:138295'},note:'DEX(revision) Home / mWeb / S3 · Empty home card 29420:138295(Figma 4차 #12 — 문구 `Link once and cashback keeps coming` · `Link Account`). V2.2 home/S3#app · REQ-267'},
  {id:'s3Pending',label:'확인 중 계정만 있음 → S4 전환',note:'V2.2 home/S3#pendingOnly · G-070 확정: S4로 전환하고 행에 확인 중 표시'},
- {id:'normal',label:'S4 연동 있음 — CEX·DEX 한 목록 (S4-1)',figma:{pc:'28960:127837',mo:'22913:1051713'},note:'페이지 전체 = [기존 MAX-7] MAXOP-731 Web 22913:1052131 · mWeb 22913:1051713(누적 캐시백 카드 22913:1054295 포함) + DEX S4-1. V2.2 home/S4#normal · REQ-268·271. L17(연동 화면 배경)도 이 화면. 총액은 행 합계(매칭 전) — Figma 표본 5,137.70은 행 합계와 달라 합계로 씀'},
+ {id:'normal',label:'S4 연동 있음 — CEX·DEX 한 목록 (S4-1)',figma:{pc:'28960:127837',mo:'29330:208569'},note:'페이지 전체 = [기존 MAX-7] MAXOP-731 Web 22913:1052131 · mWeb 22913:1051713(누적 캐시백 카드 22913:1054295 포함) + DEX S4-1. V2.2 home/S4#normal · REQ-268·271. L17(연동 화면 배경)도 이 화면. 총액은 행 합계(매칭 전) — Figma 표본 5,137.70은 행 합계와 달라 합계로 씀'},
  {id:'hw1',label:'총액 카드 · 4행 (HW1)',figma:{pc:'28960:126108'},note:'Figma HW1. Figma의 Aster 칩 자리는 결정 10차(`Data delayed` 칩 없음)로 비움'},
  {id:'statuses',label:'상태 행(CEX) — 점 색 · 시계(확인 중 · 소유 확인 중) · 배너(수동 연동 실패 · 소유 확인 실패 · 해제), 칩 없음',note:'V2.2 home/S4#statuses · REQ-272 · 결정 10차: 자동 연동 실패 행 없음, 칩 대신 기존 디자인(9401:87675 계열 행 점 + 행 아래 배너). '+N_FIG},
  {id:'walletStates',label:'상태 행(DEX 지갑) — wallet 문구 분기',note:'결정 10차 — DEX 행은 `UID` 자리를 `Wallet`/`wallet`로'},
@@ -276,7 +290,7 @@ const HOME_STATES=[
  {id:'many',label:'계정 11개 이상 — 10개 + 더보기',note:'V2.2 home/S4#many · REQ-271'},
  {id:'app',label:'앱·모바일웹 — Wallet 라벨 없음 · 푸터 문구',figma:{mo:'8582:156599'},note:'[기존 MAX-7] mAPP S4 8582:156599 — 하단 탭은 앱에서만. V2.2 home/S4#app · REQ-271. 모바일 보기에서는 모든 상태에 같은 규칙'},
  {id:'first',label:'첫 연동 — 체크리스트 없는 S4 + 토스트 (S3-7)',figma:{pc:'28960:127795'},note:'V2.2 link/HOME#first · REQ-096 · G-070. Figma 총액 5,137.70은 표본이라 행 합계 0.00으로 씀'},
- {id:'newRow',label:'새 행 맨 아래 · 0.00 USDT (S4-6)',figma:{pc:'28960:127867'},note:'V2.2 link/HOME#normal · REQ-094·273 · 결정 10차: 캐시백 0은 칩 없이 `0.00 USDT`'},
+ {id:'newRow',label:'새 행 맨 아래 · 0.00 USDT (S4-6)',figma:{pc:'28960:127867',mo:'29381:137457'},note:'모바일 = DEX(revision) Home / mWeb / S4 DEX · After first link (Lighter) 29381:137457(Figma 2차 「모바일 홈 첫 연동」 — 기존 계정이 있는 상태의 첫 DEX 연동, 새 행 맨 아래). V2.2 link/HOME#normal · REQ-094·273 · 결정 10차: 캐시백 0은 칩 없이 `0.00 USDT`'},
  {id:'transferred',label:'10 USDT 미만 이관 4.00',note:'V2.2 link/HOME#transferred · REQ-107'},
  {id:'pending',label:'확인 중 — 연동 시도중이에요 · -',note:'V2.2 link/HOME#pending · REQ-098'},
  {id:'inactive',label:'DEX 오프보딩 — 이슈 처리(빨간 점 → 문제 안내 모달)',note:'V2.2 link/HOME#inactive · REQ-121 · 결정 10차: `Inactive` 칩 없음, 오프보딩 계정은 이슈 처리'},
@@ -307,7 +321,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    if(st==='many'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'},...['Bybit','OKX','EdgeX','ApeX','Aster','Bitget','EdgeX','OKX','Binance'].map((e,i)=>({ex:e,id:isCex(e)?String(70001230+i):[WAL.edgex,WAL.w2][i%2],amt:5+i,st:'ok'}))];lc.max=10}
    if(st==='errToast')o.errToast=true;
    if(st==='first'){rows=[{ex:'Lighter',id:WAL.lighter,amt:0,st:'ok'}];o.toast=true}
-   if(st==='newRow'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:0,st:'ok'}];o.toast=true}
+   if(st==='newRow'){rows=S.vp==='mo'?[R_BITGET,R_APEX,{ex:'Lighter',id:WAL.lighter,amt:0,st:'ok'}]:[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:0,st:'ok'}];o.toast=true}   // 모바일 = Figma 29381:137457(새로 연동한 Lighter가 맨 아래 0.00 USDT)
    if(st==='transferred')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:4,st:'ok'}];
    if(st==='pending')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
    if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'}];
@@ -419,7 +433,7 @@ R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wa
 // ---------- 캐시백 타임라인 · 누적 캐시백 (FU-041) — 디자인 없음, V2.2 내용 ----------
 R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 (섹션)',route:'/ (홈 · 지갑 상세 안 섹션)',fu:['FU-041'],shell:{accent:true,moNav:'home'},
  states:[
-  {id:'normal',label:'EdgeX Daily D+1',figma:{pc:'26047:56579',mo:'26047:56579'},note:'기존 Earning Timeline 3단계(Start Trading · Cut-off Time · Updated), 캐러셀 없음 — 결정 N16·N17·N19 · REQ-282 · 289. 홈·지갑 상세 안의 섹션(별도 화면 아님 · 뒤로 없음)'},
+  {id:'normal',label:'EdgeX Daily D+1',figma:{pc:'5947:87400',mo:'5947:87400'},note:'[기존 MAX-7] mWeb individualExchange Earning Timeline 5947:87400(343) — 기존 Earning Timeline 3단계(Start Trading · Cut-off Time · Updated), 캐러셀 없음 — 결정 N16·N17·N19 · REQ-282 · 289. 홈·지갑 상세 안의 섹션(별도 화면 아님 · 뒤로 없음)'},
   {id:'apex',label:'ApeX D+2',note:'같은 3단계 — 날짜만 주기대로'},
   {id:'lighter',label:'Lighter Weekly W+1 (온보딩 후)',note:'같은 3단계 — 주간 집계'},
   {id:'warning',label:'순차 지급 경고',note:'V2.2 home/TL#warning · REQ-289. 경고 자리 디자인 없음 — 기존 MUI Alert(warning) 재사용'},

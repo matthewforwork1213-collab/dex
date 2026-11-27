@@ -108,8 +108,8 @@ function panelCard(c){
  if(c==='dexLoading')return receipt(`${head}<div class="col" style="gap:14px">${C.skel('60%',28)}${C.skel('100%',18)}${C.skel('100%',18)}${C.skel('40%',14)}</div>${autoClaim()}`)+C.note('로딩: 0 대신 스켈레톤(REQ-301). 근거: DEX(revision) 지갑 잔액 카드 메모(29026:97581) 「조회 중에는 스켈레톤」 — 같은 잔액 줄 자리에 코어 스켈레톤(C.skel). 로딩 화면 프레임 자체는 없음. V2.2 `hub/HUB#dexLoading`.');
  if(c==='dexError')return receipt(`${head}<span class="b1 semi">Cashback could not load</span>${C.btn('Try again',{v:'outlined',c:'primary',full:true})}${autoClaim()}<p class="cap c2" style="margin:0">We could not load your cashback. Please try again.</p>`)+
   C.note('H7 잔액 로드 실패 — Figma H7은 CEX(Bybit) 탭이고 `Auto Claim` 버튼이 없음. DEX 탭으로 옮기고, REQ-301 「버튼은 항상 비활성 `Auto Claim`」에 따라 버튼을 둠. 0 표시 금지.');
- if(c==='dexPanel')return receipt(`${head}${bigLine(T('Paid to your TetherMax balance','테더맥스 잔액으로 적립돼요'),'3.10 USDT')}${rule()}${lineKV('Total exchange cashback','Paid records, reported by EdgeX','3.10 USDT')}${rule()}${lineKV('Reported next day','','1.25 USDT')}${paid}${autoClaim()}${dest}`)+
-  C.note('H8 EdgeX 지갑 연동 — Figma 그대로(표본 금액 3.10 · 1.25). 큰 숫자 라벨이 H5(`Total available cashback`)와 다르고, REQ-300 원문(`Withdrawable {amount} USDT` · `Total event reward` · 각주 `You withdraw on TetherMax, …`)과도 다름 → 질문_hub #3.');
+ if(c==='dexPanel')return receipt(`${head}${bigLine(T('Paid to your TetherMax balance','테더맥스 잔액으로 적립돼요'),'3.10 USDT')}${rule()}${lineKV('Total exchange cashback','Paid records, reported by EdgeX','3.10 USDT')}${rule()}${paid}${autoClaim()}${dest}`)+
+  C.note('H8 EdgeX 지갑 연동 — Figma 그대로(표본 금액 3.10). 다음 날 반영 예정 줄은 두지 않음(G-100 · 반영 지연 표시 없음 원칙, 최신 모바일 H8 29515:144188에도 없음). 큰 숫자 라벨이 H5(`Total available cashback`)와 다르고, REQ-300 원문(`Withdrawable {amount} USDT` · `Total event reward` · 각주 `You withdraw on TetherMax, …`)과도 다름 → 질문_hub #3.');
  // H5 구성 재사용: Total available cashback · Total exchange cashback + Reported by · Total event reward · Claimable · Total claimed · Paid to / Minimum · Auto Claim · 각주
  const v={dexPartial:[3,8],dexBelowMin:[4,3],dexMulti:[12,0],aster:[18,0],totalClaimed:[100,20],lighterAccruing:[120,5]}[c]||[100,20];
  const [a,b]=v,w=fl2(a+Math.min(a,b));
@@ -207,7 +207,7 @@ function compare(chip,c){
   // 모바일 카드: 로고·이름 / Up to N% cashback / Final Taker · Final Maker / 카드 끝 전폭 `Join {partner}`(정책 B-5-8 모바일). 행·카드 본문 클릭과 `Join`은 모두 그 파트너 상세(현재 탭 — 결정 12차 · 사용자 2026-11-27)
   body=`<div class="col" style="gap:16px">${list.map(p=>`<div class="col" data-go="${go(p)}" style="cursor:pointer;${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px"><div class="row" style="gap:8px">${plogo(p,32)}<span class="b1 semi grow">${esc(p.name)}</span>${hp(p)}</div>
    <span class="b1 semi">${brk?`${esc(p.cb)} ${/off/.test(p.cb)?'commission':'cashback'}`:`Up to ${p.rate}% cashback`}</span><hr class="divider">
-   <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted commission':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div>${C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',full:true,go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} `)}</div>`).join('')}</div>`+
+   <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted commission':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div>${C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',full:true,go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} style="height:36px;padding-top:0;padding-bottom:0" `)}</div>`).join('')}</div>`+
    (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정). 카드 끝 전폭 <code>Join {partner}</code>(정책 B-5-8 모바일) — 그 파트너 상세로 이동(DEX 상세 · 거래소 상세 · 브로커 상세, 현재 탭 — 사용자 결정 2026-11-27)'));
  }else if(view==='card'){
   const card=p=>`<div class="col" data-m-lift data-go="${go(p)}" style="cursor:pointer;background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
@@ -247,24 +247,24 @@ function shell(guest,body){
 
 R.screen({id:'hub.main',group:'hub',title:'캐시백 허브',route:'/cashback-hub',fu:['FU-045','FU-046','FU-047','FU-048'],shell:false,
  states:[
-  {id:'normal',label:'게스트 · DEX 탭 계산기 (H1)',figma:{pc:'28960:126884',mo:'28960:130794'},note:'V2.2 hub/HUB#normal · 기본 파트너는 Figma대로 Lighter(온보딩 보류 G-428 — 질문_hub #1)'},
-  {id:'cex',label:'게스트 · CEX 탭 (H1-CEX, Bybit $100,000)',figma:{pc:'28960:126944',mo:'28960:130854'},note:'V2.2 hub/HUB#cex · 검증값 $55.00 / −$24.75 / $30.25 / $24.75'},
-  {id:'brokers',label:'게스트 · Brokers 칩 비교표 (H1-Broker)',figma:{pc:'28960:126950',mo:'28960:130860'},note:'V2.2 hub/HUB#brokers'},
-  {id:'member',label:'로그인 · 연동 0 — 이유 카드 없음 (H2)',figma:{pc:'28960:126890',mo:'28960:130800'},note:'V2.2 hub/HUB#member'},
-  {id:'cexPanel',label:'CEX UID 연동 — CEX 잔액 패널 (H3)',figma:{pc:'28960:126896',mo:'28960:130806'},note:'Figma에만 있는 상태 — 정책 B-5-4 「로그인 · 선택 파트너에 연동 계정 있음 → YOUR CASHBACK」 유효'},
-  {id:'cexBelowMin',label:'CEX 잔액 10 USDT 미만 (H4)',figma:{pc:'28960:126902',mo:'28960:130812'},note:'Figma에만 있는 상태 — 정책 B-5-4 유효 · 넛지 문구는 G-139'},
-  {id:'dexPanel',label:'DEX 잔액 패널 — EdgeX 지갑 연동 (H8)',figma:{pc:'29354:139273',mo:'28960:130836'},note:'V2.2 hub/HUB#dexPanel'},
+  {id:'normal',label:'게스트 · DEX 탭 계산기 (H1)',figma:{pc:'28960:126884',mo:'29515:137400'},note:'V2.2 hub/HUB#normal · 기본 파트너는 Figma대로 Lighter(온보딩 보류 G-428 — 질문_hub #1)'},
+  {id:'cex',label:'게스트 · CEX 탭 (H1-CEX, Bybit $100,000)',figma:{pc:'28960:126944',mo:'29515:144850'},note:'V2.2 hub/HUB#cex · 검증값 $55.00 / −$24.75 / $30.25 / $24.75'},
+  {id:'brokers',label:'게스트 · Brokers 칩 비교표 (H1-Broker)',figma:{pc:'28960:126950',mo:'29515:146538'},note:'V2.2 hub/HUB#brokers'},
+  {id:'member',label:'로그인 · 연동 0 — 이유 카드 없음 (H2)',figma:{pc:'28960:126890',mo:'29515:138107'},note:'V2.2 hub/HUB#member'},
+  {id:'cexPanel',label:'CEX UID 연동 — CEX 잔액 패널 (H3)',figma:{pc:'28960:126896',mo:'29515:138815'},note:'Figma에만 있는 상태 — 정책 B-5-4 「로그인 · 선택 파트너에 연동 계정 있음 → YOUR CASHBACK」 유효'},
+  {id:'cexBelowMin',label:'CEX 잔액 10 USDT 미만 (H4)',figma:{pc:'28960:126902',mo:'29515:140513'},note:'Figma에만 있는 상태 — 정책 B-5-4 유효 · 넛지 문구는 G-139'},
+  {id:'dexPanel',label:'DEX 잔액 패널 — EdgeX 지갑 연동 (H8)',figma:{pc:'29354:139273',mo:'29515:144188'},note:'V2.2 hub/HUB#dexPanel'},
   {id:'dexPartial',label:'A=3 · B=8 — 일부만 출금',note:'V2.2 hub/HUB#dexPartial · 재사용: H5 패널 + 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704)'},
-  {id:'dexBelowMin',label:'최소액 미만 — 넛지 (H4 · DEX & CEX)',figma:{pc:'28960:126902',mo:'28960:130812'},note:'V2.2 hub/HUB#dexBelowMin · H4 웹 라벨 `DEX & CEX balance under 10 USDT`(28960:126903)'},
+  {id:'dexBelowMin',label:'최소액 미만 — 넛지 (H4 · DEX & CEX)',figma:{pc:'28960:126902',mo:'29515:140513'},note:'V2.2 hub/HUB#dexBelowMin · H4 웹 라벨 `DEX & CEX balance under 10 USDT`(28960:126903)'},
     {id:'dexLoading',label:'패널 로딩',note:'V2.2 hub/HUB#dexLoading · 재사용: H5 패널 + 코어 스켈레톤(지갑 카드 메모 29026:97581 「조회 중에는 스켈레톤」)'},
-  {id:'dexError',label:'패널 로드 실패 (H7 — CEX 탭 시안을 DEX로)',figma:{pc:'28960:126920',mo:'28960:130830'},note:'V2.2 hub/HUB#dexError · Figma H7은 Bybit(CEX) 탭'},
+  {id:'dexError',label:'패널 로드 실패 (H7 — CEX 탭 시안을 DEX로)',figma:{pc:'28960:126920',mo:'29515:142500'},note:'V2.2 hub/HUB#dexError · Figma H7은 Bybit(CEX) 탭'},
   {id:'dexMulti',label:'같은 DEX 복수 지갑 +N',note:'V2.2 hub/HUB#dexMulti · 재사용: H5 패널 · `EdgeX +1` 표기는 상태 정의 S4_18(29002:128037)'},
   {id:'aster',label:'Aster — USDT value at payout',note:'V2.2 hub/HUB#aster · 재사용: H5 패널 · H9·H10은 숨김 폐기안이라 쓰지 않음'},
   {id:'totalClaimed',label:'Total claimed (G-053 유지)',note:'V2.2 hub/HUB#totalClaimed · 재사용: H5 패널 + 기존 `Total Claimed` 줄(29035:97792)'},
-  {id:'noLedger',label:'원장 미수신 DEX → 계산기 (H2와 같은 화면)',figma:{pc:'28960:126890',mo:'28960:130800'},note:'V2.2 hub/HUB#noLedger · 화면은 H2(로그인 계산기)와 같음(REQ-299)'},
+  {id:'noLedger',label:'원장 미수신 DEX → 계산기 (H2와 같은 화면)',figma:{pc:'28960:126890',mo:'29515:138107'},note:'V2.2 hub/HUB#noLedger · 화면은 H2(로그인 계산기)와 같음(REQ-299)'},
   {id:'rateFail',label:'요율 서비스 실패',note:'V2.2 hub/HUB#rateFail · 재사용: H1 계산기 영수증 · 문구 근거 DEX(revision) 상태 정의 S5_11 `Estimate unavailable`(29002:128580) = G-144'},
   {id:'lighterAccruing',label:'Lighter 주중 「집계 전」 (G-100)',note:'V2.2 hub/HUB#lighterAccruing · 가장 가까운 Figma H5(28960:126908)는 추정치 줄 — G-100으로 미표시'},
-  {id:'cards',label:'게스트 · 비교표 카드 뷰 (평점 생략)',figma:{pc:'22807:98684',mo:'28960:130794'},note:'[기존 MAX-1216] CMT-08 Exchange list — CARD view · 모바일은 H1 비교표 카드 · V2.2 hub/HUB#cards'},
+  {id:'cards',label:'게스트 · 비교표 카드 뷰 (평점 생략)',figma:{pc:'22807:98684',mo:'29515:137400'},note:'[기존 MAX-1216] CMT-08 Exchange list — CARD view · 모바일은 H1 비교표 카드 · V2.2 hub/HUB#cards'},
   {id:'emptySearch',label:'비교표 빈 검색',figma:{mo:'5145:50887'},note:'[기존 MAX-22] mWeb allPartnerExchanges 「No results found for …」 배치 · 문구 G-151 · PC는 같은 배치 재사용 · V2.2 hub/HUB#emptySearch'},
  ],
  render(st){
