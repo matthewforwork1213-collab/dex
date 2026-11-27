@@ -126,6 +126,9 @@ function siteGo(key) {
     return goRoute('/dex/edgex');
   }
   if (id.startsWith('cexd')) { const s = CEX_SLUG[st] || st; return navReal('/en/exchangeDetail/' + s + '-referral') }
+  // 목록판: 브로커 화면(155-brokers.js)은 목록판 화면으로 — 목록판 go가 brkd·brokers.list를 브로커 화면으로 바꾼다(없으면 실사이트 새 탭)
+  if (EMBED && typeof R !== 'undefined' && R.byId[id.startsWith('brkd') ? 'brokers.detail' : id === 'brokers.list' ? 'brokers.main' : id]) { PT_EMBED.restore(); setTimeout(() => window.go(key), 0); return }
+  if (id.startsWith('brokers.')) return navReal('/en/brokers' + ({ 'brokers.learn': '/learn', 'brokers.compare': '/compare', 'brokers.detail': '/' + ({ rsFinance: 'rs-finance', rs: 'rs-finance' }[st] || st || '') }[id] || ''));
   if (id.startsWith('brkd')) return navReal('/en/brokers/' + ({ rs: 'rs-finance' }[st] || st));
   if (id === 'tp.intro') { closeLayer(true); return goRoute('/tp-intro') }   // TP로 가는 모든 진입 = 소개(게스트 포함, 결정 2026-11-27)
   if (id === 'tp.main') { if (isMember()) return navReal('/en/tethermax-point'); closeLayer(true); return goRoute('/tp-intro') }   // 포인트 페이지 = 회원 전용, 게스트는 소개(dev 동작)
@@ -226,12 +229,13 @@ function rightCard(o = {}) {
 function hubHTML() {
   H.route = ['CEX', 'DEX', 'Brokers'].includes(route.q.tab) ? route.q.tab : 'DEX';
   H.view = route.q.view === 'cards' ? 'card' : 'table';
+  if (route.q.pid && HUBX.routeList(H.route).some(x => x.id === route.q.pid)) H.pid[H.route] = route.q.pid;   // ?pid= — 그 파트너를 고른 채로 연다(목록판 상태 「EdgeX 지갑 연동 (H8)」)
   HUBX.setVol(H.vol[H.route]);
   const guest = !isMember();
-  const panelWait = ledgerAccounts().length > 0;
+  const panelWait = ledgerAccounts().length > 0 && !H.instant; H.instant = false;   // 목록판이 상태로 열 때는 조회 대기(스켈레톤) 없이 — 로딩은 별도 상태(dexLoading)
   const right = rightCard({ loading: panelWait });
   const pad = S.vp === 'mo' ? '40px 16px 64px' : '96px 120px 120px';
-  const body = `${HUBX.hero(`<div data-hub-right>${right}</div>`, H.route)}<section data-hub-routes style="padding:${pad}">${HUBX.routes()}${HUBX.compare(H.route, H.view === 'card' ? 'cards' : 'normal')}</section>${guest ? HUBX.why() : ''}`;
+  const body = `${HUBX.hero(`<div data-hub-right>${right}</div>`, H.route)}<section data-hub-routes style="padding:${pad}"><div style="max-width:1200px;margin:0 auto">${HUBX.routes()}${HUBX.compare(H.route, H.view === 'card' ? 'cards' : 'normal')}</div></section>${guest ? HUBX.why() : ''}`;
   if (panelWait) setTimeout(() => { const box = $('[data-hub-right]'); if (box) { box.innerHTML = rightCard(); bindRight(); fadeIn(box) } }, rnd(300, 800));
   return HUBX.shell(guest, body);
 }
@@ -291,7 +295,7 @@ function updateCalc(o = {}) {
 function applyFilter() {
   const q = H.q.trim().toLowerCase(); let n = 0;
   $$('[data-hub-row]').forEach(r => { const ok = !q || r.dataset.hubRow.toLowerCase().includes(q); r.style.display = ok ? '' : 'none'; if (ok) n++ });
-  const em = $('[data-hub-empty]'); if (em) { em.style.display = n ? 'none' : 'block'; em.textContent = H.q.trim() ? `No results found for “${H.q.trim()}”` : 'No results found' }   // G-151 · N13
+  const em = $('[data-hub-empty]'); if (em) { em.style.display = n ? 'none' : 'block'; em.textContent = H.q.trim() ? `No results found for ${H.q.trim()}` : 'No results found' }   // G-151 · N13
   const tb = $('[data-compare-body] table'); if (tb) tb.closest('[data-compare-body]>div').style.display = n ? '' : 'none';
   const cards = $('[data-compare-body]>.col'); if (cards) cards.style.display = n ? '' : 'none';
   const clr = $('[data-hub-clear]'); if (clr) clr.style.display = q ? 'inline-flex' : 'none';
@@ -722,7 +726,8 @@ function mount(path, q, auth) {
   SITE.auth = auth === 'guest' ? 'guest' : 'member';
   ST = auth === 's3' ? Object.assign(DEXSTATE.load(), { accounts: [], transient: true }) : DEXSTATE.load();
   // 목록판 「회원·연동」으로 DEX 상세를 열면 그 DEX가 연동된 상태(상태 linked)로 보인다 — 화면 보기용 임시 계정(저장 안 함)
-  const m = /^\/dex\/(\w+)$/.exec(path), DXN = { edgex: 'EdgeX', apex: 'ApeX', lighter: 'Lighter', aster: 'Aster' };
+  const m = /^\/dex\/(\w+)$/.exec(path) || (path === '/hub' && q && q.pid && [0, q.pid]), DXN = { edgex: 'EdgeX', apex: 'ApeX', lighter: 'Lighter', aster: 'Aster' };
+  if (path === '/hub') Object.assign(H, { instant: true, pid: { DEX: 'lighter', CEX: 'bybit', Brokers: 'rs' }, vol: { DEX: 100000, CEX: 100000, Brokers: 200000 }, q: '', sort: null });   // 목록판 상태 = 처음 연 모습
   if (auth === 's4' && m && DXN[m[1]] && !ST.accounts.some(a => a.ex === DXN[m[1]] && a.st === 'ok')) ST = Object.assign({}, ST, { accounts: ST.accounts.concat([{ ex: DXN[m[1]], type: 'DEX', id: '0x5b2E8c1D4f7A9036b1C8e2D5F4a7B9c0E3d6A21f', a: 12, b: 0, st: 'ok', seed: true }]), transient: true });
   L.open = false; layer.className = 'site-layer'; layer.innerHTML = ''; document.documentElement.classList.remove('site-lock');
   route = { path, q: q || {} }; lastVp = vpNow();

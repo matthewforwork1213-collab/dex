@@ -346,11 +346,15 @@ function openSeeAll() {
         // 계정 행 → 지갑/UID 상세
         $$('.row.between', box).forEach(r => {
           const t = (r.firstElementChild || r).textContent; const m = t.match(/(UID (\S+)|Wallet (0x\w{4})…(\w{4}))/); if (!m) return;
+          const h0 = seeAllRows().find(x => m[2] ? x.id === m[2] : x.id.startsWith(m[3]) && x.id.endsWith(m[4])); if (!h0 || !['ok', 'issue', 'unlinked'].includes(h0.st)) return;   // 진입 없는 행은 눌림 표시도 없음
           r.style.cursor = 'pointer'; r.classList.add('site-hoverrow');
           r.onclick = e => {
             e.stopPropagation();
             const rows = seeAllRows(); const hit = rows.find(x => m[2] ? x.id === m[2] : x.id.startsWith(m[3]) && x.id.endsWith(m[4]));
-            if (hit) openAccount(hit);
+            if (!hit) return; const dex = isDex(hit.ex);
+            if (hit.st === 'ok') return openAccount(hit);
+            if (hit.st === 'issue') return openCustom(() => HOMEX.issueDialog(dex), 'center');
+            if (hit.st === 'unlinked') { API.ST.own = { ex: hit.ex, type: dex ? 'DEX' : 'CEX', id: hit.id }; API.persist(); OWNX.setOwn(hit.ex, dex ? short(hit.id) : 'UID ' + hit.id, hit.id); window.SITEO_DLG = 1; let h; try { h = R.byId['own.home'].render(dex ? 'reclaim' : 'reclaimUid', { asBg: false, state: {} }) } finally { window.SITEO_DLG = 0 } return openCustom(() => h, 'center') }
           };
         });
       }
@@ -371,7 +375,6 @@ function accountHTML() {
   const v = API.ST.view; if (!v) { setTimeout(() => navReal('/en'), 0); return '' }
   window.SITELOGO = Object.assign({}, window.SITELOGO || {}, v.type === 'CEX' && API.ST.viewLogo ? { [v.ex]: API.ST.viewLogo } : {});
   window.SITEW = v; S.auth = 's4';
-  const sc = R.byId['home.wallet']; sc.shell = Object.assign({}, sc.shell, { moTitle: [v.ex, v.ex] });
   try { return renderInner('home.wallet:normal') } finally { window.SITEW = null }
 }
 
@@ -428,7 +431,7 @@ function exOpts() {
   Object.entries(by).filter(([, v]) => v.type === 'DEX').forEach(([k, v]) => o.push([k, T(`${k} (${v.n} ${v.n === 1 ? 'wallet' : 'wallets'})`, `${k} (${v.n} 지갑)`)]));
   return o;
 }
-const accLabel = a => a.type === 'CEX' ? `${a.ex} UID ${a.id}` : `${a.ex} Wallet ${short(a.id)}`;
+const accLabel = a => a.type === 'CEX' ? `${a.ex} UID ${a.id}` : `<span>${a.ex} Wallet <span data-addr="${esc(a.id)}">${short(a.id)}</span></span>`;
 const TYS = [['ex', () => T('Exchange Cashback', '캐시백')], ['ev', () => T('Event Reward', '이벤트 리워드')], ['claim', () => T('Claim Amount', '출금 금액')]];
 function sumFilters() {
   const D = SM.D || (SM.D = { ex: SM.F.ex, acc: SM.F.acc ? new Set(SM.F.acc) : null, ty: SM.F.ty ? new Set(SM.F.ty) : null });
@@ -517,7 +520,7 @@ document.addEventListener('click', e => {
 const SO = { step: 0, file: null };
 const MAX = 1024 * 1024 * 1024;   // 1GB(결정: 현행)
 const mb = n => n >= 1024 * 1024 * 1024 ? (n / 1073741824).toFixed(1) + ' GB' : (n / 1048576).toFixed(1) + ' MB';
-function ownCtx() { const o = API.ST.own || { ex: 'Lighter', type: 'DEX', id: '0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9' }; OWNX.setOwn(o.ex, o.type === 'CEX' ? 'UID ' + o.id : short(o.id)); return o }
+function ownCtx() { const o = API.ST.own || { ex: 'Lighter', type: 'DEX', id: '0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9' }; OWNX.setOwn(o.ex, o.type === 'CEX' ? 'UID ' + o.id : short(o.id), o.id); return o }
 function ownHTML() {
   ownCtx(); S.auth = 's4';
   const st = SO.file ? 'uploaded' : ['normal', 's2', 's3'][SO.step];
@@ -575,7 +578,7 @@ function ownGo(st, inLayer) {
 }
 let submitting = false;
 function ownHomeGo(st) {
-  if (st === 'reclaimRejected') { ownResult('rejected'); return true }   // 배너 「Ownership verification was unsuccessful. View reason.」
+  if (st === 'reclaimRejected') { ownResult('reclaimRejected'); return true }   // 배너 「Ownership verification was unsuccessful. View reason.」
   if (st === 'reclaim') { SO.step = 0; SO.file = null; go2('/ownership'); return true }
   if (st === 'review') {
     if (submitting) { window.siteErr && siteErr(); return true } submitting = true;           // 연타해도 1건(REQ-727)
@@ -593,9 +596,9 @@ function ownHomeGo(st) {
 }
 // 테스트용 심사 결과(홈 도움말에서) — 승인: 연동 완료(금액 표시) · 거절: Ownership verification failed
 function ownResult(r) {
-  const o = API.ST.own || {}; OWNX.setOwn(o.ex || 'Lighter', o.type === 'CEX' ? 'UID ' + o.id : short(o.id || '0x0000000000'));
+  const o = API.ST.own || {}; OWNX.setOwn(o.ex || 'Lighter', o.type === 'CEX' ? 'UID ' + o.id : short(o.id || '0x0000000000'), o.id);
   window.SITEO_DLG = 1; let h;
-  try { h = R.byId['own.home'].render(r === 'approved' ? 'approved' : 'rejected', { asBg: false, state: {} }) } finally { window.SITEO_DLG = 0 }
+  try { h = R.byId['own.home'].render(r === 'approved' ? 'approved' : r === 'reclaimRejected' ? 'reclaimRejected' : 'rejected', { asBg: false, state: {} }) } finally { window.SITEO_DLG = 0 }
   openCustom(() => h, 'center');
 }
 
@@ -678,13 +681,7 @@ document.addEventListener('click', e => {
     wrap.style.gridTemplateRows = CK.how ? '1fr' : '0fr'; if (ic) ic.style.transform = `rotate(${CK.how ? 180 : 0}deg)`; hw.setAttribute('aria-expanded', CK.how);
     return;
   }
-  const sb = t.closest('[data-calc-start]');
-  if (sb) {
-    e.preventDefault(); e.stopPropagation();
-    const id = sb.dataset.calcStart;
-    if (OFFICIAL[id]) { window.open(OFFICIAL[id], '_blank', 'noopener'); return toast('새 탭으로 열었어요 — 레퍼럴 링크는 어드민 입력값이라 프로토타입은 공식 사이트로 열어요') }
-    return toast('「' + sb.innerText.trim() + '」 — 거래소 레퍼럴 링크(새 탭)는 어드민 입력값 (프로토타입)');
-  }
+  // Summary `Start {거래소} Cashback` = 그 거래소 상세(data-go: DEX → #/dex/{slug} · CEX → /en/exchangeDetail/{slug}-referral, 결정 12차)
 }, true);
 // 3단계 — 칩 ↔ 슬라이더 양방향(칩은 값이 정확히 같을 때만 선택), 값 표시 즉시 갱신
 const CK_RANGE = { lev: { min: 1, max: 125, step: 1 }, bal: { min: 100, max: 100000, step: 1 }, ratio: { min: 0, max: 100, step: 1 } };

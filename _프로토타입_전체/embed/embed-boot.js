@@ -16,7 +16,7 @@
   function target(id, st) {
     if (window.PT_NO_MOUNT) return null;   // tools/check.cjs(JSDOM 정적 렌더 점검)
     if (id === 'hub.main' && ['normal', 'member', 'dexPanel', 'cex', 'brokers', 'cards'].includes(st))
-      return { path: '/hub', q: st === 'cex' ? { tab: 'CEX' } : st === 'brokers' ? { tab: 'Brokers' } : st === 'cards' ? { view: 'cards' } : {} };
+      return { path: '/hub', q: st === 'cex' ? { tab: 'CEX' } : st === 'brokers' ? { tab: 'Brokers' } : st === 'cards' ? { view: 'cards' } : st === 'dexPanel' ? { pid: 'edgex' } : {} };   // H8 = EdgeX 지갑 연동 패널
     if (id === 'dex.overview' && ['normal', 'member'].includes(st)) return { path: '/dex', q: {} };
     if (id === 'dex.detail' && ['normal', 'edgex', 'unlinked', 'linked', 'aster', 'apex', 'lighter'].includes(st)) return { path: '/dex/' + (SLUG.includes(st) ? st : 'edgex'), q: {} };
     if (id === 'calc.p1' && st === 'normal') return { path: '/payback', q: {} };

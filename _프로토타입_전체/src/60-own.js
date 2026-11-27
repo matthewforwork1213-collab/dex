@@ -5,6 +5,8 @@
 const OWN_DEX='Lighter';
 const OWN_ADDR='0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9'; // Figma 예시 주소(저장된 대소문자 그대로 표시, REQ-723)
 const OWN_SHORT='0x7a3f…51e9';
+let OWN_FULL=OWN_ADDR;   // 축약 주소의 전체 값(툴팁 · 복사). 사이트 모드는 setOwn으로 바뀜
+const ownAddr=()=>/^0x/.test(OWN_SHORT)?`${T('Wallet','지갑')} <span data-addr="${esc(OWN_FULL)}">${OWN_SHORT}</span>`:OWN_SHORT;
 const oic=(n,s=24)=>`<img src="${A('own-ic-'+n+'.svg')}" style="width:${s}px;height:${s}px;flex:none" alt="">`;
 const oAlert=(tone,text,o={})=>{const m={info:['#e5f6fd','#014361','info'],warn:['#fff4e5','#663c00','warn'],err:['#fdeded','#5f2120',null]}[tone];
  const icon=m[2]?oic(m[2],20):`<span style="width:20px;height:20px;border-radius:50%;background:var(--error);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none">!</span>`;
@@ -32,7 +34,7 @@ R.screen({id:'own.inuse',group:'own',title:'이미 사용 중 · 신청 불가(3
   {id:'cooldown',label:'Ownership Claim Unavailable — 30일 쿨다운 (O2)',figma:{pc:'28960:127650',mo:'28982:126298'},note:'V2.2 <code>own/O2#normal</code> · REQ-724. DEX(revision) O2 = 결과 스플래시(warning) — O1 대신 표시(최근 30일 안에 다른 회원이 인증). 기존 [MAX-561] Ownership cooldown time(웹 12792:61035 · mWeb 12783:405465)의 DEX판. 「DEX는 소유권 인증을 지원하지 않습니다」류 문구 금지(REQ-125)'},
  ],
  render(st){
-  if(st==='cooldown')return window.LINK_SPLASH('warning',T('Ownership Claim Unavailable'),[`<span class="row" style="gap:8px;justify-content:center;align-items:center">${C.dex(OWN_DEX,24)}<span class="b1 semi" style="color:var(--text-primary)">${OWN_DEX}</span><span>${T('Wallet','지갑')} ${OWN_SHORT}</span></span>`,T('This wallet address was recently verified by another user. Ownership claims will be available after 30 days.')],C.btn(T('Try a different wallet'),{full:true,go:'link.addr:empty'})+C.btn(T('Close','닫기'),{v:'outlined',c:'black',full:true,go:'link.addr:kept'}),{close:'link.addr:kept'});
+  if(st==='cooldown')return window.LINK_SPLASH('warning',T('Ownership Claim Unavailable'),[`<span class="row" style="gap:8px;justify-content:center;align-items:center">${C.dex(OWN_DEX,24)}<span class="b1 semi" style="color:var(--text-primary)">${OWN_DEX}</span><span>${ownAddr()}</span></span>`,T('This wallet address was recently verified by another user. Ownership claims will be available after 30 days.')],C.btn(T('Try a different wallet'),{full:true,go:'link.addr:empty'})+C.btn(T('Close','닫기'),{v:'outlined',c:'black',full:true,go:'link.addr:kept'}),{close:'link.addr:kept'});
   return renderInner('link.result:inuse')}});
 
 // ---------- O3~O10 : 인증 화면 ----------
@@ -44,7 +46,7 @@ const STEPS=[
 const stepIdx=st=>st==='s2'?1:['s3','uploading','failed','uploaded','confirm'].includes(st)?2:0;
 const NEXT={normal:'s2',s2:'s3',s3:'normal'};
 // 조각 — 기존 [MAX-561] 원본 `Web` 컴포넌트(웹 그리드 346.67 | 717.33)와 모바일이 같은 카드를 쓴다
-const vWallet=()=>`<div style="background:#fff;border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:8px">${C.dex(OWN_DEX,30)}<div class="col" style="gap:0"><span class="b2 semi">${OWN_DEX}</span><span class="row" style="gap:4px"><span style="font-size:12px;line-height:12px;color:var(--text-secondary)">${T('Wallet','지갑')} ${OWN_SHORT}</span><span style="padding:2px;display:flex">${oic('copy',16)}</span></span></div></div>`;
+const vWallet=()=>`<div style="background:#fff;border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:8px">${C.dex(OWN_DEX,30)}<div class="col" style="gap:0"><span class="b2 semi">${OWN_DEX}</span><span class="row" style="gap:4px"><span style="font-size:12px;line-height:12px;color:var(--text-secondary)">${ownAddr()}</span><span data-copy="${esc(OWN_FULL)}" style="padding:2px;display:flex;cursor:pointer">${oic('copy',16)}</span></span></div></div>`;
 function vGuide(st){const i=stepIdx(st),s=STEPS[i];
  return `<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:16px"><span class="b1 semi">${T('Ownership Video Recording Guide')}</span>
   <div style="border-radius:8px;display:flex;flex-direction:column;gap:8px"><div style="position:relative;border-radius:8px 8px 0 0;overflow:hidden;cursor:pointer" data-go="own.verify:${NEXT[['normal','s2','s3'][i]]}"><img src="${A('own-guide-lighter.png')}" style="width:100%;aspect-ratio:1280/929;object-fit:cover"><span style="position:absolute;left:16px;top:16px;background:#0031c6;color:#fff;border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">${T(`Step ${i+1} of 3`)}</span></div>
@@ -104,7 +106,7 @@ R.screen({id:'own.verify',group:'own',title:'소유권 인증 · 업로드 · �
   const page=mo?verifyPageMo(st):verifyPage(st);
   const wrap=h=>h+`<div style="${mo?'padding:0 16px 24px':'width:1088px;max-width:100%;margin:0 auto 24px'}">${nt}</div>`;
   if(!['uploading','failed','error','confirm'].includes(st)||ctx.asBg)return wrap(page);
-  const walletBox=`<div style="margin:16px 24px 0;border:.5px solid var(--divider);border-radius:8px;padding:8px 16px;display:flex;align-items:center;gap:8px">${C.dex(OWN_DEX,24)}<span class="b2 semi">${OWN_DEX}</span><span class="cap c2">${T('Wallet','지갑')} ${OWN_SHORT}</span>${oic('copy',16)}</div>`;
+  const walletBox=`<div style="margin:16px 24px 0;border:.5px solid var(--divider);border-radius:8px;padding:8px 16px;display:flex;align-items:center;gap:8px">${C.dex(OWN_DEX,24)}<span class="b2 semi">${OWN_DEX}</span><span class="cap c2">${ownAddr()}</span><span data-copy="${esc(OWN_FULL)}" style="display:flex;cursor:pointer">${oic('copy',16)}</span></div>`;
   const dlg={
    uploading:`<div style="background:#fff;border-radius:4px;box-shadow:var(--elev24);width:${mo?343:480}px;max-width:100%;padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center"><img src="${A('own-spinner.svg')}" style="width:40px;height:40px" alt=""><div style="padding-top:16px;font-size:20px;font-weight:500;line-height:1.6">${T('Uploading File')}</div><div class="b2 c2" style="margin-top:8px;cursor:pointer" data-go="own.verify:uploaded">${T('Do not close this window.')}</div></div>`,
    failed:muiDialog({title:T('Upload Failed'),body:T('We couldn’t upload your file. Please try again or select a different file.'),actions:`<button class="btn contained primary lg" style="width:100%" data-go="own.verify:s3">${T('OK')}</button>`}),
@@ -118,26 +120,10 @@ R.screen({id:'own.verify',group:'own',title:'소유권 인증 · 업로드 · �
 // ---------- O11~O16 : 홈 연동 계정 행 · 심사 결과 ----------
 // 배경 = 실제 회원 홈(home.main:normal, 홈 담당) — Linked Accounts 카드만 소유권 상태 행으로 바꾼다(Figma O11~O16과 같은 4행)
 function ownRows(st){
- const mo=S.vp==='mo';
- const row=(logo,name,sub,dot,amount,extra='')=>`<div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px"${st==='unlinked'&&name===OWN_DEX?' data-go="own.home:reclaim"':''}>${logo}<div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${name}</span><span class="cap c2"><span style="color:${dot}">●</span>&nbsp; ${sub}</span></div><div class="col" style="gap:4px;align-items:flex-end;flex:none">${amount}${extra}</div></div>`;
- const amt=v=>v==='-'?`<span class="b1 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline"><span class="b1 semi tnum">${v}</span><span class="b2 c2">USDT</span></span>`;
- const lighterAmt=st==='approved'?'120.00':'-';
- const chip=st==='review'?`<span style="background:#01579b;color:#fff;border-radius:100px;padding:3px 9px;font-size:13px;line-height:18px;white-space:nowrap">소유 확인중</span>`:'';
- const notice={review:oAlert('info',T('Ownership verification in progress · 06:46')),
-  rejected:oAlert('err',T('Ownership verification was unsuccessful. Please try again.')),
-  unlinked:`<div style="width:100%;cursor:pointer" data-go="own.home:reclaim">${oAlert('warn',T('This wallet has been unlinked. Tap to verify ownership and reclaim it.'),{chevron:mo})}</div>`,
-  reclaim:oAlert('warn',T('This wallet has been unlinked. Tap to verify ownership and reclaim it.')),
-  reclaimRejected:`<div style="width:100%;cursor:pointer" data-go="own.home:reclaimRejected">${oAlert('err',T('Ownership verification was unsuccessful. View reason.'))}</div>`}[st]||'';
- const w=T('Wallet','지갑')+' ';
- const bitget=`<img src="${A('hub-logo-bitget.png')}" style="width:32px;height:32px;border-radius:50%;flex:none" alt="Bitget">`;
- return `<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:12px">
-  <div class="row between"><span class="b1 semi">${T('Linked Accounts','연동된 계정')}</span><button class="btn text primary sm">${T('See All','모두 보기')}</button></div>
-  ${row(bitget,'Bitget','UID 685432171','#2ea652',amt('14.00'))}
-  ${row(C.dex('Lighter',32),'Lighter',(mo?'':w)+OWN_SHORT,'#2ea652',amt(lighterAmt),chip)}
-  ${notice}
-  ${row(C.dex('ApeX',32),'ApeX',(mo?'':w)+'0x91c4…a07b','#2ea652',amt('14.00'))}
-  ${row(C.dex('Aster',32),'Aster',(mo?'':w)+'0x5e0d…c2f4','#2ea652',amt('3.20'))}
-  <button class="btn text primary sm full" data-go="link.select">${mo?T('Trading on multiple exchanges? Link more'):T('Using multiple platforms? Link more accounts')}</button></div>`;
+ const H=window.HOME_ROWS,mo=S.vp==='mo';
+ const k={review:'own',approved:'ok',rejected:'ownfail',unlinked:'unlinked',reclaim:'unlinked',reclaimUid:'unlinked',reclaimRejected:'reclaimfail'}[st]||'ok';
+ const me={ex:OWN_DEX,id:OWN_FULL,amt:k==='ok'?120:null,st:k};
+ return H.linkedCard([H.R_BITGET,me,H.R_APEX,{ex:'Aster',id:H.WAL.aster,amt:3.2,st:'ok'}],{app:mo});
 }
 // home.main:normal을 그리고 Linked Accounts 카드를 ownRows로 바꾼다(홈 모듈은 그대로)
 function ownHome(st){
@@ -175,7 +161,7 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
   const ntWrap=`<div style="${mo?'padding:0 16px 24px':'width:1088px;max-width:100%;margin:8px auto 24px'}">${nt}</div>`;
   const page=ownHome(st==='reclaimRejectedRow'?'reclaimRejected':st);
   if(!['approved','rejected','reclaim','reclaimUid','reclaimRejected'].includes(st)||ctx.asBg)return page+ntWrap;
-  const account=`<div class="row g8" style="margin:16px 24px 0;padding:8px 16px;border:1px solid var(--divider);border-radius:4px">${C.dex(OWN_DEX,24)}<span class="b2 med">${OWN_DEX}</span><span class="cap c2">${T('Wallet','지갑')} ${OWN_SHORT}</span></div>`;
+  const account=`<div class="row g8" style="margin:16px 24px 0;padding:8px 16px;border:1px solid var(--divider);border-radius:4px">${C.dex(OWN_DEX,24)}<span class="b2 med">${OWN_DEX}</span><span class="cap c2">${ownAddr()}</span></div>`;
   const ok=mBtn(T('OK'),'home.main');
   const remove=mBtn(T('Remove Wallet'),'home.main','white');
   const submit=mBtn(T('Submit Wallet Ownership'),'own.verify:normal');

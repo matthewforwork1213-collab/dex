@@ -32,7 +32,7 @@ const dexSel=(d,s=32)=>S.vp==='mo'
 const guideText={Lighter:'Open Lighter and log in. Tap your wallet address in the top right corner, copy it, then paste it above. No wallet connection or signature required.'};
 function guide(d){
  if(S.vp==='mo'){
-  const txt=d==='Lighter'?T('Open Lighter and copy the wallet address from your account. Paste it above. TetherMax never asks for your private key, recovery phrase, or wallet signature.'):T(`Open ${d} and copy the wallet address from your account. Paste it above.`,`${d}에서 계정의 지갑 주소를 복사해 위에 붙여넣으세요.`);
+  const txt=d==='Lighter'?T('Open Lighter and copy the wallet address from your account. Paste it above. TetherMax never asks for your private key, seed phrase, or a wallet signature.'):T(`Open ${d} and copy the wallet address from your account. Paste it above.`,`${d}에서 계정의 지갑 주소를 복사해 위에 붙여넣으세요.`);
   return `<div class="col g8"><span class="b1 semi">${T('How to find your wallet address','지갑 주소 찾는 방법')}</span><p class="cap" style="margin:0">${txt}</p>
    <div style="height:256px;background:#eaeef4;overflow:hidden">${d==='Lighter'?`<img src="${A('guide-lighter-1.png')}" style="width:100%;height:100%;object-fit:contain">`:''}</div></div>`;
  }
@@ -85,25 +85,25 @@ function webExchangeField(selected,st){
  const button=(name,kind,top=false)=>`<button type="button" data-link-venue="${esc(name)}" data-link-type="${kind}"${top?' data-link-top':''} aria-pressed="${name===selected}" style="${top?'min-height:56px;border:1px solid '+(name===selected?'var(--blue)':'var(--divider)')+';border-radius:8px;flex-direction:column;justify-content:center;gap:4px;':'min-height:44px;border:0;padding:0 12px;gap:8px;'}align-items:center;background:${name===selected&&top?'#eef6fc':'transparent'};color:inherit;text-align:left;cursor:pointer;display:${top||((c.chip==='all'||kind.toLowerCase()===c.chip)&&(!c.q||name.toLowerCase().includes(c.q)))?'flex':'none'}">${webMark(name,top?22:20)}<span class="${top?'cap c2':'b1 grow'}">${name}</span>${top?'':`${kind==='DEX'?`<span data-picker-badge style="display:${c.chip==='all'?'inline':'none'}">${C.badge('DEX','dex')}</span>`:''}${name===selected?`<img class="ic20" src="${A('link-ic-check.svg')}" alt="">`:''}`}</button>`;
  const popular=`<div data-link-popular class="col g12" style="padding-bottom:8px;display:${c.q||c.chip==='dex'?'none':'flex'}"><span class="b1 semi">${T('Top Partner Exchanges','인기 제휴 거래소')}</span><div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">${WEB_TOP.map(n=>button(n,'CEX',true)).join('')}</div></div>`;
  const opts=selList({chip:'all',drop:c.drop},true);
- const results=`<div data-link-list class="col" style="gap:4px">${opts.map(x=>button(x.n,x.t)).join('')}</div><p data-link-empty class="empty" style="margin:12px 0;display:${selList(c,true).length?'none':'block'}">${T('No results found','검색 결과가 없어요.')}</p>`;
+ const results=`<div data-link-list class="col" style="gap:4px">${opts.map(x=>button(x.n,x.t)).join('')}</div><p data-link-empty class="empty" style="margin:12px 0;display:${selList(c,true).length?'none':'block'}">${c.q?`No results found for “${esc(c.q)}”`:T('No results found','검색 결과가 없어요.')}</p>`;
  return `<details data-link-picker data-type="${c.chip}" data-current="${esc(selected||'')}" style="position:relative"${st?' open':''}>
   <summary class="sel" style="list-style:none;cursor:pointer;padding:16px 12px;min-height:58px">${selected?webMark(selected,24):''}<span class="b1 grow">${selected||T('Select a partner','거래소를 선택하세요')}</span>${ic('arrow-drop-down')}</summary>
   <div style="position:absolute;z-index:5;top:calc(100% + 4px);left:0;right:0;border-radius:4px;background:var(--paper);box-shadow:var(--elev24);padding:16px;display:flex;flex-direction:column;gap:12px">
    <label class="tf sm focus" style="display:block"><span class="in">${limg('ic-search.svg',20)}<input data-link-search type="search" aria-label="Search for an exchange" placeholder="${T('Search for an exchange','거래소 검색')}" value="${esc(c.q||'')}"></span></label>
-   <div class="row g8" role="group" aria-label="Exchange type">${tabs.map(([key,name])=>`<button type="button" class="chip${c.chip===key?' on':''}" data-link-filter="${key}" aria-pressed="${c.chip===key}">${name}</button>`).join('')}</div>
+   <div class="row g8" role="group" aria-label="Exchange type">${tabs.map(([key,name])=>`<button type="button" class="chip ft${c.chip===key?' on':''}" data-link-filter="${key}" aria-pressed="${c.chip===key}">${name}</button>`).join('')}</div>
    <div style="max-height:246px;overflow-y:auto;display:flex;flex-direction:column;gap:12px">${c.fail?failBox():popular+results}</div>
   </div></details>`;
 }
 function moSheet(st,origin){
  const c=SEL[st];const list=selList({chip:'all',drop:c.drop},false);
- const chips=`<div class="row g8" role="group" aria-label="Exchange type">${[['all','All'],['cex','CEX'],['dex','DEX']].map(([k,l])=>`<button type="button" class="chip${c.chip===k?' on':''}" data-link-filter="${k}" aria-pressed="${c.chip===k}">${l}</button>`).join('')}</div>`;
+ const chips=`<div class="row g8" role="group" aria-label="Exchange type">${[['all','All'],['cex','CEX'],['dex','DEX']].map(([k,l])=>`<button type="button" class="chip ft${c.chip===k?' on':''}" data-link-filter="${k}" aria-pressed="${c.chip===k}">${l}</button>`).join('')}</div>`;
  const head=t=>`<div class="row" style="gap:16px;min-height:24px"><span class="b1 semi" style="white-space:nowrap">${t}</span>${c.q?'':'<span style="flex:1;height:1px;background:var(--divider)"></span>'}</div>`;
  const top=c.fail?'':`<div data-link-popular class="col" style="gap:12px;display:${c.q||c.chip==='dex'?'none':'flex'}">${head(T('Top Partner Exchanges'))}<div class="row" style="gap:8px;align-items:flex-start">${['Bitget','Bybit','Binance','OKX'].map(n=>`<button type="button" data-link-venue="${n}" data-link-type="CEX" style="flex:1;min-width:0;background:var(--paper);color:inherit;border:.5px solid var(--divider);border-radius:8px;box-shadow:0 4px 5px rgba(0,0,0,.04);padding:8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer">${mark(n,48)}<span class="cap c2 med">${n}</span></button>`).join('')}</div></div>`;
  const tile=x=>{const cx=cexBy(x.n);const match=(c.chip==='all'||x.t.toLowerCase()===c.chip)&&(!c.q||x.n.toLowerCase().includes(c.q));return `<button type="button" style="min-width:0;padding:8px;border-radius:8px;border:0;background:transparent;color:inherit;text-align:left;display:${match?'flex':'none'};flex-direction:column;gap:4px;cursor:pointer" data-link-venue="${x.n}" data-link-type="${x.t}">
    <div style="height:60px;border-radius:4px;position:relative;${cx?`background:${cx[2]};display:flex;align-items:center;justify-content:center`:''}">${cx?mark(x.n,48):`<span style="position:absolute;left:0;top:0">${C.dex(x.n,40)}</span>`}</div>
    <span class="cap c2 med" style="line-height:1.4">${x.n}</span>${cx?`<span style="font-size:10px;line-height:10px;letter-spacing:.15px">${cx[3]}% Total Savings</span>`:`<span data-picker-badge style="font-size:10px;display:${c.chip==='all'?'inline':'none'}">DEX</span>`}</button>`};
  const count=selList(c,false).length;
- const all=c.fail?failBox():`<div class="col g12"><span class="b1 semi" data-link-count>${pickerCount(c.chip,c.q,count)}</span><div data-link-list style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">${list.map(tile).join('')}</div><p data-link-empty class="empty" style="display:${count?'none':'block'}">${T('No results found')}</p></div>`;
+ const all=c.fail?failBox():`<div class="col g12"><span class="b1 semi" data-link-count>${pickerCount(c.chip,c.q,count)}</span><div data-link-list style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">${list.map(tile).join('')}</div><p data-link-empty class="empty" style="display:${count?'none':'block'}">${c.q?`No results found for “${esc(c.q)}”`:T('No results found')}</p></div>`;
  const search=`<div class="tf sm${c.q?' focus':''}"><div class="in"><img src="${A('link-ic-search.svg')}" class="ic20" alt=""><input type="search" data-link-search value="${esc(c.q||'')}" placeholder="${esc(T('Search exchanges'))}" aria-label="Search exchanges"></div></div>`;
  return `<div data-link-picker data-type="${c.chip}" style="background:var(--paper);border-radius:16px 16px 0 0;width:100%;height:640px;overflow:auto;padding:24px 16px;display:flex;flex-direction:column;gap:24px">
   <div class="row between"><span class="h6" style="font-weight:500">${T('Select an exchange')}</span><button class="icon-btn" style="padding:5px" data-go="${origin}">${ic('close','ic20')}</button></div>${search}${chips}${top}${all}</div>`}
@@ -176,7 +176,7 @@ document.addEventListener('keydown',event=>{
 
 R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (웹 꽉 찬 모달 · 앱 바텀시트)',fu:['FU-013'],shell:false,
  states:[
-  {id:'normal',label:'진입 — 첫 거래소 WOO X Pro 기본 선택 (G-379)',figma:{pc:'28960:127765',mo:'28969:126953'},note:'V2.2 <code>link/SEL#normal</code> · <code>link/SHEET#normal</code> · <code>link/GRID#normal</code>. 웹 = Figma S3-2 「Link Account modal (live)」 기본 상태(Select a partner · Link Account 비활성). 모바일 = 연동 폼 위 선택 시트(Top Partner · All exchanges (23))'},
+  {id:'normal',label:'진입 — 첫 거래소 WOO X Pro 기본 선택 (G-379)',figma:null,note:'맞는 Figma 프레임 없음(결정 12차 「연동 모달 첫 상태」 — 실서비스 첫 항목 WOO X Pro 기본 선택). PC 28960:127765는 숨김 프레임, 모바일 28969:126953은 선택기 시트(<code>dexlist</code>·<code>all</code>이 그 프레임). V2.2 <code>link/SEL#normal</code> · <code>link/SHEET#normal</code> · <code>link/GRID#normal</code>. 웹 = Figma S3-2 「Link Account modal (live)」 기본 상태(Select a partner · Link Account 비활성). 모바일 = 연동 폼 위 선택 시트(Top Partner · All exchanges (23))'},
   {id:'dexlist',label:'홈 Linked Accounts 푸터 → 공통 선택기 All',figma:{pc:'28960:127381',mo:'28969:126953'}},
   {id:'all',label:'기존 연동 폼의 검색 팝오버 · All',figma:{pc:'28960:127381',mo:'28969:126953'}},
   {id:'uid',label:'UID 입력 화면에서 연 공통 선택기',figma:{pc:'28960:127381',mo:'28969:126953'}},
@@ -202,7 +202,9 @@ R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (�
    const origin={uid:'link.uid:empty',uidFilled:'link.uid:filled'}[st]||'link.addr:empty';
    return C.overlay(origin,moSheet(st==='all'?'normal':st,origin));
   }
-  return uidLinkForm(st==='uidFilled'?'filled':'empty',st==='all'?'normal':st);
+  // 선택기를 연 배경 폼 = Figma 표본(Bitget 선택 · Bitget UID 안내, 28960:127381 · 29192:119719). 사이트 모드는 사용자가 고른 거래소 그대로
+  if(window.SITEL&&!window.PT_EMBED)return uidLinkForm(st==='uidFilled'?'filled':'empty',st==='all'?'normal':st);
+  const keep=selectedExchange;selectedExchange='Bitget';try{return uidLinkForm(st==='uidFilled'?'filled':'empty',st==='all'?'normal':st)}finally{selectedExchange=keep}
  }});
 
 // ---------- 기존 CEX UID 입력 (현행 테더맥스 UID 연동) ----------
@@ -210,7 +212,7 @@ R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (�
 function uidGuide(mo,d){
  if(d!=='Bitget')return `<div class="col g8"><span class="b1 semi">${T('Steps to link UID')}</span><p class="cap" style="margin:0">${T('Copy the UID from your exchange account and paste it above.')}</p></div>`;
  return `<div class="col g8"><span class="b1 semi">${T('Steps to link UID')}</span>
-  <p class="cap" style="margin:0">${T('Log in to the Bitget Website. Go to <b class="med">My Profile</b> icon in the top right corner. Tap/Click on the copy icon to copy your UID.')}</p>
+  <p class="cap" style="margin:0">${T('Log in to the Bitget Website. Go to My Profile icon in the top right corner. Tap/Click on the copy icon to copy your UID.')}</p>
   <div style="height:${mo?256:410}px;background:#eaeef4;overflow:hidden"><img src="${A('link-uid-guide-1.png')}" style="width:100%;height:100%;object-fit:cover"></div>
   ${mo?'':`<img src="${A('link-uid-guide-2.png')}" style="width:100%;aspect-ratio:1280/929;object-fit:cover">`}</div>`}
 
@@ -233,7 +235,9 @@ R.screen({id:'link.uid',group:'link',title:'CEX UID 입력 (기존)',route:'/uid
   {id:'empty',label:'빈 값 — Next 비활성',figma:{pc:'9105:196091',mo:'29051:100488'},note:'기존 테더맥스 UID 연동(REQ-712). 선택기·시트에서 CEX를 고르면 여기로(REQ-056 CEX = UID 경로). 거래소를 DEX로 바꾸면 입력값을 지우고 지갑 경로로(REQ-057). 기존 화면이라 국문 원문 없음 → 영문'},
   {id:'filled',label:'UID 입력 완료 — Next 활성 (게스트 조회 handoffcex 포함)',figma:{pc:'9287:185462',mo:'9105:188659'},note:'[기존 MAX-30] Link Exchange Flow — 값 입력(포커스 테두리) · Next 활성. 게스트 조회 <code>guest.result:handoffcex</code> → 로그인 후 같은 UID가 채워진 채 여기로(REQ-180 · REQ-107). Next 이후(캡차 → 결과)는 기존 CEX 흐름'},
  ],
- render(st){return uidLinkForm(st);}});
+ render(st){   // 목록판 표본 = Figma(Bitget 선택 · Bitget UID 안내, 9105:196091 · 29051:100488). 사이트 모드는 고른 거래소
+  if((window.SITEL&&!window.PT_EMBED)||selectedExchange)return uidLinkForm(st);
+  selectedExchange='Bitget';try{return uidLinkForm(st)}finally{selectedExchange=null}}});
 
 // ---------- FU-015 · FU-016 지갑 주소 입력 · 검증 · 안내 ----------
 // 웹: Figma L2 · L3 · Address validation(Empty · Preserve original case · Internal whitespace(=L4) · Partner rejected · Name instead of address · Zero address)
@@ -297,14 +301,6 @@ R.screen({id:'link.signup',group:'link',title:'가입 후 연동 복귀 (G-402) 
    if(S.vp==='mo')return renderInner('link.addr:empty');
    return C.overlay(BG,linkModal(body,`${C.btn(T('Next','다음'),{full:true,disabled:true})}${signUp('Lighter')}`));
   }
-  const step=(icon,t)=>`<div class="col" style="flex:1;min-width:0;align-items:center;gap:12px">${icon}<span class="b1 semi" style="text-align:center">${t}</span></div>`;
-  const arr=ic('arrow-forward','ic20');
-  const mo=S.vp==='mo';
-  const box=`<div style="background:#fff;border-radius:12px;box-shadow:var(--elev24);width:720px;max-width:100%;padding:${mo?24:32}px;display:flex;flex-direction:column;gap:28px">
-   <div class="row" style="gap:16px;align-items:flex-start"><p class="h5 grow" style="margin:0">${T('Start by signing up for Lighter?')}</p><button class="icon-btn" style="padding:0" data-go="${BG}">${ic('close')}</button></div>
-   <div class="row" style="background:var(--bg-accent);border-radius:16px;padding:24px 16px;gap:${mo?8:16}px">${step(C.dex('Lighter',32),T('Sign up for Lighter'))}${arr}${step(limg('ic-tethermax.svg',32),T('Return to TetherMax'))}${arr}${step(limg('ic-wallet.svg',32),T('Link your wallet','지갑을 연동하세요'))}</div>
-   ${C.btn(T('Sign up through our Lighter link'),{full:true,go:'link.signup:return'})}</div>`;
-  return C.overlay(BG,box,{center:true,clip:S.vp==='mo'?812:900});
  }});
 
 // ---------- FU-017 캡차 ----------
@@ -331,8 +327,8 @@ R.screen({id:'link.captcha',group:'link',title:'캡차',route:'/link (모달)',f
    if(mo)return `<div style="position:relative;height:812px;overflow:hidden">${renderInner('link.addr:valid')}${layer}</div>`;
    return C.overlay(BG,`${addrModal('',true)}${layer}`);
   }
-  const [t,m,b]=st==='retry'?['Verification expired','Complete a new puzzle to continue.','Retry verification']:['Verification could not load','Your wallet address has been kept.','Retry'];
-  const box=`<div class="alert err"><span class="ai">!</span><div class="ab"><b>${T(t)}</b>${T(m)}<div class="mt8">${C.btn(T(b),{v:'outlined',c:'black',size:'sm',go:st==='retry'?'link.captcha:normal':''})}</div></div></div>`;
+  // 퍼즐 실패·만료(retry)만 — 캡차 스크립트 로드 실패 상태는 두지 않음(결정 3차 보류 #1 · G-098)
+  const box=`<div class="alert err"><span class="ai">!</span><div class="ab"><b>${T('Verification expired')}</b>${T('Complete a new puzzle to continue.')}<div class="mt8">${C.btn(T('Retry verification'),{v:'outlined',c:'black',size:'sm',go:'link.captcha:normal'})}</div></div></div>`;
   if(mo)return moForm(T('Link Account','거래 계정 연동하기'),`<div class="sel" style="border-color:var(--input-border);padding:16px 12px">${C.dex('Lighter',24)}<span class="b1 grow">Lighter</span>${ic('arrow-drop-down')}</div>${C.field({label:T('Wallet address','지갑 주소'),value:ADDR})}${box}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:true})}${signUp('Lighter')}`);
   return C.overlay(BG,addrModal(box,false));
  }});

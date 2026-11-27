@@ -9,6 +9,8 @@ const W_EDGEX='0x884B2e7f90d6a158ce0b4f7d23e9a61c58a01a69';   // Figma 모바일
 const W_ASTER='0x91c4e2b73f90d6a158ce0b4f7d23e9a61c58a07b';   // Figma RK `Wallet address / 0x91c4…a07b` 원문
 const mo=()=>S.vp==='mo';
 const short=a=>a.slice(0,6)+'…'+a.slice(-4);
+// 축약 지갑 주소 — 모바일 탭 · PC 호버로 전체 주소 툴팁(공통 04-behave, 결정 12차 「축약 지갑 주소 전체 보기」)
+const addr=w=>`<span data-addr="${w}">${short(w)}</span>`;
 const LOGO={bitget:'inv-logo-bitget.png',okx:'inv-logo-okx.png',bybit:'inv-logo-bybit.png',binance:'link-cex-binance.png',bingx:'link-cex-bingx.png'};
 // 거래소 로고: DEX는 공통 에셋, CEX는 Figma에서 받은 inv-logo-*(없으면 연동 모듈 로고 → 글자 아바타)
 function logo(name,size=24){
@@ -70,7 +72,7 @@ function monthCard0(d){
  const line=(k,v,c)=>`<div class="row between"><span class="cap c2">${k}</span><span class="b2 semi tnum" style="color:${c}">${v} USDT</span></div>`;
  return `<div style="border:1px solid var(--divider);border-radius:8px;padding:16px" class="col">${head}${line('Received',r,'var(--blue)')}${line('Withdrawn',w,w==='0.00'?'var(--text-primary)':'var(--error)')}<hr class="divider" style="margin:4px 0"><div class="row between"><span class="cap c2">Net</span><span class="sub1 semi tnum">${n} USDT</span></div></div>${cap}`}
 function dayRow(r){
- const acct=r.w?`Wallet ${mo()?short(r.w):r.w}`:r.id;
+ const acct=r.w?`Wallet ${mo()?addr(r.w):r.w}`:r.id;
  const v=r.pending?'—':`${r.v} USDT`;
  return `<div class="row g12" style="border:1px solid var(--divider);border-radius:8px;padding:10px 12px;background:#fff">${logo(r.p,24)}<div class="col grow" style="gap:2px"><span class="b2 med" style="font-size:13px">${r.t}</span><span class="cap c2" style="word-break:break-all">${r.p} ${acct}</span></div><span class="b2 tnum" style="white-space:nowrap;font-size:13px;color:${r.muted||r.pending?'var(--text-disabled)':amtColor(r.v)}">${v}</span></div>`}
 function dayList(d,st){
@@ -84,13 +86,13 @@ function menu(items){return `<div style="background:#fff;border-radius:4px;box-s
 const mItem=(label,on,o={})=>`<div class="row between" style="padding:${o.h?'6px 16px 2px':'13px 16px'};${o.sel?'background:rgba(0,49,198,.08)':''}">${o.h?`<span class="cap c2 med">${label}</span>`:`<span class="row g8 b1">${o.logo||''}${label}</span>${o.box?chk(on):''}`}</div>`;
 function filters(st){
  const exLabel=st==='dexRange'?'DEX 전체':T('All Exchanges','모든 거래소');
- const acLabel=st==='oneEmpty'?`Lighter Wallet ${short(W_LIGHTER)}`:T('All Accounts','모든 거래 계정');
+ const acLabel=st==='oneEmpty'?`Lighter Wallet ${addr(W_LIGHTER)}`:T('All Accounts','모든 거래 계정');
  let ex=sel(exLabel,{focus:st==='dexRange'}),ac=sel(acLabel,{focus:st==='account'}),ty=sel(T('All Types','모든 캐시백 유형'),{focus:st==='types'&&!mo()});
  if(st==='dexRange')ex+=menu(EX_OPTS().map(([k,l,s])=>mItem(l,false,{h:k==='h',sel:s})).join(''));
  if(st==='account')ac+=menu([mItem(T('All Accounts','모든 거래 계정'),true,{box:1}),
   mItem('Bitget UID 528633991',false,{box:1,logo:logo('Bitget',20)}),mItem('Bitget UID 528622214',false,{box:1,logo:logo('Bitget',20)}),
   mItem('Bybit UID 135587874',false,{box:1,logo:logo('Bybit',20)}),mItem('OKX UID 534682053632420829',false,{box:1,logo:logo('OKX',20)}),
-  mItem(`Lighter Wallet ${short(W_LIGHTER)}`,false,{box:1,logo:logo('Lighter',20)})].join(''));
+  mItem(`<span>Lighter Wallet ${addr(W_LIGHTER)}</span>`,false,{box:1,logo:logo('Lighter',20)})].join(''));
  const types=()=>[mItem(T('All Types','모든 캐시백 유형'),!mo(),{box:1}),mItem(T('Exchange Cashback','캐시백'),mo(),{box:1}),mItem(T('Event Reward','이벤트 리워드'),mo(),{box:1}),mItem(T('Claim Amount','출금 금액'),false,{box:1})].join('');
  if(st==='types'&&!mo())ty+=menu(types());
  // Reset: Figma CS1 회색(비활성 모양) — 필터가 All이면 되돌릴 것이 없음
@@ -141,12 +143,15 @@ R.screen({id:'summary.main',group:'summary',title:'캐시백 요약',route:'/cas
 const RK_ROWS=[{p:'Bitget',id:'UID 7605865687'},{p:'Bybit',id:'UID 08547939171'},{p:'Lighter',w:W_LIGHTER}];
 const RK_ROWS_MO=[{p:'Bitget',id:'UID 7605865687'},{p:'Bybit',id:'UID 08547939171'},{p:'EdgeX',w:W_EDGEX}];
 const back=()=>`<img src="${A('ic-arrow-forward.svg')}" alt="" class="ic" style="transform:rotate(180deg);opacity:.56">`;
-function rkPanel(st){
- const rows=(mo()?RK_ROWS_MO:RK_ROWS).map((r,i)=>{const rank=st==='normal'?['1st','2nd','3rd'][i]:'–';
-  const id=r.w?`<span data-go="ranking.main:wallet" style="cursor:pointer">Wallet ${short(r.w)}</span>`:r.id;
+// 정적 주소 툴팁(상태 보기용) — 동작은 공통 04-behave(모바일 탭 · PC 호버), 모양은 같은 .ui-tip[data-addr-tip]
+const tipAt=w=>`<span style="position:relative;display:inline-block">${addr(w)}<span class="ui-tip" data-addr-tip style="position:absolute;left:0;top:calc(100% + 4px);z-index:5;opacity:1;transform:none;display:block">${w}</span></span>`;
+function rkPanel(st,o={}){
+ const f=o.f||'All';
+ const rows=(mo()?RK_ROWS_MO:RK_ROWS).filter(r=>f==='All'||(f==='DEX')===!!r.w).map((r,i)=>{const rank=st==='normal'?['1st','2nd','3rd'][i]:'–';
+  const id=r.w?`Wallet ${o.tip?tipAt(r.w):addr(r.w)}`:r.id;
   return `<div class="row g12" style="background:#fff;border:1px solid var(--divider);border-radius:8px;padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06)">${logo(r.p,32)}<div class="col grow" style="gap:0"><span class="b2 semi">${r.p}</span><span class="cap c2">${id}</span></div><span class="b2">${rank}</span></div>`}).join('');
  const body=st==='empty'?`<div class="b2 c2 center" style="padding:${mo()?200:240}px 0 0">There are currently no eligible accounts for ranking.</div>`
-  :`<div class="col center" style="gap:12px;align-items:center;margin-top:${mo()?24:4}px"><span style="background:var(--blue);color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:500">May 2026</span><span class="h6 bold" style="font-size:${mo()?20:18}px">My Cashback Ranking</span><span class="b2 c2" style="margin-top:-6px">Rankings are updated daily at 00:01</span></div><div class="col" style="gap:8px;margin-top:24px">${rows}</div><div class="col" style="gap:4px;margin-top:16px"><span class="cap c2">${T('Cashback under 0.01 USDT isn’t included in the rankings.','캐시백 0.01 USDT 미만은 순위에 포함되지 않습니다.')}</span><span class="cap c2">${T('Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback.','랭킹 리워드만으로는 출금할 수 없어요. 같은 계정의 캐시백과 1:1로 매칭돼요.')}</span></div>`;
+  :`<div class="col center" style="gap:12px;align-items:center;margin-top:${mo()?24:4}px"><span style="background:var(--blue);color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:500">May 2026</span><span class="h6 bold" style="font-size:${mo()?20:18}px">My Cashback Ranking</span><span class="b2 c2" style="margin-top:-6px">Rankings are updated daily at 00:01</span></div><div class="row" style="gap:8px;margin-top:24px">${['All','CEX','DEX'].map(k=>`<span class="chip ft${f===k?' on':''}" data-go="ranking.main:${k==='All'?'normal':k.toLowerCase()}">${k}</span>`).join('')}</div><div class="col" style="gap:8px;margin-top:24px">${rows}</div><div class="col" style="gap:4px;margin-top:16px"><span class="cap c2">${T('Cashback under 0.01 USDT isn’t included in the rankings.','캐시백 0.01 USDT 미만은 순위에 포함되지 않습니다.')}</span><span class="cap c2">${T('Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback.','랭킹 리워드만으로는 출금할 수 없어요. 같은 계정의 캐시백과 1:1로 매칭돼요.')}</span></div>`;
  return `<div style="background:var(--bg-accent);${mo()?'min-height:812px':'width:375px;height:100%;min-height:900px'};padding:${mo()?'56px 16px':'20px 16px'};box-shadow:var(--elev8)"><button class="icon-btn" data-go="benefits.list" style="padding:4px">${back()}</button>${body}</div>`}
 function rkOverlay(inner){
  if(mo())return inner;
@@ -156,7 +161,7 @@ function rkOverlay(inner){
 function rkBoard(st){
  const dex=st==='dex';
  const all=[{p:'Bitget',id:'UID 1210910640',rank:'2nd place',msg:'win'},{p:'EdgeX',w:W_EDGEX,rank:'Top 100%',msg:'more'},{p:'OKX',id:'UID 617755618866586639',rank:'-'},{p:'Aster',w:W_ASTER,rank:'-'}];
- const rows=(dex?all.filter(r=>r.w):all).map(r=>{const id=r.w?`Wallet ${short(r.w)}`:r.id;
+ const rows=(dex?all.filter(r=>r.w):all).map(r=>{const id=r.w?`Wallet ${addr(r.w)}`:r.id;
   const msg=r.msg==='win'?`<div class="row" style="gap:4px;padding-left:36px"><img src="${A('sum-ic-trophy.svg')}" style="width:16px;height:16px" alt=""><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--success)">You're in the reward zone.</span></div>`
    :r.msg==='more'?`<div style="padding-left:36px;font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)">Trade more to get a reward.</div>`:'';
   return `<div class="col" style="gap:4px"><div class="row" style="gap:8px">${logo(r.p,28)}<div class="col grow" style="gap:0;min-width:0;font-size:12px"><span style="font-weight:500;line-height:1.4">${r.p}</span><span style="line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)">${id}</span></div><span style="font-size:12px;line-height:20px;letter-spacing:.14px;font-weight:500">${r.rank}</span></div>${msg}</div>`}).join('');
@@ -171,12 +176,15 @@ R.screen({id:'ranking.main',group:'summary',title:'캐시백 랭킹',route:'/ben
   {id:'normal',label:'순위 매겨짐 (RK2)',figma:{pc:'28960:127207'},note:'V2.2 rk/RANK#normal(사이드 패널 부분) · 행에 금액 없음(REQ-383) · CEX는 UID, DEX는 Wallet 접두(Figma 메모)'},
   {id:'unranked',label:'순위 미집계 – (RK1)',figma:{pc:'28960:127201',mo:'29065:6980'},note:'Figma에만 있는 상태 — Figma 메모 「순위 미집계는 –로 표시」, REQ-383 순위 밖 `–`'},
   {id:'empty',label:'자격 계정 없음 (RK3)',figma:{pc:'28960:127213',mo:'29065:4998'},note:'V2.2 rk/RANK#empty · REQ-383'},
-  {id:'wallet',label:'지갑 주소 전체 보기 — 툴팁',figma:{pc:'28984:126296'},note:'축약 지갑 주소를 누르면(모바일) · 올리면(PC) 전체 주소 툴팁(어두운 툴팁 — 결정 2026-11-27, 대화상자 아님)'},
+  {id:'cex',label:'거래소 유형 CEX',figma:{mo:'29192:123337'},note:'거래소 유형 칩(Figma 29192:123527) — UID 행만'},
+  {id:'dex',label:'거래소 유형 DEX',figma:{mo:'29192:123432'},note:'거래소 유형 칩 — 지갑 행만'},
+  {id:'wallet',label:'지갑 주소 전체 보기 — 툴팁',figma:{mo:'29415:138026'},note:'축약 지갑 주소를 누르면(모바일) · 올리면(PC) 전체 주소 툴팁(기존 어두운 툴팁, 꼬리 없음 — 결정 12차 「축약 지갑 주소 전체 보기」). 카드형 <code>Wallet address</code> 대화상자(28984:126296)는 쓰지 않음'},
   {id:'board',label:'월간 순위 CEX+DEX 한 목록 (혜택 랭킹 카드)',figma:{pc:'26651:60616',mo:'25849:1340946'},note:'[기존 MAX-468] MAXOP-805 랭킹 카드. V2.2 rk/RANK#normal(순위표 부분)'},
-  {id:'dex',label:'순위표 DEX 칩',note:'V2.2 rk/RANK#dex — 칩 필터 디자인 없음. 카드는 [기존 MAX-468] MAXOP-805 재사용'},
+  {id:'boardDex',label:'순위표 DEX 칩',note:'V2.2 rk/RANK#dex — 칩 필터 디자인 없음. 카드는 [기존 MAX-468] MAXOP-805 재사용'},
  ],
  render(st){
-  if(st==='board'||st==='dex')return rkBoard(st);
-  if(st==='wallet')return rkOverlay(rkPanel('normal'));
+  if(st==='board'||st==='boardDex')return rkBoard(st==='boardDex'?'dex':st);
+  if(st==='wallet')return rkOverlay(rkPanel('normal',{tip:1}));
+  if(st==='cex'||st==='dex')return rkOverlay(rkPanel('unranked',{f:st.toUpperCase()}));
   return rkOverlay(rkPanel(st));
  }});

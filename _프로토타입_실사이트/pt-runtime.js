@@ -841,7 +841,7 @@
     popAcc = a; var dex = a.type === 'DEX';
     if (a.st === 'fail') return centerPopup(dex ? 'Wallet Linking Unsuccessful' : 'UID Linking Unsuccessful', a.reason || (dex ? '{Reason provided by backend}' : 'UID is not found in the tetherMax database. Please contact customer service for assistance.'), [[dex ? 'Remove Wallet' : 'Remove UID', 'remove'], [dex ? 'Link Wallet' : 'UID Link', 'relink']]);
     if (a.st === 'ownfail') return centerPopup('Ownership Verification Unsuccessful', 'We were unable to verify your wallet ownership. Please review your submission and try again.', [['OK', 'close']]);
-    if (a.st === 'reclaimfail') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return post({ dexLink: { mode: 'own', r: 'rejected' } }) }
+    if (a.st === 'reclaimfail') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return post({ dexLink: { mode: 'own', r: 'reclaimRejected' } }) }   // O16 — 심사 사유 · Remove Wallet · Apply for Ownership
     if (a.st === 'unlinked') return dex ? centerPopup('Verify Ownership to Reclaim This Wallet', 'This wallet address was unlinked after another user verified ownership. If it belongs to you, submit a new claim.', [['Submit Wallet Ownership', 'reclaim'], ['Remove Wallet', 'remove']])
       : centerPopup('Verify Ownership to Reclaim This UID', 'This UID was unlinked after another user verified ownership. If it belongs to you, submit a new claim.', [['Submit UID Ownership', 'reclaim'], ['Remove UID', 'remove']]);   // O15(REQ-729)
   }
@@ -851,7 +851,7 @@
     var p = document.createElement('div'); p.id = 'pt-addr'; p.setAttribute('data-id', id); p.setAttribute('role', 'tooltip'); var r = el.getBoundingClientRect();
     p.style.cssText = 'position:fixed;z-index:2147483000;width:200px;box-sizing:border-box;background:rgba(97,97,97,.9);color:#fff;font:500 12px/1.4 inherit;text-align:center;padding:4px 8px;border-radius:4px;word-break:break-all;pointer-events:none';
     p.textContent = id; document.body.appendChild(p);
-    p.style.left = Math.max(8, Math.min(r.left + r.width / 2 - p.offsetWidth / 2, innerWidth - p.offsetWidth - 8)) + 'px'; p.style.top = (r.bottom + 6) + 'px';
+    p.style.left = Math.max(8, Math.min(r.left, innerWidth - p.offsetWidth - 8)) + 'px'; p.style.top = (r.bottom + 4) + 'px';
     if (toggle) setTimeout(function () { document.addEventListener('click', function h() { p.remove(); document.removeEventListener('click', h, true) }, true) }, 0);
   }
 

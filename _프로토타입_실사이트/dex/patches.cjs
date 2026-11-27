@@ -10,7 +10,7 @@ const PATCH = [
   ['70-hub.js', `<span class="sub2 c2">Monthly trading volume</span><span class="h5">\${usd0(HB_VOL)}</span>`,
     `<span class="sub2 c2">Monthly trading volume</span><span class="h5" data-hub-vol aria-live="polite">\${usd0(HB_VOL)}</span>`],   // 값 = 표시 전용(슬라이더로만 조정, 🔴 #26 권장 A)
   ['70-hub.js', "${rHead('CASHBACK ESTIMATE')}${rule()}${seg(route)}${inputs}${slider}${rule()}${body}${member}${o.rateFail?'':learn}",
-    "${rHead('CASHBACK ESTIMATE')}${rule()}${seg(route)}${inputs}${slider}${rule()}<div data-calc-body class=\"col\" style=\"gap:24px\">${body}${member}</div>${o.rateFail?'':learn}"],
+    "${rHead('CASHBACK ESTIMATE')}${rule()}${seg(route)}${inputs}${slider}${rule()}<div data-calc-body class=\"col\" style=\"gap:${mo()?20:24}px\">${body}${member}</div>${o.rateFail?'':learn}"],
   ['70-hub.js', `<div class="row" style="gap:10px;border:1px solid var(--divider);border-radius:12px;padding:10px 12px;background:#fff;cursor:pointer">`,
     `<div class="row" data-hub-partner style="gap:10px;border:1px solid var(--divider);border-radius:12px;padding:10px 12px;background:#fff;cursor:pointer">`],
   ['70-hub.js', "const pid={aster:'aster',lighterAccruing:'lighter'}[c]||'edgex';",
@@ -23,8 +23,8 @@ const PATCH = [
   ['70-hub.js', `data-go="hub.main:\${s}">\${l}</span>`, `data-hub-tab="\${k}">\${l}</span>`],
   ['70-hub.js', `data-go="hub.main:\${s}"><img src="\${A(i)}" alt="" style="width:20px;height:20px"></span>`, `data-hub-view="\${k}"><img src="\${A(i)}" alt="" style="width:20px;height:20px"></span>`],
   ['70-hub.js', `<div class="row grow" style="border:\${es?`, `<div class="row grow" data-hub-sbox style="border:\${es?`],
-  ['70-hub.js', `<span class="b2 grow \${es?'':'c3'}" style="line-height:20px">\${es?'Hyperliquid':ph}</span>\${es?\`<span title="Clear" style="cursor:pointer;display:inline-flex">\${ic('close')}</span>\`:''}`,
-    `\${window.SITEH?\`<input data-hub-search class="b2 grow hub-search" placeholder="\${ph}" aria-label="\${ph}"><span data-hub-clear title="Clear" style="cursor:pointer;display:none">\${ic('close')}</span>\`:\`<span class="b2 grow \${es?'':'c3'}" style="line-height:20px">\${es?'Hyperliquid':ph}</span>\${es?\`<span title="Clear" style="cursor:pointer;display:inline-flex">\${ic('close')}</span>\`:''}\`}`],
+  ['70-hub.js', `<span class="b2 grow \${es?'':'c3'}" style="line-height:20px">\${es?'Crypto.com':ph}</span>\${es?\`<span title="Clear" style="cursor:pointer;display:inline-flex">\${ic('close')}</span>\`:''}`,
+    `\${window.SITEH?\`<input data-hub-search class="b2 grow hub-search" placeholder="\${ph}" aria-label="\${ph}"><span data-hub-clear title="Clear" style="cursor:pointer;display:none">\${ic('close')}</span>\`:\`<span class="b2 grow \${es?'':'c3'}" style="line-height:20px">\${es?'Crypto.com':ph}</span>\${es?\`<span title="Clear" style="cursor:pointer;display:inline-flex">\${ic('close')}</span>\`:''}\`}`],
   ['70-hub.js', "<tbody>${list.map((p,i)=>`<tr>", "<tbody>${list.map((p,i)=>`<tr data-hub-row=\"${esc(p.name)}\">"],
   ['70-hub.js', "const card=p=>`<div class=\"col\" data-m-lift style=\"background:#fff;", "const card=p=>`<div class=\"col\" data-m-lift data-hub-row=\"${esc(p.name)}\" style=\"background:#fff;"],
   ['70-hub.js', "${list.map(p=>`<div class=\"col\" style=\"${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px\">", "${list.map(p=>`<div class=\"col\" data-hub-row=\"${esc(p.name)}\" style=\"${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px\">"],
@@ -62,10 +62,6 @@ const PATCH = [
   ['80-dex.js', "<span class=\"b2\">${o.body}</span><span style=\"font-size:13px;color:var(--blue)\">Read more</span>", "<span class=\"b2 rv-body\">${o.body}</span><span data-rv-more style=\"cursor:pointer;font-size:13px;color:var(--blue)\">Read more</span>"],
   // ---- 2회차: 지갑·UID 상세(기존 디자인 · Earning Timeline 3단계)
   ['40-home.js', "const mark=(name,s=32)=>CEXLOGO[name]?", "const mark=(name,s=32)=>window.SITELOGO&&SITELOGO[name]&&!['Lighter','ApeX','EdgeX','Aster'].includes(name)?`<img src=\"${SITELOGO[name]}\" style=\"width:${s}px;height:${s}px;border-radius:50%;flex:none;object-fit:cover\" alt=\"${name}\">`:CEXLOGO[name]?"],
-  ['40-home.js', "const [A0,B0]=ctx.state.ab;const pending=st==='pending';", "const SW=window.SITEW;const [A0,B0]=SW?[SW.a,SW.b]:ctx.state.ab;const pending=SW?SW.st==='pend':st==='pending';"],
-  ['40-home.js', "${C.dex('Lighter',30)}<div class=\"col\" style=\"gap:0\"><span class=\"b2 semi\">Lighter</span><span class=\"row\" style=\"gap:4px\"><span data-addr=\"${WAL.lighter}\" style=\"font-size:12px;line-height:12px;color:var(--text-secondary)\">${short(WAL.lighter)}</span><button class=\"icon-btn\" style=\"padding:2px\">",
-    "${SW?mark(SW.ex,30):C.dex('Lighter',30)}<div class=\"col\" style=\"gap:0\"><span class=\"b2 semi\">${SW?SW.ex:'Lighter'}</span><span class=\"row\" style=\"gap:4px\"><span ${SW&&SW.type==='CEX'?'':`data-addr=\"${SW?SW.id:WAL.lighter}\" `}style=\"font-size:12px;line-height:12px;color:var(--text-secondary)\">${SW?(SW.type==='CEX'?'UID '+SW.id:short(SW.id)):short(WAL.lighter)}</span><button class=\"icon-btn\" data-copy=\"${SW?SW.id:WAL.lighter}\" style=\"padding:2px\">"],
-  ['40-home.js', "<span class=\"b2 semi\">How was Lighter?</span>", "<span class=\"b2 semi\">How was ${(window.SITEW||{}).ex||'Lighter'}?</span>"],
   // ---- 2회차: 캐시백 요약(실제 필터 · 월 이동 · 날짜 선택)
   ['100-summary.js', "function sumData(st){", "function sumData(st){\n if(window.SITES)return SITES.data();"],
   ['100-summary.js', "function filters(st){", "function filters(st){\n if(window.SITES)return SITES.filters();"],
@@ -99,7 +95,7 @@ const EXPORT = {
   '80-dex.js': ";window.DEXX={DX,dtDrawer,ovPage,dtPage,offerBox,dtStructure,dtGuide,calc};",
   '40-home.js': ";window.HOMEX={seeAllModal,ST,hChip,n2,short,mark,issueDialog,failDialog};",
   '100-summary.js': ";window.SUMX={sel,menu,mItem,chk,logo,short,TY};",
-  '60-own.js': ";window.OWNX={muiDialog,mBtn,oAlert,setOwn:(d,s)=>{OWN_DEX=d;OWN_SHORT=s}};",
+  '60-own.js': ";window.OWNX={muiDialog,mBtn,oAlert,setOwn:(d,s,f)=>{OWN_DEX=d;OWN_SHORT=s;OWN_FULL=f||s}};",
   '50-link.js': ";window.LINKX={linkModal,moForm,splash,webExchangeField,moSheet,uidLinkForm,guide,ADDR_KO,DEXES,WEB_CEX,get addr(){return ADDR},setAddr:v=>{ADDR=v},setSel:v=>{selectedExchange=v}};",
 };
 

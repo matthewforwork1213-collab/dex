@@ -231,7 +231,7 @@ function dtHero(d,member,maker){
  const elig=d.tiers?T('Cashback applies to Premium and Plus accounts. Standard accounts pay 0% fees, so there is no cashback on them.','캐시백은 Premium과 Plus 계정에 적용됩니다. Standard 계정은 캐시백이 쌓이지 않아요.')
   :T(`Cashback applies to eligible trading fees on ${d.name}.`,`${d.name}에서 발생한 대상 거래 수수료에 캐시백이 적용돼요.`);
  const venue=`<div class="col" style="flex:1 1 0;min-width:0;gap:20px">
-  <div class="col" style="gap:8px"><div class="row" style="gap:8px">${C.dex(d.name,32)}<span class="h5">${d.name}</span></div><p class="b2" style="margin:0">${esc(d.desc)}</p></div>
+  <div class="col" style="gap:8px"><div class="row" style="gap:8px;align-items:center">${C.dex(d.name,32)}<span class="h5">${d.name}</span>${chip('DEX')}</div><p class="b2" style="margin:0">${esc(d.desc)}</p></div>
   <div class="col" style="gap:16px"><div class="row" style="gap:8px;align-items:flex-start"><span class="b2 semi c2" style="width:73px;flex:none">Perpetuals</span><div class="row wrap" style="gap:8px;max-width:378px">${d.chips.map(x=>chip(x)).join('')}</div></div>
    ${d.tiers?`<div class="col" style="gap:4px">${['Trade crypto, RWAs and pre IPO perps onchain','Earn Lighter points while you trade','Leverage up to 50x on selected markets','0% maker and taker fees on Standard accounts'].map(x=>`<span class="b2">✓ ${x}</span>`).join('')}</div>`:''}
    <div class="row" style="gap:8px"><span class="b2 semi c2" style="width:73px;flex:none">Deposit</span>${d.dep.map(x=>chip(x,1)).join('')}</div></div>
@@ -242,7 +242,8 @@ function dtHero(d,member,maker){
 function dtTabs(c){
  const n=c==='reviewsEmpty'?0:23;
  const tabs=['Key Features','Structure','Guide','Policy',`Reviews (${n})`];
- return `<div data-dt-tabs style="background:var(--bg-accent);${mo()?'overflow-x:auto':''}"><div style="max-width:1056px;margin:0 auto;display:flex;border-bottom:1px solid var(--divider);${mo()?'padding:0 16px':''}">${tabs.map((t,i)=>`<span style="padding:9px 16px;font-size:14px;font-weight:500;white-space:nowrap;${i===0?'color:var(--blue);border-bottom:2px solid var(--blue)':'color:var(--text-secondary);border-bottom:2px solid transparent'}">${t}</span>`).join('')}</div></div>`;
+ // Figma 「tab bar (sticky)」(28960:127486): 1px 가로줄은 바 전체 폭(1440) 아래, 탭(높이 42 = 밑줄 2 포함)은 1056 안에서 8px 간격
+ return `<div data-dt-tabs style="background:var(--bg-accent);border-bottom:1px solid var(--divider);${mo()?'overflow-x:auto':''}"><div style="max-width:1056px;margin:0 auto;display:flex;gap:8px;${mo()?'padding:0 16px':''}">${tabs.map((t,i)=>`<span style="padding:9px 16px;font-size:14px;line-height:22px;font-weight:500;white-space:nowrap;${i===0?'color:var(--blue);border-bottom:2px solid var(--blue)':'color:var(--text-secondary);border-bottom:2px solid transparent'}">${t}</span>`).join('')}</div></div>`;
 }
 function dtWhy(d){
  const card=(t,i)=>`<div class="row" style="flex:1 1 0;min-width:0;gap:12px;border:1px solid var(--divider);border-radius:8px;padding:16px;background:#fff"><img src="${A('dex-dt-why-'+(i+1)+'.png')}" style="width:92px;height:92px;border-radius:16px;flex:none" alt=""><span class="b1 semi">${esc(t)}</span></div>`;
@@ -290,7 +291,7 @@ function guideData(d){
  const rail=L?['Create a Web3 wallet','Deposit USDC into your wallet','Join Lighter and link your wallet','Deposit USDC into Lighter','Trade and get rewarded']
   :['Create a Web3 wallet',`Deposit ${cur} into your wallet`,`Join ${d.name} and link your wallet`,`Deposit ${cur} into ${d.name}`,'Trade and get rewarded'];
  // G-270 · G-437: 단계마다 Step N Title 하나(왼쪽 목록 = 오른쪽 패널 제목) + Step N Description(경고·안전 메시지 포함)
- const bodies=[(L?'Install a self-custody wallet, or sign up on Lighter with email to get a wallet made for you.':'Install a self-custody wallet such as MetaMask and save your recovery phrase.')+' Keep your 12-word recovery phrase private. TetherMax never asks for a private key, recovery phrase or wallet signature.',
+ const bodies=[(L?'Install a self-custody wallet, or sign up on Lighter with email to get a wallet made for you.':'Install a self-custody wallet such as MetaMask.')+' Keep your 12-word recovery phrase private. TetherMax never asks for a private key, recovery phrase or wallet signature.',
   'Check the receiving network before sending. Sending funds on the wrong network can cause permanent loss.',
   L?'Open Lighter through the TetherMax link and log in. Then copy your wallet address from Lighter and paste it in TetherMax. TetherMax never asks you to connect a wallet. After you sign up, confirm the TetherMax referral code on Lighter’s referral page. Cashback applies only to Plus and Premium accounts. Standard accounts pay no fees.'
    :`After you sign up, confirm the TetherMax referral code on ${d.name}’s referral page. Copy your public address from ${d.name} and paste it on TetherMax.`,
@@ -411,7 +412,7 @@ R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',rout
   {id:'aster',label:'Aster',figma:{pc:'28960:127627',mo:'28960:131017'},note:'V2.2 exd/DETAIL#aster · Figma D5'},
   {id:'apex',label:'ApeX',figma:{pc:'28960:127633',mo:'28960:131023'},note:'V2.2 exd/DETAIL#apex · Figma D6'},
   {id:'lighter',label:'Lighter — Premium/Plus (온보딩 후 — 보류)',figma:{pc:'28960:127443',mo:'28960:130990'},note:'V2.2 exd/DETAIL#lighter · Figma D1 · 연동 모달 배경으로도 쓰임'},
-  {id:'drawer',label:'How this works 드로어 (REQ-344)',figma:{pc:'22544:808136',mo:'22988:114502'},note:'[기존 MAX-1216] S21 How this works modal · 컴포넌트 Modal / How this works / mobile 343(22985:103042) 값 그대로 · 상태 정의 S5_12(29002:128605) · V2.2 exd/DETAIL#drawer(드로어 → 기존 제품 모달로 바꿈)'},
+  {id:'drawer',label:'How this works 드로어 (REQ-344)',figma:null,note:'디자인 없음 — [기존 MAX-1216] S21(22544:808136 · 모바일 22988:114502)은 CEX 상세 전체 페이지로 `How this works` 진입 링크만 있고 열린 모습이 없음. 내용은 V2.2 exd/DETAIL#drawer · 상태 정의 S5_12(29002:128605)'},
   {id:'step2',label:'단계 가이드 Step 2 (Lighter)',figma:{pc:'29386:137364'},note:'Figma CT-28 「Step 2 선택」 — 본문은 DEX(revision) `DEX guide / Step 2 of 5`(28981:129056) 원문(8차 결정)'},
   {id:'step3',label:'단계 가이드 Step 3 (Lighter)',figma:{pc:'28960:127444',mo:'28960:130999'},note:'V2.2 exd/DETAIL#step3 · Figma D2'},
   {id:'faq2',label:'FAQ 두 구역 펼침 — Withdrawals & Account Management',figma:{pc:'29367:138679'},note:'Figma CT-29 ② — 첫 구역과 `Withdrawals & Account Management` 동시 펼침. 질문·답변은 운영자 입력 예시(8차 결정)'},

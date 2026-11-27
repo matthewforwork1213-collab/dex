@@ -191,7 +191,11 @@
 | GNB 드롭다운 | DEX 앱 GNB | 클릭 펼침·유지(위 「GNB 드롭다운」 블록 그대로) + 열림 200ms · 닫힘 190ms 전환 |
 | 토스트 | 전 화면 | 실사이트 스낵바: PC 아래 24px 가운데 · 모바일 아래 16px |
 
-**캐시백 계산기** — 셸 `/en/payback`을 DEX 앱 `#/payback`으로 보낸다(DEXR 한 줄). 실서비스 6단계(소개 → 거래소 선택 → 거래 프로필 → 로딩 1.9초 → What You're Missing Out On(`#/payback?step=result`) → Summary) · 문구 · 기본값(10x · 1,000 USDT · Taker 100%) · 계산식(잔고 × 레버리지 × 월 거래 횟수 × Taker/Maker 수수료 × 캐시백률)을 라이브에서 역산해 그대로 구현했다. DEX 4곳 타일 · DEX 결과 `Did you know?` 숨김 · DEX 각주 · 전 플랫폼 `Daily`는 정책 B-19. `Start {exchange} Cashback`은 DEX 공식 사이트 새 탭(레퍼럴 링크는 어드민 입력값), CEX는 토스트.
+**캐시백 계산기** — 셸 `/en/payback`을 DEX 앱 `#/payback`으로 보낸다(DEXR 한 줄). 실서비스 6단계(소개 → 거래소 선택 → 거래 프로필 → 로딩 1.9초 → What You're Missing Out On(`#/payback?step=result`) → Summary) · 문구 · 기본값(10x · 1,000 USDT · Taker 100%) · 계산식(잔고 × 레버리지 × 월 거래 횟수 × Taker/Maker 수수료 × 캐시백률)을 라이브에서 역산해 그대로 구현했다. DEX 4곳 타일 · DEX 결과 `Did you know?` 숨김 · DEX 각주 · 전 플랫폼 `Daily`는 정책 B-19. `Start {exchange} Cashback`은 그 거래소 상세로 이동(DEX = `#/dex/{slug}`, CEX = `/en/exchangeDetail/{slug}-referral`, 결정 12차).
+
+**허브 목적지(결정 12차)** — 계산기 카드 `Learn More` = 그 파트너 상세(Brokers = 브로커 상세). 비교표 `Join {partner}`(웹 표·카드 뷰 · 모바일 카드 끝 전폭 버튼, 정책 B-5-8) = CEX·DEX는 레퍼럴 가입 새 탭, 브로커는 브로커 상세(현재 탭). 라우트 Brokers 행 = Brokers 페이지(`/brokers`). 목록판에서는 브로커 화면이 목록판 화면(`brokers.*`)으로 열린다.
+
+**넓은 화면 배치** — 허브 히어로: 배경 전체 폭, 헤드라인 왼쪽 120px, 영수증 카드 오른쪽 120px(Figma 1440 오른쪽 여백), 3D 배지 묶음은 영수증 왼쪽에 붙어 함께 오른쪽 정렬(1440보다 좁으면 Figma 1440 배치). 히어로 아래 구역(라우트 · 비교표 · 이유 카드)은 실사이트 규칙대로 최대 1200px 가운데. DEX 상세 탭 바의 1px 가로줄은 바 전체 폭(Figma 28960:127486), 탭은 높이 42 · 간격 8.
 
 **검증** — 자동 테스트(Playwright, PC 1440 · 모바일 390 × 게스트 · 회원 + See All · 소유권 · 셸 경로) 248개 항목 전부 통과, 페이지 오류 0. 전환 시간은 매 프레임 샘플링으로 기준표 값과 비교.
 

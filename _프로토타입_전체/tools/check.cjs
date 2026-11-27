@@ -19,7 +19,8 @@ for(const sc of R.screens){if(!sc.id.startsWith(prefix))continue;
   for(const el of fr.querySelectorAll('[data-go]')){const g=el.getAttribute('data-go');if(g&&!/^(cexd|brkd|back|@)/.test(g)&&!R.byId[g.split(':')[0]])missing.add(g.split(':')[0])}
   const vis=Array.from(fr.querySelectorAll('*')).filter(e=>!e.closest('.note')&&e.children.length===0).map(e=>e.textContent).join(' ');
   // 예외: 소유권 Step 1 확정 문구(REQ-725) — DEX 사이트의 지갑 연결 끊기를 뜻하며 테더맥스 연동 해제와 다름
-  for(const re of ban)if(re.test(vis.replace(/\/payback/g,'').replace(/disconnect your wallet/gi,'')))errs.push(`${sc.id}:${st.id} ${vp}/${lang} 금지어 ${re}`);
+  // 예외: Brokers 페이지(brokers.*)는 실서비스·Figma 원문 유지(결정 12차 「Brokers 페이지」) — `Rebates` 등 기존 문구라 rebate 검사 제외
+  for(const re of ban)if(!(String(re)==='/rebate/i'&&sc.id.startsWith('brokers.'))&&re.test(vis.replace(/\/payback/g,'').replace(/disconnect your wallet/gi,'')))errs.push(`${sc.id}:${st.id} ${vp}/${lang} 금지어 ${re}`);
  }}
 console.log(`렌더 ${n}건 · 화면 ${R.screens.length} · 오류 ${errs.length}`);
 errs.slice(0,80).forEach(e=>console.log(' -',e));

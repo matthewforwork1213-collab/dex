@@ -156,6 +156,9 @@ function go(key,o={}){if(!key)return;
  if(key==='@authdone'){const from=S.screen,st=S.state;S.auth=from==='auth.signup'?'s3':'s4';save();const k=S.after||(st==='guest'?'guest.result:handoff':S.auth==='s3'?'home.main:s3':'home.main');S.after=null;return go(k,{noPush:true})}
  if(window.PT_EMBED)PT_EMBED.restore();
  if(key.startsWith('back:')){const p=HIST.pop();return go(p||key.slice(5),{noPush:true})}
+ // 브로커 상세·Brokers 페이지는 프로토타입 안 화면(155-brokers.js — 결정 12차 Brokers 페이지 유지 · 허브 Join {broker} = 브로커 상세 현재 탭)
+ if(key.startsWith('brkd:')&&R.byId['brokers.detail']){const b=key.slice(5);return go('brokers.detail:'+({rs:'rsFinance','rs-finance':'rsFinance'}[b]||b),o)}
+ if(/^brokers\.list(:|$)/.test(key)&&R.byId['brokers.main'])return go('brokers.main',o);
  if(/^(cexd|brkd):/.test(key)){const [k,id]=key.split(':');const CS={blockfin:'blofin',biofin:'blofin',woox:'woo-x-pro'},BS={rs:'rs-finance'};window.open('https://tethermax.io/en/'+(k==='cexd'?'exchangeDetail/'+(CS[id]||id)+'-referral':'brokers/'+(BS[id]||id)),'_blank','noopener');window.PT_LAST_OPEN=key;return}
  if(!o.noPush&&S.screen)HIST.push(S.screen+(S.state?':'+S.state:''));if(HIST.length>50)HIST.shift();
  const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}document.body.classList.remove('pt-side-open');S.screen=id;S.state=st||(AUTH_STATE[id]?AUTH_STATE[id][S.auth]:null);   // 상태를 안 정하면 지금 로그인 상태의 화면

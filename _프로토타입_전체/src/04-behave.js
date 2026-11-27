@@ -51,19 +51,20 @@ window.ptSupport = support;
 const SHORT_RE = /^0x[0-9a-fA-F]{4}…[0-9a-fA-F]{4}$/;
 function fullOf(el) {
   if (el.dataset && el.dataset.addr) return el.dataset.addr;
-  const t = txt(el).replace(/^(Wallet|지갑)s+/, ''); if (!SHORT_RE.test(t)) return null;
+  const t = txt(el).replace(/^(Wallet|지갑)\s+/, ''); if (!SHORT_RE.test(t)) return null;
   const [a, b] = t.toLowerCase().split('…'); return (window.PT_ADDRS || []).find(x => x.toLowerCase().startsWith(a) && x.toLowerCase().endsWith(b)) || null;
 }
-function addrEl(t) { if (!t.closest || t.closest('[data-go],[data-see-all],[data-dex-row],.site-hoverrow,[class*="__LinkedUidRow"]')) return null;   // 행 클릭 = 상세(툴팁 없음)
+function addrEl(t) { if (!t.closest || t.closest('[data-go],[data-see-all],[data-no-addr-tip],[data-dex-row],.site-hoverrow,[class*="__LinkedUidRow"]')) return null;   // 행 클릭 = 상세(툴팁 없음)
   let e = t.closest('[data-addr]'); if (e) return e; e = t; for (let k = 0; e && k < 2; k++, e = e.parentElement) { if (e.children.length <= 1 && fullOf(e)) return e } return null }
 const isMo = () => document.body.classList.contains('pt-mo') || document.body.classList.contains('vp-mo') || window.innerWidth <= 1024;
 function addrTip(el, toggle) {
   const old = document.querySelector('.ui-tip[data-addr-tip]'); if (old) { const same = old._for === el; old.remove(); if (same && toggle) return }
   const full = fullOf(el); if (!full) return;
   const t = document.createElement('div'); t.className = 'ui-tip'; t.setAttribute('data-addr-tip', ''); t.setAttribute('role', 'tooltip'); t._for = el;
-  t.style.cssText = 'position:fixed;z-index:3002;opacity:1';
+  t.style.cssText = 'position:fixed;z-index:3002';
   t.textContent = full; document.body.appendChild(t);
-  const r = el.getBoundingClientRect(); t.style.left = Math.max(8, Math.min(r.left + r.width / 2 - t.offsetWidth / 2, innerWidth - t.offsetWidth - 8)) + 'px'; t.style.top = (r.bottom + 6) + 'px';
+  const r = el.getBoundingClientRect(); t.style.left = Math.max(8, Math.min(r.left, innerWidth - t.offsetWidth - 8)) + 'px'; t.style.top = (r.bottom + 4) + 'px';   // 축약 주소 바로 아래, 주소 시작 위치(Figma 29484:181385 등)
+  t.style.transformOrigin = 'left top'; void t.offsetWidth; t.style.opacity = 1; t.style.transform = 'none';   // 기존 툴팁 등장(03-motion .ui-tip): 75% → 100% · 페이드
 }
 const tipOff = () => { const tip = document.querySelector('.ui-tip[data-addr-tip]'); if (tip) tip.remove() };
 document.addEventListener('mouseover', e => { if (isMo()) return; const el = e.target && e.target.closest ? addrEl(e.target) : null; if (el) addrTip(el, false); else if (document.querySelector('.ui-tip[data-addr-tip]') && !(e.target.closest && e.target.closest('[data-addr-tip]'))) tipOff() });
