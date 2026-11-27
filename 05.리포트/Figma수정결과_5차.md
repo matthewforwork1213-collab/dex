@@ -8,7 +8,7 @@
 
 | 구분 | 수 | 내용 |
 |---|---|---|
-| 처리한 항목 | **18** | 10차 결정 홈 행 상태 1(기존 디자인으로 다시 그림 + 칩 정리 + 0원 안내 숨김) · 우선 1 CEX UID 상세 1 · 결정 위반 4 · 우선 2 상위 4 · 추가 결정(0원 안내 없음) 1 · 기존 노드·원문 조사 2(배너·모달 원본 · 행 상태 표시 방식) · 반영 지연 숨김 1(요약 · 허브 H6 · 홈 · 지갑 상세 · 메모) · 처리 중 행 기존 디자인 1 · Cashback Basics 소제목 1 · `DEX data pending`·맥스보드 지연 숨김 1 |
+| 처리한 항목 | **20** | 10차 결정 홈 행 상태 1(기존 디자인으로 다시 그림 + 칩 정리 + 0원 안내 숨김) · 우선 1 CEX UID 상세 1 · 결정 위반 4 · 우선 2 상위 4 · 추가 결정(0원 안내 없음) 1 · 기존 노드·원문 조사 2(배너·모달 원본 · 행 상태 표시 방식) · 반영 지연 숨김 1(요약 · 허브 H6 · 홈 · 지갑 상세 · 메모) · 처리 중 행 기존 디자인 1 · Cashback Basics 소제목 1 · `DEX data pending`·맥스보드 지연 숨김 1 · 게스트 집계 대기 숨김 1 · 쿠폰 이름 확인 1 |
 | 새 프레임 | **7** | 홈 행 상태 1 · 배너를 누른 모달 4(수동 연동 실패 CEX·DEX · 이슈 CEX·DEX) · 공통 오류 토스트 1 · 모바일 `See All` 꽉 찬 모달 1 (아래 「새 프레임 목록」) |
 | 숨김 | 프레임 8 · 라벨 4 · 칩 13 · 보조 문구 3 | 4차 「Issue and failed」 29418:141446 · 4차 「Zero balance」 29423:139494 · 반영 지연 프레임 6(요약 `Delayed` · 허브 H6 PC·모바일 라이트·다크 · 홈 `Balance delayed` · 지갑 상세 `Delayed`) + 라벨 4 · `Trying to link` · `Verifying ownership` 칩(점 + 시계로) · 홈·`See All` 모달의 `No cashback yet` · `Data delayed` · `Inactive` 칩 · `Last updated …` 2 · `No longer supported …` 1 |
 | ✏️ 문구표 승인 대상 | **6** | DEX 행 배너·모달의 `Wallet` 표기(아래 「DEX 행 문구」) |
@@ -147,6 +147,21 @@
 | ![전](Figma수정결과_img/r5_07_mbDelayed_before.jpg) | (숨김) |
 | ![전](Figma수정결과_img/r5_07_FU065_before.jpg) | ![후](Figma수정결과_img/r5_07_FU065_after.jpg) |
 
+## 8. 게스트 집계 대기 안내 숨김 · 첫 연동 쿠폰 이름 (추가 결정)
+
+| 화면(노드) | 바꾼 것 | 전/후 |
+|---|---|---|
+| 게스트 조회 결과 「거래 데이터 집계 중」 — `Cashback is being updated` 모달 PC [29035:98986](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-98986) · 모바일 [29035:99040](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29035-99040) · 라벨 29035:98985 | 프레임·라벨 숨김(집계 대기 안내 없음). 이 프레임을 가리키는 메모 링크 없음 | `r5_08_guestDelay_before` · `r5_08_guestDelayM_before` |
+| 개발 메모 · 조회 응답 → 화면 29039:99769(텍스트 29039:99772) | `NO_PUBLIC_RESULT → 결과 없음·회원 전용 공통 안내. DATA_PENDING → 집계 대기. 두 상태는 금액을 숨깁니다.` → `NO_PUBLIC_RESULT → 결과 없음·회원 전용 공통 안내(금액 숨김).` | `r5_08_guestMemo_before` · `_after` |
+| 첫 연동 쿠폰 이름 | 되돌릴 곳 0건 — 쿠폰 이름은 이미 모두 `LINK UID`(G-326): 쿠폰 계정 선택 PC·모바일 · CEX·DEX 4 · 사용/만료 이력 PC·모바일 · 적용 완료 · 연동 계정 없음 PC·모바일 · 이미 사용된 쿠폰 PC·모바일 · 혜택 진행 중 PC·모바일(회원 포함) · 챌린지 수령 계정 선택 모바일, 17곳 | — |
+
+검색: DEX(revision) 전 섹션 + Mobile 하위 묶음 보이는 TEXT(대소문자 구분) `LINK (ACCOUNT|UID|WALLET)|첫 연동 쿠폰|연동 쿠폰|Link (UID|Account|Wallet) [Cc]oupon|being updated|집계 중|집계 대기`. `LINK ACCOUNT`는 연동 화면 묶음 라벨 `S3 · FAILURES OVER LINK ACCOUNT`·`S4 · …`(쿠폰 아님)뿐, `거래 계정 연동`은 정책 변경 메모 제목(쿠폰 아님)뿐.
+
+| 전 | 후 |
+|---|---|
+| ![전](Figma수정결과_img/r5_08_guestDelay_before.jpg) | (숨김) |
+| ![전](Figma수정결과_img/r5_08_guestMemo_before.jpg) | ![후](Figma수정결과_img/r5_08_guestMemo_after.jpg) |
+
 ## 새 프레임 목록
 
 | 노드 | 이름 | 섹션 |
@@ -222,6 +237,7 @@
 | (점검 이후 결정) 캐시백 0원 안내 없음 | 처리 — 4장 |
 | (점검 이후 결정) 요약 반영 지연 없음 · 처리 중 행 기존 디자인 | 처리 — 5장 |
 | (점검 이후 결정) `DEX data pending` · `Cashback Update Delayed` 없음 | 처리 — 7장 |
+| (점검 이후 결정) 게스트 집계 대기 없음 · 쿠폰 `LINK UID` | 처리 — 8장 |
 | 4 · ❓8 · Cashback Basics `Withdraw cashback and rewards` | 처리 — 11차 결정으로 `Claim cashback and rewards`(6장) |
 
 ## 프로토타입에 반영할 것
@@ -240,6 +256,7 @@
 | 10 | 반영 지연(`Delayed` · `DEX data delayed` · `Last updated`) 표시 제거 — 요약 · 허브 H6 · 홈 잔액 · 지갑 상세 | 29327:126239 · 28960:126914 · 29327:411242 · 29330:199016(숨김) |
 | 11 | Cashback Basics 소제목 `Claim cashback and rewards`(본문 · 목차, PC · 모바일) | 29328:132715 · 29381:137257 |
 | 12 | 캐시백 요약 달력 `DEX data pending` 표시 · 맥스보드 `Cashback Update Delayed` 안내 제거 | 28960:127133 · 29062:111741 |
+| 13 | 게스트 조회 결과 「거래 데이터 집계 중」(`Cashback is being updated`) 상태 제거 · 첫 연동 쿠폰 이름 `LINK UID` 유지 | 29035:98986 · 29035:99040(숨김) |
 
 ---
 

@@ -109,7 +109,6 @@ R.screen({id:'guest.modal',group:'guest',title:'비회원 조회 — 선택·안
    const body=`${C.field({ph:'Search for an exchange',start:'<span style="font-size:18px;color:var(--text-secondary)">⌕</span>'})}<span class="b1 semi" style="margin-top:8px">Centralised exchanges</span><div class="row">${tile('Bitget','guest.search:emptycex')}</div><span class="b1 semi" style="margin-top:16px">Decentralised exchanges</span><div class="row">${tile('Lighter','guest.search:emptydex',1)}</div>`;
    inner=gDialog('Select an exchange',body,'',{w:480,h:680,sheet:1,close:'guest.search:search'});
   }else if(st==='none')inner=gDialog('No public result',`<p class="b2 c2" style="margin:0">Check the exchange and account details, or log in to view your linked account.</p>`,C.btn('Log in',{full:true,go:'auth.login'})+back());
-  else if(st==='delay')inner=gDialog('Cashback is being updated',`<p class="b2 c2" style="margin:0">The exchange is still processing this account’s trading data. Check again later.</p>`,back('guest.search:dex','primary'));
   else if(st==='error')inner=gDialog('Couldn’t load cashback',`<p class="b2 c2" style="margin:0">Your search details are saved. Try again with the same exchange and account.</p>`,C.btn('Try again',{full:true,go:'guest.search:loading'})+back());
   else inner=gDialog('Too many searches',`<p class="b2 c2" style="margin:0">Please wait before searching again.</p>`,back('guest.search:dex','primary'));
   const note=`<div style="position:absolute;left:16px;right:16px;bottom:8px;z-index:25">${C.note(`<b>흐름</b> ${m.flow}`)}</div>`;
