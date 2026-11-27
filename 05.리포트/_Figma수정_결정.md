@@ -18,7 +18,7 @@
 | D7 | 설명 후 재확인(질문 대기) |
 | D8 | **초대 리워드 최소 10 USDT로 확정·시행 중(회원·파트너 허브 모두)** — 10 USDT 넘으면 자동 출금 요청. 전 문서·화면을 10으로 |
 | D9 | 권장안: `출금 가능 캐시백`(REQ-150) |
-| N1 | Figma 드로어대로. `Exchanges`를 누르면 Cashback Hub로 이동 |
+| N1 | 모바일 드로어 항목 이름은 **`Cashback Hub`**(D4와 같은 구성), 누르면 Cashback Hub로 이동 (2026-11-27) |
 | N2 | 거래소 목록 `Rating` 열 **있어야 함** |
 | N3 | 앱 업데이트 다이얼로그 **옛 스타일 유지** |
 | N4 | A — 맥스보드 게스트·미참여 단계 화면 넣음 |
@@ -123,3 +123,32 @@
 | 컴포넌트 안에 줄을 넣어야 하는 항목 | **A — DEX(revision) 해당 화면 인스턴스만 분리(detach)해 수정**, 컴포넌트 메인·다른 페이지는 고치지 않음 |
 | 기존 원본이 없는 화면(퀴즈 모바일 상태 · Cashback Basics 모바일 · 혜택 상세 회원 모바일 CTA · 모바일 홈 첫 연동) | **가장 가까운 기존 컴포넌트로 그림** |
 | 프로토타입 방향 | **실사이트 수집본(`_프로토타입_실사이트/`) + DEX 합치기, 실제 사이트처럼 작동**(입력·검증·토스트·탭·애니메이션). 캐시백 허브가 거래소 목록(`/en/affiliated`) 자리 |
+
+## Figma 2차 남은 항목 (2026-11-27 8차)
+
+| 항목 | 결정 |
+|---|---|
+| 기존 원본이 없는 화면 | 지금 디자인 기조(같은 페이지의 기존 컴포넌트·간격·글꼴)를 살려 새로 그림 — CT-33 서비스 소개 모바일 `Our Partners` 탭(`All` · `Exchanges` · `DEXs`) 포함 |
+| 불러오기 실패 상태 | 만들지 않음 — 허브 H6 `DEX data pending` · CT-14 ③ 파트너 캐러셀 실패 · CT-28 ③ 영상 재생 실패 |
+| 영상 자리 | 영상이라는 것만 표시(재생·실패 상태 없음) |
+| 홈 누적 캐시백 블록 모바일 | 이번에 넣지 않음 |
+| 다크 모드 | 자동 변환 — 다크 프레임 별도 반영 안 함 |
+| CT-24 Landing | 기존 화면(PB-3)과 중복 — 만들지 않음 |
+| 가이드 Step 2 본문 | DEX(revision) 기존 프레임 `DEX guide / Step 2 of 5`(28981:129056)의 문구 사용: `Check the receiving network before sending. Sending funds on the wrong network can cause permanent loss.` |
+| CT-29 FAQ `Withdrawals & Account Management` 펼친 상태 | 같은 FAQ 첫 질문 답변 문구(`Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.`)를 운영자 입력 예시로 사용 |
+
+## Figma 3차 남은 항목 (2026-11-27 9차, 모두 권장안)
+
+| # | 항목 | 결정 |
+|---|---|---|
+| 1 | 서비스 소개 `Three steps to start earning cashback` 부제 | 문구표 #75로 통일(PC·다크·모바일) |
+| 2 | `payout` 표현 | 화면 라벨이 출금 실적을 가리키면 `Withdraw` 계열(예: 계산기 Summary `Payout Time` → `Withdrawal Time`, `Payout Details` → `Withdrawal Details`, DEX 개요 표 `PAYOUT` 같은 라벨). 홍보 문장의 `payout`은 유지 |
+| 3 | 쿠폰 약관 `… based on UTC` | 기존 서비스 약관 원문 유지 |
+| 4 | AI 리뷰 요약 표본 `… every week.` | `every day`(G-428 일 1회) |
+| 5 | 서버·운영 값 표기 `{rate}%` · `{date}` · `{local_time}` | 화면에는 표본 값(같은 화면의 다른 값과 일관), 「서버·어드민 값」은 개발 인계 메모에 |
+| 6 | 계산기 단계명 `Boost` · `Start Cashback Preview` | 기존 /payback 퍼널 단계명 유지(N7은 Boost 기능 범위 제외) |
+| 7 | 공개 피드 로딩·오류 | 만들지 않음(8차 불러오기 실패 제외) |
+| 8 | 모바일 캐시백 요약 상태 4종(월간 카드 · 계정 시트 · 빈 달 · 빈 날) | 디자인 기조대로 새로 그림(캘린더 `DEX data pending`은 제외) |
+| 9 | 랭킹 | 로딩 제외, 모바일 주소 팝오버만 새로 그림 |
+| 10 | CEX UID 상세 | 새로 그리지 않음 — 기존 디자인([MAX-7] 9193:119755 계열) 노드를 인계 메모에 연결 |
+| 11 | 문구표 행 중 화면이 없는 것(#12 · #16 · #19 · #36 · #49 · #51 · #54 · #3~#5) | 기존 컴포넌트로 상태 프레임을 그림. 홈 행 이슈·실패 칩은 Q4 기존 디자인 |

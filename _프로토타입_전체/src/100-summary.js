@@ -119,7 +119,7 @@ R.screen({id:'summary.main',group:'summary',title:'캐시백 요약',route:'/cas
   {id:'noMonth',label:'활동 없는 달 (CS5)',figma:{pc:'28960:127157'},note:'V2.2 hist/SUM#noMonth · REQ-375'},
   {id:'noDay',label:'활동 없는 날 · 큰 금액 (CS4)',figma:{pc:'28960:127151'},note:'V2.2 hist/SUM#noDay · REQ-375'},
   {id:'oneEmpty',label:'계정 1개 선택 빈 상태',note:'V2.2 hist/SUM#oneEmpty · G-180 확정 문구'},
-  {id:'delayed',label:'데이터 지연 (허브 H6과 같음)',note:'V2.2 hist/SUM#delayed · REQ-376 — 문구는 허브 H6 각주와 같게(V2.2 국문 배너의 「출금할 수 있어요」는 자동 지급과 맞지 않아 쓰지 않음)'},
+  {id:'delayed',label:'데이터 지연',note:'V2.2 hist/SUM#delayed · REQ-376 — 문구는 허브 H6 각주와 같게(V2.2 국문 배너의 「출금할 수 있어요」는 자동 지급과 맞지 않아 쓰지 않음)'},
   {id:'old',label:'180일 넘은 달',note:'V2.2 hist/SUM#old · REQ-374'},
  ],
  render(st){
@@ -149,7 +149,7 @@ function rkPanel(st){
   const id=r.w?`<span data-go="ranking.main:wallet" style="cursor:pointer">Wallet ${short(r.w)}</span>`:r.id;
   return `<div class="row g12" style="background:#fff;border:1px solid var(--divider);border-radius:8px;padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06)">${logo(r.p,32)}<div class="col grow" style="gap:0"><span class="b2 semi">${r.p}</span><span class="cap c2">${id}</span></div><span class="b2">${rank}</span></div>`}).join('');
  const body=st==='empty'?`<div class="b2 c2 center" style="padding:${mo()?200:240}px 0 0">There are currently no eligible accounts for ranking.</div>`
-  :`<div class="col center" style="gap:12px;align-items:center;margin-top:${mo()?24:4}px"><span style="background:var(--blue);color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:500">May 2026</span><span class="h6 bold" style="font-size:${mo()?20:18}px">My Cashback Ranking</span><span class="b2 c2" style="margin-top:-6px">Rankings are updated daily at 00:01</span></div><div class="col" style="gap:8px;margin-top:24px">${rows}</div>`;
+  :`<div class="col center" style="gap:12px;align-items:center;margin-top:${mo()?24:4}px"><span style="background:var(--blue);color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:500">May 2026</span><span class="h6 bold" style="font-size:${mo()?20:18}px">My Cashback Ranking</span><span class="b2 c2" style="margin-top:-6px">Rankings are updated daily at 00:01</span></div><div class="col" style="gap:8px;margin-top:24px">${rows}</div><div class="col" style="gap:4px;margin-top:16px"><span class="cap c2">${T('Cashback under 0.01 USDT isn’t included in the rankings.','캐시백 0.01 USDT 미만은 순위에 포함되지 않습니다.')}</span><span class="cap c2">${T('Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback.','랭킹 리워드만으로는 출금할 수 없어요. 같은 계정의 캐시백과 1:1로 매칭돼요.')}</span></div>`;
  return `<div style="background:var(--bg-accent);${mo()?'min-height:812px':'width:375px;height:100%;min-height:900px'};padding:${mo()?'56px 16px':'20px 16px'};box-shadow:var(--elev8)"><button class="icon-btn" data-go="benefits.list" style="padding:4px">${back()}</button>${body}</div>`}
 function rkOverlay(inner){
  if(mo())return inner;
@@ -165,7 +165,7 @@ function rkBoard(st){
   return `<div class="col" style="gap:4px"><div class="row" style="gap:8px">${logo(r.p,28)}<div class="col grow" style="gap:0;min-width:0;font-size:12px"><span style="font-weight:500;line-height:1.4">${r.p}</span><span style="line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)">${id}</span></div><span style="font-size:12px;line-height:20px;letter-spacing:.14px;font-weight:500">${r.rank}</span></div>${msg}</div>`}).join('');
  const card=`<div style="background:#fff;border-radius:8px;padding:16px;width:${mo()?'100%':'928px'}" class="col g16"><div class="col" style="gap:4px"><span class="b2 semi">Your May Cashback Ranking</span><span style="font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">Rankings are updated daily at 00:01</span></div><div class="col" style="gap:16px">${rows}</div></div>`;
  const body=`<div style="padding:${mo()?'16px':'40px 0 80px'};display:flex;flex-direction:column;align-items:center;gap:16px">${card}
-  ${C.note(`[기존 MAX-468] MAXOP-805 랭킹 카드(25849:1340946 · 26651:60616) 재사용 — 순위표 페이지 디자인 없음. ${dex?'DEX 칩 필터 디자인 없음 — 같은 카드에서 DEX 지갑 행만 남김. ':''}V2.2 rk/RANK 내용 중 디자인 없는 것: 전체/CEX/DEX 칩 · 0.01 USDT 미만 순위 제외 안내 · Monthly Top Rewards 박스(1st 100 · 2nd 50 · 3rd 20 · top 10% 10 USDT, 이벤트 리워드로 지급 · 매칭 적용). 순위 기준 = 그달 커미션 캐시백 적립액(REQ-380), 금액 미표시(REQ-383)`)}</div>`;
+  ${C.note(`[기존 MAX-468] MAXOP-805 랭킹 카드(25849:1340946 · 26651:60616) 재사용 — 순위표 페이지 디자인 없음. ${dex?'DEX 칩 필터 디자인 없음 — 같은 카드에서 DEX 지갑 행만 남김. ':''}V2.2 rk/RANK 내용 중 디자인 없는 것: 전체/CEX/DEX 칩 · Monthly Top Rewards 박스(1st 100 · 2nd 50 · 3rd 20 · top 10% 10 USDT, 이벤트 리워드로 지급 · 매칭 적용). 순위 기준 = 그달 커미션 캐시백 적립액(REQ-380), 금액 미표시(REQ-383)`)}</div>`;
  if(mo())return `${moTop(T('Cashback Ranking','캐시백 랭킹'),'home.main')}<div class="page accent">${body}</div>${footer()}`;
  return `${gnb('rewards')}<div class="page accent">${body}</div>${footer()}`}
 

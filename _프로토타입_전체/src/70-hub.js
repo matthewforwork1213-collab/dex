@@ -1,5 +1,5 @@
 // 7. 캐시백 허브 — FU-045 ~ FU-048 (V2.2 hub/HUB 18개 상태 + Figma에만 있는 H3·H4)
-// Figma: DEX(revision) › "DEX — Cashback Hub Web [Selected Design]" (H1 · H2 · H3 · H4 · H6 · H7 · H8 · H1-CEX · H1-Broker, H5 참고),
+// Figma: DEX(revision) › "DEX — Cashback Hub Web [Selected Design]" (H1 · H2 · H3 · H4 · H7 · H8 · H1-CEX · H1-Broker, H5 참고),
 //        "DEX — Cashback Hub Mobile [Selected Design]" 라이트 프레임. H9·H10(Aster 귀속 만료)은 숨김 폐기안이라 쓰지 않는다.
 // "Hub withdraw, Exchanges Web"(HC1~HC6, 회원 출금 팝업·퍼즐·이메일 인증)은 10분 주기 자동 지급(정책 6-1 · G-412: CEX·DEX 모두)과
 // 충돌하므로 만들지 않는다. 출금 자리는 비활성 `Auto Claim`.
@@ -98,7 +98,7 @@ function panelCard(c){
    ${low?capRow(T(`You can claim if you receive an additional ${amt(n).replace(' USDT','')} USDT in exchange cashback.`,`거래소 캐시백을 ${amt(n).replace(' USDT','')} USDT 더 받으면 출금할 수 있어요.`),'Minimum 10 USDT',{blue:true}):capRow(`Claimable ${amt(w)}`,'Minimum 10 USDT')}
    ${autoClaim()}<p class="cap c2" style="margin:0">${low?'Minimum per account: 10 USDT.':'Cashback is paid to your TetherMax balance.'}</p>`)+
    C.note(low?'H4 CEX 잔액 10 USDT 미만 — 넛지는 G-139 확정 문구(Figma `Just 3.00 USDT more to qualify.` 대신), 금액은 매칭 기준 부족분(A=5 · B=2 → 3.00). Figma에만 있는 상태(정책 B-5-4 유효).':'H3 CEX UID 연동 — Figma에만 있는 상태(정책 B-5-4 유효). 금액 = 매칭 후 A + MIN(B, A). `Events and invites` 하위 줄은 정책상 틀림(G-140 미정).')}
- const pid={aster:'aster',lighterAccruing:'lighter',dexDelayed:'lighter'}[c]||'edgex';
+ const pid={aster:'aster',lighterAccruing:'lighter'}[c]||'edgex';
  const p=HB_DEX.find(x=>x.id===pid);
  const multi='';
  const sel=`<div class="row">${partnerSel(p,c==='dexMulti'?'+1':'')}</div>${multi}`;
@@ -110,30 +110,29 @@ function panelCard(c){
   C.note('H7 잔액 로드 실패 — Figma H7은 CEX(Bybit) 탭이고 `Auto Claim` 버튼이 없음. DEX 탭으로 옮기고, REQ-301 「버튼은 항상 비활성 `Auto Claim`」에 따라 버튼을 둠. 0 표시 금지.');
  if(c==='dexPanel')return receipt(`${head}${bigLine(T('Paid to your TetherMax balance','테더맥스 잔액으로 적립돼요'),'3.10 USDT')}${rule()}${lineKV('Total exchange cashback','Paid records, reported by EdgeX','3.10 USDT')}${rule()}${lineKV('Reported next day','','1.25 USDT')}${paid}${autoClaim()}${dest}`)+
   C.note('H8 EdgeX 지갑 연동 — Figma 그대로(표본 금액 3.10 · 1.25). 큰 숫자 라벨이 H5(`Total available cashback`)와 다르고, REQ-300 원문(`Withdrawable {amount} USDT` · `Total event reward` · 각주 `You withdraw on TetherMax, …`)과도 다름 → 질문_hub #3.');
- if(c==='dexDelayed')return receipt(`${head}${bigLine('Total available cashback','120.00 USDT')}${rule()}${lineKV('Total exchange cashback','Reported by Lighter','120.00 USDT')}${rule()}<span class="b2 c2">Last updated 14 Oct 2026, 09:12</span>${autoClaim()}<p class="cap c2" style="margin:0">Lighter has not sent new data yet. Amounts show the last update.</p>`)+
-  C.note('H6 데이터 지연 — Figma 그대로(Lighter 표본, 온보딩 보류 G-428). 마지막 보고 금액 + `Last updated {date}, {time}` + 각주(정책 B-5-5). 최소액 충족 계정은 자동 지급 대상 유지.');
- // H5 구성 재사용: Total available cashback · Total exchange cashback + Reported by · Event Reward · Paid to / Minimum · Auto Claim · Payout destination
+ // H5 구성 재사용: Total available cashback · Total exchange cashback + Reported by · Total event reward · Claimable · Total claimed · Paid to / Minimum · Auto Claim · 각주
  const v={dexPartial:[3,8],dexBelowMin:[4,3],dexMulti:[12,0],aster:[18,0],totalClaimed:[100,20],lighterAccruing:[120,5]}[c]||[100,20];
  const [a,b]=v,w=fl2(a+Math.min(a,b));
  const reported=c==='aster'?'Reported by Aster, USDT value at payout':`Reported by ${p.name}`;
  let n=0;if(c==='dexBelowMin')while(fl2(a+n+Math.min(b,a+n))<10&&n<10)n=fl2(n+.01);
- const lines=`${lineKV('Total exchange cashback',reported,amt(a))}${b>0?`${rule()}${lineKV('Event Reward','',amt(c==='dexPartial'?Math.min(a,b):b))}`:''}`;
+ const lines=`${lineKV('Total exchange cashback',reported,amt(a))}${b>0?`${rule()}${lineKV('Total event reward','',amt(c==='dexPartial'?Math.min(a,b):b))}`:''}`;
  let need=0;if(c==='dexPartial')while(fl2(a+need+Math.min(b,a+need))<10&&need<10)need=fl2(need+.01);
  const partial=c==='dexPartial'?`<div class="col" style="gap:0;font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)"><span>Matched ${amt(Math.min(a,b)).replace(' USDT','')} / ${amt(b)} in event rewards</span><span>Claimable ${amt(w)} · Minimum 10 USDT</span>${w<10?`<span>Additional exchange cashback needed: ${amt(need)}</span>`:''}</div>`:'';
- const claimed=c==='totalClaimed'?lineKV('Total claimed','','240.00 USDT'):'';
+ const claimable=c==='dexPartial'?'':`<span class="b1">${T(`Claimable ${amt(w)}`,`출금 가능 ${amt(w)}`)}</span>`;
+ const claimed=lineKV('Total claimed','',c==='totalClaimed'?'240.00 USDT':'0.00 USDT');
  const multiNote=c==='dexMulti'?`<p class="b2 c2" style="margin:0">${T('Wallets: 12.00 (auto-paid next cycle) · 4.00 (not included)','지갑 12.00(다음 10분 주기 자동 지급) · 4.00(제외)')}</p>`:'';
  const accr='';
  const bottom=c==='dexBelowMin'?`${rule()}${capRow(T(`You can claim if you receive an additional ${amt(n).replace(' USDT','')} USDT in exchange cashback.`,`거래소 캐시백을 ${amt(n).replace(' USDT','')} USDT 더 받으면 출금할 수 있어요.`),'Minimum 10 USDT',{blue:true})}${autoClaim()}<p class="cap c2" style="margin:0">${T('Cashback is claimed automatically once your claimable amount reaches 10 USDT.','출금 가능액이 10 USDT가 되면 자동으로 출금돼요.')}</p>${dest}`
   :`${paid}${autoClaim()}${dest}`;
  const notes={
-  dexPartial:'A=3 · B=8 → 3 + MIN(8, 3) = 6.00. 패널은 H5(28960:126908) 구성, 매칭 설명 3줄은 DEX(revision) 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704) 문구·스타일 그대로(<code>Matched … in event rewards</code> · <code>Claimable … · Minimum 10 USDT</code> · <code>Additional exchange cashback needed</code>). Event Reward 줄 = 매칭된 금액 min(A,B). V2.2 `hub/HUB#dexPartial`(V2.2 안내 문장 대신 Figma 문구).',
+  dexPartial:'A=3 · B=8 → 3 + MIN(8, 3) = 6.00. 패널은 H5(28960:126908) 구성, 매칭 설명 3줄은 DEX(revision) 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704) 문구·스타일 그대로(<code>Matched … in event rewards</code> · <code>Claimable … · Minimum 10 USDT</code> · <code>Additional exchange cashback needed</code>). Total event reward 줄 = 매칭된 금액 min(A,B). V2.2 `hub/HUB#dexPartial`(V2.2 안내 문장 대신 Figma 문구).',
   dexBelowMin:'H4(28960:126902) — 웹 SCREEN-LABEL `DEX & CEX balance under 10 USDT`(28960:126903)라 DEX에도 이 프레임. 프레임은 CEX 탭이라 DEX 탭 · H5 줄 구성으로 그림. 넛지 = G-139 확정 문구(DEX(revision) 지갑 카드의 `Additional exchange cashback needed: {n} USDT`와 다름 — 결정대로), 금액은 매칭 기준 부족분(A=4 · B=3 → 3.00) + `Minimum 10 USDT` + 각주(REQ-301). 버튼은 숨기지 않고 비활성.',
   dexMulti:'파트너 선택 `EdgeX   +1` 표기 = DEX(revision) 상태 정의 S4_18 `EdgeX   +1`(29002:128037, 전환 「선택한 패널 유지」). 같은 DEX 지갑 2개(12 · 4) → 12 USDT 지갑만 다음 10분 주기 자동 지급, 4 USDT 지갑 제외(REQ-302). 패널은 H5 구성 재사용(전용 프레임 없음). V2.2 `hub/HUB#dexMulti`.',
-  aster:'Aster: `Reported by Aster, USDT value at payout`(REQ-300). H9·H10(귀속 만료)은 범위 밖 폐기안. 패널은 H5(28960:126908) 구성 재사용 — 이벤트 리워드 0이면 Event Reward 줄 숨김(DEX(revision) 상태 정의 S4_22 「이벤트 행 숨김」 29002:128137). `USDT value at payout` 줄 디자인은 어디에도 없음. V2.2 `hub/HUB#aster`.',
-  totalClaimed:'`Total claimed` 유지(G-053 확정) — 테더맥스를 통해 지급한 누계, `Sent` 시 증가(REQ-307). 허브 패널(H3~H8)에 이 줄 없음 → 기존 `Total Claimed` 줄(DEX(revision) 게스트 조회 결과 카드 29035:97792 · [MAX-7] 홈 카드)과 같은 lineKV 줄로 H5 구성에 추가. V2.2 `hub/HUB#totalClaimed`.',
+  aster:'Aster: `Reported by Aster, USDT value at payout`(REQ-300). H9·H10(귀속 만료)은 범위 밖 폐기안. 패널은 H5(28960:126908) 구성 재사용 — 이벤트 리워드 0이면 Total event reward 줄 숨김(DEX(revision) 상태 정의 S4_22 「이벤트 행 숨김」 29002:128137). `USDT value at payout` 줄 디자인은 어디에도 없음. V2.2 `hub/HUB#aster`.',
+  totalClaimed:'`Total claimed` 유지(G-053 확정) — 테더맥스를 통해 지급한 누계, `Sent` 시 증가(REQ-307). H5 패널 줄(Figma 29352:145077, 기본 0.00 USDT) — 이 상태는 누계가 있는 표본(240.00). V2.2 `hub/HUB#totalClaimed`.',
   lighterAccruing:'Lighter: Figma H5의 `Accruing this week (estimate)` 3.20 USDT 추정 줄은 G-100 확정(주중 「집계 전」, 추정치 미표시)으로 쓰지 않음. 나머지는 H5 구성. 「집계 전」 표시 자리·영문 문구는 어디에도 없음(DEX(revision) 상태 정의 S6_06 `DEX data pending` 29002:129262는 캐시백 요약 쪽) → C.tbd 유지. Lighter 온보딩 보류(G-428).',
  };
- return receipt(`${head}${bigLine('Total available cashback',amt(w))}${rule()}${lines}${accr}${claimed}${partial}${multiNote}${bottom}`)+(notes[c]?C.note(notes[c]):'')}
+ return receipt(`${head}${bigLine('Total available cashback',amt(w))}${rule()}${lines}${accr}${claimable}${claimed}${partial}${multiNote}${bottom}`)+(notes[c]?C.note(notes[c]):'')}
 
 // ---------- 히어로 (HA5) ----------
 function hero(right,route){
@@ -232,7 +231,7 @@ function why(){
 
 // ---------- 페이지 조립 ----------
 const GUEST=['normal','cex','brokers','rateFail','cards','emptySearch'];
-const PANEL=['dexPanel','dexPartial','dexBelowMin','dexDelayed','dexLoading','dexError','dexMulti','aster','totalClaimed','lighterAccruing','cexPanel','cexBelowMin'];
+const PANEL=['dexPanel','dexPartial','dexBelowMin','dexLoading','dexError','dexMulti','aster','totalClaimed','lighterAccruing','cexPanel','cexBelowMin'];
 function shell(guest,body){
  // 허브 상태가 회원 여부를 정한다 → 헤더도 상태에 맞춰 그린다(도구의 게스트/회원 토글과 무관). 셸은 코어 함수(gnb·moTop·footer) 그대로 — 모바일 웹에는 하단 탭 없음
  const keep=S.auth;S.auth=guest?'guest':'s4';
@@ -250,8 +249,7 @@ R.screen({id:'hub.main',group:'hub',title:'캐시백 허브',route:'/cashback-hu
   {id:'dexPanel',label:'DEX 잔액 패널 — EdgeX 지갑 연동 (H8)',figma:{pc:'28960:126926',mo:'28960:130836'},note:'V2.2 hub/HUB#dexPanel'},
   {id:'dexPartial',label:'A=3 · B=8 — 일부만 출금',note:'V2.2 hub/HUB#dexPartial · 재사용: H5 패널 + 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704)'},
   {id:'dexBelowMin',label:'최소액 미만 — 넛지 (H4 · DEX & CEX)',figma:{pc:'28960:126902',mo:'28960:130812'},note:'V2.2 hub/HUB#dexBelowMin · H4 웹 라벨 `DEX & CEX balance under 10 USDT`(28960:126903)'},
-  {id:'dexDelayed',label:'데이터 지연 (H6)',figma:{pc:'28960:126914',mo:'28960:130824'},note:'V2.2 hub/HUB#dexDelayed'},
-  {id:'dexLoading',label:'패널 로딩',note:'V2.2 hub/HUB#dexLoading · 재사용: H5 패널 + 코어 스켈레톤(지갑 카드 메모 29026:97581 「조회 중에는 스켈레톤」)'},
+    {id:'dexLoading',label:'패널 로딩',note:'V2.2 hub/HUB#dexLoading · 재사용: H5 패널 + 코어 스켈레톤(지갑 카드 메모 29026:97581 「조회 중에는 스켈레톤」)'},
   {id:'dexError',label:'패널 로드 실패 (H7 — CEX 탭 시안을 DEX로)',figma:{pc:'28960:126920',mo:'28960:130830'},note:'V2.2 hub/HUB#dexError · Figma H7은 Bybit(CEX) 탭'},
   {id:'dexMulti',label:'같은 DEX 복수 지갑 +N',note:'V2.2 hub/HUB#dexMulti · 재사용: H5 패널 · `EdgeX +1` 표기는 상태 정의 S4_18(29002:128037)'},
   {id:'aster',label:'Aster — USDT value at payout',note:'V2.2 hub/HUB#aster · 재사용: H5 패널 · H9·H10은 숨김 폐기안이라 쓰지 않음'},

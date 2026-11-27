@@ -308,9 +308,9 @@ window.C=C;
 
 // ---------- 셸 (실제 디자인 — 근거 노드는 ref/대응_common.md 1장) ----------
 // 웹 GNB 28967:127332(DEX / Web / Navigation) · 비로그인 우측 19604:32577(webPrelogin) · 드롭다운 19604:32652~32678(atom3 · atom2)
-// 드롭다운 — Cashback: DEX Navigation 설명(CEX · DEX · Brokers) / Rewards Hub · Discover: 기존 GNB 드롭다운 항목 그대로
+// 드롭다운 — Cashback: 결정 D4(Cashback Hub · Cashback Calculator, 단독 Calculator 메뉴 없음) / Rewards Hub · Discover: 기존 GNB 드롭다운 항목 그대로
 const NAV={
- cashback:{en:'Cashback',ko:'캐시백',items:[['cex.list','Centralised Exchanges','중앙화 거래소'],['dex.overview','Decentralised Exchanges','탈중앙화 거래소'],['hub.main:brokers','Brokers','브로커']]},
+ cashback:{en:'Cashback',ko:'캐시백',items:[['hub.main','Cashback Hub','Cashback Hub'],['calc.p1','Cashback Calculator','Cashback Calculator']]},
  rewards:{en:'Rewards Hub',ko:'리워드 허브',items:[['events.list','Exchanges Events','거래소 이벤트'],['benefits.list','Benefits','혜택'],['tp.main','Points','포인트']]},
  discover:{en:'Discover',ko:'둘러보기',items:[['quiz.list','Beginner’s Guide','초보자 가이드'],['about.intro','About TetherMax','테더맥스 소개']]},
 };
@@ -318,8 +318,7 @@ const shIc=(f,cls='ic')=>`<img class="${cls}" src="${A(f)}" alt="">`;
 // gnb(active, {open:'cashback'|'rewards'|'discover'}) — open이면 그 드롭다운을 펼친 상태로 그린다(hover 상태 화면용). 실제 hover에서도 펼쳐진다.
 function gnb(active,o={}){
  const authed=S.auth!=='guest';
- const nav=Object.entries(NAV).map(([k,n])=>`<div class="ni${o.open===k?' open':''}"><a class="${active===k||o.open===k?'on':''}" data-go="${n.items[0][0]}">${T(n.en,n.ko)}${ic('arrow-drop-down')}</a><div class="gnb-dd">${n.items.map(([go,en,ko])=>`<a data-go="${go}">${T(en,ko)}</a>`).join('')}</div></div>`).join('')
-  +`<div class="ni"><a class="${active==='calc'?'on':''}" data-go="calc.p1">${T('Calculator','계산기')}</a></div>`;
+ const nav=Object.entries(NAV).map(([k,n])=>`<div class="ni${o.open===k?' open':''}"><a class="${active===k||o.open===k?'on':''}" data-go="${n.items[0][0]}">${T(n.en,n.ko)}${ic('arrow-drop-down')}</a><div class="gnb-dd">${n.items.map(([go,en,ko])=>`<a data-go="${go}">${T(en,ko)}</a>`).join('')}</div></div>`).join('');
  const right=authed?`<button class="icon-btn" data-go="${o.bellGo||'cmn.header:unread'}" title="Notifications">${shIc('cmn-ic-bell.svg')}</button><button class="icon-btn" data-go="my.main" title="My">${shIc('cmn-ic-account.svg')}</button>`
   :`${C.btn(T('Login','로그인'),{v:'outlined',go:'auth.login'})}${C.btn(T('Sign Up','회원가입'),{go:'auth.signup'})}`;
  return `<header class="gnb"><div class="row g24"><img src="${A('logo.svg')}" style="width:142px;height:16px;cursor:pointer" data-go="${authed?'home.main':'landing.main'}" alt="TetherMax"><nav class="nav">${nav}</nav></div><div class="right">${right}<button class="icon-btn">${ic('light-mode')}</button><button class="icon-btn" data-lang>${ic('language')}</button></div></header>`}
@@ -491,7 +490,7 @@ R.screen({id:'cmn.header',group:'common',title:'데스크톱 헤더 (GNB)',route
  states:[
   {id:'normal',label:'로그인',figma:{pc:'28967:127332'},note:'DEX(revision) DEX / Web / Navigation · V2.2 cmn/HEADER#normal'},
   {id:'guest',label:'비로그인 — Login · Sign Up',figma:{pc:'19604:32578'},note:'[기존 MAX-] Quiz › GNB webPrelogin Type=Pre-Login · V2.2 cmn/HEADER#guest'},
-  {id:'hover',label:'Cashback 드롭다운 열림',figma:{pc:'19604:32652'},note:'[기존 MAX-] Quiz › GNB 합체 Property 1=Cashback — 패널 스타일은 기존, 항목은 DEX Navigation 설명(CEX · DEX · Brokers) · V2.2 cmn/HEADER#hover'},
+  {id:'hover',label:'Cashback 드롭다운 열림',figma:{pc:'19604:32652'},note:'[기존 MAX-] Quiz › GNB 합체 Property 1=Cashback — 패널 스타일은 기존, 항목은 결정 D4(Cashback Hub · Cashback Calculator — 단독 Calculator 메뉴 없음) · V2.2 cmn/HEADER#hover'},
   {id:'rewards',label:'Rewards Hub 드롭다운 열림',figma:{pc:'19604:32665'},note:'[기존 MAX-] Quiz › GNB 합체 Property 1=Rewards Hub'},
   {id:'discover',label:'Discover 드롭다운 열림',figma:{pc:'19604:32678'},note:'[기존 MAX-] Quiz › GNB 합체 Property 1=Discover'},
   {id:'unread',label:'알림 안 읽음 (빨간 점)',figma:{pc:'8643:121393'},note:'[기존 MAX-7] Web S3 라벨 Notifications — 벨 빨간 점 · hover 회색 원 8643:124416'},
@@ -511,9 +510,9 @@ const drIc=(f,st='')=>`<img src="${A(f)}" alt="" style="width:20px;height:20px;f
 const drRow=(icon,t,go,end='')=>`<div class="row" style="justify-content:space-between;padding:8px 0;cursor:pointer"${go?` data-go="${go}"`:''}><span class="row" style="gap:16px">${icon}<span style="font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:500">${t}</span></span>${end}</div>`;
 const drCard=rows=>`<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 2.5px rgba(93,96,103,.05)">${rows}</div>`;
 function drawer(member,o={}){
- const P={ex:[drIc('cmn-dr-candle.svg'),'Exchanges','cex.list'],br:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-broker.svg')}" alt="" style="width:16.67px;height:16.66px;transform:scaleY(-1)"></span>`,'Brokers','hub.main:brokers'],
+ const P={ex:[drIc('cmn-dr-candle.svg'),'Cashback Hub','hub.main'],br:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-broker.svg')}" alt="" style="width:16.67px;height:16.66px;transform:scaleY(-1)"></span>`,'Brokers','hub.main:brokers'],
   ev:[drIc('cmn-dr-event.svg'),'Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.main']};
- const prod=(member?['ex','ev','br','bn','calc','pt']:['ex','br','ev','bn','calc','pt']).map(k=>drRow(...P[k])).join('');
+ const prod=(member?['ex','ev','bn','calc','pt']:['ex','ev','bn','calc','pt']).map(k=>drRow(...P[k])).join('');
  const theme=`<span style="background:#e6e7e9;border-radius:5000px;height:28px;padding:2px;display:flex"><span style="background:#fff;border-radius:5000px;padding:6px 4px;display:flex">${drIc('cmn-dr-light.svg','width:16px;height:16px')}</span><span style="width:24px"></span></span>`;
  const welcome=member?'':`<div style="padding:0 16px"><div style="background:#fff;border:.5px solid rgba(0,0,0,.05);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:24px"><div class="col center" style="gap:4px;font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:600"><span>Welcome to TetherMax!</span><span class="c2">Create an account or log in to start<br>earning Cashback.</span></div><div class="row" style="gap:12px">${C.btn('Log In',{v:'outlined',full:true,go:'auth.login'})}${C.btn('Sign Up',{full:true,go:'auth.signup'})}</div></div></div>`;
  const body=`<div style="background:var(--bg-accent);min-height:${o.h||812}px;position:relative;display:flex;flex-direction:column;gap:16px">
@@ -531,9 +530,9 @@ R.screen({id:'cmn.drawer',group:'common',title:'모바일 웹 드로어',route:'
   {id:'promo',label:'프로모 배너 (선택)',figma:null,note:'V2.2 cmn/DRAWER#promo — 드로어 배너 디자인 어디에도 없음'},
  ],
  render(st){
-  const promo=st==='promo'?`<div style="padding:0 16px;margin-top:-8px">${C.tbd('프로모 배너 — 운영 설정 이미지·문구','원문 없음')}</div>`:'';
+  const promo=st==='promo'?`<div style="padding:0 16px;margin-top:-8px"><div class="row g12" style="background:#eef3ff;border-radius:8px;padding:12px"><div style="width:48px;height:48px;border-radius:8px;background:#c9d6ff;flex:none"></div><div class="col" style="gap:2px;min-width:0"><span class="b2 semi">${T('Banner title','배너 제목')}</span><span class="cap c2">${T('Banner content','배너 내용')}</span></div></div></div>`:'';
   let b=drawer(st==='member',{h:st==='member'?945:1119});if(promo)b=b.replace('<div class="col" style="gap:8px;padding:0 16px 16px">',promo+'<div class="col" style="gap:8px;padding:0 16px 16px">');
-  return moFrame(b)+C.note('항목은 최신 기존 드로어 그대로(Exchanges · Brokers · Events · Benefits · Cashback Calculator · Point / Theme · Language / Terms · Privacy / About · Beginner’s Guide · Notices · Affiliate). 명세 REQ-465(Cashback · Calculator · Newsletters · Points)와 다름 → 질문_common.md. 비로그인 Figma는 Beginner’s Guide·Notices 아이콘이 서로 바뀌어 있어 로그인판(19604:32844) 기준 아이콘 사용.'+(S.vp==='pc'?' · 모바일 웹 전용 — PC 보기에서는 375폭.':''));
+  return moFrame(b)+C.note('항목은 최신 기존 드로어 기준 + 결정 N1 · D4: 첫 항목 `Cashback Hub`(→ 캐시백 허브), `Brokers` 행 없음(허브 안 탭) — Cashback Hub · Events · Benefits · Cashback Calculator · Point / Theme · Language / Terms · Privacy / About · Beginner’s Guide · Notices · Affiliate. 비로그인 Figma는 Beginner’s Guide·Notices 아이콘이 서로 바뀌어 있어 로그인판(19604:32844) 기준 아이콘 사용.'+(S.vp==='pc'?' · 모바일 웹 전용 — PC 보기에서는 375폭.':''));
  }});
 R.screen({id:'cmn.lang',group:'common',title:'언어 설정 시트',route:'모바일 웹 드로어 › Language',fu:['FU-083'],shell:false,
  states:[{id:'sheet',label:'언어 바텀시트',figma:{mo:'12085:400397'},note:'[기존 MAX-497] mWeb Language settings bottomSheet · 전체 목록 12085:400563'}],
@@ -844,7 +843,7 @@ R.screen({id:'summary.main',group:'summary',title:'캐시백 요약',route:'/cas
   {id:'noMonth',label:'활동 없는 달 (CS5)',figma:{pc:'28960:127157'},note:'V2.2 hist/SUM#noMonth · REQ-375'},
   {id:'noDay',label:'활동 없는 날 · 큰 금액 (CS4)',figma:{pc:'28960:127151'},note:'V2.2 hist/SUM#noDay · REQ-375'},
   {id:'oneEmpty',label:'계정 1개 선택 빈 상태',note:'V2.2 hist/SUM#oneEmpty · G-180 확정 문구'},
-  {id:'delayed',label:'데이터 지연 (허브 H6과 같음)',note:'V2.2 hist/SUM#delayed · REQ-376 — 문구는 허브 H6 각주와 같게(V2.2 국문 배너의 「출금할 수 있어요」는 자동 지급과 맞지 않아 쓰지 않음)'},
+  {id:'delayed',label:'데이터 지연',note:'V2.2 hist/SUM#delayed · REQ-376 — 문구는 허브 H6 각주와 같게(V2.2 국문 배너의 「출금할 수 있어요」는 자동 지급과 맞지 않아 쓰지 않음)'},
   {id:'old',label:'180일 넘은 달',note:'V2.2 hist/SUM#old · REQ-374'},
  ],
  render(st){
@@ -874,7 +873,7 @@ function rkPanel(st){
   const id=r.w?`<span data-go="ranking.main:wallet" style="cursor:pointer">Wallet ${short(r.w)}</span>`:r.id;
   return `<div class="row g12" style="background:#fff;border:1px solid var(--divider);border-radius:8px;padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06)">${logo(r.p,32)}<div class="col grow" style="gap:0"><span class="b2 semi">${r.p}</span><span class="cap c2">${id}</span></div><span class="b2">${rank}</span></div>`}).join('');
  const body=st==='empty'?`<div class="b2 c2 center" style="padding:${mo()?200:240}px 0 0">There are currently no eligible accounts for ranking.</div>`
-  :`<div class="col center" style="gap:12px;align-items:center;margin-top:${mo()?24:4}px"><span style="background:var(--blue);color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:500">May 2026</span><span class="h6 bold" style="font-size:${mo()?20:18}px">My Cashback Ranking</span><span class="b2 c2" style="margin-top:-6px">Rankings are updated daily at 00:01</span></div><div class="col" style="gap:8px;margin-top:24px">${rows}</div>`;
+  :`<div class="col center" style="gap:12px;align-items:center;margin-top:${mo()?24:4}px"><span style="background:var(--blue);color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:500">May 2026</span><span class="h6 bold" style="font-size:${mo()?20:18}px">My Cashback Ranking</span><span class="b2 c2" style="margin-top:-6px">Rankings are updated daily at 00:01</span></div><div class="col" style="gap:8px;margin-top:24px">${rows}</div><div class="col" style="gap:4px;margin-top:16px"><span class="cap c2">${T('Cashback under 0.01 USDT isn’t included in the rankings.','캐시백 0.01 USDT 미만은 순위에 포함되지 않습니다.')}</span><span class="cap c2">${T('Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback.','랭킹 리워드만으로는 출금할 수 없어요. 같은 계정의 캐시백과 1:1로 매칭돼요.')}</span></div>`;
  return `<div style="background:var(--bg-accent);${mo()?'min-height:812px':'width:375px;height:100%;min-height:900px'};padding:${mo()?'56px 16px':'20px 16px'};box-shadow:var(--elev8)"><button class="icon-btn" data-go="benefits.list" style="padding:4px">${back()}</button>${body}</div>`}
 function rkOverlay(inner){
  if(mo())return inner;
@@ -890,7 +889,7 @@ function rkBoard(st){
   return `<div class="col" style="gap:4px"><div class="row" style="gap:8px">${logo(r.p,28)}<div class="col grow" style="gap:0;min-width:0;font-size:12px"><span style="font-weight:500;line-height:1.4">${r.p}</span><span style="line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)">${id}</span></div><span style="font-size:12px;line-height:20px;letter-spacing:.14px;font-weight:500">${r.rank}</span></div>${msg}</div>`}).join('');
  const card=`<div style="background:#fff;border-radius:8px;padding:16px;width:${mo()?'100%':'928px'}" class="col g16"><div class="col" style="gap:4px"><span class="b2 semi">Your May Cashback Ranking</span><span style="font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">Rankings are updated daily at 00:01</span></div><div class="col" style="gap:16px">${rows}</div></div>`;
  const body=`<div style="padding:${mo()?'16px':'40px 0 80px'};display:flex;flex-direction:column;align-items:center;gap:16px">${card}
-  ${C.note(`[기존 MAX-468] MAXOP-805 랭킹 카드(25849:1340946 · 26651:60616) 재사용 — 순위표 페이지 디자인 없음. ${dex?'DEX 칩 필터 디자인 없음 — 같은 카드에서 DEX 지갑 행만 남김. ':''}V2.2 rk/RANK 내용 중 디자인 없는 것: 전체/CEX/DEX 칩 · 0.01 USDT 미만 순위 제외 안내 · Monthly Top Rewards 박스(1st 100 · 2nd 50 · 3rd 20 · top 10% 10 USDT, 이벤트 리워드로 지급 · 매칭 적용). 순위 기준 = 그달 커미션 캐시백 적립액(REQ-380), 금액 미표시(REQ-383)`)}</div>`;
+  ${C.note(`[기존 MAX-468] MAXOP-805 랭킹 카드(25849:1340946 · 26651:60616) 재사용 — 순위표 페이지 디자인 없음. ${dex?'DEX 칩 필터 디자인 없음 — 같은 카드에서 DEX 지갑 행만 남김. ':''}V2.2 rk/RANK 내용 중 디자인 없는 것: 전체/CEX/DEX 칩 · Monthly Top Rewards 박스(1st 100 · 2nd 50 · 3rd 20 · top 10% 10 USDT, 이벤트 리워드로 지급 · 매칭 적용). 순위 기준 = 그달 커미션 캐시백 적립액(REQ-380), 금액 미표시(REQ-383)`)}</div>`;
  if(mo())return `${moTop(T('Cashback Ranking','캐시백 랭킹'),'home.main')}<div class="page accent">${body}</div>${footer()}`;
  return `${gnb('rewards')}<div class="page accent">${body}</div>${footer()}`}
 
@@ -975,7 +974,7 @@ function regTable(){
 function rewardCard(amount,st){
  const btn2=`<button class="btn outlined black md" style="height:36px">Reward History</button><button class="btn outlined black md" style="height:36px">Referral Details</button>`;
  const auto=`<button class="btn contained primary md" disabled style="height:36px;min-width:136px">Auto Claim</button>`;
- const below=st==='below50'?`<p class="cap c2" style="margin:8px 0 0">${C.tbd('50 USDT 미만 안내 — `Just {amount} USDT more to withdraw`를 Claim 용어로 재작성한 문구','G-419 문구표')}</p>`:'';
+ const below=st==='below50'?`<p class="cap c2" style="margin:8px 0 0">${T('Invitation rewards are claimed automatically at 10 USDT. Just 0.01 USDT more to go.','초대 리워드는 10 USDT가 되면 자동으로 출금돼요. 0.01 USDT만 더 모이면 돼요.')}</p>`:'';
  const head=`<div class="col" style="gap:2px"><span class="cap c2">Available Invitation Rewards</span><span class="h6 semi tnum" style="font-size:${mo()?18:16}px">${amount} USDT</span></div>`;
  if(mo())return box(`<div class="col g12">${head}${auto.replace('min-width:136px','width:100%')}<div class="grid2" style="grid-template-columns:1fr 1fr;gap:8px">${btn2}</div>${below}</div>`);
  return box(`<div class="row between">${head}<div class="row g16">${auto}${btn2}</div></div>${below}`);
@@ -985,7 +984,7 @@ function invPage(st){
  const head=`${tabsTop()}<div style="margin:${mo()?'16px 0 24px':'24px 0'}">${toggle(sub)}</div>`;
  let body='';
  if(st==='empty')body=`<div class="col center" style="align-items:center;gap:8px;padding:${mo()?120:150}px 0 ${mo()?160:180}px"><span class="b1 semi">You haven't invited any friends yet${mo()?'.':''}</span><span class="b2 c2" style="max-width:325px">Share your invitation code with friends and help them start earning cashback rewards.</span><button class="btn outlined primary lg" data-go="invite.main:code" style="width:311px;max-width:100%;margin-top:12px">Share Invitation Code ${icx('inv-ic-share.svg',24)}</button></div>`;
- else if(sub==='reward')body=`<div class="col" style="gap:40px">${rewardCard(st==='below50'?'49.99':'0.00',st)}${regTable()}</div>`;
+ else if(sub==='reward')body=`<div class="col" style="gap:40px">${rewardCard(st==='below50'?'9.99':'0.00',st)}${regTable()}</div>`;
  else if(st==='normal'||st==='terms')body=`${hero('Invite friends to earn cashback with TetherMax','Share the benefits and help friends get more value from their trades.')}<div class="col g16" style="margin-top:48px">${steps(STEPS_INV())}<button class="btn outlined primary lg" data-go="invite.main:code" style="width:311px;margin:0 auto">Get Friend Invitation Code</button></div>`;
  else body=`${hero('Invite friends to earn cashback with TetherMax','Share the benefits and help friends get more value from their trades.')}<div class="col" style="gap:24px;margin-top:48px">${steps(STEPS_INV())}${shareBox(st==='codeCopied'?'Invite code copied':st==='linkCopied'?'Invite link copied':'')}</div>`;
  // 초대 랜딩(IF1)은 상단 탭에 토글이 없다
@@ -1002,7 +1001,7 @@ R.screen({id:'invite.main',group:'invite',title:'친구 초대',route:'/point/in
   {id:'empty',label:'Invitation Reward 탭 — 0명 빈 상태 (IF6)',figma:{pc:'28960:126846',mo:'29065:5700'},note:'V2.2 inv/IF8#empty · REQ-419 — 약관은 계속 표시'},
   {id:'terms',label:'약관 bullet 펼침',figma:null,note:'V2.2 inv/IF8#terms · PC는 약관이 항상 펼쳐짐(IF1과 같음). 모바일 펼친 상태는 재사용 — [기존 MAX-425] 「Terms&NotesExpanded」(4923:56476) 틀'},
   {id:'rewards',label:'Invitation Reward 탭 — 자동 지급 (IF7)',figma:{pc:'28967:127210',mo:'29065:6175'},note:'V2.2 inv/IF8#rewards · REQ-413·414 — `Auto Claim` 비활성, 계정 선택 없음(관리자 지정 계정으로 50 USDT부터 자동 지급). 모바일 Figma `Withdraw`·`Linked Trading Accounts 31`은 정책 문구로 바꿈'},
-  {id:'below50',label:'50 USDT 미만',figma:null,note:'V2.2 inv/IF8#below50 · REQ-414 — 안내 문구는 Claim 용어로 재작성 대상(G-419 「문구표에서 확정」, 확정 문구 없음)'},
+  {id:'below50',label:'10 USDT 미만',figma:null,note:'V2.2 inv/IF8#below50 · REQ-414 · 결정 D8(최소 10 USDT) — 안내 문구 = 05.리포트/문구표_DEX.md'},
  ],
  render(st){return invPage(st)}});
 
@@ -1115,6 +1114,8 @@ const logo=(n,s=24)=>LOGO[n]?`<img src="${A(LOGO[n])}" style="width:${s}px;heigh
 const W={edgex:'0xa410556c2A1C829d890122682B21F623b02122F0',e1:'0x884BdE72f2E9919E4Cbeef6a83E6Ca9Ea55f1a69',e2:'0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9',
  v22edge:'0x52908400098527886E0F7030069857D2E4169EE7',v22aster:'0xde709f2102306220921060314715629080e2fb77',v22apex:'0x7a3F9c2B8e41D05a6F3b7C91e2D4a8B0c6E551E9'};
 const wrap=(inner,max=1200,pad)=>`<div style="max-width:${max}px;margin:0 auto;padding:${pad??(MO()?'0 16px':'0 24px')}">${inner}</div>`;
+// 기존 [MAX 1216] S9 List failed(22442:219848) — 주황 경고 바(아이콘 · 안내) + 가운데 외곽선 Try again
+const s9Fail=(msg,go)=>`<div class="col" style="gap:12px;align-items:center"><div class="row" style="width:100%;gap:12px;background:#fff4e5;border-radius:4px;padding:14px 16px"><img src="${A('link-ic-warning.svg')}" style="width:20px;height:20px;flex:none" alt=""><span class="b2" style="color:#663c00">${msg}</span></div><button class="btn outlined primary md"${go?` data-go="${go}"`:''}>Try again</button></div>`;
 const backRow=(go,label)=>`<div class="row" style="padding:${MO()?'16px 0':'24px 0'}"><button class="icon-btn" data-go="${go}"><img src="${A('rw-ic-back.svg')}" class="ic" alt=""></button>${label?`<span class="sub2">${label}</span>`:''}</div>`;
 const greyBtn=(l,go)=>`<button class="btn lg full" style="background:#f2f2f5;color:rgba(0,0,0,.87)"${go?` data-go="${go}"`:''}>${l}</button>`;
 // 같은 화면의 기본 상태 위에 오버레이(셸이 두 번 그려지지 않게 본문만 겹침)
@@ -1208,8 +1209,8 @@ function mbSection2(st){
  let below='';
  const nb=(a,b)=>`<div class="grid2" style="gap:16px">${[['Next Bingo',a],['Full Board',b]].map(([l,v])=>`<div class="row between" style="background:#1f45d6;border-radius:12px;padding:14px 20px;color:#fff"><span class="b2 semi">${l}</span><span class="b2 semi">${v}</span></div>`).join('')}</div>`;
  if(ph==='run')below=nb('1 cell','7 cell')+(st==='delayed'?C.note('지연 안내 노출 중에는 <code>Updated once a day</code>를 숨김(REQ-640: 지연 안내가 우선). Figma는 둘 다 보임 — 정책 우선'):info(T('Updated once a day','하루 한 번 업데이트돼요')));
- if(st==='complete')below=nb('-','0 cell')+info(T('Updated once a day','랭킹은 매일 업데이트돼요'))+C.note('완성 직후(랭킹 ON): 국문은 정책 문구 <code>랭킹은 매일 업데이트돼요</code>(REQ-654). 영문 원문 없음 — Figma 문구 유지');
- if(st==='final')below=nb('-','0 cell')+info(T(C.tbd('최종 순위 안내 EN','원문 없음'),'최종 순위는 결과 발표 때 확인할 수 있어요 · 10월 28일 09:00'));
+ if(st==='complete')below=nb('-','0 cell')+info(T('Rankings are updated daily.','랭킹은 매일 업데이트돼요'))+C.note('완성 직후(랭킹 ON): 국문 = 정책 문구(REQ-654), 영문 = 문구표_DEX');
+ if(st==='final')below=nb('-','0 cell')+info(T('Final rankings will be shown when results are announced · Oct 28, 09:00','최종 순위는 결과 발표 때 확인할 수 있어요 · 10월 28일 09:00'));
  if(ph==='end')below=info('The participation period has ended, so cells can no longer be checked.');
  const coin3d=mo?'':`<div style="position:absolute;right:-33px;top:-48px;width:160px;height:158px;overflow:hidden;pointer-events:none"><img src="${A('rw-mb-coin3d.png')}" style="position:absolute;left:-121px;top:-122px;width:444px;max-width:none" alt=""></div>`;
  return `<section style="background:#121721;padding:${mo?'48px 0':'100px 0'}">${wrap(`<div class="col g16" style="margin-bottom:${mo?40:80}px"><span class="b1 bold" style="color:#fff">01 / BINGO MISSION</span><div class="row between wrap" style="gap:8px"><span style="font-size:${mo?24:34}px;font-weight:700;color:#fff;line-height:1.235">Earn Cashback. Complete your bingo.</span><span class="b1" style="color:rgba(255,255,255,.7)">Rewards for each completed row or column</span></div></div>
@@ -1323,11 +1324,11 @@ function couponTerms(){if(MO())return `<div style="margin-top:24px">${moTerms()}
  const sec=(h,items)=>`<li style="margin-top:20px">${h}<ol type="a" style="margin:4px 0 0;padding-left:22px">${items.map(i=>`<li>${i}</li>`).join('')}</ol></li>`;
  return `<div class="card" style="border:0;margin-top:16px"><div class="b1 semi">Terms &amp; Conditions</div><ul class="b2" style="margin:8px 0 0;padding-left:18px;line-height:1.7">
  ${sec('Coupon expiration date',['Our coupon expriation date is based on UTC and the reward will be given after applying coupon.','Coupons without an expiration date can be used until deleting your account.','If you receive a coupon from TetherMax in an unusual way, the coupon may expire without notice.','When you cancel your membership, the coupon will expire immediately and will not be restored.','Expired coupons cannot be issued again.'])}
- ${sec('How to use coupon',['The amount from coupon use is added to the ‘event reward’.',C.tbd('쿠폰 사용엔 연동 계정(UID 또는 지갑) 최소 1개 필요 — 약관 문구','G-419 문구표'),'Coupons once have beeon used cannot be used again.','Same coupons provided as a benefit when signing up for an exchange UID that have been used once cannot be reused. (coupons provided as a benefit when signing up)'])}
+ ${sec('How to use coupon',['The amount from coupon use is added to the ‘event reward’.','To use a coupon, you must link at least one account (UID or wallet).','Coupons once have beeon used cannot be used again.','Same coupons provided as a benefit when signing up for an exchange UID that have been used once cannot be reused. (coupons provided as a benefit when signing up)'])}
  ${sec('Referral coupon',["'Referral coupon' will be issued to your account when you signing up by entering the friends' invitation code or through the friends' invitation link."])}
  ${sec('Welcome coupon',["Welcome coupon' will be issued ro new accounts signing up wihtout friends' invitation code."])}
  ${sec('Coupon for checking estimated cashback',["'Coupon for checking estimated cashback' is given to users who have finished the first cashback test after signing up."])}
- ${sec('Coupon for UID binding',["'Coupon for UID binding' is given after finishing binding exxhanges' UID for the first time."])}
+ ${sec('Coupon for UID binding',["'Coupon for UID binding' is given the first time you link a UID from a centralised exchange. Linking a DEX wallet does not qualify."])}
  ${sec('Alarm-on coupon',["'Alarm-on coupon' is issued to users who have turned on TetherMax app's notification and marketing notifications.",'You can only be eligible after turning the alarm on through TetherMax mobile application.'])}
  ${sec('Coupon for your first cashback',["'Coupon for your first casback' is issued after receiving the first casback to your TetherMax account."])}
  ${sec('Cashback TOP Coupon (1st, 2nd, 3rd, top 10%)',["'Cashback TOP coupon' is issued depending on the cashback amount of each exchange.","Please check ‘Benefits’ for details."])}
@@ -1340,7 +1341,8 @@ function couponPage(tab,list,n){const mo=MO();
 const couponList=()=>COUPONS.map(([n,t])=>couponRow(n,t)).join('');
 const couponDone=()=>COUPONS.map(([n,t],i)=>couponRow(n,t,{done:1,exp:'26/06/13, 23:59:59',status:i>=4?'Expired':'Used'})).join('')+couponRow('10',T('CHALLENGE','챌린지'),{done:1,exp:'Expired 10. 01. 09:00',status:'Expired'});
 const BG_CP='coupon.box:normal';
-R.screen({id:'coupon.box',group:'rewards',title:'쿠폰함',route:'/coupon',fu:['FU-070'],shell:{nav:'rewards',noTop:true},
+let cpNF=false; // notFound 상태는 기존 404 화면이 셸(GNB·상단 바)을 직접 그린다 — 쿠폰함 셸(푸터 포함)을 끈다
+const cpScr=R.screen({id:'coupon.box',group:'rewards',title:'쿠폰함',route:'/coupon',fu:['FU-070'],shell:{nav:'rewards',noTop:true},
  states:[
   {id:'normal',label:'Coupons 탭',figma:{pc:'11982:372438',mo:'11922:364127'},note:'[기존 MAX-499] 「Coupons available」 · V2.2 <code>cp/COUPON#normal</code>. 만료 쿠폰은 이 탭이 아니라 Completed 탭(MAXOP-796) · 같은 목록이 DEX 29062:117713/117894의 배경'},
   {id:'empty',label:'쿠폰 없음',figma:{pc:'11982:388195',mo:'11982:387214'},note:'[기존 MAX-499] 「No coupons」 — <code>No coupons available</code> + <code>View Benefits</code> · V2.2 <code>cp/COUPON#empty</code>. 기존 Web 프레임은 탭 배지가 7로 남아 있어 0으로 표시'},
@@ -1351,9 +1353,11 @@ R.screen({id:'coupon.box',group:'rewards',title:'쿠폰함',route:'/coupon',fu:[
   {id:'picker6',label:'계정 5개 초과 · Deactivated',figma:{mo:'12474:164724'},note:'[기존 MAX-499] 「Deactivated UIDs」 — 비활성 계정은 흐리게(배지 없음)·선택 불가(REQ-403). 5개 초과 목록은 다이얼로그 안 스크롤(디자인 없음) · V2.2 <code>cp/COUPON#picker6</code>'},
   {id:'done',label:'적용 완료',figma:{pc:'29065:7079',mo:'25994:12167'},note:'V2.2 <code>cp/COUPON#done</code> · 모바일은 [기존 MAX-499] MAXOP-782 「mWeb / Coupon claimed / with close」 전체 화면 · 라벨은 DEX면 <code>Wallet</code>(REQ-405)'},
   {id:'unable',label:'사용 불가',figma:{mo:'12474:164021'},note:'[기존 MAX-499] 「Error state」 — <code>Unable to Use Coupon</code> · PC는 같은 다이얼로그를 PC 폭으로(PC 프레임 없음) · V2.2 <code>cp/COUPON#unable</code>'},
+  {id:'notFound',label:'없는·남의 쿠폰 — 404',figma:null,note:'근거: 기존 [MAX-497] 404 error 회원(웹 12216:419863 · 12216:421961 · mWeb 12085:401487 · 12216:421112) 그대로 — 셸 포함, 쿠폰 경로 <code>/coupon/{id}</code>에 적용(점검 C12). <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},
   {id:'noAccount',label:'연동 계정 없음',note:'재사용 — 같은 「Error state」 다이얼로그 틀(12474:164021)에 G-196 연동 안내 + <code>Link Account</code>. 안내 문구 원문 없음 · V2.2 <code>cp/COUPON#noAccount</code>'},
  ],
- render(st){const mo=MO();
+ render(st){const mo=MO();cpNF=st==='notFound';
+  if(cpNF)return R.byId['cmn.notfound'].render('member');
   if(st==='normal')return couponPage('c',couponList(),7);
   if(st==='empty')return couponPage('c',emptyBox('No coupons available','View Benefits','benefits.list:normal'),0);
   if(st==='history')return couponPage('d',couponDone(),7);
@@ -1370,8 +1374,9 @@ R.screen({id:'coupon.box',group:'rewards',title:'쿠폰함',route:'/coupon',fu:[
    return ov(`<div style="background:#fff;border-radius:4px;width:480px;max-width:100%;box-shadow:var(--elev24);overflow:hidden">${doneBody}<div class="row g8" style="padding:32px 16px 16px">${greyBtn('Back to Home','home.main')}${C.btn('View Rewards',{full:true,go:'summary.main'})}</div></div>`)}
   const errDlg=(t,b,btn,go)=>`<div style="background:#fff;border-radius:4px;box-shadow:var(--elev24);width:${mo?'295px':'444px'};max-width:100%;padding:${mo?'20px':'24px'};display:flex;flex-direction:column;gap:16px">${t?`<div style="font-size:20px;line-height:1.6;font-weight:500;letter-spacing:.15px">${t}</div>`:''}<div class="b2 c2">${b}</div>${C.btn(btn,{full:true,go})}</div>`;
   if(st==='unable')return ov(errDlg('Unable to Use Coupon','This coupon is not eligible for use at this time.','OK',BG_CP));
-  if(st==='noAccount')return ov(errDlg('',C.tbd('연동 계정 없음 안내 문구','G-196 — 문구 원문 없음'),T('Link Account','거래 계정 연동하기'),'link.select'));
+  if(st==='noAccount')return ov(errDlg('',T('You need to link an account to use the coupon.','쿠폰을 사용하려면 거래 계정 연동이 필요해요'),T('Link Account','거래 계정 연동하기'),'link.select'));
  }});
+{const sh=cpScr.shell;Object.defineProperty(cpScr,'shell',{get(){return cpNF?false:sh},configurable:true,enumerable:true})}
 
 // =====================================================================
 // 글로벌 리그 (FU-064)
@@ -1440,7 +1445,7 @@ const BNF_ROWS=[{label:'New user exclusive benefits',cat:'EXTRA CASHBACK BOOST',
  {n:'5',cat:'WELCOME GIFT',desc:'Its your first time visiting our website.',btn:'Claim'},
  {n:'2',cat:'CASHBACK PREVIEW',desc:'Calculate your estimated cashback',btn:'Claim',go:'calc.p1'},
  {n:'1',cat:'NOTIFICATIONS',desc:'Turn on push notifications',btn:'Claim'},
- {n:'3',cat:'LINK UID',desc:'Bind your exchange UID',btn:'Claim',go:'benefits.list:uidm'},
+ {n:'3',cat:'LINK UID',desc:'Link a CEX UID to Get Cashback',btn:'Claim',go:'benefits.list:uidm'},
  {n:'10',cat:'FIRST CASHBACK',desc:'Claim your first cashback',btn:'Claim',go:'benefits.list:first'},
  {n:'10',unit:'USDT MAX',cat:'INVITATION REWARD',desc:'Referred a friend',btn:'Claim'}];
 function bnfList(member){return BNF_ROWS.map(r=>ticket({...r,desc:MO()?r.desc.replace(/\.$/,''):r.desc,go:member?r.go:'auth.signup'})).join('')}
@@ -1482,7 +1487,7 @@ R.screen({id:'benefits.list',group:'rewards',title:'혜택',route:'/benefits',fu
   if(st==='uidm')return bnfDetail({title:'Link UID to Get Cashback',sub:'Link your UID to start earning cashback and receive 3 USDT.',plus:'+3 USDT',amt:'3 USDT',imgH:220,img:`<img src="${A('rw-bd-uid.png')}" style="width:100%;height:100%;object-fit:cover" alt="">`,phone:1,
    cta:`<button class="btn contained primary lg" style="width:300px" data-go="link.select">Link UID and Get 3 USDT</button>`,moCta:C.btn('Link UID and Get 3 USDT Coupon',{full:true,go:'link.select'}),once:'This reward can only be claimed once per account.'})+C.note(T('Linking a DEX wallet does not qualify for this reward.','DEX 지갑 연동은 이 보상 대상이 아닙니다.')+' — V2.2 문구(REQ-396). 기존 화면에 이 안내 자리가 없어 note로만');
   if(st==='first')return bnfDetail({title:'First Withdrawal Reward',sub:'Withdraw your first cashback to receive a 10 USDT coupon.',plus:'+10 USDT',amt:'10 USDT',imgH:162,img:`<img src="${A('rw-bd-first.png')}" style="width:100%;height:100%;object-fit:cover" alt=""><img src="${A('rw-bd-first-obj.png')}" style="position:absolute;left:27.75%;width:46%;top:calc(50% - 10px);transform:translateY(-50%)" alt="">`,
-   cta:`<button class="btn contained primary lg" style="width:308px" disabled>${C.tbd('CTA 문구 (기존 Withdraw Cashback and Get 10 USDT)','G-419')}</button>`,moCta:`<button class="btn contained primary lg full" disabled>${C.tbd('CTA 문구 (기존 Link UID)','G-419')}</button>`,once:'This reward can only be claimed once per account.'})
+   cta:`<button class="btn contained primary lg" style="width:308px" disabled>Auto Claim</button>`,moCta:`<button class="btn contained primary lg full" disabled>Auto Claim</button>`,once:'This reward can only be claimed once per account.'})
    +C.note('제목·부제의 <code>Withdrawal</code>/<code>Withdraw</code>는 기존 원문 그대로 — 자동 지급 용어로 바꿀지 문구표(G-419). CEX·DEX 모두 대상(REQ-398)');
  }});
 
@@ -1490,19 +1495,19 @@ R.screen({id:'benefits.list',group:'rewards',title:'혜택',route:'/benefits',fu
 // 캐시백 챌린지 (FU-071 · FU-075) — 기존 [MAX-468] MAX-503 「Get Cashback Get Extra USDT」
 // =====================================================================
 const CH_LV=[['Level 1 Reward','5 USDT','rw-ch-1.png',158,174],['Level 2 Reward','7 USDT','rw-ch-2.png',161,161],['Level 3 Reward','10 USDT','rw-ch-3.png',148,148],['Level 4 Reward','15 USDT','rw-ch-4.png',178,178]];
-function chCard(i,pct){const [lb,amt,img,w,h]=CH_LV[i];const cur=i===0;
- const prog=`<div class="col g8" style="width:100%"><div class="row between" style="font-size:10px;line-height:10px"><span>${pct}%</span><span>${pct} <span style="color:var(--text-disabled)">/ 100 USDT</span></span></div><div style="height:4px;border-radius:4px;background:rgba(0,0,0,.12);overflow:hidden"><div style="width:${pct}%;height:100%;border-radius:4px;background:var(--blue)"></div></div></div><span style="font-size:10px;line-height:10px;letter-spacing:.15px;color:var(--text-secondary);text-align:center">Complete 100 USDT to claim reward</span>`;
+function chCard(i,pct,done){const [lb,amt,img,w,h]=CH_LV[i];const cur=done?i===1:i===0;const comp=done&&i===0;if(comp)pct=100;
+ const prog=`<div class="col g8" style="width:100%"><div class="row between" style="font-size:10px;line-height:10px"><span>${comp?'Complete':pct+'%'}</span><span>${pct} <span style="color:var(--text-disabled)">/ 100 USDT</span></span></div><div style="height:4px;border-radius:4px;background:rgba(0,0,0,.12);overflow:hidden"><div style="width:${pct}%;height:100%;border-radius:4px;background:var(--blue)"></div></div></div><span style="font-size:10px;line-height:10px;letter-spacing:.15px;color:var(--text-secondary);text-align:center">Complete 100 USDT to claim reward</span>`;
  const lock=`<div class="row center" style="gap:4px"><img src="${A('rw-ic-lock.svg')}" style="width:16px;height:16px" alt=""><span style="font-size:10px;line-height:10px;letter-spacing:.15px;color:var(--text-secondary)">Complete level ${i} reward to unlock</span></div>`;
- return `<div style="flex:none;width:220px;height:320px;border-radius:8px;border:2px solid ${cur?'var(--blue)':'rgba(187,226,255,.2)'};background:rgba(255,255,255,.38);backdrop-filter:blur(2px);padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between">
-  <div class="col center" style="gap:8px;align-items:center"><span style="border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px;${cur?'background:var(--blue);color:#fff':'background:rgba(0,0,0,.08);color:var(--text-disabled)'}">${lb}</span><span class="b1 semi">${amt}</span></div>
-  <div style="width:${w}px;height:${h}px;overflow:hidden;${cur?'':'opacity:.5'}"><img src="${A(img)}" style="${cur?'width:112.66%;margin-left:-12.5%;height:100%;max-width:none':'width:100%;height:100%'};object-fit:cover" alt=""></div>
-  <div class="col g8" style="width:100%">${cur?prog:lock}</div></div>`}
-function chPage(pct){const mo=MO();
+ return `<div style="flex:none;width:220px;height:320px;border-radius:8px;border:2px solid ${cur?'var(--blue)':'rgba(187,226,255,.2)'};${comp?'background:rgba(255,255,255,.6);':''};background:rgba(255,255,255,.38);backdrop-filter:blur(2px);padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between">
+  <div class="col center" style="gap:8px;align-items:center"><span style="border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px;${comp?'background:rgba(0,0,0,.08);color:var(--text-primary)':cur?'background:var(--blue);color:#fff':'background:rgba(0,0,0,.08);color:var(--text-disabled)'}">${comp?'Completed':lb}</span><span class="b1 semi">${amt}</span></div>
+  <div style="width:${w}px;height:${h}px;overflow:hidden;${cur||comp?'':'opacity:.5'}"><img src="${A(img)}" style="${i===0?'width:112.66%;margin-left:-12.5%;height:100%;max-width:none':'width:100%;height:100%'};object-fit:cover" alt=""></div>
+  <div class="col g8" style="width:100%">${cur&&done?prog.replace(/Complete 100 USDT/,'Complete 200 USDT').replace(/\/ 100 USDT/,'/ 200 USDT'):cur||comp?prog:lock}</div></div>`}
+function chPage(pct,done){const mo=MO();
  const head=`<div class="col center" style="gap:10px;align-items:center;text-align:center;width:311px;margin:0 auto;padding-top:16px"><span class="b1 semi">Unlock Your Cashback Goal!</span><span class="b2 c2">Cashback history is updated daily at 13:00</span></div>`;
- const claim=`<button class="btn contained primary lg" disabled style="${mo?'width:100%':'width:200px'}">Claim 5 USDT Coupon</button>`;
+ const claim=`<button class="btn contained primary lg" disabled style="${mo?'width:100%':'width:200px'}">Claim ${done?7:5} USDT Coupon</button>`;
  const terms=['The UID to receive event rewards cannot be changed once set.','This benefit may be subject to changes or termination due to our circumstances.','If benefits are received through fraudulent means, rewards may be revoked without notice.','Event rewards are not included in this list.','Once a UID is linked to participate in the challenge, it may not apply to the Cashback Challenge even if it is linked to another TetherMax account.',"The 'Claim' button will be disabled from 19:30 to 21:30 due to cashback challenge amount updates.",'Cashback transactions made while your UID is in issue status will not count towards the challenge.'];
- if(mo)return `${moHead('benefits.list:normal',{coupon:1})}<div class="col" style="gap:16px;padding:16px 0 0"><div style="padding:0 16px"><div style="background:rgba(187,226,255,.2);border-radius:8px;height:430px;overflow:hidden">${head}<div class="row" style="gap:24px;margin-top:30px;padding-left:46px;overflow-x:auto;align-items:flex-start">${CH_LV.map((_,i)=>chCard(i,pct)).join('')}</div></div></div><div style="padding:0 16px">${moTerms()}</div></div><div style="position:sticky;bottom:0;margin-top:120px;background:#fff;padding:16px">${claim}</div>`;
- return `<div style="max-width:960px;margin:0 auto;padding:80px 0 64px" class="col g24"><div style="background:rgba(187,226,255,.2);border-radius:8px;height:488px;position:relative">${head}<div class="row" style="position:absolute;left:16px;top:94px;gap:16px">${CH_LV.map((_,i)=>chCard(i,pct)).join('')}</div><div style="position:absolute;left:50%;top:430px;transform:translateX(-50%)">${claim}</div></div>
+ if(mo)return `${moHead('benefits.list:normal',{coupon:1})}<div class="col" style="gap:16px;padding:16px 0 0"><div style="padding:0 16px"><div style="background:rgba(187,226,255,.2);border-radius:8px;height:430px;overflow:hidden">${head}<div class="row" style="gap:24px;margin-top:30px;padding-left:46px;overflow-x:auto;align-items:flex-start">${CH_LV.map((_,i)=>chCard(i,pct,done)).join('')}</div></div></div><div style="padding:0 16px">${moTerms()}</div></div><div style="position:sticky;bottom:0;margin-top:120px;background:#fff;padding:16px">${claim}</div>`;
+ return `<div style="max-width:960px;margin:0 auto;padding:80px 0 64px" class="col g24"><div style="background:rgba(187,226,255,.2);border-radius:8px;height:488px;position:relative">${head}<div class="row" style="position:absolute;left:16px;top:94px;gap:16px">${CH_LV.map((_,i)=>chCard(i,pct,done)).join('')}</div><div style="position:absolute;left:50%;top:430px;transform:translateX(-50%)">${claim}</div></div>
   <div style="background:#fff;border-radius:16px;padding:16px" class="col g16"><span class="b1 semi">Terms &amp; Conditions</span><ul class="b2 c2" style="margin:0;padding-left:21px;display:flex;flex-direction:column;gap:4px">${terms.map(t=>`<li>${t}</li>`).join('')}</ul></div></div>`}
 R.screen({id:'challenge.detail',group:'rewards',title:'캐시백 챌린지 상세',route:'/benefits/cashback-challenge',fu:['FU-071','FU-075'],shell:{nav:'rewards',accent:true,noTop:true},
  states:[
@@ -1512,6 +1517,7 @@ R.screen({id:'challenge.detail',group:'rewards',title:'캐시백 챌린지 상�
  ],
  render(st){
   if(st==='pick')return ovSelf('challenge.detail','normal',pickDialog(T('Select an account for the reward','보상을 받을 계정을 선택하세요'),T('Once applied, it cannot be changed.','한 번 선택하면 변경할 수 없어요.'),acctList([ACC.bybit,ACC.bitget],[ACC.edge22]),{cancel:'challenge.detail:normal',ok:'challenge.detail:progress',disabled:1}),true);
+  if(st==='claimedPc')return chPage(0,true)+C.note('레벨 2 진행 표기(<code>/ 200 USDT</code> · <code>Complete 200 USDT to claim reward</code>)는 기존 「When user has claimed level 1 reward」(10739:232627 등) 카드 그대로. 레벨 금액은 운영 설정값(C2) — 표본');
   return chPage(st==='progress'?35:0)+C.note('약관의 <code>UID</code> 표현은 기존 원문 — DEX 지갑을 포함하는 문구로 바꿀지 문구표(G-419). G-429: 챌린지 배치 시각까지 도착한 원장만 그 배치에 반영');
  }});
 
@@ -1696,14 +1702,13 @@ const BASICS={title:'Cashback Basics: How Rewards work in TetherMax',img:'qz-thu
  ['TetherMax Points (TP)',['TetherMax has introduced TetherMax Points (TP), a rewards layer that sits on top of your cashback without changing it. The cashback you already earn stays exactly the same; points accumulate as an extra benefit. The loop is simple: trade → get cashback → earn points. Link your account once, and points build up as you go. You can also grow your points balance by inviting friends, so your network becomes part of the value.']],
  ['Exchange events and competitions',['Beyond steady cashback, TetherMax runs a rotating slate of exchange events and trading competitions with sizeable prize pools. These are hosted with partner exchanges and typically reward trading volume, ROI, PnL, or new sign-ups. Recent examples:',['OKX volume &amp; PnL competitions with prize pools around 350,000 USDT','MEXC volume competitions up to 500,000 USDT','Bitget monthly volume &amp; ROI events around 150,000 USDT','New-user and first-deposit bonuses, fee-free trading windows, and “cashback vault” events across Bybit, BingX, Bitunix, DeepCoin, and others']]],
  ['Task-based rewards',['TetherMax also hands out task-based USDT rewards while you set up. These have included:',['First visit to the site: up to 5 USDT','Turn on alerts: 1 USDT','Calculate your estimated cashback: 2 USDT','Link your UID: 3 USDT','Claim your first cashback: 10 USDT','Claim cashback monthly: up to 100 USDT','Refer a friend: up to 10 USDT per referral, plus ongoing invite bonuses']]],
- ['Withdraw cashback and rewards',[['__MIN__','__EVR__','Once requirements are met, funds land in your exchange account roughly 5 minutes to 1 hour after you request the withdrawal.','__HOW__']]],
- ['Cashback history',['Cashback timelines and update schedules differ by exchange, and you can view your full history in the Cashback Summary section by exchange, UID, and reward type.']]],
+ ['Withdraw cashback and rewards',[['__MIN__','__EVR__','Once requirements are met, TetherMax sends the amount to that account automatically. You don’t need to request it.','__HOW__']]],
+ ['Cashback history',['Cashback timelines and update schedules differ by exchange, and you can view your full history in the Cashback Summary section by exchange, account, and reward type.']]],
  take:['If you are talking about how much money you put down, you are talking about margin. If you are talking about how much bigger your position becomes, you are talking about leverage. You can use margin without extreme leverage, but once leverage increases, the risks increase too.']};
 R.screen({id:'quiz.basics',group:'quiz',title:'Cashback Basics 아티클 문구',route:'/beginner-guide/cashback-basics',fu:['FU-076'],shell:{nav:'discover',back:'quiz.list',moTitle:['Beginner’s Guide','초보자 가이드'],moNav:'home'},
  states:[{id:'normal',label:'본문 교체 (거래 계정 · 자동 지급)',figma:{pc:'19604:32207'},note:'[기존 MAX-] Quiz 「Signed In, Module 3」 — Cashback Basics 아티클 원문 · V2.2 <code>cmn/BASICS#normal</code> · REQ-714: 「Withdraw cashback and rewards」 문단의 UID 기준 3문장을 거래 계정·자동 지급 문장으로 교체(확정 문구 없음, G-419) · 게스트 문장 삭제. 모바일 아티클 프레임 없음 — 퀴즈 아티클 모바일 틀'}],
  render(){
-  const tbd=(t,orig)=>`${C.tbd(t,'G-419 문구표')}`;
-  const map={'__MIN__':'Minimum withdrawal: '+tbd('거래 계정 기준 문장'),'__EVR__':'Event Reward Rules: '+tbd('거래 계정 기준 문장'),'__HOW__':'How: '+tbd('10 USDT 이상이면 자동 지급 문장')};
+  const map={'__MIN__':'Minimum claim: Once an account’s remaining cashback plus matched event rewards reaches 10 USDT or more, it is claimed automatically.','__EVR__':'Event reward rule: Event rewards can only be withdrawn alongside exchange cashback for the same account, at a 1:1 ratio. Your cashback for that account must be at least equal to the event reward amount.','__HOW__':'How: Link your account. Each account is claimed automatically once it reaches 10 USDT, with nothing to press.'};
   const a={...BASICS,sec:BASICS.sec.map(([h,ps])=>[h,ps.map(p=>Array.isArray(p)?p.map(x=>map[x]||x):p)])};
   ART.basics=a;
   return qzArticle('basics',false)+C.note('교체 전 원문: <code>Minimum withdrawal: You can request a withdrawal once the combined balance of remaining cashback plus event rewards for a UID reaches 10 USDT or more.</code> · <code>Event Reward Rules: Event rewards can be withdrawn combined with exchange cashback under the same UID up to a 1:1 ratio. The withdrawable event reward amount cannot exceed your available cashback balance.</code> · <code>How: Members log in and click Withdraw from the home screen. Non-members can select their exchange, enter their UID, and withdraw from the homepage.</code>(게스트 문장 삭제). <code>Link your UID: 3 USDT</code>는 CEX 첫 연동이라 유지(REQ-714). KEY TAKEWAYS는 기존 프레임 원문(다른 모듈 내용이 들어가 있음 — 질문 목록)');
@@ -1935,12 +1940,12 @@ R.screen({id:'cex.list',group:'cex',title:'거래소 목록 (CEX · 기존)',rou
  states:[
   {id:'normal',label:'기본 — 표 (Recommended)',figma:{pc:'22598:410917',mo:'5145:52544'},note:'[기존 MAXOP-692] Figma (Updated) · 모바일 [기존 MAX-22] list view'},
   {id:'search',label:'검색 결과',figma:{mo:'5145:51653'},note:'[기존 MAX-22] Search Results — PC 검색 결과 프레임 없음(같은 표에 필터)'},
-  {id:'empty',label:'검색 결과 없음',figma:null,note:'디자인 없음 — 표 안 빈 상태 원문 없음'},
+  {id:'empty',label:'검색 결과 없음',figma:null,note:'디자인 없음 — 빈 검색 문구는 기존 제품 문구(언어팩 <code>no results found for</code>, 결정 N13)'},
  ],
  render(st){
   const L=window.CMN_LISTING;if(!L)return '';
   if(st==='search')return L('table',{q:'bit',chip:'all'})+C.note('검색어 입력 시 표가 즉시 필터(기존 화면).');
-  if(st==='empty')return L('table',{q:'abcd',chip:'all',empty:`<div class="empty">${C.tbd('검색 결과 없음 문구','원문 없음')}</div>`});
+  if(st==='empty')return L('table',{q:'abcd',chip:'all',empty:`<div class="empty">${T('No results found for <strong>abcd</strong>','<strong>abcd</strong>에 대한 검색 결과가 없습니다')}</div>`});
   return L('table')+C.note('CEX만 — DEX를 넣지 않는다(REQ-466 · FU-089). 카드 뷰는 <a data-go="cmn.listing:cards">cmn.listing</a>.');
  }});
 
@@ -1971,12 +1976,12 @@ const dexBadge=n=>DEXN.includes(n)?C.badge('DEX','dex'):'';
 // Figma 표 = 랜딩 28960:128525 · 서비스 소개 28960:129611. 공개 피드는 서버 마스킹 값만(DEX 지갑 고정 마스크 + 끝 4자리, CEX UID 끝 4자리)
 const FEED=[['*******8814','Bitget','197.27'],['*****0465','BingX','197.27'],['********…51e9','Lighter','14.46'],['*************7941','MEXC','160.34'],['********…22f0','ApeX','526.34']];
 function feedTable(st,w=1080){
- const th=[T('Accounts','거래 계정'),T('Partner','거래소'),T('Cashback','캐시백'),T('Payout Time','출금 시각'),T('Status','상태')];
+ const th=[T('Accounts','거래 계정'),T('Partner','거래소'),T('Cashback','캐시백'),T('Withdrawal Time','출금 시각'),T('Status','상태')];
  const cell=(x,i,o='')=>`<div style="${i===1?'width:125px;flex:none':'flex:1;min-width:0'};display:flex;align-items:center;justify-content:center;gap:6px;padding:0 4px;height:56px;text-align:center;${o}">${x}</div>`;
  let rows;
  if(st==='loading')rows=Array.from({length:5},()=>`<div class="row" style="gap:0">${[0,1,2,3,4].map(i=>cell(C.skel(i===1?'28px':'60%',i===1?28:14),i)).join('')}</div>`).join('');
- else if(st==='empty')rows=`<div class="empty" style="padding:40px 16px">${C.tbd('피드 빈 상태 문구','원문 없음 — G-137 확정은 「완료 건만 표시」')}</div>`;
- else if(st==='error')rows=`<div class="empty" style="padding:40px 16px">${C.tbd('피드 로드 실패 문구','원문 없음 — G-137 확정은 「실패 사유 미표시」')}</div>`;
+ else if(st==='empty')rows=`<div class="empty" style="padding:40px 16px">${T('No cashback activity yet.','아직 캐시백 내역이 없습니다.')}</div>`;
+ else if(st==='error')rows=`<div class="empty" style="padding:40px 16px">${T('No cashback activity yet.','아직 캐시백 내역이 없습니다.')}</div>`;
  else rows=FEED.map(([acc,p,amt])=>`<div class="row" style="gap:0">${cell(`<span class="b2 med">${acc}</span>`,0)}${cell(logo(p,28)+dexBadge(p),1)}${cell(`<span class="b2 med">${amt} USDT</span>`,2)}${cell(`<span class="cap c2" style="line-height:12px">07/24/2026, 18:18</span>`,3)}${cell(`<span class="row" style="gap:4px"><i style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block"></i><span class="cap cb" style="line-height:12px">${T('Completed','완료')}</span></span>`,4)}</div>`).join('');
  const tbl=`<div style="min-width:${mo()?640:0}px;background:#fff;border:1px solid #f2f2f5;border-radius:12px;overflow:hidden"><div class="row" style="gap:0;background:#f2f2f5">${th.map((t,i)=>cell(`<span class="b2 med c2">${t}</span>`,i,'height:44px')).join('')}</div>${rows}</div>`;
  return `<div style="${W(w)};${mo()?'overflow-x:auto':''}">${tbl}</div>`;
@@ -2006,8 +2011,8 @@ function lndPartners(st){
   ${img('lnd-popular-bg.png','position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:475px;height:190px;object-fit:cover;opacity:.32')}
   <span class="h6 bold" style="position:relative">Most popular exchange</span>
   <div class="col" style="gap:20px;align-items:center;justify-content:center;height:218px;position:relative">${hd?C.dex('EdgeX',80):img('lnd-bitget.png','width:80px;height:80px;border-radius:20px')}
-   <div class="col" style="gap:8px;align-items:center"><span class="cap c3">${hd?C.tbd('Promo Tagline — 운영자 입력 EN·KO','REQ-288'):'Official Partner Exchanges'}</span><div class="col" style="gap:0;align-items:center"><span class="b2">${hd?'EdgeX':'Bitget'}</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${hd?C.tbd('Total Savings — 레코드 total_savings_rate','REQ-060'):'77% <span style="color:#1c1c1e">Total Savings</span>'}</span></div></div></div>
-  <button class="btn contained primary lg full" style="position:relative" data-go="${hd?'dex.detail:edgex':'cex.list'}">${hd?C.tbd('CTA Button Title — 운영자 입력','REQ-288'):'Browse Partner Exchange'}</button></div>`;
+   <div class="col" style="gap:8px;align-items:center"><span class="cap c3">Official Partner Exchanges</span><div class="col" style="gap:0;align-items:center"><span class="b2">${hd?'EdgeX':'Bitget'}</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${hd?'30%':'77%'} <span style="color:#1c1c1e">Total Savings</span></span></div></div></div>
+  <button class="btn contained primary lg full" style="position:relative" data-go="${hd?'dex.detail:edgex':'cex.list'}">Browse Partner Exchange</button></div>`;
  const top=card(`<div class="col" style="gap:4px"><span class="h6 bold">TOP 5 Traders in December</span><span class="cap c3" style="line-height:12px">As of Aug 5, 2026 (Cashback)</span></div>
   <div class="col" style="gap:0;margin-top:4px">${[['Bitget','Bitget trader','4,051.38'],['Bitunix','BingX trader','4,561.12'],['Lighter','Lighter trader','4,561.12'],['OKX','Bitmart trader','3,051.38'],['EdgeX','EdgeX trader','2,051.38']].map(([l,n,v])=>`<div class="row" style="gap:12px;height:56px;padding:8px">${logo(l,32)}<div class="col" style="gap:4px"><span class="cap c2">${n}</span><span class="b2 semi">${v} USDT</span></div></div>`).join('')}</div>`,'flex:1;min-width:0;height:424px');
  const days=['8/11','8/12','8/13','8/14','8/15','8/16','8/17','8/18','8/19','8/20','8/21','8/22','8/23','8/24','8/25'];
@@ -2030,7 +2035,7 @@ function lndSteps(){
  const conn=`<div style="width:24px;height:56px;display:flex;justify-content:center"><i style="width:1px;background:#bdbdbd;display:block"></i></div>`;
  return sec(`<div style="${W(1080)};${flexRC(48)};justify-content:center">${phone('lnd-phone-screen.jpg',refCard())}
   <div class="col" style="gap:40px;width:${mo()?'100%':'500px'}"><p style="margin:0;font-size:34px;line-height:1.235;font-weight:700">Three steps to cashback</p>
-  <div class="col" style="gap:8px">${step(1,'Sign up with our code','Sign up to the exchange with our referral code',1)}${conn}${step(2,'Link your exchange account','Link your exchange UID or wallet address to TetherMax')}${conn}${step(3,'Get automatic payouts in USDT','Each linked account is paid automatically once its claimable balance reaches 10 USDT.')}</div></div></div>`)}
+  <div class="col" style="gap:8px">${step(1,'Sign up with our code','Sign up to the exchange with our referral code',1)}${conn}${step(2,'Link your exchange account','Link your exchange UID or wallet address to TetherMax')}${conn}${step(3,'Get cashback in USDT automatically','Each linked account is paid automatically once its claimable balance reaches 10 USDT.')}</div></div></div>`)}
 function lndQuiz(){return sec(`<div style="${W(1080)};${flexRC(64)}">${img('lnd-quiz.png','width:320px;height:320px;flex:none;margin:0 auto')}<div class="col" style="gap:32px;flex:1"><div class="col" style="gap:12px"><p style="margin:0;font-size:34px;line-height:1.235;font-weight:700">New to futures?<br>Learn and earn</p><p class="b1 c2" style="margin:0">Short lessons, a quick quiz, and the rewards are yours.</p></div><div>${C.btn('Get Started',{go:'quiz.list'})}</div></div></div>`,{bg:'#f8fafc'})}
 // 이벤트 카드 (eventCard/competition · signup)
 function evCard(o){
@@ -2077,7 +2082,7 @@ function siHero(){return `<section style="position:relative;min-height:${mo()?56
 function siPartners(){return sec(`<div class="col" style="gap:64px;overflow:hidden">${head('','Cashback on the exchanges you already trade on','')}<div class="col" style="gap:28px"><div class="row" style="gap:28px;justify-content:center;flex-wrap:nowrap">${WORDS.map(chipW).join('')}</div><div class="row" style="gap:28px;justify-content:center;flex-wrap:nowrap;margin-left:-120px">${WORDS2.map(chipW).join('')}</div></div></div>`,{bg:'#f8fafc',p:'120px 0',mp:'48px 0'})+
  `<section style="min-height:${mo()?420:1362}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:radial-gradient(ellipse 45% 18% at 50% 8%,#a9d3ff 0,rgba(169,211,255,0) 70%),radial-gradient(ellipse 70% 30% at 50% 88%,#8fbaff 0,rgba(143,186,255,0) 70%),linear-gradient(180deg,#dcebfd,#f3f8ff 50%,#cfe2fb)"><span class="b1 semi">Official Partner Exchanges</span><span style="font-size:${mo()?64:96}px;line-height:1;font-weight:700;color:var(--blue)">23+</span></section>`+
  `<section style="height:${mo()?260:408}px;background:#333 url('${A('lnd-si-support.jpg')}') center/cover;display:flex;flex-direction:column;justify-content:flex-end;padding:${mo()?'24px 16px':'0 180px 64px'};color:#fff"><p style="margin:0;font-size:${mo()?28:48}px;font-weight:700;line-height:1.2">24/7 Customer Support</p><p class="cap" style="margin:8px 0 0">Real humans, no bots. Every message you send helps us make TetherMax better.</p></section>`}
-function siFeed(st){return sec(`<div class="col" style="gap:64px">${head('Real-time cashback','Someone just got paid.<br>Watch it happen.','Eligible account balances are paid automatically from 10 USDT.')}${feedTable(st,960)}</div>`,{p:'120px 24px'})}
+function siFeed(st){return sec(`<div class="col" style="gap:64px">${head('Real-time cashback',T('Someone is cashing out right now','지금 이 순간에도 누군가는 캐시백을 받고 있어요'),T("Claim every cent you've earned",'쌓인 캐시백을 한 푼도 빠짐없이 받아가세요'))}${feedTable(st,960)}</div>`,{p:'120px 24px'})}
 function siWhy(){return sec(`<div class="col" style="${W(960)};gap:64px;align-items:center">${head('','Why traders never leave','')}
  <div style="width:100%;border-radius:24px;background:linear-gradient(90deg,#1e2a5a,#3352b8);${flexRC(40)};padding:${mo()?'24px':'40px 64px'};color:#fff;min-height:320px">${img('lnd-si-guarantee.png','width:240px;height:240px;flex:none;margin:0 auto')}<div class="col" style="gap:12px"><span style="font-size:${mo()?24:34}px;font-weight:700;line-height:1.235">Highest Cashback<br>Rate Guarantee</span><span class="b1" style="opacity:.85">We guarantee the highest cashback rate in the industry, compared to any cashback service, KOL, or influencer.</span></div></div>
  <div class="row" style="gap:4px"><i style="width:20px;height:8px;border-radius:4px;background:#c4c8d0"></i>${'<i style="width:8px;height:8px;border-radius:4px;background:#dde0e5"></i>'.repeat(4)}</div></div>`,{p:'160px 24px'})}
@@ -2087,7 +2092,7 @@ function siHow(){
  return sec(`<div class="col" style="${W(1080)};gap:64px">${head('','<span class="cb">How is cashback even possible?</span>','')}
   ${mo()?`<div class="col" style="gap:12px">${box(1,'Trading fee incurred','A trader trades on a partner exchange and pays a trading fee.','')}${box(2,'Referral revenue earned','The exchange pays referral revenue to the referrer (TetherMax).','')}${box(3,'Returned to the customer','TetherMax returns that referral revenue to you as cashback.','')}</div>`
   :`<div style="position:relative;height:675px">${box(1,'Trading fee incurred','A trader trades on a partner exchange and pays a trading fee.','left:380px;top:0')}<div style="position:absolute;left:330px;top:150px">${ring}</div>${box(2,'Referral revenue earned','The exchange pays referral revenue to the referrer (TetherMax).','right:0;top:510px')}${box(3,'Returned to the customer','TetherMax returns that referral revenue to you as cashback.','left:0;top:510px')}</div>`}</div>`,{p:'120px 24px'})}
-function siSteps(){return sec(`<div class="col" style="${W(1080)};gap:64px;align-items:center">${head('Get ready to earn cashback','Three steps to start earning cashback','Join a partner through your TetherMax referral and link your exchange UID or DEX wallet address.')}
+function siSteps(){return sec(`<div class="col" style="${W(1080)};gap:64px;align-items:center">${head('Get ready to earn cashback','Three steps to start earning cashback',T('Join an exchange with your TetherMax code and just link your account. Done, under 3 minutes!','테더맥스 코드로 거래소에 가입하고 거래 계정만 연동하면 끝! 3분도 안 걸려요!'))}
  ${phone('lnd-phone-screen.jpg',`<span style="font-size:10px;color:var(--blue)">Referral Code</span><div class="row" style="border:1px solid var(--blue);border-radius:6px;padding:7px 10px"><span class="grow" style="font-size:13px;font-weight:600;color:var(--blue)">TetherMax code</span>${img('lnd-ic-check-circle.svg','width:18px;height:18px')}</div><span style="font-size:8.6px;color:var(--blue)">You will receive a 20% discount for 90 days.</span>`)}
  <div class="row" style="gap:4px"><i style="width:20px;height:8px;border-radius:4px;background:#c4c8d0"></i><i style="width:8px;height:8px;border-radius:4px;background:#dde0e5"></i></div></div>`,{p:'120px 24px'})}
 function siBoost(){
@@ -2106,7 +2111,7 @@ function siGuide(){return `<section style="position:relative;min-height:${mo()?3
  <div class="col" style="gap:16px;position:relative;max-width:720px"><p style="margin:0;font-size:${mo()?28:48}px;line-height:1.2;font-weight:700">Earn Cashback While You<br>Learn to Trade Smarter</p><p class="cap" style="margin:0">Complete lessons and quizzes to earn coupons. Redeemed quiz rewards match trading cashback 1:1.</p><div>${C.btn('Beginner’s Guide',{size:'md',go:'quiz.list',iconEnd:'arrow-forward'})}</div></div></section>`}
 function siKol(){
  const st=(n,t,d)=>`<div style="background:#f8fafc;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:16px;display:flex;gap:12px;width:${mo()?'100%':'320px'}"><span class="cap c2" style="width:20px;height:20px;background:#eceef1;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:26px">${n}</span><div class="col" style="gap:6px"><span class="b1 bold">${t}</span><span class="b2 c2">${d}</span></div></div>`;
- return sec(`<div class="col" style="${W(1080)};gap:64px;align-items:center">${head('Revenue that grows as you bring traders','Your audience trades. You get paid.','Every time a trader you invite links their account and trades, you earn rewards.')}
+ return sec(`<div class="col" style="${W(1080)};gap:64px;align-items:center">${head('Revenue that grows as you bring traders','Your audience trades. You get paid.',T('Every time a trader you invite links an account and trades, you earn rewards.','초대한 트레이더가 거래 계정을 연동하고 거래할 때마다, 보상으로 리워드를 받을 수 있어요.'))}
  <div style="${flexRC(40)};justify-content:space-between;width:100%"><div class="col" style="gap:16px">${st(1,'User inflow','Bring traders via KOL channels.')}${st(2,'Account linked','Traders you invite join an exchange with the TetherMax code and link their account.')}${st(3,'Cashback becomes revenue','The cashback of traders you invite becomes KOL revenue.')}</div>
  <div class="col" style="align-items:center;gap:0;position:relative"><i style="width:144px;height:144px;border-radius:50%;background:var(--blue);display:block;margin-bottom:-72px"></i>${img('lnd-si-funnel.png','width:400px;max-width:100%;position:relative')}${img('lnd-si-coins.png','width:120px;margin-top:-20px')}</div>
  ${card(`<div class="col" style="gap:4px"><span class="cap c2">Cashback accumulating</span><span class="h5 bold">20,021 USDT</span><span class="b2 cb">As inflow → link → conversion repeats, revenue keeps growing steadily.</span></div>`,`width:${mo()?'100%':'320px'}`)}</div>
@@ -2129,7 +2134,7 @@ R.screen({id:'about.intro',group:'landing',title:'서비스 소개',route:'/serv
   {id:'error',label:'피드 실패',figma:null,note:'V2.2 etc/ABOUT#error'},
  ],
  render(st){
-  const n=C.note(`FU-043 · REQ-287: 공식 파트너 캐러셀(Figma 「Cashback on the exchanges you already trade on」)은 서비스 소개에만 두고 CEX·DEX 표시 내용·로고·순서·노출을 API 레코드로 받음(고정 목록 없음). G-190 확정: DEX 포함(전역 순위), 별도 DEX 문구 없음. REQ-715 · G-419: 「UID」 단독 표기 대신 거래 계정 — Figma 문구 「link your exchange UID or DEX wallet address」.${st==='normal'?'':` 이 상태는 피드 영역만 다름(V2.2 <code>etc/ABOUT#${st}</code>) — 디자인 없음.`}<br>히어로·23+·24/7 영역은 Figma 「히어로배너 진입 애니메이션」 등의 정적 첫 프레임. Bitget 가입 화면 폰 목업은 랜딩 폰 화면 에셋으로 대체. 크리에이터 카드의 SNS 아이콘은 에셋 미수신으로 생략.`);
+  const n=C.note(`FU-043 · REQ-287: 공식 파트너 캐러셀(Figma 「Cashback on the exchanges you already trade on」)은 서비스 소개에만 두고 CEX·DEX 표시 내용·로고·순서·노출을 API 레코드로 받음(고정 목록 없음). G-190 확정: DEX 포함(전역 순위), 별도 DEX 문구 없음. REQ-715 · G-419: 「UID」 단독 표기 대신 거래 계정 — 부제는 문구표 #75(9차 결정).${st==='normal'?'':` 이 상태는 피드 영역만 다름(V2.2 <code>etc/ABOUT#${st}</code>) — 디자인 없음.`}<br>히어로·23+·24/7 영역은 Figma 「히어로배너 진입 애니메이션」 등의 정적 첫 프레임. Bitget 가입 화면 폰 목업은 랜딩 폰 화면 에셋으로 대체. 크리에이터 카드의 SNS 아이콘은 에셋 미수신으로 생략.`);
   return `<div style="padding:0 ${mo()?16:40}px">${n}</div>${siHero()}${siPartners()}${siFeed(st)}${st==='normal'?'':`<div style="padding:0 40px">${feedNote(st)}</div>`}${siWhy()}${siHow()}${siSteps()}${siBoost()}${siBenefits()}${siEvents()}${siGuide()}${siKol()}${siCreators()}${siReviews()}${siCta()}`;
  }});
 
@@ -2200,10 +2205,10 @@ R.screen({id:'guest.search',group:'guest',title:'비회원 캐시백 조회',rou
 
 // ---------- 조회 결과 (읽기 전용) ----------
 const RES={
- above:{a:'dex',amt:'14.00 USDT',rows:[['Exchange Cashback','7.00 USDT'],['Matched event reward','7.00 USDT']],cap:'10 USDT minimum reached. Link to receive payouts.',label:'조회 성공 · 10 USDT 이상',fig:{pc:'29035:97792',mo:'29035:97855'}},
- below:{a:'dex',amt:'6.00 USDT',cap:'Below the 10 USDT payout minimum.',label:'조회 성공 · 10 USDT 미만',fig:{pc:'29035:98631',mo:'29035:98694'}},
+ above:{a:'dex',amt:'14.00 USDT',rows:[['Exchange Cashback','7.00 USDT'],['Matched event reward','7.00 USDT']],cap:['10 USDT minimum reached. Link this account to receive it.','최소 금액 10 USDT를 넘었어요. 이 거래 계정을 연동하면 받을 수 있어요.'],label:'조회 성공 · 10 USDT 이상',fig:{pc:'29035:97792',mo:'29035:97855'}},
+ below:{a:'dex',amt:'6.00 USDT',cap:['Below the 10 USDT minimum to claim.','출금 최소 금액 10 USDT에 못 미쳐요.'],label:'조회 성공 · 10 USDT 미만',fig:{pc:'29035:98631',mo:'29035:98694'}},
  zero:{a:'dex',amt:'0.00 USDT',cap:'No cashback recorded yet.',label:'조회 성공 · 잔액 0',fig:{pc:'29035:98754',mo:'29035:98817'}},
- belowcex:{a:'cex',amt:'8.00 USDT',cap:'Below the 10 USDT payout minimum.',label:'CEX · UID 잔액 조회 성공',fig:{pc:'29035:99309',mo:'29035:99372'}},
+ belowcex:{a:'cex',amt:'8.00 USDT',cap:['Below the 10 USDT minimum to claim.','출금 최소 금액 10 USDT에 못 미쳐요.'],label:'CEX · UID 잔액 조회 성공',fig:{pc:'29035:99309',mo:'29035:99372'}},
  handoff:{a:'dex',handoff:1,label:'로그인 후 · 계정 미연동 (DEX)',fig:{pc:'29035:97915',mo:'29035:97974'}},
  handoffcex:{a:'cex',handoff:1,label:'CEX · 로그인 후 같은 UID 연동',fig:{pc:'29037:102463',mo:'29037:102530'}},
 };
@@ -2213,7 +2218,7 @@ function acctCard(r){
  const top=`<div style="background:#fff;border-radius:8px;overflow:hidden"><div class="row" style="gap:8px;padding:12px 16px">${mark(a.name,40)}<div class="col" style="gap:0"><span class="b2 semi">${a.name}</span><span class="cap c2">${a.kind}&nbsp; ${a.short}</span></div></div>${banner}</div>`;
  let body;
  if(r.handoff)body=`<div class="col" style="gap:12px"><span class="b1 center">Link this trading account</span><hr class="divider"><span style="font-size:10px;color:var(--text-secondary)">Finish linking this account to receive cashback.</span>${C.btn('Link account',{full:true,go:linkGo})}</div>`;
- else body=`<div class="col" style="gap:12px"><div class="row between"><span class="b2">Available Cashback</span><span class="b1 bold">${r.amt}</span></div><hr class="divider">${(r.rows||[]).map(([k,v])=>`<div class="row between" style="font-size:11px;color:var(--text-secondary)"><span>${k}</span><span>${v}</span></div>`).join('')}<span style="font-size:10px;color:var(--text-secondary)">${r.cap}</span>${C.btn('Sign up to link account',{full:true,go:'auth.signup'})}</div>`;
+ else body=`<div class="col" style="gap:12px"><div class="row between"><span class="b2">Available Cashback</span><span class="b1 bold">${r.amt}</span></div><hr class="divider">${(r.rows||[]).map(([k,v])=>`<div class="row between" style="font-size:11px;color:var(--text-secondary)"><span>${k}</span><span>${v}</span></div>`).join('')}<span style="font-size:10px;color:var(--text-secondary)">${Array.isArray(r.cap)?T(...r.cap):r.cap}</span>${C.btn('Sign up to link account',{full:true,go:'auth.signup'})}</div>`;
  return `<div class="col" style="gap:12px;width:${mo()?'100%':'346px'};flex:none">${top}<div style="background:#fff;border-radius:8px;padding:16px">${body}</div></div>`}
 function sideRecs(){
  const tile=(n,bg,inner,pct)=>`<div class="col" style="gap:4px;flex:none;width:${mo()?106:155}px"><div style="height:${mo()?60:80}px;background:${bg};display:flex;align-items:center;justify-content:center;overflow:hidden">${inner}</div><span class="cap" style="color:var(--text-secondary)">${n}</span><span class="cap med">${pct} Total Savings</span></div>`;
@@ -2316,16 +2321,16 @@ const isCex=n=>!!CEXLOGO[n];
 
 // 상태 7단계(REQ-272) + DEX 칩(REQ-273). 색은 의미별 4토큰(G-058): done 완료 · prog 진행 · warn 주의 · off 실패/해제
 const ST={
- own:{lb:'소유 확인중',tone:'prog',pri:1,linked:false},
- pend:{lb:'연동 시도중이에요',tone:'prog',pri:2,linked:false},
- issue:{lb:'이슈',tone:'warn',pri:3,linked:false},
- ok:{lb:'연동 완료',tone:'done',pri:4,linked:true},
- fail:{lb:'연동 실패',tone:'off',pri:5,linked:false},
- ownfail:{lb:'소유 확인 실패',tone:'off',pri:6,linked:false},
- unlinked:{lb:'연동 해제',tone:'off',pri:7,linked:false},
- zero:{lb:'No cashback yet',tone:'prog',linked:true},
- delayed:{lb:'Data delayed',tone:'warn',linked:true},
- inactive:{lb:'Inactive',tone:'off',linked:true},
+ own:{get lb(){return T('Verifying ownership','소유 확인중이에요')},tone:'prog',pri:1,linked:false},
+ pend:{get lb(){return T('Trying to link','연동 시도중이에요')},tone:'prog',pri:2,linked:false},
+ issue:{get lb(){return T('There’s an issue','문제가 있어요')},tone:'warn',pri:3,linked:false},
+ ok:{get lb(){return T('Linked','연동 완료')},tone:'done',pri:4,linked:true},
+ fail:{get lb(){return T('Linking failed','연동 실패했어요')},tone:'off',pri:5,linked:false},
+ ownfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'off',pri:6,linked:false},
+ unlinked:{get lb(){return T('Unlinked','연동 해제되었어요')},tone:'off',pri:7,linked:false},
+ zero:{get lb(){return T('No cashback yet','아직 캐시백이 없어요')},tone:'prog',linked:true},
+ delayed:{get lb(){return T('Data delayed','반영 지연')},tone:'warn',linked:true},
+ inactive:{get lb(){return T('Inactive','비활성')},tone:'off',linked:true},
 };
 const DOT={done:'#2ea652',prog:'#ed6b03',warn:'#ed6b03',off:'rgba(0,0,0,0.38)'};
 // 칩: Figma HW1(주의 = 채움 #e65100) · S4-6(진행 = 파랑 외곽선) · PW1(완료 = 연녹 채움). 실패/해제는 MUI 기본 칩
@@ -2375,9 +2380,9 @@ function linkedCard(rows,o={}){
   :(o.max?rows.slice(0,o.max):rows).map(a=>accRow(a,{app,full:o.full})).join('');
  const more=o.max&&rows.length>o.max?`<button class="btn text black sm full">${T('See more','더보기')} (${rows.length-o.max})</button>`:'';
  const line=`<hr class="divider" style="margin:0">`;
- const cum=o.cum===false||o.loading?'':`${line}${cumulative(rows)}`;
+ const cum=o.cum===false||o.loading||S.vp==='mo'?'':`${line}${cumulative(rows)}`;
  return `<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:12px">
-  <div class="row between"><span class="b1 semi">Linked Accounts</span><button class="btn text primary sm" style="padding:4px 5px">See All</button></div>
+  <div class="row between"><span class="b1 semi">Linked Accounts</span><button class="btn text primary sm" style="padding:4px 5px" data-go="home.main:seeAll">See All</button></div>
   ${o.top||''}<div class="col" style="gap:12px">${list}</div>${more}
   ${cum?line:''}<button class="btn text primary sm full" style="padding:4px 5px" data-go="link.select:all">${foot}</button>${cum}</div>`}
 // 누적 캐시백 요약 — 기존 [MAX-7] MAXOP-731 `Cumulative Cashback Summary`(Web 22913:1054295 · mWeb 22931:51476)를 Linked Accounts 카드 안 맨 아래에 그대로
@@ -2389,7 +2394,7 @@ function cumulative(rows=[]){
   <div class="row" style="gap:10px;height:58px"><img src="${HA('safe.png')}" style="width:58px;height:58px;object-fit:cover;flex:none" alt="">
    <div class="col" style="gap:4px"><span class="row" style="gap:4px"><span class="b1 semi tnum">${n2(CUM.total)} USDT</span><img src="${HA('ic-info.svg')}" style="width:16px;height:16px" title="거래로 인한 캐시백과 이벤트 리워드를 합산한 금액을 표시합니다." alt=""></span><span style="font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">Total cumulative cashback</span></div></div>
   <div class="row" style="gap:12px;align-items:flex-start">${metric(CUM.month,'This month')}${metric(CUM.withdrawn,'Total withdrawn')}</div>
-  <div class="row between"><span style="width:162px;font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">${T(`Total of ${n} accounts · Update times vary by exchange`,`${n}개 거래 계정 합산 · 거래소마다 갱신 시각이 달라요`)}</span><button class="btn text primary sm" style="padding:4px 5px" data-go="summary.main">View history</button></div></div>`}
+  <div class="row between"><span style="width:162px;font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">${T(`Sum of ${n} linked accounts · Update times vary by exchange`,`${n}개 거래 계정 합산 · 거래소마다 갱신 시각이 달라요`)}</span><button class="btn text primary sm" style="padding:4px 5px" data-go="summary.main">View history</button></div></div>`}
 
 // ---------- 홈 오른쪽 열: 기존 홈 콘텐츠 (Figma HW1 main) ----------
 const secHead=(t,go)=>`<div class="row" style="gap:16px"><span style="font-size:24px;line-height:1.334;font-weight:700;white-space:nowrap">${t}</span><span class="grow" style="height:1px;background:var(--divider)"></span><button class="btn text primary md" style="padding:8px 11px;font-size:15px"${go?` data-go="${go}"`:''}>See All</button></div>`;
@@ -2501,6 +2506,33 @@ function guestHome(){
   <div class="row" style="gap:16px">${[1,2,3,4,5].map(i=>`<img src="${HA('sns-'+i+'.svg')}" style="width:${i===4?23:32}px;height:${i===4?24:i===5?28:32}px" alt="">`).join('')}</div>
   <span class="cap" style="line-height:12px">© 2026 TetherMax. All rights reserved.</span></div></div>`}
 
+// ---------- See All — 연동 계정 목록 모달 (기존 9401:160223 구성, 표기 Accounts — 결정 Q3) ----------
+// 제목 + 원형 배지(계정 수) · 오른쪽 {n} Total · 거래소별 묶음(로고 · 이름 · {n} accounts · 거래소 합계) · 계정 행(상태 점 · 식별자 · 금액) · 구분선 · 세로 스크롤 · 하단 Close
+const SEE_ALL=[
+ {ex:'Bitget',id:'685432171',amt:14,st:'ok'},
+ {ex:'Bybit',id:'512093847',amt:42.5,st:'ok'},{ex:'Bybit',id:'512093912',amt:8.1,st:'ok'},
+ {ex:'Lighter',id:WAL.lighter,amt:120,st:'ok'},
+ {ex:'ApeX',id:WAL.apex,amt:14,st:'ok'},
+ {ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
+function seeAllModal(){
+ const mob=S.vp==='mo';const rows=SEE_ALL;
+ const groups=[];rows.forEach(r=>{let g=groups.find(x=>x.ex===r.ex);if(!g)groups.push(g={ex:r.ex,rows:[]});g.rows.push(r)});
+ const amt=v=>v==null?`<span class="b2 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b2 semi tnum">${n2(v)}</span><span class="cap c2">USDT</span></span>`;
+ const idTxt=r=>isCex(r.ex)?`UID ${esc(r.id)}`:`Wallet ${short(r.id)}`;
+ const grp=g=>{const sum=g.rows.reduce((a,r)=>a+(ST[r.st].linked&&r.amt?r.amt:0),0);
+  return `<div class="col" style="gap:4px;padding:12px 0">
+   <div class="row g12">${mark(g.ex,32)}<div class="col grow" style="gap:0;min-width:0"><span class="b2 semi">${g.ex}</span><span class="cap c2">${g.rows.length} ${g.rows.length===1?'account':'accounts'}</span></div>${g.rows.some(r=>ST[r.st].linked)?`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi tnum">${n2(sum)}</span><span class="b2 c2">USDT</span></span>`:`<span class="b1 semi">-</span>`}</div>
+   ${g.rows.map(r=>`<div class="row between" style="padding:6px 0 6px 44px;gap:12px"><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary);min-width:0"><span style="color:${DOT[ST[r.st].tone]}">●</span>&nbsp; ${idTxt(r)}</span>${amt(r.st==='ok'?r.amt:null)}</div>`).join('')}</div>`};
+ const list=groups.map(grp).join('<hr class="divider" style="margin:0">');
+ const box=`<div style="background:#fff;border-radius:${mob?'16px 16px 0 0':'8px'};box-shadow:var(--elev24);width:${mob?'100%':'444px'};max-width:100%;display:flex;flex-direction:column;${mob?'align-self:flex-end;':''}max-height:${mob?'640px':'680px'}">
+  ${mob?'<div class="sheet-grab"></div>':''}
+  <div class="row between" style="padding:${mob?'16px 16px 8px':'24px 24px 8px'}"><span class="row" style="gap:8px"><span class="h6">Linked Accounts</span><span style="min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center">${rows.length}</span></span><span class="b2 c2">${rows.length} Total</span></div>
+  <div class="row g8" style="padding:4px ${mob?16:24}px 8px">${C.chip('All',true,{sm:false})}${C.chip('CEX',false)}${C.chip('DEX',false)}</div>
+  <div style="overflow-y:auto;padding:0 ${mob?16:24}px;flex:1;min-height:0">${list}</div>
+  <div style="padding:${mob?'12px 16px 16px':'16px 24px 24px'}">${C.btn('Close',{full:true,go:'home.main:normal'})}</div></div>`;
+ return C.overlay('home.main:normal',box,{center:!mob,clip:mob?812:900});
+}
+
 // ---------- home.main ----------
 const autoKey=()=>S.auth==='guest'?'guest':S.auth==='s3'?'s3':'normal';
 const N_FIG='FU-038·039 행 디자인(로고·점·칩·금액)은 HW1/S4-1 컴포넌트를 그대로 썼고, 이 상태 프레임은 없음';
@@ -2529,17 +2561,19 @@ const HOME_STATES=[
  {id:'rejected',label:'확인 중 거절 — 행 제거',note:'V2.2 link/HOME#rejected · REQ-102 · G-069 확정: 거절되면 홈 행 제거(한도 점유 해제)'},
  {id:'labels',label:'DEX 정산 상태 라벨 (홈 행 칩)',note:'V2.2 cmn/LABELS · FU-011 · REQ-047'},
  {id:'faq',label:'홈 FAQ — 회원 답변',note:'V2.2 home/FAQ · FU-044 · REQ-711'},
+ {id:'seeAll',label:'See All — 연동 계정 목록 모달',figma:null,note:'All · CEX · DEX 칩(사용자 결정 2026-11-26, 쿠폰 계정 선택과 같은 칩) · 근거: 기존 9401:160223 연동 UID 목록 모달(거래소별 묶음 · 계정 수 · 거래소 합계 · 계정별 금액 · 상태 점 · <code>Close</code>) — 표기는 Accounts(결정 Q3 · N5). 행 표기는 홈 Linked Accounts 행과 같게(CEX <code>UID</code> · DEX <code>Wallet</code> 축약). 모바일은 바텀시트. <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},
 ];
 const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트)',route:'/',fu:['FU-037','FU-038','FU-039','FU-029','FU-022','FU-011','FU-044'],shell:false,
  states:HOME_STATES,
  render(st0){
   const st=st0==='auto'?autoKey():st0;
   if(st==='guest')return guestHome();
+  if(st==='seeAll')return seeAllModal();
   const app=st==='app'||S.vp==='mo';
   let left='',o={};
   const card=(rows,x={})=>balanceCard({amount:sumLinked(rows),...x});
   if(st==='s3')left=balanceCard({amount:0})+s3Checklist()+s3Preview();
-  else if(st==='s3App')left=balanceCard({amount:0})+`<div style="background:#fff;border-radius:8px;padding:24px 16px;text-align:center" class="col g12"><span class="b1 semi">Link once and cashbacks keep coming</span><span class="cap c2">${C.tbd('cashbacks keep coming / cashback keeps coming 문구 확인','사용자 확인 #48')}</span>${C.btn('Link Account',{go:'link.select',full:true})}</div>`;
+  else if(st==='s3App')left=balanceCard({amount:0})+`<div style="background:#fff;border-radius:8px;padding:24px 16px;text-align:center" class="col g12"><span class="b1 semi">${T('Link once and cashback keeps coming','한 번 연동하면 캐시백이 계속 쌓여요')}</span>${C.btn('Link Account',{go:'link.select',full:true})}</div>`;
   else{
    let rows=[R_BITGET,R_LIGHTER,R_APEX],x={},lc={app};
    if(st==='s3Pending')rows=[{ex:'EdgeX',id:WAL.edgex,amt:null,st:'pend'}];
@@ -2555,7 +2589,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    if(st==='newRow'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:0,st:'zero'}];o.toast=true}
    if(st==='transferred')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:4,st:'ok'}];
    if(st==='pending')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
-   if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:12.4,st:'inactive',extra:C.tbd('Inactive 행 안내 문구 (오프보딩 — 적립 캐시백은 자동 지급 유지)','REQ-121')}];
+   if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:12.4,st:'inactive',extra:T('No longer supported. Cashback already earned is still sent to this wallet automatically.','지원이 종료된 거래소예요. 적립된 캐시백은 이 지갑으로 계속 자동 지급돼요.')}];
    if(st==='multi')rows=[R_BITGET,...[[WAL.lighter,3.2],[WAL.w2,0],[WAL.edgex,11.05]].map(([w,a])=>({ex:'Lighter',id:w,amt:a,st:a?'ok':'zero'})),...[WAL.aster,WAL.apex].map(w=>({ex:'Aster',id:w,amt:0,st:'zero'}))];
    if(st==='labels')rows=[
     {ex:'Lighter',id:WAL.lighter,amt:120,st:'ok',extra:hChip(T('Not yet tallied','집계 전'),'prog')},
@@ -2576,7 +2610,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
   }
   if(st==='faq'){
    const faq=`<div style="background:#fff;border-radius:8px;padding:24px;width:${S.vp==='mo'?'100%':'717px'}" class="col g16"><span style="font-size:24px;font-weight:700">FAQs</span>
-    <details open style="border-bottom:1px solid var(--divider);padding:12px 0"><summary class="b1 semi" style="cursor:pointer">${T('How do I get cashback?','캐시백은 어떻게 받나요?')}</summary><p class="b2 c2">…select your exchange, UID, and cashback type… ${C.tbd('UID → 거래 계정 답변 — 문구표 확정분','G-419')}</p></details>
+    <details open style="border-bottom:1px solid var(--divider);padding:12px 0"><summary class="b1 semi" style="cursor:pointer">${T('How do I get cashback?','캐시백은 어떻게 받나요?')}</summary><p class="b2 c2">${T('Go to Cashback Summary, then select your exchange, account, and cashback type to view your cashback history by date.','[캐시백 요약] 메뉴에서 거래소 / 거래 계정 / 캐시백 유형을 선택하면 날짜별 캐시백 적립 내역을 확인하실 수 있습니다.')}</p></details>
     ${C.note('게스트 조회 안내 답변 2건(Search for your exchange and UID …)은 삭제 — REQ-711')}</div>`;
    return hShell(homeLayout(balanceCard({amount:148})+linkedCard([R_BITGET,R_LIGHTER,R_APEX],{app}),{right:faq}),{moNav:'home'});
   }
@@ -2619,12 +2653,13 @@ function walletRight(o={}){
   <div style="position:absolute;left:8px;top:-14px;width:104px;height:88px;overflow:hidden"><img src="${HA('review.png')}" style="position:absolute;height:142.56%;left:-39.21%;top:-21.21%;width:177.17%;max-width:none" alt=""></div>
   <div class="col grow" style="gap:2px;min-width:178px"><span class="b2 semi">How was Lighter?</span><span class="cap c2">Your first review earns you 2 USDT. It takes about a minute.</span></div>
   <button class="btn md" style="background:#f2f2f5" data-go="dex.detail:lighter">Write a review, get 2 USDT</button></div>`;
- const dexes=['Lighter','ApeX','EdgeX','Aster'],rate=['20','30','30','20'],bg=['#00f0ff','#15192a','#181a20','#000'];
- const top=`<div style="background:#fff;border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:16px">${secHead('Top Partner DEXs','dex.overview')}
-  <div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">${dexes.map((d,i)=>`<div class="col" style="gap:4px;cursor:pointer" data-go="dex.detail:${d.toLowerCase()}"><div style="background:${bg[i]};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${C.dex(d,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${d}</span><span style="font-size:12px;line-height:20px;font-weight:500">Up to ${rate[i]}% cashback</span></div>`).join('')}</div></div>`;
+ // 하단 = 기존 디자인 `Top Partner Exchanges`(CEX·DEX 공통 — 결정 「지갑 상세 하단」, 홈 HW1과 같은 블록)
+ const parts=[['Bitget','#00f0ff','54%'],['Bybit','#15192a','55%'],['Binance','#181a20','50%'],['OKX','#000','65%']];
+ const top=`<div style="background:#fff;border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:16px">${secHead('Top Partner Exchanges','cex.list')}
+  <div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px"><div style="background:${bg};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div>`;
  if(S.vp==='mo'){ // 기존 UID 상세 모바일(26047:1348691 · 25867:1348700) 순서: 리뷰 유도 → Top Partner(가로) → Exclusive For Members(2열)
-  const topMo=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Top Partner DEXs</span><button class="btn text primary sm" style="padding:4px 5px" data-go="dex.overview">See All</button></div>
-   <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${dexes.map((d,i)=>`<div class="col" style="gap:4px;width:100px;flex:none" data-go="dex.detail:${d.toLowerCase()}"><div style="background:${bg[i]};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${C.dex(d,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${d}</span><span style="font-size:12px;line-height:20px;font-weight:500">Up to ${rate[i]}% cashback</span></div>`).join('')}</div></div>`;
+  const topMo=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Top Partner Exchanges</span><button class="btn text primary sm" style="padding:4px 5px" data-go="cex.list">See All</button></div>
+   <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:100px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div>`;
   return `<div class="col" style="gap:16px;width:100%">${week.replace('padding:24px','padding:16px')}${review.replace('padding:16px 16px 16px 124px','padding:16px 16px 16px 112px')}${topMo}<div style="background:#fff;border-radius:8px;padding:16px" class="col g16">${moMemberCards('Lighter','Exclusive Benefit')}</div></div>`}
  return `<div style="display:flex;flex-direction:column;gap:24px;width:${S.vp==='mo'?'100%':'717px'}">${week}${review}
   <div style="background:#fff;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">${secHead('Exclusive Benefit','benefits.list')}${memberEvents('Lighter',true)}</div>${top}</div>`}
@@ -2693,97 +2728,6 @@ R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 · 누�
   return `<div style="padding:${S.vp==='mo'?'16px':'40px 0 80px'};display:flex;justify-content:center"><div class="col g16" style="width:${w}">${tl}${cum}${C.note('MAXOP-783은 3단계(Start Trading · Cut-off Time · Cashback Accumulated)이지만 정책(REQ-282 · G-192)은 4단계라 탭을 4개로 두고 단계명은 V2.2 국문(영문 원문 없음 — EN 보기에서도 국문). 카드 안 상세 행은 V2.2 내용. 누적 카드 = MAXOP-731 컴포넌트, 캡션은 G-191 확정 문구')}</div></div>`;
  }});
 
-// ---------- 출금 화면 /withdrawal-apply (FU-030~034) — 표시 전용, 모든 버튼은 비활성 Auto Claim ----------
-const WD_ACC=()=>[
- {ex:'Bitget',id:'123456789',cash:5,reward:232},
- {ex:'OKX',id:'987654321',cash:31.68,reward:0},
- {ex:'EdgeX',id:WAL.edgex,cash:100,reward:20},
- {ex:'Aster',id:WAL.edgex,cash:12,reward:0},
- {ex:'ApeX',id:WAL.w2,cash:3,reward:0}];
-const wdAvail=a=>Math.floor((a.cash+Math.min(a.reward,a.cash))*100+1e-6)/100;
-const wdNeed=a=>{const r=a.reward>=5?5:10-a.reward;return Math.max(0,r-a.cash)};
-function wdUpdates(ex){
- if(ex==='EdgeX')return `Daily, ${new Intl.DateTimeFormat(S.lang==='en'?'en-US':'ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date('2026-10-23T00:00:00Z'))}`;
- if(ex==='Lighter')return `Every Monday<div class="cap c2" style="font-weight:400">Lighter reports every Monday for the week before. New trades show after the next report.</div>`;
- return C.tbd(ex+' 주기·공개 시각',ex==='Aster'?'G-036':'G-025');
-}
-// 계정 카드 — 기존 [MAX-18] 출금 모달 계정 카드(12936:346690): 0.5px 테두리 · 그림자 · 로고30/이름/UID · Available 칩 · Available Cashback 행 · 구분선 · 작은 행
-function wdCard(a,st,deducted){
- const cex=isCex(a.ex),av=deducted&&wdAvail(a)>=10?0:wdAvail(a),ok=av>=10,err=st==='partner'&&a.ex==='Aster';
- const zero=!cex&&a.cash===0;
- const chip=deducted&&wdAvail(a)>=10?`<span style="background:rgba(0,0,0,.08);color:var(--text-primary);border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">Pending</span>`:ok?`<span style="background:#c8e6c9;color:#1b5e20;border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">Available</span>`:`<span style="background:rgba(0,0,0,.08);color:var(--text-primary);border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">Unavailable</span>`;
- const small=(k,v)=>`<div class="row between" style="color:var(--text-secondary);font-size:12px"><span style="line-height:1.33;letter-spacing:.2px">${k}</span><span style="font-weight:500;line-height:1.33;text-align:right">${v}</span></div>`;
- return `<div style="background:#fff;border:.5px solid var(--divider);border-radius:8px;filter:drop-shadow(0 1px 2.5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:16px">
-  <div class="row between"><span class="row" style="gap:8px;min-width:0">${mark(a.ex,30)}<span class="col" style="gap:0;min-width:0"><span class="b2 semi">${a.ex}</span><span style="font-size:12px;line-height:12px;color:var(--text-secondary);word-break:break-all">${cex?'UID '+a.id:'Wallet '+a.id}</span></span></span>${chip}</div>
-  ${st==='delayed'&&a.ex==='EdgeX'?`<div class="cap c2" style="margin-top:-8px">Last updated ${clk('2026-10-22T00:00:00Z')}</div>`:''}
-  ${err?`<div class="col g8">${C.alert('warn','',`We can't load your latest ${a.ex} cashback right now.`)}<span>${C.btn('Try again',{v:'outlined',size:'sm'})}</span></div>`:''}
-  <div class="col" style="gap:16px"><div class="row between"><span class="b2">Available Cashback</span><span class="b2 med tnum">${n2(av)} USDT</span></div><hr class="divider">
-   <div class="col" style="gap:8px">${small('Exchange Cashback',n2(deducted&&wdAvail(a)>=10?0:a.cash)+' USDT')}${a.reward>0?small('Event Reward',n2(deducted&&wdAvail(a)>=10?Math.max(0,a.reward-Math.min(a.reward,a.cash)):a.reward)+' USDT'):''}
-   ${cex?'':small('Cashback updates ⓘ',wdUpdates(a.ex))}
-   ${st==='preAccrual'&&a.ex==='ApeX'?small('Pending','2.10 USDT'):''}</div></div>
-  ${st==='noNetwork'&&!cex?C.alert('warn','',C.tbd('지급 네트워크 미설정 — 지갑 목적지 비활성 표시','REQ-142')):''}
-  ${!ok&&!err&&!(deducted&&wdAvail(a)>=10)?`<div class="cap c2">${T(`You can claim cashback if you receive an additional ${up2(wdNeed(a))} USDT in exchange Cashback.`,`거래소 캐시백을 ${up2(wdNeed(a))} USDT 더 받으면 출금할 수 있어요.`)}</div>`:''}
-  ${zero?C.alert('info','',`No exchange cashback yet. ${a.ex==='Lighter'?"Cashback appears here after Lighter's Monday settlement.":'Cashback appears here the day after you trade on your linked DEX.'}`):''}</div>`}
-const WD_NOTE='[기존 MAX-18] 출금 모달 Web 12936:389796([When there is more than 2 UIDs]) · 계정 카드 12936:346690. 정책(10분 주기 자동 지급)에 따라 `Confirm Withdraw` → 비활성 `Auto Claim`(DEX HW1·PW1), 마일스톤 진행바(First Milestone)는 REQ-278로 뺌. ';
-R.screen({id:'wd.claim',group:'home',title:'출금 화면 (/withdrawal-apply)',route:'/withdrawal-apply',fu:['FU-030','FU-031','FU-032','FU-033','FU-034'],shell:false,closeTo:'home.main',
- states:[
-  {id:'normal',label:'정상 — 가능 위 · 불가 아래, 같은 주소 DEX별 카드',figma:{pc:'12936:389796',mo:'8873:163663'},note:WD_NOTE+'V2.2 wd/CLAIM#normal · REQ-134~137'},
-  {id:'allBlocked',label:'전부 불가 — Not eligible to withdraw',figma:{pc:'10500:94074'},note:'[기존 MAX-18] Web [Not eligible to withdraw] 10500:94074. V2.2 wd/CLAIM#allBlocked · REQ-136·139 · G-108 확정'},
-  {id:'zero',label:'DEX 캐시백 0 — 배너',note:'V2.2 wd/CLAIM#zero · REQ-146 · G-110. 상태 정의 = DEX 흐름 S4_12 `No cashback yet`(29002:127873). 배너 모양 디자인 없음 — MUI Alert(info) 재사용'},
-  {id:'loading',label:'로딩 — 스켈레톤, 금액·버튼 없음',note:'V2.2 wd/CLAIM#loading · REQ-145. 재사용: [MAX-425] Loading state 5702:12582 스켈레톤'},
-  {id:'delayed',label:'데이터 지연 — Last updated',note:'V2.2 wd/CLAIM#delayed · REQ-147 · G-348. 상태 정의 = DEX 흐름 S4_13 29002:127898'},
-  {id:'partner',label:'파트너 오류 — 그 카드만',note:'V2.2 wd/CLAIM#partner · REQ-148. 상태 정의 = DEX 흐름 S4_14 `Partner data unavailable` 29002:127923 · 오류 모양 = Hub H7 28960:126920'},
-  {id:'balanceError',label:'잔액 오류',note:'V2.2 wd/CLAIM#balanceError · REQ-149. 상태 정의 = DEX 흐름 S4_15 29002:127948 · 오류 모양 = Hub H7 28960:126920'},
-  {id:'deducted',label:'선차감 반영',figma:{pc:'10501:104627'},note:'[기존 MAX-18] Web [Pending withdrawal] 10501:104627 — 처리 중 계정 카드 칩 Pending(회색). 하단 버튼은 기존 Pending(비활성) 대신 정책상 비활성 Auto Claim. V2.2 wd/CLAIM#deducted · REQ-158 · G-112'},
-  {id:'preAccrual',label:'적립 전 줄 (합계 미포함)',note:'V2.2 wd/CLAIM#preAccrual · REQ-138 · G-127. 상태 정의 = DEX 흐름 S6_11 `Pending settlement` 29002:129353'},
-  {id:'many',label:'계정 11개 이상 — 10개 + 더보기',figma:{pc:'12936:389796'},note:'[기존 MAX-18] [When there is more than 2 UIDs] 12936:389796(모달 안 스크롤). V2.2 wd/CLAIM#many · REQ-134 · G-114'},
-  {id:'noNetwork',label:'지급 네트워크 미설정',note:'V2.2 wd/CLAIM#noNetwork · REQ-142. 상태 정의 = DEX 흐름 S4_20 `Network unavailable` 29002:128078. 모양 디자인 없음'},
-  {id:'lighter',label:'Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets)',note:'V2.2 wd/CLAIM#lighter · REQ-137·150. 카드 = 기존 계정 카드 재사용'},
-  {id:'pending',label:'확인 중 계정은 목록에 없음',figma:{pc:'12936:389796',mo:'8873:163663'},note:WD_NOTE+'V2.2 wd/CLAIM#pending · REQ-134 — 화면은 normal과 같고 확인 중 계정만 빠짐'},
- ],
- render(st){
-  let acc=WD_ACC();
-  if(st==='allBlocked')acc=acc.map(a=>({...a,cash:Math.min(a.cash,3),reward:Math.min(a.reward,2)}));
-  if(st==='zero')acc=acc.map(a=>isCex(a.ex)?a:{...a,cash:0,reward:0});
-  if(st==='lighter')acc=[...acc,{ex:'Lighter',id:WAL.lighter,cash:14,reward:0},{ex:'Lighter',id:WAL.w2,cash:2,reward:0}];
-  if(st==='many')acc=[...acc,...['Bybit','OKX','Bitget','ApeX','Aster','EdgeX','Bybit'].map((e,i)=>({ex:e,id:isCex(e)?String(555000000+i):WAL.w2,cash:12+i,reward:0}))];
-  const deducted=st==='deducted';
-  acc.sort((x,y)=>Number(wdAvail(y)>=10)-Number(wdAvail(x)>=10));
-  const avail=acc.filter(a=>wdAvail(a)>=10);const blocked=!avail.length;
-  const total=deducted?0:avail.reduce((s,a)=>s+wdAvail(a),0);
-  const minNeed=Math.min(...acc.map(wdNeed));
-  const box=inner=>`<div style="background:#fff;border:.5px solid var(--divider);border-radius:8px;filter:drop-shadow(0 1px 2.5px rgba(0,0,0,.1));padding:16px" class="col g12">${inner}</div>`;
-  const top=st==='balanceError'?box(`${C.alert('warn','',"We can't load your balance right now.")}<span>${C.btn('Try again',{v:'outlined',size:'sm'})}</span>`)
-   :st==='loading'?box(`${C.skel('40%',14)}${C.skel('30%',28)}`)
-   :box(`<div class="col" style="gap:4px"><span style="font-size:12px;line-height:1.4;color:var(--text-secondary)">Total Available Cashback</span><span class="row" style="gap:4px;align-items:baseline"><span style="font-size:24px;line-height:32px;font-weight:600" class="tnum">${n2(total)}</span><span class="b2 c2">USDT</span></span></div>
-    ${blocked?`<span>${C.badge('Not eligible to withdraw')}</span>`:''}
-    ${deducted?`<p class="cap c2" style="margin:0">${T(C.tbd('영문 — 문구표 확정분','G-112'),'출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다')}</p>`:''}
-    ${blocked?`<p class="b2 c2" style="margin:0">${T(`No account can be claimed yet. You can claim once ${up2(minNeed)} USDT more cashback accrues.`,`출금 가능한 계정이 없어요. 캐시백 ${up2(minNeed)} USDT가 더 쌓이면 출금할 수 있어요.`)}</p><p class="cap c2" style="margin:0">${T('Each account needs at least 10 USDT (cashback + matched event rewards).','이벤트 리워드는 같은 계정의 캐시백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다.')}</p>`:''}`);
-  const shown=st==='many'?acc.slice(0,10):acc;
-  const cards=st==='loading'?box(C.skel('100%',80))+box(C.skel('100%',80)):shown.map(a=>wdCard(a,st,deducted)).join('')+(st==='many'?`<button class="btn text black sm full">${T('See more','더보기')} (${acc.length-10})</button>`:'');
-  const foot=st==='loading'?'':`<div style="padding:0 2px">${C.kv('Network',st==='noNetwork'?'—':'BNB Smart Chain (BEP20)')}<p class="cap c2" style="margin:0 0 8px">Deposits are made to the above wallet address on BNB Smart Chain (BEP20).</p>${C.kv('Network fee',T('covered by TetherMax','테더맥스가 전액 부담'))}</div>`;
-  const notes=`${st==='pending'?C.note('확인 중(연동 시도중이에요) 계정은 이 목록에 없음 — 자동 지급 대상 아님'):''}${C.note('카드 = 기존 출금 모달 계정 카드 그대로 + DEX 지갑 식별자(전체 주소) · Cashback updates 행(V2.2). DEX 배지 없음(REQ-135). 금액·주소·네트워크 입력 없음(REQ-140·141). Auto Claim 옆 안내 문구 없음(REQ-144). 네트워크 줄은 V2.2 내용(디자인 없음). 제목 `Withdraw`는 기존 모달 원문')}`;
-  const mo=S.vp==='mo';
-  const panel=`<div style="background:#fff;border-radius:${mo?'16px 16px 0 0':'4px'};box-shadow:var(--elev24);width:${mo?'100%':'600px'};max-height:${mo?'740px':'680px'};display:flex;flex-direction:column;overflow:hidden">
-   ${mo?'<div class="sheet-grab"></div>':''}<div class="row between" style="height:56px;padding:${mo?'0 16px':'0 24px'};flex:none"><span class="h6" style="font-size:20px">Withdraw</span><button class="icon-btn" data-go="home.main">${ic('close')}</button></div>
-   <div class="col" style="gap:16px;padding:16px ${mo?16:24}px;overflow:auto">${top}${cards}${foot}${notes}</div>
-   <div style="padding:${mo?'16px':'24px'};flex:none">${st==='loading'?'':`<button class="btn contained md full" disabled style="height:42px">Auto Claim</button>`}</div></div>`;
-  return C.overlay('home.main:normal',panel,{clip:mo?812:null,center:!mo});
- }});
-
-// ---------- 두 번째 출금 화면 /withdrawal (FU-036) ----------
-R.screen({id:'wd.second',group:'home',title:'두 번째 출금 화면 (/withdrawal)',route:'/withdrawal',fu:['FU-036'],shell:{accent:true,back:'home.main',moTitle:['Claim','출금'],moNav:'home'},
- states:[{id:'normal',label:'출금 가능 계정 없음 — STG 문구 + DEX 행',note:'V2.2 wd/SECOND#normal · REQ-710 · G-419(문구표에서 확정 — 확정 문안 원문 없음)'}],
- render(){
-  const acc=WD_ACC().map(a=>({...a,cash:Math.min(a.cash,4),reward:0}));
-  return `<div class="container" style="max-width:720px;padding-top:40px;padding-bottom:80px"><div class="card col g16">
-   <span class="h5">Trading just a bit more and you can claim.</span><p class="b1 c2" style="margin:0">Cashback can be claimed for UIDs with 10 USDT or more in cashback.</p>
-   <p class="cap" style="margin:0">${C.tbd('UID → 거래 계정 · 「10 USDT 이상」 → 매칭 기준(A + MIN(B, A) ≥ 10) 문장 — 문구표 확정분','G-419')}</p>
-   <div>${acc.map(a=>`<div class="row g12" style="padding:12px 0;border-bottom:1px solid var(--divider)">${mark(a.ex,32)}<div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${a.ex}</span><span class="cap c2" style="word-break:break-all">${isCex(a.ex)?'UID '+a.id:a.id}</span></div><div class="col" style="gap:0;align-items:flex-end"><span class="b1 semi">${n2(wdAvail(a))} <span class="b2 c2">USDT</span></span><span class="cap c2">Trading just a bit more</span></div></div>`).join('')}</div>
-   <div class="row between"><span class="b1">Cashback to be Claimed</span><span class="h6">${n2(acc.reduce((s,a)=>s+wdAvail(a),0))} USDT</span></div>
-   ${C.btn('Go back',{v:'outlined',go:'home.main',full:true})}</div></div>`;
- }});
-
 // ---------- 선차감 · 복원 반영 위치 (FU-034 · 035) ----------
 R.screen({id:'wd.reflect',group:'home',title:'선차감 · 복원 반영 위치',route:'/ · /cashback-summary · 실시간 출금 피드',fu:['FU-034','FU-035'],shell:{accent:true,back:'home.main',moNav:'home'},
  states:[
@@ -2799,7 +2743,7 @@ R.screen({id:'wd.reflect',group:'home',title:'선차감 · 복원 반영 위치'
   const sec=(t,b,go)=>`<div style="background:#fff;border-radius:8px;padding:16px" class="col g12"><div class="row between"><span class="b1 semi">${t}</span>${go?`<button class="btn text primary sm" data-go="${go}">See All</button>`:''}</div>${b}</div>`;
   const body=`${balanceCard({amount:bal,sub:st==='deducted'?`<div class="cap c2">출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다</div>`:''})}
    ${sec(T('Cashback Summary','캐시백 요약'),sum,'summary.main')}${sec(T('Live withdrawals','실시간 출금'),feed,'about.feed')}
-   ${C.note({normal:'지급 완료된 건만 피드에 표시',deducted:'처리 중 — 피드에 아직 없음(자동 지급 완료 = 출금일 때만 표시). 영문 선차감 문구는 G-112 문구표 확정분(원문 없음)',restored:'실패해 복원된 건은 피드에 Sent 항목이 생기지 않음. 잔액은 복원 후 다시 같은 조건으로 판정'}[st]+' · 출금 화면 · 홈 · 캐시백 요약 · 실시간 출금 피드가 같은 레코드에서 같은 새로고침에 반영. 결과를 보여 주는 회원 화면은 없음(REQ-163)')}`;
+   ${C.note({normal:'지급 완료된 건만 피드에 표시',deducted:'처리 중 — 피드에 아직 없음(자동 지급 완료 = 출금일 때만 표시). 영문 선차감 문구는 G-112 문구표 확정분(원문 없음)',restored:'실패해 복원된 건은 피드에 Sent 항목이 생기지 않음. 잔액은 복원 후 다시 같은 조건으로 판정'}[st]+' · 홈 · 캐시백 요약 · 실시간 출금 피드가 같은 레코드에서 같은 새로고침에 반영. 결과를 보여 주는 회원 화면은 없음(REQ-163)')}`;
   return `<div style="padding:${S.vp==='mo'?16:40}px 16px 80px;display:flex;justify-content:center"><div class="col g16" style="width:${S.vp==='mo'?'100%':'480px'}">${body}</div></div>`;
  }});
 
@@ -2866,11 +2810,11 @@ const dexSel=(d,s=32)=>S.vp==='mo'
 const guideText={Lighter:'Open Lighter and log in. Tap your wallet address in the top right corner, copy it, then paste it above. No wallet connection or signature required.'};
 function guide(d){
  if(S.vp==='mo'){
-  const txt=d==='Lighter'?T('Open Lighter and copy the wallet address from your account. Paste it above. TetherMax never asks for your private key, recovery phrase, or wallet signature.'):C.tbd(d+' 단계 제목·설명(어드민 거래소 가이드 작성)','REQ-533 · G-443');
+  const txt=d==='Lighter'?T('Open Lighter and copy the wallet address from your account. Paste it above. TetherMax never asks for your private key, recovery phrase, or wallet signature.'):T(`Open ${d} and copy the wallet address from your account. Paste it above.`,`${d}에서 계정의 지갑 주소를 복사해 위에 붙여넣으세요.`);
   return `<div class="col g8"><span class="b1 semi">${T('How to find your wallet address','지갑 주소 찾는 방법')}</span><p class="cap" style="margin:0">${txt}</p>
    <div style="height:256px;background:#eaeef4;overflow:hidden">${d==='Lighter'?`<img src="${A('guide-lighter-1.png')}" style="width:100%;height:100%;object-fit:contain">`:''}</div></div>`;
  }
- const txt=guideText[d]?T(guideText[d],'Lighter에 로그인한 뒤 오른쪽 위 지갑 주소를 눌러 복사하고 위에 붙여넣으세요. 지갑 연결이나 서명은 필요하지 않아요.'):C.tbd(d+' 단계 제목·설명(어드민 거래소 가이드 작성)','REQ-533 · G-443');
+ const txt=guideText[d]?T(guideText[d],'Lighter에 로그인한 뒤 오른쪽 위 지갑 주소를 눌러 복사하고 위에 붙여넣으세요. 지갑 연결이나 서명은 필요하지 않아요.'):T(`Open ${d} and copy the wallet address from your account. Paste it above.`,`${d}에서 계정의 지갑 주소를 복사해 위에 붙여넣으세요.`);
  const shot=guideText[d]?`<img src="${A('guide-lighter-1.png')}" style="width:100%;height:100%;object-fit:cover">`:`<div style="width:100%;height:100%;background:var(--bg-accent);display:flex;align-items:center;justify-content:center" class="cap c3">${d} screenshot 1 / 3</div>`;
  const arrow=(side,i)=>`<button class="icon-btn" style="position:absolute;${side}:12px;top:89px;background:#fff;box-shadow:0 2px 3px rgba(0,0,0,.16);padding:6px">${ic(i,'ic20')}</button>`;
  return `<div class="col g8"><span class="b1 semi">${T('How to find your wallet address','지갑 주소 찾는 방법')}</span><p class="b2 c2" style="margin:0">${txt}</p>
@@ -2911,7 +2855,7 @@ function selList(c,web){
  const dx=(web?DEXES:MO_DEXES).map(n=>({n,t:'DEX'})),cs=cx.map(n=>({n,t:'CEX'}));
  const l=web?[...cs,...dx]:[...dx,...cs]; // 웹 V2.2 순서(CEX 먼저) · 모바일 Figma 순서(DEX 타일 먼저)
  return l.filter(x=>c.chip==='all'||x.t===c.chip.toUpperCase()).filter(x=>!c.q||x.n.toLowerCase().includes(c.q)).filter(x=>x.n!==c.drop)}
-function failBox(){return `<div class="col center" style="align-items:center;padding:24px 0;gap:4px"><span class="b1 semi">${T('Partners couldn’t load')}</span><span class="b2 c2">${T('Please try loading the exchange list again.')}</span><div class="mt8">${C.btn(T('Retry'),{v:'outlined',c:'black',size:'md'})}</div></div>`}
+function failBox(){return `<div class="col center" style="align-items:center;padding:24px 0;gap:4px"><span class="b1 semi">${T('Partners couldn’t load','거래소 목록을 불러오지 못했어요')}</span><span class="b2 c2">${T('Please try loading the exchange list again.','거래소 목록을 다시 불러와 주세요.')}</span><div class="mt8">${C.btn(T('Retry','다시 시도'),{v:'outlined',c:'black',size:'md'})}</div></div>`}
 function webExchangeField(selected,st){
  const c=SEL[st]||SEL.normal;
  const tabs=[['all',T('All','전체')],['cex','CEX'],['dex','DEX']];
@@ -3025,7 +2969,7 @@ R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (�
  render(st){
   const mo=S.vp==='mo';
   if(st==='intro'){
-   const body=`<p class="h6" style="margin:0">${T('Have you registered a trading account with the TetherMax referral code?')}</p><p class="b1 c2" style="margin:0">${T('You must link your UID to claim USDT from TetherMax.')} ${C.tbd('UID → 거래 계정 · 지갑 문구 교체','REQ-712')}</p>`;
+   const body=`<p class="h6" style="margin:0">${T('Have you registered a trading account with the TetherMax referral code?')}</p><p class="b1 c2" style="margin:0">${T('You must link your account to receive USDT from TetherMax.','테더맥스에서 USDT를 받으려면 거래 계정 연동이 꼭 필요해요.')}</p>`;
    return C.overlay('home.main',linkModal(body,`${C.btn(T('Yes, I have one!'),{full:true,go:'link.select:normal'})}${C.btn(T('No, not yet!'),{v:'outlined',c:'black',full:true})}${signUp()}`));
   }
   if(mo){
@@ -3049,10 +2993,10 @@ function uidGuide(mo,d){
   ${mo?'':`<img src="${A('link-uid-guide-2.png')}" style="width:100%;aspect-ratio:1280/929;object-fit:cover">`}</div>`}
 
 function uidLinkForm(st,openPicker){
- const mo=S.vp==='mo',filled=st==='filled';
+ const mo=S.vp==='mo',filled=st==='filled',fmtErr=st==='formatError';
  const d=WEB_CEX.includes(selectedExchange)||cexBy(selectedExchange)?selectedExchange:'Bitget';
  const sel=mo?`<button type="button" class="sel" style="border-color:var(--input-border);padding:16px 12px" data-go="link.select:${filled?'uidFilled':'uid'}">${webMark(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`:webExchangeField(d,openPicker);
- const field=C.field({label:null,value:filled?'1234567':null,ph:T('Enter your UID'),focus:filled});
+ const field=C.field({label:null,value:filled?'1234567':fmtErr?'12345abc':null,ph:T('Enter your UID'),focus:filled,error:null});
  const reg=`<p class="b1 med" style="margin:0;text-align:center;padding:8px 0">${T('Don’t have an account yet?')} <a class="cb" style="cursor:pointer" data-go="auth.signup">${T('Register here')}</a></p>`;
  const next=C.btn(T('Next'),{full:true,size:'md',disabled:!filled});
  if(mo)return moForm(T('Link your exchange UID'),`${sel}${field}${uidGuide(true,d)}`,`${next}${reg}`);
@@ -3081,6 +3025,8 @@ const IN={ // [값, 오류, Next 활성]
  e6:['example.eth','Paste the wallet address, not an account name.',false],
  e7:['0x0000000000000000000000000000000000000000','This address can’t be linked.',false],
 };
+// 주소 검증 오류 국문(G-367) — 05.리포트/문구표_DEX.md
+const ADDR_KO={'Enter your wallet address.':'지갑 주소를 입력해 주세요.','Remove spaces within the wallet address.':'지갑 주소 안의 공백을 지워 주세요.','This address is not supported for the selected exchange.':'선택한 거래소에서 지원하지 않는 주소예요.','We couldn’t verify this wallet address. Copy it again from the exchange.':'지갑 주소를 확인하지 못했어요. 거래소에서 다시 복사해 주세요.','Paste the wallet address, not an account name.':'계정 이름이 아닌 지갑 주소를 붙여넣어 주세요.','This address can’t be linked.':'연동할 수 없는 주소예요.'};
 R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link (웹 꽉 찬 모달 · 앱 전체 화면)',fu:['FU-015','FU-016'],shell:false,
  states:[
   {id:'empty',label:'빈 값 — 안내 보임, Next 비활성 (L2)',figma:{pc:'28960:127275',mo:'28969:126986'},note:'V2.2 <code>link/ADDR#normal</code> · <code>link/SEL#detail</code>(DEX 상세 진입 = 그 DEX 선택 상태로 바로 주소 입력, 배경 D1 상세) · <code>link/SHEET#screen</code>(모바일 전체 화면 Link Account — Next 항상 닿음)'},
@@ -3101,8 +3047,8 @@ R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link 
   const d=preset||(st==='hub'?'ApeX':st==='empty'&&DEXES.includes(selectedExchange)?selectedExchange:'Lighter');
   const [val,err,ok]=IN[preset?'empty':st];
   const mo=S.vp==='mo';
-  const fld=C.field({label:val?T('Wallet address','지갑 주소'):null,value:val||null,ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),error:err?T(err):null,focus:mo&&st==='valid',help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')});
-  const extra=st==='paste'?`<p class="cap c2" style="margin:0">${C.tbd('클립보드 권한 거부 시 직접 붙여넣기 힌트','REQ-061 권고')}</p>`:'';
+  const fld=C.field({label:val?T('Wallet address','지갑 주소'):null,value:val||null,ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),error:err?T(err,ADDR_KO[err]):null,focus:mo&&st==='valid',help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')});
+  const extra='';
   const nt=st==='kept'?C.note('실패 다이얼로그를 닫거나 새로고침해도 선택 거래소·입력 주소 유지(REQ-064 · G-380)'):'';
   const hintTxt=T('Paste a valid wallet address to continue.','올바른 지갑 주소를 붙여넣으면 계속할 수 있어요.');
   if(mo){
@@ -3127,7 +3073,7 @@ R.screen({id:'link.signup',group:'link',title:'가입 후 연동 복귀 (G-402)'
  ],
  render(st){
   if(st==='return'){
-   const body=`${trust()}${dexSel('Lighter')}${C.field({ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')})}<p class="cap c2" style="margin:0">${C.tbd('가입 후 복귀 안내 문구','G-402 문구표')}</p>${guide('Lighter')}`;
+   const body=`${trust()}${dexSel('Lighter')}${C.field({ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')})}<p class="cap c2" style="margin:0">${T('Signed up on Lighter? Paste your Lighter wallet address to link it.','Lighter 가입을 마쳤다면 Lighter 지갑 주소를 붙여넣어 연동해 주세요.')}</p>${guide('Lighter')}`;
    if(S.vp==='mo')return renderInner('link.addr:empty');
    return C.overlay(BG,linkModal(body,`${C.btn(T('Next','다음'),{full:true,disabled:true})}${signUp()}`));
   }
@@ -3179,7 +3125,7 @@ R.screen({id:'link.proc',group:'link',title:'처리 중 (Processing Your Account
   {id:'prelink',label:'연동 전 잔액 출금 대기',figma:{pc:'28966:124158',mo:'28969:127087'},note:'V2.2 <code>link/PROC#prelink</code> · REQ-108(처리 중 화면 재사용) · 본문은 Figma 원문(G-426 문구표). Severity info'},
  ],
  render(st){
-  const msg=st==='prelink'?T('Your existing cashback is being paid to this wallet. Linking completes when the transfer is confirmed.'):T("Your account is being processed. You'll be notified once linking is complete.");
+  const msg=st==='prelink'?T('Your previous cashback of 14.00 USDT is being sent to this account. Linking completes once the transfer is confirmed.','이전에 쌓인 캐시백 14.00 USDT를 이 거래 계정으로 보내고 있어요. 송금이 확인되면 연동이 완료돼요.'):T("Your account is being processed. You'll be notified once linking is complete.");
   return splash('info',T('Processing Your Account'),msg,C.btn(T('Back to Home'),{full:true,go:'home.main'})+help());
  }});
 
@@ -3207,7 +3153,7 @@ R.screen({id:'link.result',group:'link',title:'연동 결과',route:'/link (전�
   if(st==='other'||st==='unavailable')return splash('error',T('Unable to Link Account'),T('We were unable to link this account. Please contact our support team for assistance.'),support,{close:'link.addr:kept'});
   if(st==='limit')return splash('warning',T('Trading account limit reached'),T('You’ve linked the maximum number of accounts (21).','연동할 수 있는 거래 계정을 모두 사용했어요 (21개)'),`${support}${help()}`);
   if(st==='pending')return splash('info',T('We’re checking your account link','지갑 연동을 확인하고 있어요'),T('We’ll let you know the result after checking the exchange’s referral records.','거래소의 귀속 내역 확인 후 연동 결과를 알려드릴게요.'),`${C.btn(T('Back to Home'),{full:true,go:'home.main'})}${help()}`);
-  return splash('error',T('Unable to Link Account'),T('We couldn’t complete the payout. Your previous balance has been restored. You can try linking this account again.'),`${C.btn(T('Try again'),{full:true,go:'link.addr:kept'})}${help()}`,{close:'link.addr:kept'});
+  return splash('error',T('Unable to Link Account'),T('We couldn’t send your previous cashback, so this account wasn’t linked. The amount is back in this account’s balance. You can try linking again.','이전에 쌓인 캐시백을 보내지 못해 연동하지 못했어요. 금액은 이 거래 계정의 잔액으로 돌아왔어요. 다시 연동을 시도할 수 있어요.'),`${C.btn(T('Try again'),{full:true,go:'link.addr:kept'})}${help()}`,{close:'link.addr:kept'});
  }});
 
 // ---------- FU-023 · FU-025 연동 성공 ----------
@@ -3453,7 +3399,7 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
 <script>// ===== 70-hub.js =====
 try{(()=>{
 // 7. 캐시백 허브 — FU-045 ~ FU-048 (V2.2 hub/HUB 18개 상태 + Figma에만 있는 H3·H4)
-// Figma: DEX(revision) › "DEX — Cashback Hub Web [Selected Design]" (H1 · H2 · H3 · H4 · H6 · H7 · H8 · H1-CEX · H1-Broker, H5 참고),
+// Figma: DEX(revision) › "DEX — Cashback Hub Web [Selected Design]" (H1 · H2 · H3 · H4 · H7 · H8 · H1-CEX · H1-Broker, H5 참고),
 //        "DEX — Cashback Hub Mobile [Selected Design]" 라이트 프레임. H9·H10(Aster 귀속 만료)은 숨김 폐기안이라 쓰지 않는다.
 // "Hub withdraw, Exchanges Web"(HC1~HC6, 회원 출금 팝업·퍼즐·이메일 인증)은 10분 주기 자동 지급(정책 6-1 · G-412: CEX·DEX 모두)과
 // 충돌하므로 만들지 않는다. 출금 자리는 비활성 `Auto Claim`.
@@ -3546,48 +3492,47 @@ function panelCard(c){
  if(c==='cexPanel'||c==='cexBelowMin'){
   const low=c==='cexBelowMin',[a,b]=low?[5,2]:[28.4,4],w=fl2(a+Math.min(a,b));
   let n=0;while(fl2(a+n+Math.min(b,a+n))<10&&n<10)n=fl2(n+.01);
-  const sub2=C.tbd('이벤트 리워드 하위 줄 (Figma `Events and invites`는 틀림 — 초대 리워드는 별도 잔액)','G-140');
+  const sub2=T('From events. Invitation rewards are separate.','이벤트에서 받은 리워드예요. 초대 리워드는 따로 쌓여요.');
   return receipt(`${rHead('YOUR CASHBACK')}${rule()}${seg('CEX')}<div class="row">${partnerSel(HB_CEX.find(x=>x.id==='bybit'))}</div>${bigLine('Total available cashback',amt(w))}${rule()}
    ${lineKV('Total exchange cashback','From your Bybit trades',amt(a))}${lineKV('Total event reward',sub2,amt(b),{subSize:'b2'})}${rule()}
    ${low?capRow(T(`You can claim if you receive an additional ${amt(n).replace(' USDT','')} USDT in exchange cashback.`,`거래소 캐시백을 ${amt(n).replace(' USDT','')} USDT 더 받으면 출금할 수 있어요.`),'Minimum 10 USDT',{blue:true}):capRow(`Claimable ${amt(w)}`,'Minimum 10 USDT')}
    ${autoClaim()}<p class="cap c2" style="margin:0">${low?'Minimum per account: 10 USDT.':'Cashback is paid to your TetherMax balance.'}</p>`)+
    C.note(low?'H4 CEX 잔액 10 USDT 미만 — 넛지는 G-139 확정 문구(Figma `Just 3.00 USDT more to qualify.` 대신), 금액은 매칭 기준 부족분(A=5 · B=2 → 3.00). Figma에만 있는 상태(정책 B-5-4 유효).':'H3 CEX UID 연동 — Figma에만 있는 상태(정책 B-5-4 유효). 금액 = 매칭 후 A + MIN(B, A). `Events and invites` 하위 줄은 정책상 틀림(G-140 미정).')}
- const pid={aster:'aster',lighterAccruing:'lighter',dexDelayed:'lighter'}[c]||'edgex';
+ const pid={aster:'aster',lighterAccruing:'lighter'}[c]||'edgex';
  const p=HB_DEX.find(x=>x.id===pid);
  const multi='';
  const sel=`<div class="row">${partnerSel(p,c==='dexMulti'?'+1':'')}</div>${multi}`;
  const head=`${rHead('YOUR CASHBACK')}${rule()}${seg('DEX')}${sel}`;
- const dest=`<p class="cap c2" style="margin:0">Payout destination: linked ${esc(p.name)} wallet.</p>`;
+ const dest=`<p class="cap c2" style="margin:0">${T(`Cashback is sent automatically to your linked ${esc(p.name)} wallet.`,`캐시백은 연동한 ${esc(p.name)} 지갑으로 자동 지급돼요.`)}</p>`;
  const paid=capRow(T('Paid to your TetherMax balance','테더맥스 잔액으로 적립돼요'),'Minimum 10 USDT');
  if(c==='dexLoading')return receipt(`${head}<div class="col" style="gap:14px">${C.skel('60%',28)}${C.skel('100%',18)}${C.skel('100%',18)}${C.skel('40%',14)}</div>${autoClaim()}`)+C.note('로딩: 0 대신 스켈레톤(REQ-301). 근거: DEX(revision) 지갑 잔액 카드 메모(29026:97581) 「조회 중에는 스켈레톤」 — 같은 잔액 줄 자리에 코어 스켈레톤(C.skel). 로딩 화면 프레임 자체는 없음. V2.2 `hub/HUB#dexLoading`.');
  if(c==='dexError')return receipt(`${head}<span class="b1 semi">Cashback could not load</span>${C.btn('Try again',{v:'outlined',c:'primary',full:true})}${autoClaim()}<p class="cap c2" style="margin:0">We could not load your cashback. Please try again.</p>`)+
   C.note('H7 잔액 로드 실패 — Figma H7은 CEX(Bybit) 탭이고 `Auto Claim` 버튼이 없음. DEX 탭으로 옮기고, REQ-301 「버튼은 항상 비활성 `Auto Claim`」에 따라 버튼을 둠. 0 표시 금지.');
  if(c==='dexPanel')return receipt(`${head}${bigLine(T('Paid to your TetherMax balance','테더맥스 잔액으로 적립돼요'),'3.10 USDT')}${rule()}${lineKV('Total exchange cashback','Paid records, reported by EdgeX','3.10 USDT')}${rule()}${lineKV('Reported next day','','1.25 USDT')}${paid}${autoClaim()}${dest}`)+
   C.note('H8 EdgeX 지갑 연동 — Figma 그대로(표본 금액 3.10 · 1.25). 큰 숫자 라벨이 H5(`Total available cashback`)와 다르고, REQ-300 원문(`Withdrawable {amount} USDT` · `Total event reward` · 각주 `You withdraw on TetherMax, …`)과도 다름 → 질문_hub #3.');
- if(c==='dexDelayed')return receipt(`${head}${bigLine('Total available cashback','120.00 USDT')}${rule()}${lineKV('Total exchange cashback','Reported by Lighter','120.00 USDT')}${rule()}<span class="b2 c2">Last updated 14 Oct 2026, 09:12</span>${autoClaim()}<p class="cap c2" style="margin:0">Lighter has not sent new data yet. Amounts show the last update.</p>`)+
-  C.note('H6 데이터 지연 — Figma 그대로(Lighter 표본, 온보딩 보류 G-428). 마지막 보고 금액 + `Last updated {date}, {time}` + 각주(정책 B-5-5). 최소액 충족 계정은 자동 지급 대상 유지.');
- // H5 구성 재사용: Total available cashback · Total exchange cashback + Reported by · Event Reward · Paid to / Minimum · Auto Claim · Payout destination
+ // H5 구성 재사용: Total available cashback · Total exchange cashback + Reported by · Total event reward · Claimable · Total claimed · Paid to / Minimum · Auto Claim · 각주
  const v={dexPartial:[3,8],dexBelowMin:[4,3],dexMulti:[12,0],aster:[18,0],totalClaimed:[100,20],lighterAccruing:[120,5]}[c]||[100,20];
  const [a,b]=v,w=fl2(a+Math.min(a,b));
  const reported=c==='aster'?'Reported by Aster, USDT value at payout':`Reported by ${p.name}`;
  let n=0;if(c==='dexBelowMin')while(fl2(a+n+Math.min(b,a+n))<10&&n<10)n=fl2(n+.01);
- const lines=`${lineKV('Total exchange cashback',reported,amt(a))}${b>0?`${rule()}${lineKV('Event Reward','',amt(c==='dexPartial'?Math.min(a,b):b))}`:''}`;
+ const lines=`${lineKV('Total exchange cashback',reported,amt(a))}${b>0?`${rule()}${lineKV('Total event reward','',amt(c==='dexPartial'?Math.min(a,b):b))}`:''}`;
  let need=0;if(c==='dexPartial')while(fl2(a+need+Math.min(b,a+need))<10&&need<10)need=fl2(need+.01);
  const partial=c==='dexPartial'?`<div class="col" style="gap:0;font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)"><span>Matched ${amt(Math.min(a,b)).replace(' USDT','')} / ${amt(b)} in event rewards</span><span>Claimable ${amt(w)} · Minimum 10 USDT</span>${w<10?`<span>Additional exchange cashback needed: ${amt(need)}</span>`:''}</div>`:'';
- const claimed=c==='totalClaimed'?lineKV('Total claimed','','240.00 USDT'):'';
+ const claimable=c==='dexPartial'?'':`<span class="b1">${T(`Claimable ${amt(w)}`,`출금 가능 ${amt(w)}`)}</span>`;
+ const claimed=lineKV('Total claimed','',c==='totalClaimed'?'240.00 USDT':'0.00 USDT');
  const multiNote=c==='dexMulti'?`<p class="b2 c2" style="margin:0">${T('Wallets: 12.00 (auto-paid next cycle) · 4.00 (not included)','지갑 12.00(다음 10분 주기 자동 지급) · 4.00(제외)')}</p>`:'';
- const accr=c==='lighterAccruing'?lineKV(C.tbd('주중 Lighter 「집계 전」 표시 자리·영문 문구','G-100 확정 · 원문 없음'),'',C.tbd('집계 전','G-100')):'';
- const bottom=c==='dexBelowMin'?`${rule()}${capRow(T(`You can claim if you receive an additional ${amt(n).replace(' USDT','')} USDT in exchange cashback.`,`거래소 캐시백을 ${amt(n).replace(' USDT','')} USDT 더 받으면 출금할 수 있어요.`),'Minimum 10 USDT',{blue:true})}${autoClaim()}<p class="cap c2" style="margin:0">You can withdraw once your available cashback reaches 10 USDT.</p>${dest}`
+ const accr='';
+ const bottom=c==='dexBelowMin'?`${rule()}${capRow(T(`You can claim if you receive an additional ${amt(n).replace(' USDT','')} USDT in exchange cashback.`,`거래소 캐시백을 ${amt(n).replace(' USDT','')} USDT 더 받으면 출금할 수 있어요.`),'Minimum 10 USDT',{blue:true})}${autoClaim()}<p class="cap c2" style="margin:0">${T('Cashback is claimed automatically once your claimable amount reaches 10 USDT.','출금 가능액이 10 USDT가 되면 자동으로 출금돼요.')}</p>${dest}`
   :`${paid}${autoClaim()}${dest}`;
  const notes={
-  dexPartial:'A=3 · B=8 → 3 + MIN(8, 3) = 6.00. 패널은 H5(28960:126908) 구성, 매칭 설명 3줄은 DEX(revision) 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704) 문구·스타일 그대로(<code>Matched … in event rewards</code> · <code>Claimable … · Minimum 10 USDT</code> · <code>Additional exchange cashback needed</code>). Event Reward 줄 = 매칭된 금액 min(A,B). V2.2 `hub/HUB#dexPartial`(V2.2 안내 문장 대신 Figma 문구).',
+  dexPartial:'A=3 · B=8 → 3 + MIN(8, 3) = 6.00. 패널은 H5(28960:126908) 구성, 매칭 설명 3줄은 DEX(revision) 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704) 문구·스타일 그대로(<code>Matched … in event rewards</code> · <code>Claimable … · Minimum 10 USDT</code> · <code>Additional exchange cashback needed</code>). Total event reward 줄 = 매칭된 금액 min(A,B). V2.2 `hub/HUB#dexPartial`(V2.2 안내 문장 대신 Figma 문구).',
   dexBelowMin:'H4(28960:126902) — 웹 SCREEN-LABEL `DEX & CEX balance under 10 USDT`(28960:126903)라 DEX에도 이 프레임. 프레임은 CEX 탭이라 DEX 탭 · H5 줄 구성으로 그림. 넛지 = G-139 확정 문구(DEX(revision) 지갑 카드의 `Additional exchange cashback needed: {n} USDT`와 다름 — 결정대로), 금액은 매칭 기준 부족분(A=4 · B=3 → 3.00) + `Minimum 10 USDT` + 각주(REQ-301). 버튼은 숨기지 않고 비활성.',
   dexMulti:'파트너 선택 `EdgeX   +1` 표기 = DEX(revision) 상태 정의 S4_18 `EdgeX   +1`(29002:128037, 전환 「선택한 패널 유지」). 같은 DEX 지갑 2개(12 · 4) → 12 USDT 지갑만 다음 10분 주기 자동 지급, 4 USDT 지갑 제외(REQ-302). 패널은 H5 구성 재사용(전용 프레임 없음). V2.2 `hub/HUB#dexMulti`.',
-  aster:'Aster: `Reported by Aster, USDT value at payout`(REQ-300). H9·H10(귀속 만료)은 범위 밖 폐기안. 패널은 H5(28960:126908) 구성 재사용 — 이벤트 리워드 0이면 Event Reward 줄 숨김(DEX(revision) 상태 정의 S4_22 「이벤트 행 숨김」 29002:128137). `USDT value at payout` 줄 디자인은 어디에도 없음. V2.2 `hub/HUB#aster`.',
-  totalClaimed:'`Total claimed` 유지(G-053 확정) — 테더맥스를 통해 지급한 누계, `Sent` 시 증가(REQ-307). 허브 패널(H3~H8)에 이 줄 없음 → 기존 `Total Claimed` 줄(DEX(revision) 게스트 조회 결과 카드 29035:97792 · [MAX-7] 홈 카드)과 같은 lineKV 줄로 H5 구성에 추가. V2.2 `hub/HUB#totalClaimed`.',
+  aster:'Aster: `Reported by Aster, USDT value at payout`(REQ-300). H9·H10(귀속 만료)은 범위 밖 폐기안. 패널은 H5(28960:126908) 구성 재사용 — 이벤트 리워드 0이면 Total event reward 줄 숨김(DEX(revision) 상태 정의 S4_22 「이벤트 행 숨김」 29002:128137). `USDT value at payout` 줄 디자인은 어디에도 없음. V2.2 `hub/HUB#aster`.',
+  totalClaimed:'`Total claimed` 유지(G-053 확정) — 테더맥스를 통해 지급한 누계, `Sent` 시 증가(REQ-307). H5 패널 줄(Figma 29352:145077, 기본 0.00 USDT) — 이 상태는 누계가 있는 표본(240.00). V2.2 `hub/HUB#totalClaimed`.',
   lighterAccruing:'Lighter: Figma H5의 `Accruing this week (estimate)` 3.20 USDT 추정 줄은 G-100 확정(주중 「집계 전」, 추정치 미표시)으로 쓰지 않음. 나머지는 H5 구성. 「집계 전」 표시 자리·영문 문구는 어디에도 없음(DEX(revision) 상태 정의 S6_06 `DEX data pending` 29002:129262는 캐시백 요약 쪽) → C.tbd 유지. Lighter 온보딩 보류(G-428).',
  };
- return receipt(`${head}${bigLine('Total available cashback',amt(w))}${rule()}${lines}${accr}${claimed}${partial}${multiNote}${bottom}`)+(notes[c]?C.note(notes[c]):'')}
+ return receipt(`${head}${bigLine('Total available cashback',amt(w))}${rule()}${lines}${accr}${claimable}${claimed}${partial}${multiNote}${bottom}`)+(notes[c]?C.note(notes[c]):'')}
 
 // ---------- 히어로 (HA5) ----------
 function hero(right,route){
@@ -3611,8 +3556,8 @@ function hero(right,route){
 function routes(){
  // 순서 CEX → DEX → Brokers 고정(G-138 확정). Figma는 DEX → CEX → Broker(하드코딩). 강조(파란 화살표)는 Figma의 DEX 행 hover 표현
  const rows=[
-  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Automatic payouts from 10 USDT',unit:'futures cashback',go:'cex.list'},
-  {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Automatic payouts from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
+  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'cex.list'},
+  {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
   {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:''},
  ];
  const row=r=>{const on=r.k==='DEX';
@@ -3636,7 +3581,7 @@ function routes(){
 // ---------- 비교표 FU-048 ----------
 function compare(chip,c){
  const list=routeList(chip),n=list.length,brk=chip==='Brokers';
- const title=brk?C.tbd('Brokers 비교표 제목 — Figma·정책 원문에 금지 용어 포함, 캐시백 용어로 교체 필요','질문_hub #5'):mo()&&chip==='DEX'?`Compare cashback across ${n} DEXs`:`Compare cashback across ${n} exchanges`;
+ const title=brk?`Compare cashback across ${n} brokers`:mo()&&chip==='DEX'?`Compare cashback across ${n} DEXs`:`Compare cashback across ${n} exchanges`;
  const sub=brk?'Monthly cashback at 2 lots a month, from the calculator above.':`Monthly cashback at ${usd0(HB_VOL)} monthly trading volume, from the calculator above.`;
  const ph=chip==='DEX'?'Search for a DEX':brk?'Search for a broker':'Search for a partner';
  const est=p=>brk?p.est:fl2(HB_VOL*p.taker/100*p.rate/100);
@@ -3686,7 +3631,7 @@ function why(){
 
 // ---------- 페이지 조립 ----------
 const GUEST=['normal','cex','brokers','rateFail','cards','emptySearch'];
-const PANEL=['dexPanel','dexPartial','dexBelowMin','dexDelayed','dexLoading','dexError','dexMulti','aster','totalClaimed','lighterAccruing','cexPanel','cexBelowMin'];
+const PANEL=['dexPanel','dexPartial','dexBelowMin','dexLoading','dexError','dexMulti','aster','totalClaimed','lighterAccruing','cexPanel','cexBelowMin'];
 function shell(guest,body){
  // 허브 상태가 회원 여부를 정한다 → 헤더도 상태에 맞춰 그린다(도구의 게스트/회원 토글과 무관). 셸은 코어 함수(gnb·moTop·footer) 그대로 — 모바일 웹에는 하단 탭 없음
  const keep=S.auth;S.auth=guest?'guest':'s4';
@@ -3704,8 +3649,7 @@ R.screen({id:'hub.main',group:'hub',title:'캐시백 허브',route:'/cashback-hu
   {id:'dexPanel',label:'DEX 잔액 패널 — EdgeX 지갑 연동 (H8)',figma:{pc:'28960:126926',mo:'28960:130836'},note:'V2.2 hub/HUB#dexPanel'},
   {id:'dexPartial',label:'A=3 · B=8 — 일부만 출금',note:'V2.2 hub/HUB#dexPartial · 재사용: H5 패널 + 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704)'},
   {id:'dexBelowMin',label:'최소액 미만 — 넛지 (H4 · DEX & CEX)',figma:{pc:'28960:126902',mo:'28960:130812'},note:'V2.2 hub/HUB#dexBelowMin · H4 웹 라벨 `DEX & CEX balance under 10 USDT`(28960:126903)'},
-  {id:'dexDelayed',label:'데이터 지연 (H6)',figma:{pc:'28960:126914',mo:'28960:130824'},note:'V2.2 hub/HUB#dexDelayed'},
-  {id:'dexLoading',label:'패널 로딩',note:'V2.2 hub/HUB#dexLoading · 재사용: H5 패널 + 코어 스켈레톤(지갑 카드 메모 29026:97581 「조회 중에는 스켈레톤」)'},
+    {id:'dexLoading',label:'패널 로딩',note:'V2.2 hub/HUB#dexLoading · 재사용: H5 패널 + 코어 스켈레톤(지갑 카드 메모 29026:97581 「조회 중에는 스켈레톤」)'},
   {id:'dexError',label:'패널 로드 실패 (H7 — CEX 탭 시안을 DEX로)',figma:{pc:'28960:126920',mo:'28960:130830'},note:'V2.2 hub/HUB#dexError · Figma H7은 Bybit(CEX) 탭'},
   {id:'dexMulti',label:'같은 DEX 복수 지갑 +N',note:'V2.2 hub/HUB#dexMulti · 재사용: H5 패널 · `EdgeX +1` 표기는 상태 정의 S4_18(29002:128037)'},
   {id:'aster',label:'Aster — USDT value at payout',note:'V2.2 hub/HUB#aster · 재사용: H5 패널 · H9·H10은 숨김 폐기안이라 쓰지 않음'},
@@ -3849,8 +3793,8 @@ function ovVenues(list,c){
 }
 function ovCompare(){
  const row=(k,v,dex,chip)=>`<div class="col" style="gap:4px;border-top:1px solid var(--divider);padding:16px 0"><span class="cap c2">${k}</span><span style="${dex?'font-size:20px;line-height:1.6;font-weight:600;letter-spacing:.15px':'font-size:16px;line-height:1.5'}">${v}</span>${chip?`<span class="cap cb" style="border:1px solid var(--blue);border-radius:999px;padding:0 8px;align-self:flex-start">${chip}</span>`:''}</div>`;
- const ex=[['Who holds your funds','The exchange'],['How you sign up','Account with an identity check'],['How you link to TetherMax','Your exchange UID'],['Where cashback is paid','Your TetherMax balance'],['Where payouts go','On TetherMax, from 10 USDT'],['Event and invite rewards','Yes']];
- const dx=[['Who holds your funds','You, in your own wallet'],['How you sign up','Email or a wallet, no KYC check'],['How you link to TetherMax','Your wallet address, pasted'],['Where cashback is paid','Your TetherMax balance','Your Cashback'],['Where payouts go','To your linked wallet from 10 USDT'],['Rewards','Event and invitation rewards are available.']];
+ const ex=[['Who holds your funds','The exchange'],['How you sign up','Account with an identity check'],['How you link to TetherMax','Your exchange UID'],['Where cashback is paid','Your TetherMax balance'],['Where withdrawals go','On TetherMax, from 10 USDT'],['Event and invite rewards','Yes']];
+ const dx=[['Who holds your funds','You, in your own wallet'],['How you sign up','Email or a wallet, no KYC check'],['How you link to TetherMax','Your wallet address, pasted'],['Where cashback is paid','Your TetherMax balance','Your Cashback'],['Where withdrawals go','To your linked wallet from 10 USDT'],['Rewards','Event and invitation rewards are available.']];
  const panel=(dex)=>`<div style="position:relative;flex:1 1 0;min-width:0;background:#fff;border:${dex?'2px solid var(--blue)':'1px solid var(--divider)'};border-radius:8px;padding:40px;box-shadow:${dex?'0 16px 40px rgba(26,64,217,.14)':'0 10px 20px rgba(0,0,0,.06)'}" class="col">
   <div class="col" style="gap:8px">${eyebrow(dex?'ON A DEX':'ON AN EXCHANGE',dex?'var(--blue)':'var(--text-secondary)')}<span style="font-size:${mo()?24:34}px;line-height:1.235;letter-spacing:.25px">${dex?'You hold the keys':'The exchange holds them'}</span></div><div style="height:24px"></div>
   ${(dex?dx:ex).map(r=>row(r[0],r[1],dex,r[2])).join('')}
@@ -3874,7 +3818,7 @@ function ovBento(){
   <div class="col" style="position:absolute;left:${mo()?20:40}px;right:${mo()?20:40}px;bottom:${o.blue&&!mo()?40:24}px;gap:12px;max-width:420px">${eyebrow(o.k,o.blue?'rgba(255,255,255,.87)':'var(--blue)')}<span style="font-size:${mo()?24:o.big?48:34}px;line-height:${o.big?1.167:1.235};color:${o.blue?'rgba(255,255,255,.87)':'var(--text-primary)'}">${o.t}</span><span class="b1" style="color:${o.blue?'rgba(255,255,255,.6)':'var(--text-secondary)'}">${o.b}</span></div></div>`;
  const T1={w:700,h:460,big:1,k:'CUSTODY',t:'You hold the keys.',b:'Your collateral stays under your control. No one can freeze it, and no one can restore it for you.',img:'dex-ov-bento-wallet.webp',ip:mo()?'right:16px;top:8px;width:160px':'left:120px;top:-71px;width:402px'};
  const T2={w:476,h:460,k:'ORDER BOOK',t:'Onchain order book',b:'Onchain matching via rollup or sequencer for verification.',img:'dex-ov-bento-chart.webp',ip:mo()?'right:16px;top:16px;width:160px':'left:180px;top:11px;width:270px;border-radius:21px'};
- const T3={w:476,h:400,k:'PAYOUT',t:'Paid to your TetherMax balance',b:'Your trades are tracked through our referral. TetherMax pays the cashback into your TetherMax balance.',img:'dex-ov-bento-plane.webp',ip:mo()?'right:8px;top:-20px;width:180px':'left:180px;top:-58px;width:315px'};
+ const T3={w:476,h:400,k:'WITHDRAWAL',t:'Paid to your TetherMax balance',b:'Your trades are tracked through our referral. TetherMax pays the cashback into your TetherMax balance.',img:'dex-ov-bento-plane.webp',ip:mo()?'right:8px;top:-20px;width:180px':'left:180px;top:-58px;width:315px'};
  const T4={w:700,h:400,big:1,blue:1,k:'TRADING COSTS',t:"Low fees don't always mean low trading costs",b:'Compare liquidity, slippage, funding, and gas, not just the advertised fee.',img:'dex-ov-bento-calc.webp',ip:mo()?'right:8px;top:-20px;width:180px':'left:398px;top:-59px;width:310px'};
  const body=mo()?`<div class="col" style="gap:12px">${[T1,T2,T3,T4].map(tile).join('')}</div>`:`<div class="col" style="gap:24px"><div class="row" style="gap:24px;align-items:stretch">${tile(T1)}${tile(T2)}</div><div class="row" style="gap:24px;align-items:stretch">${tile(T3)}${tile(T4)}</div></div>`;
  return `<section style="background:#fff;padding:${mo()?'24px 0 48px':'24px 0 120px'}">${wrap(body)}</section>`;
@@ -3952,7 +3896,8 @@ function offerBox(d,member,maker){
  const cta={guest:mo()?'':outlinedP(T('Sign Up','회원가입'),{full:true,go:'auth.signup'}),
   return:C.btn(T('Link Wallet','연동하기'),{full:true,go:linkWallet}),
   unlinked:outlinedP(T('Link Wallet','연동하기'),{full:true,go:linkWallet}),
-  linked:`<button class="btn outlined black lg full" disabled>Auto Claim</button>`}[member];
+  linked:`<button class="btn outlined black lg full" disabled>Auto Claim</button>`,
+  pending:`<button class="btn outlined black lg full" disabled>${T('Trying to link','연동 시도중이에요')}</button>`}[member];
  return `<div class="col" style="gap:12px;${mo()?'border-left:1px solid var(--divider);padding:0 0 0 16px':'width:400px;flex:none;border-left:1px solid var(--divider);padding:0 16px 0 24px'}">
   <div class="row between" style="align-items:flex-start"><div class="col" style="gap:0"><span class="b2 med">Trading fees cashback up to</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${d.rate}%</span></div>${lighter?toggle('Premium','Plus',0):toggle('Taker','Maker',maker?1:0)}</div>
   ${tbl}${ret?outlinedP('Get Started',{full:true}):`<button class="btn contained primary lg full">Get Started${ext()}</button>`}${cta}</div>`;
@@ -4022,23 +3967,21 @@ function guideData(d){
   :['Create a Web3 wallet',`Deposit ${cur} into your wallet`,`Join ${d.name} and link your wallet`,`Deposit ${cur} into ${d.name}`,'Trade and get rewarded'];
  // G-270 · G-437: 단계마다 Step N Title 하나(왼쪽 목록 = 오른쪽 패널 제목) + Step N Description(경고·안전 메시지 포함)
  const bodies=[(L?'Install a self-custody wallet, or sign up on Lighter with email to get a wallet made for you.':'Install a self-custody wallet such as MetaMask and save your recovery phrase.')+' Keep your 12-word recovery phrase private. TetherMax never asks for a private key, recovery phrase or wallet signature.',
-  `Send ${cur} from an exchange or wallet on the correct network. Sending on the wrong chain can lose your funds.`,
+  'Check the receiving network before sending. Sending funds on the wrong network can cause permanent loss.',
   L?'Open Lighter through the TetherMax link and log in. Then copy your wallet address from Lighter and paste it in TetherMax. TetherMax never asks you to connect a wallet. After you sign up, confirm the TetherMax referral code on Lighter’s referral page. Cashback applies only to Plus and Premium accounts. Standard accounts pay no fees.'
    :`After you sign up, confirm the TetherMax referral code on ${d.name}’s referral page. Copy your public address from ${d.name} and paste it on TetherMax.`,
   `Transfer ${cur} to ${d.name}.`,'TetherMax pays your cashback into your TetherMax balance.'];
  return {rail,bodies};
 }
 function dtGuide(d,c){
- const g=guideData(d),cur=c==='step3'?2:0;
+ const g=guideData(d),cur=c==='step3'?2:c==='step2'?1:0;
  const item=(t,i)=>`<div class="row" style="gap:12px;height:56px;padding:12px 16px;border-radius:12px;box-sizing:border-box;${i===cur?'background:rgba(207,216,220,.2)':''}"><span style="width:32px;height:32px;border-radius:16px;flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;${i===cur?'background:var(--blue);color:rgba(255,255,255,.87)':'background:rgba(207,216,220,.2)'}">${i+1}</span><span class="b1 ${i===cur?'semi':'c2'}">${t}</span></div>`;
  const support=`<div class="col" style="gap:12px;background:rgba(0,123,255,.1);border-radius:8px;padding:16px"><img src="${A('dex-dt-ic-headset.svg')}" style="width:24px;height:24px" alt=""><span class="b2 semi">Stuck partway through?</span><span class="b2 c2">Live chat replies in about 2 minutes.</span><a class="cb" data-go="support.main" style="font-size:13px;font-weight:500;text-decoration:underline;cursor:pointer;padding:4px 5px">Chat with support</a></div>`;
- const shot=c==='mediaFail'?`<div style="height:360px;border-radius:12px;background:#eef0f3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px" class="c2"><span class="b2">${C.tbd('영상 로드 실패 — 정지된 첫 프레임 + 단계 글','REQ-348 원문 없음')}</span></div>`
-  :`<img src="${A(cur===2&&d.tiers?'dex-dt-guide-lighter-3.jpg':'dex-dt-guide-lighter-1.jpg')}" style="width:100%;height:360px;object-fit:cover;border-radius:12px" alt="">`;
+ const shot=`<img src="${A(cur===2&&d.tiers?'dex-dt-guide-lighter-3.jpg':'dex-dt-guide-lighter-1.jpg')}" style="width:100%;height:360px;object-fit:cover;border-radius:12px" alt="">`;
  const safe=cur!==0?`<p class="cap c2" style="margin:0">${T('TetherMax never asks for your private key, seed phrase, or a wallet signature.','테더맥스는 개인키 · 시드 문구 · 지갑 서명을 요구하지 않아요.')}</p>`:'';
  const panel=`<div class="col" style="flex:1 1 0;min-width:0;gap:16px;padding:${mo()?0:'0 16px 16px'}">${shot}<span style="align-self:flex-start;background:var(--blue-accentlight);color:var(--blue);border-radius:100px;padding:3px 9px;font-size:13px">Step ${cur+1} of 5</span><span class="h5">${g.rail[cur]}</span><p class="b2 c2" style="margin:0">${g.bodies[cur]}</p>${safe}</div>`;
  const rail=`<div class="col" style="gap:4px;${mo()?'':'width:320px;flex:none'}">${g.rail.map(item).join('')}${mo()?'':'<div style="flex:1;min-height:76px"></div>'}${support}</div>`;
  const n=[];
- if(c==='mediaFail')n.push('가이드 미디어 실패 — 영상 로드 실패 → 정지된 첫 프레임 + 단계 글, reduced motion이면 자동재생 안 함, 선택 언어 영상이 없으면 영어 영상(REQ-348) · 디자인 없음');
  if(c==='step3'&&d.tiers)n.push('Step 3 — Figma D2(Lighter). 경고 문장은 Description 안(G-437), 영문은 정책 A-22 후보(사용자 확인 #37). Lighter 온보딩 보류');
  return box1056(`<div class="col" style="gap:24px"><span class="h5 bold" style="${mo()?'font-size:20px;line-height:1.6':''}">Step by step guide on starting your trading journey on ${d.name}</span><div style="display:flex;${mo()?'flex-direction:column;gap:24px':'gap:32px;align-items:stretch'}">${rail}${panel}</div>${n.map(C.note).join('')}</div>`);
 }
@@ -4046,12 +3989,16 @@ function dtClosing(d){
  if(mo())return `<div style="padding:20px 0"><div style="position:relative;overflow:hidden;border-radius:8px;padding:32px 20px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;background:#fff"><img src="${A('dex-dt-closing-mo.jpg')}" style="position:absolute;left:0;top:-118.36%;width:100%;height:291.18%;pointer-events:none" alt=""><span style="position:relative;font-size:24px;line-height:1.334;color:#000">Start Earning Cashback with ${d.name}</span><button class="btn contained lg" style="position:relative;background:#2453f0;color:#fff">Join Now</button></div></div>`;
  return `<div style="padding:20px 0"><div style="max-width:1056px;margin:0 auto;border-radius:8px;overflow:hidden;background:#0a0b10 url(${A('dex-dt-closing.jpg')}) center/cover;padding:48px 16px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center"><span style="font-size:34px;line-height:1.235;font-weight:700;color:#fff">Start Earning Cashback with ${d.name}</span><button class="btn contained lg" style="background:#2453f0;color:#fff">Join Now</button></div></div>`;
 }
-function dtFaq(d){
+function dtFaq(d,c){
  const ico=open=>`<span style="width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:24px;color:var(--action-active)">${open?'−':'+'}</span>`;
  const tail=d.cur==='USDC'||d.id==='edgex'?' Shown in USDT, 1:1 with USDC.':' Amounts are shown in USDT.';
- const secs=['General Partnership','Cashback & Referral Rewards','Points Program & Airdrop','Account Types & Eligibility','Prohibited Activity & Compliance','Payouts & Account Management','Contact & Support'];
- const acc=(s,i)=>`<div style="border-bottom:1px solid var(--divider)"><div class="row between" style="padding:16px"><span class="b1 semi">${esc(s)}</span>${ico(i===0)}</div>${i===0?`<div class="col" style="gap:8px;padding:16px"><span class="b1 semi">How does TetherMax cashback work on ${d.name}?</span><span class="b1 c2">Join ${d.name} through the TetherMax link and trade. Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.${tail}</span></div>`:''}</div>`;
- return box1056(`<div class="col" style="gap:24px"><span class="h5 bold">FAQs</span><div>${secs.map(acc).join('')}</div><div class="row between" style="padding:16px"><span class="b1 semi">Terms and conditions</span>${ico(false)}</div>${C.note('FAQ 답변은 Figma 초안(DRAFT copy) — 10분 주기 자동 지급 기준으로 이미 바뀌어 있음(G-419 문구표 확정 대기). 약관 서랍 본문은 보류 G-369')}</div>`);
+ const secs=['General Partnership','Cashback & Referral Rewards','Points Program & Airdrop','Account Types & Eligibility','Prohibited Activity & Compliance','Withdrawals & Account Management','Contact & Support'];
+ // 펼친 구역: 첫 구역(REQ-350) · faq2 상태는 6번째 `Withdrawals & Account Management`도(Figma CT-29 ② 29367:138679 — 운영자 입력 예시)
+ const qa={0:[`How does TetherMax cashback work on ${d.name}?`,`Join ${d.name} through the TetherMax link and trade. Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.${tail}`],
+  5:['How do I receive my cashback?','Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.']};
+ const open=i=>i===0||(c==='faq2'&&i===5);
+ const acc=(s,i)=>`<div style="border-bottom:1px solid var(--divider)"><div class="row between" style="padding:16px"><span class="b1 semi">${esc(s)}</span>${ico(open(i))}</div>${qa[i]&&(open(i)||window.SITED)?`<div class="col" style="gap:8px;padding:16px${open(i)?'':';display:none'}"><span class="b1 semi">${qa[i][0]}</span><span class="b1 c2">${qa[i][1]}</span></div>`:''}</div>`;
+ return box1056(`<div class="col" style="gap:24px"><span class="h5 bold">FAQs</span><div>${secs.map(acc).join('')}</div><div class="row between" style="padding:16px"><span class="b1 semi">Terms and conditions</span>${ico(false)}</div>${C.note('FAQ 질문·답변은 운영자가 어드민에서 입력(G-265 · G-272 · G-439) — 여기 문구는 Figma 운영자 입력 예시(첫 구역 28960:127610 · `Withdrawals & Account Management` 29367:138679). 나머지 구역 내용은 어드민 입력값. 약관 서랍 본문은 거래소별 어드민 입력(G-369)')}</div>`);
 }
 function stars(v,sz=18){let h='';for(let i=1;i<=5;i++){const f=v>=i?1:v>=i-.5?.5:0;h+=f===1?`<img src="${A('dex-dt-ic-star-full.svg')}" style="width:${sz}px;height:${sz}px" alt="">`:f?`<span style="position:relative;width:${sz}px;height:${sz}px;display:inline-block"><img src="${A('dex-dt-ic-star-empty.svg')}" style="position:absolute;inset:0;width:${sz}px;height:${sz}px" alt=""><img src="${A('dex-dt-ic-star-full.svg')}" style="position:absolute;inset:0;width:${sz}px;height:${sz}px;clip-path:inset(0 50% 0 0)" alt=""></span>`:`<img src="${A('dex-dt-ic-star-empty.svg')}" style="width:${sz}px;height:${sz}px" alt="">`}return `<span class="row" style="gap:0">${h}</span>`}
 function dtReviews(d,member,c){
@@ -4069,7 +4016,7 @@ function dtReviews(d,member,c){
  const vdiv=mo()?'<hr class="divider">':'<div style="width:1px;height:99px;background:var(--divider)"></div>';
  const summary=`<div style="border:1px solid var(--divider);border-radius:12px;padding:24px;display:flex;${mo()?'flex-direction:column;gap:16px':'gap:24px;align-items:center'}"><div class="col" style="gap:4px;align-items:center"><span style="font-size:48px;line-height:1.2;font-weight:600">4.0</span>${stars(3.5)}<span class="b2 c2">23 reviews</span></div>${vdiv}<div class="col" style="flex:1;gap:4px">${hist}</div>${vdiv}<div class="row" style="gap:12px;justify-content:center">${axis('4.2','Overall experience')}${axis('4.2','Cashback earning')}${axis('3.7','Cashback payouts')}</div></div>`;
  const ai=`<div class="col" style="gap:10px;background:rgba(25,118,210,.04);border-radius:12px;padding:16px 20px 18px"><span class="row b2 semi" style="gap:6px;color:#1976d2"><img src="${A('dex-dt-ic-ai.svg')}" style="width:16px;height:16px" alt="">AI review summary</span>
-  ${[['Cashback reaches my TetherMax balance every week.',11],[`Frequent traders notice the cashback on ${d.tiers?'Premium ':''}fees.`,7],['Support replies quickly, even at weekends.',4]].map(([t,k])=>`<div class="row" style="gap:10px;align-items:flex-start"><span class="b2 semi" style="color:#1976d2">·</span><span class="b2 semi grow">${t}</span><span class="cap c2">(${k} reviews)</span></div>`).join('')}
+  ${[['Cashback reaches my TetherMax balance every day.',11],[`Frequent traders notice the cashback on ${d.tiers?'Premium ':''}fees.`,7],['Support replies quickly, even at weekends.',4]].map(([t,k])=>`<div class="row" style="gap:10px;align-items:flex-start"><span class="b2 semi" style="color:#1976d2">·</span><span class="b2 semi grow">${t}</span><span class="cap c2">(${k} reviews)</span></div>`).join('')}
   <span class="cap c2">From real reviews, summarised by AI. Wording may differ from individual reviews.</span></div>`;
  const tagChip=(t,on)=>`<span style="border:1px solid #bdbdbd;border-radius:100px;padding:3px 10px;font-size:13px;line-height:18px;${on?'background:rgba(0,0,0,.12)':''}">${t}</span>`;
  const tags=`<div class="row wrap" style="gap:6px;padding:9px 12px;border-radius:10px"><span class="cap c2">Browse by tag</span>${tagChip('#'+d.name,1)}${tagChip('#Fee')}${tagChip('#Cashback')}</div>`;
@@ -4109,9 +4056,9 @@ function dtDrawer(d,maker){
   <hr class="divider" style="margin:0"></div>`;
 }
 function dtPage(c){
- const id=['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='signupReturn'?'lighter':'edgex';
+ const id=['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='step2'||c==='signupReturn'||c==='faq2'?'lighter':'edgex';
  const d=DX[id];
- const member=c==='normal'?'guest':c==='unlinked'?'unlinked':c==='linked'?'linked':c==='signupReturn'?'return':({guest:'guest',s3:'unlinked',s4:'linked'}[S.auth]||'guest');
+ const member=c==='normal'?'guest':c==='unlinked'?'unlinked':c==='linked'?'linked':c==='signupReturn'?'return':c==='pendingLink'?'pending':({guest:'guest',s3:'unlinked',s4:'linked'}[S.auth]||'guest');
  const maker=c==='maker';
  const notes=[];
  if(c==='lighter')notes.push('Lighter 상세(Premium/Plus) — <b>Lighter 온보딩 후 표시(현재 보류)</b>. Plus 요율 미수신이라 Premium 값만. V2.2 <code>exd/DETAIL#lighter</code>');
@@ -4120,11 +4067,12 @@ function dtPage(c){
  if(member==='guest')notes.push('게스트 CTA <code>Sign Up</code> → 회원가입. 가입 뒤 이 DEX가 미리 선택된 연동 모달로 복귀(G-402 확정)');
  if(member==='unlinked')notes.push('미연동 CTA <code>Link Wallet</code> → 이 DEX가 미리 선택된 연동 모달(<code>link.addr</code>). V2.2 <code>exd/DETAIL#unlinked</code>');
  if(member==='return')notes.push('가입 후 복귀(Signup + Link Wallet / 3 Return, 28960:127422) — 회원 GNB, 오퍼 박스 주 버튼이 <code>Link Wallet</code>(contained), <code>Get Started</code>는 outlined로 낮춤. <code>Link Wallet</code> → 이 DEX가 미리 선택된 연동 모달(G-402). Figma 예시는 Lighter(온보딩 보류 G-428) — 실제로는 가입 전에 보던 DEX. GNB는 상단 도구의 회원 토글을 따른다(회원·연동0 선택)');
+ if(member==='pending')notes.push('확인 중 지갑만 있는 회원 — 오퍼 박스 연동 버튼 자리를 비활성 「확인 중」 표시로(결정 Q6 B). 문구는 홈 행 확인 중 칩과 같은 <code>연동 시도중이에요</code>(홈 모듈 ST.pend — 영문 원문 없어 EN에서도 같은 문자열). 버튼 모양은 연동 완료 <code>Auto Claim</code>과 같은 비활성 외곽선 버튼. 귀속 확인은 대부분 즉시 응답이라 짧게 나타남');
  if(member==='linked')notes.push('연동 완료 — 출금 자리는 비활성 <code>Auto Claim</code>(10분 주기 자동 지급), 리뷰 쓰기. V2.2 <code>exd/DETAIL#linked</code>');
  if(c==='offboarded')return `<div style="padding:8px 16px">${C.note('DEX 오프보딩 — 상세 URL <code>/dex/{slug}</code>는 DEX 랜딩으로 301 리다이렉트(REQ-121·358). 아래는 리다이렉트된 랜딩 · 디자인 없음. V2.2 <code>exd/DETAIL#offboarded</code>')}</div>${ovPage('normal')}`;
  const top=`${notes.length?`<div style="padding:8px 16px">${notes.map(C.note).join('')}</div>`:''}`;
  const sticky=mo()&&member==='guest'?`<div style="position:sticky;bottom:0;z-index:5;background:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -1px 0 var(--divider)"><button class="btn contained primary lg full" data-go="auth.signup">Sign Up${ext()}</button><button class="btn outlined black lg full" data-go="auth.login">Already have an account?</button></div>${C.note('모바일 게스트 하단 고정 CTA — DEX(revision) 모바일 D4 「sticky bottom CTA (guest)」(I28960:131011;27610:306639): <code>Sign Up</code> + <code>Already have an account?</code>. 모바일 오퍼 박스에는 <code>Get Started</code>만 있다.')}`:'';
- return `${top}${dtHero(d,member,maker)}${member==='linked'?dtMyReview():''}${dtTabs(c)}${dtWhy(d)}${dtStructure(d,maker)}${dtGuide(d,c)}${dtClosing(d)}${dtFaq(d)}${dtReviews(d,member,c)}${sticky}`;
+ return `${top}${dtHero(d,member,maker)}${member==='linked'?dtMyReview():''}${dtTabs(c)}${dtWhy(d)}${dtStructure(d,maker)}${dtGuide(d,c)}${dtClosing(d)}${dtFaq(d,c)}${dtReviews(d,member,c)}${sticky}`;
 }
 
 R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',route:'/dex/{slug}',fu:['FU-054','FU-055','FU-056','FU-057','FU-058','FU-059'],
@@ -4140,10 +4088,12 @@ R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',rout
   {id:'apex',label:'ApeX',figma:{pc:'28960:127633',mo:'28960:131023'},note:'V2.2 exd/DETAIL#apex · Figma D6'},
   {id:'lighter',label:'Lighter — Premium/Plus (온보딩 후 — 보류)',figma:{pc:'28960:127443',mo:'28960:130990'},note:'V2.2 exd/DETAIL#lighter · Figma D1 · 연동 모달 배경으로도 쓰임'},
   {id:'drawer',label:'How this works 모달',figma:{pc:'22544:808136',mo:'22988:114502'},note:'[기존 MAX-1216] S21 How this works modal · 컴포넌트 Modal / How this works / mobile 343(22985:103042) 값 그대로 · 상태 정의 S5_12(29002:128605) · V2.2 exd/DETAIL#drawer(드로어 → 기존 제품 모달로 바꿈)'},
+  {id:'step2',label:'단계 가이드 Step 2 (Lighter)',figma:{pc:'29386:137364'},note:'Figma CT-28 「Step 2 선택」 — 본문은 DEX(revision) `DEX guide / Step 2 of 5`(28981:129056) 원문(8차 결정)'},
   {id:'step3',label:'단계 가이드 Step 3 (Lighter)',figma:{pc:'28960:127444',mo:'28960:130999'},note:'V2.2 exd/DETAIL#step3 · Figma D2'},
-  {id:'mediaFail',label:'가이드 미디어 실패',note:'V2.2 exd/DETAIL#mediaFail · DEX(revision)·기존 페이지 어디에도 디자인 없음(누락_dex.md)'},
+  {id:'faq2',label:'FAQ 두 구역 펼침 — Withdrawals & Account Management',figma:{pc:'29367:138679'},note:'Figma CT-29 ② — 첫 구역과 `Withdrawals & Account Management` 동시 펼침. 질문·답변은 운영자 입력 예시(8차 결정)'},
   {id:'moderation',label:'리뷰 검토 중',figma:{pc:'27392:937',mo:'27392:1062'},note:'[기존 MAX-1216] Reviews / Card · State=In moderation(27392:937 · 모바일 27392:1062) · 상태 정의 S5_20(29002:128826) · V2.2 exd/DETAIL#moderation'},
   {id:'reviewsEmpty',label:'리뷰 없음 (G-169)',figma:{pc:'22442:219830',mo:'22956:84690'},note:'[기존 MAX-1216] S6 Empty — 0 reviews · 문구는 G-169 `No reviews yet` · V2.2 exd/DETAIL#reviewsEmpty'},
+  {id:'pendingLink',label:'확인 중 지갑만 있음 — 연동 버튼 자리 비활성 「확인 중」',figma:null,note:'근거: DEX 상세 회원 오퍼 박스(28969:129666 · 28969:129751)의 버튼 자리 + 홈 행 확인 중 표기(<code>연동 시도중이에요</code>) · 결정 Q6 B. <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},
   {id:'offboarded',label:'DEX 오프보딩 — 랜딩 리다이렉트',note:'V2.2 exd/DETAIL#offboarded · 상태 정의 S5_16 `Exchange unavailable`·S5_17 자동 이동(29002:128736·128761) — 결정(301 리다이렉트)대로 별도 화면 없음'},
  ],
  render(st,ctx){
@@ -4329,10 +4279,10 @@ R.screen({id:'calc.p5',group:'calc',title:'P5 Summary',route:'/payback',fu:['FU-
   const receipt=`<div style="border:1px solid #0031c6;border-radius:4px;padding:16px;background:#fff" class="col g16">${row('Trading Fees',num(CL_FEES)+' USDT/mo')}${row('× Cashback Rate','× '+p.rate+'%')}<hr class="divider">
    <div class="row between"><span class="b1 semi">Cashback</span><span class="tnum"><b style="font-size:16px">${num(cb)}</b> <span class="b2">USDT/mo*</span></span></div><div style="font-size:10px;line-height:1;color:var(--text-secondary)">${foot}</div></div>`;
   const pcol=(icn,k,v)=>`<div class="col" style="align-items:center;gap:8px;width:${mo()?'auto':'80px'};flex:${mo()?1:'none'};position:relative;z-index:1"><span style="background:#e6e7e9;border-radius:8px;padding:16px;display:flex"><img src="${A('calc-ic-'+icn+'.svg')}" style="width:24px;height:24px" alt=""></span><span style="font-size:10px;line-height:1;color:var(--text-secondary)">${k}</span><span style="font-size:10px;line-height:1;letter-spacing:.15px;white-space:nowrap">${v}</span></div>`;
-  const payout=`<div style="${box.replace('4px;padding:16px','8px;padding:16px 16px 16px')}"><div class="b1 semi" style="text-align:center">Payout Details</div><div class="row center" style="margin-top:16px;gap:${mo()?8:36}px;align-items:flex-start;position:relative"><span style="position:absolute;top:28px;left:${mo()?'20%':'50%'};${mo()?'right:20%':'width:175px;transform:translateX(-50%)'};border-top:1px dashed rgba(0,0,0,.2)"></span>${pcol('schedule','Schedule',sched[0])}${pcol('atm','Payout Time',sched[1])}${pcol('pin','Destination','TetherMax Account')}</div></div>`;
+  const payout=`<div style="${box.replace('4px;padding:16px','8px;padding:16px 16px 16px')}"><div class="b1 semi" style="text-align:center">Withdrawal Details</div><div class="row center" style="margin-top:16px;gap:${mo()?8:36}px;align-items:flex-start;position:relative"><span style="position:absolute;top:28px;left:${mo()?'20%':'50%'};${mo()?'right:20%':'width:175px;transform:translateX(-50%)'};border-top:1px dashed rgba(0,0,0,.2)"></span>${pcol('schedule','Schedule',sched[0])}${pcol('atm','Withdrawal Time',sched[1])}${pcol('pin','Destination','TetherMax Account')}</div></div>`;
   const btns=`<div class="grid2" style="gap:8px;grid-template-columns:1fr 1fr;padding-top:8px"><button class="btn contained lg" style="background:#f2f2f5;color:#000" data-go="calc.p1"><img src="${A('calc-ic-restart.svg')}" style="width:24px;height:24px" alt="">Restart</button><button class="btn contained primary lg">Start ${esc(p.name)} Cashback<img src="${A('calc-ic-open.svg')}" style="width:24px;height:24px" alt=""></button></div>`;
   const body=`<h1 style="margin:0;text-align:center;font-size:${mo()?20:24}px;line-height:1.334;font-weight:700">You're all set.<br>Here's your summary.</h1>${tiles}${receipt}${payout}${btns}`;
-  const notes={normal:'Schedule·Payout Time은 거래소 레코드 <code>주기</code>·<code>요일</code>·<code>업데이트(UTC)</code>에서 파생, 로컬 표시(REQ-459). Destination = <code>TetherMax Account</code>(전 플랫폼, DEX 직접 지급 표현 금지). 영수증 2자리 절삭. <code>Start {platform} Cashback</code> = 귀속 새 탭.',
+  const notes={normal:'Schedule·Withdrawal Time은 거래소 레코드 <code>주기</code>·<code>요일</code>·<code>업데이트(UTC)</code>에서 파생, 로컬 표시(REQ-459). Destination = <code>TetherMax Account</code>(전 플랫폼, DEX 직접 지급 표현 금지). 영수증 2자리 절삭. <code>Start {platform} Cashback</code> = 귀속 새 탭.',
    cex:'CEX 각주 <code>*Calculated based on paid trading fees</code>(REQ-462). Bybit 업데이트 02:00 UTC → 로컬 표시.',aster:'Aster 각주(REQ-462).',
    apex:'ApeX <code>Hourly</code>/<code>Every hour</code> 금지. G-025(ApeX 일 롤업) 합의 시 <code>Daily</code>(G-099).',lighter:'Lighter <code>Weekly</code>·<code>Every Monday</code>(REQ-459). Lighter는 온보딩 보류(G-428) — 온보딩 후 노출.',mobile:'375폭: 같은 단계·같은 문구, 1열, 가로 스크롤 없음(REQ-460).'};
   return page('p5',body,{w:752,note:notes[st]+' · 타일 첫 줄 라벨은 명세 <code>Platform</code>(기존 Figma <code>Exchange</code>).'});

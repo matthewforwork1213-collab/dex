@@ -52,7 +52,7 @@ const REAL = {
   'summary.main': '/en/rewardHistory', 'guest.search': '/en/search', 'coupon.box': '/en/coupon'
 };
 const CEX_SLUG = { bitget: 'bitget', okx: 'okx', bybit: 'bybit', binance: 'binance', mexc: 'mexc', gate: 'gate', deepcoin: 'deepcoin', bingx: 'bingx', lbank: 'lbank', zoomex: 'zoomex', bitunix: 'bitunix', blockfin: 'blofin', biofin: 'blofin', kucoin: 'kucoin', bitmex: 'bitmex', bvox: 'bvox' };
-const NEXT = { 'own.verify': '소유권 인증', 'home.wallet': '지갑 상세', 'wd.claim': '출금', 'home.timeline': '캐시백 타임라인', 'ranking.main': '캐시백 랭킹', 'partner.hub': '파트너 허브', 'maxboard.main': '맥스보드' };
+const NEXT = { 'own.verify': '소유권 인증', 'home.wallet': '지갑 상세', 'home.timeline': '캐시백 타임라인', 'ranking.main': '캐시백 랭킹', 'partner.hub': '파트너 허브', 'maxboard.main': '맥스보드' };
 
 // ---------------- 경로 ----------------
 const SLUGS = ['lighter', 'apex', 'edgex', 'aster'];

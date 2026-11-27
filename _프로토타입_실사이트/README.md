@@ -66,7 +66,7 @@
 | 파일 | 내용 |
 |---|---|
 | `dex/app.html` | 사이트 모드 DEX 앱(빌드 결과). 경로 `#/hub`(`?tab=CEX\|Brokers` · `&view=cards`) · `#/dex` · `#/dex/{lighter\|apex\|edgex\|aster}`. 쿼리 `auth=guest\|member`, `modal=1`(셸이 여는 연동 모달 전용 · 배경 투명) |
-| `dex/build-site.cjs` | `node dex/build-site.cjs` — `../_프로토타입_전체/src`의 코어·화면 모듈을 그대로 묶고 최소 패치 28건(허브 입력값 반영·검색 입력·정렬 표식, 연동 성공 화면 주소, 레이어 높이)을 적용. 원본이 바뀌어 패치를 못 찾으면 빌드가 멈춘다. 에셋은 `dex/assets/`로 복사 |
+| `dex/build-site.cjs` | `node dex/build-site.cjs` — `../_프로토타입_전체/src`의 코어·화면 모듈을 그대로 묶고 최소 패치(허브 입력값 반영·검색 입력·정렬 표식, 연동 성공 화면 주소, 레이어 높이 등 73건)를 적용. 원본이 바뀌어 패치를 못 찾으면 빌드가 멈춘다. 에셋은 `dex/assets/`로 복사 |
 | `dex/src/site.js` · `site.css` · `template.html` | 사이트 런타임(경로 · 허브 동작 · 연동 흐름 · 토스트 · 카운트업) |
 | `dex/dex-state.js` | 사용자 데이터 공유 저장소(localStorage `tm-dex-site-v1`). DEX 앱과 스냅숏 런타임이 같이 읽는다. 표본 계정 = 전체 프로토타입 홈 기본값(Lighter 120 · ApeX 14) |
 
@@ -125,11 +125,11 @@
 | `#/account` | `/en/account` | 지갑·UID 상세 — 기존 디자인 + Earning Timeline 3단계(결정 N16·N17·N19 · A6) |
 | `#/ownership` | `/en/ownership-verification` | 소유권 인증 화면 |
 
-모달 모드 쿼리 `mode=drawer|seeAll|own`(셸 `openDexModal`이 메시지의 키를 그대로 쿼리로 넘김). 앱 소스에 `dex/src/site2.js` 추가, 빌드 패치 77건.
+모달 모드 쿼리 `mode=drawer|seeAll|own`(셸 `openDexModal`이 메시지의 키를 그대로 쿼리로 넘김). 앱 소스에 `dex/src/site2.js` 추가.
 
 | 흐름 | 동작 |
 |---|---|
-| GNB(D4) | 실사이트 드롭다운 · DEX 앱 GNB · 모바일 드로어 모두 `Cashback Hub` · `Cashback Calculator`, 단독 `Calculator` 없음 |
+| GNB(D4) · 드로어(N1) | 실사이트 드롭다운 · DEX 앱 GNB · 모바일 드로어 모두 `Cashback Hub` · `Cashback Calculator`, 단독 `Calculator` 없음. 드로어 `Cashback Hub` → 캐시백 허브, `Brokers` 행 없음 |
 | DEX 랜딩 | 리스트/카드 전환, 카드 → 상세, glance·요율 카운트업, 프로모 배너 캐러셀(5초 자동 · 화살표 · 점, 마우스 올리면 멈춤). 슬라이드 = Figma Aster 배너 + 실사이트 거래소 목록 상단 Bitget 배너(같은 어드민 배너 — 결정 D7·Q7) |
 | DEX 상세 | 탭 바 고정 + 스크롤 위치 연동 + 밑줄 이동, 탭 클릭 → 그 구역으로, Taker/Maker 토글 → 오퍼 박스·계산기 값(카운트업), 계산기 슬라이더(눈금 Min 100K~10M), 단계 가이드 단계 클릭 → 패널·미디어, `How this works` 모달(현재 거래량·Taker/Maker 반영), FAQ 여러 구역 동시 펼침, 리뷰 정렬 · `Read more`, `Get Started`·`Join Now` 새 탭 |
 | 상세 회원 상태 | 게스트 `Sign Up` · 미연동 `Link Wallet` → 그 DEX가 선택된 연동 모달 · 연동 완료 `Auto Claim`(비활성) + `My review` · 확인 중 지갑만 → 비활성 `Trying to link`(결정 Q6 B) |
@@ -139,17 +139,37 @@
 
 **표본 데이터**
 - 요약 원장은 전체 프로토타입 요약 상태의 표본값(CS1~CS4 · 2025-10)이다. 기준일도 표본의 오늘(2026-05-26)이라 5월이 이번 달로 보인다. DEX 행은 회원이 연동한 같은 거래소 지갑에 붙고, 연동 안 한 DEX 행은 나오지 않는다.
-- FAQ 첫 구역 외 질문·답변(G-419)과 약관 서랍 본문(G-369)은 어드민 입력값이라 원문이 없다. 펼치면 미정 표시만 나온다.
+- FAQ 질문·답변은 운영자가 어드민에서 입력한다. 첫 구역과 `Withdrawals & Account Management` 구역은 Figma 운영자 입력 예시 문구, 나머지 구역과 약관 서랍 본문(G-369)은 원문이 없어 펼치면 미정 표시만 나온다.
 - `Get Started`의 레퍼럴 링크는 어드민 입력값이라 없다. 각 DEX 공식 사이트를 새 탭으로 연다.
 
-**결정과 다르게 둔 곳**
-- 드로어 첫 항목 이름: N1(「Figma 드로어대로, `Exchanges`를 누르면 허브」)과 D4(Cashback = Hub · Calculator)가 겹친다. 지시에 따라 D4로 맞췄다(`Cashback Hub`, `Brokers` 행 없음).
+### 3회차 (2026-11-27) — Figma DEX(revision) 3차 결과 · 결정 8차 · 9차
+
+| 위치 | 반영 내용 | 근거 |
+|---|---|---|
+| DEX 앱(전체 프로토타입 src 공유) | 가이드 Step 2 본문 `Check the receiving network before sending. Sending funds on the wrong network can cause permanent loss.` | 8차 · 28981:129056 |
+| | FAQ 6번째 구역 `Withdrawals & Account Management` — 질문 `How do I receive my cashback?` · 답변(운영자 입력 예시), 미정 표시 없음 | 8차 · 29367:138679 |
+| | 허브 DEX 패널 H5 형태: `Total event reward` · `Claimable {n} USDT` · `Total claimed` · 각주 `Cashback is sent automatically to your linked {DEX} wallet.` | 문구표 #31 · #32 · H5 29352:145077 |
+| | 지갑 상세 하단 `Top Partner Exchanges`(홈과 같은 기존 블록) | 결정 「지갑 상세 하단」 |
+| | 제외: 허브 데이터 지연(H6) · 가이드 미디어 실패 상태. 가이드 미디어는 이미지 자리만 | 8차 |
+| | DEX 개요 `WITHDRAWAL` 카드 라벨 · 비교표 `Where withdrawals go` · 리뷰 요약 표본 `… every day.` | 9차 #2 · #4 |
+| 실사이트 랜딩 `/en`(런타임 `dexCopy` · `dexPartners`) | 3단계 `Link your exchange account` / `Link your exchange UID or wallet address to TetherMax` · `Get cashback in USDT automatically` / `Each linked account is paid automatically once its claimable balance reaches 10 USDT.` | 문구표 #44 · Figma 랜딩 28960:128375 |
+| | 모바일 `Top Exchanges` → `Our Partners` + 칩 `All` · `Exchanges` · `DEXs`(실제 필터), 목록 끝 두 행 `ApeX 30%` · `Lighter 20%` → 누르면 DEX 상세 | Figma 29386:140183 |
+| 실사이트 서비스 소개(런타임 `dexCopy`) | 피드 제목·부제 `Someone is cashing out right now` / `Claim every cent you've earned` · 캐시백 슬라이드 부제 #75 · 파트너십 문장 #76 · `Account linked` / `… link their account.` | 문구표 #41 · #75 · #76 · 9차 #1 |
+
+스냅숏 페이지(`pages/`)는 고치지 않고 런타임에서 문구만 바꾼다(`pt-runtime.js` 상단 `COPY` 표 — 랜딩·서비스 소개만).
+
+**검증** — Playwright 실조작(2회차 시나리오 전체 + 3회차 항목), 페이지 오류 0. 콘솔 오류 1건은 실사이트 스냅숏의 외부 SVG(`tethermax.io/...#kolFunnelClipPath`) CORS 차단 — 런타임 오류 아님. 스크린샷 `05.리포트/실동작프로토타입_img/3_*.png`.
+
+| 아직 없는 것 | 이유 |
+|---|---|
+| 실사이트 혜택·랭킹 화면의 Figma 3차 문구(`Link a CEX UID to Get Cashback` · 랭킹 캡션 2줄) | 수집본에 해당 문구·자리가 없음(실사이트 화면). 전체 프로토타입에는 반영 |
+| 계산기 Summary `Withdrawal Details` / `Withdrawal Time` | `/en/payback`은 실사이트 수집본 그대로(DEX 앱 계산기 아님). 전체 프로토타입에는 반영 |
+| 모바일 랜딩 스크롤 | 모바일 랜딩 스냅숏의 `body`가 `position:fixed`로 수집돼 화면이 스크롤되지 않음(수집 시점 상태) — 다음 수집 때 확인 |
 
 ### 아직 없는 것 (다음 회차 후보)
 
 | 항목 | 이유 |
 |---|---|
 | 리뷰 작성 폼 · 리뷰 페이지 이동 | 작성 화면 디자인 없음. `Write a Review`는 토스트 |
-| 지갑 상세 하단 `Top Partner DEXs` | 결정은 기존 `Top Partner Exchanges`(CEX·DEX 공통)인데 전체 프로토타입 모듈이 아직 옛 구성 |
 | 재청구(이전 보유자 O14~O16) | 이전 보유자 계정 표본이 없음 |
 | Brokers 탭 계산식 | 미정 — 표본 값 그대로(화면 표시 없음) |

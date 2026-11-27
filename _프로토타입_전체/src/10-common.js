@@ -55,7 +55,7 @@ R.screen({id:'cmn.header',group:'common',title:'데스크톱 헤더 (GNB)',route
  states:[
   {id:'normal',label:'로그인',figma:{pc:'28967:127332'},note:'DEX(revision) DEX / Web / Navigation · V2.2 cmn/HEADER#normal'},
   {id:'guest',label:'비로그인 — Login · Sign Up',figma:{pc:'19604:32578'},note:'[기존 MAX-] Quiz › GNB webPrelogin Type=Pre-Login · V2.2 cmn/HEADER#guest'},
-  {id:'hover',label:'Cashback 드롭다운 열림',figma:{pc:'19604:32652'},note:'[기존 MAX-] Quiz › GNB 합체 Property 1=Cashback — 패널 스타일은 기존, 항목은 DEX Navigation 설명(CEX · DEX · Brokers) · V2.2 cmn/HEADER#hover'},
+  {id:'hover',label:'Cashback 드롭다운 열림',figma:{pc:'19604:32652'},note:'[기존 MAX-] Quiz › GNB 합체 Property 1=Cashback — 패널 스타일은 기존, 항목은 결정 D4(Cashback Hub · Cashback Calculator — 단독 Calculator 메뉴 없음) · V2.2 cmn/HEADER#hover'},
   {id:'rewards',label:'Rewards Hub 드롭다운 열림',figma:{pc:'19604:32665'},note:'[기존 MAX-] Quiz › GNB 합체 Property 1=Rewards Hub'},
   {id:'discover',label:'Discover 드롭다운 열림',figma:{pc:'19604:32678'},note:'[기존 MAX-] Quiz › GNB 합체 Property 1=Discover'},
   {id:'unread',label:'알림 안 읽음 (빨간 점)',figma:{pc:'8643:121393'},note:'[기존 MAX-7] Web S3 라벨 Notifications — 벨 빨간 점 · hover 회색 원 8643:124416'},
@@ -75,9 +75,9 @@ const drIc=(f,st='')=>`<img src="${A(f)}" alt="" style="width:20px;height:20px;f
 const drRow=(icon,t,go,end='')=>`<div class="row" style="justify-content:space-between;padding:8px 0;cursor:pointer"${go?` data-go="${go}"`:''}><span class="row" style="gap:16px">${icon}<span style="font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:500">${t}</span></span>${end}</div>`;
 const drCard=rows=>`<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 2.5px rgba(93,96,103,.05)">${rows}</div>`;
 function drawer(member,o={}){
- const P={ex:[drIc('cmn-dr-candle.svg'),'Exchanges','cex.list'],br:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-broker.svg')}" alt="" style="width:16.67px;height:16.66px;transform:scaleY(-1)"></span>`,'Brokers','hub.main:brokers'],
+ const P={ex:[drIc('cmn-dr-candle.svg'),'Cashback Hub','hub.main'],br:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-broker.svg')}" alt="" style="width:16.67px;height:16.66px;transform:scaleY(-1)"></span>`,'Brokers','hub.main:brokers'],
   ev:[drIc('cmn-dr-event.svg'),'Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.main']};
- const prod=(member?['ex','ev','br','bn','calc','pt']:['ex','br','ev','bn','calc','pt']).map(k=>drRow(...P[k])).join('');
+ const prod=(member?['ex','ev','bn','calc','pt']:['ex','ev','bn','calc','pt']).map(k=>drRow(...P[k])).join('');
  const theme=`<span style="background:#e6e7e9;border-radius:5000px;height:28px;padding:2px;display:flex"><span style="background:#fff;border-radius:5000px;padding:6px 4px;display:flex">${drIc('cmn-dr-light.svg','width:16px;height:16px')}</span><span style="width:24px"></span></span>`;
  const welcome=member?'':`<div style="padding:0 16px"><div style="background:#fff;border:.5px solid rgba(0,0,0,.05);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:24px"><div class="col center" style="gap:4px;font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:600"><span>Welcome to TetherMax!</span><span class="c2">Create an account or log in to start<br>earning Cashback.</span></div><div class="row" style="gap:12px">${C.btn('Log In',{v:'outlined',full:true,go:'auth.login'})}${C.btn('Sign Up',{full:true,go:'auth.signup'})}</div></div></div>`;
  const body=`<div style="background:var(--bg-accent);min-height:${o.h||812}px;position:relative;display:flex;flex-direction:column;gap:16px">
@@ -97,7 +97,7 @@ R.screen({id:'cmn.drawer',group:'common',title:'모바일 웹 드로어',route:'
  render(st){
   const promo=st==='promo'?`<div style="padding:0 16px;margin-top:-8px"><div class="row g12" style="background:#eef3ff;border-radius:8px;padding:12px"><div style="width:48px;height:48px;border-radius:8px;background:#c9d6ff;flex:none"></div><div class="col" style="gap:2px;min-width:0"><span class="b2 semi">${T('Banner title','배너 제목')}</span><span class="cap c2">${T('Banner content','배너 내용')}</span></div></div></div>`:'';
   let b=drawer(st==='member',{h:st==='member'?945:1119});if(promo)b=b.replace('<div class="col" style="gap:8px;padding:0 16px 16px">',promo+'<div class="col" style="gap:8px;padding:0 16px 16px">');
-  return moFrame(b)+C.note('항목은 최신 기존 드로어 그대로(Exchanges · Brokers · Events · Benefits · Cashback Calculator · Point / Theme · Language / Terms · Privacy / About · Beginner’s Guide · Notices · Affiliate). 명세 REQ-465(Cashback · Calculator · Newsletters · Points)와 다름 → 질문_common.md. 비로그인 Figma는 Beginner’s Guide·Notices 아이콘이 서로 바뀌어 있어 로그인판(19604:32844) 기준 아이콘 사용.'+(S.vp==='pc'?' · 모바일 웹 전용 — PC 보기에서는 375폭.':''));
+  return moFrame(b)+C.note('항목은 최신 기존 드로어 기준 + 결정 N1 · D4: 첫 항목 `Cashback Hub`(→ 캐시백 허브), `Brokers` 행 없음(허브 안 탭) — Cashback Hub · Events · Benefits · Cashback Calculator · Point / Theme · Language / Terms · Privacy / About · Beginner’s Guide · Notices · Affiliate. 비로그인 Figma는 Beginner’s Guide·Notices 아이콘이 서로 바뀌어 있어 로그인판(19604:32844) 기준 아이콘 사용.'+(S.vp==='pc'?' · 모바일 웹 전용 — PC 보기에서는 375폭.':''));
  }});
 R.screen({id:'cmn.lang',group:'common',title:'언어 설정 시트',route:'모바일 웹 드로어 › Language',fu:['FU-083'],shell:false,
  states:[{id:'sheet',label:'언어 바텀시트',figma:{mo:'12085:400397'},note:'[기존 MAX-497] mWeb Language settings bottomSheet · 전체 목록 12085:400563'}],

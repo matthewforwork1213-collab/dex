@@ -7,9 +7,9 @@
 | 구분 | 수 | 항목 |
 |---|---|---|
 | 완료 | **24** | balance 7(PW1 `Total Claimed`·리뷰 버튼 · 허브 H5 `Total claimed` · H8 빈 띠 · 홈 누적 캐시백 · 모바일 지갑 상세 로고 · 리뷰 유도 · 요약 날짜) · content 13(CT-04 · 16 · 18 · 19 · 20 · G-441 혜택 줄 · 21 · 24 · 25 · 27 · 28 · 29 · 30) · 공통 GNB 교체 1 · 원본 없던 모바일 4(퀴즈 상태 16 · Cashback Basics · 혜택 상세 회원 CTA · 홈 첫 연동) |
-| 일부 완료 | **3** | CT-33(문장만) · CT-04/16 모바일(라이트만) · CT-28(영상 실패 상태 없음) |
-| 문구 대기 | **2** | CT-29 `Withdrawals & Account Management` 펼친 질문·답변 · CT-28 Step 2 본문 — 원문 없음, `{… — 문구 원문 없음}` 자리표시 |
-| 못 한 것 · 기록만 | **4** | H6 `DEX data pending` · CT-14 ③ · CT-33 탭·캐러셀 · 홈 누적 블록 모바일 (아래 「못 한 것」) |
+| 일부 완료 | **1** | CT-33 — 이 회차는 문장만, 탭·DEX 로고는 [3차](Figma수정결과_3차.md)에서 반영 |
+| 문구 대기 | **0** | CT-28 Step 2 본문 · CT-29 `Withdrawals & Account Management` 질문·답변은 [3차](Figma수정결과_3차.md)에서 채움 |
+| 결정으로 제외 | **6** | 아래 「결정으로 제외」 |
 | 새 프레임 | **31** | 아래 「새로 만든 프레임」 |
 | 분리한 인스턴스 | 아래 「분리(detach)한 노드」 | 컴포넌트 메인 · 다른 페이지는 고치지 않음 |
 
@@ -61,10 +61,10 @@
 | CT-24 /payback Trading profile · 계산 근거 펼침 | 새 [Trading profile PC](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29370-136469) · [펼침 모바일](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29370-136865) | [MAX-146] 6510:88401 복제 → 옛 GNB 숨기고 새 GNB(회원), 진행 막대 유지. 5123:32498 복제 → `x 30%` · `1.89 USDT`(EdgeX 결과 6.30 × 30%) | REQ-456 · REQ-458 · REQ-461 | `r2_CT24_new_profile` · `r2_CT24_new_calcexp` |
 | CT-25 Exchange Listings | 새 [Exchange Listings / PC](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29370-138808) | CMT-08 컴포넌트(22799:96486) 인스턴스를 만들어 분리 → 옛 헤더 숨기고 새 GNB(게스트). `Rating` 열 · DEX 없음 그대로 | 결정 N2 · B3 · REQ-466 | `r2_CT25_new` |
 | CT-27 앱 My Page Cashback 진입 | 새 [앱 My Page](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29370-140683) | mAPP My Page(10981:111021) 인스턴스 → 분리, `Account Security` 행을 복제해 그 묶음 첫 행 `Cashback Hub` | REQ-469 · G-214 · 문구표 #79 | `r2_CT27_new` |
-| CT-28 단계 가이드 추가 상태 | 새 [Step 2 선택](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-137364) · [3단계](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-137485) | D2 복제. ① 레일 step 2 `State=Active`, step 1 `Done`, step 3 `Default`, 칩 `Step 2 of 5`, 제목 = 레일 라벨 `Deposit USDC into your wallet`, 본문 `{Step 2 body — 문구 원문 없음}` ② step 4·5 숨김, 칩 `Step 3 of 3` | REQ-345 · REQ-346 · REQ-348 | `r2_CT28_step2` · `r2_CT28_3steps` |
-| CT-29 ② FAQ 두 구역 동시 펼침 | 새 [29367:138679](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-138679) | D3 복제 → 6번째 `<Accordion>` `Expanded?=True`, 본문 슬롯을 `DEX / FAQ answer`(27610:193910)로 바꾸고 질문·답변 자리표시 | REQ-350 · REQ-361 | `r2_CT29_before` / `r2_CT29_after` |
+| CT-28 단계 가이드 추가 상태 | 새 [Step 2 선택](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-137364) · [3단계](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-137485) | D2 복제. ① 레일 step 2 `State=Active`, step 1 `Done`, step 3 `Default`, 칩 `Step 2 of 5`, 제목 = 레일 라벨 `Deposit USDC into your wallet`, 본문 `Check the receiving network before sending. Sending funds on the wrong network can cause permanent loss.`(28981:129056 원문, 3차) ② step 4·5 숨김, 칩 `Step 3 of 3` | REQ-345 · REQ-346 · REQ-348 | `r2_CT28_step2` · `r2_CT28_3steps` |
+| CT-29 ② FAQ 두 구역 동시 펼침 | 새 [29367:138679](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-138679) | D3 복제 → 6번째 `<Accordion>` `Expanded?=True`, 본문 슬롯을 `DEX / FAQ answer`(27610:193910)로 바꾸고 질문 `How do I receive my cashback?` · 답변 `Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.`(운영자 입력 예시, 3차) | REQ-350 · REQ-361 | `r2_CT29_before` / `r2_CT29_after` |
 | CT-30 탭 바 고정 · Reviews 활성 | 새 [29367:139672](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29367-139672) | D3 복제 → 히어로~약관 숨겨 탭 바를 GNB 바로 아래로, `<Tab>` `Reviews (23)` Active · `Policy` 비활성 | REQ-341 | `r2_CT30_new` |
-| CT-33 서비스 소개 · 프리로그인 모바일 | 새 [Service intro / mo](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-139409) · [Landing / mWeb](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-140103) | 19224:4458 · 20932:96981 복제. 서비스 소개 `Join an exchange with your TetherMax code and just enter your UID…` → PC 문장 `Join a partner through your TetherMax referral and link your exchange UID or DEX wallet address.` (탭·캐러셀은 「못 한 것」) | REQ-287 · REQ-715 · G-424 · PC 28960:129521 | `r2_CT33_svc_m` |
+| CT-33 서비스 소개 · 프리로그인 모바일 | 새 [Service intro / mo](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-139409) · [Landing / mWeb](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29386-140103) | 19224:4458 · 20932:96981 복제. 서비스 소개 `Join an exchange with your TetherMax code and just enter your UID…` → PC 문장 `Join a partner through your TetherMax referral and link your exchange UID or DEX wallet address.` (`Our Partners` 탭 · DEX 로고는 3차) | REQ-287 · REQ-715 · G-424 · PC 28960:129521 | `r2_CT33_svc_m` |
 
 ![전](Figma수정결과_img/r2_CT04_before.jpg) ![후](Figma수정결과_img/r2_CT04_after.jpg)
 ![전 모바일](Figma수정결과_img/r2_CT04m_before.jpg) ![후 모바일](Figma수정결과_img/r2_CT04m_after.jpg)
@@ -108,24 +108,20 @@
 
 ---
 
-## 못 한 것 · 기록만
+## 결정으로 제외 (8차 결정, 2026-11-27)
 
-| 항목 | 이유 |
+| 항목 | 결정 |
 |---|---|
-| 허브 H6 `DEX data pending` | 허브 패널에 날짜 칸이 없고, 정책·명세에 패널 안 표시 위치 근거가 없음(지갑 상세 칸은 승인 조정으로 제외). 요약 캘린더(CS1 25일)에만 둠 |
-| CT-14 ③ 서비스 소개 파트너 캐러셀 실패 | 서비스 소개 PC(28960:129521)에 API-001 파트너 캐러셀 레이어가 없음(`Official Partner Exchanges`는 통계 카드, `Select a partner`는 계산기). 대상이 없어 기록만 |
-| CT-33 `Our Partners` 탭(`All` · `Exchanges` · `DEXs`) · 캐러셀 DEX 로고 | 모바일 원본에 탭이 없고(`Top Exchanges`만) 캐러셀 로고 묶음이 이미지라 바꿀 노드가 없음. 문장만 교체 |
-| CT-04 · CT-16 모바일 다크 3프레임 | 복제할 다크 venue 카드 원본이 없어 라이트 칸을 넣으면 색이 맞지 않음 — 라이트만 반영 |
-| CT-28 ③ 영상 실패 | 미디어 자리가 이미 정지 이미지라 화면 차이가 없음 — 프레임 만들지 않음 |
-| 홈 누적 캐시백 블록 — 모바일 홈 | MAXOP-731 모바일 원본 노드를 확인하지 못함. PC HW1만 반영 |
-| CT-24 Landing | [MAX-146] 6510:88151은 거래소 선택 단계 화면(히어로 문구는 프레임 밖 y −482 레이어)이라 PB-3(29194:120700)과 같은 화면 — 만들지 않음 |
+| 허브 H6 `DEX data pending` | 불러오기 실패·대기 상태는 만들지 않음. 요약 캘린더(CS1 25일)에만 있음 |
+| CT-14 ③ 서비스 소개 파트너 캐러셀 실패 | 만들지 않음 |
+| CT-28 ③ 영상 실패 | 만들지 않음 — 영상 자리는 영상이라는 것만 표시 |
+| 홈 누적 캐시백 블록 — 모바일 홈 | 이번에 넣지 않음. PC HW1만 있음 |
+| CT-04 · CT-16 모바일 다크 3프레임 | 다크 모드는 자동 변환 — 다크 프레임 별도 반영 안 함(라이트만) |
+| CT-24 Landing | 기존 화면(PB-3 29194:120700)과 중복 — 만들지 않음 |
 
 ## 문구 대기
 
-| 자리 | 화면 |
-|---|---|
-| `{Withdrawals & Account Management question}` · `{answer — 문구 원문 없음}` | CT-29 29367:138679 |
-| `{Step 2 body — 문구 원문 없음}`(잘못된 체인 경고) | CT-28 29386:137364 |
+없음. 남은 확인 사항은 [3차 결과](Figma수정결과_3차.md) 「남은 것」.
 
 ## 새로 만든 프레임
 

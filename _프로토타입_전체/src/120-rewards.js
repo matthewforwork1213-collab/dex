@@ -337,7 +337,7 @@ const BNF_ROWS=[{label:'New user exclusive benefits',cat:'EXTRA CASHBACK BOOST',
  {n:'5',cat:'WELCOME GIFT',desc:'Its your first time visiting our website.',btn:'Claim'},
  {n:'2',cat:'CASHBACK PREVIEW',desc:'Calculate your estimated cashback',btn:'Claim',go:'calc.p1'},
  {n:'1',cat:'NOTIFICATIONS',desc:'Turn on push notifications',btn:'Claim'},
- {n:'3',cat:'LINK UID',desc:'Bind your exchange UID',btn:'Claim',go:'benefits.list:uidm'},
+ {n:'3',cat:'LINK UID',desc:'Link a CEX UID to Get Cashback',btn:'Claim',go:'benefits.list:uidm'},
  {n:'10',cat:'FIRST CASHBACK',desc:'Claim your first cashback',btn:'Claim',go:'benefits.list:first'},
  {n:'10',unit:'USDT MAX',cat:'INVITATION REWARD',desc:'Referred a friend',btn:'Claim'}];
 function bnfList(member){return BNF_ROWS.map(r=>ticket({...r,desc:MO()?r.desc.replace(/\.$/,''):r.desc,go:member?r.go:'auth.signup'})).join('')}

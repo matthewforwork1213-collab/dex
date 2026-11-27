@@ -115,8 +115,8 @@ function ovVenues(list,c){
 }
 function ovCompare(){
  const row=(k,v,dex,chip)=>`<div class="col" style="gap:4px;border-top:1px solid var(--divider);padding:16px 0"><span class="cap c2">${k}</span><span style="${dex?'font-size:20px;line-height:1.6;font-weight:600;letter-spacing:.15px':'font-size:16px;line-height:1.5'}">${v}</span>${chip?`<span class="cap cb" style="border:1px solid var(--blue);border-radius:999px;padding:0 8px;align-self:flex-start">${chip}</span>`:''}</div>`;
- const ex=[['Who holds your funds','The exchange'],['How you sign up','Account with an identity check'],['How you link to TetherMax','Your exchange UID'],['Where cashback is paid','Your TetherMax balance'],['Where payouts go','On TetherMax, from 10 USDT'],['Event and invite rewards','Yes']];
- const dx=[['Who holds your funds','You, in your own wallet'],['How you sign up','Email or a wallet, no KYC check'],['How you link to TetherMax','Your wallet address, pasted'],['Where cashback is paid','Your TetherMax balance','Your Cashback'],['Where payouts go','To your linked wallet from 10 USDT'],['Rewards','Event and invitation rewards are available.']];
+ const ex=[['Who holds your funds','The exchange'],['How you sign up','Account with an identity check'],['How you link to TetherMax','Your exchange UID'],['Where cashback is paid','Your TetherMax balance'],['Where withdrawals go','On TetherMax, from 10 USDT'],['Event and invite rewards','Yes']];
+ const dx=[['Who holds your funds','You, in your own wallet'],['How you sign up','Email or a wallet, no KYC check'],['How you link to TetherMax','Your wallet address, pasted'],['Where cashback is paid','Your TetherMax balance','Your Cashback'],['Where withdrawals go','To your linked wallet from 10 USDT'],['Rewards','Event and invitation rewards are available.']];
  const panel=(dex)=>`<div style="position:relative;flex:1 1 0;min-width:0;background:#fff;border:${dex?'2px solid var(--blue)':'1px solid var(--divider)'};border-radius:8px;padding:40px;box-shadow:${dex?'0 16px 40px rgba(26,64,217,.14)':'0 10px 20px rgba(0,0,0,.06)'}" class="col">
   <div class="col" style="gap:8px">${eyebrow(dex?'ON A DEX':'ON AN EXCHANGE',dex?'var(--blue)':'var(--text-secondary)')}<span style="font-size:${mo()?24:34}px;line-height:1.235;letter-spacing:.25px">${dex?'You hold the keys':'The exchange holds them'}</span></div><div style="height:24px"></div>
   ${(dex?dx:ex).map(r=>row(r[0],r[1],dex,r[2])).join('')}
@@ -140,7 +140,7 @@ function ovBento(){
   <div class="col" style="position:absolute;left:${mo()?20:40}px;right:${mo()?20:40}px;bottom:${o.blue&&!mo()?40:24}px;gap:12px;max-width:420px">${eyebrow(o.k,o.blue?'rgba(255,255,255,.87)':'var(--blue)')}<span style="font-size:${mo()?24:o.big?48:34}px;line-height:${o.big?1.167:1.235};color:${o.blue?'rgba(255,255,255,.87)':'var(--text-primary)'}">${o.t}</span><span class="b1" style="color:${o.blue?'rgba(255,255,255,.6)':'var(--text-secondary)'}">${o.b}</span></div></div>`;
  const T1={w:700,h:460,big:1,k:'CUSTODY',t:'You hold the keys.',b:'Your collateral stays under your control. No one can freeze it, and no one can restore it for you.',img:'dex-ov-bento-wallet.webp',ip:mo()?'right:16px;top:8px;width:160px':'left:120px;top:-71px;width:402px'};
  const T2={w:476,h:460,k:'ORDER BOOK',t:'Onchain order book',b:'Onchain matching via rollup or sequencer for verification.',img:'dex-ov-bento-chart.webp',ip:mo()?'right:16px;top:16px;width:160px':'left:180px;top:11px;width:270px;border-radius:21px'};
- const T3={w:476,h:400,k:'PAYOUT',t:'Paid to your TetherMax balance',b:'Your trades are tracked through our referral. TetherMax pays the cashback into your TetherMax balance.',img:'dex-ov-bento-plane.webp',ip:mo()?'right:8px;top:-20px;width:180px':'left:180px;top:-58px;width:315px'};
+ const T3={w:476,h:400,k:'WITHDRAWAL',t:'Paid to your TetherMax balance',b:'Your trades are tracked through our referral. TetherMax pays the cashback into your TetherMax balance.',img:'dex-ov-bento-plane.webp',ip:mo()?'right:8px;top:-20px;width:180px':'left:180px;top:-58px;width:315px'};
  const T4={w:700,h:400,big:1,blue:1,k:'TRADING COSTS',t:"Low fees don't always mean low trading costs",b:'Compare liquidity, slippage, funding, and gas, not just the advertised fee.',img:'dex-ov-bento-calc.webp',ip:mo()?'right:8px;top:-20px;width:180px':'left:398px;top:-59px;width:310px'};
  const body=mo()?`<div class="col" style="gap:12px">${[T1,T2,T3,T4].map(tile).join('')}</div>`:`<div class="col" style="gap:24px"><div class="row" style="gap:24px;align-items:stretch">${tile(T1)}${tile(T2)}</div><div class="row" style="gap:24px;align-items:stretch">${tile(T3)}${tile(T4)}</div></div>`;
  return `<section style="background:#fff;padding:${mo()?'24px 0 48px':'24px 0 120px'}">${wrap(body)}</section>`;
@@ -289,23 +289,21 @@ function guideData(d){
   :['Create a Web3 wallet',`Deposit ${cur} into your wallet`,`Join ${d.name} and link your wallet`,`Deposit ${cur} into ${d.name}`,'Trade and get rewarded'];
  // G-270 · G-437: 단계마다 Step N Title 하나(왼쪽 목록 = 오른쪽 패널 제목) + Step N Description(경고·안전 메시지 포함)
  const bodies=[(L?'Install a self-custody wallet, or sign up on Lighter with email to get a wallet made for you.':'Install a self-custody wallet such as MetaMask and save your recovery phrase.')+' Keep your 12-word recovery phrase private. TetherMax never asks for a private key, recovery phrase or wallet signature.',
-  `Send ${cur} from an exchange or wallet on the correct network. Sending on the wrong chain can lose your funds.`,
+  'Check the receiving network before sending. Sending funds on the wrong network can cause permanent loss.',
   L?'Open Lighter through the TetherMax link and log in. Then copy your wallet address from Lighter and paste it in TetherMax. TetherMax never asks you to connect a wallet. After you sign up, confirm the TetherMax referral code on Lighter’s referral page. Cashback applies only to Plus and Premium accounts. Standard accounts pay no fees.'
    :`After you sign up, confirm the TetherMax referral code on ${d.name}’s referral page. Copy your public address from ${d.name} and paste it on TetherMax.`,
   `Transfer ${cur} to ${d.name}.`,'TetherMax pays your cashback into your TetherMax balance.'];
  return {rail,bodies};
 }
 function dtGuide(d,c){
- const g=guideData(d),cur=c==='step3'?2:0;
+ const g=guideData(d),cur=c==='step3'?2:c==='step2'?1:0;
  const item=(t,i)=>`<div class="row" style="gap:12px;height:56px;padding:12px 16px;border-radius:12px;box-sizing:border-box;${i===cur?'background:rgba(207,216,220,.2)':''}"><span style="width:32px;height:32px;border-radius:16px;flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;${i===cur?'background:var(--blue);color:rgba(255,255,255,.87)':'background:rgba(207,216,220,.2)'}">${i+1}</span><span class="b1 ${i===cur?'semi':'c2'}">${t}</span></div>`;
  const support=`<div class="col" style="gap:12px;background:rgba(0,123,255,.1);border-radius:8px;padding:16px"><img src="${A('dex-dt-ic-headset.svg')}" style="width:24px;height:24px" alt=""><span class="b2 semi">Stuck partway through?</span><span class="b2 c2">Live chat replies in about 2 minutes.</span><a class="cb" data-go="support.main" style="font-size:13px;font-weight:500;text-decoration:underline;cursor:pointer;padding:4px 5px">Chat with support</a></div>`;
- const shot=c==='mediaFail'?`<img src="${A('dex-dt-guide-lighter-1.jpg')}" style="width:100%;height:360px;object-fit:cover;border-radius:12px" alt="">`
-  :`<img src="${A(cur===2&&d.tiers?'dex-dt-guide-lighter-3.jpg':'dex-dt-guide-lighter-1.jpg')}" style="width:100%;height:360px;object-fit:cover;border-radius:12px" alt="">`;
+ const shot=`<img src="${A(cur===2&&d.tiers?'dex-dt-guide-lighter-3.jpg':'dex-dt-guide-lighter-1.jpg')}" style="width:100%;height:360px;object-fit:cover;border-radius:12px" alt="">`;
  const safe=cur!==0?`<p class="cap c2" style="margin:0">${T('TetherMax never asks for your private key, seed phrase, or a wallet signature.','테더맥스는 개인키 · 시드 문구 · 지갑 서명을 요구하지 않아요.')}</p>`:'';
  const panel=`<div class="col" style="flex:1 1 0;min-width:0;gap:16px;padding:${mo()?0:'0 16px 16px'}">${shot}<span style="align-self:flex-start;background:var(--blue-accentlight);color:var(--blue);border-radius:100px;padding:3px 9px;font-size:13px">Step ${cur+1} of 5</span><span class="h5">${g.rail[cur]}</span><p class="b2 c2" style="margin:0">${g.bodies[cur]}</p>${safe}</div>`;
  const rail=`<div class="col" style="gap:4px;${mo()?'':'width:320px;flex:none'}">${g.rail.map(item).join('')}${mo()?'':'<div style="flex:1;min-height:76px"></div>'}${support}</div>`;
  const n=[];
- if(c==='mediaFail')n.push('가이드 미디어 실패 — 영상 로드 실패 → 정지된 첫 프레임 + 단계 글, reduced motion이면 자동재생 안 함, 선택 언어 영상이 없으면 영어 영상(REQ-348) · 디자인 없음');
  if(c==='step3'&&d.tiers)n.push('Step 3 — Figma D2(Lighter). 경고 문장은 Description 안(G-437), 영문은 정책 A-22 후보(사용자 확인 #37). Lighter 온보딩 보류');
  return box1056(`<div class="col" style="gap:24px"><span class="h5 bold" style="${mo()?'font-size:20px;line-height:1.6':''}">Step by step guide on starting your trading journey on ${d.name}</span><div style="display:flex;${mo()?'flex-direction:column;gap:24px':'gap:32px;align-items:stretch'}">${rail}${panel}</div>${n.map(C.note).join('')}</div>`);
 }
@@ -313,12 +311,16 @@ function dtClosing(d){
  if(mo())return `<div style="padding:20px 0"><div style="position:relative;overflow:hidden;border-radius:8px;padding:32px 20px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;background:#fff"><img src="${A('dex-dt-closing-mo.jpg')}" style="position:absolute;left:0;top:-118.36%;width:100%;height:291.18%;pointer-events:none" alt=""><span style="position:relative;font-size:24px;line-height:1.334;color:#000">Start Earning Cashback with ${d.name}</span><button class="btn contained lg" style="position:relative;background:#2453f0;color:#fff">Join Now</button></div></div>`;
  return `<div style="padding:20px 0"><div style="max-width:1056px;margin:0 auto;border-radius:8px;overflow:hidden;background:#0a0b10 url(${A('dex-dt-closing.jpg')}) center/cover;padding:48px 16px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center"><span style="font-size:34px;line-height:1.235;font-weight:700;color:#fff">Start Earning Cashback with ${d.name}</span><button class="btn contained lg" style="background:#2453f0;color:#fff">Join Now</button></div></div>`;
 }
-function dtFaq(d){
+function dtFaq(d,c){
  const ico=open=>`<span style="width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:24px;color:var(--action-active)">${open?'−':'+'}</span>`;
  const tail=d.cur==='USDC'||d.id==='edgex'?' Shown in USDT, 1:1 with USDC.':' Amounts are shown in USDT.';
- const secs=['General Partnership','Cashback & Referral Rewards','Points Program & Airdrop','Account Types & Eligibility','Prohibited Activity & Compliance','Payouts & Account Management','Contact & Support'];
- const acc=(s,i)=>`<div style="border-bottom:1px solid var(--divider)"><div class="row between" style="padding:16px"><span class="b1 semi">${esc(s)}</span>${ico(i===0)}</div>${i===0?`<div class="col" style="gap:8px;padding:16px"><span class="b1 semi">How does TetherMax cashback work on ${d.name}?</span><span class="b1 c2">Join ${d.name} through the TetherMax link and trade. Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.${tail}</span></div>`:''}</div>`;
- return box1056(`<div class="col" style="gap:24px"><span class="h5 bold">FAQs</span><div>${secs.map(acc).join('')}</div><div class="row between" style="padding:16px"><span class="b1 semi">Terms and conditions</span>${ico(false)}</div>${C.note('FAQ 답변은 Figma 초안(DRAFT copy) — 10분 주기 자동 지급 기준으로 이미 바뀌어 있음(G-419 문구표 확정 대기). 약관 서랍 본문은 보류 G-369')}</div>`);
+ const secs=['General Partnership','Cashback & Referral Rewards','Points Program & Airdrop','Account Types & Eligibility','Prohibited Activity & Compliance','Withdrawals & Account Management','Contact & Support'];
+ // 펼친 구역: 첫 구역(REQ-350) · faq2 상태는 6번째 `Withdrawals & Account Management`도(Figma CT-29 ② 29367:138679 — 운영자 입력 예시)
+ const qa={0:[`How does TetherMax cashback work on ${d.name}?`,`Join ${d.name} through the TetherMax link and trade. Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.${tail}`],
+  5:['How do I receive my cashback?','Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.']};
+ const open=i=>i===0||(c==='faq2'&&i===5);
+ const acc=(s,i)=>`<div style="border-bottom:1px solid var(--divider)"><div class="row between" style="padding:16px"><span class="b1 semi">${esc(s)}</span>${ico(open(i))}</div>${qa[i]&&(open(i)||window.SITED)?`<div class="col" style="gap:8px;padding:16px${open(i)?'':';display:none'}"><span class="b1 semi">${qa[i][0]}</span><span class="b1 c2">${qa[i][1]}</span></div>`:''}</div>`;
+ return box1056(`<div class="col" style="gap:24px"><span class="h5 bold">FAQs</span><div>${secs.map(acc).join('')}</div><div class="row between" style="padding:16px"><span class="b1 semi">Terms and conditions</span>${ico(false)}</div>${C.note('FAQ 질문·답변은 운영자가 어드민에서 입력(G-265 · G-272 · G-439) — 여기 문구는 Figma 운영자 입력 예시(첫 구역 28960:127610 · `Withdrawals & Account Management` 29367:138679). 나머지 구역 내용은 어드민 입력값. 약관 서랍 본문은 거래소별 어드민 입력(G-369)')}</div>`);
 }
 function stars(v,sz=18){let h='';for(let i=1;i<=5;i++){const f=v>=i?1:v>=i-.5?.5:0;h+=f===1?`<img src="${A('dex-dt-ic-star-full.svg')}" style="width:${sz}px;height:${sz}px" alt="">`:f?`<span style="position:relative;width:${sz}px;height:${sz}px;display:inline-block"><img src="${A('dex-dt-ic-star-empty.svg')}" style="position:absolute;inset:0;width:${sz}px;height:${sz}px" alt=""><img src="${A('dex-dt-ic-star-full.svg')}" style="position:absolute;inset:0;width:${sz}px;height:${sz}px;clip-path:inset(0 50% 0 0)" alt=""></span>`:`<img src="${A('dex-dt-ic-star-empty.svg')}" style="width:${sz}px;height:${sz}px" alt="">`}return `<span class="row" style="gap:0">${h}</span>`}
 function dtReviews(d,member,c){
@@ -336,7 +338,7 @@ function dtReviews(d,member,c){
  const vdiv=mo()?'<hr class="divider">':'<div style="width:1px;height:99px;background:var(--divider)"></div>';
  const summary=`<div style="border:1px solid var(--divider);border-radius:12px;padding:24px;display:flex;${mo()?'flex-direction:column;gap:16px':'gap:24px;align-items:center'}"><div class="col" style="gap:4px;align-items:center"><span style="font-size:48px;line-height:1.2;font-weight:600">4.0</span>${stars(3.5)}<span class="b2 c2">23 reviews</span></div>${vdiv}<div class="col" style="flex:1;gap:4px">${hist}</div>${vdiv}<div class="row" style="gap:12px;justify-content:center">${axis('4.2','Overall experience')}${axis('4.2','Cashback earning')}${axis('3.7','Cashback payouts')}</div></div>`;
  const ai=`<div class="col" style="gap:10px;background:rgba(25,118,210,.04);border-radius:12px;padding:16px 20px 18px"><span class="row b2 semi" style="gap:6px;color:#1976d2"><img src="${A('dex-dt-ic-ai.svg')}" style="width:16px;height:16px" alt="">AI review summary</span>
-  ${[['Cashback reaches my TetherMax balance every week.',11],[`Frequent traders notice the cashback on ${d.tiers?'Premium ':''}fees.`,7],['Support replies quickly, even at weekends.',4]].map(([t,k])=>`<div class="row" style="gap:10px;align-items:flex-start"><span class="b2 semi" style="color:#1976d2">·</span><span class="b2 semi grow">${t}</span><span class="cap c2">(${k} reviews)</span></div>`).join('')}
+  ${[['Cashback reaches my TetherMax balance every day.',11],[`Frequent traders notice the cashback on ${d.tiers?'Premium ':''}fees.`,7],['Support replies quickly, even at weekends.',4]].map(([t,k])=>`<div class="row" style="gap:10px;align-items:flex-start"><span class="b2 semi" style="color:#1976d2">·</span><span class="b2 semi grow">${t}</span><span class="cap c2">(${k} reviews)</span></div>`).join('')}
   <span class="cap c2">From real reviews, summarised by AI. Wording may differ from individual reviews.</span></div>`;
  const tagChip=(t,on)=>`<span style="border:1px solid #bdbdbd;border-radius:100px;padding:3px 10px;font-size:13px;line-height:18px;${on?'background:rgba(0,0,0,.12)':''}">${t}</span>`;
  const tags=`<div class="row wrap" style="gap:6px;padding:9px 12px;border-radius:10px"><span class="cap c2">Browse by tag</span>${tagChip('#'+d.name,1)}${tagChip('#Fee')}${tagChip('#Cashback')}</div>`;
@@ -376,7 +378,7 @@ function dtDrawer(d,maker){
   <hr class="divider" style="margin:0"></div>`;
 }
 function dtPage(c){
- const id=['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='signupReturn'?'lighter':'edgex';
+ const id=['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='step2'||c==='signupReturn'||c==='faq2'?'lighter':'edgex';
  const d=DX[id];
  const member=c==='normal'?'guest':c==='unlinked'?'unlinked':c==='linked'?'linked':c==='signupReturn'?'return':c==='pendingLink'?'pending':({guest:'guest',s3:'unlinked',s4:'linked'}[S.auth]||'guest');
  const maker=c==='maker';
@@ -392,7 +394,7 @@ function dtPage(c){
  if(c==='offboarded')return `<div style="padding:8px 16px">${C.note('DEX 오프보딩 — 상세 URL <code>/dex/{slug}</code>는 DEX 랜딩으로 301 리다이렉트(REQ-121·358). 아래는 리다이렉트된 랜딩 · 디자인 없음. V2.2 <code>exd/DETAIL#offboarded</code>')}</div>${ovPage('normal')}`;
  const top=`${notes.length?`<div style="padding:8px 16px">${notes.map(C.note).join('')}</div>`:''}`;
  const sticky=mo()&&member==='guest'?`<div style="position:sticky;bottom:0;z-index:5;background:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -1px 0 var(--divider)"><button class="btn contained primary lg full" data-go="auth.signup">Sign Up${ext()}</button><button class="btn outlined black lg full" data-go="auth.login">Already have an account?</button></div>${C.note('모바일 게스트 하단 고정 CTA — DEX(revision) 모바일 D4 「sticky bottom CTA (guest)」(I28960:131011;27610:306639): <code>Sign Up</code> + <code>Already have an account?</code>. 모바일 오퍼 박스에는 <code>Get Started</code>만 있다.')}`:'';
- return `${top}${dtHero(d,member,maker)}${member==='linked'?dtMyReview():''}${dtTabs(c)}${dtWhy(d)}${dtStructure(d,maker)}${dtGuide(d,c)}${dtClosing(d)}${dtFaq(d)}${dtReviews(d,member,c)}${sticky}`;
+ return `${top}${dtHero(d,member,maker)}${member==='linked'?dtMyReview():''}${dtTabs(c)}${dtWhy(d)}${dtStructure(d,maker)}${dtGuide(d,c)}${dtClosing(d)}${dtFaq(d,c)}${dtReviews(d,member,c)}${sticky}`;
 }
 
 R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',route:'/dex/{slug}',fu:['FU-054','FU-055','FU-056','FU-057','FU-058','FU-059'],
@@ -408,8 +410,9 @@ R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',rout
   {id:'apex',label:'ApeX',figma:{pc:'28960:127633',mo:'28960:131023'},note:'V2.2 exd/DETAIL#apex · Figma D6'},
   {id:'lighter',label:'Lighter — Premium/Plus (온보딩 후 — 보류)',figma:{pc:'28960:127443',mo:'28960:130990'},note:'V2.2 exd/DETAIL#lighter · Figma D1 · 연동 모달 배경으로도 쓰임'},
   {id:'drawer',label:'How this works 모달',figma:{pc:'22544:808136',mo:'22988:114502'},note:'[기존 MAX-1216] S21 How this works modal · 컴포넌트 Modal / How this works / mobile 343(22985:103042) 값 그대로 · 상태 정의 S5_12(29002:128605) · V2.2 exd/DETAIL#drawer(드로어 → 기존 제품 모달로 바꿈)'},
+  {id:'step2',label:'단계 가이드 Step 2 (Lighter)',figma:{pc:'29386:137364'},note:'Figma CT-28 「Step 2 선택」 — 본문은 DEX(revision) `DEX guide / Step 2 of 5`(28981:129056) 원문(8차 결정)'},
   {id:'step3',label:'단계 가이드 Step 3 (Lighter)',figma:{pc:'28960:127444',mo:'28960:130999'},note:'V2.2 exd/DETAIL#step3 · Figma D2'},
-  {id:'mediaFail',label:'가이드 미디어 실패',note:'V2.2 exd/DETAIL#mediaFail · DEX(revision)·기존 페이지 어디에도 디자인 없음(누락_dex.md)'},
+  {id:'faq2',label:'FAQ 두 구역 펼침 — Withdrawals & Account Management',figma:{pc:'29367:138679'},note:'Figma CT-29 ② — 첫 구역과 `Withdrawals & Account Management` 동시 펼침. 질문·답변은 운영자 입력 예시(8차 결정)'},
   {id:'moderation',label:'리뷰 검토 중',figma:{pc:'27392:937',mo:'27392:1062'},note:'[기존 MAX-1216] Reviews / Card · State=In moderation(27392:937 · 모바일 27392:1062) · 상태 정의 S5_20(29002:128826) · V2.2 exd/DETAIL#moderation'},
   {id:'reviewsEmpty',label:'리뷰 없음 (G-169)',figma:{pc:'22442:219830',mo:'22956:84690'},note:'[기존 MAX-1216] S6 Empty — 0 reviews · 문구는 G-169 `No reviews yet` · V2.2 exd/DETAIL#reviewsEmpty'},
   {id:'pendingLink',label:'확인 중 지갑만 있음 — 연동 버튼 자리 비활성 「확인 중」',figma:null,note:'근거: DEX 상세 회원 오퍼 박스(28969:129666 · 28969:129751)의 버튼 자리 + 홈 행 확인 중 표기(<code>연동 시도중이에요</code>) · 결정 Q6 B. <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},

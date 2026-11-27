@@ -82,7 +82,7 @@ function linkedCard(rows,o={}){
   :(o.max?rows.slice(0,o.max):rows).map(a=>accRow(a,{app,full:o.full})).join('');
  const more=o.max&&rows.length>o.max?`<button class="btn text black sm full">${T('See more','더보기')} (${rows.length-o.max})</button>`:'';
  const line=`<hr class="divider" style="margin:0">`;
- const cum=o.cum===false||o.loading?'':`${line}${cumulative(rows)}`;
+ const cum=o.cum===false||o.loading||S.vp==='mo'?'':`${line}${cumulative(rows)}`;
  return `<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:12px">
   <div class="row between"><span class="b1 semi">Linked Accounts</span><button class="btn text primary sm" style="padding:4px 5px" data-go="home.main:seeAll">See All</button></div>
   ${o.top||''}<div class="col" style="gap:12px">${list}</div>${more}
@@ -96,7 +96,7 @@ function cumulative(rows=[]){
   <div class="row" style="gap:10px;height:58px"><img src="${HA('safe.png')}" style="width:58px;height:58px;object-fit:cover;flex:none" alt="">
    <div class="col" style="gap:4px"><span class="row" style="gap:4px"><span class="b1 semi tnum">${n2(CUM.total)} USDT</span><img src="${HA('ic-info.svg')}" style="width:16px;height:16px" title="거래로 인한 캐시백과 이벤트 리워드를 합산한 금액을 표시합니다." alt=""></span><span style="font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">Total cumulative cashback</span></div></div>
   <div class="row" style="gap:12px;align-items:flex-start">${metric(CUM.month,'This month')}${metric(CUM.withdrawn,'Total withdrawn')}</div>
-  <div class="row between"><span style="width:162px;font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">${T(`Total of ${n} accounts · Update times vary by exchange`,`${n}개 거래 계정 합산 · 거래소마다 갱신 시각이 달라요`)}</span><button class="btn text primary sm" style="padding:4px 5px" data-go="summary.main">View history</button></div></div>`}
+  <div class="row between"><span style="width:162px;font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">${T(`Sum of ${n} linked accounts · Update times vary by exchange`,`${n}개 거래 계정 합산 · 거래소마다 갱신 시각이 달라요`)}</span><button class="btn text primary sm" style="padding:4px 5px" data-go="summary.main">View history</button></div></div>`}
 
 // ---------- 홈 오른쪽 열: 기존 홈 콘텐츠 (Figma HW1 main) ----------
 const secHead=(t,go)=>`<div class="row" style="gap:16px"><span style="font-size:24px;line-height:1.334;font-weight:700;white-space:nowrap">${t}</span><span class="grow" style="height:1px;background:var(--divider)"></span><button class="btn text primary md" style="padding:8px 11px;font-size:15px"${go?` data-go="${go}"`:''}>See All</button></div>`;
@@ -355,12 +355,13 @@ function walletRight(o={}){
   <div style="position:absolute;left:8px;top:-14px;width:104px;height:88px;overflow:hidden"><img src="${HA('review.png')}" style="position:absolute;height:142.56%;left:-39.21%;top:-21.21%;width:177.17%;max-width:none" alt=""></div>
   <div class="col grow" style="gap:2px;min-width:178px"><span class="b2 semi">How was Lighter?</span><span class="cap c2">Your first review earns you 2 USDT. It takes about a minute.</span></div>
   <button class="btn md" style="background:#f2f2f5" data-go="dex.detail:lighter">Write a review, get 2 USDT</button></div>`;
- const dexes=['Lighter','ApeX','EdgeX','Aster'],rate=['20','30','30','20'],bg=['#00f0ff','#15192a','#181a20','#000'];
- const top=`<div style="background:#fff;border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:16px">${secHead('Top Partner DEXs','dex.overview')}
-  <div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">${dexes.map((d,i)=>`<div class="col" style="gap:4px;cursor:pointer" data-go="dex.detail:${d.toLowerCase()}"><div style="background:${bg[i]};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${C.dex(d,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${d}</span><span style="font-size:12px;line-height:20px;font-weight:500">Up to ${rate[i]}% cashback</span></div>`).join('')}</div></div>`;
+ // 하단 = 기존 디자인 `Top Partner Exchanges`(CEX·DEX 공통 — 결정 「지갑 상세 하단」, 홈 HW1과 같은 블록)
+ const parts=[['Bitget','#00f0ff','54%'],['Bybit','#15192a','55%'],['Binance','#181a20','50%'],['OKX','#000','65%']];
+ const top=`<div style="background:#fff;border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:16px">${secHead('Top Partner Exchanges','cex.list')}
+  <div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px"><div style="background:${bg};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div>`;
  if(S.vp==='mo'){ // 기존 UID 상세 모바일(26047:1348691 · 25867:1348700) 순서: 리뷰 유도 → Top Partner(가로) → Exclusive For Members(2열)
-  const topMo=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Top Partner DEXs</span><button class="btn text primary sm" style="padding:4px 5px" data-go="dex.overview">See All</button></div>
-   <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${dexes.map((d,i)=>`<div class="col" style="gap:4px;width:100px;flex:none" data-go="dex.detail:${d.toLowerCase()}"><div style="background:${bg[i]};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${C.dex(d,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${d}</span><span style="font-size:12px;line-height:20px;font-weight:500">Up to ${rate[i]}% cashback</span></div>`).join('')}</div></div>`;
+  const topMo=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Top Partner Exchanges</span><button class="btn text primary sm" style="padding:4px 5px" data-go="cex.list">See All</button></div>
+   <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:100px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div>`;
   return `<div class="col" style="gap:16px;width:100%">${week.replace('padding:24px','padding:16px')}${review.replace('padding:16px 16px 16px 124px','padding:16px 16px 16px 112px')}${topMo}<div style="background:#fff;border-radius:8px;padding:16px" class="col g16">${moMemberCards('Lighter','Exclusive Benefit')}</div></div>`}
  return `<div style="display:flex;flex-direction:column;gap:24px;width:${S.vp==='mo'?'100%':'717px'}">${week}${review}
   <div style="background:#fff;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">${secHead('Exclusive Benefit','benefits.list')}${memberEvents('Lighter',true)}</div>${top}</div>`}
@@ -429,96 +430,6 @@ R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 · 누�
   return `<div style="padding:${S.vp==='mo'?'16px':'40px 0 80px'};display:flex;justify-content:center"><div class="col g16" style="width:${w}">${tl}${cum}${C.note('MAXOP-783은 3단계(Start Trading · Cut-off Time · Cashback Accumulated)이지만 정책(REQ-282 · G-192)은 4단계라 탭을 4개로 두고 단계명은 V2.2 국문(영문 원문 없음 — EN 보기에서도 국문). 카드 안 상세 행은 V2.2 내용. 누적 카드 = MAXOP-731 컴포넌트, 캡션은 G-191 확정 문구')}</div></div>`;
  }});
 
-// ---------- 출금 화면 /withdrawal-apply (FU-030~034) — 표시 전용, 모든 버튼은 비활성 Auto Claim ----------
-const WD_ACC=()=>[
- {ex:'Bitget',id:'123456789',cash:5,reward:232},
- {ex:'OKX',id:'987654321',cash:31.68,reward:0},
- {ex:'EdgeX',id:WAL.edgex,cash:100,reward:20},
- {ex:'Aster',id:WAL.edgex,cash:12,reward:0},
- {ex:'ApeX',id:WAL.w2,cash:3,reward:0}];
-const wdAvail=a=>Math.floor((a.cash+Math.min(a.reward,a.cash))*100+1e-6)/100;
-const wdNeed=a=>{const r=a.reward>=5?5:10-a.reward;return Math.max(0,r-a.cash)};
-function wdUpdates(ex){
- if(ex==='EdgeX')return `Daily, ${new Intl.DateTimeFormat(S.lang==='en'?'en-US':'ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date('2026-10-23T00:00:00Z'))}`;
- if(ex==='Lighter')return `Every Monday<div class="cap c2" style="font-weight:400">Lighter reports every Monday for the week before. New trades show after the next report.</div>`;
- return C.tbd(ex+' 주기·공개 시각',ex==='Aster'?'G-036':'G-025');
-}
-// 계정 카드 — 기존 [MAX-18] 출금 모달 계정 카드(12936:346690): 0.5px 테두리 · 그림자 · 로고30/이름/UID · Available 칩 · Available Cashback 행 · 구분선 · 작은 행
-function wdCard(a,st,deducted){
- const cex=isCex(a.ex),av=deducted&&wdAvail(a)>=10?0:wdAvail(a),ok=av>=10,err=st==='partner'&&a.ex==='Aster';
- const zero=!cex&&a.cash===0;
- const chip=deducted&&wdAvail(a)>=10?`<span style="background:rgba(0,0,0,.08);color:var(--text-primary);border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">Pending</span>`:ok?`<span style="background:#c8e6c9;color:#1b5e20;border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">Available</span>`:`<span style="background:rgba(0,0,0,.08);color:var(--text-primary);border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">Unavailable</span>`;
- const small=(k,v)=>`<div class="row between" style="color:var(--text-secondary);font-size:12px"><span style="line-height:1.33;letter-spacing:.2px">${k}</span><span style="font-weight:500;line-height:1.33;text-align:right">${v}</span></div>`;
- return `<div style="background:#fff;border:.5px solid var(--divider);border-radius:8px;filter:drop-shadow(0 1px 2.5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:16px">
-  <div class="row between"><span class="row" style="gap:8px;min-width:0">${mark(a.ex,30)}<span class="col" style="gap:0;min-width:0"><span class="b2 semi">${a.ex}</span><span style="font-size:12px;line-height:12px;color:var(--text-secondary);word-break:break-all">${cex?'UID '+a.id:'Wallet '+a.id}</span></span></span>${chip}</div>
-  ${st==='delayed'&&a.ex==='EdgeX'?`<div class="cap c2" style="margin-top:-8px">Last updated ${clk('2026-10-22T00:00:00Z')}</div>`:''}
-  ${err?`<div class="col g8">${C.alert('warn','',`We can't load your latest ${a.ex} cashback right now.`)}<span>${C.btn('Try again',{v:'outlined',size:'sm'})}</span></div>`:''}
-  <div class="col" style="gap:16px"><div class="row between"><span class="b2">Available Cashback</span><span class="b2 med tnum">${n2(av)} USDT</span></div><hr class="divider">
-   <div class="col" style="gap:8px">${small('Exchange Cashback',n2(deducted&&wdAvail(a)>=10?0:a.cash)+' USDT')}${a.reward>0?small('Event Reward',n2(deducted&&wdAvail(a)>=10?Math.max(0,a.reward-Math.min(a.reward,a.cash)):a.reward)+' USDT'):''}
-   ${cex?'':small('Cashback updates ⓘ',wdUpdates(a.ex))}
-   ${st==='preAccrual'&&a.ex==='ApeX'?small('Pending','2.10 USDT'):''}</div></div>
-  ${!ok&&!err&&!(deducted&&wdAvail(a)>=10)?`<div class="cap c2">${T(`You can claim cashback if you receive an additional ${up2(wdNeed(a))} USDT in exchange Cashback.`,`거래소 캐시백을 ${up2(wdNeed(a))} USDT 더 받으면 출금할 수 있어요.`)}</div>`:''}
-  ${zero?C.alert('info','',`No exchange cashback yet. ${a.ex==='Lighter'?"Cashback appears here after Lighter's Monday settlement.":'Cashback appears here the day after you trade on your linked DEX.'}`):''}</div>`}
-const WD_NOTE='[기존 MAX-18] 출금 모달 Web 12936:389796([When there is more than 2 UIDs]) · 계정 카드 12936:346690. 정책(10분 주기 자동 지급)에 따라 `Confirm Withdraw` → 비활성 `Auto Claim`(DEX HW1·PW1), 마일스톤 진행바(First Milestone)는 REQ-278로 뺌. ';
-R.screen({id:'wd.claim',group:'home',title:'출금 화면 (/withdrawal-apply)',route:'/withdrawal-apply',fu:['FU-030','FU-031','FU-032','FU-033','FU-034'],shell:false,closeTo:'home.main',
- states:[
-  {id:'normal',label:'정상 — 가능 위 · 불가 아래, 같은 주소 DEX별 카드',figma:{pc:'12936:389796',mo:'8873:163663'},note:WD_NOTE+'V2.2 wd/CLAIM#normal · REQ-134~137'},
-  {id:'allBlocked',label:'전부 불가 — Not eligible to withdraw',figma:{pc:'10500:94074'},note:'[기존 MAX-18] Web [Not eligible to withdraw] 10500:94074. V2.2 wd/CLAIM#allBlocked · REQ-136·139 · G-108 확정'},
-  {id:'zero',label:'DEX 캐시백 0 — 배너',note:'V2.2 wd/CLAIM#zero · REQ-146 · G-110. 상태 정의 = DEX 흐름 S4_12 `No cashback yet`(29002:127873). 배너 모양 디자인 없음 — MUI Alert(info) 재사용'},
-  {id:'loading',label:'로딩 — 스켈레톤, 금액·버튼 없음',note:'V2.2 wd/CLAIM#loading · REQ-145. 재사용: [MAX-425] Loading state 5702:12582 스켈레톤'},
-  {id:'delayed',label:'데이터 지연 — Last updated',note:'V2.2 wd/CLAIM#delayed · REQ-147 · G-348. 상태 정의 = DEX 흐름 S4_13 29002:127898'},
-  {id:'partner',label:'파트너 오류 — 그 카드만',note:'V2.2 wd/CLAIM#partner · REQ-148. 상태 정의 = DEX 흐름 S4_14 `Partner data unavailable` 29002:127923 · 오류 모양 = Hub H7 28960:126920'},
-  {id:'balanceError',label:'잔액 오류',note:'V2.2 wd/CLAIM#balanceError · REQ-149. 상태 정의 = DEX 흐름 S4_15 29002:127948 · 오류 모양 = Hub H7 28960:126920'},
-  {id:'deducted',label:'선차감 반영',figma:{pc:'10501:104627'},note:'[기존 MAX-18] Web [Pending withdrawal] 10501:104627 — 처리 중 계정 카드 칩 Pending(회색). 하단 버튼은 기존 Pending(비활성) 대신 정책상 비활성 Auto Claim. V2.2 wd/CLAIM#deducted · REQ-158 · G-112'},
-  {id:'preAccrual',label:'적립 전 줄 (합계 미포함)',note:'V2.2 wd/CLAIM#preAccrual · REQ-138 · G-127. 상태 정의 = DEX 흐름 S6_11 `Pending settlement` 29002:129353'},
-  {id:'many',label:'계정 11개 이상 — 10개 + 더보기',figma:{pc:'12936:389796'},note:'[기존 MAX-18] [When there is more than 2 UIDs] 12936:389796(모달 안 스크롤). V2.2 wd/CLAIM#many · REQ-134 · G-114'},
-  {id:'noNetwork',label:'지급 네트워크 미설정',note:'V2.2 wd/CLAIM#noNetwork · REQ-142. 상태 정의 = DEX 흐름 S4_20 `Network unavailable` 29002:128078. 모양 디자인 없음'},
-  {id:'lighter',label:'Lighter 카드 (온보딩 후) — Every Monday · Lighter (2 wallets)',note:'V2.2 wd/CLAIM#lighter · REQ-137·150. 카드 = 기존 계정 카드 재사용'},
-  {id:'pending',label:'확인 중 계정은 목록에 없음',figma:{pc:'12936:389796',mo:'8873:163663'},note:WD_NOTE+'V2.2 wd/CLAIM#pending · REQ-134 — 화면은 normal과 같고 확인 중 계정만 빠짐'},
- ],
- render(st){
-  let acc=WD_ACC();
-  if(st==='allBlocked')acc=acc.map(a=>({...a,cash:Math.min(a.cash,3),reward:Math.min(a.reward,2)}));
-  if(st==='zero')acc=acc.map(a=>isCex(a.ex)?a:{...a,cash:0,reward:0});
-  if(st==='lighter')acc=[...acc,{ex:'Lighter',id:WAL.lighter,cash:14,reward:0},{ex:'Lighter',id:WAL.w2,cash:2,reward:0}];
-  if(st==='many')acc=[...acc,...['Bybit','OKX','Bitget','ApeX','Aster','EdgeX','Bybit'].map((e,i)=>({ex:e,id:isCex(e)?String(555000000+i):WAL.w2,cash:12+i,reward:0}))];
-  const deducted=st==='deducted';
-  acc.sort((x,y)=>Number(wdAvail(y)>=10)-Number(wdAvail(x)>=10));
-  const avail=acc.filter(a=>wdAvail(a)>=10);const blocked=!avail.length;
-  const total=deducted?0:avail.reduce((s,a)=>s+wdAvail(a),0);
-  const minNeed=Math.min(...acc.map(wdNeed));
-  const box=inner=>`<div style="background:#fff;border:.5px solid var(--divider);border-radius:8px;filter:drop-shadow(0 1px 2.5px rgba(0,0,0,.1));padding:16px" class="col g12">${inner}</div>`;
-  const top=st==='balanceError'?box(`${C.alert('warn','',"We can't load your balance right now.")}<span>${C.btn('Try again',{v:'outlined',size:'sm'})}</span>`)
-   :st==='loading'?box(`${C.skel('40%',14)}${C.skel('30%',28)}`)
-   :box(`<div class="col" style="gap:4px"><span style="font-size:12px;line-height:1.4;color:var(--text-secondary)">Total Available Cashback</span><span class="row" style="gap:4px;align-items:baseline"><span style="font-size:24px;line-height:32px;font-weight:600" class="tnum">${n2(total)}</span><span class="b2 c2">USDT</span></span></div>
-    ${blocked?`<span>${C.badge('Not eligible to withdraw')}</span>`:''}
-    ${deducted?`<p class="cap c2" style="margin:0">${T('Amounts being claimed are excluded from your balance until the result is confirmed.','출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다')}</p>`:''}
-    ${blocked?`<p class="b2 c2" style="margin:0">${T(`No account can be claimed yet. You can claim once ${up2(minNeed)} USDT more cashback accrues.`,`출금 가능한 계정이 없어요. 캐시백 ${up2(minNeed)} USDT가 더 쌓이면 출금할 수 있어요.`)}</p><p class="cap c2" style="margin:0">${T('Event rewards are matched 1:1 with the same account’s cashback. The minimum per account is 10 USDT.','이벤트 리워드는 같은 계정의 캐시백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다.')}</p>`:''}`);
-  const shown=st==='many'?acc.slice(0,10):acc;
-  const cards=st==='loading'?box(C.skel('100%',80))+box(C.skel('100%',80)):shown.map(a=>wdCard(a,st,deducted)).join('')+(st==='many'?`<button class="btn text black sm full">${T('See more','더보기')} (${acc.length-10})</button>`:'');
-  const foot=st==='loading'?'':`<div style="padding:0 2px">${C.kv('Network',st==='noNetwork'?'—':'BNB Smart Chain (BEP20)')}<p class="cap c2" style="margin:0 0 8px">Deposits are made to the above wallet address on BNB Smart Chain (BEP20).</p>${C.kv('Network fee',T('covered by TetherMax','테더맥스가 전액 부담'))}</div>`;
-  const notes=`${st==='pending'?C.note('확인 중(연동 시도중이에요) 계정은 이 목록에 없음 — 자동 지급 대상 아님'):''}${C.note('카드 = 기존 출금 모달 계정 카드 그대로 + DEX 지갑 식별자(전체 주소) · Cashback updates 행(V2.2). DEX 배지 없음(REQ-135). 금액·주소·네트워크 입력 없음(REQ-140·141). Auto Claim 옆 안내 문구 없음(REQ-144). 네트워크 줄은 V2.2 내용(디자인 없음). 제목 `Withdraw`는 기존 모달 원문')}`;
-  const mo=S.vp==='mo';
-  const panel=`<div style="background:#fff;border-radius:${mo?'16px 16px 0 0':'4px'};box-shadow:var(--elev24);width:${mo?'100%':'600px'};max-height:${mo?'740px':'680px'};display:flex;flex-direction:column;overflow:hidden">
-   ${mo?'<div class="sheet-grab"></div>':''}<div class="row between" style="height:56px;padding:${mo?'0 16px':'0 24px'};flex:none"><span class="h6" style="font-size:20px">Withdraw</span><button class="icon-btn" data-go="home.main">${ic('close')}</button></div>
-   <div class="col" style="gap:16px;padding:16px ${mo?16:24}px;overflow:auto">${top}${cards}${foot}${notes}</div>
-   <div style="padding:${mo?'16px':'24px'};flex:none">${st==='loading'?'':`<button class="btn contained md full" disabled style="height:42px">Auto Claim</button>`}</div></div>`;
-  return C.overlay('home.main:normal',panel,{clip:mo?812:null,center:!mo});
- }});
-
-// ---------- 두 번째 출금 화면 /withdrawal (FU-036) ----------
-R.screen({id:'wd.second',group:'home',title:'두 번째 출금 화면 (/withdrawal)',route:'/withdrawal',fu:['FU-036'],shell:{accent:true,back:'home.main',moTitle:['Claim','출금'],moNav:'home'},
- states:[{id:'normal',label:'출금 가능 계정 없음 — STG 문구 + DEX 행',note:'V2.2 wd/SECOND#normal · REQ-710 · G-419(문구표에서 확정 — 확정 문안 원문 없음)'}],
- render(){
-  const acc=WD_ACC().map(a=>({...a,cash:Math.min(a.cash,4),reward:0}));
-  return `<div class="container" style="max-width:720px;padding-top:40px;padding-bottom:80px"><div class="card col g16">
-   <span class="h5">Trading just a bit more and you can claim.</span><p class="b1 c2" style="margin:0">Cashback can be claimed for UIDs with 10 USDT or more in cashback.</p>
-   <p class="cap" style="margin:0">${T('Event rewards are matched 1:1 with the same account’s cashback. The minimum per account is 10 USDT.','이벤트 리워드는 같은 계정의 캐시백과 1:1로 매칭됩니다. 최소 출금액은 계정별 10 USDT입니다.')}</p>
-   <div>${acc.map(a=>`<div class="row g12" style="padding:12px 0;border-bottom:1px solid var(--divider)">${mark(a.ex,32)}<div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${a.ex}</span><span class="cap c2" style="word-break:break-all">${isCex(a.ex)?'UID '+a.id:a.id}</span></div><div class="col" style="gap:0;align-items:flex-end"><span class="b1 semi">${n2(wdAvail(a))} <span class="b2 c2">USDT</span></span><span class="cap c2">Trading just a bit more</span></div></div>`).join('')}</div>
-   <div class="row between"><span class="b1">Cashback to be Claimed</span><span class="h6">${n2(acc.reduce((s,a)=>s+wdAvail(a),0))} USDT</span></div>
-   ${C.btn('Go back',{v:'outlined',go:'home.main',full:true})}</div></div>`;
- }});
-
 // ---------- 선차감 · 복원 반영 위치 (FU-034 · 035) ----------
 R.screen({id:'wd.reflect',group:'home',title:'선차감 · 복원 반영 위치',route:'/ · /cashback-summary · 실시간 출금 피드',fu:['FU-034','FU-035'],shell:{accent:true,back:'home.main',moNav:'home'},
  states:[
@@ -534,7 +445,7 @@ R.screen({id:'wd.reflect',group:'home',title:'선차감 · 복원 반영 위치'
   const sec=(t,b,go)=>`<div style="background:#fff;border-radius:8px;padding:16px" class="col g12"><div class="row between"><span class="b1 semi">${t}</span>${go?`<button class="btn text primary sm" data-go="${go}">See All</button>`:''}</div>${b}</div>`;
   const body=`${balanceCard({amount:bal,sub:st==='deducted'?`<div class="cap c2">출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다</div>`:''})}
    ${sec(T('Cashback Summary','캐시백 요약'),sum,'summary.main')}${sec(T('Live withdrawals','실시간 출금'),feed,'about.feed')}
-   ${C.note({normal:'지급 완료된 건만 피드에 표시',deducted:'처리 중 — 피드에 아직 없음(자동 지급 완료 = 출금일 때만 표시). 영문 선차감 문구는 G-112 문구표 확정분(원문 없음)',restored:'실패해 복원된 건은 피드에 Sent 항목이 생기지 않음. 잔액은 복원 후 다시 같은 조건으로 판정'}[st]+' · 출금 화면 · 홈 · 캐시백 요약 · 실시간 출금 피드가 같은 레코드에서 같은 새로고침에 반영. 결과를 보여 주는 회원 화면은 없음(REQ-163)')}`;
+   ${C.note({normal:'지급 완료된 건만 피드에 표시',deducted:'처리 중 — 피드에 아직 없음(자동 지급 완료 = 출금일 때만 표시). 영문 선차감 문구는 G-112 문구표 확정분(원문 없음)',restored:'실패해 복원된 건은 피드에 Sent 항목이 생기지 않음. 잔액은 복원 후 다시 같은 조건으로 판정'}[st]+' · 홈 · 캐시백 요약 · 실시간 출금 피드가 같은 레코드에서 같은 새로고침에 반영. 결과를 보여 주는 회원 화면은 없음(REQ-163)')}`;
   return `<div style="padding:${S.vp==='mo'?16:40}px 16px 80px;display:flex;justify-content:center"><div class="col g16" style="width:${S.vp==='mo'?'100%':'480px'}">${body}</div></div>`;
  }});
 

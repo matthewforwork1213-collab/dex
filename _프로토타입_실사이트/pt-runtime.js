@@ -140,12 +140,80 @@
     });
   }
   var _show = show;
-  show = function (id) { _show(id); var l = document.querySelector('.pt-layer'); if (l) settleOpen(l) };
+  show = function (id) { _show(id); var l = document.querySelector('.pt-layer'); if (l) { settleOpen(l); dexCopy(l) } };
   document.addEventListener('DOMContentLoaded', function () {
     if (PT.stateSig) settleOpen(document);
     post({ loaded: PT.snap, title: document.title });
-    dexInject({}); dexMenu();
+    dexInject({}); dexMenu(); dexCopy(); dexPartners();
   });
+
+  // ④ 문구 — Figma DEX(revision) 2·3차 수정 결과 · 문구표_DEX · 9차 결정과 같게(랜딩 `/en` · 서비스 소개만)
+  var COPY = {
+    en: {
+      'Get paid daily in USDT': 'Get cashback in USDT automatically',                                   // 문구표 #44
+      'Trade, and cashback accrues automatically': 'Each linked account is paid automatically once its claimable balance reaches 10 USDT.',
+      'Link your exchange UID': 'Link your exchange account',                                           // Figma 랜딩 28960:128375
+      'Link your exchange UID to TetherMax': 'Link your exchange UID or wallet address to TetherMax',
+      'Top Exchanges': 'Our Partners'                                                                   // Figma 랜딩 모바일 29386:140183
+    },
+    'en__service-intro-new': {
+      'Someone just got paid.': 'Someone is cashing out right now',                                     // 문구표 #41
+      'Watch it happen.': '',
+      'With 24/7 real-time cashback, every cent you earn is paid out, instantly.': "Claim every cent you've earned",
+      'Join an exchange with your TetherMax code and just enter your UID. Done, under 3 minutes!': 'Join an exchange with your TetherMax code and just link your account. Done, under 3 minutes!',   // 문구표 #75
+      'Every time a trader you invite links a UID and trades, you earn rewards.': 'Every time a trader you invite links an account and trades, you earn rewards.',                            // 문구표 #76
+      'UID linked': 'Account linked',
+      'Traders you invite join an exchange with the TetherMax code and link their UID.': 'Traders you invite join an exchange with the TetherMax code and link their account.'
+    }
+  };
+  function dexCopy(root) {
+    var map = COPY[PT.key]; if (!map) return;
+    var w = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT), n, hit = [];
+    while ((n = w.nextNode())) { var k = n.nodeValue.trim(); if (k && Object.prototype.hasOwnProperty.call(map, k)) hit.push(n) }
+    hit.forEach(function (x) { var v = map[x.nodeValue.trim()]; if (v === '') { var p = x.parentNode; x.remove(); if (p && !p.textContent.trim() && p.children.length === 0) p.style.display = 'none' } else x.nodeValue = v });
+  }
+  // ⑤ 랜딩 모바일 `Our Partners` 카드 — 칩 All · Exchanges · DEXs + 목록 끝 두 행 ApeX 30% · Lighter 20%(Figma 29386:140183 · PC 28960:128424)
+  function dexPartnerSet(k) {
+    document.querySelectorAll('[data-dex-chips]').forEach(function (chips) {
+      [].forEach.call(chips.children, function (c) { var on = c.getAttribute('data-k') === k; c.style.background = on ? '#2453f0' : 'rgba(0,0,0,.08)'; c.style.color = on ? '#fff' : 'inherit' });
+    });
+    document.querySelectorAll('[data-dex-p] > li').forEach(function (li) { li.style.display = k === 'all' || li.getAttribute('data-kind') === k ? '' : 'none' });
+  }
+  window.addEventListener('click', function (e) {   // 위임(window 캡처 — 런타임 문서 캡처 처리보다 먼저)
+    var c = e.target.closest && e.target.closest('[data-dex-chips] [data-k]');
+    if (c) { e.preventDefault(); e.stopPropagation(); return dexPartnerSet(c.getAttribute('data-k')) }
+    var r = e.target.closest && e.target.closest('[data-dex-slug]');
+    if (r) { e.preventDefault(); e.stopPropagation(); return post({ nav: ORIGIN + '/en/dex/' + r.getAttribute('data-dex-slug') }) }
+  }, true);
+  function dexPartners() {
+    if (PT.key !== 'en') return;
+    document.querySelectorAll('[class*="__MobileCard"] [class*="__MobileExchangeList"]').forEach(function (ul) {
+      if (ul.hasAttribute('data-dex-p')) return; ul.setAttribute('data-dex-p', '');
+      var items = [].slice.call(ul.children); if (items.length < 3) return;
+      items.forEach(function (li) { li.setAttribute('data-kind', 'cex') });
+      [['ApeX', 'apex', '30%'], ['Lighter', 'lighter', '20%']].forEach(function (d, i) {
+        var src = items[items.length - 2 + i], li = src.cloneNode(true);
+        li.className = li.className.replace(/\S*__MobilePopularItem/g, '');
+        var img = li.querySelector('img'); if (img) { img.removeAttribute('srcset'); img.src = '../dex/assets/dex-' + d[1] + '.png' }
+        var nm = li.querySelector('[class*="__MobileExchangeNameText"]'); if (nm) nm.textContent = d[0];
+        var badge = li.querySelector('[class*="__MobilePopularBadge"]'); if (badge) badge.remove();
+        var rt = li.querySelector('[class*="__MobileSavingsRate"]'); if (rt) rt.textContent = d[2];
+        li.setAttribute('data-kind', 'dex');
+        li.setAttribute('data-dex-slug', d[1]);
+        src.replaceWith(li);
+      });
+      var head = ul.parentNode.querySelector('[class*="__MobileCardHeader"]');
+      var chips = document.createElement('div'); chips.setAttribute('data-dex-chips', '');
+      chips.style.cssText = 'display:flex;gap:8px;margin:12px 0 4px';
+      ['All', 'Exchanges', 'DEXs'].forEach(function (l, i) {
+        var c = document.createElement('button'); c.type = 'button'; c.textContent = l; c.setAttribute('data-k', ['all', 'cex', 'dex'][i]);
+        c.style.cssText = 'border:0;cursor:pointer;padding:7px 10px;border-radius:100px;font:inherit;font-size:13px;line-height:18px;letter-spacing:.16px;transition:background .2s,color .2s';
+        chips.appendChild(c);
+      });
+      if (head) head.after(chips); else ul.before(chips);
+      dexPartnerSet('all');
+    });
+  }
 
   // ================= DEX 연결 (README 「DEX 연결」) =================
   // ① 연동 버튼·「Link more」 → 셸이 DEX 앱 연동 모달을 연다(어디서 열어도 같은 모달)

@@ -50,9 +50,9 @@ window.C=C;
 
 // ---------- 셸 (실제 디자인 — 근거 노드는 ref/대응_common.md 1장) ----------
 // 웹 GNB 28967:127332(DEX / Web / Navigation) · 비로그인 우측 19604:32577(webPrelogin) · 드롭다운 19604:32652~32678(atom3 · atom2)
-// 드롭다운 — Cashback: DEX Navigation 설명(CEX · DEX · Brokers) / Rewards Hub · Discover: 기존 GNB 드롭다운 항목 그대로
+// 드롭다운 — Cashback: 결정 D4(Cashback Hub · Cashback Calculator, 단독 Calculator 메뉴 없음) / Rewards Hub · Discover: 기존 GNB 드롭다운 항목 그대로
 const NAV={
- cashback:{en:'Cashback',ko:'캐시백',items:[['cex.list','Centralised Exchanges','중앙화 거래소'],['dex.overview','Decentralised Exchanges','탈중앙화 거래소'],['hub.main:brokers','Brokers','브로커']]},
+ cashback:{en:'Cashback',ko:'캐시백',items:[['hub.main','Cashback Hub','Cashback Hub'],['calc.p1','Cashback Calculator','Cashback Calculator']]},
  rewards:{en:'Rewards Hub',ko:'리워드 허브',items:[['events.list','Exchanges Events','거래소 이벤트'],['benefits.list','Benefits','혜택'],['tp.main','Points','포인트']]},
  discover:{en:'Discover',ko:'둘러보기',items:[['quiz.list','Beginner’s Guide','초보자 가이드'],['about.intro','About TetherMax','테더맥스 소개']]},
 };
@@ -60,8 +60,7 @@ const shIc=(f,cls='ic')=>`<img class="${cls}" src="${A(f)}" alt="">`;
 // gnb(active, {open:'cashback'|'rewards'|'discover'}) — open이면 그 드롭다운을 펼친 상태로 그린다(hover 상태 화면용). 실제 hover에서도 펼쳐진다.
 function gnb(active,o={}){
  const authed=S.auth!=='guest';
- const nav=Object.entries(NAV).map(([k,n])=>`<div class="ni${o.open===k?' open':''}"><a class="${active===k||o.open===k?'on':''}" data-go="${n.items[0][0]}">${T(n.en,n.ko)}${ic('arrow-drop-down')}</a><div class="gnb-dd">${n.items.map(([go,en,ko])=>`<a data-go="${go}">${T(en,ko)}</a>`).join('')}</div></div>`).join('')
-  +`<div class="ni"><a class="${active==='calc'?'on':''}" data-go="calc.p1">${T('Calculator','계산기')}</a></div>`;
+ const nav=Object.entries(NAV).map(([k,n])=>`<div class="ni${o.open===k?' open':''}"><a class="${active===k||o.open===k?'on':''}" data-go="${n.items[0][0]}">${T(n.en,n.ko)}${ic('arrow-drop-down')}</a><div class="gnb-dd">${n.items.map(([go,en,ko])=>`<a data-go="${go}">${T(en,ko)}</a>`).join('')}</div></div>`).join('');
  const right=authed?`<button class="icon-btn" data-go="${o.bellGo||'cmn.header:unread'}" title="Notifications">${shIc('cmn-ic-bell.svg')}</button><button class="icon-btn" data-go="my.main" title="My">${shIc('cmn-ic-account.svg')}</button>`
   :`${C.btn(T('Login','로그인'),{v:'outlined',go:'auth.login'})}${C.btn(T('Sign Up','회원가입'),{go:'auth.signup'})}`;
  return `<header class="gnb"><div class="row g24"><img src="${A('logo.svg')}" style="width:142px;height:16px;cursor:pointer" data-go="${authed?'home.main':'landing.main'}" alt="TetherMax"><nav class="nav">${nav}</nav></div><div class="right">${right}<button class="icon-btn">${ic('light-mode')}</button><button class="icon-btn" data-lang>${ic('language')}</button></div></header>`}
