@@ -137,7 +137,7 @@ function render(){
  const ar=S.live&&appRoute(sc.id,state.id);
  fr.innerHTML=ar?liveFrame(ar):renderInner(sc.id+':'+state.id);
  const h=`#${sc.id}/${state.id}`;if(location.hash!==h)history.replaceState(null,'',h);
- document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;render()};
+ document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;if(AUTH_ONLY_GUEST.includes(S.screen)&&S.auth!=='guest'){S.auth='guest';save()}else if((AUTH_ONLY_MEMBER.includes(S.screen)||/^(link|own)\./.test(S.screen))&&S.auth==='guest'){S.auth='s4';save()}render()};   // 상태를 직접 고르면 로그인 상태를 그 화면에 맞춤
  document.getElementById('pt-design').onchange=e=>{S.design=e.target.checked;save();render()};
  document.querySelectorAll('[data-vp]').forEach(x=>x.onclick=()=>{S.vp=x.dataset.vp;save();render()});
  document.querySelectorAll('[data-lg]').forEach(x=>x.onclick=()=>{S.lang=x.dataset.lg;save();render()});
@@ -206,5 +206,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 document.addEventListener('click',e=>{
  const g=e.target.closest('[data-go]');if(g&&g.dataset.go!==undefined){e.preventDefault();if(g.dataset.go)go(g.dataset.go);else if(S.screen){const sc=R.byId[S.screen];if(sc.closeTo)go(sc.closeTo)}return}
  if(e.target.closest('[data-lang]')){S.lang=S.lang==='en'?'ko':'en';save();render()}});
-window.addEventListener('hashchange',()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]&&(m[0]!==S.screen||m[1]!==S.state)){S.screen=m[0];S.state=m[1]||null;render()}});
-window.PT_START=()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]){S.screen=m[0];S.state=m[1]||null}render()};
+// 주소(#)로 직접 연 화면도 지금 로그인 상태로 볼 수 없으면 실제로 보게 되는 화면으로(결정 12차 — 게스트 전용 랜딩을 회원 상태로 그리지 않음)
+function fixAuthView(){const id=S.screen,st=S.state;if(!id)return;const to=(AUTH_ONLY_GUEST.includes(id)&&S.auth!=='guest')||((AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id))&&S.auth==='guest')?authTarget(id,st,S.auth):null;if(to){if(to[0]==='auth.login')S.after=id+(st?':'+st:'');S.screen=to[0];S.state=to[1]}}
+window.addEventListener('hashchange',()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]&&(m[0]!==S.screen||m[1]!==S.state)){S.screen=m[0];S.state=m[1]||null;fixAuthView();render()}});
+window.PT_START=()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]){S.screen=m[0];S.state=m[1]||null}fixAuthView();render()};
