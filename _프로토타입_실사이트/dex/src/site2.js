@@ -29,7 +29,7 @@ function memberOf(slug) {
 }
 function withSD(o, f) { window.SITED = o; try { return f() } finally { window.SITED = null } }
 const site2 = {
-  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax' }[p] },
+  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/benefits': 'Benefits | TetherMax' }[p] },
   dexLanding() { S.auth = isMember() ? 's3' : 'guest'; return withSD({ guest: !isMember(), list: SD.list }, () => renderInner('dex.overview:' + (isMember() ? 'member' : 'normal'))) },
   dexDetail(slug) {
     if (SD.slug !== slug) Object.assign(SD, { slug, maker: false, vol: 400000, step: 0, faq: new Set([0]), sort: 0 });
@@ -37,13 +37,16 @@ const site2 = {
     S.auth = member === 'guest' ? 'guest' : 's4';
     return withSD({ id: slug, member, maker: SD.maker, vol: SD.vol, step: SD.step }, () => renderInner('dex.detail:' + slug));
   },
-  render(p) {
+  render(p, q) {
+    if (p === '/payback') return calcHTML(q || {});
+    if (p === '/benefits') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('benefits.list:' + (isMember() ? 'normal' : 'guestOn')) }   // GNB Rewards Hub ▾ Benefits (사용자 2026-11-27)
     if (p === '/summary') { if (!isMember()) { navReal('/en/login'); return '' } S.auth = 's4'; return withSum(() => renderInner('summary.main:normal')) }
     if (p === '/account') { if (!isMember()) { navReal('/en/login'); return '' } return accountHTML() }
     if (p === '/ownership') { if (!isMember()) { navReal('/en/login'); return '' } return ownHTML() }
     return null;
   },
   enhance(p, q, o) {
+    if (p === '/payback') calcEnhance();
     if (p === '/dex') landingEnhance();
     if (/^\/dex\/\w+$/.test(p)) detailEnhance(o);
     if (p === '/summary') sumEnhance();
@@ -58,7 +61,11 @@ const site2 = {
     if (id === 'dex.detail' && st === 'drawer') { openHow(); return true }
     if (id === 'dex.detail' && st === 'close') { closeLayer(); return true }
     if (id === 'summary.main') { go2('/summary'); return true }
+    if (/^calc./.test(id)) return calcGo(id, st);
+    // 행 배너·이슈 모달(결정 10차): 수동 연동 실패 사유 · 문제 안내. 모달 안 Link 버튼 → 연동 모달
+    if (id === 'home.main' && ['linkFail', 'linkFailWallet', 'issue', 'issueWallet'].includes(st)) { const dex = /Wallet$/.test(st); openCustom(() => /^link/.test(st) ? HOMEX.failDialog(dex) : HOMEX.issueDialog(dex), 'center'); return true }
     if (id === 'home.main' && L.open && L.step === 'custom' && L.kind !== 'full') { closeLayer(); return true }
+    if (/^link./.test(id) && L.open && L.step === 'custom') { closeLayer(true); setTimeout(() => API.openLink(id === 'link.addr' ? { ex: 'Lighter', type: 'DEX' } : {}), 230); return true }
     if (id === 'own.verify') return ownGo(st, inLayer);
     if (id === 'own.home') return ownHomeGo(st);
     return false;
@@ -113,21 +120,25 @@ function carousel() {
 let spy = null;
 function detailEnhance(o) {
   const tabs = $('[data-dt-tabs]', app); if (!tabs) return;
-  const row = tabs.firstElementChild; row.style.position = 'relative';
-  $$('[data-dt-tab]', row).forEach(t => { t.style.borderBottom = '2px solid transparent' });
-  const bar = document.createElement('span'); bar.className = 'site-tabbar'; row.appendChild(bar);
+  // 밑줄 탭 — 실사이트 Events 탭처럼 탭마다 2px 밑줄이 color·border-color .2s로 바뀐다(막대 이동 없음)
+  const row = tabs.firstElementChild;
+  const head = document.querySelector('.gnb, .mo-top, [data-mo-head]');
+  document.documentElement.style.setProperty('--site-head', (head && getComputedStyle(head).position === 'sticky' ? head.offsetHeight : 0) + 'px');
   const setActive = (i, inst) => {
-    $$('[data-dt-tab]', row).forEach((t, j) => { t.style.color = j === i ? 'var(--blue)' : 'var(--text-secondary)' });
+    $$('[data-dt-tab]', row).forEach((t, j) => {
+      if (inst) t.style.transition = 'none';
+      t.style.color = j === i ? 'var(--blue)' : 'var(--text-secondary)';
+      t.style.borderBottom = '2px solid ' + (j === i ? 'var(--blue)' : 'transparent');
+      if (inst) { void t.offsetWidth; t.style.transition = '' }
+    });
     const t = $(`[data-dt-tab="${i}"]`, row); if (!t) return;
-    if (inst) bar.style.transition = 'none'; bar.style.left = t.offsetLeft + 'px'; bar.style.width = t.offsetWidth + 'px';
-    if (inst) { void bar.offsetWidth; bar.style.transition = '' }
-    if (S.vp === 'mo') row.parentElement.scrollTo({ left: t.offsetLeft - 16, behavior: 'smooth' });
+    if (S.vp === 'mo') row.parentElement.scrollTo({ left: t.offsetLeft - 16, behavior: inst ? 'auto' : 'smooth' });
     tabs.dataset.on = i;
   };
   setActive(0, true);
   window.removeEventListener('scroll', spy);
   spy = () => {
-    const h = tabs.getBoundingClientRect().height + 8; let cur = 0;
+    const h = tabs.getBoundingClientRect().bottom + 8; let cur = 0;
     $$('[data-dt-sec]', app).forEach(sec => { if (sec.getBoundingClientRect().top <= h + 40) cur = +sec.dataset.dtSec });
     if (+tabs.dataset.on !== cur) setActive(cur);
   };
@@ -136,6 +147,40 @@ function detailEnhance(o) {
   $$('[data-faq]', app).forEach(f => faqSet(f, SD.faq.has(+f.dataset.faq)));
   const terms = $('[data-faq-terms]', app); if (terms) faqSet(terms.parentElement.querySelector('[data-faq-terms]').parentElement === terms.parentElement ? terms : terms, SD.faq.has('t'), true);
   reviewsSort(SD.sort, true);
+  bindDtSlider();
+}
+// 상세 계산기 거래량 슬라이더 — 공통 UI.slider. 값이 바뀌면 같은 구역의 숫자만 즉시 바꾸고 슬라이더 요소는 그대로 둔다(전환 유지)
+function bindDtSlider() {
+  const s = $('[data-dt-slider]', app); if (!s || !window.DEXVOL) return;
+  const VT = DEXVOL.VT;
+  UI.slider(s, {
+    value: SD.vol, min: VT[0], max: VT[VT.length - 1], step: 10000, label: 'Total volume', inset: 0, halo: { size: 20 },
+    toPct: v => DEXVOL.volPct(v) / 100, fromPct: p => volFromPct(p * 100),
+    thumbLeft: p => `calc(${p * 100}% - 10px)`, fillWidth: p => `${p * 100}%`,
+    valueText: v => DEXVOL.volK(v),
+    onInput: v => { SD.vol = v; refreshStructure() }
+  });
+}
+function refreshStructure() {
+  const sec = $('[data-dt-sec="1"]', app); if (!sec) return;
+  const tmp = document.createElement('div');
+  tmp.innerHTML = withSD({ id: SD.slug, member: memberOf(SD.slug), maker: SD.maker, vol: SD.vol, step: SD.step }, () => DEXX.dtStructure(DEXX.DX[SD.slug], SD.maker));
+  morph(sec, tmp, '[data-dt-slider]');
+}
+// 같은 모양의 새 마크업으로 글자·속성만 바꾼다(skip 선택자 안은 건드리지 않음). 구조가 다르면 그 자리만 교체
+function morph(a, b, skip) {
+  const ac = Array.from(a.childNodes), bc = Array.from(b.childNodes);
+  if (ac.length !== bc.length) { a.replaceChildren(...bc); return }
+  ac.forEach((x, i) => {
+    const y = bc[i];
+    if (x.nodeType !== y.nodeType || x.nodeName !== y.nodeName) return x.replaceWith(y);
+    if (x.nodeType === 3) { if (x.data !== y.data) x.data = y.data; return }
+    if (x.nodeType !== 1) return;
+    if (skip && x.matches(skip)) return;
+    for (const at of Array.from(y.attributes)) if (x.getAttribute(at.name) !== at.value) x.setAttribute(at.name, at.value);
+    for (const at of Array.from(x.attributes)) if (!y.hasAttribute(at.name)) x.removeAttribute(at.name);
+    morph(x, y, skip);
+  });
 }
 function faqBodyOf(f, terms) {
   const head = terms ? f : f.querySelector('[data-faq-head]');
@@ -179,14 +224,6 @@ function openHow() {
   const d = DEXX.DX[SD.slug || 'edgex'];
   openCustom(() => withSD({ id: SD.slug, vol: SD.vol, maker: SD.maker }, () => DEXX.dtDrawer(d, SD.maker)), 'center');
 }
-document.addEventListener('pointerdown', e => {
-  const sl = e.target.closest && e.target.closest('[data-dt-slider]'); if (!sl) return;
-  e.preventDefault();
-  const set = x => { const s = $('[data-dt-slider]', app); const r = s.getBoundingClientRect(); SD.vol = volFromPct(Math.max(0, Math.min(100, (x - r.left) / r.width * 100))); rerenderSec(1, d => DEXX.dtStructure(d, SD.maker)); const n = $('[data-dt-slider]', app); if (n) n.classList.add('drag') };
-  set(e.clientX);
-  const mv = ev => set(ev.clientX), up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); const n = $('[data-dt-slider]', app); if (n) n.classList.remove('drag') };
-  window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
-}, true);
 
 // ---------------- 클릭 위임(2회차 화면) ----------------
 document.addEventListener('click', e => {
@@ -215,28 +252,53 @@ document.addEventListener('click', e => {
     stop(); const k = tg.dataset.tog;
     if (k !== 'Taker' && k !== 'Maker') return;      // Lighter Premium/Plus — Plus 요율 미수신(표시 그대로)
     if ((k === 'Maker') === SD.maker) return;
-    const olds = leafNums(app).map(x => numParts(x.textContent.trim()).n);
-    SD.maker = k === 'Maker'; renderPage({ keepScroll: true });
-    const now = leafNums(app); if (now.length === olds.length) now.forEach((x, i) => { if (olds[i] !== numParts(x.textContent.trim()).n) countUp(x, olds[i], 380) });
+    // 실사이트 ToggleBtn: 선택 칸 .2s 전환, 금액은 즉시. 단계 표 행 수가 바뀌면(EdgeX Taker 3행 ↔ Maker 2행) 높이 300ms
+    const grp = tg.parentElement, gi = Array.from(grp.parentElement.children).indexOf(grp);
+    const prev = Array.from(grp.children).indexOf(Array.from(grp.children).find(x => /background:#fff/.test(x.getAttribute('style') || '')));
+    const rows0 = $$('[data-stage-row]', app).map(r => r.dataset.stageRow);
+    SD.maker = k === 'Maker';
+    UI.heightFx(() => $('[data-stage-tbl]', app), () => renderPage({ keepScroll: true }));
+    $$('[data-stage-row]', app).forEach(r => { if (!rows0.includes(r.dataset.stageRow)) try { r.animate([{ opacity: 0 }, { opacity: 1 }], { duration: UI.T.collapse, easing: UI.E.io }) } catch (x) { } });
+    $$('[data-tog]', app).map(x => x.parentElement).filter((g, i, a) => a.indexOf(g) === i).forEach(g => { if ($$('[data-tog]', g).some(x => x.dataset.tog === 'Maker')) UI.toggleFx(Array.from(g.children), prev) });
     return;
   }
   const tab = t.closest('[data-dt-tab]');
   if (tab) {
     stop(); const sec = $(`[data-dt-sec="${tab.dataset.dtTab}"]`, app); const tabs = $('[data-dt-tabs]', app);
-    if (sec) window.scrollTo({ top: sec.getBoundingClientRect().top + window.scrollY - tabs.getBoundingClientRect().height + 1, behavior: 'smooth' });
+    if (sec) window.scrollTo({ top: sec.getBoundingClientRect().top + window.scrollY - tabs.getBoundingClientRect().height - (parseFloat(getComputedStyle(tabs).top) || 0) + 1, behavior: 'smooth' });   // 고정 헤더 + 탭 바 아래로
     return;
   }
   const step = t.closest('[data-dt-step]');
-  if (step) { stop(); SD.step = +step.dataset.dtStep; const sec = rerenderSec(2, d => DEXX.dtGuide(d, 'site')); const pn = sec && $('[data-dt-panel]', sec); if (pn) fadeIn(pn); return }
+  if (step) {
+    stop(); if (SD.step === +step.dataset.dtStep) return; SD.step = +step.dataset.dtStep;
+    // 실사이트 온보딩 단계: 이미지 교차 페이드 opacity .4s
+    const sec = $('[data-dt-sec="2"]', app); const old = sec && $('[data-dt-panel] img', sec);
+    const ghost = old && old.cloneNode(true);
+    if (ghost) { const r = old.getBoundingClientRect(), pr = sec.getBoundingClientRect(); ghost.style.cssText += `;position:absolute;left:${r.left - pr.left}px;top:${r.top - pr.top}px;width:${r.width}px;height:${r.height}px;margin:0;pointer-events:none;transition:opacity .4s;z-index:2` }
+    rerenderSec(2, d => DEXX.dtGuide(d, 'site'));
+    const img = $('[data-dt-panel] img', sec);
+    if (img) { img.style.transition = 'none'; img.style.opacity = 0; void img.offsetWidth; img.style.transition = 'opacity .4s'; img.style.opacity = 1 }
+    if (ghost) { sec.style.position = 'relative'; sec.appendChild(ghost); void ghost.offsetWidth; ghost.style.opacity = 0; setTimeout(() => ghost.remove(), 420) }
+    return;
+  }
   const fh = t.closest('[data-faq-head]');
   if (fh) {
     stop(); const terms = fh.hasAttribute('data-faq-terms'); const f = terms ? fh : fh.closest('[data-faq]'); const key = terms ? 't' : +f.dataset.faq;
-    const open = !SD.faq.has(key); open ? SD.faq.add(key) : SD.faq.delete(key); faqSet(f, open, terms);
-    const body = faqBodyOf(f, terms).body; if (open) fadeIn(body);
+    const open = !SD.faq.has(key); open ? SD.faq.add(key) : SD.faq.delete(key);
+    const { head, body } = faqBodyOf(f, terms);
+    const icn = head.lastElementChild; if (icn) icn.textContent = open ? '−' : '+';
+    UI.collapse(body, open);   // 실사이트 FAQ: 높이 300ms ease-in-out
     return;
   }
   const rs = t.closest('[data-rv-sort]'); if (rs) { stop(); return reviewsSort(+rs.dataset.rvSort) }
-  const rm = t.closest('[data-rv-more]'); if (rm) { stop(); rm.closest('[data-rv]').classList.add('rv-open'); rm.style.display = 'none'; return }
+  const rm = t.closest('[data-rv-more]');
+  if (rm) {
+    stop(); const rv = rm.closest('[data-rv]'), b = $('.rv-body', rv); const h0 = b.getBoundingClientRect().height;
+    rv.classList.add('rv-open'); rm.style.display = 'none';
+    const h1 = b.getBoundingClientRect().height; b.style.overflow = 'hidden';
+    try { b.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: UI.T.collapse, easing: UI.E.io }).onfinish = () => { b.style.overflow = '' } } catch (x) { }
+    return;
+  }
 }, true);
 
 // =====================================================================
@@ -260,7 +322,7 @@ function cexSnapshot(cb) {
       const amtEl = $('[class*="__UidAmount"]', el);
       const single = !amtEl && !curMulti && curAmt != null;
       const nx = el.nextElementSibling, alertT = nx && /StatusAlert/.test(nx.className) ? nx.textContent : '';
-      const st = /Ownership verification was unsuccessful/.test(alertT) ? 'ownfail' : /Linking was unsuccessful/.test(alertT) ? 'fail' : amtEl || single ? 'ok' : 'unlinked';
+      const st = /Ownership verification was unsuccessful/.test(alertT) ? 'ownfail' : /Linking was unsuccessful/.test(alertT) ? 'fail' : 'ok';   // 금액 없는 거래소 행(수집본)은 금액 '-'. 수동 연동 실패(fail)·소유 확인 실패는 행 아래 배너(결정 10차)
       rows.push({ ex: cur, id: num.replace(/^UID\s*/, '').trim(), amt: amtEl ? parseFloat(amtEl.textContent) || 0 : single ? curAmt : null, st, type: 'CEX' });
     });
     SEE.rows = rows; cb();
@@ -383,20 +445,45 @@ function sumFilters() {
   return `<div class="col" style="gap:16px">${wrap('ex', ex)}${wrap('acc', ac)}${wrap('ty', ty)}${btns}</div>`;
 }
 function sumEnhance() {
-  $$('[data-sm-sel] .menu, [data-sm-sel] > div + div', app).forEach(m => { m.style.position = 'absolute'; m.style.left = 0; m.style.right = 0; m.style.zIndex = 30; m.classList.add('site-fade') });
+  $$('[data-sm-sel]', app).forEach(w => { const t = w.firstElementChild; t.tabIndex = 0; t.setAttribute('role', 'button'); t.setAttribute('aria-haspopup', 'listbox'); t.setAttribute('aria-expanded', 'false'); t.setAttribute('data-ui-trigger', '') });
+  const m = $('[data-sm-month]', app); if (m) { m.tabIndex = 0; m.setAttribute('role', 'button'); m.setAttribute('aria-haspopup', 'listbox'); m.setAttribute('data-ui-trigger', '') }
 }
 function sumRerender() { renderPage({ keepScroll: true }) }
+// 필터 셀렉트 — 공통 UI.dropdown. 거래소: 하나 고르면 닫힘. 거래 계정·유형: 여러 개 체크(열린 채 유지), 바깥·Esc로 닫힘
+function smMenuHTML(k) {
+  const D = SM.D, { mItem, logo } = SUMX, accs = sumAccounts();
+  const opt = (v, on, inner) => `<div data-ui-opt="${esc(v)}" role="option" aria-selected="${on}" class="${on ? 'on' : ''}">${inner}</div>`;
+  if (k === 'ex') return exOpts().map(([v, l]) => v === 'h' ? `<div data-ui-opt data-ui-head>${mItem(l, false, { h: 1 })}</div>` : opt(v, D.ex === v, mItem(l, false, { sel: D.ex === v }))).join('');
+  if (k === 'acc') return [opt('*', !D.acc, mItem(T('All Accounts', '모든 거래 계정'), !D.acc, { box: 1 }))].concat(accs.map(a => opt(a.key, !!(D.acc && D.acc.has(a.key)), mItem(accLabel(a), !!(D.acc && D.acc.has(a.key)), { box: 1, logo: logo(a.ex, 20) })))).join('');
+  return [opt('*', !D.ty, mItem(T('All Types', '모든 캐시백 유형'), !D.ty, { box: 1 }))].concat(TYS.map(([v, f]) => opt(v, !!(D.ty && D.ty.has(v)), mItem(f(), !!(D.ty && D.ty.has(v)), { box: 1 })))).join('');
+}
+function smSyncLabels() {
+  const tmp = document.createElement('div'); tmp.innerHTML = sumFilters();
+  $$('[data-sm-sel]', app).forEach(w => { const n = $(`[data-sm-sel="${w.dataset.smSel}"] .b2`, tmp), o = $('.b2', w); if (n && o && o.textContent !== n.textContent) o.textContent = n.textContent });
+  const nr = $('[data-sm-reset]', tmp), or = $('[data-sm-reset]', app); if (nr && or) or.disabled = nr.disabled;
+}
+function openSmSel(k, wrap) {
+  sumFilters();   // 초안(SM.D) 준비
+  const D = SM.D;
+  UI.dropdown(wrap.firstElementChild, {
+    html: smMenuHTML(k), cls: 'sm-menu', width: 'anchor', host: wrap, keepOpen: k !== 'ex',
+    onPick(v) {
+      if (k === 'ex') { D.ex = v; return sumRerender() }
+      if (k === 'acc') { if (v === '*') D.acc = null; else { D.acc = D.acc || new Set(); D.acc.has(v) ? D.acc.delete(v) : D.acc.add(v); if (!D.acc.size) D.acc = null } }
+      if (k === 'ty') { if (v === '*') D.ty = null; else { D.ty = D.ty || new Set(); D.ty.has(v) ? D.ty.delete(v) : D.ty.add(v); if (!D.ty.size || D.ty.size === TYS.length) D.ty = null } }
+      UI.refreshDropdown(smMenuHTML(k)); smSyncLabels();
+    }
+  });
+}
 document.addEventListener('click', e => {
   if (API.route.path !== '/summary') return;
   const t = e.target; if (!t.closest) return;
+  if (t.closest('.ui-dd')) return;   // 드롭다운 패널 안 클릭은 UI.dropdown이 처리
   const hit = s => t.closest(s);
   const stop = () => { e.preventDefault(); e.stopPropagation() };
   const D = SM.D || {};
   let x;
-  if ((x = hit('[data-sm-ex]'))) { stop(); D.ex = x.dataset.smEx; SM.open = null; return sumRerender() }
-  if ((x = hit('[data-sm-acc]'))) { stop(); const k = x.dataset.smAcc; if (k === '*') D.acc = null; else { D.acc = D.acc || new Set(); D.acc.has(k) ? D.acc.delete(k) : D.acc.add(k); if (!D.acc.size) D.acc = null } return sumRerender() }
-  if ((x = hit('[data-sm-ty]'))) { stop(); const k = x.dataset.smTy; if (k === '*') D.ty = null; else { D.ty = D.ty || new Set(); D.ty.has(k) ? D.ty.delete(k) : D.ty.add(k); if (!D.ty.size || D.ty.size === TYS.length) D.ty = null } return sumRerender() }
-  if ((x = hit('[data-sm-sel]'))) { stop(); SM.open = SM.open === x.dataset.smSel ? null : x.dataset.smSel; return sumRerender() }
+  if ((x = hit('[data-sm-sel]'))) { stop(); return openSmSel(x.dataset.smSel, x) }
   if (hit('[data-sm-search]')) { stop(); SM.F = { ex: D.ex, acc: D.acc ? new Set(D.acc) : null, ty: D.ty ? new Set(D.ty) : null }; SM.open = null; return sumRerender() }
   if (hit('[data-sm-reset]')) { stop(); SM.F = { ex: 'all', acc: null, ty: null }; SM.D = null; SM.open = null; return sumRerender() }
   if (hit('[data-sm-prev]') || hit('[data-sm-next]')) {
@@ -404,16 +491,16 @@ document.addEventListener('click', e => {
     if (y * 12 + m > TODAY.y * 12 + TODAY.m) return; SM.y = y; SM.m = m; SM.sel = y === TODAY.y && m === TODAY.m ? TODAY.d : 1; SM.open = null; return sumRerender();
   }
   if ((x = hit('[data-sm-month]'))) {
-    stop(); const old = $('.site-monthpop'); if (old) return old.remove();
-    const pop = document.createElement('div'); pop.className = 'site-pop site-monthpop';
+    stop();
     const opts = []; for (let i = 0; i < 8; i++) { let y = TODAY.y, m = TODAY.m - i; while (m < 0) { m += 12; y-- } opts.push([y, m]) }
-    pop.innerHTML = opts.map(([y, m]) => `<button type="button" data-ym="${y}-${m}" class="${y === SM.y && m === SM.m ? 'on' : ''}">${MON[m]} ${y}</button>`).join('');
-    x.appendChild(pop); requestAnimationFrame(() => pop.classList.add('in'));
-    pop.onclick = ev => { const bt = ev.target.closest('[data-ym]'); if (!bt) return; ev.stopPropagation(); const [y, m] = bt.dataset.ym.split('-').map(Number); SM.y = y; SM.m = m; SM.sel = y === TODAY.y && m === TODAY.m ? TODAY.d : 1; sumRerender() };
+    UI.dropdown(x, {
+      cls: 'pick site-monthpop', width: 'auto',
+      html: opts.map(([y, m]) => { const on = y === SM.y && m === SM.m; return `<button type="button" role="option" aria-selected="${on}" data-ui-opt="${y}-${m}" class="${on ? 'on' : ''}">${MON[m]} ${y}</button>` }).join(''),
+      onPick(v) { const [y, m] = v.split('-').map(Number); if (y === SM.y && m === SM.m) return; SM.y = y; SM.m = m; SM.sel = y === TODAY.y && m === TODAY.m ? TODAY.d : 1; sumRerender() }
+    });
     return;
   }
   if ((x = hit('[data-day]'))) { const n = +x.dataset.day; if (SM.y === TODAY.y && SM.m === TODAY.m && n > TODAY.d) return; stop(); SM.sel = n; return sumRerender() }
-  if (SM.open && !hit('[data-sm-sel]')) { SM.open = null; sumRerender() }
 }, true);
 
 // =====================================================================
@@ -479,6 +566,8 @@ function ownGo(st, inLayer) {
 }
 let submitting = false;
 function ownHomeGo(st) {
+  if (st === 'reclaimRejected') { ownResult('rejected'); return true }   // 배너 「Ownership verification was unsuccessful. View reason.」
+  if (st === 'reclaim') { SO.step = 0; SO.file = null; go2('/ownership'); return true }
   if (st === 'review') {
     if (submitting) return true; submitting = true;           // 연타해도 1건(REQ-727)
     const o = API.ST.own; const accs = API.ST.accounts;
@@ -499,5 +588,118 @@ function ownResult(r) {
   window.SITEO_DLG = 1; let h;
   try { h = R.byId['own.home'].render(r === 'approved' ? 'approved' : 'rejected', { asBg: false, state: {} }) } finally { window.SITEO_DLG = 0 }
   openCustom(() => h, 'center');
+}
+
+// =====================================================================
+// 캐시백 계산기 (/payback) — 실서비스와 같은 6단계 · 같은 동작(라이브 조작 기록: 05.리포트/실사이트_인터랙션_기준.md 7장)
+// 화면 = _프로토타입_전체 calc.* 렌더 함수, 입력값은 window.SITEC로 넘긴다. 결과·요약은 #/payback?step=result(라이브 /payback/result)
+// =====================================================================
+const CK = { step: 'p1', pid: null, chip: 'All', lev: 10, bal: 1000, ratio: 100, freq: null, how: false, lastFill: null, timer: null };
+const CK0 = { step: 'p1', pid: null, chip: 'All', lev: 10, bal: 1000, ratio: 100, freq: null, how: false };
+const CK_FILL = { p1: .2, p2: .4, p3: .6, p4: .8, p5: 1 };
+function calcHTML(q) {
+  if (q.step === 'result') { if (!CK.pid || CK.freq == null) { CK.step = 'p1'; history.replaceState(null, '', '#/payback') } else if (!['p4', 'p5'].includes(CK.step)) CK.step = 'p4' }
+  else if (['p4', 'p5'].includes(CK.step)) CK.step = 'p3';
+  window.SITEC_LIVE = 1;
+  window.SITEC = { pid: CK.pid, chip: CK.chip, lev: CK.lev, bal: CK.bal, ratio: CK.ratio, freq: CK.freq, how: CK.how };
+  S.auth = isMember() ? 's4' : 'guest';
+  try { return renderInner('calc.' + CK.step + ':' + (CK.step === 'p2' ? 'none' : CK.step === 'p3' ? 'noFreq' : 'normal')) } finally { window.SITEC = null }
+}
+function calcGo(id, st) {
+  const step = id.split('.')[1];
+  clearTimeout(CK.timer);
+  if (step === 'p1') {
+    // Back(2단계) → 소개(입력 유지) · Restart(결과) · 다른 화면에서 진입 → 입력 초기화 후 소개
+    if (API.route.path !== '/payback' || API.route.q.step === 'result') Object.assign(CK, CK0);
+    CK.step = 'p1'; calcShow(); return true;
+  }
+  if (step === 'p2') { CK.step = 'p2'; if (st && st !== 'none') CK.chip = st === 'cexChip' ? 'CEX' : st === 'dexChip' ? 'DEX' : 'All'; calcShow(); return true }
+  if (step === 'p3') { if (!CK.pid) return true; CK.step = 'p3'; calcShow(); return true }
+  if (step === 'p4c') {
+    if (CK.freq == null) return true;
+    CK.step = 'p4c'; calcShow();
+    CK.timer = setTimeout(() => { CK.step = 'p4'; CK.how = false; goRoute('/payback', { step: 'result' }) }, 1900);   // 라이브 로딩 ≈ 1.9초
+    return true;
+  }
+  if (step === 'p4') { CK.step = 'p4'; goRoute('/payback', { step: 'result' }); return true }
+  if (step === 'p5') { CK.step = 'p5'; calcShow(); return true }
+  return true;
+}
+function calcShow() {
+  const p = API.route.path === '/payback' && (API.route.q.step === 'result') === ['p4', 'p5'].includes(CK.step);
+  if (!p) return goRoute('/payback', ['p4', 'p5'].includes(CK.step) ? { step: 'result' } : {});
+  renderPage({ keepScroll: false }); window.scrollTo(0, 0);
+}
+function calcEnhance() {
+  // 진행 바: 이전 단계 폭에서 새 폭으로 .3s ease-in-out(라이브 ProgressBar Gage)
+  const g = $('[data-calc-gage]', app);
+  if (g) { const to = g.style.width; if (CK.lastFill != null && CK.lastFill !== to) { g.style.transition = 'none'; g.style.width = CK.lastFill; void g.offsetWidth; g.style.transition = 'width .3s ease-in-out'; g.style.width = to } CK.lastFill = to }
+  if (CK.step === 'p3') calcBindProfile();
+  // 화면 전환은 라이브처럼 즉시(페이드 없음)
+  app.classList.remove('enter');
+}
+// 2단계 — 타일 단일 선택 · Next 활성 · 칩 필터
+document.addEventListener('click', e => {
+  if (API.route.path !== '/payback') return;
+  const t = e.target; if (!t.closest) return;
+  const tl = t.closest('[data-calc-platform]');
+  if (tl) {
+    e.preventDefault(); e.stopPropagation();
+    CK.pid = tl.dataset.calcPlatform;
+    $$('[data-calc-platform]', app).forEach(x => { const on = x === tl; x.setAttribute('aria-pressed', on); x.style.borderColor = on ? '#0031c6' : 'transparent'; x.style.background = on ? 'rgba(187,226,255,.2)' : 'transparent' });
+    const nx = $('[data-calc-next]', app); if (nx) nx.disabled = false;
+    return;
+  }
+  const ch = t.closest('[data-calc-chip]');
+  if (ch) { e.preventDefault(); e.stopPropagation(); if (CK.chip === ch.dataset.calcChip) return; CK.chip = ch.dataset.calcChip; renderPage({ keepScroll: true }); return }
+  const cv = t.closest('[data-calc-chipv]');
+  if (cv) { e.preventDefault(); e.stopPropagation(); const [k, v] = cv.dataset.calcChipv.split(':'); calcSet(k, +v, true); return }
+  const fq = t.closest('[data-calc-freq]');
+  if (fq) {
+    e.preventDefault(); e.stopPropagation(); CK.freq = +fq.dataset.calcFreq;
+    $$('[data-calc-freq]', app).forEach(x => { const on = x === fq; x.setAttribute('aria-pressed', on); x.style.border = on ? '1px solid #0031c6' : '.5px solid var(--divider)' });
+    const ck = $('[data-calc-check]', app); if (ck) ck.disabled = false;
+    return;
+  }
+  const hw = t.closest('[data-calc-how-head]');
+  if (hw) {
+    e.preventDefault(); e.stopPropagation(); CK.how = !CK.how;
+    const box = hw.closest('[data-calc-how]'), wrap = $('[data-calc-how-wrap]', box), ic = $('img', hw);
+    wrap.style.gridTemplateRows = CK.how ? '1fr' : '0fr'; if (ic) ic.style.transform = `rotate(${CK.how ? 180 : 0}deg)`; hw.setAttribute('aria-expanded', CK.how);
+    return;
+  }
+  const sb = t.closest('[data-calc-start]');
+  if (sb) {
+    e.preventDefault(); e.stopPropagation();
+    const id = sb.dataset.calcStart;
+    if (OFFICIAL[id]) { window.open(OFFICIAL[id], '_blank', 'noopener'); return toast('새 탭으로 열었어요 — 레퍼럴 링크는 어드민 입력값이라 프로토타입은 공식 사이트로 열어요') }
+    return toast('「' + sb.innerText.trim() + '」 — 거래소 레퍼럴 링크(새 탭)는 어드민 입력값 (프로토타입)');
+  }
+}, true);
+// 3단계 — 칩 ↔ 슬라이더 양방향(칩은 값이 정확히 같을 때만 선택), 값 표시 즉시 갱신
+const CK_RANGE = { lev: { min: 1, max: 125, step: 1 }, bal: { min: 100, max: 100000, step: 1 }, ratio: { min: 0, max: 100, step: 1 } };
+function calcBindProfile() {
+  Object.keys(CK_RANGE).forEach(k => {
+    const el = $(`[data-calc-slider="${k}"]`, app); if (!el) return;
+    const r = CK_RANGE[k];
+    UI.slider(el, {
+      value: CK[k], min: r.min, max: r.max, step: r.step, inset: 0, halo: { size: 20 },
+      label: { lev: 'Leverage', bal: 'Account balance', ratio: 'Order Type Ratio' }[k],
+      toPct: v => (v - r.min) / (r.max - r.min), fromPct: p => r.min + (r.max - r.min) * p,
+      thumbLeft: p => `calc(${p * 100}% - 10px)`, fillWidth: p => `${p * 100}%`,
+      onInput: v => calcSet(k, v, false)
+    });
+  });
+}
+function calcSet(k, v, fromChip) {
+  CK[k] = v;
+  const sl = $(`[data-calc-slider="${k}"]`, app);
+  if (fromChip && sl && sl._ui) { sl.classList.add('jump'); sl._ui.set(v); setTimeout(() => sl.classList.remove('jump'), UI.T.slide) }
+  const card = sl && sl.closest('.card');
+  if (k === 'ratio') { const r = $('[data-calc-ratio]', app); if (r) r.innerHTML = `<span>Maker ${100 - v}%</span><span>Taker ${v}%</span>` }
+  else if (card) {
+    const val = $('[data-calc-val]', card); if (val) val.textContent = k === 'lev' ? v + 'x' : v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USDT';
+    $$('[data-calc-chipv]', card).forEach(c => { const on = +c.dataset.calcChipv.split(':')[1] === v; c.setAttribute('aria-pressed', on); c.style.border = on ? '1px solid #0031c6' : '.5px solid var(--divider)'; c.style.color = on ? '#0031c6' : 'var(--text-secondary)' });
+  }
 }
 })();

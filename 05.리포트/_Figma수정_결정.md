@@ -142,7 +142,7 @@
 | # | 항목 | 결정 |
 |---|---|---|
 | 1 | 서비스 소개 `Three steps to start earning cashback` 부제 | 문구표 #75로 통일(PC·다크·모바일) |
-| 2 | `payout` 표현 | 화면 라벨이 출금 실적을 가리키면 `Withdraw` 계열(예: 계산기 Summary `Payout Time` → `Withdrawal Time`, `Payout Details` → `Withdrawal Details`, DEX 개요 표 `PAYOUT` 같은 라벨). 홍보 문장의 `payout`은 유지 |
+| 2 | `payout` 표현 | 계산기 Summary `Payout Details` · `Payout Time`(적립 시점, REQ-459)과 DEX 개요 타일 `PAYOUT`(REQ-329)은 실서비스 계산기·명세 그대로 유지. 그 밖의 홍보 문장 `payout`도 유지 |
 | 3 | 쿠폰 약관 `… based on UTC` | 기존 서비스 약관 원문 유지 |
 | 4 | AI 리뷰 요약 표본 `… every week.` | `every day`(G-428 일 1회) |
 | 5 | 서버·운영 값 표기 `{rate}%` · `{date}` · `{local_time}` | 화면에는 표본 값(같은 화면의 다른 값과 일관), 「서버·어드민 값」은 개발 인계 메모에 |
@@ -152,3 +152,18 @@
 | 9 | 랭킹 | 로딩 제외, 모바일 주소 팝오버만 새로 그림 |
 | 10 | CEX UID 상세 | 새로 그리지 않음 — 기존 디자인([MAX-7] 9193:119755 계열) 노드를 인계 메모에 연결 |
 | 11 | 문구표 행 중 화면이 없는 것(#12 · #16 · #19 · #36 · #49 · #51 · #54 · #3~#5) | 기존 컴포넌트로 상태 프레임을 그림. 홈 행 이슈·실패 칩은 Q4 기존 디자인 |
+| GNB `Rewards Hub ▾` 항목 (2026-11-27) | Figma 기준 3개 `Exchange Events` · `Benefits` · `Points`(Figma의 `Exchanges Events`는 `Exchange Events`로). 실사이트 스냅숏 화면·DEX 화면·Figma 모두 이 구성 |
+| 오퍼 박스 할인 단계 (2026-11-27) | `After discount` 행은 레코드 할인율(선택한 Taker/Maker 기준)이 0보다 클 때만 표시, 할인이 없으면 `Without TetherMax` · `After cashback` 2행(모든 DEX, Lighter 포함). EdgeX 등 Maker 할인 전 값이 없으므로 Maker 선택 시 할인 행 숨김(2행) |
+| 리뷰 외 옛 파랑(#1976D2) (2026-11-27) | `How this works` 글자·아이콘 · `Read more` · 모바일 Lighter 오퍼 `After cashback` 값도 버튼 색 `primary/blue/main`(#0031C6)으로 통일 |
+| 계산기(`/payback`) 프로토타입 (2026-11-27) | 실서비스 계산기 화면(`05.리포트/실사이트_계산기_img/calc_01~06.png`) 흐름·문구·동작 그대로 — 소개 → 거래소 선택 → 거래 프로필 → 로딩 → What You're Missing Out On → Summary(`Payout Details`) |
+
+## 홈 연동 계정 행 상태 표시 (2026-11-27 10차)
+
+| 항목 | 결정 |
+|---|---|
+| 연동 실패 | 자동 연동 실패는 홈 목록에 표시하지 않음(연동 결과 화면에서 끝남). **수동 연동 실패**는 기존 디자인: 빨간 점 + 분홍 배너 `UID Linking was unsuccessful. View reason.` › → 모달 `UID Linking Unsuccessful` / 사유 문구(예 `UID is not found in the tetherMax database. Please contact customer service for assistance.`) / `Remove UID` · `UID Link` |
+| 캐시백 0 | 칩 없음. `0.00 USDT` 그대로 (`No cashback yet` 칩 없음) |
+| 이슈 · 소유 확인 실패 · 연동 해제(되찾기) | 칩이 아니라 **기존 디자인**(9401:87675 계열): 행 상태 점 + 행 아래 배너(`Ownership verification was unsuccessful. View reason.` · `This UID has been unlinked. Tap to verify ownership and reclaim it.`), 이슈 행 탭 → 모달 `There is a problem with this UID.` / `Please contact our support team for assistance.` / `Contact Support` |
+| 반영 지연 · 오프보딩 | `Data delayed` 칩 없음(거래소 API 응답을 바로 받음). `Inactive` 칩 없음 — 오프보딩 계정은 **이슈 처리**(빨간 점, 누르면 `There is a problem with this UID.` 모달) |
+| 행 배너·모달 문구의 계정 표기 | 행 하나는 CEX 또는 DEX 하나이므로 용어 규칙대로 분기: CEX 행 = 기존 `UID` 문구 그대로, DEX 행 = `UID` 자리를 `Wallet`/`wallet`로(문구표에서 확정) |
+| 캐시백 0원 안내 | 없음 — CEX와 같이 `0.00 USDT`만 표시. 지갑 상세 0원 배너(G-110 문구)·홈 0원 칩 모두 두지 않음 |

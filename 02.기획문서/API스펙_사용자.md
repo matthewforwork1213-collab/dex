@@ -651,7 +651,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 
 - `identifier`: DEX 지갑 = 전체 주소, CEX UID = 기존 마스킹(REQ-009). DEX 계정 ID 미포함.
 - `MANUAL_LINK_PENDING` 행은 `availableCashback: null`(화면 `-`), `selectable: false`(REQ-034).
-- `isExchangeActive: false` = DEX 오프보딩(`Inactive` 표시, 출금 목적지로는 계속 선택 가능).
+- `isExchangeActive: false` = DEX 오프보딩(홈 행은 이슈 표시 — 빨간 점, 탭 → `There is a problem with this wallet.` 모달 · 출금 목적지로는 계속 선택 가능).
 
 **에러 Response**
 

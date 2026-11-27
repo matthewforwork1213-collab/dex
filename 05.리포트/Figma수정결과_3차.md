@@ -14,20 +14,11 @@
 
 ### 남은 것과 이유
 
+4차([Figma수정결과_4차.md](Figma수정결과_4차.md))에서 9차 결정과 후속 결정으로 처리한 뒤 남은 항목입니다.
+
 | # | 항목 | 화면 | 이유 |
 |---|---|---|---|
-| 1 | `Get automatic payouts in USDT` ×3 | 컴포넌트 세트 `earn 애니메이션` [28960:130341](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-130341) | 컴포넌트 메인이라 고치지 않음(지시 원칙). 랜딩 화면의 같은 줄은 인스턴스 오버라이드로 고침(2-3) |
-| 2 | 서비스 소개 `Three steps to start earning cashback` 부제 | PC [28960:129666](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-129666) · 다크 28960:128975 · 모바일 29386:139409 | 문구표 #75(`Join an exchange with your TetherMax code and just link your account. Done, under 3 minutes!`)와 Figma PC 문구(`Join a partner through your TetherMax referral and link your exchange UID or DEX wallet address.`)가 다름. 둘 다 REQ-715(UID 단독 표기 0건)는 충족 — ❓ 어느 쪽으로 할지 사용자 확인 |
-| 3 | `payout` 표현 | 랜딩 `View live payouts` · FAQ `What is the minimum payout?` · 서비스 소개 `Every payout, live, on your phone.` · 모바일 `3 minutes from here to your first payout.` · `Automatic cashback payouts from 10 USDT per account`(28960:130303) · DEX 개요 표 `PAYOUT` · 상세 이유 카드 `Cashback payouts` · 계산기 Summary `Payout Details` / `Payout Time` | 결정·문구표에 `payout` 사용 여부가 없음. 문구표에 행이 있는 곳(피드 열 #42 · 3단계 #44 · 허브 #32 · #38)만 고침 — ❓ 나머지 표현 기준 사용자 확인 |
-| 4 | 쿠폰 약관 `Our coupon expriation date is based on UTC …` | 쿠폰 이력 [29365:135006](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29365-135006) · 쿠폰 없음 29335:140206 | 기존 서비스 약관 원문. 사용자 화면 타임존 라벨 금지 원칙과 부딪힘 — 약관 문안이라 지어내지 않음, ❓ 사용자 확인 |
-| 5 | AI 리뷰 요약 `Cashback reaches my TetherMax balance every week.` | DEX 상세 PC 10 · 링크 섹션 상세 12 | CT-07에서 넣은 표본 문구. G-428(Lighter도 일 1회)과 「every week」가 어긋남 — 리뷰 요약은 사용자 글 요약 표본이라 ❓ 사용자 확인 |
-| 6 | 서버 값 표기 `{rate}%` · `{date}` · `{local_time}` | Plus 선택 [29327:390098](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29327-390098) · 맥스보드 29330:191656 · 29330:192021 · 챌린지 29335:142890 외 4 | 운영 입력값(문구표 #93)·서버 값 자리로 1차에 의도해서 넣은 표기. 원문이 아니라 값이 없어서 생긴 자리표시가 아님 — 표본 값으로 바꿀지 ❓ 사용자 확인 |
-| 7 | 공개 피드 로딩 · 오류 · 모바일 피드(balance #19) | 서비스 소개 · 랜딩 | 1차 balance 「못 한 것」이었으나 2차 표에서 빠져 있었음. 새 프레임 3개 필요(피드 빈·실패 = 결정 3차 #3 「기존 빈 상태」, 문구표 #43). 모바일 피드는 랜딩·서비스 소개 모바일에 이미 있음 |
-| 8 | 모바일 캐시백 요약 새 상태 4종(balance #22 ②~⑤) · 캘린더 25일 `DEX data pending`(#22 ①의 모바일분) | 모바일 요약 [29065:6366](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29065-6366) | 위와 같이 2차 표에서 빠져 있었음. 새 프레임 4개(월간 카드 · 계정 시트 · 빈 달 · 빈 날) 필요 |
-| 9 | 랭킹 로딩 · 모바일 주소 팝오버(balance #40) | 랭킹 | 위와 같음. 새 프레임 2개 필요(웹 복사 토스트는 PW1 · Copied 29330:203678로 있음) |
-| 10 | CEX UID 상세(balance 추가-1) | — | 1차부터 대상 프레임 없음. 사용자 기능 섹션의 UID 연동 상세(29327:403008)는 혜택 상세라 다른 화면 |
-| 11 | 문구표 행 중 화면이 없는 것 #12 · #16 · #19 · #36 · #49 · #51 · #54 · #3~#5 | — | DEX(revision)에 그 화면·상태 프레임이 없음(앱·모바일 빈 홈 카드 · 웹 `/uidlinking` · 가입 후 복귀 안내 · 매칭 안내 캡션 · DEX 카드 파트너 오류 · DEX 0원 배너 · 연동 전 출금 행 · 홈 행 이슈·실패 칩). 홈 행 칩은 결정 Q4(기존 디자인) |
-| 12 | `Boost` · `Start Cashback Preview` | 계산기 Trading profile [29370:136469](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29370-136469) | 기존 [MAX-146] /payback 퍼널을 복제한 화면의 단계명. N7(Boost 범위 밖)이 이 단계명까지 바꾸라는 결정인지 ❓ 사용자 확인 |
+| 1 | `Get automatic payouts in USDT` ×3 | 컴포넌트 세트 `earn 애니메이션` [28960:130341](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-130341) | 컴포넌트 메인이라 고치지 않음(지시 원칙). 홍보 문장이라 9차 #2 유지 대상. 랜딩 화면의 같은 줄은 인스턴스 오버라이드로 고침(2-3) |
 
 ### 결정으로 제외 (8차 결정, 2026-11-27)
 

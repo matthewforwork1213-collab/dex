@@ -21,20 +21,40 @@ const CEXLOGO={Bitget:'logo-bitget.png',Bybit:'logo-bybit.png',Binance:'logo-bin
 const mark=(name,s=32)=>CEXLOGO[name]?`<img src="${HA(CEXLOGO[name])}" style="width:${s}px;height:${s}px;border-radius:50%;flex:none;object-fit:cover" alt="${name}">`:C.dex(name,s);
 const isCex=n=>!!CEXLOGO[n];
 
-// 상태 7단계(REQ-272) + DEX 칩(REQ-273). 색은 의미별 4토큰(G-058): done 완료 · prog 진행 · warn 주의 · off 실패/해제
+// 행 상태(REQ-272) + DEX 칩(REQ-273). 색은 의미별 4토큰(G-058): done 완료 · prog 진행 · warn 주의 · off 실패/해제
+// 결정 10차: 자동 연동 실패는 홈 목록에 없음(연동 결과 화면에서 끝남) · 수동 연동 실패 = 빨간 점 + 분홍 배너 → 사유 모달 · 캐시백 0은 칩 없이 `0.00 USDT`
+//   이슈·오프보딩 = 빨간 점, 행 탭 → 문제 안내 모달 · 소유 확인 실패·연동 해제 = 점 + 행 아래 배너 · `Data delayed`·`Inactive` 칩 없음
+//   배너·모달의 계정 표기: CEX 행 = `UID` 문구, DEX 행 = `Wallet`/`wallet`
 const ST={
  own:{get lb(){return T('Verifying ownership','소유 확인중이에요')},tone:'prog',pri:1,linked:false},
  pend:{get lb(){return T('Trying to link','연동 시도중이에요')},tone:'prog',pri:2,linked:false},
- issue:{get lb(){return T('There’s an issue','문제가 있어요')},tone:'warn',pri:3,linked:false},
+ issue:{get lb(){return T('There’s an issue','문제가 있어요')},tone:'err',pri:3,linked:false,noChip:true},
  ok:{get lb(){return T('Linked','연동 완료')},tone:'done',pri:4,linked:true},
- fail:{get lb(){return T('Linking failed','연동 실패했어요')},tone:'off',pri:5,linked:false},
- ownfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'off',pri:6,linked:false},
- unlinked:{get lb(){return T('Unlinked','연동 해제되었어요')},tone:'off',pri:7,linked:false},
- zero:{get lb(){return T('No cashback yet','아직 캐시백이 없어요')},tone:'prog',linked:true},
- delayed:{get lb(){return T('Data delayed','반영 지연')},tone:'warn',linked:true},
- inactive:{get lb(){return T('Inactive','비활성')},tone:'off',linked:true},
+ fail:{get lb(){return T('Linking failed','연동 실패했어요')},tone:'err',pri:5,linked:false,noChip:true},
+ ownfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'err',pri:6,linked:false,noChip:true},
+ unlinked:{get lb(){return T('Unlinked','연동 해제되었어요')},tone:'off',pri:7,linked:false,noChip:true},
 };
-const DOT={done:'#2ea652',prog:'#ed6b03',warn:'#ed6b03',off:'rgba(0,0,0,0.38)'};
+const DOT={done:'#2ea652',prog:'#ed6b03',warn:'#ed6b03',off:'rgba(0,0,0,0.38)',err:'#d32f2f'};
+// 행 아래 상태 배너 — 실서비스 연동 계정 목록(SelectMyExchangePopup StatusAlert): 모서리 4 · 좌우 10 · 12px 글자 · 오류 #fdeded/#5f2120 · 주의 #fff4e5/#663c00 · 오른쪽 화살표
+const SVG_ERR='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1m1 4h-2v-2h2z',SVG_WARN='M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z',SVG_CHEV='M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01';
+const svgI=(d,s=20)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" aria-hidden="true" style="display:block;fill:currentColor"><path d="${d}"/></svg>`;
+function rowBanner(a){
+ const cex=isCex(a.ex);
+ const b={fail:['err',cex?T('UID Linking was unsuccessful. View reason.'):T('Wallet linking was unsuccessful. View reason.'),cex?'home.main:linkFail':'home.main:linkFailWallet'],
+  ownfail:['err',T('Ownership verification was unsuccessful. View reason.'),'own.home:reclaimRejected'],
+  unlinked:['warn',cex?T('This UID has been unlinked. Tap to verify ownership and reclaim it.'):T('This wallet has been unlinked. Tap to verify ownership and reclaim it.'),'own.home:reclaim']}[a.st];
+ if(!b)return '';
+ const [bg,fg]=b[0]==='err'?['#fdeded','#5f2120']:['#fff4e5','#663c00'];
+ return `<div data-row-banner="${a.st}" data-go="${b[2]}" style="display:flex;align-items:center;border-radius:4px;padding:0 10px;margin:0 12px 4px 56px;overflow:hidden;cursor:pointer;background:${bg};color:${fg}"><span style="flex:none;display:flex;align-self:flex-start;padding:8px 8px 7px 0;color:${b[0]==='err'?'#d32f2f':'#ed6c02'}">${svgI(b[0]==='err'?SVG_ERR:SVG_WARN)}</span><p style="margin:0;flex:1;min-width:0;font-size:12px;line-height:1.33;letter-spacing:.2px;padding:8px 0">${b[1]}</p><span style="flex:none;display:flex;margin-left:8px">${svgI(SVG_CHEV)}</span></div>`}
+// 행 모달(결정 10차) — MUI Dialog(웹 480 · 모바일 343). 이슈: 문제 안내 + Contact Support / 수동 연동 실패: 사유 + Remove · Link
+function rowDialog(title,body,actions){
+ const mo=S.vp==='mo';
+ return `<div role="dialog" aria-modal="true" style="background:var(--paper);border-radius:4px;box-shadow:0 6px 30px 5px rgba(0,0,0,.12),0 16px 24px 2px rgba(0,0,0,.14),0 8px 10px -5px rgba(0,0,0,.2);width:${mo?343:480}px;max-width:100%"><div style="padding:24px 24px 0;font-size:20px;font-weight:500;line-height:1.6;letter-spacing:.15px">${title}</div><div style="padding:16px 24px 0;font-size:14px;line-height:1.43;font-weight:500;letter-spacing:.17px;color:var(--text-secondary)">${body}</div><div style="padding:24px;display:flex;${mo?'flex-direction:column;':''}gap:8px">${actions}</div></div>`}
+const dBtn=(label,go,white)=>`<button class="btn lg" style="${white?'background:#f2f2f5;color:var(--text-primary)':'background:var(--blue);color:#fff'};${S.vp==='mo'?'width:100%':'flex:1;min-width:0'}" data-go="${go}">${label}</button>`;
+const issueDialog=dex=>rowDialog(dex?T('There is a problem with this wallet.'):T('There is a problem with this UID.'),T('Please contact our support team for assistance.'),dBtn(T('Contact Support'),'support.main'));
+// 사유 문구는 거래소 응답별 — CEX는 결정 기록 예시 문구, DEX 사유 원문은 아직 없음
+const failDialog=dex=>rowDialog(dex?T('Wallet Linking Unsuccessful'):T('UID Linking Unsuccessful'),dex?C.tbd('연동 실패 사유 — 거래소 응답별 원문 없음',''):T('UID is not found in the tetherMax database. Please contact customer service for assistance.'),
+ dBtn(dex?T('Remove Wallet'):T('Remove UID'),'home.main:normal',true)+dBtn(dex?T('Link Wallet'):T('UID Link'),dex?'link.addr:lighter':'link.uid:empty'));
 // 칩: Figma HW1(주의 = 채움 #e65100) · S4-6(진행 = 파랑 외곽선) · PW1(완료 = 연녹 채움). 실패/해제는 MUI 기본 칩
 function hChip(label,tone){
  const base='display:inline-flex;align-items:center;max-height:24px;min-height:24px;border-radius:100px;font-size:13px;line-height:18px;letter-spacing:.16px;white-space:nowrap;padding:3px 10px;';
@@ -65,16 +85,16 @@ function balanceCard(o={}){
 function accRow(a,o={}){
  const st=ST[a.st||'ok'];const cex=isCex(a.ex);const app=o.app;
  const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:short(a.id)}`;
- const showChip=a.st&&a.st!=='ok';
+ const showChip=a.st&&a.st!=='ok'&&!st.noChip;
  const amt=a.amt==null?'-':a.amt;
  const amtHtml=amt==='-'?`<span class="b1 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi">${n2(amt)}</span><span class="b2 c2">USDT</span></span>`;
- const go=cex?'':` data-go="home.wallet:${a.st==='pend'?'pending':'normal'}" style="cursor:pointer;`;
+ const go=a.st==='issue'?` data-go="home.main:${cex?'issue':'issueWallet'}" style="cursor:pointer;`:cex||st.noChip?'':` data-go="home.wallet:${a.st==='pend'?'pending':'normal'}" style="cursor:pointer;`;
  return `<div class="row g12"${go||' style="'}display:flex;padding:10px 12px;border-radius:12px;align-items:center">
   ${mark(a.ex,32)}
   <div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${a.ex}</span>
    <span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)"><span style="color:${DOT[st.tone]}">●</span>&nbsp; ${id}</span>
    ${showChip?`<span>${hChip(st.lb,st.tone)}</span>`:''}${a.extra?`<span style="font-size:12px;line-height:1.5;color:var(--text-secondary)">${a.extra}</span>`:''}</div>
-  <div style="flex:none">${amtHtml}</div></div>`}
+  <div style="flex:none">${amtHtml}</div></div>${rowBanner(a)}`}
 function linkedCard(rows,o={}){
  const app=o.app||S.vp==='mo';
  const foot=app?'Trading on multiple exchanges? Link more':'Using multiple platforms? Link more accounts';
@@ -217,14 +237,14 @@ const SEE_ALL=[
  {ex:'ApeX',id:WAL.apex,amt:14,st:'ok'},
  {ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
 function seeAllModal(){
- const mob=S.vp==='mo';const rows=SEE_ALL;
+ const mob=S.vp==='mo';const rows=SEE_ALL.filter(r=>ST[r.st]);   // 연동 실패(fail)는 목록에 없음(결정 10차)
  const groups=[];rows.forEach(r=>{let g=groups.find(x=>x.ex===r.ex);if(!g)groups.push(g={ex:r.ex,rows:[]});g.rows.push(r)});
  const amt=v=>v==null?`<span class="b2 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b2 semi tnum">${n2(v)}</span><span class="cap c2">USDT</span></span>`;
  const idTxt=r=>isCex(r.ex)?`UID ${esc(r.id)}`:`Wallet ${short(r.id)}`;
  const grp=g=>{const sum=g.rows.reduce((a,r)=>a+(ST[r.st].linked&&r.amt?r.amt:0),0);
   return `<div class="col" style="gap:4px;padding:12px 0">
    <div class="row g12">${mark(g.ex,32)}<div class="col grow" style="gap:0;min-width:0"><span class="b2 semi">${g.ex}</span><span class="cap c2">${g.rows.length} ${g.rows.length===1?'account':'accounts'}</span></div>${g.rows.some(r=>ST[r.st].linked)?`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi tnum">${n2(sum)}</span><span class="b2 c2">USDT</span></span>`:`<span class="b1 semi">-</span>`}</div>
-   ${g.rows.map(r=>`<div class="row between" style="padding:6px 0 6px 44px;gap:12px"><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary);min-width:0"><span style="color:${DOT[ST[r.st].tone]}">●</span>&nbsp; ${idTxt(r)}</span>${amt(r.st==='ok'?r.amt:null)}</div>`).join('')}</div>`};
+   ${g.rows.map(r=>`<div class="row between" style="padding:6px 0 6px 44px;gap:12px"><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary);min-width:0"><span style="color:${DOT[ST[r.st].tone]}">●</span>&nbsp; ${idTxt(r)}</span>${amt(r.st==='ok'?r.amt:null)}</div>${rowBanner(r).replace('margin:0 12px 4px 56px','margin:0 0 4px 44px')}`).join('')}</div>`};
  const list=groups.map(grp).join('<hr class="divider" style="margin:0">');
  const box=`<div style="background:#fff;border-radius:${mob?'16px 16px 0 0':'8px'};box-shadow:var(--elev24);width:${mob?'100%':'444px'};max-width:100%;display:flex;flex-direction:column;${mob?'align-self:flex-end;':''}max-height:${mob?'640px':'680px'}">
   ${mob?'<div class="sheet-grab"></div>':''}
@@ -245,20 +265,23 @@ const HOME_STATES=[
  {id:'s3App',label:'S3 앱·모바일웹 빈 홈 카드',figma:{mo:'8582:154521'},note:'[기존 MAX-7] mAPP S3 8582:154521(체크리스트 카드 — V2.2의 Link once 카드는 디자인 없음). V2.2 home/S3#app · REQ-267 · 사용자 확인 #48'},
  {id:'s3Pending',label:'확인 중 계정만 있음 → S4 전환',note:'V2.2 home/S3#pendingOnly · G-070 확정: S4로 전환하고 행에 확인 중 표시'},
  {id:'normal',label:'S4 연동 있음 — CEX·DEX 한 목록 (S4-1)',figma:{pc:'28960:127837',mo:'22913:1051713'},note:'페이지 전체 = [기존 MAX-7] MAXOP-731 Web 22913:1052131 · mWeb 22913:1051713(누적 캐시백 카드 22913:1054295 포함) + DEX S4-1. V2.2 home/S4#normal · REQ-268·271. L17(연동 화면 배경)도 이 화면. 총액은 행 합계(매칭 전) — Figma 표본 5,137.70은 행 합계와 달라 합계로 씀'},
- {id:'hw1',label:'총액 카드 · 4행 + Aster 칩 (HW1)',figma:{pc:'28960:126108'},note:'Figma HW1. Aster 칩은 Figma가 Expiring 변형("Chip")인데 Aster 만료 칩 금지(REQ-273)라 같은 주의 스타일로 Data delayed를 넣음'},
- {id:'statuses',label:'상태 7단계 행',note:'V2.2 home/S4#statuses · REQ-272 · G-060(데이터 지연·로드 실패는 그 뒤 번호). '+N_FIG},
- {id:'chips',label:'DEX 칩 — No cashback yet · Data delayed · Inactive',note:'V2.2 home/S4#chips · REQ-273 · G-058 · G-177(ApeX Account ID 미반환 칩 없음). '+N_FIG},
+ {id:'hw1',label:'총액 카드 · 4행 (HW1)',figma:{pc:'28960:126108'},note:'Figma HW1. Figma의 Aster 칩 자리는 결정 10차(`Data delayed` 칩 없음)로 비움'},
+ {id:'statuses',label:'상태 행(CEX) — 확인 중 칩 · 빨간 점(이슈) · 점+배너(수동 연동 실패 · 소유 확인 실패 · 해제)',note:'V2.2 home/S4#statuses · REQ-272 · 결정 10차: 자동 연동 실패 행 없음, 칩 대신 기존 디자인(9401:87675 계열 행 점 + 행 아래 배너). '+N_FIG},
+ {id:'walletStates',label:'상태 행(DEX 지갑) — wallet 문구 분기',note:'결정 10차 — DEX 행은 `UID` 자리를 `Wallet`/`wallet`로'},
+ {id:'linkFail',label:'수동 연동 실패 배너 탭 → UID Linking Unsuccessful',note:'결정 10차 — 사유 문구는 거래소 응답별(예시 문구) · `Remove UID` · `UID Link`'},
+ {id:'linkFailWallet',label:'수동 연동 실패(DEX) → Wallet Linking Unsuccessful',note:'결정 10차 — `Remove Wallet` · `Link Wallet`. DEX 사유 원문 없음'},
+ {id:'issue',label:'이슈 행 탭 → 문제 안내 모달',note:'결정 10차 — `There is a problem with this UID.` / `Please contact our support team for assistance.` / `Contact Support`'},
+ {id:'issueWallet',label:'이슈(DEX) → There is a problem with this wallet.',note:'결정 10차 — DEX 행 문구 분기'},
  {id:'loading',label:'로딩 — 스켈레톤',note:'V2.2 home/S4#loading · REQ-269·271'},
  {id:'error',label:'잔액 로드 실패',note:'V2.2 home/S4#error · REQ-269'},
- {id:'delayed',label:'DEX 원장 지연 — Last updated',note:'V2.2 home/S4#delayed · REQ-269·274'},
  {id:'many',label:'계정 11개 이상 — 10개 + 더보기',note:'V2.2 home/S4#many · REQ-271'},
  {id:'app',label:'앱·모바일웹 — Wallet 라벨 없음 · 푸터 문구',figma:{mo:'8582:156599'},note:'[기존 MAX-7] mAPP S4 8582:156599 — 하단 탭은 앱에서만. V2.2 home/S4#app · REQ-271. 모바일 보기에서는 모든 상태에 같은 규칙'},
  {id:'full',label:'지갑 전체 주소 펼침',note:'V2.2 home/S4#full · REQ-271'},
  {id:'first',label:'첫 연동 — 체크리스트 없는 S4 + 토스트 (S3-7)',figma:{pc:'28960:127795'},note:'V2.2 link/HOME#first · REQ-096 · G-070. Figma 총액 5,137.70은 표본이라 행 합계 0.00으로 씀'},
- {id:'newRow',label:'새 행 맨 아래 · 0.00 + No cashback yet (S4-6)',figma:{pc:'28960:127867'},note:'V2.2 link/HOME#normal · REQ-094·273. Figma "Chip" 자리 = 캐시백 0 칩 No cashback yet'},
+ {id:'newRow',label:'새 행 맨 아래 · 0.00 USDT (S4-6)',figma:{pc:'28960:127867'},note:'V2.2 link/HOME#normal · REQ-094·273 · 결정 10차: 캐시백 0은 칩 없이 `0.00 USDT`'},
  {id:'transferred',label:'10 USDT 미만 이관 4.00',note:'V2.2 link/HOME#transferred · REQ-107'},
  {id:'pending',label:'확인 중 — 연동 시도중이에요 · -',note:'V2.2 link/HOME#pending · REQ-098'},
- {id:'inactive',label:'DEX 오프보딩 — Inactive',note:'V2.2 link/HOME#inactive · REQ-121'},
+ {id:'inactive',label:'DEX 오프보딩 — 이슈 처리(빨간 점 → 문제 안내 모달)',note:'V2.2 link/HOME#inactive · REQ-121 · 결정 10차: `Inactive` 칩 없음, 오프보딩 계정은 이슈 처리'},
  {id:'multi',label:'같은 DEX 지갑 3개 · Aster 하위 계정',figma:{mo:'7633:92140'},note:'[기존 MAX-7] mWeb [2 or more UID per exchange] 7633:92140 · 7633:90865(거래소별 묶음 패턴). V2.2 link/HOME#multi · REQ-118·084 · G-087 확정: 하위 계정마다 따로 연동'},
  {id:'rejected',label:'확인 중 거절 — 행 제거',note:'V2.2 link/HOME#rejected · REQ-102 · G-069 확정: 거절되면 홈 행 제거(한도 점유 해제)'},
  {id:'labels',label:'DEX 정산 상태 라벨 (홈 행 칩)',note:'V2.2 cmn/LABELS · FU-011 · REQ-047'},
@@ -271,6 +294,8 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
   const st=st0==='auto'?autoKey():st0;
   if(st==='guest')return guestHome();
   if(st==='seeAll')return seeAllModal();
+  if(st==='issue'||st==='issueWallet')return C.overlay(st==='issue'?'home.main:statuses':'home.main:walletStates',issueDialog(st==='issueWallet'),{center:true});
+  if(st==='linkFail'||st==='linkFailWallet')return C.overlay(st==='linkFail'?'home.main:statuses':'home.main:walletStates',failDialog(st==='linkFailWallet'),{center:true});
   const app=st==='app'||S.vp==='mo';
   let left='',o={};
   const card=(rows,x={})=>balanceCard({amount:sumLinked(rows),...x});
@@ -279,20 +304,19 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
   else{
    let rows=[R_BITGET,R_LIGHTER,R_APEX],x={},lc={app};
    if(st==='s3Pending')rows=[{ex:'EdgeX',id:WAL.edgex,amt:null,st:'pend'}];
-   if(st==='hw1')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'delayed'}];
-   if(st==='statuses')rows=Object.entries(ST).filter(([,v])=>v.pri).sort((a,b)=>a[1].pri-b[1].pri).map(([k],i)=>({ex:['EdgeX','ApeX','Aster','EdgeX','ApeX','Aster','Lighter'][i],id:[WAL.edgex,WAL.w2,WAL.aster,WAL.lighter,WAL.apex,WAL.w2,WAL.lighter][i],amt:k==='ok'?120:null,st:k}));
-   if(st==='chips')rows=[{ex:'EdgeX',id:WAL.edgex,amt:0,st:'zero'},{ex:'Aster',id:WAL.aster,amt:3.2,st:'delayed',extra:`Last updated ${clk('2026-10-22T09:00:00Z')}`},{ex:'ApeX',id:WAL.w2,amt:12.4,st:'inactive'},{ex:'ApeX',id:WAL.apex,amt:0,st:'zero'}];
+   if(st==='hw1')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'}];
+   if(st==='statuses')rows=Object.entries(ST).filter(([,v])=>v.pri).sort((a,b)=>a[1].pri-b[1].pri).map(([k],i)=>({ex:['Bitget','Bybit','Bitget','OKX','OKX','Bybit','Binance'][i],id:['685432171','512093847','685432179','734305240','734305277','512093855','40213377'][i],amt:k==='ok'?120:null,st:k}));
    if(st==='loading'){x={loading:true};lc.loading=true}
    if(st==='error')x={error:true};
-   if(st==='delayed'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'delayed',extra:`Last updated ${clk('2026-10-22T09:00:00Z')}`}];x={sub:`<div style="font-size:12px;color:var(--text-secondary)">Last updated ${clk('2026-10-23T00:30:00Z')}</div>`};}
    if(st==='many'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'},...['Bybit','OKX','EdgeX','ApeX','Aster','Bitget','EdgeX','OKX','Binance'].map((e,i)=>({ex:e,id:isCex(e)?String(70001230+i):[WAL.edgex,WAL.w2][i%2],amt:5+i,st:'ok'}))];lc.max=10}
    if(st==='full')lc.full=true;
    if(st==='first'){rows=[{ex:'Lighter',id:WAL.lighter,amt:0,st:'ok'}];o.toast=true}
-   if(st==='newRow'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:0,st:'zero'}];o.toast=true}
+   if(st==='newRow'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:0,st:'ok'}];o.toast=true}
    if(st==='transferred')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:4,st:'ok'}];
    if(st==='pending')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
-   if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:12.4,st:'inactive',extra:T('No longer supported. Cashback already earned is still sent to this wallet automatically.','지원이 종료된 거래소예요. 적립된 캐시백은 이 지갑으로 계속 자동 지급돼요.')}];
-   if(st==='multi')rows=[R_BITGET,...[[WAL.lighter,3.2],[WAL.w2,0],[WAL.edgex,11.05]].map(([w,a])=>({ex:'Lighter',id:w,amt:a,st:a?'ok':'zero'})),...[WAL.aster,WAL.apex].map(w=>({ex:'Aster',id:w,amt:0,st:'zero'}))];
+   if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'}];
+   if(st==='walletStates')rows=[R_LIGHTER,{ex:'EdgeX',id:WAL.edgex,amt:null,st:'fail'},{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'},{ex:'Aster',id:WAL.aster,amt:null,st:'unlinked'},{ex:'Lighter',id:WAL.w2,amt:null,st:'ownfail'}];
+   if(st==='multi')rows=[R_BITGET,...[[WAL.lighter,3.2],[WAL.w2,0],[WAL.edgex,11.05]].map(([w,a])=>({ex:'Lighter',id:w,amt:a,st:'ok'})),...[WAL.aster,WAL.apex].map(w=>({ex:'Aster',id:w,amt:0,st:'ok'}))];
    if(st==='labels')rows=[
     {ex:'Lighter',id:WAL.lighter,amt:120,st:'ok',extra:hChip(T('Not yet tallied','집계 전'),'prog')},
     {ex:'Lighter',id:WAL.w2,amt:14,st:'ok',extra:hChip('Credited','done')},

@@ -492,7 +492,7 @@ API-007 · API-109 · API-115 · JOB-D05 · JOB-D07 · JOB-D10은 이 표를 기
 | 총 캐시백 잔액 | CEX+DEX 합산 · **매칭 전 금액(기존 로직)** · 연동 미완료 제외 |
 | 연동 계정 목록 (`Linked Accounts`) | **CEX UID와 DEX 지갑을 한 목록**에. 라벨만 다르고 섞여 나옴 (`UID 685432171` / `Wallet 0x7a3F…51E9` — 폭이 좁을 때의 축약, 누르면 전체) |
 | 상태 우선순위 | 기존 UID 7단계 그대로 — `소유 확인중`1 · `연동 시도중`2 · `이슈`3 · `연동 완료`4 · `연동 실패`5 · `소유 확인 실패`6 · `연동 해제`7. DEX도 소유권 계열(1·6·7 중 소유권 원인)이 같은 규칙으로 발생(5-10) |
-| 상태 칩 | **Aster 행의 만료 관련 칩 없음.** `Unavailable`(캐시백 0) 칩은 정상 신규 연동이 "사용 불가"로 읽힘 → `No cashback yet` 계열 |
+| 상태 표시 | 칩 없이 기존 홈 행 디자인(행 상태 점 + 행 아래 배너, 이슈는 행 탭 → 모달). 캐시백 0은 `0.00 USDT`만(0원 칩·배너 없음). 자동 연동 실패는 목록에 표시하지 않고 수동 연동 실패만 표시. `Data delayed`·`Inactive` 칩 없음 — 오프보딩 계정은 이슈 처리(사용자 2026-11-27). 문구는 REQ-273·문구표 |
 | 상태 겹침 | 데이터 지연 + 로드 실패 등 동시 발생 규칙 (G-060 확정: UID 7단계와 같은 정수 priority로 확장(데이터 지연·로드 실패를 그 뒤 번호로)) |
 | 11개 이상 | `더보기` 전까지 10개 |
 | 미연동 상태 | **모든 거래소(CEX·DEX)에 연동 계정이 없을 때만.** DEX만 연동한 회원을 미연동으로 분류하지 않음 |
@@ -1774,7 +1774,7 @@ Aster는 회원별 테더맥스 커미션 필드를 요청한 적이 없음(트�
 - ApeX: KYC·자체 국가 제한 없음(접속 차단 가능, 한국은 CDN 우회·기능 제한 없음). 제한 지역 IP 거래는 원장에 커미션이 없어 카드가 오류 없이 `0.00`일 수 있음 → 0 상태 캡션에 지역 규칙 언급 (❓ 권고).
 
 ### DEX 오프보딩 (연동자가 있는 상태)
-- 연동 숨김, 기존 행은 `Inactive`로 표시하고 이력 유지.
+- 연동 숨김, 기존 행은 이슈로 표시(빨간 점, 행 탭 → `There is a problem with this wallet.` 모달, 사용자 2026-11-27)하고 이력 유지.
 - 적립 캐시백은 잔액에 남아 출금 가능, 지갑은 지급 목적지로 계속 선택 가능.
 - 상세 URL은 DEX 랜딩으로 리다이렉트.
 - 레코드를 비활성화해도 언어별 콘텐츠·미디어·연동 이력은 삭제되지 않음.
@@ -1837,7 +1837,7 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 | 상태 | 표시 |
 |---|---|
 | 로딩 | 합계 카드·계정 카드 자리에 스켈레톤. 데이터 도착 전 금액·버튼 렌더 안 함 |
-| 0원 | 합계 `0.00 USDT`. 캐시백 없는 DEX 카드 `Exchange Cashback 0.00 USDT` + `Unavailable`(홈 칩은 본문 8-1). 카드 아래 배너 `No exchange cashback yet. Cashback appears here the day after you trade on your linked DEX.` — Lighter는 주간이라 「the day after」가 틀림 → DEX별 문구 ❓ |
+| 0원 | 합계 `0.00 USDT`. 캐시백 없는 DEX 카드 `Exchange Cashback 0.00 USDT` + `Unavailable`. 0원 배너 없음(G-110) |
 | 데이터 지연 | DEX 원장이 예정 시각 + 임계값(❓ 권고 2시간)까지 안 오면 그 카드에 `Last updated {time}`, 적립 금액은 출금 가능 유지. |
 | 파트너 오류 | 그 카드에 `We can't load your latest {DEX} cashback right now.` + `Try again`. 다른 카드는 정상, 적립 캐시백은 `Available Cashback`에 그대로, 10 USDT 이상 계정은 자동 지급 대상 유지 |
 | 잔액 오류 | 합계 카드 `We can't load your balance right now.` + `Try again` |
@@ -2272,9 +2272,9 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 |---|---|
 | `Active` | `연동 완료`로 (CEX와 같은 라벨) |
 | `Processing` | `연동 시도중이에요` / `Trying to link` (본문 5-4) |
-| `Unavailable`(캐시백 0) | `No cashback yet` 계열(본문 8-1). 배너 원문 `No exchange cashback yet. Cashback appears here the day after you trade on your linked DEX.` — Lighter는 주간이라 "the day after"가 틀림 → DEX별 문구 ❓. 카드 `Exchange Cashback 0.00 USDT`, 출금 확인 비활성 |
-| `Data delayed` | 본문 8-1 문구 |
-| `Inactive` | DEX 오프보딩 시: 연동 숨김, 기존 행 `Inactive` + 이력 유지, 적립 캐시백 잔액 유지·출금 가능, 지갑은 지급 목적지로 계속 선택 가능, **상세 URL은 DEX 랜딩으로 리다이렉트** |
+| `Unavailable`(캐시백 0) | 칩·배너 없이 `0.00 USDT`만(사용자 2026-11-27). 카드 `Exchange Cashback 0.00 USDT` |
+| `Data delayed` | 칩 없음 — 거래소 API 응답을 바로 받음(사용자 2026-11-27) |
+| `Inactive` | DEX 오프보딩 시: 연동 숨김, 기존 행은 이슈 처리(빨간 점, 행 탭 → `There is a problem with this wallet.` 모달) + 이력 유지, 적립 캐시백 잔액 유지·출금 가능, 지갑은 지급 목적지로 계속 선택 가능, **상세 URL은 DEX 랜딩으로 리다이렉트** |
 | `Standard account, no cashback` | 연동 경고 화면 삭제(본문 5-9)에 따라 홈 칩도 없음 — 칩·`Upgrade on Lighter`·카피 3종(`Upgrade to Plus or Premium on Lighter to earn cashback.` · `Switch to Plus or Premium on your Lighter Portfolio page to earn cashback.` · `Switch to Plus or Premium on Lighter to earn cashback.`) 처리를 명시해야 함 ❓ |
 | 원장 미수신 DEX | 테더맥스가 그 DEX 원장을 받기 전: 잔액 패널 대신 계산기 렌더, 빈 패널 금지 |
 | ApeX `AccountID` 미반환 · 제한 IP 거래(커미션 0) | 고유 칩 없음 — 필요 여부 ❓ |
@@ -2670,7 +2670,7 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | DEX 오프보딩 | 상세 URL은 랜딩으로 리다이렉트 |
 | 프로모 슬라이드 0 | 배너 미렌더 (B-6-4) |
 | DefiLlama 실패 | B-6-3 |
-| Figma에 없는 상태 | `Estimate unavailable` · DEX 카드 오류 · `Adjustment` · `DEX data pending` · `Inactive` 행 |
+| Figma에 없는 상태 | `Estimate unavailable` · DEX 카드 오류 · `Adjustment` · `DEX data pending` |
 
 근거: 09.txt EC-PG-16, 화면_수정_필요_목록:1046
 
@@ -2700,8 +2700,8 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 어드민 출처 | Right Box 탭 1개 = 토글 1칸(G-438): `Tab Name` → 토글 이름 · `Line 1` → 라벨 · `Line 2` → 헤드라인 요율(`{요율}` 치환, G-167) · `Get Started link` → 그 탭의 `Get Started` 링크. 탭 1개면 토글 없음. 단계 표 요율은 레코드 |
 | 라벨 | `Trading fees cashback up to` + 헤드라인(레코드값, Lighter 20%) |
 | 토글 | Lighter `Premium` / `Plus` · EdgeX·Aster·ApeX `Taker` / `Maker`. 토글 변경 시 모든 단계 요율 변경 |
-| 단계 표 (Lighter) | 열 `Fee stage` · `Final Taker` · `Final Maker` / 행 ① `Without TetherMax`(취소선, Premium `0.0280%` / `0.0040%`) ② `After cashback`(`0.0224%` / `0.0032%`) |
-| 단계 표 (EdgeX·Aster·ApeX) | 열 `Fee stage` · `Final Taker`(Maker 선택 시 `Final Maker`) / 행 ① `Without TetherMax`(취소선) ② `After discount` ③ `After cashback`(강조). Aster·ApeX 숫자는 레코드 값 전까지 EdgeX 샘플 |
+| 단계 표 | 열 `Fee stage` · Lighter `Final Taker` · `Final Maker` / 그 외 `Final Taker`(Maker 선택 시 `Final Maker`) · 행 ① `Without TetherMax`(취소선) ② `After discount` ③ `After cashback`(강조). **② 행은 레코드 할인율(`할인율 메이커/테이커`, 선택한 Taker/Maker 기준)이 0보다 클 때만 표시 — 할인이 없으면 ①·`After cashback` 2행만**(모든 DEX 공통, Lighter 포함 · 사용자 2026-11-27) |
+| 단계 표 값 | Lighter Premium `0.0280%` / `0.0040%` → `0.0224%` / `0.0032%`(할인 없음, 2행). Aster·ApeX 숫자는 레코드 값 전까지 EdgeX 샘플 |
 | 버튼 | `Get Started`(외부 링크 아이콘, 어트리뷰션 새 탭) + 회원 3분기 CTA(본문 8-5): `exchange_guest` = 회원가입/로그인으로 이동(게스트 조회로 보내지 않음, 문구 G-402 확정: 그 DEX가 미리 선택된 연동 모달로 복귀. 문구는 문구표) · `exchange_member_unlinked` = 연동하기 · `exchange_member_linked` = `Auto Claim`(비활성)·리뷰 쓰기 |
 | 일치 | 헤드라인 = 랜딩 카드 헤드라인. `After cashback` ≠ 카드 `Final Taker/Maker`면 게시 차단 |
 | 헤드라인 검증 | `Line 2`는 `{요율}` 치환이라 레코드값을 넘지 않는다(G-167) |
@@ -3202,13 +3202,13 @@ TP 적립 공식(출금이 트리거, DEX 출금에도 같은 공식):
 
 | 단계 | 원문·규칙 |
 |---|---|
-| **PB-2 Landing** | 제목 `You're paying too many fees.` · 리드 `See how much cashback you're missing out on, across exchanges, DEXs and brokers.` · 금고 일러스트 · `Did you know?` 카드 `{n} of our users earn an average of {amount} USDT in cashback per month.` · 주 버튼 `Start Cashback Preview`. **사용자 수가 없으면 카드 숨김**(0 표시 금지 — 라이브 `Trusted by 0 users` 금지). 리드는 brokers를 말하지만 플랫폼 선택에 브로커 없음(디자인 확인) |
+| **PB-2 Landing** | 제목 `Check your missed Cashback, in just 1 minute` · 리드 `Check now` · 금고 일러스트 · `Did you know?` 카드 `Cashback made simple — up to {amount} USDT a month. Trusted by {n} users.`(실서비스 `/payback` 문구, 사용자 2026-11-27) · 주 버튼 `Start Cashback Preview`. **사용자 수가 없으면 카드 숨김**(0 표시 금지 — 라이브 `Trusted by 0 users` 금지). |
 | **PB-3 Choose platform** | 제목 `First, which exchange do you use most?` (국문 현행 `먼저, 가장 자주 사용하는 거래소는 어디인가요?`) · PC 6열·모바일 3열 타일 = 거래소 브랜드 배경·로고·이름 · CEX `{totalSavingsRate}% Total Savings`(국문 `총 절감률 {n}%`) · DEX `{rate}% Cashback`(국문 `최종 캐시백률 {n}%`) · **단일 선택**(선택 타일 외곽선, 다른 선택 해제) · `Back`·`Next`(국문 `뒤로`/`다음`) · **미선택 시 `Next` 비활성** · **유효 요율 없는 DEX 타일은 숨김.** 그리드·칩은 본문 8-22. 원본 예시 요율 Lighter 20 · ApeX 30 · EdgeX 30 · Aster 20(실제 ⏳) |
 | **PB-4 Trading profile** | 제목 `Next, let's check your trading profile.` 카드 4장: `What leverage do you usually use?`(칩 `1x, 5x, 10x, 20x, 50x, 100x` + 슬라이더) · `What is your current account balance?`(USDT, 칩 `500, 1K, 5K, 10K, 25K, 50K` + 슬라이더) · `Order Type Ratio`(`Maker {n}%` ↔ `Taker {n}%` 슬라이더) · `How often do you trade per day?` — `Rarely` "Barely once a day" / `Sometimes` "1–2 trades a day" / `Regularly` "2–5 trades a day" / `Very Active` "5–10 trades a day" / `All Day` "10+ trades a day". **칩 ↔ 슬라이더 양방향 동기**(Figma 10x/1x 불일치 오류) · **빈도 미선택 시 `Check Results` 비활성** · CEX·DEX 동일 |
 | **PB-5 Lighter 계정 유형** | Lighter 선택 시 레버리지 카드 위: `Which Lighter account do you use?` — `Premium` "Taker 0.0280%, Maker 0.0040%" · `Plus` "Taker 0.0050%, Maker 0.0050%" · `Standard` "No trading fees, so no cashback". 수수료는 백오피스(레코드) 값. **유형 미선택 시 `Check Results` 비활성.** Summary에 `Lighter Premium` 식 표시. **Standard면 결과 `0.00 USDT` + Standard는 거래 수수료가 없다는 설명**(Figma에 Standard 결과 프레임 없음). 경고·차단 없음(본문 5-9)과 같은 결 — 이 단계를 둘지 ❓ |
 | **PB-6 Calculating** | 계산기 일러스트 + `You might be surprised...`, 잠깐 보인 뒤 자동으로 다음 단계 |
 | **PB-7 What You're Missing Out On** | 카드 2장 `Trade with TetherMax` `+{amount}` `YOUR CASHBACK (USDT)` / `Without TetherMax` `-{amount}` `FEES LOST (USDT)`(같은 월 캐시백 값) · `How we calculated this?` 펼침(계산 표시, 펼친 내용 Figma 미설계) · CEX만 `Did you know?` `On average, {n} {platform} traders like you earn about {amount} USDT/mo.` — **DEX는 이 카드 숨김** · `Next` |
-| **PB-8 Summary** | 제목 `You're all set. Here's your summary.` 타일 `Platform`(Lighter는 계정 유형) · `Account balance` · `Leverage` · `Order Type Ratio`(예 `100% Taker`) · `Trading frequency`(예 `1-2 trades a day`). 영수증 `Trading Fees {amount} USDT/mo` · `× Cashback Rate ×{rate}%` · `Cashback {amount} USDT/mo*`. `Payout Details` = `Schedule` · `Payout Time` · `Destination` — **Destination = `TetherMax Account`(전 플랫폼)**, DEX가 직접 지급한다는 표현 금지. 버튼 `Restart`(입력 초기화 후 Landing) · `Start {platform} Cashback`(어트리뷰션 새 탭) |
+| **PB-8 Summary** | 제목 `You're all set. Here's your summary.` 타일 `Exchange`(실서비스 라벨, Lighter는 계정 유형) · `Account balance` · `Leverage` · `Order Type Ratio`(예 `100% Taker`) · `Trading frequency`(예 `1-2 trades a day`). 영수증 `Trading Fees {amount} USDT/mo` · `× Cashback Rate ×{rate}%` · `Cashback {amount} USDT/mo*`. `Payout Details` = `Schedule` · `Payout Time` · `Destination` — **Destination = `TetherMax Account`(전 플랫폼)**, DEX가 직접 지급한다는 표현 금지. 버튼 `Restart`(입력 초기화 후 Landing) · `Start {platform} Cashback`(어트리뷰션 새 탭) |
 | **PB-9 모바일 웹** | 375폭. 같은 단계·같은 문구, 1열, 가로 스크롤 없음, 플랫폼 타일 줄바꿈 |
 
 ### B-19-3 Summary 계산 · 지급 표기
@@ -4071,7 +4071,7 @@ DEX 수동 연동(본문 9-4)은 **새 메뉴가 아니라 이 기존 화면들�
 | 값 | 진입 조건 | 표시·효과 |
 |---|---|---|
 | `Live` | 파트너 API(·웹훅)로 정상 수집 | 정상 |
-| `Degraded` | 거래소별 기준 초과(아래) | **회원 화면 `Data delayed` + `Last updated {time}`을 켬**(본문 8-1 지연 문구). 피드가 다시 들어오면 다음 조회에서 둘 다 해제. 마지막 갱신 시각을 잔액 서비스에 노출. 운영 알림(부록 D) |
+| `Degraded` | 거래소별 기준 초과(아래) | 운영 알림(부록 D). 회원 화면에는 지연 표시를 두지 않음 — 거래소 API 응답을 바로 받음(사용자 2026-11-27) |
 | `Not integrated` | 파트너 연동 전 | 오류 아님 |
 
 **`Degraded` 기준** — 전부 ❓ 권고 (P)
@@ -6514,7 +6514,7 @@ EdgeX는 "확인을 받으면 엔드포인트·인증·서명·푸시 포맷·�
 | 상황 | 신규 연동 | 기존 연동 행 | 적립 캐시백 | 출금 목적지 | 페이지 |
 |---|---|---|---|---|---|
 | **회원 지역에서 쓸 수 없는 DEX** (DEX 레코드 `제한 지역`, `EXT-14`) | `Get Started`·연동 버튼 **숨김 + 이유 표시**(문구 ❓) | 그대로 보임 | 잔액에 남음 | 그 지갑으로 출금 가능 | — |
-| **DEX 오프보딩**(비노출, `EXT-16`) 후 연동자 있음 | 연동 숨김 | **`Inactive`로 표시하고 이력 유지**(국문 라벨 ❓) | 잔액에 남음, 출금 가능 | 지급 목적지로 계속 선택 가능(DEX 지급 네트워크) — ❓ 권고 | **상세 URL은 DEX 랜딩으로 리다이렉트** |
+| **DEX 오프보딩**(비노출, `EXT-16`) 후 연동자 있음 | 연동 숨김 | **이슈로 표시(빨간 점, 행 탭 → `There is a problem with this wallet.` 모달, 사용자 2026-11-27)하고 이력 유지** | 잔액에 남음, 출금 가능 | 지급 목적지로 계속 선택 가능(DEX 지급 네트워크) — ❓ 권고 | **상세 URL은 DEX 랜딩으로 리다이렉트** |
 
 - 지역 신호는 **CEX 상품과 같은 신호**를 씀(❓ 권고). 테더맥스 자체 지역 규칙은 없고 **DEX 레코드의 지역 목록만** 따름 (EC-ACC-4). ApeX는 `geo_restrictions`로 받음.
 - 비활성화로 연동 한도 산식(본문 5-7, G-479)이 이미 연동한 개수보다 작아지면 **기존 연동은 유지하고, 한도 아래로 내려갈 때까지 신규 연동 불가.**
@@ -7356,7 +7356,7 @@ PRD 작성자에게 검토 PDF·피드백 문서를 넘길 때 **함께 가면 �
 | G-107 | ~~홈 · 지갑 상세 `Withdraw` 진입 버튼~~ | 확정: 출금 버튼은 항상 비활성 `Auto Claim`(사용자 2026-11-16) |
 | G-108 | ~~en 「전부 불가」 문구~~ | 확정: 국문 짝: `No account can be claimed yet. You can claim once {n} USDT more cashback accrues.` (사용자 2026-11-25) |
 | G-109 | ~~`Each wallet needs at least 10 USDT…` 문구~~ | 확정: `Each account needs at least 10 USDT (cashback + matched event rewards).` (사용자 2026-11-25) |
-| G-110 | ~~`No cashback yet` 0원 배너의 DEX별 문구~~ | 확정: `Cashback appears here the day after you trade on your linked DEX.`(Lighter 포함 DEX 4곳 공통, G-428) (사용자 2026-11-25) |
+| G-110 | ~~`No cashback yet` 0원 배너의 DEX별 문구~~ | 확정: 0원 배너 없음 — CEX와 같이 `0.00 USDT`만 표시 (사용자 2026-11-27) |
 | G-111 | ~~`Network fee` 영문~~ | 확정: `Network fee: covered by TetherMax` (사용자 2026-11-25) |
 | G-112 | ~~선차감 사유 문구 영문~~ | 확정: 문구표에서 국문 예시와 짝으로 확정 (사용자 2026-11-25) |
 | G-113 | ~~`Withdrawal returned` 요약 행~~ | 확정: 복원된 날 `+` 부호 행(`Withdrawal returned`) (사용자 2026-11-25) |
@@ -7395,7 +7395,7 @@ PRD 작성자에게 검토 PDF·피드백 문서를 넘길 때 **함께 가면 �
 | G-125 | 병렬 송금 nonce 관리 방식 | 미정 | nonce 충돌 | 01.txt p3 · 본문 6-4 |
 | G-126 | ~~출금 KYC~~ | 확정: DEX는 KYC가 없음(연동·출금 모두). CEX UID의 KYC 미완료 처리는 현행 정책(G-415) (사용자 2026-11-24) |
 | G-127 | ~~ApeX 대기 배치 `Pending` 줄~~ | 확정: ApeX가 원장 전 배치를 노출할 때만 `Pending` 줄 표시 (사용자 2026-11-25) |
-| G-128 | DEX 오프보딩 후 지급 목적지 | 권고: 지갑을 DEX 지급 네트워크 목적지로 계속 선택 가능, 기존 행 `Inactive` 라벨(국문 미정) | 오프보딩 DEX 연동자의 출금 | 09.txt EC-LNK-33 |
+| G-128 | DEX 오프보딩 후 지급 목적지 | 권고: 지갑을 DEX 지급 네트워크 목적지로 계속 선택 가능, 기존 행은 이슈로 표시(빨간 점, 행 탭 → `There is a problem with this wallet.` 모달, 사용자 2026-11-27) | 오프보딩 DEX 연동자의 출금 | 09.txt EC-LNK-33 |
 | G-129 | DEX 서비스 종료 시 잔여 캐시백 출금 마감 기한 | 둔다 / 안 둔다 | EMAIL 29 본문 | 부록 D-5-9 · EMAIL.xlsx 29행 L |
 | G-130 | ~~게스트 카드 이벤트 리워드 줄~~ | 개정: 공개 응답이 제공할 때만 매칭된 이벤트 리워드를 표시한다(API-023) |
 | G-131 | ~~게스트 출금 결과 확인 경로~~ | 해소: 기존 게스트 직접 출금 흐름 기준. 현행 읽기 전용 조회는 6-5 적용 |
@@ -7755,7 +7755,7 @@ PRD 작성자에게 검토 PDF·피드백 문서를 넘길 때 **함께 가면 �
 | G-364 | 기존 CEX 알림 · 이메일 템플릿의 「페이백」 → 「캐시백」 교체 범위 | 사용자 화면 전체(기존 CEX 화면 이름 포함)는 캐시백으로 확정(`#47`). 남은 것: 기존 CEX 알림 · 이메일 템플릿(`페이백 출금 실패` 등, FCM 76 · 79 · 80 포함)까지 이번 범위에서 바꿀지. 섞이면 한 서비스에 두 단어 | 알림 · 이메일 문구 | `#47` · 본문 3-1 |
 | G-365 | ~~`Exchange Cashback` / `Trading Cashback` 명칭~~ | 확정: `Exchange Cashback`으로 통일(요약 유형값 `Trading Cashback`도 개명) (사용자 2026-11-25) |
 | G-366 | ~~언어팩 101키~~ | 확정: 운영자 편집 영역도 고정 폴백 문구로 언어팩에 둔다(키 수 재산정은 언어팩 작업 때) (사용자 2026-11-25) |
-| G-367 | 신규 제안 문구의 국문 | 대상: 주소 검증 오류 6종(`Enter your wallet address.` 등, en만 존재) · `Cashback could not load` · `We can't load your balance right now.` · `We can't load your latest {DEX} cashback right now.` · `Estimate unavailable` · `Your withdrawable amount changed.` · `Something Went Wrong` · `Inactive` 라벨 · 지역 차단 이유 문구 | 로컬라이제이션 세트 등록(게시 전 필수), 연동 화면 | 09.txt 1장 · 08.txt NFR 12 |
+| G-367 | 신규 제안 문구의 국문 | 대상: 주소 검증 오류 6종(`Enter your wallet address.` 등, en만 존재) · `Cashback could not load` · `We can't load your balance right now.` · `We can't load your latest {DEX} cashback right now.` · `Estimate unavailable` · `Your withdrawable amount changed.` · `Something Went Wrong` · 지역 차단 이유 문구 | 로컬라이제이션 세트 등록(게시 전 필수), 연동 화면 | 09.txt 1장 · 08.txt NFR 12 |
 | G-368 | 레이어명만 있는 문구 확보 | `headline` · `subhead` · `lede` · `label` · `up to footnote` · `value` | 언어팩 키 매핑 | 백오피스관리_vs_하드코딩 587 |
 
 ---

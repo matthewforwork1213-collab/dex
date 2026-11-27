@@ -247,41 +247,34 @@ function bindRight() {
     vol.addEventListener('blur', () => { const [a, b] = RANGE[H.route]; const n = Math.max(a, Math.min(b, H.vol[H.route])); if (n !== H.vol[H.route]) { H.vol[H.route] = n; updateCalc() } vol.value = '$' + n.toLocaleString('en-US') });
     vol.addEventListener('keydown', e => { if (e.key === 'Enter') vol.blur() });
   }
+  // 거래량 슬라이더 — 공통 UI.slider(손잡이 SVG 30px 안의 원 중심 = (15,14))
   const sl = $('[data-hub-slider]', box);
   if (sl && sl.dataset.hubSlider !== 'Brokers') {
-    sl.classList.add('live');
-    const set = x => {
-      const r = sl.getBoundingClientRect(); const f = Math.max(0, Math.min(1, (x - r.left - 15) / (r.width - 30)));
-      const [a, b] = RANGE[H.route]; const st = STEP[H.route];
-      H.vol[H.route] = Math.round((a + (b - a) * f) / st) * st || a; updateCalc();
-    };
-    sl.addEventListener('pointerdown', e => {
-      e.preventDefault(); if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); sl.setPointerCapture(e.pointerId); sl.classList.add('drag'); set(e.clientX);
-      const mv = ev => set(ev.clientX), up = () => { sl.classList.remove('drag'); sl.removeEventListener('pointermove', mv); sl.removeEventListener('pointerup', up); sl.removeEventListener('pointercancel', up) };
-      sl.addEventListener('pointermove', mv); sl.addEventListener('pointerup', up); sl.addEventListener('pointercancel', up);
+    const r = H.route, [a, b] = RANGE[r];
+    UI.slider(sl, {
+      value: H.vol[r], min: a, max: b, step: STEP[r], label: 'Monthly trading volume', inset: 15, halo: { x: 15, y: 14, size: 20 },
+      toPct: v => (v - a) / (b - a), fromPct: p => a + (b - a) * p,
+      thumbLeft: p => `calc((100% - 30px) * ${p})`, fillWidth: p => `calc((100% - 30px) * ${p} + 15px)`,
+      valueText: v => '$' + v.toLocaleString('en-US'),
+      onInput: v => { H.vol[r] = v; updateCalc() }
     });
-    sl.tabIndex = 0; sl.setAttribute('role', 'slider'); sl.setAttribute('aria-label', 'Monthly trading volume');
-    sl.addEventListener('keydown', e => { const k = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1 }[e.key]; if (!k) return; e.preventDefault(); const [a, b] = RANGE[H.route]; H.vol[H.route] = Math.max(a, Math.min(b, H.vol[H.route] + k * STEP[H.route])); updateCalc() });
   }
+  // 파트너 셀렉트 트리거 — 키보드로도 연다
+  const ps = $('[data-hub-partner]', box);
+  if (ps) { ps.tabIndex = 0; ps.setAttribute('role', 'button'); ps.setAttribute('aria-haspopup', 'listbox'); ps.setAttribute('aria-expanded', 'false'); ps.setAttribute('data-ui-trigger', '') }
   // 첫 표시 카운트업(계산 결과)
   const body = $('[data-calc-body]', box);
   if (body && !box.dataset.counted) { box.dataset.counted = 1; leafNums(body).forEach(el => countUp(el, 0, 700)) }
 }
-// 거래량이 바뀌면 영수증 본문·슬라이더·비교표 금액만 바꾼다(입력 포커스 유지)
+// 거래량이 바뀌면 영수증 본문·슬라이더·비교표 금액만 바꾼다(입력 포커스 유지). 실사이트 계산기처럼 금액은 즉시 바뀐다(카운트업 없음)
 function updateCalc(o = {}) {
   const r = H.route; HUBX.setVol(H.vol[r]);
   const box = $('[data-hub-right]'); if (!box) return;
   const tmp = document.createElement('div'); tmp.innerHTML = rightCard();
   const nb = $('[data-calc-body]', tmp), ob = $('[data-calc-body]', box);
-  if (nb && ob) {
-    const olds = leafNums(ob).map(e => numParts(e.textContent.trim()).n);
-    ob.innerHTML = nb.innerHTML;
-    leafNums(ob).forEach((e, i) => { if (olds[i] != null) countUp(e, olds[i], 380) });
-  }
-  const pct = SITEH.sliderPct(r);
-  const fill = $('[data-sl-fill]', box), th = $('[data-sl-thumb]', box);
-  if (fill) fill.style.width = `calc((100% - 30px) * ${pct} + 15px)`;
-  if (th) th.style.left = `calc((100% - 30px) * ${pct})`;
+  if (nb && ob) ob.innerHTML = nb.innerHTML;
+  const sl = $('[data-hub-slider]', box);
+  if (sl && sl._ui && sl._ui.value !== H.vol[r]) sl._ui.set(H.vol[r]);
   const vol = $('[data-hub-vol]', box);
   if (vol && document.activeElement !== vol) vol.value = '$' + H.vol[r].toLocaleString('en-US');
   // 비교표 Est. monthly cashback · 부제
@@ -329,13 +322,7 @@ function switchTab(k, el) {
   H.sort = null;
   renderPage({ keepScroll: true });
   if (oldRect) pillFlip(oldRect);
-  // 파트너 목록을 새로 받는 것처럼 비교표 자리 스켈레톤
-  const cb = $('[data-compare-body]');
-  if (cb) {
-    const keep = cb.innerHTML;
-    cb.innerHTML = `<div class="col" style="gap:12px;padding:16px;background:#fff;border-radius:8px">${[1, 2, 3, 4].map(() => `<div class="row" style="gap:12px">${C.skel('24px', 24)}${C.skel('30%', 16)}<span class="grow"></span>${C.skel('18%', 16)}</div>`).join('')}</div>`;
-    setTimeout(() => { if ($('[data-compare-body]') === cb) { cb.innerHTML = keep; fadeIn(cb); applyFilter(); applySort() } }, rnd(300, 600));
-  }
+  // 비교표는 실사이트 거래소 목록 탭처럼 즉시 바뀐다(스켈레톤 없음)
 }
 function selectedSeg() { return $$('[data-hub-right] [data-hub-tab]').find(s => /box-shadow/.test(s.getAttribute('style') || '')) }
 // 탭 선택 표시(흰 알약)가 이전 위치에서 새 위치로 미끄러진다
@@ -349,29 +336,26 @@ function pillFlip(oldRect) {
   const bg = now.style.background, sh = now.style.boxShadow; now.style.background = 'transparent'; now.style.boxShadow = 'none';
   $$('[data-hub-tab]', par).forEach(s => { s.style.position = 'relative'; s.style.zIndex = 1 });
   requestAnimationFrame(() => { pill.style.left = (nr.left - pr.left) + 'px'; pill.style.width = nr.width + 'px'; pill.style.top = (nr.top - pr.top) + 'px' });
-  setTimeout(() => { now.style.background = bg; now.style.boxShadow = sh; pill.remove() }, 320);
+  setTimeout(() => { now.style.background = bg; now.style.boxShadow = sh; pill.remove() }, 220);
 }
-// 파트너 드롭다운
+// 파트너 셀렉트 — 공통 UI.dropdown
 function partnerMenu(anchor) {
-  const old = $('.site-pop'); if (old) { old.remove(); if (old._a === anchor) return }
   const r = H.route, list = HUBX.routeList(r);
   const lg = p => HUBX.HB_DEX.includes(p) ? C.dex(p.name, 24) : `<img src="${A('hub-logo-' + p.lg + '.png')}" alt="" style="width:24px;height:24px;border-radius:50%;object-fit:cover">`;
-  const pop = document.createElement('div'); pop.className = 'site-pop'; pop._a = anchor;
-  pop.innerHTML = list.map(p => `<button type="button" data-pid="${p.id}" class="${p.id === H.pid[r] ? 'on' : ''}">${lg(p)}<span class="grow">${esc(p.name)}</span>${p.id === H.pid[r] ? `<img src="${A('link-ic-check.svg')}" alt="" style="width:18px;height:18px;filter:brightness(0) saturate(100%) invert(12%) sepia(88%) saturate(4000%) hue-rotate(226deg)">` : ''}</button>`).join('');
-  anchor.parentElement.style.position = 'relative';
-  anchor.parentElement.appendChild(pop);
-  requestAnimationFrame(() => pop.classList.add('in'));
-  pop.addEventListener('click', e => {
-    const b = e.target.closest('[data-pid]'); if (!b) return;
-    H.pid[r] = b.dataset.pid; pop.remove();
-    const box = $('[data-hub-right]');
-    const wait = ledgerAccounts().length > 0;
-    box.innerHTML = rightCard({ loading: wait }); box.dataset.counted = ''; bindRight(); fadeIn(box);
-    if (wait) setTimeout(() => { box.innerHTML = rightCard(); bindRight(); fadeIn(box) }, rnd(300, 800));
+  const html = list.map(p => { const on = p.id === H.pid[r]; return `<button type="button" role="option" aria-selected="${on}" data-ui-opt="${p.id}" class="${on ? 'on' : ''}">${lg(p)}<span class="grow">${esc(p.name)}</span>${on ? `<img src="${A('link-ic-check.svg')}" alt="" style="width:18px;height:18px;filter:brightness(0) saturate(100%) invert(12%) sepia(88%) saturate(4000%) hue-rotate(226deg)">` : ''}</button>` }).join('');
+  UI.dropdown(anchor, {
+    html, cls: 'pick', width: 'anchor',
+    onPick(pid) {
+      if (pid === H.pid[r]) return;
+      H.pid[r] = pid;
+      const box = $('[data-hub-right]');
+      const wait = ledgerAccounts().length > 0;
+      box.innerHTML = rightCard({ loading: wait }); box.dataset.counted = ''; bindRight(); fadeIn(box);
+      if (wait) setTimeout(() => { box.innerHTML = rightCard(); bindRight(); fadeIn(box) }, rnd(300, 800));
+      const t = $('[data-hub-partner]', box); if (t) try { t.focus({ preventScroll: true }) } catch (e) { }
+    }
   });
 }
-document.addEventListener('click', e => { const p = $('.site-pop'); if (p && !p.contains(e.target) && !p._a.contains(e.target)) p.remove() });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { const p = $('.site-pop'); if (p) p.remove() } });
 
 // ---------------- 숫자 카운트업 ----------------
 function numParts(t) { const m = String(t).match(/^(.*?)(\d[\d,]*(?:\.\d+)?)(\D*)$/); if (!m) return null; return { pre: m[1], n: parseFloat(m[2].replace(/,/g, '')), dec: (m[2].split('.')[1] || '').length, post: m[3] } }
@@ -463,7 +447,7 @@ function renderLayer(o = {}) {
   // 모바일 시트는 아래 단계(입력 화면) 위에 겹친다
   let under = '';
   if (k === 'sheet' && L.prev && L.prev !== 'select') { const s = L.step; L.step = L.prev; under = `<div class="site-under">${stepHTML()}</div>`; L.step = s }
-  layer.className = 'site-layer open k-' + k + (S.vp === 'mo' ? ' vp-mo' : ' vp-pc');
+  layer.className = 'site-layer open k-' + k + (S.vp === 'mo' ? ' vp-mo' : ' vp-pc') + (L.step === 'drawer' ? ' drawer' : '');
   layer.innerHTML = `${under}<div class="site-scrim" data-site="scrim"></div><div class="site-box" data-site="box">${html}</div>${testHelp()}`;
   if (!wasOpen || o.enter) { layer.classList.add('enter'); requestAnimationFrame(() => requestAnimationFrame(() => layer.classList.remove('enter'))) }
   else if (k !== 'sheet') { const b = $('.site-box', layer); b.classList.add('swap'); requestAnimationFrame(() => requestAnimationFrame(() => b.classList.remove('swap'))) }
@@ -474,8 +458,10 @@ function closeLayer(silent) {
   if (!L.open && !layer.classList.contains('open')) { if (MODAL && !silent) post({ dexModal: 'close' }); return }
   if (L.busy) return;
   L.open = false;
+  UI.closeDropdown(true);
   layer.classList.add('leave');
-  setTimeout(() => { layer.className = 'site-layer'; layer.innerHTML = ''; document.documentElement.classList.remove('site-lock'); if (MODAL && !silent) post({ dexModal: 'close' }); if (L.onClose) { const f = L.onClose; L.onClose = null; f() } }, 200);
+  const dur = layer.classList.contains('drawer') ? UI.T.drawer : UI.T.modal;
+  setTimeout(() => { layer.className = 'site-layer'; layer.innerHTML = ''; document.documentElement.classList.remove('site-lock'); if (MODAL && !silent) post({ dexModal: 'close' }); if (L.onClose) { const f = L.onClose; L.onClose = null; f() } }, dur);
 }
 function backHome() {
   L.busy = false; closeLayer(true);
@@ -501,7 +487,9 @@ function onBackdrop() { if (L.step === 'select' && L.prev && L.prev !== 'select'
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape' || !L.open) return;
   if ($('.site-cap')) return closeCaptcha();
-  if (e.target.closest && e.target.closest('details[data-link-picker][open]')) return;
+  if (e.target.closest && e.target.closest('details[data-link-picker]')) return;   // 패널 안 포커스: 50-link.js가 패널만 닫음
+  const dp = document.querySelector('.site-layer details[data-link-picker][open]');
+  if (dp) { UI.closeDetails(dp); const sm = dp.querySelector('summary'); if (sm) try { sm.focus({ preventScroll: true }) } catch (x) { } return }   // 드롭다운 먼저 닫기(공통 규칙)
   onBackdrop();
 });
 

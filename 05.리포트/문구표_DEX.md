@@ -8,10 +8,10 @@
 
 | 구분 | 행 수 | 설명 |
 |---|---|---|
-| 총 행 | **95** | 같은 뜻의 빈칸은 한 행으로 묶음 |
-| 언어팩 재사용 | **13** | 키의 국문·영문을 그대로 씀(`페이백`→`캐시백` 치환만 허용) |
-| 기존 문구 재사용 | **9** | STG · 기존 Figma · 이메일 템플릿 · 확정 정책 원문 |
-| 신규 작성 | **59** | 언어팩 키를 UID→Account 등으로 고친 것(출처 칸에 바탕 키 표기)과, 영문은 정책 원문이 있고 국문만 새로 쓴 것(G-367 등) 포함 |
+| 총 행 | **89** | 같은 뜻의 빈칸은 한 행으로 묶음 |
+| 언어팩 재사용 | **8** | 키의 국문·영문을 그대로 씀(`페이백`→`캐시백` 치환만 허용) |
+| 기존 문구 재사용 | **12** | STG · 기존 Figma · 이메일 템플릿 · 확정 정책 원문 · 기존 홈 행 배너·모달(DEX 행은 `UID`→`wallet` ✏️) |
+| 신규 작성 | **55** | 언어팩 키를 UID→Account 등으로 고친 것(출처 칸에 바탕 키 표기)과, 영문은 정책 원문이 있고 국문만 새로 쓴 것(G-367 등) 포함 |
 | 표시 없음(결정) | **9** | 사용자 결정으로 문구·상태를 두지 않음 |
 | 운영 입력값 | **3** | 어드민·레코드가 채우는 값 — 문구표 대상 아님(프로토타입은 표본) |
 | 값 미정 | **2** | G-425(법무 문안) · G-025 · G-036(정산 주기) · G-089(지역 판정) — 4장 |
@@ -22,15 +22,10 @@
 |---|---|---|---|---|---|---|
 | 1 | 홈 연동 행 · 확인 중 / DEX 상세 오퍼 박스 확인 중 | 칩 | Trying to link | 연동 시도중이에요 | 언어팩 `link status processing` | 결정 6차 · Q6 · REQ-272 |
 | 2 | 홈 연동 행 · 소유 확인 중 | 칩 | Verifying ownership | 소유 확인중이에요 | 언어팩(app) `link status owner` | L-12 · REQ-272 |
-| 3 | 홈 연동 행 · 이슈 | 칩 | There’s an issue | 문제가 있어요 | 언어팩(app) `link status problem` | REQ-272 |
-| 4 | 홈 연동 행 · 연동 실패 | 칩 | Linking failed | 연동 실패했어요 | 언어팩(app) `link status fail` | REQ-272 |
-| 5 | 홈 연동 행 · 소유 확인 실패 | 칩 | Ownership verification failed | 소유 확인에 실패했어요 | 언어팩(app) `link status owner fail` | REQ-272 |
-| 6 | 홈 연동 행 · 연동 해제 | 칩 | Unlinked | 연동 해제되었어요 | 언어팩(app) `link status disconnect` | REQ-272 |
-| 7 | 홈 연동 행 · 연동 완료 | 칩 | Linked | 연동 완료 | 신규(EN) · KO 기존 상태명 | REQ-272 |
-| 8 | 홈 연동 행 · 오프보딩 | 칩 | Inactive | 비활성 | 언어팩 `inactive` | REQ-121 · G-128 · G-367 |
-| 9 | 홈 연동 행 · 캐시백 0 | 칩 | No cashback yet | 아직 캐시백이 없어요 | EN 정책(8-1) · KO 신규 | REQ-273 · G-367 |
-| 10 | 홈 연동 행 · 지연 | 칩 | Data delayed | 반영 지연 | EN 정책(8-1) · KO 신규 | REQ-273 · G-367 |
-| 11 | 홈 연동 행 · 오프보딩 | 본문(행 안내) | No longer supported. Cashback already earned is still sent to this wallet automatically. | 지원이 종료된 거래소예요. 적립된 캐시백은 이 지갑으로 계속 자동 지급돼요. | 신규 | REQ-121 |
+| 3 | 홈 연동 행 · 이슈(오프보딩 포함) · 행 탭 모달 | 제목 · 본문 · 버튼 | CEX `There is a problem with this UID.` / DEX `There is a problem with this wallet.` · `Please contact our support team for assistance.` · `Contact Support` | (기존 국문 짝) | 기존 디자인 · DEX 행 ✏️ | REQ-273 · 결정 10차 |
+| 4 | 홈 연동 행 · 수동 연동 실패 배너 → 모달 | 배너 · 제목 · 버튼 | CEX `UID Linking was unsuccessful. View reason.` → `UID Linking Unsuccessful` · `Remove UID` · `UID Link` / DEX `Wallet linking was unsuccessful. View reason.` → `Wallet Linking Unsuccessful` · `Remove Wallet` · `Link Wallet` | (기존 국문 짝) | 기존 디자인 · DEX 행 ✏️ | REQ-273 · 결정 10차 |
+| 5 | 홈 연동 행 · 소유 확인 실패 배너 | 배너 | Ownership verification was unsuccessful. View reason. | (기존 국문 짝) | 기존 디자인(CEX·DEX 같음) | REQ-273 · 결정 10차 |
+| 6 | 홈 연동 행 · 연동 해제(되찾기) 배너 | 배너 | CEX `This UID has been unlinked. Tap to verify ownership and reclaim it.` / DEX `This wallet has been unlinked. Tap to verify ownership and reclaim it.` | (기존 국문 짝) | 기존 디자인 · DEX 행 ✏️ | REQ-273 · 결정 10차 |
 | 12 | 홈 S3 앱·모바일웹 빈 홈 카드 | 제목 | Link once and cashback keeps coming | 한 번 연동하면 캐시백이 계속 쌓여요 | 신규(단수 표기 확정) | REQ-267 · 사용자 확인 #48 |
 | 13 | 홈 FAQ `How do I get cashback?` 회원 답변(게스트 답변 삭제) | 본문 | Go to Cashback Summary, then select your exchange, account, and cashback type to view your cashback history by date. | [캐시백 요약] 메뉴에서 거래소 / 거래 계정 / 캐시백 유형을 선택하면 날짜별 캐시백 적립 내역을 확인하실 수 있습니다. | 언어팩 FAQ 시트(회원 답변) UID→account 치환 | S-11 · G-419 |
 | 14 | 홈·허브 목록 10개 초과 | 버튼 | Show More | 더 보기 | 언어팩 `show more` | REQ-134 · balance 「더보기」 |
@@ -75,7 +70,6 @@
 | 48 | 홈 잔액 로드 실패 | 본문 | We can't load your balance right now. | 지금은 잔액을 불러올 수 없어요. | EN 정책 · KO 신규 | G-367 · REQ-269 |
 | 49 | DEX 카드 파트너 오류 | 본문 | We can't load your latest {DEX} cashback right now. | 지금은 {DEX}의 최신 캐시백을 불러올 수 없어요. | EN 정책 · KO 신규 | G-367 · REQ-148 |
 | 50 | 계산기 요율 로드 실패 | 수치 자리 | Estimate unavailable | 예상 금액을 계산할 수 없어요 | EN 정책(G-144) · KO 신규 | G-367 |
-| 51 | 홈·지갑 상세 · DEX 0원 배너 · 갱신 주기(Lighter 포함) | 본문 · 칸 | Cashback appears here the day after you trade on your linked DEX. / Daily, {로컬 시각} | (기존 국문 짝) | 확정 정책 원문 | G-110 · G-428 |
 | 52 | 랭킹 목록 아래 | 캡션 | Cashback under 0.01 USDT isn’t included in the rankings. | 캐시백 0.01 USDT 미만은 순위에 포함되지 않습니다. | KO 기존(계획 원문) · EN 신규 | balance #36 |
 | 53 | 랭킹 목록 아래 | 캡션 | Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback. | 랭킹 리워드만으로는 출금할 수 없어요. 같은 계정의 캐시백과 1:1로 매칭돼요. | 신규 | balance #36 · 정책 4-1 |
 | 54 | 캐시백 요약 · 연동 전 출금 행 | 유형명 | Claim Amount (before linking) | 연동 전 출금 | 신규(STG 유형값 `Claim Amount` 바탕) | G-426 · G-418 |

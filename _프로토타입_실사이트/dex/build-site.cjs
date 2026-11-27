@@ -12,7 +12,7 @@ const PATCH = [
   ['70-hub.js', "const p=route==='DEX'?HB_DEX.find(x=>x.id===(o.pid||'lighter')):route==='CEX'?HB_CEX.find(x=>x.id==='bybit'):HB_BRK[0];",
     "const p=(window.SITEH&&SITEH.partner(route,routeList(route)))||(route==='DEX'?HB_DEX.find(x=>x.id===(o.pid||'lighter')):route==='CEX'?HB_CEX.find(x=>x.id==='bybit'):HB_BRK[0]);"],
   ['70-hub.js', `const slider=\`<div class="col" style="gap:0"><div style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div style="position:absolute;left:0;top:10px;width:44px;height:6px;border-radius:100px;background:var(--blue)"></div><img src="\${A('hub-slider-thumb.svg')}" alt="" style="position:absolute;left:33px;top:2.5px;width:30px;height:30px"></div>`,
-    `const SLP=window.SITEH?SITEH.sliderPct(route):null;const slider=\`<div class="col" style="gap:0"><div data-hub-slider="\${route}" style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div data-sl-fill style="position:absolute;left:0;top:10px;width:\${SLP==null?'44px':\`calc((100% - 30px) * \${SLP} + 15px)\`};height:6px;border-radius:100px;background:var(--blue)"></div><img data-sl-thumb src="\${A('hub-slider-thumb.svg')}" alt="" style="position:absolute;left:\${SLP==null?'33px':\`calc((100% - 30px) * \${SLP})\`};top:2.5px;width:30px;height:30px"></div>`],
+    `const SLP=window.SITEH?SITEH.sliderPct(route):null;const slider=\`<div class="col" style="gap:0"><div data-hub-slider="\${route}" style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div data-sl-fill style="position:absolute;left:0;top:10px;width:\${SLP==null?'44px':\`calc((100% - 30px) * \${SLP} + 15px)\`};height:6px;border-radius:100px;background:var(--blue)"></div><img data-sl-thumb src="\${A('hub-slider-thumb.svg')}" alt="" style="position:absolute;left:\${SLP==null?'33px':\`calc((100% - 30px) * \${SLP})\`};top:-1px;width:30px;height:30px"></div>`],
   ['70-hub.js', `<span class="sub2 c2">Monthly trading volume</span><span class="h5">\${usd0(HB_VOL)}</span>`,
     `<span class="sub2 c2">Monthly trading volume</span>\${window.SITEH?\`<input data-hub-vol class="h5 hub-vol" inputmode="numeric" aria-label="Monthly trading volume" value="\${usd0(HB_VOL)}"\${route==='Brokers'?' readonly':''}>\`:\`<span class="h5">\${usd0(HB_VOL)}</span>\`}`],
   ['70-hub.js', "${rHead('CASHBACK ESTIMATE')}${rule()}${seg(route)}${inputs}${slider}${rule()}${body}${member}${o.rateFail?'':learn}",
@@ -68,7 +68,7 @@ const PATCH = [
   ['80-dex.js', "<div class=\"row between\" style=\"padding:16px\"><span class=\"b1 semi\">Terms and conditions</span>", "<div class=\"row between\" data-faq-head data-faq-terms style=\"cursor:pointer;padding:16px\"><span class=\"b1 semi\">Terms and conditions</span>"],
   ['80-dex.js', "${sorts.map((s,i)=>`<span style=\"padding:9px 16px;", "${sorts.map((s,i)=>`<span data-rv-sort=\"${i}\" style=\"cursor:pointer;padding:9px 16px;"],
   ['80-dex.js', "const rv=(o)=>`<div class=\"col\" style=\"gap:${o.mod?16:8}px;", "const rv=(o)=>`<div class=\"col\" data-rv data-v=\"${o.v||0}\" data-date=\"${o.date||''}\" style=\"gap:${o.mod?16:8}px;"],
-  ['80-dex.js', "<span class=\"b2\">${o.body}</span><span style=\"font-size:13px;color:#1976d2\">Read more</span>", "<span class=\"b2 rv-body\">${o.body}</span><span data-rv-more style=\"cursor:pointer;font-size:13px;color:#1976d2\">Read more</span>"],
+  ['80-dex.js', "<span class=\"b2\">${o.body}</span><span style=\"font-size:13px;color:var(--blue)\">Read more</span>", "<span class=\"b2 rv-body\">${o.body}</span><span data-rv-more style=\"cursor:pointer;font-size:13px;color:var(--blue)\">Read more</span>"],
   // ---- 2회차: 지갑·UID 상세(기존 디자인 · Earning Timeline 3단계)
   ['40-home.js', "const mark=(name,s=32)=>CEXLOGO[name]?", "const mark=(name,s=32)=>window.SITELOGO&&SITELOGO[name]&&!['Lighter','ApeX','EdgeX','Aster'].includes(name)?`<img src=\"${SITELOGO[name]}\" style=\"width:${s}px;height:${s}px;border-radius:50%;flex:none;object-fit:cover\" alt=\"${name}\">`:CEXLOGO[name]?"],
   ['40-home.js', "const [A0,B0]=ctx.state.ab;const pending=st==='pending';", "const SW=window.SITEW;const [A0,B0]=SW?[SW.a,SW.b]:ctx.state.ab;const pending=SW?SW.st==='pend':st==='pending';"],
@@ -90,7 +90,7 @@ const PATCH = [
   ['60-own.js', "const OWN_SHORT='0x7a3f…51e9';", "let OWN_SHORT='0x7a3f…51e9';"],
   ['60-own.js', "${T('MP4 or MOV (max. 100MB)')}", "${T('MP4 or MOV (max. 1GB)')}"],
   ['60-own.js', "const height=mo?812:900;", "if(window.SITEL&&window.SITEO_DLG)return muiDialog(dlg);\n  const height=mo?812:900;"],
-  ['40-home.js', "const mob=S.vp==='mo';const rows=SEE_ALL;", "const mob=S.vp==='mo';const rows=window.SITEA||SEE_ALL;"],
+  ['40-home.js', "const mob=S.vp==='mo';const rows=SEE_ALL.filter(r=>ST[r.st]);", "const mob=S.vp==='mo';const rows=(window.SITEA||SEE_ALL).filter(r=>ST[r.st]);"],
   ['40-home.js', "${C.chip('All',true,{sm:false})}${C.chip('CEX',false)}${C.chip('DEX',false)}", "${['All','CEX','DEX'].map(k=>C.chip(k,(window.SITEAF||'All')===k)).join('')}"],
   ['60-own.js', "  return wrap(ownLayer(page,dlg));", "  if(window.SITEL&&window.SITEO_DLG)return dlg;\n  return wrap(ownLayer(page,dlg));"],
   ['40-home.js', "const isCex=n=>!!CEXLOGO[n];", "const isCex=n=>!!CEXLOGO[n]||!!(window.SITELOGO&&SITELOGO[n]&&!['Lighter','ApeX','EdgeX','Aster'].includes(n));"],
@@ -107,7 +107,7 @@ const PATCH = [
 const EXPORT = {
   '70-hub.js': ";window.HUBX={calcCard,panelCard,hero,routes,compare,why,shell,routeList,HB_DEX,HB_CEX,HB_BRK,setVol:v=>{HB_VOL=v},get vol(){return HB_VOL}};",
   '80-dex.js': ";window.DEXX={DX,dtDrawer,ovPage,dtPage,offerBox,dtStructure,dtGuide,calc};",
-  '40-home.js': ";window.HOMEX={seeAllModal,ST,hChip,n2,short,mark};",
+  '40-home.js': ";window.HOMEX={seeAllModal,ST,hChip,n2,short,mark,issueDialog,failDialog};",
   '100-summary.js': ";window.SUMX={sel,menu,mItem,chk,logo,short,TY};",
   '60-own.js': ";window.OWNX={muiDialog,mBtn,oAlert,setOwn:(d,s)=>{OWN_DEX=d;OWN_SHORT=s}};",
   '50-link.js': ";window.LINKX={linkModal,moForm,splash,webExchangeField,moSheet,uidLinkForm,guide,ADDR_KO,DEXES,WEB_CEX,get addr(){return ADDR},setAddr:v=>{ADDR=v},setSel:v=>{selectedExchange=v}};",
@@ -127,7 +127,7 @@ const esc = s => s.replace(/<\/script/gi, '<\\/script');
 const core = body['01-core.js'];
 const modules = files.filter(f => f !== '01-core.js').map(f => `</script>\n<script>// ===== ${f} =====\ntry{(()=>{\n${esc(body[f])}\n})()}catch(e){console.error('${f}',e);(window.PT_ERR=window.PT_ERR||[]).push('${f}: '+e.message)}`).join('\n');
 const css = fs.readdirSync(src).filter(f => f.endsWith('.css')).sort().map(f => read(path.join(src, f))).join('\n') + '\n' + read(path.join(dir, 'src', 'site.css'));
-const site = read(path.join(dir, 'src', 'site.js')) + '\n' + read(path.join(dir, 'src', 'site2.js'));
+const site = read(path.join(dir, 'src', 'site-ui.js')) + '\n' + read(path.join(dir, 'src', 'site.js')) + '\n' + read(path.join(dir, 'src', 'site2.js'));
 const html = read(path.join(dir, 'src', 'template.html'))
   .replace('/*__CSS__*/', () => css)
   .replace('/*__JS__*/', () => esc(core) + '\n' + modules + `\n</script>\n<script>// ===== site.js =====\n${esc(site)}`);

@@ -55,7 +55,7 @@ var S={key:'en',auth:'guest',state:'',view:'auto',dr:''};
 var $=function(id){return document.getElementById(id)};
 try{var h=new URLSearchParams(location.hash.slice(1));['key','auth','state','view','dr'].forEach(function(k){if(h.get(k)!==null)S[k]=h.get(k)})}catch(e){}
 // ---- DEX 연결 (README 「DEX 연결」): /en/affiliated = 캐시백 허브, /en/dex · /en/dex/{slug} = DEX 앱(dex/app.html)
-var DEXR={en__affiliated:['/hub','캐시백 허브'],en__dex:['/dex','DEX 개요'],en__dex__lighter:['/dex/lighter','Lighter 상세'],en__dex__apex:['/dex/apex','ApeX 상세'],en__dex__edgex:['/dex/edgex','EdgeX 상세'],en__dex__aster:['/dex/aster','Aster 상세'],en__rewardHistory:['/summary','캐시백 요약'],en__account:['/account','지갑·UID 상세'],'en__ownership-verification':['/ownership','소유권 인증']};
+var DEXR={en__affiliated:['/hub','캐시백 허브'],en__dex:['/dex','DEX 개요'],en__dex__lighter:['/dex/lighter','Lighter 상세'],en__dex__apex:['/dex/apex','ApeX 상세'],en__dex__edgex:['/dex/edgex','EdgeX 상세'],en__dex__aster:['/dex/aster','Aster 상세'],en__rewardHistory:['/summary','캐시백 요약'],en__payback:['/payback','캐시백 계산기'],en__account:['/account','지갑·UID 상세'],'en__ownership-verification':['/ownership','소유권 인증'],en__benefits:['/benefits','혜택']};
 Object.keys(DEXR).forEach(function(k){var u=ORIGIN+'/'+k.replace(/__/g,'/');if(!D.pages[k])D.pages[k]={url:u,auth:{guest:{vp:{pc:{},mo:{}}},member:{vp:{pc:{},mo:{}}}}};D.pages[k].dex=DEXR[k][0];D.pages[k].label=DEXR[k][1]+' (DEX 앱) · '+u.replace(ORIGIN,'');D.urlmap[u]=k});
 function dexKeyOf(r){var p=r.split('?')[0];for(var k in DEXR)if(DEXR[k][0]===p)return k;return 'en'+p.replace(/\//g,'__')}
 if(!D.pages[S.key])S.key='en';
@@ -162,6 +162,7 @@ window.addEventListener('message',function(e){
   if('layer' in m){var want=m.layer?'o:'+m.layer.replace(/^\w+__/,''):'';if(S.state.indexOf('o:')===0||want){S.state=want;$('st').value=want;history.replaceState(null,'','#'+new URLSearchParams(S).toString())}render.pendingFrag=''}
   if(m.go&&D.pages[m.go]){S.key=m.go;S.state=m.state||'';return render()}
   if('state' in m){S.state=m.state;render()}
+  if(m.nav&&m.lang){toast('수집되지 않은 페이지: '+m.nav.replace(ORIGIN,'')+' (영문만 수집)');return}
   if(m.nav){var k=keyOf(m.nav);if(k)go(k);else if(k===null)window.open(m.nav,'_blank');else toast('수집되지 않은 페이지: '+m.nav.replace(ORIGIN,''))}
   else if(m.auth)render();
 });

@@ -45,9 +45,12 @@
     var st = document.createElement('style'); st.setAttribute('data-pt-layer', id); st.textContent = p.css; document.head.appendChild(st);
     var box = document.createElement('div'); box.className = 'pt-layer'; box.setAttribute('data-pt-layer', id); box.innerHTML = p.html;
     document.body.appendChild(box);
+    scrollLock(true);
     post({ layer: id });
   }
-  function closeLayers() { document.querySelectorAll('[data-pt-layer]').forEach(function (e) { e.remove() }); post({ layer: '' }) }
+  function closeLayers() { document.querySelectorAll('[data-pt-layer]').forEach(function (e) { e.remove() }); scrollLock(false); post({ layer: '' }) }
+  // 스크롤 잠금: 모달·메뉴·드로어 조각이 열렸을 때만(실사이트 MUI Modal = body overflow hidden)
+  function scrollLock(on) { document.documentElement.style.overflow = on ? 'hidden' : '' }
   function onLayerClick(e, layer) {
     var t = e.target;
     var a = t.closest('a[href]');
@@ -56,10 +59,18 @@
     if (a) { closeLayers(); return nav(a.getAttribute('data-orig-href') || a.href) }
     if (b) {
       var l = label(b);
+      if (b.hasAttribute('data-pt-act')) { closeLayers(); return rowAct(b.getAttribute('data-pt-act')) }
+      if (enh(t, b, true)) return;
       closeLayers();
       if (!l || /close|cancel|dismiss|^x$|×|back/i.test(l) || /close/i.test(b.getAttribute('aria-label') || '')) return;
+      if (l === 'English') return;                       // 언어 메뉴: 지금 언어 — 닫기만
+      if (LANG[l]) {                                     // 다른 언어 → 실사이트는 /{코드}/같은 경로(라이브 측정). 영문만 수집 → 셸이 「수집되지 않은 페이지」 안내
+        var alt = document.querySelector('link[rel=alternate][hreflang="' + LANG[l] + '"]');
+        return post({ nav: alt ? alt.href : ORIGIN + '/' + LANG[l] + PAGE.replace(/^\/en/, ''), lang: 1 });
+      }
       return generic(b);
     }
+    if (enh(t, null, true)) return;
     // 바깥(배경) 클릭 → 닫기
     var cls = typeof t.className === 'string' ? t.className : '';
     if (/backdrop|overlay|dimm?/i.test(cls) || t === layer || t.parentElement === layer) closeLayers();
@@ -92,26 +103,49 @@
     if (cls) { btn.classList.toggle(cls, open); var ar = btn.querySelector('[class*="__NavArrow"]'); if (ar) ar.classList.toggle(cls, open) }
     d.setAttribute('aria-hidden', open ? 'false' : 'true');
     if (open) d.removeAttribute('inert'); else d.setAttribute('inert', '');
-    d.style.height = open ? 'auto' : '0px'; d.style.opacity = open ? '1' : '0'; d.style.visibility = open ? 'visible' : 'hidden';
+    // 실사이트(라이브 측정): 높이·투명도 약 .2s 애니메이션 후 height:auto, 닫힘은 반대로 — 같은 값으로 맞춘다
+    clearTimeout(d._ptT); d.style.transition = 'height .2s cubic-bezier(.65,0,.35,1), opacity .2s cubic-bezier(.65,0,.35,1)'; d.style.overflow = 'hidden';
+    if (open) { d.style.visibility = 'visible'; var h = d.scrollHeight; d.style.height = d.getBoundingClientRect().height + 'px'; void d.offsetHeight; d.style.height = h + 'px'; d.style.opacity = '1'; d._ptT = setTimeout(function () { d.style.height = 'auto' }, 210) }
+    else { d.style.height = d.getBoundingClientRect().height + 'px'; void d.offsetHeight; d.style.height = '0px'; d.style.opacity = '0'; d._ptT = setTimeout(function () { d.style.visibility = 'hidden' }, 210) }
   }
-  function navClose(except) { document.querySelectorAll('[class*="__NavMenu"][aria-expanded="true"]').forEach(function (x) { if (x !== except) navSet(x, false) }) }
+  // 실사이트: 마우스를 올리면 펼침 · 벗어나면 접힘. 프로토타입: 클릭하면 펼친 채 유지(다시 클릭 · 바깥 클릭 · Esc로 닫힘)
+  var navPin = null, navHover = null, navOutT = null;
+  function navClose(except) { if (navPin && navPin !== except) navPin = null; document.querySelectorAll('[class*="__NavMenu"][aria-expanded="true"]').forEach(function (x) { if (x !== except) navSet(x, false) }) }
   function navToggle(btn) {
     if (!navDrop(btn)) return false;
-    var open = btn.getAttribute('aria-expanded') !== 'true';
-    navClose(btn); navSet(btn, open); return true;
+    if (navPin === btn) { navPin = null; navSet(btn, false); return true }
+    navClose(btn); navSet(btn, true); navPin = btn; return true;
   }
+  document.addEventListener('mouseover', function (e) {
+    var g = e.target.closest && e.target.closest('[class*="__NavMenu"]');
+    if (!g || !navDrop(g) || navPin === g) return;
+    if (g.getAttribute('aria-expanded') === 'true') { if (!navPin) { navHover = g; clearTimeout(navOutT) } return }
+    if (navPin) return;                                  // 다른 메뉴가 클릭으로 고정돼 있으면 hover로 바꾸지 않는다
+    clearTimeout(navOutT); navClose(g); navSet(g, true); navHover = g;
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (!navHover || navPin === navHover) return;
+    var to = e.relatedTarget; if (to && navHover.parentElement.contains(to)) return;
+    var g = navHover; navHover = null; clearTimeout(navOutT);
+    navOutT = setTimeout(function () { if (navPin !== g && navHover !== g) navSet(g, false) }, 200);   // 실사이트: 벗어난 뒤 약 .2s 뒤 접힘
+  });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') navClose() });
 
   document.addEventListener('click', function (e) {
     var t = e.target;
     var dis = disabledAt(e.clientX, e.clientY);
+    if (dis && dis.closest('[data-pt-form]')) { e.preventDefault(); e.stopPropagation(); return }   // 입력 폼: 실사이트처럼 조건을 채우기 전에는 눌리지 않음
     if (dis) { e.preventDefault(); e.stopPropagation(); return generic(dis) }
     var layer = t.closest && t.closest('.pt-layer');
     if (layer) return onLayerClick(e, layer);
+    var se = t.closest && t.closest('button[type=submit]');
+    if (se && se.form && se.form.querySelector('input[name="signup-email-input"]')) { e.preventDefault(); e.stopPropagation(); return emailGo(se.form) }
     if (t.closest('[class*="__LinkedFooter"]')) { e.preventDefault(); e.stopPropagation(); return dexLink() }   // DEX 연결
     if (t.closest('[class*="__SideButton"]')) { e.preventDefault(); e.stopPropagation(); return post({ dexLink: { mode: 'drawer' } }) }   // DEX 연결: 모바일 드로어(결정 D4 구성)
     if (t.closest('[data-dex-own]')) return;
     var lrow = PT.key === 'en' && PT.auth === 'member' && t.closest('[class*="__LinkedUidRow"]');
+    var ban = PT.key === 'en' && PT.auth === 'member' && t.closest('[data-dex-ban]');
+    if (ban) { e.preventDefault(); e.stopPropagation(); return rowBannerClick(ban.getAttribute('data-dex-ban')) }
     if (lrow) { e.preventDefault(); e.stopPropagation(); return dexRowOpen(lrow) }
     var nm = t.closest('[class*="__NavMenu"]');   // GNB 드롭다운(Cashback · Rewards Hub · Discover) — 모든 페이지·회원/게스트에서 펼침/접힘
     if (nm && navToggle(nm)) { e.preventDefault(); e.stopPropagation(); return }
@@ -122,7 +156,11 @@
       e.preventDefault(); e.stopPropagation();
       var sig = b.getAttribute('data-pt-sig'), x = (PT.acts || {})[sig];
       if (PT.stateSig && PT.stateSig === sig) return post({ state: '' });       // 같은 버튼 다시 → 닫힘
-      if (!x) return generic(b);
+      if (!x || !/^(nav|state|overlay|ext)$/.test(x.type)) {                   // 수집 결과 없음 → 보완표(다른 뷰포트·같은 라벨) → 화면 동작 → 정상 처리
+        var fb = fbAct(sig, label(b), b);
+        if (fb && fb.type === 'state' && fb.key && fb.key !== PT.key) return post({ go: fb.key, state: fb.snap.split('.').pop() });
+        if (fb) x = fb; else if (enh(t, b)) return; else return generic(b);
+      }
       if (x.type === 'nav') return nav(x.url);
       if (x.type === 'state') return post({ state: x.snap.split('.').pop() });
       if (x.type === 'overlay' && /^Link your exchange UID/.test(x.text || '')) return dexLink();   // DEX 연결: 같은 연동 모달
@@ -133,15 +171,23 @@
     }
     if (a) { e.preventDefault(); e.stopPropagation(); return nav(a.getAttribute('data-orig-href') || a.href) }
     var btn = t.closest('button,[role=button],input[type=submit]');
-    if (btn) { e.preventDefault(); e.stopPropagation(); return generic(btn) }
+    if (btn && /^(checkbox|radio|range)$/.test((t.getAttribute && t.getAttribute('type')) || '')) btn = null;
+    if (btn) { e.preventDefault(); e.stopPropagation(); if (enh(t, btn)) return; var fb2 = fbAct('', label(btn), btn); if (fb2) return runAct(fb2); return generic(btn) }
     for (var el = t, i = 0; el && el !== document.body && i < 5; el = el.parentElement, i++) {
       if ((PT.acts || {})['label:' + label(el)]) { e.preventDefault(); e.stopPropagation(); return generic(el) }
     }
+    if (enh(t, null)) { e.preventDefault(); e.stopPropagation() }
   }, true);
-  document.addEventListener('submit', function (e) { e.preventDefault(); generic(e.target.querySelector('[type=submit],button') || e.target) }, true);
+  document.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target; if (f.querySelector('input[name="signup-email-input"]')) return emailGo(f);
+    if (f.hasAttribute('data-pt-form') && !formCheck(f, true)) return;   // 입력 폼: 조건 미충족이면 오류만 표시
+    generic(f.querySelector('[type=submit],button') || f);
+  }, true);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLayers() });
   // 입력하면 같은 폼의 비활성 버튼을 살린다(실제 검증 로직이 없으므로)
   document.addEventListener('input', function (e) {
+    if (e.target.closest && e.target.closest('[data-pt-form]')) return;
     var scope = e.target.closest('form') || e.target.closest('[role=dialog]') || document;
     scope.querySelectorAll('button[disabled],button.Mui-disabled').forEach(function (b) { b.removeAttribute('disabled'); b.removeAttribute('aria-disabled'); b.classList.remove('Mui-disabled') });
   }, true);
@@ -160,12 +206,351 @@
     });
   }
   var _show = show;
-  show = function (id) { _show(id); var l = document.querySelector('.pt-layer'); if (l) { settleOpen(l); dexCopy(l) } };
+  show = function (id) { _show(id); var l = document.querySelector('.pt-layer'); if (l) { settleOpen(l); dexCopy(l); layerExName(l) } };
   document.addEventListener('DOMContentLoaded', function () {
     if (PT.stateSig) settleOpen(document);
     post({ loaded: PT.snap, title: document.title });
+    scrollFree();
     dexInject({}); dexMenu(); dexCopy(); dexPartners();
+    exCalcInit(); stepsInit();
   });
+  // 보완표(pt-acts.js): 같은 요소의 다른 뷰포트 수집 결과 · 전 페이지에서 같은 라벨의 이동 대상
+  (function () { var s = document.createElement('script'); s.src = '../pt-acts.js'; document.head.appendChild(s) })();
+
+  // ================= 입력 폼 (실사이트 OutlinedFloatingInput — 라이브 측정 2026-11-27) =================
+  // 포커스: Field + focused · floated / 벗어남: 값 있으면 floated, 검증 실패면 error + HelperText / 라벨 이동 .15s(수집 CSS)
+  // 문구·조건은 라이브에서 틀린 값을 넣어 채집한 그대로. 제출 버튼은 조건을 채워야 활성(가입은 라이브에 Cloudflare 확인이 더 있음 — 프로토타입은 생략)
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var HELP_CLS = 'HelperText-module-scss-module__wLrqwq__HelperText HelperText-module-scss-module__wLrqwq__error';
+  var EYE_OFF = '<svg viewBox="0 0 24 24" width="16" height="16" color="var(--action-disabled, rgba(0, 0, 0, 0.38))"><path d="m11.845 9.368 2.882 2.828v-.143a2.66 2.66 0 0 0-.799-1.898A2.75 2.75 0 0 0 12 9.368h-.155Zm-3.909.716 1.41 1.387a2.427 2.427 0 0 0-.073.582c0 .711.287 1.394.799 1.898a2.75 2.75 0 0 0 1.928.786c.2 0 .4-.027.59-.072L14 16.052a4.564 4.564 0 0 1-2 .474 4.583 4.583 0 0 1-3.214-1.31 4.438 4.438 0 0 1-1.331-3.163c0-.707.181-1.37.481-1.969ZM2.91 5.136 5.391 7.58C3.89 8.742 2.709 10.263 2 12.053c1.573 3.927 5.455 6.71 10 6.71 1.41 0 2.755-.268 3.982-.751l.39.375L19.028 21l1.155-1.136L4.064 4M12 7.579a4.58 4.58 0 0 1 3.214 1.31 4.438 4.438 0 0 1 1.332 3.164 4.24 4.24 0 0 1-.328 1.628l2.664 2.622A10.604 10.604 0 0 0 22 12.053c-1.573-3.928-5.454-6.71-10-6.71-1.273 0-2.49.223-3.636.625l1.972 1.924A4.654 4.654 0 0 1 12 7.58Z" fill="var(--action-disabled, rgba(0, 0, 0, 0.38))"></path></svg>';
+  var EYE_ON = '<svg viewBox="0 0 24 24" width="16" height="16" color="var(--action-disabled, rgba(0, 0, 0, 0.38))"><path d="M12 5C7.455 5 3.573 7.903 2 12c1.573 4.097 5.455 7 10 7 4.546 0 8.427-2.903 10-7-1.573-4.097-5.454-7-10-7Zm0 11.667c-2.51 0-4.545-2.091-4.545-4.667 0-2.576 2.036-4.667 4.545-4.667 2.51 0 4.546 2.091 4.546 4.667 0 2.576-2.037 4.667-4.546 4.667ZM12 9.2c-1.51 0-2.727 1.25-2.727 2.8 0 1.55 1.218 2.8 2.727 2.8 1.51 0 2.727-1.25 2.727-2.8 0-1.55-1.218-2.8-2.727-2.8Z" fill="var(--action-disabled, rgba(0, 0, 0, 0.38))"></path></svg>';
+  var CHK_ON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" width="19" height="19"><path d="M15.8333 2.5H4.16667C3.24167 2.5 2.5 3.25 2.5 4.16667V15.8333C2.5 16.75 3.24167 17.5 4.16667 17.5H15.8333C16.7583 17.5 17.5 16.75 17.5 15.8333V4.16667C17.5 3.25 16.7583 2.5 15.8333 2.5Z" fill="var(--primary-blue-main, #2453F0)"></path><path d="M8.33333 14.1667L4.16667 10L5.34167 8.825L8.33333 11.8083L14.6583 5.48333L15.8333 6.66667L8.33333 14.1667Z" fill="#fff"></path></svg>';
+  var CHK_OFF = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M13.3333 1.66667V13.3333H1.66667V1.66667H13.3333ZM13.3333 0H1.66667C0.75 0 0 0.75 0 1.66667V13.3333C0 14.25 0.75 15 1.66667 15H13.3333C14.25 15 15 14.25 15 13.3333V1.66667C15 0.75 14.25 0 13.3333 0Z" fill="var(--checkbox-outline-color, rgba(255, 255, 255, 0.7))"></path></svg>';
+  var DOT = '<svg fill="none" viewBox="0 0 16 16" width="16" height="16" color="var(--action-disabled, rgba(0, 0, 0, 0.38))" style="min-width: 16px; min-height: 16px; margin-top: 2px;"><circle cx="8" cy="8" r="3" fill="var(--action-disabled, rgba(0, 0, 0, 0.38))"></circle></svg>';
+  var TICK = '<svg fill="none" viewBox="0 0 16 16" width="16" height="16" color="var(--success-main, #2e7d32)" style="min-width: 16px; min-height: 16px; margin-top: 2px;"><path d="M5.99911 10.7799L3.68578 8.46655C3.42578 8.20655 3.00578 8.20655 2.74578 8.46655C2.48578 8.72655 2.48578 9.14655 2.74578 9.40655L5.53245 12.1932C5.79245 12.4532 6.21245 12.4532 6.47245 12.1932L13.5258 5.13988C13.7858 4.87988 13.7858 4.45988 13.5258 4.19988C13.2658 3.93988 12.8458 3.93988 12.5858 4.19988L5.99911 10.7799Z" fill="var(--success-main, #2e7d32)"></path></svg>';
+  var FORM = /\/(signup|login|resetpassword)$/.test(PAGE) ? PAGE.split('/').pop() : null;
+  var PW_RULES = ['8-16 characters.', 'At least one number and special character (*!@#).'];
+  var pwOk = function (v) { return [v.length >= 8 && v.length <= 16, /[0-9]/.test(v) && /[^A-Za-z0-9\s]/.test(v)] };
+  function fieldOf(i) { return i.closest('[class*="__Field"]') }
+  function fcls(fd, k) { var t = [].filter.call(fd.classList, function (c) { return /__Field$/.test(c) })[0]; return t ? t.replace(/Field$/, k) : k }
+  // 이 필드의 오류 문구(통과면 null, 문구 없는 오류면 '') — 라이브 채집 문구
+  function fieldErr(i) {
+    var v = i.value, n = i.name;
+    if (n === 'email') { if (FORM === 'resetpassword') return !v ? 'No email has been entered.' : EMAIL_RE.test(v) ? null : 'Enter a valid email address.'; return EMAIL_RE.test(v) ? null : 'Enter a valid email address' }
+    if (n === 'password') { if (FORM === 'signup') return pwOk(v).every(Boolean) ? null : ''; return v.length >= 8 && v.length <= 16 ? null : '8-16 characters.' }
+    if (n === 'invitecode') return !v || v.length >= 4 ? null : 'Enter at least 4 characters';
+    return null;
+  }
+  function setErr(i, msg) {
+    var fd = fieldOf(i), w = fd.parentElement, h = w.querySelector('[data-name="HelperText"]');
+    fd.classList.toggle(fcls(fd, 'error'), msg != null);
+    if (msg) { if (!h) { h = document.createElement('p'); h.className = HELP_CLS; h.setAttribute('data-name', 'HelperText'); w.appendChild(h) } h.textContent = msg }
+    else if (h) h.remove();
+  }
+  function pwRules(i) {
+    var g = i.closest('[class*="__PasswordGroup"]'); if (!g) return;
+    var pre = [].filter.call(g.classList, function (c) { return /__PasswordGroup$/.test(c) })[0].replace(/PasswordGroup$/, ''), box = g.querySelector('[class*="__PasswordValidationResult"]');
+    if (!box) { box = document.createElement('div'); box.className = pre + 'PasswordValidationResult'; box.innerHTML = PW_RULES.map(function (r) { return '<div class="' + pre + 'ValidationItem">' + DOT + '<p class="">' + r + '</p></div>' }).join(''); g.appendChild(box) }
+    var ok = pwOk(i.value);
+    [].forEach.call(box.children, function (it, j) { it.querySelector('svg').outerHTML = ok[j] ? TICK : DOT; it.querySelector('p').className = ok[j] ? pre + 'correspond' : '' });
+  }
+  function formCheck(f, show) {
+    var ins = [].slice.call(f.querySelectorAll('input[name]:not([type=hidden])')), ok = ins.every(function (i) { return fieldErr(i) == null });
+    var pol = f.querySelector('[class*="__PolicyButtonItem"]'); if (pol && pol.getAttribute('aria-pressed') !== 'true') ok = false;
+    if (show) ins.forEach(function (i) { var m = fieldErr(i); if (m != null) setErr(i, m) });
+    var sb = f.querySelector('button[type=submit]');
+    if (sb) { sb.disabled = !ok; sb.classList.toggle('Mui-disabled', !ok); sb.setAttribute('tabindex', ok ? '0' : '-1') }
+    return ok;
+  }
+  function formInit() {
+    if (!FORM) return;
+    document.querySelectorAll('form').forEach(function (f) { if (f.querySelector('[class*="OutlinedFloatingInput"]')) { f.setAttribute('data-pt-form', FORM); formCheck(f, false) } });
+    // 랜딩·검색의 `Sign Up Now` 이메일 → 가입 화면 이메일 칸(실사이트 /en/signup?email=… — 채워진 값을 바로 검증)
+    var pre = null; try { pre = sessionStorage.getItem('pt-signup-email'); sessionStorage.removeItem('pt-signup-email') } catch (x) { }
+    var em = FORM === 'signup' && pre != null && document.querySelector('[data-pt-form] input[name=email]');
+    if (em) { em.value = pre; em.setAttribute('value', pre); var fd = fieldOf(em); fd.classList.toggle(fcls(fd, 'floated'), !!pre); setErr(em, fieldErr(em)); formCheck(em.closest('form'), false) }
+  }
+  function emailGo(f) {
+    var i = f.querySelector('input[name="signup-email-input"]');
+    try { sessionStorage.setItem('pt-signup-email', i.value) } catch (x) { }
+    nav(ORIGIN + '/en/signup?email=' + encodeURIComponent(i.value));
+  }
+  document.addEventListener('focusin', function (e) {
+    var i = e.target; if (!i.matches || !i.matches('[data-pt-form] input')) return; var fd = fieldOf(i); if (!fd) return;
+    fd.classList.add(fcls(fd, 'focused'), fcls(fd, 'floated'));
+  });
+  document.addEventListener('focusout', function (e) {
+    var i = e.target; if (!i.matches || !i.matches('[data-pt-form] input')) return; var fd = fieldOf(i); if (!fd) return;
+    fd.classList.remove(fcls(fd, 'focused')); fd.classList.toggle(fcls(fd, 'floated'), !!i.value);
+    setErr(i, fieldErr(i));
+    formCheck(i.closest('form'), false);
+  });
+  document.addEventListener('input', function (e) {
+    var i = e.target; if (!i.matches || !i.matches('[data-pt-form] input')) return;
+    i.setAttribute('value', i.value);
+    if (i.name === 'password' && FORM === 'signup') pwRules(i);
+    if (fieldOf(i) && fieldErr(i) == null) setErr(i, null);    // 라이브: 고쳐서 맞으면 바로 오류가 사라짐
+    formCheck(i.closest('form'), false);
+  }, true);
+  document.addEventListener('click', function (e) {
+    var f = e.target.closest && e.target.closest('[data-pt-form]'); if (!f) return;
+    var tr = e.target.closest('[class*="__Trailing"]');
+    if (tr) { e.preventDefault(); e.stopPropagation(); var i = tr.parentElement.querySelector('input'); var show = i.type === 'password'; i.type = show ? 'text' : 'password'; tr.innerHTML = show ? EYE_ON : EYE_OFF; i.focus(); return }
+    var pol = e.target.closest('[class*="__PolicyButtonItem"]');
+    if (pol) { e.preventDefault(); e.stopPropagation(); var on = pol.getAttribute('aria-pressed') !== 'true'; pol.setAttribute('aria-pressed', on ? 'true' : 'false'); pol.innerHTML = on ? CHK_ON : CHK_OFF; formCheck(f, false); return }
+  }, true);
+  document.addEventListener('DOMContentLoaded', formInit);
+
+  // ================= 클릭 전수 점검 보완 (README 「클릭 전수 점검」) =================
+  // 수집 HTML에 이미 들어 있는 마크업(접힌 답변·탭 대상 구역·숨은 단계 이미지)을 DOM으로 펼치고 옮긴다. 근거 없는 결과는 만들지 않는다
+  var GOOD = /^(nav|state|overlay|ext)$/;
+  var LANG = { '繁體中文': 'zh-Hant', 'Português': 'pt', '简体中文': 'zh-Hans', 'Español': 'es', '日本語': 'ja', 'Français': 'fr', 'Монгол': 'mn', 'Русский': 'ru', 'Oʻzbek': 'uz', 'العربية': 'ar', 'Bahasa Indonesia': 'id', 'Türkçe': 'tr', 'Tiếng Việt': 'vi' };
+  var NOFB = /^(See All|Back|Terms & Conditions)$/;           // 페이지마다 대상이 다른 라벨은 라벨 보완표에서 뺀다
+  function fbAct(sig, l, el) {
+    var A = window.PT_ACTS; if (!A) return null;
+    var s = sig && (A.sig[PT.auth + '|' + PT.key + '|' + PT.vp] || {})[sig];
+    if (s) return s;
+    if (el && el.closest('.pt-layer')) return null;
+    if (l === 'Sign Up' && el && /__SignUpButton/.test(el.className)) l = 'Sign up';   // 모바일 헤더 = PC 헤더 `Sign up`
+    if (!l || NOFB.test(l)) return null;
+    return (A.label[PT.auth] || {})[l] || null;
+  }
+  function runAct(x) {
+    if (x.type === 'nav') return nav(x.url);
+    if (x.type === 'ext') return window.open(x.url, '_blank');
+    if (x.type === 'state') return x.key && x.key !== PT.key ? post({ go: x.key, state: x.snap.split('.').pop() }) : post({ state: x.snap.split('.').pop() });
+    if (x.type === 'overlay' && /^Linked UIDs/.test(x.text || '')) return post({ dexLink: { mode: 'seeAll' } });
+    if (x.type === 'overlay' && /^Link your exchange UID/.test(x.text || '')) return dexLink();
+    if (x.type === 'overlay') return openFrag(PT.auth + '__' + x.frag);
+  }
+  var clsOf = function (el, re) { return el ? [].filter.call(el.classList, function (c) { return re.test(c) })[0] : null };
+  var sib = function (el, re) { var c = clsOf(el, re); return c ? [].slice.call(document.getElementsByClassName(c)) : [el] };
+  // 같은 무리에서 `__active` 표식을 옮긴다(실사이트 클래스 그대로)
+  function moveActive(list, i, holder) {
+    var act = null; list.forEach(function (x) { var h = holder ? holder(x) : x; act = act || clsOf(h, /__active$|^active$/) });
+    if (!act) { var m = clsOf(list[0], /__/); act = m ? m.replace(/__\w+$/, '__active') : 'active' }
+    list.forEach(function (x, j) { var h = holder ? holder(x) : x; h.classList.toggle(act, j === i); if (h.hasAttribute('aria-current')) h.setAttribute('aria-current', j === i ? 'true' : 'false') });
+  }
+  function headerH() { var h = document.querySelector('header'); var r = h && h.getBoundingClientRect(); return r && r.bottom > 0 && r.top <= 0 ? r.height : 72 }
+  function scrollToEl(el) { var y = el.getBoundingClientRect().top + window.scrollY - headerH() - 16; window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }) }
+  // 목차·앵커 탭·사이드바 → 같은 제목의 구역으로(실사이트 = 부드러운 스크롤 + 표식 이동)
+  function findSection(l, btn, idx, n) {
+    var hs = [].filter.call(document.querySelectorAll('h1,h2,h3,h4,[class*="Title"],[class*="Label"]'), function (h) { return !h.contains(btn) && !btn.contains(h) && !h.closest('header,nav,[class*="__Toc"],[class*="Sidebar"],[class*="AnchorTab"]') && (h.innerText || '').trim().replace(/\s+/g, ' ') === l });
+    if (hs.length) return hs[0].closest('section') || hs[0];
+    var secs = [].filter.call(document.querySelectorAll('main section[id], section[id], div[id^="section"]'), function (s) { return !s.contains(btn) && !/hero/i.test(s.id) });
+    if (secs.length === n) return secs[idx];
+    if (l === 'Key Takeaways') return document.getElementById('key-takeaways');
+    var after = [].filter.call(document.querySelectorAll('section'), function (s) { return (btn.compareDocumentPosition(s) & 4) && clsOf(s, /__Section$/) });   // 탭 바 아래 구역(순서대로)
+    return after.length >= n ? after[idx] : null;
+  }
+  function anchorNav(btn) {
+    var list = sib(btn, /__(TocLabel|AnchorTab|SidebarItem)$/), i = list.indexOf(btn);
+    var sec = findSection(label(btn), btn, i, list.length); if (!sec) return false;
+    moveActive(list, i, /TocLabel/.test(btn.className) ? function (x) { return x.parentElement } : null);
+    scrollToEl(sec); return true;
+  }
+  // 아코디언 — 접힌 패널(style height:0 · FooterCollapsed)이 수집 HTML 안에 있다. 실사이트 FAQ는 하나만 펼침(나머지 접힘), .3s
+  function accPanel(item) {
+    return item.querySelector(':scope > [style*="height: 0px"], :scope > [class*="__Answer"], :scope > [class*="Collapsed"], :scope > [class*="__FAQItemAnswer"], :scope > [class*="__AnswerWrap"]');
+  }
+  function accSet(panel, open) {
+    if (/Collapsed/.test(panel.className) && !/height/.test(panel.getAttribute('style') || '')) { var c = clsOf(panel, /Collapsed$/) || panel.getAttribute('data-pt-col'); if (c) { panel.setAttribute('data-pt-col', c); panel.classList.toggle(c, !open) } panel.setAttribute('data-pt-open', open ? '1' : ''); return }
+    var h0 = panel.scrollHeight;
+    panel.style.transition = 'height .3s cubic-bezier(.65,0,.35,1), opacity .3s cubic-bezier(.65,0,.35,1)'; panel.style.overflow = 'hidden';
+    if (open) { panel.style.height = '0px'; panel.style.opacity = '0'; void panel.offsetHeight; panel.style.height = h0 + 'px'; panel.style.opacity = '1'; setTimeout(function () { if (panel.style.opacity === '1') panel.style.height = 'auto' }, 320) }
+    else { panel.style.height = panel.getBoundingClientRect().height + 'px'; void panel.offsetHeight; panel.style.height = '0px'; panel.style.opacity = '0' }
+    panel.setAttribute('data-pt-open', open ? '1' : '');
+  }
+  function accordion(t) {
+    for (var el = t, i = 0; el && el !== document.body && i < 6; el = el.parentElement, i++) {
+      var item = el.parentElement; if (!item) break;
+      var p = accPanel(item);
+      if (p && p !== el && !p.contains(t)) {
+        var was = p.getAttribute('data-pt-open'), isOpen = was === '1' || (was == null && !/height: 0px/.test(p.getAttribute('style') || '') && !/Collapsed/.test(p.className)), open = !isOpen;
+        if (/HomeFAQSection|FAQ/i.test(item.className) && open) [].forEach.call(item.parentElement.children, function (o) { var q = o !== item && accPanel(o); if (q && q.getAttribute('data-pt-open') === '1') accSet(q, false) });
+        accSet(p, open);
+        var ic = item.querySelector('button svg, [class*="Arrow"] svg, [class*="Icon"] svg'); if (ic) { ic.style.transition = 'transform .3s'; ic.style.transform = open ? 'rotate(180deg)' : '' }
+        return true;
+      }
+    }
+    return false;
+  }
+  // 랜딩 3단계(HomeOnboarding): 단계 클릭 → 그 단계 이미지. 실사이트처럼 3초마다 다음 단계
+  var stepsT = null;
+  function stepsGo(i) {
+    var items = sib(document.querySelector('[class*="__StepItem"]'), /__StepItem$/), imgs = sib(document.querySelector('[class*="__StepImage"]'), /__StepImage$/);
+    if (!items.length) return; i = (i + items.length) % items.length;
+    moveActive(items, i); moveActive(imgs, i); imgs.forEach(function (m, j) { m.setAttribute('aria-hidden', j === i ? 'false' : 'true') });
+  }
+  function stepsCur() { var items = sib(document.querySelector('[class*="__StepItem"]'), /__StepItem$/); for (var i = 0; i < items.length; i++) if (items[i].getAttribute('aria-current') === 'true' || /__active/.test(items[i].className)) return i; return 0 }
+  function stepsInit() {
+    if (!document.querySelector('[class*="HomeOnboarding"][class*="__StepItem"]') || window.PT_NOAUTO) return;
+    clearInterval(stepsT); stepsT = setInterval(function () { stepsGo(stepsCur() + 1) }, 3000);
+  }
+  // 거래소 카드·행 → 그 거래소 상세(실사이트 랜딩 `Top Exchanges` 행 클릭 = /en/exchangeDetail/{slug}-referral)
+  var EXCARD = '[class*="__ExchangeItem"][class*="__Clickable"], [class*="TopPopularExchanges"][class*="__Card"], [class*="__CashbackBoostItem"], [class*="__AllCard"]';
+  function exSlug(card) {
+    var n = card.querySelector('[class*="Name"]'), img = card.querySelector('img[alt]');
+    var name = ((n && n.textContent) || (img && img.getAttribute('alt')) || '').trim();
+    return name ? name.toLowerCase() : null;            // 실사이트 주소 그대로(`woo x pro-referral`)
+  }
+  // 거래소 상세 계산 — Taker/Maker · 거래량 슬라이더(실사이트 식: 거래량 = 100K × 100^(값/1000), 수수료 = 거래량 × 표의 요율)
+  var EX = null;
+  function pct(s) { return parseFloat(String(s).replace(/[^\d.]/g, '')) / 100 }
+  function money(n) { return n >= 1e6 ? '$' + (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? '$' + Math.round(n / 1e3) + 'K' : '$' + Math.round(n) }
+  function exCalcInit() {
+    if (!/^en__exchangeDetail__/.test(PT.key)) return;
+    var rows = document.querySelectorAll('[class*="__CommTableRow"]'); if (!rows.length) return;
+    var R = {}; [].forEach.call(rows, function (r) { var c = r.querySelectorAll('[class*="__CommTableCell"]'); var k = /Without/.test(c[0].textContent) ? 'w' : /discount/i.test(c[0].textContent) ? 'd' : 'c'; R[k] = [pct(c[1].textContent), pct(c[2].textContent)] });
+    if (!R.w || !R.c) return;
+    var sub = document.querySelector('[class*="__ExchangeInfoSection"] [class*="__CommSubtitle"]');
+    var cb = sub && (sub.textContent.match(/Cashback\s+(\d+)%/) || [])[1];
+    var range = document.querySelector('input[type=range][class*="__VolumeSlider"]');
+    EX = { R: R, cb: cb, maker: true, range: range };
+    if (range) range.addEventListener('input', exRender);
+  }
+  function exRender() {
+    if (!EX) return; var k = EX.maker ? 0 : 1, w = EX.R.w[k], c = EX.R.c[k], d = EX.R.d ? EX.R.d[k] : w;
+    document.querySelectorAll('[class*="__ToggleBtn"]').forEach(function (b) { var on = (b.textContent.trim() === 'Maker') === EX.maker; var ac = clsOf(b, /__active$|^active$/) || EX.act; if (ac) EX.act = ac; if (EX.act) b.classList.toggle(EX.act, on) });
+    var save = Math.ceil((w - c) / w * 100 - 1e-9), pay = Math.round(c / w * 100), disc = Math.round((w - d) / w * 100);
+    var info = document.querySelector('[class*="__ExchangeInfoSection"]');
+    var rn = info && info.querySelector('[class*="__RateNumber"]'); if (rn && /%/.test(rn.textContent)) rn.textContent = save + '%';
+    var sub = info && info.querySelector('[class*="__CommSubtitle"]'); if (sub && EX.cb) sub.textContent = 'Exchange discount ' + disc + '% + TetherMax Cashback ' + EX.cb + '%';
+    document.querySelectorAll('[class*="__CommInfo"]').forEach(function (p) { [].forEach.call(p.childNodes, function (n) { if (n.nodeType === 3 && /Pay only/.test(n.nodeValue)) n.nodeValue = 'Pay only $' + pay + ' instead of $100 in fees and save ' + save + '%' }) });
+    var r = EX.range; if (!r) return;
+    var v = +r.value, vol = 1e5 * Math.pow(100, v / 1000), p = v / 10;
+    r.style.background = 'linear-gradient(to right, rgb(36, 83, 240) 0%, rgb(36, 83, 240) ' + p + '%, rgba(36, 83, 240, 0.15) ' + p + '%, rgba(36, 83, 240, 0.15) 100%)';
+    var box = r.closest('[class*="__VolumeSliderWrapper"]'), sec = box && box.parentElement;
+    var vv = box.querySelector('[class*="__VolumeValue"]'); if (vv) vv.textContent = money(vol);
+    var fw = vol * w, fc = Math.round(vol * c), fv = box.querySelectorAll('[class*="__FeeCompareValue"]');
+    if (fv[0]) fv[0].textContent = '$' + Math.round(fw); if (fv[1]) fv[1].textContent = '$' + fc;
+    var big = sec && sec.querySelector('[class*="__RateNumber"]'); if (big) big.textContent = '$' + (Math.round(fw) - fc);
+  }
+  // MUI 슬라이더(서비스 소개 레버리지 등): 끌기 · 클릭 → 손잡이 · 트랙 · 값 표시
+  document.addEventListener('pointerdown', function (e) {
+    var root = e.target.closest && e.target.closest('.MuiSlider-root'); if (!root) return;
+    var inp = root.querySelector('input[type=range]'); if (!inp) return;
+    e.preventDefault();
+    var min = +inp.min || 0, max = +inp.max || 100, step = +inp.step || 1;
+    var move = function (ev) {
+      var r = root.getBoundingClientRect(), f = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width));
+      var v = Math.round((min + f * (max - min)) / step) * step, p = (v - min) / (max - min) * 100;
+      var th = root.querySelector('.MuiSlider-thumb'), tr = root.querySelector('.MuiSlider-track');
+      if (th) th.style.left = p + '%'; if (tr) tr.style.width = p + '%';
+      inp.value = v; inp.setAttribute('aria-valuenow', v);
+      var f2 = root.parentElement && root.parentElement.querySelector('[class*="__SliderFieldValue"]'); if (f2) f2.textContent = f2.textContent.replace(/[\d.,]+/, v);
+      inp.dispatchEvent(new Event('input', { bubbles: true }));
+    };
+    move(e);
+    var up = function () { document.removeEventListener('pointermove', move); document.removeEventListener('pointerup', up) };
+    document.addEventListener('pointermove', move); document.addEventListener('pointerup', up);
+  }, true);
+  function copyToast(text) {
+    try { navigator.clipboard.writeText(text).catch(function () { }) } catch (x) { }
+    toast('Copied.');
+  }
+  // 화면 동작 묶음 — 처리하면 true
+  function enh(t, el, inLayer) {
+    var l = label(el || t);
+    var tg = t.closest('[class*="__TocLabel"],[class*="__AnchorTab"],[class*="__SidebarItem"]');
+    if (tg && !inLayer && anchorNav(tg)) return true;
+    var st = t.closest('[class*="HomeOnboarding"][class*="__StepItem"]');
+    if (st) { var items = sib(st, /__StepItem$/); stepsGo(items.indexOf(st)); stepsInit(); return true }
+    var card = t.closest(EXCARD);
+    if (card && !t.closest('button:not([class*="__AllCard"])')) { var sl = exSlug(card); if (sl) { if (inLayer) closeLayers(); nav(ORIGIN + '/en/exchangeDetail/' + sl + '-referral'); return true } }
+    if (EX && el && /__ToggleBtn/.test(el.className) && /^(Taker|Maker)$/.test(l)) { EX.maker = l === 'Maker'; exRender(); return true }
+    var gs = t.closest('[class*="__GettingStartedCard"]');
+    if (gs) { nav(ORIGIN + '/en/kycCertification/detail?keyword=' + PT.key.split('__').pop() + '&page=1'); return true }   // 실사이트 이동 대상(수집 안 됨)
+    if (t.closest('[class*="__BasicsCard"]')) { nav(ORIGIN + '/en/brokers/learn'); return true }
+    if (l === 'Select Account' && document.getElementById('account-type')) { scrollToEl(document.getElementById('account-type')); return true }
+    if (inLayer && /^Sign up with .+ sign-up link/i.test(l)) {   // 가입 안내 팝업 → 그 거래소 가입 링크(실사이트에서 측정)
+      var su = SIGNUP[(PT.key.match(/exchangeDetail__(.+)-referral$/) || [])[1]];
+      if (su) { closeLayers(); window.open(su, '_blank'); return true }
+    }
+    if (l === 'support@tethermax.io') { if (inLayer) closeLayers(); copyToast('support@tethermax.io'); return true }
+    if (t.closest('[class*="AppBanner"][class*="__GetAppButton"]')) { window.open('https://play.google.com/store/apps/details?id=com.swing2app.v3.d55519973c9ef468b892634c0dcc49db4', '_blank'); return true }   // 실사이트(Android) 이동 대상
+    var ab = t.closest('[class*="AppBanner"][class*="__CloseButton"]');
+    if (ab) { var bn = ab.closest('[class$="__AppBanner"],[class*="__AppBanner "]') || ab.parentElement; bn.style.display = 'none'; return true }
+    // 단계 탭의 첫 단계(수집 기본 화면) — 다른 단계는 상태 스냅숏이 있다
+    if (el && el.hasAttribute('data-pt-sig') && PT.stateSig) {
+      var grp = [].filter.call(el.parentElement.children, function (x) { var y = (PT.acts || {})[x.getAttribute('data-pt-sig')]; return y && y.type === 'state' });
+      if (grp.length && grp.indexOf(el) < 0) { post({ state: '' }); return true }
+    }
+    if (el && el.hasAttribute('data-pt-sig') && !PT.stateSig && clsOf(el, /__(active|now|selected)$|^active$|Active$/)) {   // 이미 선택된 탭·메뉴(수집 기본 화면) — 실사이트도 그대로
+      var grp2 = [].filter.call(el.parentElement.children, function (x) { var y = (PT.acts || {})[x.getAttribute('data-pt-sig')]; return x !== el && y && GOOD.test(y.type) });
+      if (grp2.length) return true;
+    }
+    if (!inLayer && accordion(t)) return true;
+    var bnr = !inLayer && t.closest('.swiper-slide[style*="pointer"]');   // 이벤트 배너 → 같은 거래소 첫 이벤트 카드의 `Join Now` 수집 결과(라이브 측정: 같은 URL 새 탭)
+    if (bnr) {
+      var exn = Object.keys(CEXN).map(function (k) { return CEXN[k] }).filter(function (x) { return bnr.textContent.indexOf(x) >= 0 })[0];
+      var jn = exn && [].filter.call(document.querySelectorAll('[data-pt-sig^="Join Now"]'), function (j) { var y = (PT.acts || {})[j.getAttribute('data-pt-sig')]; if (!y || y.type !== 'ext') return false; for (var c = j.parentElement, k = 0; c && k < 6; c = c.parentElement, k++) if (c.textContent.indexOf(exn) >= 0 && !c.contains(bnr)) return true; return false })[0];
+      if (jn) { window.open(PT.acts[jn.getAttribute('data-pt-sig')].url, '_blank'); return true }
+    }
+    if (mobileSteps(t)) return true;
+    if (swiper(t)) return true;
+    if (!el && !inLayer) {                              // 카드 전체 클릭 = 카드 안 단 하나의 버튼과 같은 동작(그 버튼의 수집 결과)
+      for (var c = t, k = 0; c && c !== document.body && k < 5; c = c.parentElement, k++) {
+        if (getComputedStyle(c).cursor !== 'pointer' || (c.parentElement && getComputedStyle(c.parentElement).cursor === 'pointer')) continue;
+        var bs = c.querySelectorAll('[data-pt-sig]'); if (bs.length !== 1) break;
+        var y = (PT.acts || {})[bs[0].getAttribute('data-pt-sig')]; if (y && GOOD.test(y.type)) { runAct(y); return true }
+        break;
+      }
+    }
+    return false;
+  }
+  // 모바일 랜딩 3단계 슬라이더: ‹ · 점 · › → 슬라이드 + 아래 문구(같은 페이지의 PC 단계 목록 문구)
+  function mobileSteps(t) {
+    var c = t.closest('[class*="__MobileNavButton"],[class*="__MobileDot"]'); if (!c) return false;
+    var box = c.closest('[class*="__MobileSlider"]'); if (!box) return false;
+    var dots = [].slice.call(box.querySelectorAll('[class*="__MobileDot"]:not([class*="__MobileDots"])')), n = dots.length; if (!n) return false;
+    var dotOn = clsOf(dots.filter(function (d) { return /__MobileDotActive/.test(d.className) })[0], /__MobileDotActive$/) || EX_MDOT;
+    EX_MDOT = dotOn; var cur = Math.max(0, dots.findIndex(function (d) { return d.classList.contains(dotOn) })), i;
+    if (/__MobileDot/.test(c.className)) i = dots.indexOf(c); else i = (cur + (/__MobileNavPrev/.test(c.className) ? -1 : 1) + n) % n;
+    dots.forEach(function (d, j) { d.classList.toggle(dotOn, j === i) });
+    var wr = box.querySelector('.swiper-wrapper'), sl = wr && wr.children[i];
+    if (sl) { [].forEach.call(wr.children, function (x, j) { x.classList.toggle('swiper-slide-active', j === i) }); wr.style.transitionDuration = '300ms'; wr.style.transform = 'translate3d(' + (-(sl.offsetLeft - wr.children[0].offsetLeft)) + 'px, 0px, 0px)' }
+    var items = document.querySelectorAll('[class*="HomeOnboarding"][class*="__StepItem"]'), it = items[i];
+    if (it) { var tt = box.querySelector('[class*="__MobileStepTitle"]'), td = box.querySelector('[class*="__MobileStepDescription"]'); if (tt) tt.textContent = it.querySelector('[class*="__StepTitle"]').textContent; if (td) td.textContent = it.querySelector('[class*="__StepDescription"]').textContent }
+    return true;
+  }
+  var EX_MDOT = null;
+  // 거래소 상세 `Sign Up` 팝업의 가입 링크 — 라이브 tethermax.io에서 눌러 측정(2026-11-27). 어드민 입력값이라 바뀔 수 있다
+  var SIGNUP = {"binance": "https://accounts.binance.com/register?ref=TETHERMX", "bingx": "https://bingx.com/invite/SNIEBQKH", "bitget": "https://www.bitget.com/asia/expressly?channelCode=zx6x&languageType=3&vipCode=wh4h", "bitunix": "https://www.bitunix.com/register?vipCode=4p3e", "blofin": "https://www.blofin.cloud/invite/NDlncr?redirect=", "bybit": "https://partner.bybit.com/b/tetherpage", "deepcoin": "https://www.deepcoin.com/en/register?status=reg&inviteCode=9243801", "flipster": "https://flipster.io/signin?referral_code=TETHERMAX", "gate": "https://www.gate.com/signup?ref_type=103&ref=VFIRBF4KAG", "htx": "https://www.htx.com.pk/invite-register?inviter_id=11343840&invite_code=psgt7223&id=10072", "lbank": "https://www.lbank.com/signup?icode=5XAXG", "mexc": "https://www.mexc.com/register?inviteCode=mexc-1PsaL", "okx": "https://www.okx.com/join/cashbacks", "toobit": "https://www.toobit.com/t/cvrpBT", "woo x pro": "https://www.wooxpro.com/invite/TETHERMAXCODE", "woo-x-pro": "https://www.wooxpro.com/invite/TETHERMAXCODE", "zoomex": "https://www.zoomex.com/en-US/register?affiliate_id=901355&group_id=59861&group_type=1"};
+  // 수집기가 같은 팝업을 한 번만 저장해 다른 거래소 상세에서도 첫 수집 거래소 이름이 보인다 → 지금 거래소 이름으로
+  function layerExName(root) {
+    var m = (PT.key.match(/exchangeDetail__(.+)-referral$/) || [])[1]; if (!m) return;
+    var me = document.querySelector('[class*="__ExchangeName"]'); me = me && me.textContent.trim(); if (!me) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), n, names = Object.keys(CEXN).map(function (k) { return CEXN[k] }).filter(function (x) { return x !== me });
+    while ((n = w.nextNode())) names.forEach(function (x) { if (n.nodeValue.indexOf(x) >= 0) n.nodeValue = n.nodeValue.split(x).join(me) });
+  }
+  // 캐러셀(Swiper) — 점 · 화살표 → 슬라이드 이동(수집 HTML에 모든 슬라이드가 있다), .3s
+  function swiper(t) {
+    var bullet = t.closest('.swiper-pagination-bullet'), arrow = !bullet && t.closest('.swiper-button-next,.swiper-button-prev,[class*="__NavButton"],[class*="__Arrow"],[class*="__Prev"],[class*="__Next"]');
+    if (!bullet && !arrow) return false;
+    var scope = (bullet || arrow).closest('.swiper') || null;
+    for (var p = (bullet || arrow).parentElement; !scope && p && p !== document.body; p = p.parentElement) if (p.querySelector('.swiper-wrapper')) scope = p;
+    if (!scope) return false;
+    var sw = scope.matches('.swiper') ? scope : scope.querySelector('.swiper'); var wr = (sw || scope).querySelector('.swiper-wrapper'); if (!wr) return false;
+    var slides = [].filter.call(wr.children, function (x) { return x.classList.contains('swiper-slide') && !x.classList.contains('swiper-slide-duplicate') }); if (slides.length < 2) return false;
+    var cur = Math.max(0, slides.findIndex(function (x) { return x.classList.contains('swiper-slide-active') })), bl = [].slice.call(scope.querySelectorAll('.swiper-pagination-bullet'));
+    var per = Math.max(1, Math.round((sw || scope).getBoundingClientRect().width / (slides[0].getBoundingClientRect().width || 1)));
+    var last = Math.max(0, slides.length - per), i;
+    if (bullet) i = bl.indexOf(bullet);
+    else { var next = /next/i.test(arrow.className) || (!/prev/i.test(arrow.className) && arrow.parentElement && [].indexOf.call(arrow.parentElement.querySelectorAll('[class*="__NavButton"],[class*="__Arrow"]'), arrow) > 0); i = cur + (next ? 1 : -1); if (i > last) i = 0; if (i < 0) i = last }
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (x, j) { x.classList.toggle('swiper-slide-active', j === i) });
+    bl.forEach(function (x, j) { x.classList.toggle('swiper-pagination-bullet-active', j === i) });
+    wr.style.transitionDuration = '300ms'; wr.style.transform = 'translate3d(' + (-(slides[i].offsetLeft - slides[0].offsetLeft)) + 'px, 0px, 0px)';
+    return true;
+  }
+  // 모바일 수집본은 body `position:fixed`로 저장됐다(수집 때 열린 메뉴의 스크롤 잠금) — 열린 메뉴·모달이 없으면 푼다
+  function scrollFree() {
+    var b = document.body;
+    if (b.style.position !== 'fixed') return;
+    if (document.querySelector('.MuiModal-root:not(.MuiModal-hidden), .MuiBackdrop-root, [role=dialog]')) return;
+    b.style.position = ''; b.style.inset = ''; b.style.top = ''; b.style.width = '';
+  }
 
   // ④ 문구 — Figma DEX(revision) 2·3차 수정 결과 · 문구표_DEX · 9차 결정과 같게(랜딩 `/en` · 서비스 소개만)
   var COPY = {
@@ -237,7 +622,7 @@
 
   // ================= DEX 연결 (README 「DEX 연결」) =================
   // ① 연동 버튼·「Link more」 → 셸이 DEX 앱 연동 모달을 연다(어디서 열어도 같은 모달)
-  var CEXN = { binance: 'Binance', bingx: 'BingX', bitget: 'Bitget', bitunix: 'Bitunix', blofin: 'BloFin', bybit: 'Bybit', deepcoin: 'DeepCoin', flipster: 'Flipster', gate: 'Gate', htx: 'HTX', lbank: 'LBank', mexc: 'MEXC', okx: 'OKX', toobit: 'Toobit', 'woo-x-pro': 'WOO X Pro', zoomex: 'Zoomex' };
+  var CEXN = { binance: 'Binance', bingx: 'BingX', bitget: 'Bitget', bitunix: 'Bitunix', blofin: 'BloFin', bybit: 'Bybit', deepcoin: 'DeepCoin', flipster: 'Flipster', gate: 'Gate', htx: 'HTX', lbank: 'LBank', mexc: 'MEXC', okx: 'OKX', toobit: 'Toobit', 'woo-x-pro': 'WOO X Pro', 'woo x pro': 'WOO X Pro', zoomex: 'Zoomex' };
   function dexLink() {
     var m = (PT.key || '').match(/exchangeDetail__(.+)-referral$/);
     post({ dexLink: m && CEXN[m[1]] ? { ex: CEXN[m[1]], type: 'CEX' } : {} });
@@ -250,12 +635,21 @@
       leaf.textContent = 'Cashback Hub';
       [].forEach.call(a.parentNode.querySelectorAll('a[data-orig-href="' + ORIGIN + '/en/brokers"]'), function (b) { b.remove() });
     });
+    // GNB `Rewards Hub ▾` = Exchange Events · Benefits · Points(결정 기록 「GNB Rewards Hub ▾ 항목」 — Figma 기준 3개)
+    document.querySelectorAll('a[data-orig-href="' + ORIGIN + '/en/events"]').forEach(function (a) {
+      if (!/Dropdown/.test(a.className) || a.parentNode.querySelector('[data-dex-benefits]')) return;
+      var b = a.cloneNode(true); b.setAttribute('data-dex-benefits', '');
+      b.className = [].filter.call(a.classList, function (c) { return !/__selected$/.test(c) }).join(' ');
+      b.setAttribute('href', '/en/benefits'); b.setAttribute('data-orig-href', ORIGIN + '/en/benefits');
+      var leaf = b; while (leaf.children.length === 1) leaf = leaf.children[0]; leaf.textContent = 'Benefits';
+      a.after(b);
+    });
   }
   // 홈 행 → 지갑/UID 상세. 거래소 묶음 행(여러 UID)은 연동 계정 목록 모달
   function dexRowOpen(r) {
     var Sx = window.DEXSTATE; if (!Sx) return;
     var st = Sx.load(), id = r.getAttribute('data-dex-row');
-    if (id) { var a = st.accounts.filter(function (x) { return x.id === id })[0]; if (!a) return; st.view = { ex: a.ex, type: a.type, id: a.id, a: a.a || 0, b: a.b || null, st: a.st }; st.viewLogo = null }
+    if (id) { var a = st.accounts.filter(function (x) { return x.id === id })[0]; if (!a) return; if (a.st === 'issue') return rowIssue(a); st.view = { ex: a.ex, type: a.type, id: a.id, a: a.a || 0, b: a.b || null, st: a.st }; st.viewLogo = null }
     else {
       var num = r.querySelector('[class*="__LinkedUidNumber"]');
       if (!num) return post({ dexLink: { mode: 'seeAll' } });
@@ -266,14 +660,74 @@
     Sx.save(st); post({ nav: ORIGIN + '/en/account' });
   }
   // ③ 회원 홈 Linked Accounts: DEX 앱에서 연동한 계정 행 · 총액 · 라벨(Figma HW1) — dex/dex-state.js 공유 저장소
-  // 소유권 심사 결과 전환(테스트용 도움말) — 승인: 연동 완료 · 거절: Ownership verification failed
-  function ownHelp(x) {
+  // 행 상태 — 결정 기록 10차: 칩 없이 기존 실사이트 디자인(행 점 + 행 아래 StatusAlert 배너 · 모달). DEX 행은 `UID` 자리를 `Wallet`/`wallet`로
+  // 배너·점 클래스 = 실사이트 수집본(연동 계정 목록 팝업 SelectMyExchangePopup · 홈 LinkedUidDot*) 그대로
+  var ROWST = {
+    ok: {}, zero: {},
+    pend: { dot: 'proc', ban: 'Info', text: 'Trying to link' },
+    own: { dot: 'proc', ban: 'Info', text: 'Verifying ownership' },
+    fail: { dot: 'err', ban: 'Error', text: { CEX: 'UID Linking was unsuccessful. View reason.', DEX: 'Wallet linking was unsuccessful. View reason.' } },
+    ownfail: { dot: 'err', ban: 'Error', text: 'Ownership verification was unsuccessful. View reason.' },
+    unlinked: { dot: 'err', ban: 'Warning', text: { CEX: 'This UID has been unlinked. Tap to verify ownership and reclaim it.', DEX: 'This wallet has been unlinked. Tap to verify ownership and reclaim it.' } },
+    issue: { dot: 'err' }
+  };
+  var ROWST_KO = { ok: '정상', zero: '캐시백 0', pend: '확인 중', own: '소유권 심사 중', fail: '연동 실패', ownfail: '소유권 인증 실패', unlinked: '연동 해제(되찾기)', issue: '이슈(오프보딩)' };
+  var ALERT = 'SelectMyExchangePopup-module-scss-module__IotxDq__';
+  var ICO_ALERT = '<svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-r6rqcb" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1m1 4h-2v-2h2z"></path></svg>';
+  var ICO_NEXT = '<svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1q2r1cx" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01"></path></svg>';
+  function rowBanner(x, RS) {
+    var d = document.createElement('div'), txt = typeof RS.text === 'string' ? RS.text : RS.text[x.type === 'DEX' ? 'DEX' : 'CEX'];
+    d.className = ALERT + 'StatusAlert ' + ALERT + 'StatusAlert' + RS.ban; d.setAttribute('data-dex-ban', x.id);
+    d.style.margin = '0 0 8px';
+    d.innerHTML = '<div class="' + ALERT + 'StatusAlertIcon">' + ICO_ALERT + '</div><p class="' + ALERT + 'StatusAlertText">' + txt + '</p>' + (RS.ban === 'Info' ? '' : '<div class="' + ALERT + 'StatusAlertRight">' + ICO_NEXT + '</div>');
+    return d;
+  }
+  // 모달 — 실사이트 CenterPopup(수집본 `Contact Customer Support` 팝업 마크업·클래스)
+  var POPCSS = false;
+  function centerPopup(title, body, btns) {
+    if (!POPCSS) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '../css/33g7t62i3425t.css'; document.head.appendChild(l); POPCSS = true }
+    var V = 'ExchangeDetail-view-module-scss-module__vhpGua__';
+    var html = '<div class="PopupManager-module-scss-module__xOdNVW__PopupContainer" style="z-index: 5; opacity: 1; transform: none;"><div class="PopupManager-module-scss-module__xOdNVW__Dimmed PopupManager-module-scss-module__xOdNVW__open" id="dimmed" style="z-index: 5; transform: none;"></div><div class="CenterPopup-module-scss-module__-JaXgW__CenterPopup" style="z-index: 5;"><div class="CenterPopup-module-scss-module__-JaXgW__PopupContent"><div class="CenterPopup-module-scss-module__-JaXgW__Description">'
+      + '<p class="' + V + 'AlreadyTitle">' + title + '</p>' + (body ? '<p class="' + V + 'AlreadyBody">' + body + '</p>' : '')
+      + btns.map(function (b, i) { return '<button class="' + V + (i === 0 ? 'AlreadySupportBtn' : 'AlreadyCloseBtn') + '" data-pt-act="' + b[1] + '">' + b[0] + '</button>' }).join('')
+      + '</div><button class="CenterPopup-module-scss-module__-JaXgW__CloseButton" aria-label="close"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M20.094 5.72a1.282 1.282 0 1 0-1.813-1.814L12 10.187l-6.28-6.28a1.282 1.282 0 1 0-1.814 1.812L10.187 12l-6.28 6.28a1.282 1.282 0 0 0 1.812 1.814L12 13.813l6.28 6.28a1.282 1.282 0 0 0 1.814-1.812L13.813 12l6.28-6.28Z" fill="var(--action-active, rgba(0, 0, 0, 0.56))"></path></svg></button></div></div></div>';
+    frags['pt-row-popup'] = { html: html, css: '' }; show('pt-row-popup');
+  }
+  var popAcc = null;
+  function rowAct(act) {
+    var Sx = window.DEXSTATE, st = Sx.load(), a = popAcc && st.accounts.filter(function (y) { return y.id === popAcc.id && y.ex === popAcc.ex })[0];
+    if (act === 'remove' && a) { st.accounts = st.accounts.filter(function (y) { return y !== a }); Sx.save(st); dexInject({ quiet: 1 }); post({ dexChanged: 1 }); return }
+    if (act === 'relink' && a) return post({ dexLink: { ex: a.ex, type: a.type } });
+    if (act === 'support') return generic({ innerText: 'Contact Support' });
+  }
+  function rowBannerClick(id) {
+    var Sx = window.DEXSTATE, st = Sx.load(), a = st.accounts.filter(function (y) { return y.id === id })[0]; if (!a) return;
+    popAcc = a; var dex = a.type === 'DEX';
+    if (a.st === 'fail') return centerPopup(dex ? 'Wallet Linking Unsuccessful' : 'UID Linking Unsuccessful', a.reason || '', [[dex ? 'Remove Wallet' : 'Remove UID', 'remove'], [dex ? 'Link Wallet' : 'UID Link', 'relink']]);
+    if (a.st === 'ownfail') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return post({ dexLink: { mode: 'own', r: 'rejected' } }) }
+    if (a.st === 'unlinked') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return nav(ORIGIN + '/en/ownership-verification') }
+  }
+  function rowIssue(a) { popAcc = a; centerPopup(a.type === 'DEX' ? 'There is a problem with this wallet.' : 'There is a problem with this UID.', '', [['Contact Support', 'support'], ['Close', 'close']]) }
+  // 테스트용 도움말(왼쪽 아래): 연동 계정 행 상태 바꿔 보기 · 소유권 심사 결과(승인/거절)
+  function rowHelp(accs) {
+    if (!accs.length) return;
     var h = document.createElement('div'); h.setAttribute('data-dex-own', '');
-    h.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:2147483646;background:#fff;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:10px;font:12px/1.45 system-ui,"Malgun Gothic",sans-serif;color:#1f2430;max-width:260px';
-    h.innerHTML = '<b>테스트 · 소유권 심사 결과</b><div style="margin:4px 0 8px;color:#6b7280">' + x.ex + ' ' + (x.type === 'DEX' ? x.id.slice(0, 6) + '…' + x.id.slice(-4) : 'UID ' + x.id) + '</div><button data-r="approved" style="margin-right:6px">승인</button><button data-r="rejected">거절</button>';
+    h.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:2147483646;background:#fff;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:10px;font:12px/1.45 system-ui,"Malgun Gothic",sans-serif;color:#1f2430;max-width:280px';
+    var opts = Object.keys(ROWST_KO).map(function (k) { return '<option value="' + k + '">' + ROWST_KO[k] + '</option>' }).join('');
+    h.innerHTML = '<b>테스트 · 연동 계정 행 상태</b>' + accs.map(function (x, i) {
+      var nm = x.ex + ' ' + (x.type === 'DEX' ? x.id.slice(0, 6) + '…' + x.id.slice(-4) : 'UID ' + x.id);
+      return '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:#6b7280">' + nm + '</span><select data-i="' + i + '">' + opts + '</select>'
+        + (x.st === 'own' ? '<button data-r="approved" data-i="' + i + '">승인</button><button data-r="rejected" data-i="' + i + '">거절</button>' : '') + '</div>';
+    }).join('');
+    [].forEach.call(h.querySelectorAll('select'), function (sl) { sl.value = accs[+sl.getAttribute('data-i')].st in ROWST_KO ? accs[+sl.getAttribute('data-i')].st : 'ok' });
+    h.addEventListener('change', function (e) {
+      var sl = e.target.closest('select'); if (!sl) return;
+      var Sx = window.DEXSTATE, st = Sx.load(), x = accs[+sl.getAttribute('data-i')], a = st.accounts.filter(function (y) { return y.id === x.id && y.ex === x.ex })[0]; if (!a) return;
+      a.st = sl.value; Sx.save(st); dexInject({ quiet: 1 }); post({ dexChanged: 1 });
+    });
     h.addEventListener('click', function (e) {
       var b = e.target.closest('[data-r]'); if (!b) return; e.preventDefault(); e.stopPropagation();
-      var Sx = window.DEXSTATE, st = Sx.load(), a = st.accounts.filter(function (y) { return y.id === x.id && y.ex === x.ex })[0]; if (!a) return;
+      var Sx = window.DEXSTATE, st = Sx.load(), x = accs[+b.getAttribute('data-i')], a = st.accounts.filter(function (y) { return y.id === x.id && y.ex === x.ex })[0]; if (!a) return;
       a.st = b.getAttribute('data-r') === 'approved' ? 'ok' : 'ownfail'; st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st);
       dexInject({ quiet: 1 }); post({ dexLink: { mode: 'own', r: b.getAttribute('data-r') } });
     }, true);
@@ -292,22 +746,26 @@
     var errDot = q('[class*="__LinkedUidDotError"]'), errCls = errDot ? [].filter.call(errDot.classList, function (c) { return /DotError/.test(c) })[0] : '';
     var n2 = function (n) { return (Math.floor(n * 100 + 1e-6) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) };
     var amtOf = function (r) { var a = q('[class*="__LinkedUidAmount"]', r); return a ? parseFloat(a.textContent.replace(/[^\d.]/g, '')) || 0 : 0 };
-    var CHIP = { pend: 'Trying to link', zero: 'No cashback yet', own: 'Verifying ownership', ownfail: 'Ownership verification failed' }, sum = 0, mark = null;
+    var sum = 0, mark = null;
     var oldHelp = document.querySelector('[data-dex-own]'); if (oldHelp) oldHelp.remove();
+    top.querySelectorAll('[data-dex-ban]').forEach(function (e) { e.remove() });
+    var procCls = errCls ? errCls.replace(/DotError$/, 'DotProcessing') : '';
     st.accounts.forEach(function (x) {
-      var amt = Sx.amt(x); if (amt != null) sum += amt;
+      var amt = x.st === 'zero' ? 0 : Sx.amt(x); if (amt != null) sum += amt;
       var r = tpl.cloneNode(true); r.setAttribute('data-dex-row', x.id);
       var img = q('img', r); img.removeAttribute('srcset'); img.src = '../dex/assets/' + (Sx.LOGO[x.ex] || 'dex-lighter.png'); img.style.borderRadius = '50%';
       q('[class*="__LinkedUidName"]', r).textContent = x.ex;
       q('[class*="__LinkedUidAmount"]', r).textContent = amt == null ? '-' : n2(amt) + ' USDT';
       q('[class*="__LinkedUidNumber"]', r).textContent = x.type === 'DEX' ? 'Wallet ' + x.id.slice(0, 6) + '…' + x.id.slice(-4) : 'UID ' + x.id;
-      var dot = q('[class*="__LinkedUidDot"]', r); if (dot && x.st === 'pend' && errCls) dot.classList.add(errCls);
-      if (CHIP[x.st]) { var c = document.createElement('span'); c.textContent = CHIP[x.st]; c.style.cssText = 'margin-left:8px;display:inline-flex;align-items:center;border:1px solid #0031c6;color:#0031c6;border-radius:100px;font-size:12px;line-height:16px;padding:2px 8px;white-space:nowrap'; q('[class*="__LinkedUidBadgeRow"]', r).appendChild(c) }
+      var dot = q('[class*="__LinkedUidDot"]', r), RS = ROWST[x.st] || {};
+      if (dot && RS.dot === 'err' && errCls) dot.classList.add(errCls);
+      if (dot && RS.dot === 'proc' && procCls) dot.classList.add(procCls);
       var before = rows.filter(function (e) { return amtOf(e) < (amt || 0) })[0];
       if (before) top.insertBefore(r, before); else top.appendChild(r);
+      if (RS.ban) { var bn = rowBanner(x, RS); r.after(bn) }
       if (x.id === st.justLinked) mark = r;
-      if (x.st === 'own') ownHelp(x);
     });
+    rowHelp(st.accounts);
     var bal = [].filter.call(document.querySelectorAll('p'), function (p) { return p.textContent.trim() === 'Total Cashback Balance' })[0];
     var bv = bal && bal.previousElementSibling;
     if (bv) { if (!bv.hasAttribute('data-dex-orig')) bv.setAttribute('data-dex-orig', bv.textContent); bv.textContent = n2(parseFloat(bv.getAttribute('data-dex-orig').replace(/[^\d.]/g, '')) + sum) + ' USDT' }

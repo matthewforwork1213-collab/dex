@@ -81,7 +81,7 @@ function failBox(){return `<div class="col center" style="align-items:center;pad
 function webExchangeField(selected,st){
  const c=SEL[st]||SEL.normal;
  const tabs=[['all',T('All','전체')],['cex','CEX'],['dex','DEX']];
- const button=(name,kind,top=false)=>`<button type="button" data-link-venue="${esc(name)}" data-link-type="${kind}"${top?' data-link-top':''} aria-pressed="${name===selected}" style="${top?'min-height:56px;border:1px solid '+(name===selected?'var(--blue)':'var(--divider)')+';border-radius:8px;flex-direction:column;justify-content:center;gap:4px;':'min-height:44px;border:0;padding:0 12px;gap:8px;'}align-items:center;background:${name===selected&&top?'#eef6fc':'transparent'};color:inherit;text-align:left;cursor:pointer;display:${top||((c.chip==='all'||kind.toLowerCase()===c.chip)&&(!c.q||name.toLowerCase().includes(c.q)))?'flex':'none'}">${webMark(name,top?22:20)}<span class="${top?'cap c2':'b1 grow'}">${name}</span>${top?'':`${kind==='DEX'?`<span data-picker-badge style="display:${c.chip==='all'?'inline':'none'}">${C.badge('DEX','dex')}</span>`:''}${name===selected?ic('check','ic20'):''}`}</button>`;
+ const button=(name,kind,top=false)=>`<button type="button" data-link-venue="${esc(name)}" data-link-type="${kind}"${top?' data-link-top':''} aria-pressed="${name===selected}" style="${top?'min-height:56px;border:1px solid '+(name===selected?'var(--blue)':'var(--divider)')+';border-radius:8px;flex-direction:column;justify-content:center;gap:4px;':'min-height:44px;border:0;padding:0 12px;gap:8px;'}align-items:center;background:${name===selected&&top?'#eef6fc':'transparent'};color:inherit;text-align:left;cursor:pointer;display:${top||((c.chip==='all'||kind.toLowerCase()===c.chip)&&(!c.q||name.toLowerCase().includes(c.q)))?'flex':'none'}">${webMark(name,top?22:20)}<span class="${top?'cap c2':'b1 grow'}">${name}</span>${top?'':`${kind==='DEX'?`<span data-picker-badge style="display:${c.chip==='all'?'inline':'none'}">${C.badge('DEX','dex')}</span>`:''}${name===selected?`<img class="ic20" src="${A('link-ic-check.svg')}" alt="">`:''}`}</button>`;
  const popular=`<div data-link-popular class="col g12" style="padding-bottom:8px;display:${c.q||c.chip==='dex'?'none':'flex'}"><span class="b1 semi">${T('Top Partner Exchanges','인기 제휴 거래소')}</span><div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">${WEB_TOP.map(n=>button(n,'CEX',true)).join('')}</div></div>`;
  const opts=selList({chip:'all',drop:c.drop},true);
  const results=`<div data-link-list class="col" style="gap:4px">${opts.map(x=>button(x.n,x.t)).join('')}</div><p data-link-empty class="empty" style="margin:12px 0;display:${selList(c,true).length?'none':'block'}">${T('No results found','검색 결과가 없어요.')}</p>`;
@@ -107,6 +107,8 @@ function moSheet(st,origin){
  return `<div data-link-picker data-type="${c.chip}" style="background:var(--paper);border-radius:16px 16px 0 0;width:100%;height:640px;overflow:auto;padding:24px 16px;display:flex;flex-direction:column;gap:24px">
   <div class="row between"><span class="h6" style="font-weight:500">${T('Select an exchange')}</span><button class="icon-btn" style="padding:5px" data-go="${origin}">${ic('close','ic20')}</button></div>${search}${chips}${top}${all}</div>`}
 
+// 닫기: 사이트 모드(dex/app.html)는 공통 드롭다운 닫힘 전환(UI.closeDetails), 그 밖에는 바로 닫는다
+const closePicker=picker=>{if(window.UI&&UI.closeDetails)UI.closeDetails(picker);else picker.open=false};
 function pickerCount(type,q,count){
  if(q)return `${count} ${count===1?'exchange':'exchanges'} found`;
  const title={all:'All exchanges',cex:'Centralised exchanges',dex:'Decentralised exchanges'}[type];
@@ -147,11 +149,11 @@ document.addEventListener('click',event=>{
  const venue=event.target.closest('[data-link-venue]');
  if(venue){
   const picker=venue.closest('[data-link-picker]');
-  if(picker.tagName==='DETAILS'&&picker.dataset.current===venue.dataset.linkVenue){picker.open=false;return;}
+  if(picker.tagName==='DETAILS'&&picker.dataset.current===venue.dataset.linkVenue){closePicker(picker);return;}
   selectedExchange=venue.dataset.linkVenue;
   window.go(venue.dataset.linkType==='DEX'?'link.addr:empty':'link.uid:empty');
  }
- if(!event.target.closest('[data-link-picker]'))document.querySelectorAll('details[data-link-picker][open]').forEach(picker=>{picker.open=false});
+ if(!event.target.closest('[data-link-picker]'))document.querySelectorAll('details[data-link-picker][open]').forEach(closePicker);
 });
 document.addEventListener('toggle',event=>{
  const picker=event.target;
@@ -168,7 +170,7 @@ document.addEventListener('toggle',event=>{
 document.addEventListener('keydown',event=>{
  if(event.key!=='Escape')return;
  const picker=event.target.closest('details[data-link-picker][open]');
- if(picker){picker.open=false;picker.querySelector('summary').focus();}
+ if(picker){closePicker(picker);picker.querySelector('summary').focus();}
 });
 
 R.screen({id:'link.select',group:'link',title:'거래소 선택',route:'/link (웹 꽉 찬 모달 · 앱 바텀시트)',fu:['FU-013'],shell:false,
