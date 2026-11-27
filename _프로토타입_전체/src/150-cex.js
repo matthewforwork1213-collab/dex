@@ -11,8 +11,17 @@ const title=(t,sub)=>`<div class="col" style="gap:8px;text-align:${mo()?'left':'
 const promo=(top,bot,img,o={})=>`<div style="position:relative;height:56px;border-radius:8px;background:rgba(207,216,220,.2)"><div class="col" style="position:absolute;left:16px;top:${o.top||8}px;gap:0">${top}${bot}</div><img src="${A(img)}" alt="" style="position:absolute;${o.img}"></div>`;
 const cap=t=>`<span style="font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">${t}</span>`;
 const blue=t=>`<span style="font-size:16px;line-height:1.5;letter-spacing:.15px;font-weight:600;color:var(--blue)">${t}</span>`;
-const tf=(v,o={})=>`<div class="col" style="gap:3px"><div class="row" style="gap:8px;border:${o.err?'1px solid #d32f2f':'1px solid var(--input-border)'};border-radius:4px;padding:16px 12px"><span style="flex:1;font-size:16px;line-height:24px;letter-spacing:.15px;color:${o.err?'#d32f2f':o.ph?'var(--text-secondary)':'var(--text-primary)'}">${v}</span>${o.eye?`<img src="${A('cex-ic-visoff.svg')}" style="width:16px;height:16px" alt="">`:''}</div>${o.err?`<span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:#d32f2f;padding-left:0">${o.err}</span>`:''}</div>`;
-const cont=`<button class="btn contained lg full" disabled style="height:42px">Continue</button>`;
+const tf=(v,o={})=>{const pw=/^Password/.test(v), pre=v==='TM8K2Q';return `<div class="col" style="gap:3px"><label class="row tf-box" style="gap:8px;border:${o.err?'1px solid #d32f2f':'1px solid var(--input-border)'};border-radius:4px;padding:16px 12px;cursor:text;transition:border-color .2s"><input class="tf-in" ${pw?'type="password"':'type="text"'} ${pre?`value="${v}"`:`placeholder="${v}"`} style="flex:1;min-width:0;border:0;outline:0;background:transparent;padding:0;font:inherit;font-size:16px;line-height:24px;letter-spacing:.15px;color:var(--text-primary)">${o.eye?`<img class="tf-eye" src="${A('cex-ic-visoff.svg')}" style="width:16px;height:16px;cursor:pointer" alt="">`:''}</label>${o.err?`<span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:#d32f2f;padding-left:0">${o.err}</span>`:''}</div>`};
+// 입력 동작(실제 입력·포커스 테두리·눈 아이콘·필수값 채우면 Continue 활성) — 실사이트 로그인·가입과 같은 규칙
+if(!window.__tfBound){window.__tfBound=1;
+ const form=el=>el.closest('[data-tf-form]');
+ const sync=fm=>{if(!fm)return;const ins=[...fm.querySelectorAll('.tf-in')];const req=ins.filter(i=>!/optional/i.test(i.placeholder||''));const ok=req.every(i=>i.value.trim());const b=fm.querySelector('.tf-cont');if(b)b.disabled=!ok};
+ document.addEventListener('input',e=>{if(e.target.classList&&e.target.classList.contains('tf-in'))sync(form(e.target))});
+ document.addEventListener('focusin',e=>{if(e.target.classList&&e.target.classList.contains('tf-in'))e.target.closest('.tf-box').style.borderColor='var(--blue)'});
+ document.addEventListener('focusout',e=>{if(e.target.classList&&e.target.classList.contains('tf-in'))e.target.closest('.tf-box').style.borderColor=''});
+ document.addEventListener('click',e=>{const eye=e.target.closest&&e.target.closest('.tf-eye');if(!eye)return;e.preventDefault();const i=eye.parentNode.querySelector('.tf-in');i.type=i.type==='password'?'text':'password';eye.style.opacity=i.type==='text'?'.6':'1'});
+}
+const cont=`<button class="btn contained lg full tf-cont" disabled data-go="home.main" style="height:42px">Continue</button>`;
 const alt=(q,l,go)=>`<button class="btn text black lg full" data-go="${go}" style="height:42px">${q} <u style="margin-left:4px">${l}</u></button>`;
 const toast=t=>`<div style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;background:#1c1c1e;color:#fff;border-radius:8px;padding:14px 16px;box-shadow:var(--elev8);font-size:14px;white-space:nowrap"><span style="width:20px;height:20px;border-radius:50%;background:#2e7d32;display:inline-flex;align-items:center;justify-content:center;font-size:12px">✓</span>${t}</div>`;
 
@@ -22,7 +31,7 @@ function login(st){
   ${promo(cap('Log in now to complete missions'),blue('to earn more USDT'),'cex-promo-login.png',{img:'left:243px;top:-21px;width:100px;height:96px;object-fit:cover',top:6})}
   <div class="col" style="gap:16px"><div class="col" style="gap:16px">${tf('Email')}${tf('Password',{eye:1,err:pwErr})}</div><a style="font-size:14px;line-height:1.43;letter-spacing:.17px;text-decoration:underline;cursor:pointer">${st==='reset'?'Forgot password?':'Forgot Password?'}</a></div>
   <div class="col" style="gap:8px">${cont}${alt('Don’t have an account?','Sign Up Now','auth.signup')}</div>`;
- return `<div style="position:relative">${guestHead()}${wrap(body)}${st==='reset'?toast('Password reset successfully.'):''}</div>`}
+ return `<div style="position:relative" data-tf-form>${guestHead()}${wrap(body)}${st==='reset'?toast('Password reset successfully.'):''}</div>`}
 R.screen({id:'auth.login',group:'cex',title:'로그인 (기존)',route:'/login',fu:[],shell:false,
  states:[
   {id:'normal',label:'기본 — 빈 입력',figma:{pc:'10548:210709',mo:'10548:207012'},note:'[기존 MAX-508] Login (V2.2 상태 없음)'},
@@ -38,7 +47,7 @@ function signup(st){
   <div class="col" style="gap:16px">${tf('Email',{ph:1,err:st==='error'?'This field is required':null})}${tf('Password',{eye:1})}${tf(st==='invite'?'TM8K2Q':'Referral Code (optional)')}</div>
   <label class="row" style="gap:0;align-items:flex-start;cursor:pointer"><span style="padding:0 9px 9px 0"><span class="chk on"><i></i></span></span><span style="padding-top:2px;font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">I have read and agree to the <u data-go="terms.use" style="color:var(--text-primary);font-weight:500">Terms of Use</u> and <u data-go="terms.privacy" style="color:var(--text-primary);font-weight:500">Privacy Policy</u></span></label>
   <div class="col" style="gap:8px">${cont}${alt('Already have an account?',mo()?'Log In':'Log in','auth.login')}</div>`;
- return guestHead()+wrap(body)}
+ return `<div data-tf-form>${guestHead()}${wrap(body)}</div>`}
 R.screen({id:'auth.signup',group:'cex',title:'회원가입 (기존 · 첫 단계)',route:'/signup',fu:[],shell:false,
  states:[
   {id:'normal',label:'기본 — 첫 단계',figma:{pc:'10548:103656',mo:'10542:101933'},note:'[기존 MAX-508] Sign up (V2.2 상태 없음) · 문구 개정 MAXOP-696 23327:1124738 / 23327:1124323 미반영'},
