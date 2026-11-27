@@ -193,6 +193,8 @@ function s3Checklist(){
   <div class="row between" style="padding:0 16px"><span class="row">${badge(1)}${lbl('Create TetherMax account')}</span>${hic('check-step',24)}</div>${div}
   <div class="row between" style="padding:0 16px;cursor:pointer" data-go="hub.main"><span class="row">${badge(2)}${lbl('Browse partners')}</span>${hic('chevron',24)}</div>${div}
   <div class="row" style="padding:0 16px;cursor:pointer" data-go="link.select">${badge(3)}<span class="grow">${lbl('Link your account with us')}</span>${chip}${hic('chevron',24)}</div></div>`}
+// 앱·모바일웹 S3 빈 홈 카드(REQ-267) — DEX(revision) Home / mWeb / S3 · Empty home card 29420:138295(카드 343×124 · 제목 · Link Account 311×36)
+const s3Empty=()=>`<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px 16px 32px;display:flex;flex-direction:column;gap:16px"><span class="b1 semi" style="line-height:24px">Link once and cashback keeps coming</span><button class="btn contained primary md full" style="height:36px" data-go="link.select:all">Link Account</button></div>`;
 const s3Preview=()=>`<div data-go="calc.p1" style="cursor:pointer;border:1px solid #c7d6ff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:1px 1px 15px rgba(28,28,30,.04);background:linear-gradient(160deg,rgba(199,214,255,.08),rgba(199,214,255,.35))">
  <div class="row between"><span class="row">${hic('calc',16)}<span class="b2 semi" style="color:#7f9fff">Cashback Preview</span></span>${hic('chevron-blue',16)}</div>
  <p style="margin:0;font-size:12px;line-height:1.33;letter-spacing:.2px"><b class="semi">81,836</b> of our users earn an average of <b class="semi">47.00 USDT</b> to <b class="semi">284.00 USDT</b> in cashback per month.</p></div>`;
@@ -257,8 +259,8 @@ const N_FIG='FU-038·039 행 디자인(로고·점·칩·금액)은 HW1/S4-1 컴
 const HOME_STATES=[
  {id:'auto',label:'기본 — 로그인 상태(게스트·S3·S4)를 따름',note:'도구의 게스트/회원·연동0/회원·연동 선택에 따라 guest · s3 · normal 상태를 보여 줌'},
  {id:'guest',label:'비로그인 — 공개 화면 (home/S4#guest)',figma:{mo:'29037:113704'},note:'V2.2 home/S4#guest · REQ-176. 웹은 랜딩(landing.main)을 그대로 씀, 모바일은 Figma Mobile / Guest entry / Home'},
- {id:'s3',label:'S3 연동 0 — 체크리스트 · Cashback Preview (S3-1)',figma:{pc:'28960:127759',mo:'4248:33574'},note:'모바일 [기존 MAX-7] mWeb S3 4248:33574. V2.2 home/S3#normal · REQ-267. L16(연동 화면 배경)도 이 화면'},
- {id:'s3App',label:'S3 앱·모바일웹 빈 홈 카드',figma:{mo:'8582:154521'},note:'[기존 MAX-7] mAPP S3 8582:154521(체크리스트 카드 — V2.2의 Link once 카드는 디자인 없음). V2.2 home/S3#app · REQ-267 · 사용자 확인 #48'},
+ {id:'s3',label:'S3 연동 0 — 체크리스트 · Cashback Preview (S3-1)',figma:{pc:'28960:127759',mo:'29420:138295'},note:'모바일 = 앱·모바일웹 빈 홈 카드(REQ-267) DEX(revision) Home / mWeb / S3 · Empty home card 29420:138295. V2.2 home/S3#normal. L16(연동 화면 배경)도 이 화면'},
+ {id:'s3App',label:'S3 앱·모바일웹 빈 홈 카드',figma:{mo:'29420:138295'},note:'DEX(revision) Home / mWeb / S3 · Empty home card 29420:138295(Figma 4차 #12 — 문구 `Link once and cashback keeps coming` · `Link Account`). V2.2 home/S3#app · REQ-267'},
  {id:'s3Pending',label:'확인 중 계정만 있음 → S4 전환',note:'V2.2 home/S3#pendingOnly · G-070 확정: S4로 전환하고 행에 확인 중 표시'},
  {id:'normal',label:'S4 연동 있음 — CEX·DEX 한 목록 (S4-1)',figma:{pc:'28960:127837',mo:'22913:1051713'},note:'페이지 전체 = [기존 MAX-7] MAXOP-731 Web 22913:1052131 · mWeb 22913:1051713(누적 캐시백 카드 22913:1054295 포함) + DEX S4-1. V2.2 home/S4#normal · REQ-268·271. L17(연동 화면 배경)도 이 화면. 총액은 행 합계(매칭 전) — Figma 표본 5,137.70은 행 합계와 달라 합계로 씀'},
  {id:'hw1',label:'총액 카드 · 4행 (HW1)',figma:{pc:'28960:126108'},note:'Figma HW1. Figma의 Aster 칩 자리는 결정 10차(`Data delayed` 칩 없음)로 비움'},
@@ -294,8 +296,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
   const app=st==='app'||S.vp==='mo';
   let left='',o={};
   const card=(rows,x={})=>balanceCard({amount:sumLinked(rows),...x});
-  if(st==='s3')left=balanceCard({amount:0})+s3Checklist()+s3Preview();
-  else if(st==='s3App')left=balanceCard({amount:0})+s3Checklist()+s3Preview();
+  if(st==='s3'||st==='s3App')left=balanceCard({amount:0})+(S.vp==='mo'?s3Empty():s3Checklist()+s3Preview());   // 웹 = 체크리스트 · Cashback Preview, 앱·모바일웹 = 빈 홈 카드(REQ-267)
   else{
    let rows=[R_BITGET,R_LIGHTER,R_APEX],x={},lc={app};
    if(st==='s3Pending')rows=[{ex:'EdgeX',id:WAL.edgex,amt:null,st:'pend'}];

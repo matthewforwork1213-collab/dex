@@ -4153,6 +4153,8 @@ function s3Checklist(){
   <div class="row between" style="padding:0 16px"><span class="row">${badge(1)}${lbl('Create TetherMax account')}</span>${hic('check-step',24)}</div>${div}
   <div class="row between" style="padding:0 16px;cursor:pointer" data-go="hub.main"><span class="row">${badge(2)}${lbl('Browse partners')}</span>${hic('chevron',24)}</div>${div}
   <div class="row" style="padding:0 16px;cursor:pointer" data-go="link.select">${badge(3)}<span class="grow">${lbl('Link your account with us')}</span>${chip}${hic('chevron',24)}</div></div>`}
+// 앱·모바일웹 S3 빈 홈 카드(REQ-267) — DEX(revision) Home / mWeb / S3 · Empty home card 29420:138295(카드 343×124 · 제목 · Link Account 311×36)
+const s3Empty=()=>`<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px 16px 32px;display:flex;flex-direction:column;gap:16px"><span class="b1 semi" style="line-height:24px">Link once and cashback keeps coming</span><button class="btn contained primary md full" style="height:36px" data-go="link.select:all">Link Account</button></div>`;
 const s3Preview=()=>`<div data-go="calc.p1" style="cursor:pointer;border:1px solid #c7d6ff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:1px 1px 15px rgba(28,28,30,.04);background:linear-gradient(160deg,rgba(199,214,255,.08),rgba(199,214,255,.35))">
  <div class="row between"><span class="row">${hic('calc',16)}<span class="b2 semi" style="color:#7f9fff">Cashback Preview</span></span>${hic('chevron-blue',16)}</div>
  <p style="margin:0;font-size:12px;line-height:1.33;letter-spacing:.2px"><b class="semi">81,836</b> of our users earn an average of <b class="semi">47.00 USDT</b> to <b class="semi">284.00 USDT</b> in cashback per month.</p></div>`;
@@ -4217,8 +4219,8 @@ const N_FIG='FU-038·039 행 디자인(로고·점·칩·금액)은 HW1/S4-1 컴
 const HOME_STATES=[
  {id:'auto',label:'기본 — 로그인 상태(게스트·S3·S4)를 따름',note:'도구의 게스트/회원·연동0/회원·연동 선택에 따라 guest · s3 · normal 상태를 보여 줌'},
  {id:'guest',label:'비로그인 — 공개 화면 (home/S4#guest)',figma:{mo:'29037:113704'},note:'V2.2 home/S4#guest · REQ-176. 웹은 랜딩(landing.main)을 그대로 씀, 모바일은 Figma Mobile / Guest entry / Home'},
- {id:'s3',label:'S3 연동 0 — 체크리스트 · Cashback Preview (S3-1)',figma:{pc:'28960:127759',mo:'4248:33574'},note:'모바일 [기존 MAX-7] mWeb S3 4248:33574. V2.2 home/S3#normal · REQ-267. L16(연동 화면 배경)도 이 화면'},
- {id:'s3App',label:'S3 앱·모바일웹 빈 홈 카드',figma:{mo:'8582:154521'},note:'[기존 MAX-7] mAPP S3 8582:154521(체크리스트 카드 — V2.2의 Link once 카드는 디자인 없음). V2.2 home/S3#app · REQ-267 · 사용자 확인 #48'},
+ {id:'s3',label:'S3 연동 0 — 체크리스트 · Cashback Preview (S3-1)',figma:{pc:'28960:127759',mo:'29420:138295'},note:'모바일 = 앱·모바일웹 빈 홈 카드(REQ-267) DEX(revision) Home / mWeb / S3 · Empty home card 29420:138295. V2.2 home/S3#normal. L16(연동 화면 배경)도 이 화면'},
+ {id:'s3App',label:'S3 앱·모바일웹 빈 홈 카드',figma:{mo:'29420:138295'},note:'DEX(revision) Home / mWeb / S3 · Empty home card 29420:138295(Figma 4차 #12 — 문구 `Link once and cashback keeps coming` · `Link Account`). V2.2 home/S3#app · REQ-267'},
  {id:'s3Pending',label:'확인 중 계정만 있음 → S4 전환',note:'V2.2 home/S3#pendingOnly · G-070 확정: S4로 전환하고 행에 확인 중 표시'},
  {id:'normal',label:'S4 연동 있음 — CEX·DEX 한 목록 (S4-1)',figma:{pc:'28960:127837',mo:'22913:1051713'},note:'페이지 전체 = [기존 MAX-7] MAXOP-731 Web 22913:1052131 · mWeb 22913:1051713(누적 캐시백 카드 22913:1054295 포함) + DEX S4-1. V2.2 home/S4#normal · REQ-268·271. L17(연동 화면 배경)도 이 화면. 총액은 행 합계(매칭 전) — Figma 표본 5,137.70은 행 합계와 달라 합계로 씀'},
  {id:'hw1',label:'총액 카드 · 4행 (HW1)',figma:{pc:'28960:126108'},note:'Figma HW1. Figma의 Aster 칩 자리는 결정 10차(`Data delayed` 칩 없음)로 비움'},
@@ -4254,8 +4256,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
   const app=st==='app'||S.vp==='mo';
   let left='',o={};
   const card=(rows,x={})=>balanceCard({amount:sumLinked(rows),...x});
-  if(st==='s3')left=balanceCard({amount:0})+s3Checklist()+s3Preview();
-  else if(st==='s3App')left=balanceCard({amount:0})+s3Checklist()+s3Preview();
+  if(st==='s3'||st==='s3App')left=balanceCard({amount:0})+(S.vp==='mo'?s3Empty():s3Checklist()+s3Preview());   // 웹 = 체크리스트 · Cashback Preview, 앱·모바일웹 = 빈 홈 카드(REQ-267)
   else{
    let rows=[R_BITGET,R_LIGHTER,R_APEX],x={},lc={app};
    if(st==='s3Pending')rows=[{ex:'EdgeX',id:WAL.edgex,amt:null,st:'pend'}];
@@ -5640,11 +5641,9 @@ function dtStructure(d,maker){
  const head=`<div class="row between" style="align-items:flex-start;${mo()?'flex-wrap:wrap;gap:8px':''}"><div class="row" style="gap:17px;${mo()?'flex-direction:column;align-items:flex-start;gap:4px':''}"><span class="h5 bold">How much you get back</span><span class="row b2 semi" style="gap:4px;color:var(--blue);cursor:pointer" data-go="dex.detail:drawer"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" style="flex:none;display:block"><path d="M7.99333 1.33333C4.31333 1.33333 1.33333 4.32 1.33333 8C1.33333 11.68 4.31333 14.6667 7.99333 14.6667C11.68 14.6667 14.6667 11.68 14.6667 8C14.6667 4.32 11.68 1.33333 7.99333 1.33333ZM8 13.3333C5.05333 13.3333 2.66667 10.9467 2.66667 8C2.66667 5.05333 5.05333 2.66667 8 2.66667C10.9467 2.66667 13.3333 5.05333 13.3333 8C13.3333 10.9467 10.9467 13.3333 8 13.3333Z" fill="currentColor"/><path d="M8.66667 10.6667C8.66667 11.0333 8.36667 11.3333 8 11.3333C7.63333 11.3333 7.33333 11.0333 7.33333 10.6667V8C7.33333 7.63333 7.63333 7.33333 8 7.33333C8.36667 7.33333 8.66667 7.63333 8.66667 8V10.6667Z" fill="currentColor"/><path d="M7.33333 4.66667H8.66667V6H7.33333V4.66667Z" fill="currentColor"/></svg><span>How this works</span></span></div>${mo()?`<div style="width:100%">${toggle('Taker','Maker',maker?1:0).replace('display:inline-flex','display:flex;width:100%').replace(/padding:0 8px;display:flex/g,'flex:1;justify-content:center;padding:0 8px;display:flex')}</div>`:toggle('Taker','Maker',maker?1:0).replace(/font-size:14px/g,'font-size:13px')}</div>`;
  const disc=`<div class="row" style="gap:8px">${img('dex-dt-ic-info.svg',16)}<span class="b2 c2">Cashback comes from eligible exchange partner settlements. Final amounts vary by exchange, tier and trading activity.</span></div>`;
  if(mo()){
-  const kv=(k,s,v,big)=>`<div class="row between" style="padding:8px 0"><div class="col" style="gap:0"><span class="b2">${k}</span><span class="cap c2">${s}</span></div><span style="${big?'font-size:34px;font-weight:700':'font-size:16px;font-weight:600'}">${v}</span></div>`;
-  const bar=`<div style="display:flex;height:40px;border-radius:4px;overflow:hidden"><span style="width:${d.rate}%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center" class="b2 semi">${d.rate}%</span><span style="flex:1;background:#e0e0e0;color:#fff;display:flex;align-items:center;justify-content:center" class="b2">${100-d.rate}%</span></div>`;
-  const leg=(c,t,s)=>`<div class="row" style="gap:8px;align-items:flex-start"><i style="width:12px;height:12px;background:${c};border-radius:2px;margin-top:4px"></i><div class="col" style="gap:0"><span class="b2">${t}</span><span class="cap c2">${s}</span></div></div>`;
-  return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider">${kv('Normal trading fee','Without TetherMax',usd(x.fee))}${kv('Cashback','Returned to you','−'+usd(x.cb))}<hr class="divider">${kv('Effective fee','With TetherMax',usd(x.eff),1)}${slider}
-   <span class="h6" id="dex-flow" style="margin-top:16px">Where your cashback comes from</span>${bar}${leg('var(--blue)',`Returned to you — ${usd(x.cb)}`,'Paid to your TetherMax balance.')}${leg('#e0e0e0',`Stays with the fee — ${usd(x.eff)}`,`Split between ${d.name} and TetherMax.`)}
+  const kv=(k,s,v,big)=>`<div class="row between" style="padding:7px 0"><div class="col" style="gap:0"><span class="b2" style="line-height:20px">${k}</span><span class="cap c2" style="line-height:20px">${s}</span></div><span style="${big?'font-size:34px;font-weight:700':'font-size:16px;font-weight:600'}">${v}</span></div>`;
+  return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider"><div class="col" style="gap:0">${kv('Trading fee','Without TetherMax',usd(x.fee))}${kv('Cashback','Returned to you','−'+usd(x.cb))}<hr class="divider" style="margin:4px 0">${kv('Effective fee','With TetherMax',usd(x.eff),1)}</div>${slider}
+   <span class="h6" id="dex-flow" style="margin-top:16px">Where your cashback comes from</span>
    <div class="col" style="gap:8px">${steps.map(stepCard).join('')}</div>${disc}</div>`,{outer:'padding:20px 16px',style:'border-radius:8px;padding:16px'});
  }
  return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider">${fees}${slider}
@@ -5681,7 +5680,7 @@ function dtClosing(d){
 }
 function dtFaq(d,c){
  const ico=open=>`<span style="width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;font-size:24px;color:var(--action-active)">${open?'−':'+'}</span>`;
- const tail=d.cur==='USDC'||d.id==='edgex'?' Shown in USDT, 1:1 with USDC.':' Amounts are shown in USDT.';
+ const tail=d.cur==='USDC'||d.id==='edgex'?' Shown in USDT, 1:1 with USDC.':' Shown in USDT.';   // Figma D5·D6(29357:147710 · 29357:148976) FAQ 첫 답변 — 운영자 입력 예시
  const secs=['General Partnership','Cashback & Referral Rewards','Points Program & Airdrop','Account Types & Eligibility','Prohibited Activity & Compliance','Withdrawals & Account Management','Contact & Support'];
  // 펼친 구역: 첫 구역(REQ-350) · faq2 상태는 6번째 `Withdrawals & Account Management`도(Figma CT-29 ② 29367:138679 — 운영자 입력 예시)
  const qa={0:[`How does TetherMax cashback work on ${d.name}?`,`Join ${d.name} through the TetherMax link and trade. Your cashback is credited to your TetherMax balance. Eligible balances of 10 USDT or more are paid automatically to your linked wallet.${tail}`],
@@ -5727,7 +5726,7 @@ function dtReviews(d,member,c){
   {v:4.7,date:'2026-08-28',col:'#338c73',nick:'차트보는곰',title:'몇 군데 비교하고 여기로 정했어요',body:'여러 DEX를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매주 들어오고 출금이 막힌 적도 없습니다.'}];
  const pag=`<div class="row center" style="gap:6px;padding-top:8px">${['«','‹','1','2','3','4','5','6','7','›','»'].map((p,i)=>`<span style="width:26px;height:26px;border-radius:100px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;${p==='1'?'background:var(--blue);color:#fff':i<2?'opacity:.38':''}">${p}</span>`).join('')}</div>`;
  const mnote=c==='moderation'?C.note('검토 중 리뷰 — 제목·본문 숨김 + <code>This review is under moderation</code> 줄(REQ-354·362) · 디자인 없음'):'';
- return `<div style="padding:${mo()?'16px 0 40px':'32px 0 80px'}"><div style="max-width:1056px;margin:0 auto;background:#fff;border:1px solid var(--divider);border-radius:${mo()?0:16}px;padding:${mo()?'24px 29px':'24px'}" class="col" >${[head,gate,summary,ai,tags,gateCard,`<div style="border-top:1px solid var(--divider);padding-top:18px">${sort}</div>`,`<div>${list.map(rv).join('')}</div>`,pag,mnote].filter(Boolean).join('<div style="height:2px"></div>')}</div></div>`;
+ return `<div style="padding:${mo()?'16px 0 40px':'32px 0 80px'}"><div style="max-width:1056px;margin:0 auto;background:#fff;border:1px solid var(--divider);border-radius:${mo()?0:16}px;padding:${mo()?'24px 14px':'24px'}" class="col" >${[head,gate,summary,ai,tags,gateCard,`<div style="border-top:1px solid var(--divider);padding-top:18px">${sort}</div>`,`<div>${list.map(rv).join('')}</div>`,pag,mnote].filter(Boolean).join('<div style="height:2px"></div>')}</div></div>`;
 }
 function dtMyReview(){
  return `<div style="max-width:${mo()?'none':'1200px'};margin:0 auto;padding:${mo()?'24px 16px':'36px 0 24px'};display:flex;align-items:center;justify-content:space-between"><span style="font-size:${mo()?20:28}px;font-weight:600">My review</span>${outlinedP('Write a Review',{size:'lg'})}</div>`;
@@ -5749,7 +5748,7 @@ function dtDrawer(d,maker){
   <hr class="divider" style="margin:0"></div>`;
 }
 function dtPage(c){
- const SD=window.SITED&&SITED.id?SITED:null;const id=SD?SD.id:['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='step2'||c==='signupReturn'||c==='faq2'?'lighter':'edgex';
+ const SD=window.SITED&&SITED.id?SITED:null;const id=SD?SD.id:['aster','apex','lighter','edgex'].includes(c)?c:c==='step3'||c==='step2'||c==='signupReturn'||c==='faq2'||c==='reviewsEmpty'?'lighter':'edgex';   // 리뷰 없음 = Figma D3 Reviews 0(Lighter)
  const d=DX[id];
  const member=SD?SD.member:c==='normal'?'guest':c==='unlinked'?'unlinked':c==='linked'?'linked':c==='signupReturn'?'return':c==='pendingLink'?'pending':({guest:'guest',s3:'unlinked',s4:'linked'}[S.auth]||'guest');
  const maker=SD?SD.maker:c==='maker';

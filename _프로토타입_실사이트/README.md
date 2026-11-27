@@ -153,7 +153,7 @@
 | | 허브 DEX 패널 H5 형태: `Total event reward` · `Claimable {n} USDT` · `Total claimed` · 각주 `Cashback is sent automatically to your linked {DEX} wallet.` | 문구표 #31 · #32 · H5 29352:145077 |
 | | 지갑 상세 하단 `Top Partner Exchanges`(홈과 같은 기존 블록) | 결정 「지갑 상세 하단」 |
 | | 제외: 허브 데이터 지연(H6) · 가이드 미디어 실패 상태. 가이드 미디어는 이미지 자리만 | 8차 |
-| | DEX 개요 `PAYOUT` 카드 라벨 · 비교표 `Where payouts go`(실서비스·명세 유지) · 리뷰 요약 표본 `… every day.` | 9차 #2 · #4 |
+| | DEX 개요 `PAYOUT` 카드 라벨(명세 유지) · 비교표 `Where you withdraw` / DEX `On TetherMax, from 10 USDT, to your linked wallet`(정책 8-4 · REQ-327 · 최신 Figma) · 리뷰 요약 표본 `… every day.` | 9차 #2 · #4 |
 | 실사이트 랜딩 `/en`(런타임 `dexCopy` · `dexPartners`) | 3단계 `Link your exchange account` / `Link your exchange UID or wallet address to TetherMax` · `Get cashback in USDT automatically` / `Each linked account is paid automatically once its claimable balance reaches 10 USDT.` | 문구표 #44 · Figma 랜딩 28960:128375 |
 | | 모바일 `Top Exchanges` → `Our Partners` + 칩 `All` · `Exchanges` · `DEXs`(실제 필터), 목록 끝 두 행 `ApeX 30%` · `Lighter 20%` → 누르면 DEX 상세 | Figma 29386:140183 |
 | 실사이트 서비스 소개(런타임 `dexCopy`) | 피드 제목·부제 `Someone is cashing out right now` / `Claim every cent you've earned` · 캐시백 슬라이드 부제 #75 · 파트너십 문장 #76 · `Account linked` / `… link their account.` | 문구표 #41 · #75 · #76 · 9차 #1 |
