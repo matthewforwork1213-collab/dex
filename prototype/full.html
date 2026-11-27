@@ -3491,7 +3491,7 @@ const autoClaim=()=>C.btn('Auto Claim',{full:true,disabled:true});
 function calcCard(route,o={}){
  const p=route==='DEX'?HB_DEX.find(x=>x.id===(o.pid||'lighter')):route==='CEX'?HB_CEX.find(x=>x.id==='bybit'):HB_BRK[0];
  const range=route==='DEX'?['$1K','$250K']:route==='CEX'?['$10K','$500K']:['$10K','$20M'];
- const slider=`<div class="col" style="gap:0"><div style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div style="position:absolute;left:0;top:10px;width:44px;height:6px;border-radius:100px;background:var(--blue)"></div><img src="${A('hub-slider-thumb.svg')}" alt="" style="position:absolute;left:33px;top:2.5px;width:30px;height:30px"></div>
+ const slider=`<div class="col" style="gap:0"><div style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div style="position:absolute;left:0;top:10px;width:44px;height:6px;border-radius:100px;background:var(--blue)"></div><img src="${A('hub-slider-thumb.svg')}" alt="" style="position:absolute;left:33px;top:-1px;width:30px;height:30px"></div>
   <div class="row between cap c2"><span>${range[0]}</span><span>${range[1]}</span></div></div>`;
  const inputs=`<div class="row" style="gap:24px;align-items:flex-start;${mo()?'flex-direction:column;align-items:stretch':''}">${partnerSel(p)}<div class="col" style="gap:8px;flex:1"><span class="sub2 c2">Monthly trading volume</span><span class="h5">${usd0(HB_VOL)}</span></div></div>`;
  let body;
