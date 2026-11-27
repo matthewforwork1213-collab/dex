@@ -73,6 +73,16 @@ function goRoute(path, q = {}, o = {}) {
 }
 window.addEventListener('popstate', () => { route = parseHash(); renderPage(); post({ dexRoute: hashOf(route) }) });
 
+// ---------------- GNB 드롭다운: 클릭으로 펼침·유지, 다시 클릭·바깥 클릭·Esc로 닫힘(실사이트 PCHeader와 같은 동작) ----------------
+function gnbClose(except) { document.querySelectorAll('.gnb .nav .ni.open').forEach(n => { if (n !== except) n.classList.remove('open') }) }
+window.addEventListener('click', e => {
+  const top = e.target.closest && e.target.closest('.gnb .nav .ni > a');
+  if (top) { e.preventDefault(); e.stopImmediatePropagation(); const ni = top.parentNode; gnbClose(ni); ni.classList.toggle('open'); return }
+  if (e.target.closest && e.target.closest('.gnb-dd a')) { gnbClose(); return }
+  if (!(e.target.closest && e.target.closest('.gnb-dd'))) gnbClose();
+}, true);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') gnbClose() });
+
 // ---------------- data-go → 사이트 동작 ----------------
 let goEl = null, pendingVenue = null;
 document.addEventListener('click', e => {
