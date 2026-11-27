@@ -558,7 +558,7 @@ function moTop(title,back){
  return bar+tt}
 // 앱 하단 탭 — <BottomNavigation> 8582:155585 (Home · Events · Benefits · Exchanges · Point). 앱(mAPP) 전용
 function moNav(active,o={}){if(!o.app)return '';
- const it=[['home','home.main','Home','홈','cmn-tab-home.svg'],['events','events.list','Events','이벤트','cmn-tab-event.svg'],['benefits','benefits.list','Benefits','혜택','cmn-tab-benefit.svg'],['exchange','hub.main:cex','Exchanges','거래소','cmn-tab-exchange.svg'],['point','tp.intro','Point','포인트','']];
+ const it=[['home','home.main','Home','홈','cmn-tab-home.svg'],['events','events.list','Events','이벤트','cmn-tab-event.svg'],['benefits','benefits.list','Benefits','혜택','cmn-tab-benefit.svg'],['exchange','cex.list','Exchanges','거래소','cmn-tab-exchange.svg'],['point','tp.intro','Point','포인트','']];
  const icon=(k,f)=>k==='point'?`<span class="tp"><img src="${A('cmn-tab-point-b.svg')}" alt=""></span>`:`<img src="${A(f)}" alt="">`;
  return `<nav class="mo-nav">${it.map(([k,go,en,ko,f])=>`<a class="${active===k?'on':''}${k==='home'?' home':''}" data-go="${go}">${icon(k,f)}<span>${T(en,ko)}</span></a>`).join('')}</nav>`}
 
@@ -631,7 +631,9 @@ function go(key,o={}){if(!key)return;
  // 브로커 상세·Brokers 페이지는 프로토타입 안 화면(155-brokers.js — 결정 12차 Brokers 페이지 유지 · 허브 Join {broker} = 브로커 상세 현재 탭)
  if(key.startsWith('brkd:')&&R.byId['brokers.detail']){const b=key.slice(5);return go('brokers.detail:'+({rs:'rsFinance','rs-finance':'rsFinance'}[b]||b),o)}
  if(/^brokers\.list(:|$)/.test(key)&&R.byId['brokers.main'])return go('brokers.main',o);
- if(/^(cexd|brkd):/.test(key)){const [k,id]=key.split(':');const CS={blockfin:'blofin',biofin:'blofin',woox:'woo-x-pro'},BS={rs:'rs-finance'};window.open('https://tethermax.io/en/'+(k==='cexd'?'exchangeDetail/'+(CS[id]||id)+'-referral':'brokers/'+(BS[id]||id)),'_blank','noopener');window.PT_LAST_OPEN=key;return}
+ // 기존 CEX 거래소 목록(/{lang}/affiliated — 결정 2026-11-27 목록 페이지 유지)·CEX 거래소 상세는 기존 실서비스 페이지 → 실동작판 수집본을 새 탭으로
+ if(key==='cex.list'||/^cexd:/.test(key)){const CS={blockfin:'blofin',biofin:'blofin',woox:'woo-x-pro'},id=key.split(':')[1];window.open(snapUrl(key==='cex.list'?'en__affiliated':'en__exchangeDetail__'+(CS[id]||id)+'-referral'),'_blank','noopener');window.PT_LAST_OPEN=key;return}
+ if(/^brkd:/.test(key)){const BS={rs:'rs-finance'},id=key.slice(5);window.open('https://tethermax.io/en/brokers/'+(BS[id]||id),'_blank','noopener');window.PT_LAST_OPEN=key;return}
  if(!o.noPush&&S.screen)HIST.push(S.screen+(S.state?':'+S.state:''));if(HIST.length>50)HIST.shift();
  const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}document.body.classList.remove('pt-side-open');S.screen=id;S.state=st||(AUTH_STATE[id]?AUTH_STATE[id][S.auth]:null);   // 상태를 안 정하면 지금 로그인 상태의 화면
  // 지금 로그인 상태로는 볼 수 없는 화면이면 실제로 보게 되는 화면으로(게스트 전용 ↔ 회원 전용)
@@ -668,10 +670,11 @@ function appRoute(id,st){
  if(id==='own.verify')return '#/ownership';
  if(/^link\./.test(id))return '#/hub?link=1';
  return null}
-function appBase(){return '../_프로토타입_실사이트/dex/app.html'}   // _프로토타입_전체/_latest.html · prototype/full.html 모두 DEX 바로 아래
+function appBase(){return '../_프로토타입_실사이트/dex/app.html'}
+function snapUrl(k){return '../_프로토타입_실사이트/index.html#key='+encodeURIComponent(k)+'&auth='+(S.auth==='guest'?'guest':'member')}   // _프로토타입_전체/_latest.html · prototype/full.html 모두 DEX 바로 아래
 function liveFrame(r){const au=S.auth==='guest'?'guest':'member';return `<iframe id="pt-live" title="실제 동작판" src="${appBase()}?auth=${au}${r}" style="display:block;width:100%;height:calc(100vh - var(--pt-bar-h,48px));border:0;background:#fff"></iframe>`}
-const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point-introduction/,'tp.intro'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'hub.main'],[/^\/en\/dex\/?$/,'dex.overview']];
-window.PT_REAL_NAV=url=>{let p='';try{p=new URL(url).pathname}catch(x){p=String(url)}const hit=REAL2SCREEN.find(([re])=>re.test(p));if(hit){const t=typeof hit[1]==='function'?hit[1]():hit[1];go(t);return}window.open(url,'_blank','noopener');window.PT_LAST_OPEN=url};
+const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point-introduction/,'tp.intro'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'cex.list'],[/^\/en\/dex\/?$/,'dex.overview']];
+window.PT_REAL_NAV=url=>{let p='';try{p=new URL(url).pathname}catch(x){p=String(url)}const cx=/^\/en\/exchangeDetail\/(.+)-referral/.exec(p);if(cx)return go('cexd:'+cx[1]);const hit=REAL2SCREEN.find(([re])=>re.test(p));if(hit){const t=typeof hit[1]==='function'?hit[1]():hit[1];go(t);return}window.open(url,'_blank','noopener');window.PT_LAST_OPEN=url};
 window.addEventListener('message',e=>{const m=e.data||{};if(!m.pt||!S.live)return;
  if(m.auth){S.auth=m.auth==='member'?(S.auth==='guest'?'s4':S.auth):'guest';save()}
  if(m.nav){let p='';try{p=new URL(m.nav).pathname}catch(x){p=String(m.nav)}
@@ -3320,7 +3323,7 @@ R.screen({id:'auth.signup',group:'cex',title:'회원가입 (기존 · 첫 단계
  ],
  render(st){if(st==='otp'||st==='otpGuest')return withOtp(signup(st==='otpGuest'?'guest':'normal'));if(st==='invite')return `<div style="position:relative">${signup('invite')}<div class="scrim pt-fixed center" style="align-items:center;justify-content:center">${inviteModal()}</div></div>`+C.note('초대 코드 미리 채운 가입 → 가입 완료 뒤 초대 보상 안내 모달(Figma 프레임 = 모달)');return signup(st)+C.note(st==='guest'?'게스트 복귀 가입: 가입 성공 → 조회한 거래소·계정으로 돌아가 연동(REQ-178).':'Figma 원문 그대로(PC <code>Log in</code> · 모바일 <code>Log In</code>).')}});
 
-// 거래소 목록 화면(cex.list)은 두지 않음 — 결정(사용자 2026-11-27): 거래소 목록 자리 = 캐시백 허브 CEX 탭(hub.main:cex)
+// 거래소 목록(cex.list)은 기존 실서비스 페이지(/{lang}/affiliated — 결정 2026-11-27 목록 페이지 유지) → 목록판에서는 실동작판 수집본을 새 탭으로(01-core go)
 
 
 })()}catch(e){console.error('150-cex.js',e);(window.PT_ERR=window.PT_ERR||[]).push('150-cex.js: '+e.message)}
@@ -3652,7 +3655,7 @@ function lndPartners(st){
   <span class="h6 bold" style="position:relative">Most popular exchange</span>
   <div class="col" style="gap:20px;align-items:center;justify-content:center;height:218px;position:relative">${hd?C.dex('EdgeX',80):img('lnd-bitget.png','width:80px;height:80px;border-radius:20px')}
    <div class="col" style="gap:8px;align-items:center"><span class="cap c3">Official Partner Exchanges</span><div class="col" style="gap:0;align-items:center"><span class="b2">${hd?'EdgeX':'Bitget'}</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${hd?'30%':'77%'} <span style="color:#1c1c1e">Total Savings</span></span></div></div></div>
-  <button class="btn contained primary lg full" style="position:relative" data-go="${hd?'dex.detail:edgex':'hub.main:cex'}">Browse Partner Exchange</button></div>`;
+  <button class="btn contained primary lg full" style="position:relative" data-go="${hd?'dex.detail:edgex':'cex.list'}">Browse Partner Exchange</button></div>`;
  const top=card(`<div class="col" style="gap:4px"><span class="h6 bold">TOP 5 Traders in December</span><span class="cap c3" style="line-height:12px">As of Aug 5, 2026 (Cashback)</span></div>
   <div class="col" style="gap:0;margin-top:4px">${[['Bitget','Bitget trader','4,051.38'],['Bitunix','BingX trader','4,561.12'],['Lighter','Lighter trader','4,561.12'],['OKX','Bitmart trader','3,051.38'],['EdgeX','EdgeX trader','2,051.38']].map(([l,n,v])=>`<div class="row" style="gap:12px;height:56px;padding:8px">${logo(l,32)}<div class="col" style="gap:4px"><span class="cap c2">${n}</span><span class="b2 semi">${v} USDT</span></div></div>`).join('')}</div>`,'flex:1;min-width:0;height:424px');
  const days=['8/11','8/12','8/13','8/14','8/15','8/16','8/17','8/18','8/19','8/20','8/21','8/22','8/23','8/24','8/25'];
@@ -3822,7 +3825,7 @@ function searchCard(o){
   ${coin('guest-coin-a.png',mo()?'left:-60px;top:10px;width:130px':'left:-120px;top:-62px;width:210px')}${coin('guest-coin-b.png',mo()?'right:-52px;top:20px;width:100px':'left:262px;top:-66px;width:150px')}
   <div class="col" style="position:relative;gap:8px;padding:8px;border-radius:8px;background:rgba(255,255,255,.35);border:1px solid rgba(0,49,198,.08);backdrop-filter:blur(12px)">${sel}${field}${o.err?`<span class="cap ce" style="padding:0 2px">${o.err}</span>`:''}${btn}</div>
   ${coin('guest-coin-c.png',mo()?'right:-70px;bottom:-80px;width:140px':'left:280px;top:100px;width:200px')}
-  <a class="row center b1" data-go="hub.main:cex" style="gap:8px;margin-top:${mo()?24:28}px;position:relative;cursor:pointer">No account? Join our partner exchange <span style="font-size:18px">⟶</span></a></div>`}
+  <a class="row center b1" data-go="cex.list" style="gap:8px;margin-top:${mo()?24:28}px;position:relative;cursor:pointer">No account? Join our partner exchange <span style="font-size:18px">⟶</span></a></div>`}
 function band(){
  return `<section style="background:#cfe0fb url('${A('guest-band.jpg')}') center/cover;padding:${mo()?'64px 16px':'56px 24px'};text-align:center"><div class="col" style="gap:8px;align-items:center"><p style="margin:0;font-size:24px;line-height:1.334;font-weight:700">Don't leave your cashback behind.</p><p class="b2 c2" style="margin:0">Sign up or log in and link this trading account to receive your cashback.</p>
   <div style="position:relative;width:100%;max-width:400px;margin-top:32px;background:#fff;border-radius:1000px"><div style="border:1px solid var(--input-border);border-radius:5000px;padding:16px;text-align:left"><span class="b1 c2">Email address</span></div><button class="btn contained primary lg" data-go="auth.signup" style="position:absolute;right:7px;top:50%;transform:translateY(-50%);border-radius:1000px">Sign Up Now</button></div></div></section>`}
@@ -3865,7 +3868,7 @@ function acctCard(r){
 function sideRecs(){
  const tile=(n,bg,inner,pct)=>`<div class="col" style="gap:4px;flex:none;width:${mo()?106:155}px"><div style="height:${mo()?60:80}px;background:${bg};display:flex;align-items:center;justify-content:center;overflow:hidden">${inner}</div><span class="cap" style="color:var(--text-secondary)">${n}</span><span class="cap med">${pct} Total Savings</span></div>`;
  const tiles=[tile('Bitget','#00f0ff',img('lnd-bitget.png','width:40px;height:40px'),'54%'),tile('Bybit','#171a26',img('guest-bybit.png','height:100%'),'55%'),tile('Binance','#1e2026',img('home-logo-binance.png','width:40px;height:40px;border-radius:50%'),'50%'),tile('OKX','#000',img('guest-okx.png','height:100%'),'65%')];
- const head=t=>`<div class="row between"><span class="${mo()?'b1 semi':'h5 bold'}" style="${mo()?'':'font-size:24px'}">${t}</span><button class="btn text primary sm" data-go="${t==='Top Partner Exchanges'?'hub.main:cex':'benefits.list'}">See All</button></div>`;
+ const head=t=>`<div class="row between"><span class="${mo()?'b1 semi':'h5 bold'}" style="${mo()?'':'font-size:24px'}">${t}</span><button class="btn text primary sm" data-go="${t==='Top Partner Exchanges'?'cex.list':'benefits.list'}">See All</button></div>`;
  const evPc=(f,t,v)=>`<div style="flex:1;background:#fff;border-radius:8px;box-shadow:0 4px 5px rgba(0,0,0,.1);padding:12px;display:flex;flex-direction:column;gap:12px"><div style="height:140px;position:relative;background:#000;border-radius:4px;overflow:hidden">${img(f,'position:absolute;right:0;top:0;height:100%')}<span class="row" style="position:absolute;left:4px;top:4px;gap:4px;background:#1c1c1e;border-radius:4px;padding:2px 8px">${img('lnd-chip-bitget.png','width:14px;height:14px')}<span style="font-size:11px;color:#fff">Bitget</span></span><span style="position:absolute;left:16px;top:28px;width:150px;color:#fff;font-weight:600;font-size:15px;line-height:1.6">${t}</span></div><div class="row between b2"><span class="row c2" style="gap:4px">${img('lnd-ic-redeem.svg','width:20px;height:20px')}Rewards</span><span>${v}</span></div>${'<span class="cap c2" style="align-self:flex-start;background:#e6e7e9;border-radius:4px;padding:4px;line-height:12px">Ongoing</span>'}<button class="btn contained primary md full" data-go="benefits.list">Join Now</button></div>`;
  const evMo=(f,t,d)=>`<div class="col" style="gap:4px;flex:none;width:160px"><div style="height:155px;position:relative;background:#000;border-radius:8px;overflow:hidden">${img(f,'position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);width:150%')}<span class="row" style="position:absolute;left:6px;top:6px;gap:4px;background:#1c1c1e;border-radius:4px;padding:2px 8px">${img('lnd-chip-bitget.png','width:14px;height:14px')}<span style="font-size:11px;color:#fff">Bitget</span></span></div><span class="b2 semi">${t}</span><span class="cap c2">${d}</span></div>`;
  const evs=mo()?evMo('guest-ev-btc.png','Guess Bitcoin Price','Win Up to 1,000 USDT')+evMo('guest-ev-cash.png','Earn More Cashback','Earn extra USDT')
@@ -4131,7 +4134,7 @@ function homeMainMo(tag='Bitget'){
   <div style="background:#fff;padding:16px;display:flex;flex-direction:column;gap:32px">
    ${moMemberCards(tag)}
    <div class="col" style="gap:16px;align-items:center">${`<div style="width:100%">${head('Limited Time Offers','events.list',true)}</div>`}<div style="width:100%">${comp}</div><img src="${HA('mo-dots.svg')}" style="width:44px;height:6px" alt=""></div></div>
-  <div style="background:var(--bg-accent);padding:16px" class="col g16">${head('Top Partner Exchanges','hub.main:cex',true)}
+  <div style="background:var(--bg-accent);padding:16px" class="col g16">${head('Top Partner Exchanges','cex.list',true)}
    <div class="row" style="gap:10px;overflow:hidden;align-items:flex-start;margin-right:-16px">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:108px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500;letter-spacing:.14px">${p} Total Savings</span></div>`).join('')}</div></div></div>`}
 function homeMain(){
  if(S.vp==='mo')return homeMainMo();
@@ -4145,7 +4148,7 @@ function homeMain(){
   <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Limited Time Offers','events.list')}<div style="${grid}">
    ${evCard(evBanner('ev-comp.jpg','Trade to win up to $100K prize pool','Bitget'),evRow('trophy','Rewards','$100,000.00')+ends,joinBtn(),317)}
    ${evCard(evBanner('ev-vip.jpg','Become a VIP &amp; enjoy the benefits.','Bitget'),evRow('voucher','Voucher','Claim VIP2 Trial')+timer,joinBtn(),336)}</div></div>
-  <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Top Partner Exchanges','hub.main:cex')}<div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">
+  <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Top Partner Exchanges','cex.list')}<div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">
    ${partners.map(([n,bg,p])=>`<div class="col" style="gap:4px"><div style="background:${bg};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div></div>`}
 
 // 홈 2열 레이아웃(347 + 24 + 717) · 모바일 1열
@@ -4253,7 +4256,7 @@ const HOME_STATES=[
  {id:'error',label:'잔액 로드 실패',note:'V2.2 home/S4#error · REQ-269'},
  {id:'many',label:'계정 11개 이상 — 10개 + 더보기',note:'V2.2 home/S4#many · REQ-271'},
  {id:'app',label:'앱·모바일웹 — Wallet 라벨 없음 · 푸터 문구',figma:{mo:'8582:156599'},note:'[기존 MAX-7] mAPP S4 8582:156599 — 하단 탭은 앱에서만. V2.2 home/S4#app · REQ-271. 모바일 보기에서는 모든 상태에 같은 규칙'},
- {id:'first',label:'첫 연동 — 체크리스트 없는 S4 + 토스트 (S3-7)',figma:{pc:'28960:127795'},note:'V2.2 link/HOME#first · REQ-096 · G-070. Figma 총액 5,137.70은 표본이라 행 합계 0.00으로 씀'},
+ {id:'first',label:'첫 연동 — 체크리스트 없는 S4 + 토스트 (S3-7)',figma:{pc:'28960:127795',mo:'29530:134341'},note:'V2.2 link/HOME#first · REQ-096 · G-070. Figma 총액 5,137.70은 표본이라 행 합계 0.00으로 씀'},
  {id:'newRow',label:'새 행 맨 아래 · 0.00 USDT (S4-6)',figma:{pc:'28960:127867',mo:'29381:137457'},note:'모바일 = DEX(revision) Home / mWeb / S4 DEX · After first link (Lighter) 29381:137457(Figma 2차 「모바일 홈 첫 연동」 — 기존 계정이 있는 상태의 첫 DEX 연동, 새 행 맨 아래). V2.2 link/HOME#normal · REQ-094·273 · 결정 10차: 캐시백 0은 칩 없이 `0.00 USDT`'},
  {id:'transferred',label:'10 USDT 미만 이관 4.00',note:'V2.2 link/HOME#transferred · REQ-107'},
  {id:'pending',label:'확인 중 — 연동 시도중이에요 · -',note:'V2.2 link/HOME#pending · REQ-098'},
@@ -4561,15 +4564,15 @@ function webExchangeField(selected,st){
 }
 function moSheet(st,origin){
  const c=SEL[st];const list=selList({chip:'all',drop:c.drop},false);
- const chips=`<div class="row g8" role="group" aria-label="Exchange type">${[['all','All'],['cex','CEX'],['dex','DEX']].map(([k,l])=>`<button type="button" class="chip ft${c.chip===k?' on':''}" data-link-filter="${k}" aria-pressed="${c.chip===k}">${l}</button>`).join('')}</div>`;
- const head=t=>`<div class="row" style="gap:16px;min-height:24px"><span class="b1 semi" style="white-space:nowrap">${t}</span>${c.q?'':'<span style="flex:1;height:1px;background:var(--divider)"></span>'}</div>`;
- const top=c.fail?'':`<div data-link-popular class="col" style="gap:12px;display:${c.q||c.chip==='dex'?'none':'flex'}">${head(T('Top Partner Exchanges'))}<div class="row" style="gap:8px;align-items:flex-start">${['Bitget','Bybit','Binance','OKX'].map(n=>`<button type="button" data-link-venue="${n}" data-link-type="CEX" style="flex:1;min-width:0;background:var(--paper);color:inherit;border:.5px solid var(--divider);border-radius:8px;box-shadow:0 4px 5px rgba(0,0,0,.04);padding:8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer">${mark(n,48)}<span class="cap c2 med">${n}</span></button>`).join('')}</div></div>`;
- const tile=x=>{const cx=cexBy(x.n);const match=(c.chip==='all'||x.t.toLowerCase()===c.chip)&&(!c.q||x.n.toLowerCase().includes(c.q));return `<button type="button" style="min-width:0;padding:8px;border-radius:8px;border:0;background:transparent;color:inherit;text-align:left;display:${match?'flex':'none'};flex-direction:column;gap:4px;cursor:pointer" data-link-venue="${x.n}" data-link-type="${x.t}">
-   <div style="height:60px;border-radius:4px;position:relative;${cx?`background:${cx[2]};display:flex;align-items:center;justify-content:center`:''}">${cx?mark(x.n,48):`<span style="position:absolute;left:0;top:0">${C.dex(x.n,40)}</span>`}</div>
-   <span class="cap c2 med" style="line-height:1.4">${x.n}</span>${cx?`<span style="font-size:10px;line-height:10px;letter-spacing:.15px">${cx[3]}% Total Savings</span>`:`<span data-picker-badge style="font-size:10px;display:${c.chip==='all'?'inline':'none'}">DEX</span>`}</button>`};
+ const chips=`<div class="row g8" role="group" aria-label="Exchange type">${[['all','All'],['cex','CEX'],['dex','DEX']].map(([k,l])=>`<button type="button" class="chip ft${c.chip===k?' on':''}" data-link-filter="${k}" aria-pressed="${c.chip===k}" style="width:64px;height:34px;padding:0;justify-content:center">${l}</button>`).join('')}</div>`;
+ const head=(t,h=24)=>`<div class="row" style="gap:16px;min-height:${h}px"><span class="b1 semi" style="white-space:nowrap;line-height:24px">${t}</span>${c.q?'':'<span style="flex:1;height:1px;background:var(--divider)"></span>'}</div>`;
+ const top=c.fail?'':`<div data-link-popular class="col" style="gap:12px;display:${c.q||c.chip==='dex'?'none':'flex'}">${head(T('Top Partner Exchanges'),32)}<div class="row" style="gap:8px;align-items:flex-start">${['Bitget','Bybit','Binance','OKX'].map(n=>`<button type="button" data-link-venue="${n}" data-link-type="CEX" style="flex:1;min-width:0;background:var(--paper);color:inherit;border:.5px solid var(--divider);border-radius:8px;box-shadow:0 4px 5px rgba(0,0,0,.04);padding:8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer">${mark(n,48)}<span class="cap c2 med">${n}</span></button>`).join('')}</div></div>`;
+ const tile=x=>{const cx=cexBy(x.n);const match=(c.chip==='all'||x.t.toLowerCase()===c.chip)&&(!c.q||x.n.toLowerCase().includes(c.q));return `<button type="button" style="min-width:0;padding:7.5px;border-radius:8px;border:.5px solid var(--divider);background:var(--paper);color:inherit;text-align:left;display:${match?'flex':'none'};flex-direction:column;gap:4px;cursor:pointer" data-link-venue="${x.n}" data-link-type="${x.t}">
+   <div style="height:48px;border-radius:4px;display:flex;align-items:center;justify-content:center">${cx?mark(x.n,48):C.dex(x.n,48)}</div><div style="display:flex;flex-direction:column;height:30px">
+   <span class="cap c2 med" style="line-height:1.4">${x.n}</span>${cx?`<span style="font-size:10px;line-height:13px;letter-spacing:.15px">${cx[3]}% Total Savings</span>`:`<span data-picker-badge style="font-size:10px;line-height:13px;display:${c.chip==='all'?'inline':'none'}">DEX</span>`}</div></button>`};
  const count=selList(c,false).length;
  const all=c.fail?failBox():`<div class="col g12"><span class="b1 semi" data-link-count>${pickerCount(c.chip,c.q,count)}</span><div data-link-list style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">${list.map(tile).join('')}</div><p data-link-empty class="empty" style="display:${count?'none':'block'}">${c.q?`No results found for “${esc(c.q)}”`:T('No results found')}</p></div>`;
- const search=`<div class="tf sm${c.q?' focus':''}"><div class="in"><img src="${A('link-ic-search.svg')}" class="ic20" alt=""><input type="search" data-link-search value="${esc(c.q||'')}" placeholder="${esc(T('Search exchanges'))}" aria-label="Search exchanges"></div></div>`;
+ const search=`<div class="tf sm${c.q?' focus':''}" style="height:40px"><div class="in" style="height:40px;box-sizing:border-box"><img src="${A('link-ic-search.svg')}" class="ic20" alt=""><input type="search" data-link-search value="${esc(c.q||'')}" placeholder="${esc(T('Search exchanges'))}" aria-label="Search exchanges"></div></div>`;
  return `<div data-link-picker data-type="${c.chip}" style="background:var(--paper);border-radius:16px 16px 0 0;width:100%;height:640px;overflow:auto;padding:24px 16px;display:flex;flex-direction:column;gap:24px">
   <div class="row between"><span class="h6" style="font-weight:500">${T('Select an exchange')}</span><button class="icon-btn" style="padding:5px" data-go="${origin}">${ic('close','ic20')}</button></div>${search}${chips}${top}${all}</div>`}
 
@@ -5230,7 +5233,7 @@ function hero(right,route){
 function routes(){
  // 순서 CEX → DEX → Brokers 고정(G-138 확정). Figma는 DEX → CEX → Broker(하드코딩). 강조(파란 화살표)는 Figma의 DEX 행 hover 표현
  const rows=[
-  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'hub.main:cex'},
+  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'cex.list'},
   {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
   {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:'brokers.main'},
  ];
@@ -5593,9 +5596,9 @@ function offerBox(d,member,maker){
    <div class="row" style="gap:8px">${[['Final Taker',t],['Final Maker',m]].map(([k,v])=>`<div class="col" style="flex:1 1 0;gap:0;text-align:center"><span class="b2 c2" style="line-height:20px">${k}</span>${last?`<span class="b2 semi cb" style="line-height:20px">${v}</span>`:`<s class="b2 semi c3" style="line-height:20px">${v}</s>`}</div>`).join('')}</div></div>`;
  const tblMo=`<div class="col" style="gap:0;border:1px solid var(--divider);border-radius:8px;padding:11px 15px"><span class="b1 semi" style="text-align:center;line-height:24px">Fee stage</span>${mstage(1,'Without TetherMax',pct(d.taker),pct(d.maker))}${mstage(2,'After cashback',pct(fin(d,'taker')),pct(fin(d,'maker')),1)}</div>`;
  const tbl=lighter&&mo()?tblMo:lighter?`<div style="border:1px solid var(--divider);border-radius:8px;overflow:hidden">
-   <div class="row between" style="background:rgba(207,216,220,.2);padding:12px 16px"><span class="b1 semi">Fee stage</span><span class="row b2 semi" style="gap:16px"><span>Final Taker</span><span style="width:80px;text-align:right">Final Maker</span></span></div>
-   <div class="row between" style="border-top:1px solid var(--divider);padding:12px 16px"><span class="row b2 med c2" style="gap:8px;white-space:nowrap">${numBadge(1)}<span>Without TetherMax</span></span><span class="row b2 semi c3" style="gap:16px"><s style="width:80px;text-align:right">${pct(d.taker)}</s><s style="width:80px;text-align:right">${pct(d.maker)}</s></span></div>
-   <div class="row between" style="border-top:1px solid var(--divider);padding:12px 16px"><span class="row b2 med cb" style="gap:8px;white-space:nowrap">${numBadge(2,1)}<span>After cashback</span></span><span class="row b2 semi cb" style="gap:16px"><span style="width:80px;text-align:right">${pct(fin(d,'taker'))}</span><span style="width:80px;text-align:right">${pct(fin(d,'maker'))}</span></span></div></div>`
+   <div class="row between" style="background:rgba(207,216,220,.2);padding:11px 16px 12px;align-items:flex-start"><span class="b1 semi" style="line-height:24px">Fee stage</span><span class="row b2 semi" style="gap:16px;line-height:20px"><span>Final Taker</span><span style="width:80px;text-align:right">Final Maker</span></span></div>
+   <div class="row between" style="border-top:1px solid var(--divider);padding:11px 16px 12px"><span class="row b2 med c2" style="gap:8px;white-space:nowrap">${numBadge(1)}<span>Without TetherMax</span></span><span class="row b2 semi c3" style="gap:16px"><s style="width:80px;text-align:right">${pct(d.taker)}</s><s style="width:80px;text-align:right">${pct(d.maker)}</s></span></div>
+   <div class="row between" style="border-top:1px solid var(--divider);padding:11px 16px"><span class="row b2 med cb" style="gap:8px;white-space:nowrap">${numBadge(2,1)}<span>After cashback</span></span><span class="row b2 semi cb" style="gap:16px"><span style="width:80px;text-align:right">${pct(fin(d,'taker'))}</span><span style="width:80px;text-align:right">${pct(fin(d,'maker'))}</span></span></div></div>`
   :`<div data-stage-tbl style="border:1px solid var(--divider);border-radius:8px;overflow:hidden">
    <div class="row between" style="background:rgba(207,216,220,.2);padding:12px 16px;align-items:flex-start"><span class="b1 semi" style="line-height:24px">Fee stage</span><span class="b2 semi" style="line-height:20px">${maker?'Final Maker':'Final Taker'}</span></div>
    ${stageRows(d,maker).map((r,i,a)=>{const last=i===a.length-1;return `<div class="row between" data-stage-row="${r.key}" style="border-top:1px solid var(--divider);padding:11px 16px 11px"><span class="row b2 med${last?' cb':i===0?' c2':''}" style="gap:8px">${numBadge(i+1,last?1:0)}<span>${r.label}</span></span>${r.strike?`<s class="b2 semi c3">${pct(r.v)}</s>`:`<span class="b2 semi${last?' cb':''}">${pct(r.v)}</span>`}</div>`}).join('')}</div>`;
@@ -5611,12 +5614,12 @@ function offerBox(d,member,maker){
   ${tbl}${ret?outlinedP('Get Started',{full:true}):`<button class="btn contained primary lg full">Get Started${ext()}</button>`}${cta}</div>`;
 }
 function dtHero(d,member,maker){
- const chip=(x,out)=>`<span style="height:24px;display:inline-flex;align-items:center;padding:0 9px;border-radius:100px;font-size:13px;line-height:18px;letter-spacing:.16px;${out?'border:1px solid #bdbdbd':'background:var(--action-selected)'}">${esc(x)}</span>`;
+ const chip=(x,out)=>`<span style="height:24px;display:inline-flex;align-items:center;padding:0 9px;border-radius:100px;font-size:13px;line-height:18px;letter-spacing:.16px;${out?'border:1px solid #bdbdbd;padding:0 8px':'background:var(--action-selected)'}">${esc(x)}</span>`;
  const elig=d.tiers?T('Cashback applies to Premium and Plus accounts. Standard accounts pay 0% fees, so there is no cashback on them.','캐시백은 Premium과 Plus 계정에 적용됩니다. Standard 계정은 캐시백이 쌓이지 않아요.')
   :T(`Cashback applies to eligible trading fees on ${d.name}.`,`${d.name}에서 발생한 대상 거래 수수료에 캐시백이 적용돼요.`);
  const venue=`<div class="col" style="flex:1 1 0;min-width:0;gap:20px">
   <div class="col" style="gap:8px"><div class="row" style="gap:8px;align-items:center">${C.dex(d.name,32)}<span class="h5">${d.name}</span>${chip('DEX')}</div><p class="b2" style="margin:0">${esc(d.desc)}</p></div>
-  <div class="col" style="gap:16px"><div class="row" style="gap:8px;align-items:flex-start"><span class="b2 semi c2" style="width:73px;flex:none">Perpetuals</span><div class="row wrap" style="gap:8px;max-width:378px">${d.chips.map(x=>chip(x)).join('')}</div></div>
+  <div class="col" style="gap:16px"><div class="row" style="gap:8px;align-items:flex-start"><span class="b2 semi c2" style="width:73px;flex:none">Perpetuals</span><div class="row wrap" style="gap:8px;max-width:${mo()?'261px':'378px'}">${d.chips.map(x=>chip(x)).join('')}</div></div>
    ${d.tiers?`<div class="col" style="gap:4px">${['Trade crypto, RWAs and pre IPO perps onchain','Earn Lighter points while you trade','Leverage up to 50x on selected markets','0% maker and taker fees on Standard accounts'].map(x=>`<span class="b2">✓ ${x}</span>`).join('')}</div>`:''}
    <div class="row" style="gap:8px"><span class="b2 semi c2" style="width:73px;flex:none">Deposit</span>${d.dep.map(x=>chip(x,1)).join('')}</div></div>
   <p class="b2 c2" style="margin:0">${elig}</p></div>`;
@@ -5649,28 +5652,29 @@ function dtStructure(d,maker){
  const steps=[[icon(img('dex-dt-ic-chart.svg')),`You trade on ${d.name}`,d.tiers?`Your selected ${volK(x.vol)} volume on a Premium account generates an estimated ${usdS(x.fee)} in ${x.k} fees.`:`Your selected ${volK(x.vol)} volume generates an estimated ${usdS(x.fee)} in ${x.k} fees.`],
   [icon(img('dex-dt-ic-bank.svg')),`${d.name} pays a settlement`,'Eligible trading activity generates a settlement for the referring partner.'],
   [icon(img('dex-dt-ic-wallet.svg')),'TetherMax gives cashback',`TetherMax returns ${usd(x.cb)} (${d.rate}%) to you, so your effective fee becomes ${usd(x.eff)}.`]];
- const stepCard=([ic,t,b],i)=>`<div class="col" style="flex:1 1 0;min-width:0;gap:8px;background:rgba(207,216,220,.2);border-radius:8px;padding:16px 16px 13px"><span style="width:24px;height:24px;border-radius:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:500;display:inline-flex;align-items:center;justify-content:center">${i+1}</span><div style="display:flex;justify-content:center">${ic}</div><div class="col center" style="gap:4px;align-items:center"><span class="b1 semi" style="line-height:24px">${t}</span><span class="b2 c2" style="line-height:20px">${b}</span></div></div>`;
+ const stepCard=([ic,t,b],i)=>`<div class="col" style="flex:1 1 0;min-width:0;gap:8px;background:rgba(207,216,220,.2);border-radius:8px;padding:16px"><span style="width:24px;height:24px;border-radius:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:500;display:inline-flex;align-items:center;justify-content:center">${i+1}</span><div style="display:flex;justify-content:center">${ic}</div><div class="col center" style="gap:4px;align-items:center"><span class="b1 semi" style="line-height:24px">${t}</span><span class="b2 c2" style="line-height:20px">${b}</span></div></div>`;
  const star=`<span style="display:flex;align-items:center;flex:none">${img('dex-dt-ic-star.svg',20)}</span>`;
  const ticks=['Min 100K','250K','500K','750K','1M','5M','10M'];
  const slider=`<div class="col" style="gap:8px"><div class="row between"><span class="b2 c2">Total volume</span><span class="b1 semi" data-dt-vol>${volK(x.vol)}</span></div>
   <div data-dt-slider style="position:relative;height:25px"><div style="position:absolute;left:0;right:0;top:11px;height:4px;border-radius:100px;background:var(--blue);opacity:.15"></div><div data-sl-fill style="position:absolute;left:0;width:${volPct(x.vol)}%;top:10px;height:6px;border-radius:100px;background:var(--blue)"></div><div data-sl-thumb style="position:absolute;left:calc(${volPct(x.vol)}% - 10px);top:3px;width:20px;height:20px;border-radius:50%;background:var(--blue);box-shadow:var(--elev2)"></div></div>
-  <div class="row between b2 c2">${ticks.map(t=>`<span>${t}</span>`).join('')}</div></div>`;
- const fees=`<div style="background:var(--blue-accentlight);border:1px solid var(--blue);border-radius:12px;padding:13px 33px;display:flex;align-items:center">${[[usd(x.fee),'Trading fee','Without TetherMax',''],['−'],[usd(x.cb),'Cashback','Returned to you','var(--blue)'],['='],[usd(x.eff),'Effective fee','With TetherMax','']].map(a=>a.length===1?`<span style="width:67px;text-align:center;font-size:24px;font-weight:600;color:var(--text-secondary)">${a[0]}</span>`:`<div class="col" style="flex:1 1 0;gap:2px;align-items:center"><span style="font-size:34px;line-height:1.235;font-weight:700;${a[3]?`color:${a[3]}`:''}">${a[0]}</span><span class="b2 med" style="line-height:20px">${a[1]}</span><span class="cap c2" style="line-height:16px;margin-top:3px">${a[2]}</span></div>`).join('')}</div>`;
+  <div class="row between b2 c2" style="margin-top:-8px">${ticks.map(t=>`<span>${t}</span>`).join('')}</div></div>`;
+ const fees=`<div style="background:var(--blue-accentlight);border:1px solid var(--blue);border-radius:12px;padding:10px 33px 9px;display:flex;align-items:center">${[[usd(x.fee),'Trading fee','Without TetherMax',''],['−'],[usd(x.cb),'Cashback','Returned to you','var(--blue)'],['='],[usd(x.eff),'Effective fee','With TetherMax','']].map(a=>a.length===1?`<span style="width:67px;text-align:center;font-size:24px;font-weight:600;color:var(--text-secondary)">${a[0]}</span>`:`<div class="col" style="flex:1 1 0;gap:4px;align-items:center"><span style="font-size:34px;line-height:1.235;font-weight:700;${a[3]?`color:${a[3]}`:''}">${a[0]}</span><span class="b2 med" style="line-height:20px">${a[1]}</span><span class="cap c2" style="line-height:20px">${a[2]}</span></div>`).join('')}</div>`;
  const node=(ic,label)=>`<div class="col" style="gap:8px;align-items:center;width:100px;flex:none"><span style="width:80px;height:80px;border-radius:40px;background:var(--blue-accentlight);display:flex;align-items:center;justify-content:center">${ic}</span><span class="b1 semi">${label}</span></div>`;
  const arrow=label=>`<div class="col" style="flex:1 1 0;gap:8px;align-items:center;padding-bottom:52px"><span style="font-size:12px;line-height:20px;font-weight:500">${label}</span><div style="width:100%;height:2px;background:linear-gradient(90deg,#d9dbe0,#d9dbe0);position:relative"><span style="position:absolute;right:-2px;top:-5px;width:10px;height:10px;border-top:2px solid #c4c7cc;border-right:2px solid #c4c7cc;transform:rotate(45deg)"></span></div></div>`;
- const flow=`<div class="col" style="gap:16px;padding:16px 0"><div class="row" style="align-items:center">${node(img('dex-dt-ic-person.svg',40),'You')}${arrow('Trading fee '+usdS(x.fee))}${node(C.dex(d.name,40),d.name)}${arrow('Partner settlement')}${node(img('dex-dt-ic-tm.svg',40),'TetherMax')}</div>
+ const flow=`<div class="col" style="gap:16px;padding:16px 0 19px"><div class="row" style="align-items:center">${node(img('dex-dt-ic-person.svg',40),'You')}${arrow('Trading fee '+usdS(x.fee))}${node(C.dex(d.name,40),d.name)}${arrow('Partner settlement')}${node(img('dex-dt-ic-tm.svg',40),'TetherMax')}</div>
   <div style="position:relative;height:36px;margin:0 50px;border:2px solid var(--blue);border-top:0;border-radius:0 0 8px 8px"><span class="row" style="position:absolute;left:50%;top:18px;transform:translateX(calc(-50% - 4px));gap:8px;background:var(--blue);color:#fff;border-radius:100px;padding:4px 12px;white-space:nowrap">${img('dex-dt-ic-paid.svg',24)}<span class="b1 semi">${usd(x.cb)} Cashback returned to you</span></span></div></div>`;
  const head=`<div class="row between" style="align-items:flex-start;${mo()?'flex-wrap:wrap;gap:4px':''}"><div class="row" style="gap:17px;${mo()?'flex-direction:column;align-items:flex-start;gap:12px':''}"><span class="h5 bold">How much you get back</span><span class="row b2 semi" style="gap:${mo()?8:4}px;color:var(--blue);cursor:pointer" data-go="dex.detail:drawer"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" style="flex:none;display:block"><path d="M7.99333 1.33333C4.31333 1.33333 1.33333 4.32 1.33333 8C1.33333 11.68 4.31333 14.6667 7.99333 14.6667C11.68 14.6667 14.6667 11.68 14.6667 8C14.6667 4.32 11.68 1.33333 7.99333 1.33333ZM8 13.3333C5.05333 13.3333 2.66667 10.9467 2.66667 8C2.66667 5.05333 5.05333 2.66667 8 2.66667C10.9467 2.66667 13.3333 5.05333 13.3333 8C13.3333 10.9467 10.9467 13.3333 8 13.3333Z" fill="currentColor"/><path d="M8.66667 10.6667C8.66667 11.0333 8.36667 11.3333 8 11.3333C7.63333 11.3333 7.33333 11.0333 7.33333 10.6667V8C7.33333 7.63333 7.63333 7.33333 8 7.33333C8.36667 7.33333 8.66667 7.63333 8.66667 8V10.6667Z" fill="currentColor"/><path d="M7.33333 4.66667H8.66667V6H7.33333V4.66667Z" fill="currentColor"/></svg><span>How this works</span></span></div>${mo()?`<div style="width:100%">${toggle('Taker','Maker',maker?1:0).replace('display:inline-flex','display:flex;width:100%').replace(/padding:0 8px;display:flex/g,'flex:1;justify-content:center;padding:0 8px;display:flex')}</div>`:toggle('Taker','Maker',maker?1:0).replace(/font-size:14px/g,'font-size:13px')}</div>`;
  const disc=`<div class="row" style="gap:8px">${img('dex-dt-ic-info.svg',16)}<span class="b2 c2">Cashback comes from eligible exchange partner settlements. Final amounts vary by exchange, tier and trading activity.</span></div>`;
  if(mo()){
-  const kv=(k,s,v,big)=>`<div class="row between" style="padding:7px 0"><div class="col" style="gap:0"><span class="b2" style="line-height:20px">${k}</span><span class="cap c2" style="line-height:20px">${s}</span></div><span style="${big?'font-size:34px;font-weight:700':'font-size:16px;font-weight:600'}">${v}</span></div>`;
-  return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider"><div class="col" style="gap:0;margin-top:-7px">${kv('Trading fee','Without TetherMax',usd(x.fee))}${kv('Cashback','Returned to you','−'+usd(x.cb))}<hr class="divider" style="margin:4px 0">${kv('Effective fee','With TetherMax',usd(x.eff),1)}</div><div style="margin-top:-6px">${slider}</div>
-   <span class="h6" id="dex-flow" style="margin-top:16px">Where your cashback comes from</span>
-   <div class="col" style="gap:8px">${steps.map(stepCard).join('')}</div>${disc}</div>`,{outer:'padding:20px 16px',style:'border-radius:8px;padding:16px'});
+  // Figma 모바일 계산기(29360:144111 `Cashback / Explainer / m`): 영수증 행 42(라벨 20 + 2 + 20) · 행 간격 12 · 슬라이더 값 줄은 레일 바로 아래 · 흐름 블록 위 24+24 · 카드 아래 16+16
+  const kv=(k,s,v,big)=>`<div class="row between" style="align-items:center;gap:12px"><div class="col" style="gap:2px"><span class="b2" style="line-height:20px">${k}</span><span class="cap c2" style="line-height:20px">${s}</span></div><span style="${big?'font-size:34px;line-height:42px;font-weight:700':'font-size:16px;line-height:24px;font-weight:600'}">${v}</span></div>`;
+  return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider" style="margin-bottom:-1px"><div class="col" style="gap:12px">${kv('Trading fee','Without TetherMax',usd(x.fee))}${kv('Cashback','Returned to you','−'+usd(x.cb))}<hr class="divider" style="margin:0 0 -1px">${kv('Effective fee','With TetherMax',usd(x.eff),1)}</div>${slider}
+   <span class="h6" id="dex-flow" style="margin-top:32px;line-height:24px">Where your cashback comes from</span>
+   <div class="col" style="gap:8px">${steps.map(stepCard).join('')}</div>${disc}</div>`,{outer:'padding:20px 16px',style:'border-radius:8px;padding:16px 16px 32px'});
  }
- return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider">${fees}${slider}
-  <div class="col" style="gap:16px;padding:0 0 16px;margin-top:-3px"><span style="font-size:20px;font-weight:700;text-align:center">Where your cashback comes from</span>${flow}
-  <div class="row" style="gap:8px;align-items:stretch">${steps.map((s,i)=>(i?star:'')+stepCard(s,i)).join('')}</div><div style="margin-top:3px">${disc}</div></div></div>`,{pad:'16px'});
+ return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider" style="margin-bottom:-1px">${fees}${slider}
+  <div class="col" style="gap:16px;padding:0 0 16px;margin-top:8px"><span style="font-size:20px;font-weight:700;text-align:center">Where your cashback comes from</span>${flow}
+  <div class="row" style="gap:8px;align-items:stretch">${steps.map((s,i)=>(i?star:'')+stepCard(s,i)).join('')}</div>${disc}</div></div>`,{pad:'16px'});
 }
 function guideData(d){
  const L=d.tiers,cur=d.cur;
@@ -5679,7 +5683,7 @@ function guideData(d){
  // G-270 · G-437: 단계마다 Step N Title 하나(왼쪽 목록 = 오른쪽 패널 제목) + Step N Description(경고·안전 메시지 포함)
  const bodies=[(L?'Install a self-custody wallet, or sign up on Lighter with email to get a wallet made for you.':'Install a self-custody wallet such as MetaMask.')+' Keep your 12-word recovery phrase private. TetherMax never asks for a private key, recovery phrase or wallet signature.',
   'Check the receiving network before sending. Sending funds on the wrong network can cause permanent loss.',
-  L?'Open Lighter through the TetherMax link and log in. Then copy your wallet address from Lighter and paste it in TetherMax. TetherMax never asks you to connect a wallet. After you sign up, confirm the TetherMax referral code on Lighter’s referral page. Cashback applies only to Plus and Premium accounts. Standard accounts pay no fees.'
+  L?'Open Lighter through the TetherMax link and log in. Then copy your wallet address from Lighter and paste it in TetherMax. TetherMax never asks you to connect a wallet.\n\nAfter you sign up, confirm the TetherMax referral code on Lighter’s referral page.\n\nCashback applies only to Plus and Premium accounts. Standard accounts pay no fees.'
    :`After you sign up, confirm the TetherMax referral code on ${d.name}’s referral page. Copy your public address from ${d.name} and paste it on TetherMax.`,
   `Transfer ${cur} to ${d.name}.`,'TetherMax pays your cashback into your TetherMax balance.'];
  return {rail,bodies};
@@ -5689,8 +5693,8 @@ function dtGuide(d,c){
  const item=(t,i)=>`<div class="row" data-dt-step="${i}" style="cursor:pointer;gap:12px;height:56px;padding:12px 16px;border-radius:12px;box-sizing:border-box;${mo()?'max-width:320px;':''}${i===cur?'background:rgba(207,216,220,.2)':''}"><span style="width:32px;height:32px;border-radius:16px;flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;${i===cur?'background:var(--blue);color:rgba(255,255,255,.87)':'background:rgba(207,216,220,.2)'}">${i+1}</span><span class="b1 ${i===cur?'semi':'c2'}">${t}</span></div>`;
  const support=`<div class="col" style="gap:12px;background:rgba(0,123,255,.1);border-radius:8px;padding:16px"><img src="${A('dex-dt-ic-headset.svg')}" style="width:24px;height:24px" alt=""><span class="b2 semi">Stuck partway through?</span><span class="b2 c2">Live chat replies in about 2 minutes.</span><a class="cb" data-go="support.main" style="font-size:13px;font-weight:500;text-decoration:underline;cursor:pointer;padding:5px 5px;line-height:18px">Chat with support</a></div>`;
  const shot=`<img src="${A(cur===2&&d.tiers?'dex-dt-guide-lighter-3.jpg':'dex-dt-guide-lighter-1.jpg')}" style="width:100%;height:360px;object-fit:cover;border-radius:12px" alt="">`;
- const safe=cur!==0?`<p class="cap c2" style="margin:0">${T('TetherMax never asks for your private key, seed phrase, or a wallet signature.','테더맥스는 개인키 · 시드 문구 · 지갑 서명을 요구하지 않아요.')}</p>`:'';
- const panel=`<div class="col" data-dt-panel style="flex:1 1 0;min-width:0;gap:16px;padding:${mo()?'0 16px':'0 16px 16px'}">${shot}<span style="align-self:flex-start;background:var(--blue-accentlight);color:var(--blue);border-radius:100px;padding:3px 9px;font-size:13px;line-height:18px">Step ${cur+1} of 5</span><span class="h5" style="line-height:32px">${g.rail[cur]}</span><p class="b2 c2" style="margin:0;line-height:20px">${g.bodies[cur]}</p>${safe}</div>`;
+ // 본문 = Step N Description — 문단 사이 8px(Figma 본문 글상자 문단 간격 8)
+ const panel=`<div class="col" data-dt-panel style="flex:1 1 0;min-width:0;gap:16px;padding:${mo()?'0 16px':'0 16px 16px'}">${shot}<span style="align-self:flex-start;background:var(--blue-accentlight);color:var(--blue);border-radius:100px;padding:3px 9px;font-size:13px;line-height:18px">Step ${cur+1} of 5</span><span class="h5" style="line-height:32px">${g.rail[cur]}</span><div class="col b2 c2" style="gap:8px;line-height:20px">${g.bodies[cur].split("\n").map(l=>`<span style="min-height:20px">${l}</span>`).join("")}</div></div>`;
  const rail=`<div class="col" style="gap:4px;${mo()?'':'width:320px;flex:none'}">${g.rail.map(item).join('')}${mo()?'':'<div style="flex:1;min-height:56px"></div>'}${support}</div>`;
  const n=[];
  if(c==='step3'&&d.tiers)n.push('Step 3 — Figma D2(Lighter). 경고 문장은 Description 안(G-437), 영문은 정책 A-22 후보(사용자 확인 #37). Lighter 온보딩 보류');
@@ -6501,7 +6505,7 @@ function siteGo(key) {
     closeLayer(true);
     return goRoute('/hub', tab === 'DEX' ? {} : { tab });
   }
-  if (id === 'cex.list') { closeLayer(true); return goRoute('/hub', { tab: 'CEX' }) }
+  if (id === 'cex.list') { closeLayer(true); return navReal('/en/affiliated') }   // 기존 CEX 거래소 목록 페이지(결정 2026-11-27 — 허브 CEX 라우트 행 · Top Partner Exchanges See All 등)
   if (id === 'dex.overview') { closeLayer(true); return goRoute('/dex') }
   if (id === 'dex.detail') {
     if (SLUGS.includes(st)) { closeLayer(true); return goRoute('/dex/' + st) }
@@ -7140,7 +7144,7 @@ const short = a => a.slice(0, 6) + '…' + a.slice(-4);
 const app = document.getElementById('app');
 // Get Started · Join Now: 레퍼럴 링크는 어드민 입력값(미보유) — 프로토타입은 각 DEX 공식 사이트를 새 탭으로 연다
 const OFFICIAL = { lighter: 'https://lighter.xyz', apex: 'https://omni.apex.exchange', edgex: 'https://www.edgex.exchange', aster: 'https://www.asterdex.com' };
-const REAL_ROUTE = { '/benefits': '/en/benefits', '/events': '/en/events', '/hub': '/en/affiliated', '/dex': '/en/dex', '/summary': '/en/rewardHistory', '/account': '/en/account', '/ownership': '/en/ownership-verification' };
+const REAL_ROUTE = { '/benefits': '/en/benefits', '/events': '/en/events', '/hub': '/en/cashback', '/dex': '/en/dex', '/summary': '/en/rewardHistory', '/account': '/en/account', '/ownership': '/en/ownership-verification' };
 // 모달 모드(셸 레이어 iframe)에서 페이지 이동은 셸에 맡긴다
 function go2(path, q) {
   if (API.MODAL) { closeLayer(true); const real = REAL_ROUTE[path] || (path.startsWith('/dex/') ? '/en' + path : '/en'); return post({ nav: API.ORIGIN + real + (q && q.tab ? '?tab=' + q.tab : '') }) }
@@ -7186,8 +7190,9 @@ const site2 = {
     if (p === '/ownership') ownEnhance();
   },
   go(id, st, el, inLayer) {
-    if (API.MODAL && ['hub.main', 'cex.list', 'dex.overview', 'summary.main'].includes(id)) {
-      const tab = id === 'cex.list' || st === 'cex' ? 'CEX' : st === 'brokers' ? 'Brokers' : null;
+    if (API.MODAL && id === 'cex.list') { closeLayer(true); post({ nav: API.ORIGIN + '/en/affiliated' }); return true }   // 기존 CEX 거래소 목록(결정 2026-11-27)
+    if (API.MODAL && ['hub.main', 'dex.overview', 'summary.main'].includes(id)) {
+      const tab = st === 'cex' ? 'CEX' : st === 'brokers' ? 'Brokers' : null;
       go2(id === 'dex.overview' ? '/dex' : id === 'summary.main' ? '/summary' : '/hub', tab ? { tab } : null); return true;
     }
     if (API.MODAL && id === 'dex.detail' && ['lighter', 'apex', 'edgex', 'aster'].includes(st)) { go2('/dex/' + st); return true }

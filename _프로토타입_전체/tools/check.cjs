@@ -16,7 +16,7 @@ for(const sc of R.screens){if(!sc.id.startsWith(prefix))continue;
   await new Promise(r=>setImmediate(r));   // 렌더마다 MutationObserver 기록을 비움(동기 반복에서 메모리 폭증 방지)
   const fr=w.document.getElementById('pt-frame');const t=fr.textContent;n++;
   if(/없는 화면:|at Object\.render|Error:/.test(t))errs.push(`${sc.id}:${st.id} ${vp}/${lang} 렌더 오류: ${t.slice(0,160)}`);
-  for(const el of fr.querySelectorAll('[data-go]')){const g=el.getAttribute('data-go');if(g&&!/^(cexd|brkd|back|@)/.test(g)&&!R.byId[g.split(':')[0]])missing.add(g.split(':')[0])}
+  for(const el of fr.querySelectorAll('[data-go]')){const g=el.getAttribute('data-go');if(g&&!/^(cexd|brkd|back|@|cex\.list$)/.test(g)&&!R.byId[g.split(':')[0]])missing.add(g.split(':')[0])}
   const vis=Array.from(fr.querySelectorAll('*')).filter(e=>!e.closest('.note')&&e.children.length===0).map(e=>e.textContent).join(' ');
   // 예외: 소유권 Step 1 확정 문구(REQ-725) — DEX 사이트의 지갑 연결 끊기를 뜻하며 테더맥스 연동 해제와 다름
   // 예외: Brokers 페이지(brokers.*)는 실서비스·Figma 원문 유지(결정 12차 「Brokers 페이지」) — `Rebates` 등 기존 문구라 rebate 검사 제외

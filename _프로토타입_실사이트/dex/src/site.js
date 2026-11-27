@@ -118,7 +118,7 @@ function siteGo(key) {
     closeLayer(true);
     return goRoute('/hub', tab === 'DEX' ? {} : { tab });
   }
-  if (id === 'cex.list') { closeLayer(true); return goRoute('/hub', { tab: 'CEX' }) }
+  if (id === 'cex.list') { closeLayer(true); return navReal('/en/affiliated') }   // 기존 CEX 거래소 목록 페이지(결정 2026-11-27 — 허브 CEX 라우트 행 · Top Partner Exchanges See All 등)
   if (id === 'dex.overview') { closeLayer(true); return goRoute('/dex') }
   if (id === 'dex.detail') {
     if (SLUGS.includes(st)) { closeLayer(true); return goRoute('/dex/' + st) }

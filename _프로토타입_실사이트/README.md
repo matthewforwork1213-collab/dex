@@ -60,7 +60,7 @@
 
 ## DEX 연결
 
-결정: 실사이트 수집본 + DEX를 합치고, **캐시백 허브가 거래소 목록(`/en/affiliated`) 자리**에 들어간다.
+결정: 실사이트 수집본 + DEX를 합친다. 캐시백 허브는 DEX 앱 `#/hub`(셸 페이지 키 `en__cashback` — 허브 URL은 미정 IA-Q5라 프로토타입 경로), **기존 CEX 거래소 목록(`/en/affiliated`)은 수집본 그대로 유지**(결정 2026-11-27 — 허브 `Centralised exchanges` 라우트 행 · `Top Partner Exchanges` `See All` 등이 이 목록으로 이동).
 
 ### 구성
 
@@ -78,7 +78,7 @@
 
 | 위치 | 변경 |
 |---|---|
-| 페이지 목록 | `en__affiliated`를 DEX 앱 `#/hub`로, `/en/dex` · `/en/dex/{slug}` 5개 추가(목록 그룹 「DEX 신규 (DEX 앱)」). 해시에 `dr`(DEX 앱 경로) 추가 |
+| 페이지 목록 | `en__cashback`(캐시백 허브)을 DEX 앱 `#/hub`로(`en__affiliated`는 기존 CEX 거래소 목록 수집본), `/en/dex` · `/en/dex/{slug}` 5개 추가(목록 그룹 「DEX 신규 (DEX 앱)」). 해시에 `dr`(DEX 앱 경로) 추가 |
 | `render()` → `renderDex()` | DEX 페이지면 iframe에 `dex/app.html?auth=…#경로`. 경로만 바뀌면 다시 불러오지 않고 앱에 `dexGo` 메시지 |
 | 연동 모달 레이어 | `#wrap` 위 `#dexm` iframe(투명). 스냅숏 페이지의 연동 버튼이 `dexLink`를 보내면 `dex/app.html?modal=1`을 띄운다 — 어디서 열어도 같은 모달 |
 | 메시지 | `dexRoute`(앱 안 이동 → 주소·목록 동기화) · `dexLink` · `dexModal:'close'` · `dexChanged`(홈 행 즉시 반영) · `dexHome`(Back to Home) |

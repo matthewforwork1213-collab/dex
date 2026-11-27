@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27T22:13",
+ "generated": "2026-11-27T22:28",
  "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
  "results": [
   {
@@ -17428,13 +17428,13 @@
    "node_name": "Mobile / Guest / picker · 거래소 선택",
    "found": true,
    "fig_hidden": false,
-   "full": true,
-   "scoped": false,
+   "full": false,
+   "scoped": true,
    "lang": "en",
    "auth": "guest",
    "render_err": null,
    "opaque": {},
-   "generic": 11,
+   "generic": 0,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -17444,15 +17444,11 @@
     "tab",
     "text"
    ],
-   "nF": 20,
-   "nP": 20,
-   "matched": 20,
+   "nF": 7,
+   "nP": 8,
+   "matched": 7,
    "missing": [],
    "added": [
-    {
-     "t": "No account? Join our partner exchange ⟶",
-     "kind": "text"
-    },
     {
      "t": "Lighter DEX",
      "kind": "button"
@@ -17463,8 +17459,16 @@
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
-   "geom": null,
-   "scope_overlay": false
+   "geom": {
+    "issues": [],
+    "pairs": 5,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": true
   },
   {
    "screen": "guest.modal",
@@ -17478,13 +17482,13 @@
    "node_name": "Mobile / Guest / picker · CEX 필터",
    "found": true,
    "fig_hidden": false,
-   "full": true,
-   "scoped": false,
+   "full": false,
+   "scoped": true,
    "lang": "en",
    "auth": "guest",
    "render_err": null,
    "opaque": {},
-   "generic": 11,
+   "generic": 0,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -17494,23 +17498,26 @@
     "tab",
     "text"
    ],
-   "nF": 20,
-   "nP": 19,
-   "matched": 20,
+   "nF": 7,
+   "nP": 7,
+   "matched": 7,
    "missing": [],
-   "added": [
-    {
-     "t": "No account? Join our partner exchange ⟶",
-     "kind": "text"
-    }
-   ],
+   "added": [],
    "below_frame": 0,
    "frame_cut": null,
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
-   "geom": null,
-   "scope_overlay": false
+   "geom": {
+    "issues": [],
+    "pairs": 6,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": true
   },
   {
    "screen": "guest.modal",
@@ -17586,13 +17593,13 @@
    "node_name": "Mobile / Guest / picker · DEX 필터",
    "found": true,
    "fig_hidden": false,
-   "full": true,
-   "scoped": false,
+   "full": false,
+   "scoped": true,
    "lang": "en",
    "auth": "guest",
    "render_err": null,
    "opaque": {},
-   "generic": 11,
+   "generic": 0,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -17602,23 +17609,26 @@
     "tab",
     "text"
    ],
-   "nF": 19,
-   "nP": 18,
-   "matched": 19,
+   "nF": 6,
+   "nP": 6,
+   "matched": 6,
    "missing": [],
-   "added": [
-    {
-     "t": "No account? Join our partner exchange ⟶",
-     "kind": "text"
-    }
-   ],
+   "added": [],
    "below_frame": 0,
    "frame_cut": null,
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
-   "geom": null,
-   "scope_overlay": false
+   "geom": {
+    "issues": [],
+    "pairs": 5,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
+   "scope_overlay": true
   },
   {
    "screen": "guest.modal",
@@ -18557,6 +18567,55 @@
    "diff": [],
    "excepted": [],
    "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "home.main",
+   "group": "home",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "state": "newRow",
+   "label": "새 행 맨 아래 · 0.00 USDT (S4-6)",
+   "vp": "mo",
+   "node": "29381:137457",
+   "src": "정밀",
+   "node_name": "Home / mWeb / S4 DEX · After first link (Lighter)",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 12,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 18,
+   "nP": 18,
+   "matched": 18,
+   "missing": [],
+   "added": [],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 30,
+    "cards": 4,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
    "scope_overlay": false
   },
   {
@@ -19591,7 +19650,15 @@
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
-   "geom": null,
+   "geom": {
+    "issues": [],
+    "pairs": 10,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
    "scope_overlay": true
   },
   {
@@ -19711,7 +19778,15 @@
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
-   "geom": null,
+   "geom": {
+    "issues": [],
+    "pairs": 10,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
    "scope_overlay": true
   },
   {
@@ -19831,7 +19906,15 @@
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
-   "geom": null,
+   "geom": {
+    "issues": [],
+    "pairs": 10,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
    "scope_overlay": true
   },
   {
@@ -19951,7 +20034,15 @@
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
-   "geom": null,
+   "geom": {
+    "issues": [],
+    "pairs": 10,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
    "scope_overlay": true
   },
   {
@@ -20063,7 +20154,15 @@
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
-   "geom": null,
+   "geom": {
+    "issues": [],
+    "pairs": 6,
+    "cards": 1,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
    "scope_overlay": true
   },
   {
@@ -24096,39 +24195,7 @@
    "diff": [],
    "excepted": [],
    "geom": {
-    "issues": [
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "per year $#",
-      "figma": [
-       140,
-       1232,
-       103,
-       20
-      ],
-      "proto": [
-       143,
-       1192,
-       102,
-       16
-      ],
-      "d": 3,
-      "fv": 124,
-      "pv": 127,
-      "card": [
-       16,
-       522,
-       343,
-       822
-      ],
-      "pcard": [
-       16,
-       480,
-       343,
-       822
-      ]
-     }
-    ],
+    "issues": [],
     "pairs": 77,
     "cards": 10,
     "fw": 375,
@@ -24421,7 +24488,7 @@
       "proto": [
        36,
        931,
-       200,
+       201,
        14
       ],
       "d": -3,
@@ -24607,7 +24674,7 @@
       "proto": [
        140,
        1192,
-       108,
+       102,
        16
       ],
       "d": -4,
@@ -24792,7 +24859,7 @@
       ],
       "proto": [
        161,
-       3152,
+       3153,
        68,
        16
       ],
@@ -25237,44 +25304,12 @@
       "proto": [
        36,
        1192,
-       91,
+       90,
        16
       ],
       "d": -23,
       "fv": 743,
       "pv": 720,
-      "card": [
-       16,
-       522,
-       343,
-       845
-      ],
-      "pcard": [
-       16,
-       480,
-       343,
-       898
-      ],
-      "rule": "EX-A17"
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "per year $#",
-      "figma": [
-       140,
-       1255,
-       103,
-       20
-      ],
-      "proto": [
-       143,
-       1192,
-       99,
-       16
-      ],
-      "d": 3,
-      "fv": 124,
-      "pv": 127,
       "card": [
        16,
        522,
@@ -25299,9 +25334,9 @@
        20
       ],
       "proto": [
-       143,
+       142,
        1192,
-       99,
+       90,
        16
       ],
       "d": -23,
@@ -25973,7 +26008,13 @@
    "diff": [],
    "excepted": [],
    "geom": {
-    "issues": [
+    "issues": [],
+    "pairs": 63,
+    "cards": 8,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
      {
       "type": "카드 높이",
       "label": "your cashback",
@@ -26001,7 +26042,8 @@
        480,
        343,
        726
-      ]
+      ],
+      "rule": "EX-A42"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -26032,7 +26074,8 @@
        480,
        343,
        726
-      ]
+      ],
+      "rule": "EX-A42"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -26063,7 +26106,8 @@
        480,
        343,
        726
-      ]
+      ],
+      "rule": "EX-A42"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -26094,7 +26138,8 @@
        480,
        343,
        726
-      ]
+      ],
+      "rule": "EX-A42"
      },
      {
       "type": "요소 간격",
@@ -26125,7 +26170,8 @@
        480,
        343,
        726
-      ]
+      ],
+      "rule": "EX-A42"
      },
      {
       "type": "요소 간격",
@@ -26156,15 +26202,10 @@
        480,
        343,
        726
-      ]
+      ],
+      "rule": "EX-A42"
      }
-    ],
-    "pairs": 63,
-    "cards": 8,
-    "fw": 375,
-    "pw": 375,
-    "scope": false,
-    "excepted": []
+    ]
    },
    "scope_overlay": false
   },
@@ -27843,7 +27884,7 @@
       ],
       "proto": [
        120,
-       2313,
+       2312,
        274,
        38
       ],
@@ -27861,7 +27902,7 @@
       ],
       "proto": [
        406,
-       2314,
+       2313,
        273,
        36
       ],
@@ -28497,7 +28538,7 @@
    "auth": "guest",
    "render_err": null,
    "opaque": {},
-   "generic": 6,
+   "generic": 29,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -28507,9 +28548,9 @@
     "tab",
     "text"
    ],
-   "nF": 99,
+   "nF": 100,
    "nP": 105,
-   "matched": 99,
+   "matched": 100,
    "missing": [],
    "added": [
     {
@@ -28530,45 +28571,13 @@
     }
    ],
    "below_frame": 0,
-   "frame_cut": 5617,
+   "frame_cut": null,
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
    "geom": {
-    "issues": [
-     {
-      "type": "요소 간격",
-      "label": "your selected $#k volume generates an estimated $# in taker fees → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-      "figma": [
-       232,
-       1829,
-       1000,
-       20
-      ],
-      "proto": [
-       232,
-       1902,
-       777,
-       16
-      ],
-      "d": 13,
-      "fv": 49,
-      "pv": 62,
-      "card": [
-       192,
-       1041,
-       1056,
-       840
-      ],
-      "pcard": [
-       192,
-       1112,
-       1056,
-       840
-      ]
-     }
-    ],
-    "pairs": 114,
+    "issues": [],
+    "pairs": 118,
     "cards": 20,
     "fw": 1440,
     "pw": 1440,
@@ -28595,7 +28604,7 @@
    "auth": "guest",
    "render_err": null,
    "opaque": {},
-   "generic": 17,
+   "generic": 32,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -28605,13 +28614,37 @@
     "tab",
     "text"
    ],
-   "nF": 103,
+   "nF": 96,
    "nP": 102,
-   "matched": 100,
+   "matched": 93,
    "missing": [],
    "added": [
     {
+     "t": "Key Features",
+     "kind": "text"
+    },
+    {
+     "t": "Structure",
+     "kind": "text"
+    },
+    {
+     "t": "Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Reviews (23)",
+     "kind": "text"
+    },
+    {
      "t": "Frequent traders notice the cashback on fees.",
+     "kind": "text"
+    },
+    {
+     "t": "Verified",
+     "kind": "text"
+    },
+    {
+     "t": "A question about linking",
      "kind": "text"
     }
    ],
@@ -28645,26 +28678,26 @@
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "proto": [
        16,
        1540,
        343,
-       1264
+       1255
       ],
-      "d": -31,
+      "d": -20,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1540,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -28674,24 +28707,24 @@
        32,
        2124,
        311,
-       232
+       212
       ],
       "proto": [
        32,
-       2069,
+       2060,
        311,
        209
       ],
-      "d": -23,
+      "d": -3,
       "card": [
        32,
        2124,
        311,
-       232
+       212
       ],
       "pcard": [
        32,
-       2069,
+       2060,
        311,
        209
       ]
@@ -28701,26 +28734,26 @@
       "label": "% pays a settlement",
       "figma": [
        32,
-       2364,
+       2344,
        311,
        212
       ],
       "proto": [
        32,
-       2286,
+       2277,
        311,
        209
       ],
       "d": -3,
       "card": [
        32,
-       2364,
+       2344,
        311,
        212
       ],
       "pcard": [
        32,
-       2286,
+       2277,
        311,
        209
       ]
@@ -28730,243 +28763,59 @@
       "label": "% gives cashback",
       "figma": [
        32,
-       2584,
+       2564,
        311,
        212
       ],
       "proto": [
        32,
-       2503,
+       2494,
        311,
        209
       ],
       "d": -3,
       "card": [
        32,
-       2584,
+       2564,
        311,
        212
       ],
       "pcard": [
        32,
-       2503,
+       2494,
        311,
        209
       ]
      },
      {
-      "type": "카드 폭",
-      "label": "create a web# wallet",
-      "figma": [
-       16,
-       3056,
-       320,
-       56
-      ],
-      "proto": [
-       16,
-       2936,
-       343,
-       56
-      ],
-      "d": 23,
-      "card": [
-       16,
-       3056,
-       320,
-       56
-      ],
-      "pcard": [
-       16,
-       2936,
-       343,
-       56
-      ]
-     },
-     {
       "type": "안쪽 세로 위치(중심)",
-      "label": "taker",
+      "label": "with %",
       "figma": [
-       95,
-       1699,
-       34,
+       32,
+       1899,
+       182,
        20
       ],
       "proto": [
+       32,
+       1829,
        93,
-       1628,
-       37,
-       16
+       14
       ],
       "d": -4,
-      "fv": 100,
-      "pv": 96,
+      "fv": 300,
+      "pv": 296,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1540,
        343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "maker",
-      "figma": [
-       244,
-       1699,
-       39,
-       20
-      ],
-      "proto": [
-       243,
-       1628,
-       41,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "how this works",
-      "figma": [
-       56,
-       1669,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1594,
-       102,
-       16
-      ],
-      "d": -4,
-      "fv": 40,
-      "pv": 36,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "how this works",
-      "figma": [
-       56,
-       1669,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1594,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 70,
-      "pv": 62,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "trading fee",
-      "figma": [
-       32,
-       1757,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       1694,
-       75,
-       16
-      ],
-      "d": 4,
-      "fv": 158,
-      "pv": 162,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "cashback",
-      "figma": [
-       32,
-       1811,
-       235,
-       20
-      ],
-      "proto": [
-       32,
-       1748,
-       65,
-       16
-      ],
-      "d": 4,
-      "fv": 212,
-      "pv": 216,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
+       1255
       ]
      },
      {
@@ -28980,24 +28829,24 @@
       ],
       "proto": [
        32,
-       1876,
+       1867,
        83,
        16
       ],
-      "d": 5,
+      "d": -4,
       "fv": 339,
-      "pv": 344,
+      "pv": 335,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1540,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -29011,24 +28860,24 @@
       ],
       "proto": [
        32,
-       1993,
+       1984,
        278,
        56
       ],
-      "d": 6,
+      "d": -3,
       "fv": 475,
-      "pv": 481,
+      "pv": 472,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1540,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -29036,78 +28885,44 @@
       "label": "cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
       "figma": [
        56,
-       2812,
+       2792,
        287,
        60
       ],
       "proto": [
        56,
-       2730,
+       2721,
        280,
        56
       ],
-      "d": -15,
-      "fv": 1233,
-      "pv": 1218,
+      "d": -4,
+      "fv": 1213,
+      "pv": 1209,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1540,
        343,
-       1264
+       1255
       ]
-     },
-     {
-      "type": "가로 위치",
-      "label": "create a web# wallet",
-      "figma": [
-       32,
-       3952,
-       311,
-       32
-      ],
-      "proto": [
-       16,
-       3837,
-       247,
-       29
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "step # of #",
-      "figma": [
-       41,
-       3915,
-       65,
-       18
-      ],
-      "proto": [
-       25,
-       3800,
-       63,
-       15
-      ],
-      "d": -16
      },
      {
       "type": "안쪽 왼쪽 여백",
       "label": "#fee",
       "figma": [
        214,
-       6121,
+       6101,
        29,
        18
       ],
       "proto": [
        210,
-       5874,
+       5864,
        27,
        15
       ],
@@ -29116,13 +28931,13 @@
       "pv": 196,
       "card": [
        14,
-       6110,
+       6090,
        347,
        41
       ],
       "pcard": [
        14,
-       5862,
+       5852,
        347,
        40
       ]
@@ -29132,13 +28947,13 @@
       "label": "#cashback",
       "figma": [
        267,
-       6121,
+       6101,
        69,
        18
       ],
       "proto": [
        262,
-       5874,
+       5864,
        65,
        15
       ],
@@ -29147,13 +28962,13 @@
       "pv": 248,
       "card": [
        14,
-       6110,
+       6090,
        347,
        41
       ],
       "pcard": [
        14,
-       5862,
+       5852,
        347,
        40
       ]
@@ -29163,13 +28978,13 @@
       "label": "highest rated",
       "figma": [
        189,
-       6469,
+       6449,
        90,
        24
       ],
       "proto": [
        186,
-       6225,
+       6215,
        88,
        16
       ],
@@ -29178,174 +28993,19 @@
       "pv": 186,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5141,
+       5132,
        375,
        1815
       ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how much you get back → how this works",
-      "figma": [
-       56,
-       1669,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1594,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 38,
-      "pv": 30,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how this works → taker",
-      "figma": [
-       95,
-       1699,
-       34,
-       20
-      ],
-      "proto": [
-       93,
-       1628,
-       37,
-       16
-      ],
-      "d": 4,
-      "fv": 30,
-      "pv": 34,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "maker → trading fee",
-      "figma": [
-       32,
-       1757,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       1694,
-       75,
-       16
-      ],
-      "d": 8,
-      "fv": 58,
-      "pv": 66,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "with % → total volume",
-      "figma": [
-       32,
-       1938,
-       84,
-       20
-      ],
-      "proto": [
-       32,
-       1876,
-       83,
-       16
-      ],
-      "d": 6,
-      "fv": 39,
-      "pv": 45,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "where your cashback comes from → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-      "figma": [
-       56,
-       2812,
-       287,
-       60
-      ],
-      "proto": [
-       56,
-       2730,
-       280,
-       56
-      ],
-      "d": -21,
-      "fv": 758,
-      "pv": 737,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1540,
-       343,
-       1264
-      ]
      }
     ],
-    "pairs": 115,
+    "pairs": 107,
     "cards": 14,
     "fw": 375,
     "pw": 375,
@@ -29372,7 +29032,7 @@
    "auth": "s4",
    "render_err": null,
    "opaque": {},
-   "generic": 6,
+   "generic": 29,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -29382,9 +29042,9 @@
     "tab",
     "text"
    ],
-   "nF": 99,
+   "nF": 100,
    "nP": 105,
-   "matched": 96,
+   "matched": 97,
    "missing": [],
    "added": [
     {
@@ -29413,13 +29073,13 @@
     }
    ],
    "below_frame": 0,
-   "frame_cut": 5617,
+   "frame_cut": null,
    "unverifiable": 0,
    "diff": [],
    "excepted": [
     {
      "type": "missing",
-     "t": "Sign up",
+     "t": "Sign Up",
      "rule": "EX-A08"
     },
     {
@@ -29434,41 +29094,9 @@
     }
    ],
    "geom": {
-    "issues": [
-     {
-      "type": "요소 간격",
-      "label": "your selected $#k volume generates an estimated $# in taker fees → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-      "figma": [
-       232,
-       1829,
-       1000,
-       20
-      ],
-      "proto": [
-       232,
-       2006,
-       777,
-       16
-      ],
-      "d": 13,
-      "fv": 49,
-      "pv": 62,
-      "card": [
-       192,
-       1041,
-       1056,
-       840
-      ],
-      "pcard": [
-       192,
-       1216,
-       1056,
-       840
-      ]
-     }
-    ],
-    "pairs": 112,
-    "cards": 19,
+    "issues": [],
+    "pairs": 113,
+    "cards": 18,
     "fw": 1440,
     "pw": 1440,
     "scope": false,
@@ -30261,7 +29889,7 @@
    "auth": "s4",
    "render_err": null,
    "opaque": {},
-   "generic": 17,
+   "generic": 32,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -30271,9 +29899,9 @@
     "tab",
     "text"
    ],
-   "nF": 103,
+   "nF": 96,
    "nP": 101,
-   "matched": 96,
+   "matched": 89,
    "missing": [],
    "added": [
     {
@@ -30285,7 +29913,31 @@
      "kind": "text"
     },
     {
+     "t": "Key Features",
+     "kind": "text"
+    },
+    {
+     "t": "Structure",
+     "kind": "text"
+    },
+    {
+     "t": "Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Reviews (23)",
+     "kind": "text"
+    },
+    {
      "t": "Frequent traders notice the cashback on fees.",
+     "kind": "text"
+    },
+    {
+     "t": "Verified",
+     "kind": "text"
+    },
+    {
+     "t": "A question about linking",
      "kind": "text"
     }
    ],
@@ -30339,26 +29991,26 @@
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "proto": [
        16,
        1688,
        343,
-       1264
+       1255
       ],
-      "d": -31,
+      "d": -20,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1688,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -30368,24 +30020,24 @@
        32,
        2124,
        311,
-       232
+       212
       ],
       "proto": [
        32,
-       2217,
+       2208,
        311,
        209
       ],
-      "d": -23,
+      "d": -3,
       "card": [
        32,
        2124,
        311,
-       232
+       212
       ],
       "pcard": [
        32,
-       2217,
+       2208,
        311,
        209
       ]
@@ -30395,26 +30047,26 @@
       "label": "% pays a settlement",
       "figma": [
        32,
-       2364,
+       2344,
        311,
        212
       ],
       "proto": [
        32,
-       2434,
+       2425,
        311,
        209
       ],
       "d": -3,
       "card": [
        32,
-       2364,
+       2344,
        311,
        212
       ],
       "pcard": [
        32,
-       2434,
+       2425,
        311,
        209
       ]
@@ -30424,272 +30076,59 @@
       "label": "% gives cashback",
       "figma": [
        32,
-       2584,
+       2564,
        311,
        212
       ],
       "proto": [
        32,
-       2651,
+       2642,
        311,
        209
       ],
       "d": -3,
       "card": [
        32,
-       2584,
+       2564,
        311,
        212
       ],
       "pcard": [
        32,
-       2651,
+       2642,
        311,
        209
       ]
      },
      {
-      "type": "카드 폭",
-      "label": "create a web# wallet",
-      "figma": [
-       16,
-       3056,
-       320,
-       56
-      ],
-      "proto": [
-       16,
-       3084,
-       343,
-       56
-      ],
-      "d": 23,
-      "card": [
-       16,
-       3056,
-       320,
-       56
-      ],
-      "pcard": [
-       16,
-       3084,
-       343,
-       56
-      ]
-     },
-     {
-      "type": "카드 높이",
-      "label": "% global reviews",
-      "figma": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "proto": [
-       0,
-       5289,
-       375,
-       1519
-      ],
-      "d": -296,
-      "card": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5289,
-       375,
-       1519
-      ]
-     },
-     {
       "type": "안쪽 세로 위치(중심)",
-      "label": "taker",
+      "label": "with %",
       "figma": [
-       95,
-       1699,
-       34,
+       32,
+       1899,
+       182,
        20
       ],
       "proto": [
+       32,
+       1977,
        93,
-       1776,
-       37,
-       16
+       14
       ],
       "d": -4,
-      "fv": 100,
-      "pv": 96,
+      "fv": 300,
+      "pv": 296,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1688,
        343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "maker",
-      "figma": [
-       244,
-       1699,
-       39,
-       20
-      ],
-      "proto": [
-       243,
-       1776,
-       41,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "how this works",
-      "figma": [
-       56,
-       1669,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1742,
-       102,
-       16
-      ],
-      "d": -4,
-      "fv": 40,
-      "pv": 36,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "how this works",
-      "figma": [
-       56,
-       1669,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1742,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 70,
-      "pv": 62,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "trading fee",
-      "figma": [
-       32,
-       1757,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       1842,
-       75,
-       16
-      ],
-      "d": 4,
-      "fv": 158,
-      "pv": 162,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "cashback",
-      "figma": [
-       32,
-       1811,
-       235,
-       20
-      ],
-      "proto": [
-       32,
-       1896,
-       65,
-       16
-      ],
-      "d": 4,
-      "fv": 212,
-      "pv": 216,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
+       1255
       ]
      },
      {
@@ -30703,24 +30142,24 @@
       ],
       "proto": [
        32,
-       2024,
+       2015,
        83,
        16
       ],
-      "d": 5,
+      "d": -4,
       "fv": 339,
-      "pv": 344,
+      "pv": 335,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1688,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -30734,24 +30173,24 @@
       ],
       "proto": [
        32,
-       2141,
+       2132,
        278,
        56
       ],
-      "d": 6,
+      "d": -3,
       "fv": 475,
-      "pv": 481,
+      "pv": 472,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1688,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -30759,78 +30198,44 @@
       "label": "cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
       "figma": [
        56,
-       2812,
+       2792,
        287,
        60
       ],
       "proto": [
        56,
-       2878,
+       2869,
        280,
        56
       ],
-      "d": -15,
-      "fv": 1233,
-      "pv": 1218,
+      "d": -4,
+      "fv": 1213,
+      "pv": 1209,
       "card": [
        16,
        1609,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1688,
        343,
-       1264
+       1255
       ]
-     },
-     {
-      "type": "가로 위치",
-      "label": "create a web# wallet",
-      "figma": [
-       32,
-       3952,
-       311,
-       32
-      ],
-      "proto": [
-       16,
-       3985,
-       247,
-       29
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "step # of #",
-      "figma": [
-       41,
-       3915,
-       65,
-       18
-      ],
-      "proto": [
-       25,
-       3948,
-       63,
-       15
-      ],
-      "d": -16
      },
      {
       "type": "안쪽 왼쪽 여백",
       "label": "#fee",
       "figma": [
        214,
-       6121,
+       6101,
        29,
        18
       ],
       "proto": [
        210,
-       6022,
+       6013,
        27,
        15
       ],
@@ -30839,315 +30244,66 @@
       "pv": 196,
       "card": [
        14,
-       6110,
+       6090,
        347,
        41
       ],
       "pcard": [
        14,
-       6010,
+       6001,
        347,
        40
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "#cashback",
-      "figma": [
-       267,
-       6121,
-       69,
-       18
-      ],
-      "proto": [
-       262,
-       6022,
-       65,
-       15
-      ],
-      "d": -5,
-      "fv": 253,
-      "pv": 248,
-      "card": [
-       14,
-       6110,
-       347,
-       41
-      ],
-      "pcard": [
-       14,
-       6010,
-       347,
-       40
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "#cashback",
-      "figma": [
-       96,
-       6738,
-       69,
-       18
-      ],
-      "proto": [
-       97,
-       6345,
-       65,
-       15
-      ],
-      "d": -294,
-      "fv": 1358,
-      "pv": 1064,
-      "card": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5289,
-       375,
-       1519
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "#cashback",
-      "figma": [
-       96,
-       7039,
-       69,
-       18
-      ],
-      "proto": [
-       97,
-       6646,
-       65,
-       15
-      ],
-      "d": -295,
-      "fv": 1659,
-      "pv": 1364,
-      "card": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5289,
-       375,
-       1519
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how much you get back → how this works",
-      "figma": [
-       56,
-       1669,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1742,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 38,
-      "pv": 30,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how this works → taker",
-      "figma": [
-       95,
-       1699,
-       34,
-       20
-      ],
-      "proto": [
-       93,
-       1776,
-       37,
-       16
-      ],
-      "d": 4,
-      "fv": 30,
-      "pv": 34,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "maker → trading fee",
-      "figma": [
-       32,
-       1757,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       1842,
-       75,
-       16
-      ],
-      "d": 8,
-      "fv": 58,
-      "pv": 66,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "with % → total volume",
-      "figma": [
-       32,
-       1938,
-       84,
-       20
-      ],
-      "proto": [
-       32,
-       2024,
-       83,
-       16
-      ],
-      "d": 6,
-      "fv": 39,
-      "pv": 45,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "where your cashback comes from → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-      "figma": [
-       56,
-       2812,
-       287,
-       60
-      ],
-      "proto": [
-       56,
-       2878,
-       280,
-       56
-      ],
-      "d": -21,
-      "fv": 758,
-      "pv": 737,
-      "card": [
-       16,
-       1609,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1688,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "from real reviews, summarised by ai. wording § differ from individual reviews → newest",
-      "figma": [
-       30,
-       6469,
-       51,
-       24
-      ],
-      "proto": [
-       30,
-       6077,
-       49,
-       16
-      ],
-      "d": -296,
-      "fv": 423,
-      "pv": 127,
-      "card": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5289,
-       375,
-       1519
       ]
      }
     ],
-    "pairs": 111,
+    "pairs": 103,
     "cards": 14,
     "fw": 375,
     "pw": 375,
     "scope": false,
     "excepted": [
      {
+      "type": "카드 높이",
+      "label": "% global reviews",
+      "figma": [
+       0,
+       5369,
+       375,
+       1815
+      ],
+      "proto": [
+       0,
+       5280,
+       375,
+       1519
+      ],
+      "d": -296,
+      "card": [
+       0,
+       5369,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5280,
+       375,
+       1519
+      ],
+      "rule": "EX-A21"
+     },
+     {
       "type": "안쪽 세로 위치(중심)",
       "label": "# reviews",
       "figma": [
        14,
-       6510,
+       6490,
        347,
        20
       ],
       "proto": [
        152,
-       6116,
+       6107,
        71,
        16
       ],
@@ -31156,13 +30312,109 @@
       "pv": 835,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
+       375,
+       1519
+      ],
+      "rule": "EX-A21"
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "#cashback",
+      "figma": [
+       267,
+       6101,
+       69,
+       18
+      ],
+      "proto": [
+       262,
+       6013,
+       65,
+       15
+      ],
+      "d": -5,
+      "fv": 253,
+      "pv": 248,
+      "card": [
+       14,
+       6090,
+       347,
+       41
+      ],
+      "pcard": [
+       14,
+       6001,
+       347,
+       40
+      ],
+      "rule": "EX-A21"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "#cashback",
+      "figma": [
+       96,
+       6718,
+       69,
+       18
+      ],
+      "proto": [
+       97,
+       6336,
+       65,
+       15
+      ],
+      "d": -294,
+      "fv": 1358,
+      "pv": 1064,
+      "card": [
+       0,
+       5369,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5280,
+       375,
+       1519
+      ],
+      "rule": "EX-A21"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "#cashback",
+      "figma": [
+       96,
+       7019,
+       69,
+       18
+      ],
+      "proto": [
+       97,
+       6637,
+       65,
+       15
+      ],
+      "d": -295,
+      "fv": 1659,
+      "pv": 1364,
+      "card": [
+       0,
+       5369,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5280,
        375,
        1519
       ],
@@ -31173,13 +30425,13 @@
       "label": "newest",
       "figma": [
        30,
-       6469,
+       6449,
        51,
        24
       ],
       "proto": [
        30,
-       6077,
+       6068,
        49,
        16
       ],
@@ -31188,13 +30440,13 @@
       "pv": 796,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31205,13 +30457,13 @@
       "label": "oldest",
       "figma": [
        113,
-       6469,
+       6449,
        44,
        24
       ],
       "proto": [
        111,
-       6077,
+       6068,
        43,
        16
       ],
@@ -31220,13 +30472,13 @@
       "pv": 796,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31237,13 +30489,13 @@
       "label": "highest rated",
       "figma": [
        189,
-       6469,
+       6449,
        90,
        24
       ],
       "proto": [
        186,
-       6077,
+       6068,
        88,
        16
       ],
@@ -31252,13 +30504,13 @@
       "pv": 186,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31269,13 +30521,13 @@
       "label": "highest rated",
       "figma": [
        189,
-       6469,
+       6449,
        90,
        24
       ],
       "proto": [
        186,
-       6077,
+       6068,
        88,
        16
       ],
@@ -31284,109 +30536,13 @@
       "pv": 796,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
-       375,
-       1519
-      ],
-      "rule": "EX-A21"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "verified",
-      "figma": [
-       140,
-       6571,
-       45,
-       20
-      ],
-      "proto": [
-       139,
-       6180,
-       44,
-       14
-      ],
-      "d": -294,
-      "fv": 1192,
-      "pv": 898,
-      "card": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5289,
-       375,
-       1519
-      ],
-      "rule": "EX-A21"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "verified",
-      "figma": [
-       140,
-       6872,
-       45,
-       20
-      ],
-      "proto": [
-       139,
-       6481,
-       44,
-       14
-      ],
-      "d": -294,
-      "fv": 1493,
-      "pv": 1199,
-      "card": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5289,
-       375,
-       1519
-      ],
-      "rule": "EX-A21"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "a question about linking",
-      "figma": [
-       14,
-       6609,
-       213,
-       24
-      ],
-      "proto": [
-       14,
-       6217,
-       185,
-       19
-      ],
-      "d": -294,
-      "fv": 1232,
-      "pv": 938,
-      "card": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31397,13 +30553,13 @@
       "label": "read more",
       "figma": [
        14,
-       6701,
+       6681,
        66,
        18
       ],
       "proto": [
        14,
-       6308,
+       6299,
        64,
        15
       ],
@@ -31412,13 +30568,13 @@
       "pv": 1026,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31429,13 +30585,13 @@
       "label": "read more",
       "figma": [
        14,
-       7002,
+       6982,
        66,
        18
       ],
       "proto": [
        14,
-       6609,
+       6600,
        64,
        15
       ],
@@ -31444,13 +30600,13 @@
       "pv": 1328,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31461,13 +30617,13 @@
       "label": "helpful",
       "figma": [
        14,
-       6775,
+       6755,
        50,
        18
       ],
       "proto": [
        14,
-       6382,
+       6373,
        48,
        15
       ],
@@ -31476,13 +30632,13 @@
       "pv": 1100,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31493,13 +30649,13 @@
       "label": "helpful",
       "figma": [
        14,
-       7076,
+       7056,
        50,
        18
       ],
       "proto": [
        14,
-       6683,
+       6674,
        48,
        15
       ],
@@ -31508,13 +30664,13 @@
       "pv": 1402,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31525,13 +30681,13 @@
       "label": "yes #",
       "figma": [
        99,
-       6775,
+       6755,
        38,
        18
       ],
       "proto": [
        97,
-       6382,
+       6373,
        41,
        16
       ],
@@ -31540,13 +30696,13 @@
       "pv": 1101,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31557,13 +30713,13 @@
       "label": "yes #",
       "figma": [
        99,
-       7076,
+       7056,
        38,
        18
       ],
       "proto": [
        97,
-       6683,
+       6674,
        41,
        16
       ],
@@ -31572,13 +30728,13 @@
       "pv": 1402,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31589,13 +30745,13 @@
       "label": "translated from korean",
       "figma": [
        14,
-       6805,
+       6785,
        138,
        20
       ],
       "proto": [
        14,
-       6414,
+       6405,
        138,
        14
       ],
@@ -31604,13 +30760,13 @@
       "pv": 1132,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31621,13 +30777,13 @@
       "label": "show original",
       "figma": [
        156,
-       6805,
+       6785,
        78,
        20
       ],
       "proto": [
        156,
-       6414,
+       6405,
        78,
        14
       ],
@@ -31636,45 +30792,13 @@
       "pv": 1132,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
-       375,
-       1519
-      ],
-      "rule": "EX-A21"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "몇 군데 비교하고 여기로 정했어요",
-      "figma": [
-       14,
-       6910,
-       213,
-       24
-      ],
-      "proto": [
-       14,
-       6518,
-       212,
-       19
-      ],
-      "d": -295,
-      "fv": 1533,
-      "pv": 1238,
-      "card": [
-       0,
-       5389,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5289,
+       5280,
        375,
        1519
       ],
@@ -31685,13 +30809,13 @@
       "label": "show translation",
       "figma": [
        14,
-       7106,
+       7086,
        98,
        20
       ],
       "proto": [
        14,
-       6715,
+       6706,
        98,
        14
       ],
@@ -31700,13 +30824,45 @@
       "pv": 1433,
       "card": [
        0,
-       5389,
+       5369,
        375,
        1815
       ],
       "pcard": [
        0,
-       5289,
+       5280,
+       375,
+       1519
+      ],
+      "rule": "EX-A21"
+     },
+     {
+      "type": "요소 간격",
+      "label": "from real reviews, summarised by ai. wording § differ from individual reviews → newest",
+      "figma": [
+       30,
+       6449,
+       51,
+       24
+      ],
+      "proto": [
+       30,
+       6068,
+       49,
+       16
+      ],
+      "d": -296,
+      "fv": 423,
+      "pv": 127,
+      "card": [
+       0,
+       5369,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5280,
        375,
        1519
       ],
@@ -32472,7 +31628,7 @@
    "auth": "s4",
    "render_err": null,
    "opaque": {},
-   "generic": 19,
+   "generic": 29,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -32482,9 +31638,9 @@
     "tab",
     "text"
    ],
-   "nF": 108,
+   "nF": 103,
    "nP": 107,
-   "matched": 104,
+   "matched": 99,
    "missing": [],
    "added": [
     {
@@ -32493,6 +31649,22 @@
     },
     {
      "t": "My review",
+     "kind": "text"
+    },
+    {
+     "t": "Key Features",
+     "kind": "text"
+    },
+    {
+     "t": "Structure",
+     "kind": "text"
+    },
+    {
+     "t": "Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Reviews (23)",
      "kind": "text"
     }
    ],
@@ -32503,13 +31675,13 @@
    "excepted": [
     {
      "type": "missing",
-     "t": "Sign Up",
-     "rule": "EX-A26"
+     "t": "After discount",
+     "rule": "EX-A34"
     },
     {
      "type": "missing",
-     "t": "After discount",
-     "rule": "EX-A34"
+     "t": "Sign Up",
+     "rule": "EX-A26"
     },
     {
      "type": "missing",
@@ -32554,71 +31726,9 @@
        359,
        136
       ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "your selected $#k volume generates an estimated $# in taker fees → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-      "figma": [
-       232,
-       1829,
-       1000,
-       20
-      ],
-      "proto": [
-       232,
-       1963,
-       777,
-       16
-      ],
-      "d": 13,
-      "fv": 49,
-      "pv": 62,
-      "card": [
-       192,
-       1041,
-       1056,
-       840
-      ],
-      "pcard": [
-       192,
-       1173,
-       1056,
-       840
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "without % → after cashback",
-      "figma": [
-       893,
-       374,
-       103,
-       20
-      ],
-      "proto": [
-       894,
-       354,
-       102,
-       16
-      ],
-      "d": -45,
-      "fv": 88,
-      "pv": 43,
-      "card": [
-       849,
-       226,
-       359,
-       180
-      ],
-      "pcard": [
-       849,
-       248,
-       359,
-       136
-      ]
      }
     ],
-    "pairs": 120,
+    "pairs": 115,
     "cards": 18,
     "fw": 1440,
     "pw": 1440,
@@ -33484,6 +32594,38 @@
      },
      {
       "type": "요소 간격",
+      "label": "without % → after cashback",
+      "figma": [
+       893,
+       374,
+       103,
+       20
+      ],
+      "proto": [
+       894,
+       354,
+       102,
+       16
+      ],
+      "d": -45,
+      "fv": 88,
+      "pv": 43,
+      "card": [
+       849,
+       226,
+       359,
+       180
+      ],
+      "pcard": [
+       849,
+       248,
+       359,
+       136
+      ],
+      "rule": "EX-A41"
+     },
+     {
+      "type": "요소 간격",
       "label": "browse by tag → newest",
       "figma": [
        232,
@@ -33536,7 +32678,7 @@
    "auth": "s4",
    "render_err": null,
    "opaque": {},
-   "generic": 17,
+   "generic": 32,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -33546,9 +32688,9 @@
     "tab",
     "text"
    ],
-   "nF": 107,
+   "nF": 100,
    "nP": 103,
-   "matched": 98,
+   "matched": 91,
    "missing": [],
    "added": [
     {
@@ -33560,7 +32702,31 @@
      "kind": "text"
     },
     {
+     "t": "Key Features",
+     "kind": "text"
+    },
+    {
+     "t": "Structure",
+     "kind": "text"
+    },
+    {
+     "t": "Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Reviews (23)",
+     "kind": "text"
+    },
+    {
      "t": "Frequent traders notice the cashback on fees.",
+     "kind": "text"
+    },
+    {
+     "t": "Verified",
+     "kind": "text"
+    },
+    {
+     "t": "A question about linking",
      "kind": "text"
     }
    ],
@@ -33619,60 +32785,31 @@
     "issues": [
      {
       "type": "카드 높이",
-      "label": "fee stage",
-      "figma": [
-       33,
-       636,
-       310,
-       180
-      ],
-      "proto": [
-       33,
-       560,
-       310,
-       136
-      ],
-      "d": -44,
-      "card": [
-       33,
-       636,
-       310,
-       180
-      ],
-      "pcard": [
-       33,
-       560,
-       310,
-       136
-      ]
-     },
-     {
-      "type": "카드 높이",
       "label": "how much you get back",
       "figma": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "proto": [
        16,
        1677,
        343,
-       1264
+       1255
       ],
-      "d": -31,
+      "d": -20,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -33682,24 +32819,24 @@
        32,
        2188,
        311,
-       232
+       212
       ],
       "proto": [
        32,
-       2206,
+       2197,
        311,
        209
       ],
-      "d": -23,
+      "d": -3,
       "card": [
        32,
        2188,
        311,
-       232
+       212
       ],
       "pcard": [
        32,
-       2206,
+       2197,
        311,
        209
       ]
@@ -33709,26 +32846,26 @@
       "label": "% pays a settlement",
       "figma": [
        32,
-       2428,
+       2408,
        311,
        212
       ],
       "proto": [
        32,
-       2423,
+       2414,
        311,
        209
       ],
       "d": -3,
       "card": [
        32,
-       2428,
+       2408,
        311,
        212
       ],
       "pcard": [
        32,
-       2423,
+       2414,
        311,
        209
       ]
@@ -33738,86 +32875,28 @@
       "label": "% gives cashback",
       "figma": [
        32,
-       2648,
+       2628,
        311,
        212
       ],
       "proto": [
        32,
-       2640,
+       2631,
        311,
        209
       ],
       "d": -3,
       "card": [
        32,
-       2648,
+       2628,
        311,
        212
       ],
       "pcard": [
        32,
-       2640,
+       2631,
        311,
        209
-      ]
-     },
-     {
-      "type": "카드 폭",
-      "label": "create a web# wallet",
-      "figma": [
-       16,
-       3120,
-       320,
-       56
-      ],
-      "proto": [
-       16,
-       3073,
-       343,
-       56
-      ],
-      "d": 23,
-      "card": [
-       16,
-       3120,
-       320,
-       56
-      ],
-      "pcard": [
-       16,
-       3073,
-       343,
-       56
-      ]
-     },
-     {
-      "type": "카드 높이",
-      "label": "% global reviews",
-      "figma": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "proto": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "d": -296,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
       ]
      },
      {
@@ -33836,68 +32915,6 @@
        15
       ],
       "d": -6
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "taker",
-      "figma": [
-       95,
-       1763,
-       34,
-       20
-      ],
-      "proto": [
-       93,
-       1765,
-       37,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "maker",
-      "figma": [
-       244,
-       1763,
-       39,
-       20
-      ],
-      "proto": [
-       243,
-       1765,
-       41,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -33931,127 +32948,34 @@
       ]
      },
      {
-      "type": "안쪽 왼쪽 여백",
-      "label": "how this works",
+      "type": "안쪽 세로 위치(중심)",
+      "label": "with %",
       "figma": [
-       56,
-       1733,
-       102,
+       32,
+       1963,
+       184,
        20
       ],
       "proto": [
-       52,
-       1731,
-       102,
-       16
+       32,
+       1966,
+       93,
+       14
       ],
       "d": -4,
-      "fv": 40,
-      "pv": 36,
+      "fv": 300,
+      "pv": 296,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "how this works",
-      "figma": [
-       56,
-       1733,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1731,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 70,
-      "pv": 62,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "trading fee",
-      "figma": [
-       32,
-       1821,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       1831,
-       75,
-       16
-      ],
-      "d": 4,
-      "fv": 158,
-      "pv": 162,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "cashback",
-      "figma": [
-       32,
-       1875,
-       234,
-       20
-      ],
-      "proto": [
-       32,
-       1885,
-       65,
-       16
-      ],
-      "d": 4,
-      "fv": 212,
-      "pv": 216,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
+       1255
       ]
      },
      {
@@ -34065,24 +32989,24 @@
       ],
       "proto": [
        32,
-       2013,
+       2004,
        83,
        16
       ],
-      "d": 5,
+      "d": -4,
       "fv": 339,
-      "pv": 344,
+      "pv": 335,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -34096,24 +33020,24 @@
       ],
       "proto": [
        32,
-       2130,
+       2121,
        278,
        56
       ],
-      "d": 6,
+      "d": -3,
       "fv": 475,
-      "pv": 481,
+      "pv": 472,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -34121,78 +33045,44 @@
       "label": "cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
       "figma": [
        56,
-       2876,
+       2856,
        287,
        60
       ],
       "proto": [
        56,
-       2867,
+       2858,
        280,
        56
       ],
-      "d": -15,
-      "fv": 1233,
-      "pv": 1218,
+      "d": -4,
+      "fv": 1213,
+      "pv": 1209,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
+       1255
       ]
-     },
-     {
-      "type": "가로 위치",
-      "label": "create a web# wallet",
-      "figma": [
-       32,
-       4016,
-       311,
-       32
-      ],
-      "proto": [
-       16,
-       3974,
-       247,
-       29
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "step # of #",
-      "figma": [
-       41,
-       3979,
-       65,
-       18
-      ],
-      "proto": [
-       25,
-       3937,
-       63,
-       15
-      ],
-      "d": -16
      },
      {
       "type": "안쪽 왼쪽 여백",
       "label": "#fee",
       "figma": [
        208,
-       6161,
+       6141,
        29,
        18
       ],
       "proto": [
        205,
-       5987,
+       5978,
        27,
        15
       ],
@@ -34201,29 +33091,128 @@
       "pv": 191,
       "card": [
        14,
-       6150,
+       6130,
        347,
        41
       ],
       "pcard": [
        14,
-       5975,
+       5966,
        347,
        40
       ]
+     }
+    ],
+    "pairs": 102,
+    "cards": 14,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "fee stage",
+      "figma": [
+       33,
+       636,
+       310,
+       180
+      ],
+      "proto": [
+       33,
+       560,
+       310,
+       136
+      ],
+      "d": -44,
+      "card": [
+       33,
+       636,
+       310,
+       180
+      ],
+      "pcard": [
+       33,
+       560,
+       310,
+       136
+      ],
+      "rule": "EX-A41"
+     },
+     {
+      "type": "카드 높이",
+      "label": "% global reviews",
+      "figma": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "proto": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "d": -296,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "# reviews",
+      "figma": [
+       14,
+       6530,
+       347,
+       20
+      ],
+      "proto": [
+       152,
+       6072,
+       71,
+       16
+      ],
+      "d": -296,
+      "fv": 1131,
+      "pv": 835,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
      },
      {
       "type": "안쪽 왼쪽 여백",
       "label": "#cashback",
       "figma": [
        261,
-       6161,
+       6141,
        69,
        18
       ],
       "proto": [
        256,
-       5987,
+       5978,
        65,
        15
       ],
@@ -34232,29 +33221,30 @@
       "pv": 242,
       "card": [
        14,
-       6150,
+       6130,
        347,
        41
       ],
       "pcard": [
        14,
-       5975,
+       5966,
        347,
        40
-      ]
+      ],
+      "rule": "EX-A37"
      },
      {
       "type": "안쪽 세로 위치(중심)",
       "label": "#cashback",
       "figma": [
        90,
-       6778,
+       6758,
        69,
        18
       ],
       "proto": [
        91,
-       6310,
+       6301,
        65,
        15
       ],
@@ -34263,29 +33253,30 @@
       "pv": 1064,
       "card": [
        0,
-       5429,
+       5409,
        375,
        1815
       ],
       "pcard": [
        0,
-       5254,
+       5245,
        375,
        1519
-      ]
+      ],
+      "rule": "EX-A37"
      },
      {
       "type": "안쪽 세로 위치(중심)",
       "label": "#cashback",
       "figma": [
        90,
-       7079,
+       7059,
        69,
        18
       ],
       "proto": [
        91,
-       6611,
+       6602,
        65,
        15
       ],
@@ -34294,171 +33285,433 @@
       "pv": 1364,
       "card": [
        0,
-       5429,
+       5409,
        375,
        1815
       ],
       "pcard": [
        0,
-       5254,
+       5245,
        375,
        1519
-      ]
+      ],
+      "rule": "EX-A37"
      },
      {
-      "type": "요소 간격",
-      "label": "how much you get back → how this works",
+      "type": "안쪽 세로 위치(중심)",
+      "label": "newest",
       "figma": [
-       56,
-       1733,
-       102,
+       30,
+       6489,
+       51,
+       24
+      ],
+      "proto": [
+       30,
+       6033,
+       49,
+       16
+      ],
+      "d": -296,
+      "fv": 1092,
+      "pv": 796,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "oldest",
+      "figma": [
+       113,
+       6489,
+       44,
+       24
+      ],
+      "proto": [
+       111,
+       6033,
+       43,
+       16
+      ],
+      "d": -296,
+      "fv": 1092,
+      "pv": 796,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "highest rated",
+      "figma": [
+       189,
+       6489,
+       90,
+       24
+      ],
+      "proto": [
+       186,
+       6033,
+       88,
+       16
+      ],
+      "d": -3,
+      "fv": 189,
+      "pv": 186,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "highest rated",
+      "figma": [
+       189,
+       6489,
+       90,
+       24
+      ],
+      "proto": [
+       186,
+       6033,
+       88,
+       16
+      ],
+      "d": -296,
+      "fv": 1092,
+      "pv": 796,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "read more",
+      "figma": [
+       14,
+       6721,
+       66,
+       18
+      ],
+      "proto": [
+       14,
+       6264,
+       64,
+       15
+      ],
+      "d": -295,
+      "fv": 1321,
+      "pv": 1026,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "read more",
+      "figma": [
+       14,
+       7022,
+       66,
+       18
+      ],
+      "proto": [
+       14,
+       6565,
+       64,
+       15
+      ],
+      "d": -294,
+      "fv": 1622,
+      "pv": 1328,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "helpful",
+      "figma": [
+       14,
+       6795,
+       50,
+       18
+      ],
+      "proto": [
+       14,
+       6338,
+       48,
+       15
+      ],
+      "d": -295,
+      "fv": 1395,
+      "pv": 1100,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "helpful",
+      "figma": [
+       14,
+       7096,
+       50,
+       18
+      ],
+      "proto": [
+       14,
+       6639,
+       48,
+       15
+      ],
+      "d": -294,
+      "fv": 1696,
+      "pv": 1402,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "yes #",
+      "figma": [
+       99,
+       6795,
+       38,
+       18
+      ],
+      "proto": [
+       97,
+       6338,
+       41,
+       16
+      ],
+      "d": -294,
+      "fv": 1395,
+      "pv": 1101,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "yes #",
+      "figma": [
+       99,
+       7096,
+       38,
+       18
+      ],
+      "proto": [
+       97,
+       6639,
+       41,
+       16
+      ],
+      "d": -294,
+      "fv": 1696,
+      "pv": 1402,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "translated from korean",
+      "figma": [
+       14,
+       6825,
+       138,
        20
       ],
       "proto": [
-       52,
-       1731,
-       102,
-       16
+       14,
+       6370,
+       138,
+       14
       ],
-      "d": -8,
-      "fv": 38,
-      "pv": 30,
+      "d": -294,
+      "fv": 1426,
+      "pv": 1132,
       "card": [
-       16,
-       1673,
-       343,
-       1295
+       0,
+       5409,
+       375,
+       1815
       ],
       "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
      },
      {
-      "type": "요소 간격",
-      "label": "how this works → taker",
+      "type": "안쪽 세로 위치(중심)",
+      "label": "show original",
       "figma": [
-       95,
-       1763,
-       34,
+       156,
+       6825,
+       78,
        20
       ],
       "proto": [
-       93,
-       1765,
-       37,
-       16
+       156,
+       6370,
+       78,
+       14
       ],
-      "d": 4,
-      "fv": 30,
-      "pv": 34,
+      "d": -294,
+      "fv": 1426,
+      "pv": 1132,
       "card": [
-       16,
-       1673,
-       343,
-       1295
+       0,
+       5409,
+       375,
+       1815
       ],
       "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A37"
      },
      {
-      "type": "요소 간격",
-      "label": "maker → trading fee",
+      "type": "안쪽 세로 위치(중심)",
+      "label": "show translation",
       "figma": [
-       32,
-       1821,
-       240,
+       14,
+       7126,
+       98,
        20
       ],
       "proto": [
-       32,
-       1831,
-       75,
-       16
+       14,
+       6671,
+       98,
+       14
       ],
-      "d": 8,
-      "fv": 58,
-      "pv": 66,
+      "d": -294,
+      "fv": 1727,
+      "pv": 1433,
       "card": [
-       16,
-       1673,
-       343,
-       1295
+       0,
+       5409,
+       375,
+       1815
       ],
       "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "with % → total volume",
-      "figma": [
-       32,
-       2002,
-       84,
-       20
+       0,
+       5245,
+       375,
+       1519
       ],
-      "proto": [
-       32,
-       2013,
-       83,
-       16
-      ],
-      "d": 6,
-      "fv": 39,
-      "pv": 45,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "where your cashback comes from → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-      "figma": [
-       56,
-       2876,
-       287,
-       60
-      ],
-      "proto": [
-       56,
-       2867,
-       280,
-       56
-      ],
-      "d": -21,
-      "fv": 758,
-      "pv": 737,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
+      "rule": "EX-A37"
      },
      {
       "type": "요소 간격",
@@ -34489,20 +33742,21 @@
        560,
        310,
        136
-      ]
+      ],
+      "rule": "EX-A41"
      },
      {
       "type": "요소 간격",
       "label": "from real reviews, summarised by ai. wording § differ from individual reviews → newest",
       "figma": [
        30,
-       6509,
+       6489,
        51,
        24
       ],
       "proto": [
        30,
-       6042,
+       6033,
        49,
        16
       ],
@@ -34511,595 +33765,13 @@
       "pv": 127,
       "card": [
        0,
-       5429,
+       5409,
        375,
        1815
       ],
       "pcard": [
        0,
-       5254,
-       375,
-       1519
-      ]
-     }
-    ],
-    "pairs": 110,
-    "cards": 14,
-    "fw": 375,
-    "pw": 375,
-    "scope": false,
-    "excepted": [
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "# reviews",
-      "figma": [
-       14,
-       6550,
-       347,
-       20
-      ],
-      "proto": [
-       152,
-       6081,
-       71,
-       16
-      ],
-      "d": -296,
-      "fv": 1131,
-      "pv": 835,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "newest",
-      "figma": [
-       30,
-       6509,
-       51,
-       24
-      ],
-      "proto": [
-       30,
-       6042,
-       49,
-       16
-      ],
-      "d": -296,
-      "fv": 1092,
-      "pv": 796,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "oldest",
-      "figma": [
-       113,
-       6509,
-       44,
-       24
-      ],
-      "proto": [
-       111,
-       6042,
-       43,
-       16
-      ],
-      "d": -296,
-      "fv": 1092,
-      "pv": 796,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "highest rated",
-      "figma": [
-       189,
-       6509,
-       90,
-       24
-      ],
-      "proto": [
-       186,
-       6042,
-       88,
-       16
-      ],
-      "d": -3,
-      "fv": 189,
-      "pv": 186,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "highest rated",
-      "figma": [
-       189,
-       6509,
-       90,
-       24
-      ],
-      "proto": [
-       186,
-       6042,
-       88,
-       16
-      ],
-      "d": -296,
-      "fv": 1092,
-      "pv": 796,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "verified",
-      "figma": [
-       140,
-       6611,
-       45,
-       20
-      ],
-      "proto": [
-       139,
-       6145,
-       44,
-       14
-      ],
-      "d": -294,
-      "fv": 1192,
-      "pv": 898,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "verified",
-      "figma": [
-       140,
-       6912,
-       45,
-       20
-      ],
-      "proto": [
-       139,
-       6446,
-       44,
-       14
-      ],
-      "d": -294,
-      "fv": 1493,
-      "pv": 1199,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "a question about linking",
-      "figma": [
-       14,
-       6649,
-       213,
-       24
-      ],
-      "proto": [
-       14,
-       6182,
-       185,
-       19
-      ],
-      "d": -294,
-      "fv": 1232,
-      "pv": 938,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "read more",
-      "figma": [
-       14,
-       6741,
-       66,
-       18
-      ],
-      "proto": [
-       14,
-       6273,
-       64,
-       15
-      ],
-      "d": -295,
-      "fv": 1321,
-      "pv": 1026,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "read more",
-      "figma": [
-       14,
-       7042,
-       66,
-       18
-      ],
-      "proto": [
-       14,
-       6574,
-       64,
-       15
-      ],
-      "d": -294,
-      "fv": 1622,
-      "pv": 1328,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "helpful",
-      "figma": [
-       14,
-       6815,
-       50,
-       18
-      ],
-      "proto": [
-       14,
-       6347,
-       48,
-       15
-      ],
-      "d": -295,
-      "fv": 1395,
-      "pv": 1100,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "helpful",
-      "figma": [
-       14,
-       7116,
-       50,
-       18
-      ],
-      "proto": [
-       14,
-       6648,
-       48,
-       15
-      ],
-      "d": -294,
-      "fv": 1696,
-      "pv": 1402,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "yes #",
-      "figma": [
-       99,
-       6815,
-       38,
-       18
-      ],
-      "proto": [
-       97,
-       6347,
-       41,
-       16
-      ],
-      "d": -294,
-      "fv": 1395,
-      "pv": 1101,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "yes #",
-      "figma": [
-       99,
-       7116,
-       38,
-       18
-      ],
-      "proto": [
-       97,
-       6648,
-       41,
-       16
-      ],
-      "d": -294,
-      "fv": 1696,
-      "pv": 1402,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "translated from korean",
-      "figma": [
-       14,
-       6845,
-       138,
-       20
-      ],
-      "proto": [
-       14,
-       6379,
-       138,
-       14
-      ],
-      "d": -294,
-      "fv": 1426,
-      "pv": 1132,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "show original",
-      "figma": [
-       156,
-       6845,
-       78,
-       20
-      ],
-      "proto": [
-       156,
-       6379,
-       78,
-       14
-      ],
-      "d": -294,
-      "fv": 1426,
-      "pv": 1132,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "몇 군데 비교하고 여기로 정했어요",
-      "figma": [
-       14,
-       6950,
-       213,
-       24
-      ],
-      "proto": [
-       14,
-       6483,
-       212,
-       19
-      ],
-      "d": -295,
-      "fv": 1533,
-      "pv": 1238,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A37"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "show translation",
-      "figma": [
-       14,
-       7146,
-       98,
-       20
-      ],
-      "proto": [
-       14,
-       6680,
-       98,
-       14
-      ],
-      "d": -294,
-      "fv": 1727,
-      "pv": 1433,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
+       5245,
        375,
        1519
       ],
@@ -35127,7 +33799,7 @@
    "auth": "s4",
    "render_err": null,
    "opaque": {},
-   "generic": 19,
+   "generic": 29,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -35137,9 +33809,9 @@
     "tab",
     "text"
    ],
-   "nF": 109,
+   "nF": 104,
    "nP": 108,
-   "matched": 105,
+   "matched": 100,
    "missing": [],
    "added": [
     {
@@ -35148,6 +33820,22 @@
     },
     {
      "t": "My review",
+     "kind": "text"
+    },
+    {
+     "t": "Key Features",
+     "kind": "text"
+    },
+    {
+     "t": "Structure",
+     "kind": "text"
+    },
+    {
+     "t": "Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Reviews (23)",
      "kind": "text"
     }
    ],
@@ -35158,13 +33846,13 @@
    "excepted": [
     {
      "type": "missing",
-     "t": "Sign Up",
-     "rule": "EX-A27"
+     "t": "After discount",
+     "rule": "EX-A34"
     },
     {
      "type": "missing",
-     "t": "After discount",
-     "rule": "EX-A34"
+     "t": "Sign Up",
+     "rule": "EX-A27"
     },
     {
      "type": "missing",
@@ -35240,71 +33928,9 @@
        359,
        136
       ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "your selected $#k volume generates an estimated $# in taker fees → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-      "figma": [
-       232,
-       1829,
-       1000,
-       20
-      ],
-      "proto": [
-       232,
-       1963,
-       777,
-       16
-      ],
-      "d": 13,
-      "fv": 49,
-      "pv": 62,
-      "card": [
-       192,
-       1041,
-       1056,
-       840
-      ],
-      "pcard": [
-       192,
-       1173,
-       1056,
-       840
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "without % → after cashback",
-      "figma": [
-       893,
-       374,
-       103,
-       20
-      ],
-      "proto": [
-       894,
-       354,
-       102,
-       16
-      ],
-      "d": -45,
-      "fv": 88,
-      "pv": 43,
-      "card": [
-       849,
-       226,
-       359,
-       180
-      ],
-      "pcard": [
-       849,
-       248,
-       359,
-       136
-      ]
      }
     ],
-    "pairs": 121,
+    "pairs": 116,
     "cards": 18,
     "fw": 1440,
     "pw": 1440,
@@ -35411,13 +34037,13 @@
       ],
       "proto": [
        739,
-       4329,
+       4328,
        63,
        14
       ],
-      "d": -233,
+      "d": -234,
       "fv": 781,
-      "pv": 548,
+      "pv": 547,
       "card": [
        192,
        3704,
@@ -35443,13 +34069,13 @@
       ],
       "proto": [
        233,
-       4328,
+       4327,
        49,
        16
       ],
-      "d": -233,
+      "d": -234,
       "fv": 781,
-      "pv": 548,
+      "pv": 547,
       "card": [
        192,
        3704,
@@ -35475,13 +34101,13 @@
       ],
       "proto": [
        314,
-       4328,
+       4327,
        43,
        16
       ],
-      "d": -233,
+      "d": -234,
       "fv": 781,
-      "pv": 548,
+      "pv": 547,
       "card": [
        192,
        3704,
@@ -35507,13 +34133,13 @@
       ],
       "proto": [
        389,
-       4328,
+       4327,
        88,
        16
       ],
-      "d": -233,
+      "d": -234,
       "fv": 781,
-      "pv": 548,
+      "pv": 547,
       "card": [
        192,
        3704,
@@ -35539,13 +34165,13 @@
       ],
       "proto": [
        508,
-       4328,
+       4327,
        85,
        16
       ],
-      "d": -233,
+      "d": -234,
       "fv": 781,
-      "pv": 548,
+      "pv": 547,
       "card": [
        192,
        3704,
@@ -35571,13 +34197,13 @@
       ],
       "proto": [
        624,
-       4328,
+       4327,
        74,
        16
       ],
-      "d": -233,
+      "d": -234,
       "fv": 781,
-      "pv": 548,
+      "pv": 547,
       "card": [
        192,
        3704,
@@ -35603,13 +34229,13 @@
       ],
       "proto": [
        257,
-       4429,
+       4428,
        61,
        16
       ],
-      "d": -235,
+      "d": -236,
       "fv": 884,
-      "pv": 649,
+      "pv": 648,
       "card": [
        192,
        3704,
@@ -35635,13 +34261,13 @@
       ],
       "proto": [
        342,
-       4430,
+       4429,
        44,
        14
       ],
-      "d": -235,
+      "d": -236,
       "fv": 884,
-      "pv": 649,
+      "pv": 648,
       "card": [
        192,
        3704,
@@ -35667,13 +34293,13 @@
       ],
       "proto": [
        342,
-       4685,
+       4684,
        44,
        14
       ],
-      "d": -234,
+      "d": -235,
       "fv": 1138,
-      "pv": 904,
+      "pv": 903,
       "card": [
        192,
        3704,
@@ -35699,7 +34325,7 @@
       ],
       "proto": [
        217,
-       4463,
+       4462,
        185,
        19
       ],
@@ -35731,13 +34357,13 @@
       ],
       "proto": [
        217,
-       4495,
+       4494,
        890,
        16
       ],
-      "d": -235,
+      "d": -236,
       "fv": 950,
-      "pv": 715,
+      "pv": 714,
       "card": [
        192,
        3704,
@@ -35763,13 +34389,13 @@
       ],
       "proto": [
        217,
-       4524,
+       4523,
        64,
        15
       ],
-      "d": -233,
+      "d": -235,
       "fv": 977,
-      "pv": 744,
+      "pv": 742,
       "card": [
        192,
        3704,
@@ -35795,7 +34421,7 @@
       ],
       "proto": [
        217,
-       4779,
+       4778,
        64,
        15
       ],
@@ -35827,13 +34453,13 @@
       ],
       "proto": [
        217,
-       4591,
+       4590,
        53,
        16
       ],
-      "d": -233,
+      "d": -234,
       "fv": 1044,
-      "pv": 811,
+      "pv": 810,
       "card": [
        192,
        3704,
@@ -35859,13 +34485,13 @@
       ],
       "proto": [
        217,
-       4846,
+       4845,
        53,
        16
       ],
-      "d": -232,
+      "d": -233,
       "fv": 1298,
-      "pv": 1066,
+      "pv": 1065,
       "card": [
        192,
        3704,
@@ -35891,13 +34517,13 @@
       ],
       "proto": [
        305,
-       4591,
+       4590,
        41,
        16
       ],
-      "d": -233,
+      "d": -234,
       "fv": 1044,
-      "pv": 811,
+      "pv": 810,
       "card": [
        192,
        3704,
@@ -35923,13 +34549,13 @@
       ],
       "proto": [
        305,
-       4846,
+       4845,
        41,
        16
       ],
-      "d": -232,
+      "d": -233,
       "fv": 1298,
-      "pv": 1066,
+      "pv": 1065,
       "card": [
        192,
        3704,
@@ -35955,13 +34581,13 @@
       ],
       "proto": [
        999,
-       4591,
+       4590,
        138,
        14
       ],
-      "d": -234,
+      "d": -235,
       "fv": 1044,
-      "pv": 810,
+      "pv": 809,
       "card": [
        192,
        3704,
@@ -35987,13 +34613,13 @@
       ],
       "proto": [
        1145,
-       4591,
+       4590,
        78,
        14
       ],
-      "d": -234,
+      "d": -235,
       "fv": 1044,
-      "pv": 810,
+      "pv": 809,
       "card": [
        192,
        3704,
@@ -36019,13 +34645,13 @@
       ],
       "proto": [
        257,
-       4684,
+       4683,
        61,
        16
       ],
-      "d": -234,
+      "d": -235,
       "fv": 1138,
-      "pv": 904,
+      "pv": 903,
       "card": [
        192,
        3704,
@@ -36051,13 +34677,13 @@
       ],
       "proto": [
        217,
-       4718,
+       4717,
        212,
        19
       ],
-      "d": -234,
+      "d": -236,
       "fv": 1174,
-      "pv": 940,
+      "pv": 938,
       "card": [
        192,
        3704,
@@ -36083,13 +34709,13 @@
       ],
       "proto": [
        1125,
-       4846,
+       4845,
        98,
        14
       ],
-      "d": -233,
+      "d": -234,
       "fv": 1298,
-      "pv": 1065,
+      "pv": 1064,
       "card": [
        192,
        3704,
@@ -36138,6 +34764,38 @@
      },
      {
       "type": "요소 간격",
+      "label": "without % → after cashback",
+      "figma": [
+       893,
+       374,
+       103,
+       20
+      ],
+      "proto": [
+       894,
+       354,
+       102,
+       16
+      ],
+      "d": -45,
+      "fv": 88,
+      "pv": 43,
+      "card": [
+       849,
+       226,
+       359,
+       180
+      ],
+      "pcard": [
+       849,
+       248,
+       359,
+       136
+      ],
+      "rule": "EX-A41"
+     },
+     {
+      "type": "요소 간격",
       "label": "browse by tag → newest",
       "figma": [
        232,
@@ -36147,7 +34805,7 @@
       ],
       "proto": [
        233,
-       4328,
+       4327,
        49,
        16
       ],
@@ -36190,7 +34848,7 @@
    "auth": "s4",
    "render_err": null,
    "opaque": {},
-   "generic": 17,
+   "generic": 32,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -36200,9 +34858,9 @@
     "tab",
     "text"
    ],
-   "nF": 108,
+   "nF": 101,
    "nP": 104,
-   "matched": 99,
+   "matched": 92,
    "missing": [],
    "added": [
     {
@@ -36214,7 +34872,31 @@
      "kind": "text"
     },
     {
+     "t": "Key Features",
+     "kind": "text"
+    },
+    {
+     "t": "Structure",
+     "kind": "text"
+    },
+    {
+     "t": "Policy",
+     "kind": "text"
+    },
+    {
+     "t": "Reviews (23)",
+     "kind": "text"
+    },
+    {
      "t": "Frequent traders notice the cashback on fees.",
+     "kind": "text"
+    },
+    {
+     "t": "Verified",
+     "kind": "text"
+    },
+    {
+     "t": "A question about linking",
      "kind": "text"
     }
    ],
@@ -36273,60 +34955,31 @@
     "issues": [
      {
       "type": "카드 높이",
-      "label": "fee stage",
-      "figma": [
-       33,
-       636,
-       310,
-       180
-      ],
-      "proto": [
-       33,
-       560,
-       310,
-       136
-      ],
-      "d": -44,
-      "card": [
-       33,
-       636,
-       310,
-       180
-      ],
-      "pcard": [
-       33,
-       560,
-       310,
-       136
-      ]
-     },
-     {
-      "type": "카드 높이",
       "label": "how much you get back",
       "figma": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "proto": [
        16,
        1677,
        343,
-       1264
+       1255
       ],
-      "d": -31,
+      "d": -20,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -36336,24 +34989,24 @@
        32,
        2188,
        311,
-       232
+       212
       ],
       "proto": [
        32,
-       2206,
+       2197,
        311,
        209
       ],
-      "d": -23,
+      "d": -3,
       "card": [
        32,
        2188,
        311,
-       232
+       212
       ],
       "pcard": [
        32,
-       2206,
+       2197,
        311,
        209
       ]
@@ -36363,26 +35016,26 @@
       "label": "% pays a settlement",
       "figma": [
        32,
-       2428,
+       2408,
        311,
        212
       ],
       "proto": [
        32,
-       2423,
+       2414,
        311,
        209
       ],
       "d": -3,
       "card": [
        32,
-       2428,
+       2408,
        311,
        212
       ],
       "pcard": [
        32,
-       2423,
+       2414,
        311,
        209
       ]
@@ -36392,86 +35045,28 @@
       "label": "% gives cashback",
       "figma": [
        32,
-       2648,
+       2628,
        311,
        212
       ],
       "proto": [
        32,
-       2640,
+       2631,
        311,
        209
       ],
       "d": -3,
       "card": [
        32,
-       2648,
+       2628,
        311,
        212
       ],
       "pcard": [
        32,
-       2640,
+       2631,
        311,
        209
-      ]
-     },
-     {
-      "type": "카드 폭",
-      "label": "create a web# wallet",
-      "figma": [
-       16,
-       3120,
-       320,
-       56
-      ],
-      "proto": [
-       16,
-       3073,
-       343,
-       56
-      ],
-      "d": 23,
-      "card": [
-       16,
-       3120,
-       320,
-       56
-      ],
-      "pcard": [
-       16,
-       3073,
-       343,
-       56
-      ]
-     },
-     {
-      "type": "카드 높이",
-      "label": "% global reviews",
-      "figma": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "proto": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "d": -296,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
       ]
      },
      {
@@ -36490,68 +35085,6 @@
        15
       ],
       "d": -6
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "taker",
-      "figma": [
-       95,
-       1763,
-       34,
-       20
-      ],
-      "proto": [
-       93,
-       1765,
-       37,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "maker",
-      "figma": [
-       244,
-       1763,
-       39,
-       20
-      ],
-      "proto": [
-       243,
-       1765,
-       41,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -36585,127 +35118,34 @@
       ]
      },
      {
-      "type": "안쪽 왼쪽 여백",
-      "label": "how this works",
+      "type": "안쪽 세로 위치(중심)",
+      "label": "with %",
       "figma": [
-       56,
-       1733,
-       102,
+       32,
+       1963,
+       182,
        20
       ],
       "proto": [
-       52,
-       1731,
-       102,
-       16
+       32,
+       1966,
+       93,
+       14
       ],
       "d": -4,
-      "fv": 40,
-      "pv": 36,
+      "fv": 300,
+      "pv": 296,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "how this works",
-      "figma": [
-       56,
-       1733,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1731,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 70,
-      "pv": 62,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "trading fee",
-      "figma": [
-       32,
-       1821,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       1831,
-       75,
-       16
-      ],
-      "d": 4,
-      "fv": 158,
-      "pv": 162,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "cashback",
-      "figma": [
-       32,
-       1875,
-       235,
-       20
-      ],
-      "proto": [
-       32,
-       1885,
-       65,
-       16
-      ],
-      "d": 4,
-      "fv": 212,
-      "pv": 216,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
+       1255
       ]
      },
      {
@@ -36719,24 +35159,24 @@
       ],
       "proto": [
        32,
-       2013,
+       2004,
        83,
        16
       ],
-      "d": 5,
+      "d": -4,
       "fv": 339,
-      "pv": 344,
+      "pv": 335,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -36750,24 +35190,24 @@
       ],
       "proto": [
        32,
-       2130,
+       2121,
        278,
        56
       ],
-      "d": 6,
+      "d": -3,
       "fv": 475,
-      "pv": 481,
+      "pv": 472,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
+       1255
       ]
      },
      {
@@ -36775,78 +35215,44 @@
       "label": "cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
       "figma": [
        56,
-       2876,
+       2856,
        287,
        60
       ],
       "proto": [
        56,
-       2867,
+       2858,
        280,
        56
       ],
-      "d": -15,
-      "fv": 1233,
-      "pv": 1218,
+      "d": -4,
+      "fv": 1213,
+      "pv": 1209,
       "card": [
        16,
        1673,
        343,
-       1295
+       1275
       ],
       "pcard": [
        16,
        1677,
        343,
-       1264
+       1255
       ]
-     },
-     {
-      "type": "가로 위치",
-      "label": "create a web# wallet",
-      "figma": [
-       32,
-       4016,
-       311,
-       32
-      ],
-      "proto": [
-       16,
-       3974,
-       247,
-       29
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "step # of #",
-      "figma": [
-       41,
-       3979,
-       65,
-       18
-      ],
-      "proto": [
-       25,
-       3937,
-       63,
-       15
-      ],
-      "d": -16
      },
      {
       "type": "안쪽 왼쪽 여백",
       "label": "#fee",
       "figma": [
        206,
-       6161,
+       6141,
        29,
        18
       ],
       "proto": [
        203,
-       5987,
+       5978,
        27,
        15
       ],
@@ -36855,29 +35261,128 @@
       "pv": 189,
       "card": [
        14,
-       6150,
+       6130,
        347,
        41
       ],
       "pcard": [
        14,
-       5975,
+       5966,
        347,
        40
       ]
+     }
+    ],
+    "pairs": 105,
+    "cards": 14,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "fee stage",
+      "figma": [
+       33,
+       636,
+       310,
+       180
+      ],
+      "proto": [
+       33,
+       560,
+       310,
+       136
+      ],
+      "d": -44,
+      "card": [
+       33,
+       636,
+       310,
+       180
+      ],
+      "pcard": [
+       33,
+       560,
+       310,
+       136
+      ],
+      "rule": "EX-A41"
+     },
+     {
+      "type": "카드 높이",
+      "label": "% global reviews",
+      "figma": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "proto": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "d": -296,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "# reviews",
+      "figma": [
+       14,
+       6530,
+       347,
+       20
+      ],
+      "proto": [
+       152,
+       6072,
+       71,
+       16
+      ],
+      "d": -296,
+      "fv": 1131,
+      "pv": 835,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
      },
      {
       "type": "안쪽 왼쪽 여백",
       "label": "#cashback",
       "figma": [
        259,
-       6161,
+       6141,
        69,
        18
       ],
       "proto": [
        254,
-       5987,
+       5978,
        65,
        15
       ],
@@ -36886,29 +35391,30 @@
       "pv": 240,
       "card": [
        14,
-       6150,
+       6130,
        347,
        41
       ],
       "pcard": [
        14,
-       5975,
+       5966,
        347,
        40
-      ]
+      ],
+      "rule": "EX-A38"
      },
      {
       "type": "안쪽 세로 위치(중심)",
       "label": "#cashback",
       "figma": [
        88,
-       6778,
+       6758,
        69,
        18
       ],
       "proto": [
        89,
-       6310,
+       6301,
        65,
        15
       ],
@@ -36917,29 +35423,30 @@
       "pv": 1064,
       "card": [
        0,
-       5429,
+       5409,
        375,
        1815
       ],
       "pcard": [
        0,
-       5254,
+       5245,
        375,
        1519
-      ]
+      ],
+      "rule": "EX-A38"
      },
      {
       "type": "안쪽 세로 위치(중심)",
       "label": "#cashback",
       "figma": [
        88,
-       7079,
+       7059,
        69,
        18
       ],
       "proto": [
        89,
-       6611,
+       6602,
        65,
        15
       ],
@@ -36948,171 +35455,433 @@
       "pv": 1364,
       "card": [
        0,
-       5429,
+       5409,
        375,
        1815
       ],
       "pcard": [
        0,
-       5254,
+       5245,
        375,
        1519
-      ]
+      ],
+      "rule": "EX-A38"
      },
      {
-      "type": "요소 간격",
-      "label": "how much you get back → how this works",
+      "type": "안쪽 세로 위치(중심)",
+      "label": "newest",
       "figma": [
-       56,
-       1733,
-       102,
+       30,
+       6489,
+       51,
+       24
+      ],
+      "proto": [
+       30,
+       6033,
+       49,
+       16
+      ],
+      "d": -296,
+      "fv": 1092,
+      "pv": 796,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "oldest",
+      "figma": [
+       113,
+       6489,
+       44,
+       24
+      ],
+      "proto": [
+       111,
+       6033,
+       43,
+       16
+      ],
+      "d": -296,
+      "fv": 1092,
+      "pv": 796,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "highest rated",
+      "figma": [
+       189,
+       6489,
+       90,
+       24
+      ],
+      "proto": [
+       186,
+       6033,
+       88,
+       16
+      ],
+      "d": -3,
+      "fv": 189,
+      "pv": 186,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "highest rated",
+      "figma": [
+       189,
+       6489,
+       90,
+       24
+      ],
+      "proto": [
+       186,
+       6033,
+       88,
+       16
+      ],
+      "d": -296,
+      "fv": 1092,
+      "pv": 796,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "read more",
+      "figma": [
+       14,
+       6721,
+       66,
+       18
+      ],
+      "proto": [
+       14,
+       6264,
+       64,
+       15
+      ],
+      "d": -295,
+      "fv": 1321,
+      "pv": 1026,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "read more",
+      "figma": [
+       14,
+       7022,
+       66,
+       18
+      ],
+      "proto": [
+       14,
+       6565,
+       64,
+       15
+      ],
+      "d": -294,
+      "fv": 1622,
+      "pv": 1328,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "helpful",
+      "figma": [
+       14,
+       6795,
+       50,
+       18
+      ],
+      "proto": [
+       14,
+       6338,
+       48,
+       15
+      ],
+      "d": -295,
+      "fv": 1395,
+      "pv": 1100,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "helpful",
+      "figma": [
+       14,
+       7096,
+       50,
+       18
+      ],
+      "proto": [
+       14,
+       6639,
+       48,
+       15
+      ],
+      "d": -294,
+      "fv": 1696,
+      "pv": 1402,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "yes #",
+      "figma": [
+       99,
+       6795,
+       38,
+       18
+      ],
+      "proto": [
+       97,
+       6338,
+       41,
+       16
+      ],
+      "d": -294,
+      "fv": 1395,
+      "pv": 1101,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "yes #",
+      "figma": [
+       99,
+       7096,
+       38,
+       18
+      ],
+      "proto": [
+       97,
+       6639,
+       41,
+       16
+      ],
+      "d": -294,
+      "fv": 1696,
+      "pv": 1402,
+      "card": [
+       0,
+       5409,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "translated from korean",
+      "figma": [
+       14,
+       6825,
+       138,
        20
       ],
       "proto": [
-       52,
-       1731,
-       102,
-       16
+       14,
+       6370,
+       138,
+       14
       ],
-      "d": -8,
-      "fv": 38,
-      "pv": 30,
+      "d": -294,
+      "fv": 1426,
+      "pv": 1132,
       "card": [
-       16,
-       1673,
-       343,
-       1295
+       0,
+       5409,
+       375,
+       1815
       ],
       "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
      },
      {
-      "type": "요소 간격",
-      "label": "how this works → taker",
+      "type": "안쪽 세로 위치(중심)",
+      "label": "show original",
       "figma": [
-       95,
-       1763,
-       34,
+       156,
+       6825,
+       78,
        20
       ],
       "proto": [
-       93,
-       1765,
-       37,
-       16
+       156,
+       6370,
+       78,
+       14
       ],
-      "d": 4,
-      "fv": 30,
-      "pv": 34,
+      "d": -294,
+      "fv": 1426,
+      "pv": 1132,
       "card": [
-       16,
-       1673,
-       343,
-       1295
+       0,
+       5409,
+       375,
+       1815
       ],
       "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
+       0,
+       5245,
+       375,
+       1519
+      ],
+      "rule": "EX-A38"
      },
      {
-      "type": "요소 간격",
-      "label": "maker → trading fee",
+      "type": "안쪽 세로 위치(중심)",
+      "label": "show translation",
       "figma": [
-       32,
-       1821,
-       240,
+       14,
+       7126,
+       98,
        20
       ],
       "proto": [
-       32,
-       1831,
-       75,
-       16
+       14,
+       6671,
+       98,
+       14
       ],
-      "d": 8,
-      "fv": 58,
-      "pv": 66,
+      "d": -294,
+      "fv": 1727,
+      "pv": 1433,
       "card": [
-       16,
-       1673,
-       343,
-       1295
+       0,
+       5409,
+       375,
+       1815
       ],
       "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "with % → total volume",
-      "figma": [
-       32,
-       2002,
-       84,
-       20
+       0,
+       5245,
+       375,
+       1519
       ],
-      "proto": [
-       32,
-       2013,
-       83,
-       16
-      ],
-      "d": 6,
-      "fv": 39,
-      "pv": 45,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "where your cashback comes from → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-      "figma": [
-       56,
-       2876,
-       287,
-       60
-      ],
-      "proto": [
-       56,
-       2867,
-       280,
-       56
-      ],
-      "d": -21,
-      "fv": 758,
-      "pv": 737,
-      "card": [
-       16,
-       1673,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1677,
-       343,
-       1264
-      ]
+      "rule": "EX-A38"
      },
      {
       "type": "요소 간격",
@@ -37143,20 +35912,21 @@
        560,
        310,
        136
-      ]
+      ],
+      "rule": "EX-A41"
      },
      {
       "type": "요소 간격",
       "label": "from real reviews, summarised by ai. wording § differ from individual reviews → newest",
       "figma": [
        30,
-       6509,
+       6489,
        51,
        24
       ],
       "proto": [
        30,
-       6042,
+       6033,
        49,
        16
       ],
@@ -37165,595 +35935,13 @@
       "pv": 127,
       "card": [
        0,
-       5429,
+       5409,
        375,
        1815
       ],
       "pcard": [
        0,
-       5254,
-       375,
-       1519
-      ]
-     }
-    ],
-    "pairs": 113,
-    "cards": 14,
-    "fw": 375,
-    "pw": 375,
-    "scope": false,
-    "excepted": [
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "# reviews",
-      "figma": [
-       14,
-       6550,
-       347,
-       20
-      ],
-      "proto": [
-       152,
-       6081,
-       71,
-       16
-      ],
-      "d": -296,
-      "fv": 1131,
-      "pv": 835,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "newest",
-      "figma": [
-       30,
-       6509,
-       51,
-       24
-      ],
-      "proto": [
-       30,
-       6042,
-       49,
-       16
-      ],
-      "d": -296,
-      "fv": 1092,
-      "pv": 796,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "oldest",
-      "figma": [
-       113,
-       6509,
-       44,
-       24
-      ],
-      "proto": [
-       111,
-       6042,
-       43,
-       16
-      ],
-      "d": -296,
-      "fv": 1092,
-      "pv": 796,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "highest rated",
-      "figma": [
-       189,
-       6509,
-       90,
-       24
-      ],
-      "proto": [
-       186,
-       6042,
-       88,
-       16
-      ],
-      "d": -3,
-      "fv": 189,
-      "pv": 186,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "highest rated",
-      "figma": [
-       189,
-       6509,
-       90,
-       24
-      ],
-      "proto": [
-       186,
-       6042,
-       88,
-       16
-      ],
-      "d": -296,
-      "fv": 1092,
-      "pv": 796,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "verified",
-      "figma": [
-       140,
-       6611,
-       45,
-       20
-      ],
-      "proto": [
-       139,
-       6145,
-       44,
-       14
-      ],
-      "d": -294,
-      "fv": 1192,
-      "pv": 898,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "verified",
-      "figma": [
-       140,
-       6912,
-       45,
-       20
-      ],
-      "proto": [
-       139,
-       6446,
-       44,
-       14
-      ],
-      "d": -294,
-      "fv": 1493,
-      "pv": 1199,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "a question about linking",
-      "figma": [
-       14,
-       6649,
-       213,
-       24
-      ],
-      "proto": [
-       14,
-       6182,
-       185,
-       19
-      ],
-      "d": -294,
-      "fv": 1232,
-      "pv": 938,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "read more",
-      "figma": [
-       14,
-       6741,
-       66,
-       18
-      ],
-      "proto": [
-       14,
-       6273,
-       64,
-       15
-      ],
-      "d": -295,
-      "fv": 1321,
-      "pv": 1026,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "read more",
-      "figma": [
-       14,
-       7042,
-       66,
-       18
-      ],
-      "proto": [
-       14,
-       6574,
-       64,
-       15
-      ],
-      "d": -294,
-      "fv": 1622,
-      "pv": 1328,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "helpful",
-      "figma": [
-       14,
-       6815,
-       50,
-       18
-      ],
-      "proto": [
-       14,
-       6347,
-       48,
-       15
-      ],
-      "d": -295,
-      "fv": 1395,
-      "pv": 1100,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "helpful",
-      "figma": [
-       14,
-       7116,
-       50,
-       18
-      ],
-      "proto": [
-       14,
-       6648,
-       48,
-       15
-      ],
-      "d": -294,
-      "fv": 1696,
-      "pv": 1402,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "yes #",
-      "figma": [
-       99,
-       6815,
-       38,
-       18
-      ],
-      "proto": [
-       97,
-       6347,
-       41,
-       16
-      ],
-      "d": -294,
-      "fv": 1395,
-      "pv": 1101,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "yes #",
-      "figma": [
-       99,
-       7116,
-       38,
-       18
-      ],
-      "proto": [
-       97,
-       6648,
-       41,
-       16
-      ],
-      "d": -294,
-      "fv": 1696,
-      "pv": 1402,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "translated from korean",
-      "figma": [
-       14,
-       6845,
-       138,
-       20
-      ],
-      "proto": [
-       14,
-       6379,
-       138,
-       14
-      ],
-      "d": -294,
-      "fv": 1426,
-      "pv": 1132,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "show original",
-      "figma": [
-       156,
-       6845,
-       78,
-       20
-      ],
-      "proto": [
-       156,
-       6379,
-       78,
-       14
-      ],
-      "d": -294,
-      "fv": 1426,
-      "pv": 1132,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "몇 군데 비교하고 여기로 정했어요",
-      "figma": [
-       14,
-       6950,
-       213,
-       24
-      ],
-      "proto": [
-       14,
-       6483,
-       212,
-       19
-      ],
-      "d": -295,
-      "fv": 1533,
-      "pv": 1238,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
-       375,
-       1519
-      ],
-      "rule": "EX-A38"
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "show translation",
-      "figma": [
-       14,
-       7146,
-       98,
-       20
-      ],
-      "proto": [
-       14,
-       6680,
-       98,
-       14
-      ],
-      "d": -294,
-      "fv": 1727,
-      "pv": 1433,
-      "card": [
-       0,
-       5429,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5254,
+       5245,
        375,
        1519
       ],
@@ -38002,7 +36190,7 @@
        849,
        248,
        359,
-       160
+       140
       ]
      },
      {
@@ -38033,38 +36221,7 @@
        849,
        248,
        359,
-       160
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "without %",
-      "figma": [
-       893,
-       286,
-       129,
-       20
-      ],
-      "proto": [
-       892,
-       312,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 70,
-      "pv": 82,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       248,
-       359,
-       160
+       140
       ]
      },
      {
@@ -38078,13 +36235,13 @@
       ],
       "proto": [
        894,
-       377,
+       357,
        102,
        16
       ],
-      "d": 23,
+      "d": 3,
       "fv": 114,
-      "pv": 137,
+      "pv": 117,
       "card": [
        849,
        226,
@@ -38095,7 +36252,7 @@
        849,
        248,
        359,
-       160
+       140
       ]
      },
      {
@@ -38162,68 +36319,6 @@
      },
      {
       "type": "요소 간격",
-      "label": "final maker → without %",
-      "figma": [
-       893,
-       286,
-       129,
-       20
-      ],
-      "proto": [
-       892,
-       312,
-       71,
-       36
-      ],
-      "d": 9,
-      "fv": 48,
-      "pv": 57,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       248,
-       359,
-       160
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "without % → after cashback",
-      "figma": [
-       893,
-       330,
-       103,
-       20
-      ],
-      "proto": [
-       894,
-       377,
-       102,
-       16
-      ],
-      "d": 11,
-      "fv": 44,
-      "pv": 55,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       248,
-       359,
-       160
-      ]
-     },
-     {
-      "type": "요소 간격",
       "label": "$# cashback returned to you → your selected $#k volume on a premium account generates an estimated $# in taker fees",
       "figma": [
        224,
@@ -38283,37 +36378,6 @@
        1056,
        860
       ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "# reviews → 연동고민중",
-      "figma": [
-       256,
-       4640,
-       62,
-       20
-      ],
-      "proto": [
-       257,
-       4552,
-       61,
-       16
-      ],
-      "d": -3,
-      "fv": 103,
-      "pv": 100,
-      "card": [
-       192,
-       3766,
-       1056,
-       1404
-      ],
-      "pcard": [
-       192,
-       3912,
-       1056,
-       1171
-      ]
      }
     ],
     "pairs": 127,
@@ -38335,9 +36399,9 @@
        849,
        248,
        359,
-       160
+       140
       ],
-      "d": 24,
+      "d": 4,
       "card": [
        849,
        226,
@@ -38348,7 +36412,7 @@
        849,
        248,
        359,
-       160
+       140
       ],
       "rule": "EX-A41"
      },
@@ -38585,13 +36649,13 @@
       ],
       "proto": [
        257,
-       4552,
+       4553,
        61,
        16
       ],
-      "d": -236,
+      "d": -235,
       "fv": 884,
-      "pv": 648,
+      "pv": 649,
       "card": [
        192,
        3766,
@@ -38617,13 +36681,13 @@
       ],
       "proto": [
        342,
-       4553,
+       4554,
        44,
        14
       ],
-      "d": -236,
+      "d": -235,
       "fv": 884,
-      "pv": 648,
+      "pv": 649,
       "card": [
        192,
        3766,
@@ -38649,13 +36713,13 @@
       ],
       "proto": [
        342,
-       4808,
+       4809,
        44,
        14
       ],
-      "d": -235,
+      "d": -234,
       "fv": 1138,
-      "pv": 903,
+      "pv": 904,
       "card": [
        192,
        3766,
@@ -38681,7 +36745,7 @@
       ],
       "proto": [
        217,
-       4586,
+       4587,
        185,
        19
       ],
@@ -38713,13 +36777,13 @@
       ],
       "proto": [
        217,
-       4618,
+       4619,
        890,
        16
       ],
-      "d": -236,
+      "d": -235,
       "fv": 950,
-      "pv": 714,
+      "pv": 715,
       "card": [
        192,
        3766,
@@ -38745,13 +36809,13 @@
       ],
       "proto": [
        217,
-       4647,
+       4648,
        64,
        15
       ],
-      "d": -235,
+      "d": -233,
       "fv": 977,
-      "pv": 742,
+      "pv": 744,
       "card": [
        192,
        3766,
@@ -38777,7 +36841,7 @@
       ],
       "proto": [
        217,
-       4902,
+       4903,
        64,
        15
       ],
@@ -38809,13 +36873,13 @@
       ],
       "proto": [
        217,
-       4714,
+       4715,
        53,
        16
       ],
-      "d": -234,
+      "d": -233,
       "fv": 1044,
-      "pv": 810,
+      "pv": 811,
       "card": [
        192,
        3766,
@@ -38841,13 +36905,13 @@
       ],
       "proto": [
        217,
-       4969,
+       4970,
        53,
        16
       ],
-      "d": -233,
+      "d": -232,
       "fv": 1298,
-      "pv": 1065,
+      "pv": 1066,
       "card": [
        192,
        3766,
@@ -38873,13 +36937,13 @@
       ],
       "proto": [
        305,
-       4714,
+       4715,
        41,
        16
       ],
-      "d": -234,
+      "d": -233,
       "fv": 1044,
-      "pv": 810,
+      "pv": 811,
       "card": [
        192,
        3766,
@@ -38905,13 +36969,13 @@
       ],
       "proto": [
        305,
-       4969,
+       4970,
        41,
        16
       ],
-      "d": -233,
+      "d": -232,
       "fv": 1298,
-      "pv": 1065,
+      "pv": 1066,
       "card": [
        192,
        3766,
@@ -38937,13 +37001,13 @@
       ],
       "proto": [
        999,
-       4714,
+       4715,
        138,
        14
       ],
-      "d": -235,
+      "d": -234,
       "fv": 1044,
-      "pv": 809,
+      "pv": 810,
       "card": [
        192,
        3766,
@@ -38969,13 +37033,13 @@
       ],
       "proto": [
        1145,
-       4714,
+       4715,
        78,
        14
       ],
-      "d": -235,
+      "d": -234,
       "fv": 1044,
-      "pv": 809,
+      "pv": 810,
       "card": [
        192,
        3766,
@@ -39001,13 +37065,13 @@
       ],
       "proto": [
        257,
-       4807,
+       4808,
        61,
        16
       ],
-      "d": -235,
+      "d": -234,
       "fv": 1138,
-      "pv": 903,
+      "pv": 904,
       "card": [
        192,
        3766,
@@ -39033,13 +37097,13 @@
       ],
       "proto": [
        217,
-       4841,
+       4842,
        212,
        19
       ],
-      "d": -236,
+      "d": -234,
       "fv": 1174,
-      "pv": 938,
+      "pv": 940,
       "card": [
        192,
        3766,
@@ -39065,13 +37129,13 @@
       ],
       "proto": [
        1125,
-       4969,
+       4970,
        98,
        14
       ],
-      "d": -234,
+      "d": -233,
       "fv": 1298,
-      "pv": 1064,
+      "pv": 1065,
       "card": [
        192,
        3766,
@@ -39097,13 +37161,13 @@
       ],
       "proto": [
        849,
-       420,
+       400,
        359,
        42
       ],
-      "d": 24,
+      "d": 4,
       "fv": 290,
-      "pv": 314,
+      "pv": 294,
       "card": [
        192,
        84,
@@ -39240,35 +37304,6 @@
     "issues": [
      {
       "type": "카드 높이",
-      "label": "fee stage",
-      "figma": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "proto": [
-       33,
-       760,
-       310,
-       180
-      ],
-      "d": -52,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       760,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "카드 높이",
       "label": "how much you get back",
       "figma": [
        16,
@@ -39278,11 +37313,11 @@
       ],
       "proto": [
        16,
-       1921,
+       1973,
        343,
-       1284
+       1275
       ],
-      "d": -11,
+      "d": -20,
       "card": [
        16,
        1893,
@@ -39291,9 +37326,9 @@
       ],
       "pcard": [
        16,
-       1921,
+       1973,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -39307,7 +37342,7 @@
       ],
       "proto": [
        32,
-       2450,
+       2493,
        311,
        229
       ],
@@ -39320,7 +37355,7 @@
       ],
       "pcard": [
        32,
-       2450,
+       2493,
        311,
        229
       ]
@@ -39336,7 +37371,7 @@
       ],
       "proto": [
        32,
-       2687,
+       2730,
        311,
        209
       ],
@@ -39349,7 +37384,7 @@
       ],
       "pcard": [
        32,
-       2687,
+       2730,
        311,
        209
       ]
@@ -39365,7 +37400,7 @@
       ],
       "proto": [
        32,
-       2904,
+       2947,
        311,
        209
       ],
@@ -39378,67 +37413,9 @@
       ],
       "pcard": [
        32,
-       2904,
+       2947,
        311,
        209
-      ]
-     },
-     {
-      "type": "카드 폭",
-      "label": "create a web# wallet",
-      "figma": [
-       16,
-       3340,
-       320,
-       56
-      ],
-      "proto": [
-       16,
-       3337,
-       343,
-       56
-      ],
-      "d": 23,
-      "card": [
-       16,
-       3340,
-       320,
-       56
-      ],
-      "pcard": [
-       16,
-       3337,
-       343,
-       56
-      ]
-     },
-     {
-      "type": "카드 높이",
-      "label": "% global reviews",
-      "figma": [
-       0,
-       5693,
-       375,
-       1815
-      ],
-      "proto": [
-       0,
-       5562,
-       375,
-       1519
-      ],
-      "d": -296,
-      "card": [
-       0,
-       5693,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5562,
-       375,
-       1519
       ]
      },
      {
@@ -39452,7 +37429,7 @@
       ],
       "proto": [
        153,
-       153,
+       154,
        25,
        15
       ],
@@ -39527,240 +37504,23 @@
       "d": -114
      },
      {
-      "type": "안쪽 왼쪽 여백",
-      "label": "fee stage",
-      "figma": [
-       148,
-       816,
-       80,
-       24
-      ],
-      "proto": [
-       50,
-       775,
-       75,
-       19
-      ],
-      "d": -98,
-      "fv": 115,
-      "pv": 17,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       760,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "without %",
-      "figma": [
-       138,
-       864,
-       129,
-       20
-      ],
-      "proto": [
-       70,
-       824,
-       71,
-       36
-      ],
-      "d": -68,
-      "fv": 105,
-      "pv": 37,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       760,
-       310,
-       180
-      ]
-     },
-     {
       "type": "안쪽 세로 위치(중심)",
-      "label": "without %",
+      "label": "with %",
       "figma": [
-       138,
-       864,
-       129,
+       32,
+       2183,
+       184,
        20
       ],
       "proto": [
-       70,
-       824,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 70,
-      "pv": 82,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       760,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       889,
-       64,
-       36
-      ],
-      "d": -79,
-      "fv": 118,
-      "pv": 39,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       760,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       889,
-       64,
-       36
-      ],
-      "d": -15,
-      "fv": 162,
-      "pv": 147,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       760,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1975,
-       102,
-       16
-      ],
-      "d": -4,
-      "fv": 40,
-      "pv": 36,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1975,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 70,
-      "pv": 62,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "taker",
-      "figma": [
-       95,
-       1983,
-       34,
-       20
-      ],
-      "proto": [
+       32,
+       2262,
        93,
-       2009,
-       37,
-       16
+       14
       ],
       "d": -4,
-      "fv": 100,
-      "pv": 96,
+      "fv": 300,
+      "pv": 296,
       "card": [
        16,
        1893,
@@ -39769,102 +37529,9 @@
       ],
       "pcard": [
        16,
-       1921,
+       1973,
        343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "maker",
-      "figma": [
-       244,
-       1983,
-       39,
-       20
-      ],
-      "proto": [
-       243,
-       2009,
-       41,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "trading fee",
-      "figma": [
-       32,
-       2041,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       2075,
-       75,
-       16
-      ],
-      "d": 4,
-      "fv": 158,
-      "pv": 162,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "cashback",
-      "figma": [
-       32,
-       2095,
-       234,
-       20
-      ],
-      "proto": [
-       32,
-       2129,
-       65,
-       16
-      ],
-      "d": 4,
-      "fv": 212,
-      "pv": 216,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
+       1275
       ]
      },
      {
@@ -39878,13 +37545,13 @@
       ],
       "proto": [
        32,
-       2257,
+       2300,
        83,
        16
       ],
-      "d": 5,
+      "d": -4,
       "fv": 339,
-      "pv": 344,
+      "pv": 335,
       "card": [
        16,
        1893,
@@ -39893,9 +37560,9 @@
       ],
       "pcard": [
        16,
-       1921,
+       1973,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -39909,13 +37576,13 @@
       ],
       "proto": [
        32,
-       2374,
+       2417,
        278,
        56
       ],
-      "d": 6,
+      "d": -3,
       "fv": 475,
-      "pv": 481,
+      "pv": 472,
       "card": [
        16,
        1893,
@@ -39924,9 +37591,9 @@
       ],
       "pcard": [
        16,
-       1921,
+       1973,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -39940,13 +37607,13 @@
       ],
       "proto": [
        56,
-       3131,
+       3174,
        280,
        56
       ],
-      "d": 5,
+      "d": -4,
       "fv": 1233,
-      "pv": 1238,
+      "pv": 1229,
       "card": [
        16,
        1893,
@@ -39955,61 +37622,10 @@
       ],
       "pcard": [
        16,
-       1921,
+       1973,
        343,
-       1284
+       1275
       ]
-     },
-     {
-      "type": "가로 위치",
-      "label": "create a web# wallet",
-      "figma": [
-       32,
-       4236,
-       311,
-       32
-      ],
-      "proto": [
-       16,
-       4238,
-       247,
-       29
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "step # of #",
-      "figma": [
-       41,
-       4199,
-       65,
-       18
-      ],
-      "proto": [
-       25,
-       4201,
-       63,
-       15
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "install a self-custody wallet, or sign up on % with email to get a wallet made for you. keep your #-word recovery phrase private. % never asks for a private key, recovery phrase or wallet signature",
-      "figma": [
-       32,
-       4284,
-       311,
-       100
-      ],
-      "proto": [
-       16,
-       4287,
-       332,
-       96
-      ],
-      "d": -16
      },
      {
       "type": "안쪽 왼쪽 여백",
@@ -40022,7 +37638,7 @@
       ],
       "proto": [
        211,
-       6294,
+       6338,
        27,
        15
       ],
@@ -40037,10 +37653,79 @@
       ],
       "pcard": [
        14,
-       6282,
+       6326,
        347,
        40
       ]
+     }
+    ],
+    "pairs": 123,
+    "cards": 14,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "% global reviews",
+      "figma": [
+       0,
+       5693,
+       375,
+       1815
+      ],
+      "proto": [
+       0,
+       5605,
+       375,
+       1519
+      ],
+      "d": -296,
+      "card": [
+       0,
+       5693,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5605,
+       375,
+       1519
+      ],
+      "rule": "EX-A39"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "# reviews",
+      "figma": [
+       14,
+       6814,
+       347,
+       20
+      ],
+      "proto": [
+       152,
+       6432,
+       71,
+       16
+      ],
+      "d": -296,
+      "fv": 1131,
+      "pv": 835,
+      "card": [
+       0,
+       5693,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5605,
+       375,
+       1519
+      ],
+      "rule": "EX-A39"
      },
      {
       "type": "안쪽 왼쪽 여백",
@@ -40053,7 +37738,7 @@
       ],
       "proto": [
        262,
-       6294,
+       6338,
        65,
        15
       ],
@@ -40068,10 +37753,11 @@
       ],
       "pcard": [
        14,
-       6282,
+       6326,
        347,
        40
-      ]
+      ],
+      "rule": "EX-A39"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -40084,13 +37770,13 @@
       ],
       "proto": [
        97,
-       6617,
+       6661,
        65,
        15
       ],
-      "d": -296,
+      "d": -294,
       "fv": 1358,
-      "pv": 1062,
+      "pv": 1064,
       "card": [
        0,
        5693,
@@ -40099,10 +37785,11 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
-      ]
+      ],
+      "rule": "EX-A39"
      },
      {
       "type": "안쪽 세로 위치(중심)",
@@ -40115,7 +37802,7 @@
       ],
       "proto": [
        97,
-       6918,
+       6962,
        65,
        15
       ],
@@ -40130,262 +37817,7 @@
       ],
       "pcard": [
        0,
-       5562,
-       375,
-       1519
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "fee stage → without %",
-      "figma": [
-       138,
-       864,
-       129,
-       20
-      ],
-      "proto": [
-       70,
-       824,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 46,
-      "pv": 58,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       760,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "without % → after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       889,
-       64,
-       36
-      ],
-      "d": -27,
-      "fv": 92,
-      "pv": 65,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       760,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how much you get back → how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1975,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 38,
-      "pv": 30,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how this works → taker",
-      "figma": [
-       95,
-       1983,
-       34,
-       20
-      ],
-      "proto": [
-       93,
-       2009,
-       37,
-       16
-      ],
-      "d": 4,
-      "fv": 30,
-      "pv": 34,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "maker → trading fee",
-      "figma": [
-       32,
-       2041,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       2075,
-       75,
-       16
-      ],
-      "d": 8,
-      "fv": 58,
-      "pv": 66,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "with % → total volume",
-      "figma": [
-       32,
-       2222,
-       84,
-       20
-      ],
-      "proto": [
-       32,
-       2257,
-       83,
-       16
-      ],
-      "d": 6,
-      "fv": 39,
-      "pv": 45,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1921,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "from real reviews, summarised by ai. wording § differ from individual reviews → newest",
-      "figma": [
-       30,
-       6773,
-       51,
-       24
-      ],
-      "proto": [
-       30,
-       6349,
-       49,
-       16
-      ],
-      "d": -296,
-      "fv": 423,
-      "pv": 127,
-      "card": [
-       0,
-       5693,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5562,
-       375,
-       1519
-      ]
-     }
-    ],
-    "pairs": 119,
-    "cards": 14,
-    "fw": 375,
-    "pw": 375,
-    "scope": false,
-    "excepted": [
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "# reviews",
-      "figma": [
-       14,
-       6814,
-       347,
-       20
-      ],
-      "proto": [
-       152,
-       6388,
-       71,
-       16
-      ],
-      "d": -297,
-      "fv": 1131,
-      "pv": 834,
-      "card": [
-       0,
-       5693,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40402,13 +37834,13 @@
       ],
       "proto": [
        30,
-       6349,
+       6393,
        49,
        16
       ],
-      "d": -297,
+      "d": -296,
       "fv": 1092,
-      "pv": 795,
+      "pv": 796,
       "card": [
        0,
        5693,
@@ -40417,7 +37849,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40434,13 +37866,13 @@
       ],
       "proto": [
        111,
-       6349,
+       6393,
        43,
        16
       ],
-      "d": -297,
+      "d": -296,
       "fv": 1092,
-      "pv": 795,
+      "pv": 796,
       "card": [
        0,
        5693,
@@ -40449,7 +37881,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40466,7 +37898,7 @@
       ],
       "proto": [
        186,
-       6349,
+       6393,
        88,
        16
       ],
@@ -40481,7 +37913,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40498,13 +37930,13 @@
       ],
       "proto": [
        186,
-       6349,
+       6393,
        88,
        16
       ],
-      "d": -297,
+      "d": -296,
       "fv": 1092,
-      "pv": 795,
+      "pv": 796,
       "card": [
        0,
        5693,
@@ -40513,7 +37945,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40530,13 +37962,13 @@
       ],
       "proto": [
        139,
-       6452,
+       6496,
        44,
        14
       ],
-      "d": -295,
+      "d": -294,
       "fv": 1192,
-      "pv": 897,
+      "pv": 898,
       "card": [
        0,
        5693,
@@ -40545,7 +37977,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40562,13 +37994,13 @@
       ],
       "proto": [
        139,
-       6753,
+       6797,
        44,
        14
       ],
-      "d": -295,
+      "d": -294,
       "fv": 1493,
-      "pv": 1198,
+      "pv": 1199,
       "card": [
        0,
        5693,
@@ -40577,7 +38009,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40594,13 +38026,13 @@
       ],
       "proto": [
        14,
-       6489,
+       6533,
        185,
        19
       ],
-      "d": -296,
+      "d": -294,
       "fv": 1232,
-      "pv": 936,
+      "pv": 938,
       "card": [
        0,
        5693,
@@ -40609,7 +38041,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40626,7 +38058,7 @@
       ],
       "proto": [
        14,
-       6580,
+       6624,
        64,
        15
       ],
@@ -40641,7 +38073,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40658,13 +38090,13 @@
       ],
       "proto": [
        14,
-       6881,
+       6925,
        64,
        15
       ],
-      "d": -296,
+      "d": -294,
       "fv": 1622,
-      "pv": 1326,
+      "pv": 1328,
       "card": [
        0,
        5693,
@@ -40673,7 +38105,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40690,7 +38122,7 @@
       ],
       "proto": [
        14,
-       6654,
+       6698,
        48,
        15
       ],
@@ -40705,7 +38137,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40722,13 +38154,13 @@
       ],
       "proto": [
        14,
-       6955,
+       6999,
        48,
        15
       ],
-      "d": -296,
+      "d": -294,
       "fv": 1696,
-      "pv": 1400,
+      "pv": 1402,
       "card": [
        0,
        5693,
@@ -40737,7 +38169,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40754,13 +38186,13 @@
       ],
       "proto": [
        97,
-       6654,
+       6698,
        41,
        16
       ],
-      "d": -295,
+      "d": -294,
       "fv": 1395,
-      "pv": 1100,
+      "pv": 1101,
       "card": [
        0,
        5693,
@@ -40769,7 +38201,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40786,13 +38218,13 @@
       ],
       "proto": [
        97,
-       6955,
+       6999,
        41,
        16
       ],
-      "d": -295,
+      "d": -294,
       "fv": 1696,
-      "pv": 1401,
+      "pv": 1402,
       "card": [
        0,
        5693,
@@ -40801,7 +38233,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40818,13 +38250,13 @@
       ],
       "proto": [
        14,
-       6686,
+       6730,
        138,
        14
       ],
-      "d": -295,
+      "d": -294,
       "fv": 1426,
-      "pv": 1131,
+      "pv": 1132,
       "card": [
        0,
        5693,
@@ -40833,7 +38265,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40850,13 +38282,13 @@
       ],
       "proto": [
        156,
-       6686,
+       6730,
        78,
        14
       ],
-      "d": -295,
+      "d": -294,
       "fv": 1426,
-      "pv": 1131,
+      "pv": 1132,
       "card": [
        0,
        5693,
@@ -40865,7 +38297,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40882,7 +38314,7 @@
       ],
       "proto": [
        14,
-       6790,
+       6834,
        212,
        19
       ],
@@ -40897,7 +38329,7 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
        375,
        1519
       ],
@@ -40914,13 +38346,13 @@
       ],
       "proto": [
        14,
-       6987,
+       7031,
        98,
        14
       ],
-      "d": -295,
+      "d": -294,
       "fv": 1727,
-      "pv": 1432,
+      "pv": 1433,
       "card": [
        0,
        5693,
@@ -40929,7 +38361,39 @@
       ],
       "pcard": [
        0,
-       5562,
+       5605,
+       375,
+       1519
+      ],
+      "rule": "EX-A39"
+     },
+     {
+      "type": "요소 간격",
+      "label": "from real reviews, summarised by ai. wording § differ from individual reviews → newest",
+      "figma": [
+       30,
+       6773,
+       51,
+       24
+      ],
+      "proto": [
+       30,
+       6393,
+       49,
+       16
+      ],
+      "d": -296,
+      "fv": 423,
+      "pv": 127,
+      "card": [
+       0,
+       5693,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5605,
        375,
        1519
       ],
@@ -41293,7 +38757,7 @@
        849,
        242,
        359,
-       160
+       140
       ]
      },
      {
@@ -41324,38 +38788,7 @@
        849,
        242,
        359,
-       160
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "without %",
-      "figma": [
-       893,
-       286,
-       129,
-       20
-      ],
-      "proto": [
-       892,
-       306,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 70,
-      "pv": 82,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       242,
-       359,
-       160
+       140
       ]
      },
      {
@@ -41369,13 +38802,13 @@
       ],
       "proto": [
        894,
-       371,
+       351,
        102,
        16
       ],
-      "d": 23,
+      "d": 3,
       "fv": 114,
-      "pv": 137,
+      "pv": 117,
       "card": [
        849,
        226,
@@ -41386,7 +38819,7 @@
        849,
        242,
        359,
-       160
+       140
       ]
      },
      {
@@ -41449,68 +38882,6 @@
        1251,
        1056,
        860
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "final maker → without %",
-      "figma": [
-       893,
-       286,
-       129,
-       20
-      ],
-      "proto": [
-       892,
-       306,
-       71,
-       36
-      ],
-      "d": 9,
-      "fv": 48,
-      "pv": 57,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       242,
-       359,
-       160
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "without % → after cashback",
-      "figma": [
-       893,
-       330,
-       103,
-       20
-      ],
-      "proto": [
-       894,
-       371,
-       102,
-       16
-      ],
-      "d": 11,
-      "fv": 44,
-      "pv": 55,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       242,
-       359,
-       160
       ]
      },
      {
@@ -41595,9 +38966,9 @@
        849,
        242,
        359,
-       160
+       140
       ],
-      "d": 24,
+      "d": 4,
       "card": [
        849,
        226,
@@ -41608,7 +38979,7 @@
        849,
        242,
        359,
-       160
+       140
       ],
       "rule": "EX-A41"
      },
@@ -42357,13 +39728,13 @@
       ],
       "proto": [
        849,
-       414,
+       394,
        359,
        42
       ],
-      "d": 24,
+      "d": 4,
       "fv": 290,
-      "pv": 314,
+      "pv": 294,
       "card": [
        192,
        84,
@@ -42504,35 +39875,6 @@
     "issues": [
      {
       "type": "카드 높이",
-      "label": "fee stage",
-      "figma": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "proto": [
-       33,
-       754,
-       310,
-       180
-      ],
-      "d": -52,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "카드 높이",
       "label": "how much you get back",
       "figma": [
        16,
@@ -42542,11 +39884,11 @@
       ],
       "proto": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ],
-      "d": -11,
+      "d": -20,
       "card": [
        16,
        1893,
@@ -42555,9 +39897,9 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -42571,7 +39913,7 @@
       ],
       "proto": [
        32,
-       2444,
+       2487,
        311,
        229
       ],
@@ -42584,7 +39926,7 @@
       ],
       "pcard": [
        32,
-       2444,
+       2487,
        311,
        229
       ]
@@ -42600,7 +39942,7 @@
       ],
       "proto": [
        32,
-       2681,
+       2724,
        311,
        209
       ],
@@ -42613,7 +39955,7 @@
       ],
       "pcard": [
        32,
-       2681,
+       2724,
        311,
        209
       ]
@@ -42629,7 +39971,7 @@
       ],
       "proto": [
        32,
-       2898,
+       2941,
        311,
        209
       ],
@@ -42642,67 +39984,9 @@
       ],
       "pcard": [
        32,
-       2898,
+       2941,
        311,
        209
-      ]
-     },
-     {
-      "type": "카드 폭",
-      "label": "join % and link your wallet",
-      "figma": [
-       16,
-       3460,
-       320,
-       56
-      ],
-      "proto": [
-       16,
-       3451,
-       343,
-       56
-      ],
-      "d": 23,
-      "card": [
-       16,
-       3460,
-       320,
-       56
-      ],
-      "pcard": [
-       16,
-       3451,
-       343,
-       56
-      ]
-     },
-     {
-      "type": "카드 높이",
-      "label": "% global reviews",
-      "figma": [
-       0,
-       5857,
-       375,
-       1815
-      ],
-      "proto": [
-       0,
-       5684,
-       375,
-       1519
-      ],
-      "d": -296,
-      "card": [
-       0,
-       5857,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5684,
-       375,
-       1519
       ]
      },
      {
@@ -42791,240 +40075,23 @@
       "d": -114
      },
      {
-      "type": "안쪽 왼쪽 여백",
-      "label": "fee stage",
-      "figma": [
-       148,
-       816,
-       80,
-       24
-      ],
-      "proto": [
-       50,
-       769,
-       75,
-       19
-      ],
-      "d": -98,
-      "fv": 115,
-      "pv": 17,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "without %",
-      "figma": [
-       138,
-       864,
-       129,
-       20
-      ],
-      "proto": [
-       70,
-       818,
-       71,
-       36
-      ],
-      "d": -68,
-      "fv": 105,
-      "pv": 37,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
       "type": "안쪽 세로 위치(중심)",
-      "label": "without %",
+      "label": "with %",
       "figma": [
-       138,
-       864,
-       129,
+       32,
+       2183,
+       184,
        20
       ],
       "proto": [
-       70,
-       818,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 70,
-      "pv": 82,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       883,
-       64,
-       36
-      ],
-      "d": -79,
-      "fv": 118,
-      "pv": 39,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       883,
-       64,
-       36
-      ],
-      "d": -15,
-      "fv": 162,
-      "pv": 147,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1969,
-       102,
-       16
-      ],
-      "d": -4,
-      "fv": 40,
-      "pv": 36,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1969,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 70,
-      "pv": 62,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "taker",
-      "figma": [
-       95,
-       1983,
-       34,
-       20
-      ],
-      "proto": [
+       32,
+       2256,
        93,
-       2003,
-       37,
-       16
+       14
       ],
       "d": -4,
-      "fv": 100,
-      "pv": 96,
+      "fv": 300,
+      "pv": 296,
       "card": [
        16,
        1893,
@@ -43033,102 +40100,9 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "maker",
-      "figma": [
-       244,
-       1983,
-       39,
-       20
-      ],
-      "proto": [
-       243,
-       2003,
-       41,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "trading fee",
-      "figma": [
-       32,
-       2041,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       2069,
-       75,
-       16
-      ],
-      "d": 4,
-      "fv": 158,
-      "pv": 162,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "cashback",
-      "figma": [
-       32,
-       2095,
-       234,
-       20
-      ],
-      "proto": [
-       32,
-       2123,
-       65,
-       16
-      ],
-      "d": 4,
-      "fv": 212,
-      "pv": 216,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
+       1275
       ]
      },
      {
@@ -43142,13 +40116,13 @@
       ],
       "proto": [
        32,
-       2251,
+       2294,
        83,
        16
       ],
-      "d": 5,
+      "d": -4,
       "fv": 339,
-      "pv": 344,
+      "pv": 335,
       "card": [
        16,
        1893,
@@ -43157,9 +40131,9 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -43173,13 +40147,13 @@
       ],
       "proto": [
        32,
-       2368,
+       2411,
        278,
        56
       ],
-      "d": 6,
+      "d": -3,
       "fv": 475,
-      "pv": 481,
+      "pv": 472,
       "card": [
        16,
        1893,
@@ -43188,9 +40162,9 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -43204,13 +40178,13 @@
       ],
       "proto": [
        56,
-       3125,
+       3168,
        280,
        56
       ],
-      "d": 5,
+      "d": -4,
       "fv": 1233,
-      "pv": 1238,
+      "pv": 1229,
       "card": [
        16,
        1893,
@@ -43219,61 +40193,10 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ]
-     },
-     {
-      "type": "가로 위치",
-      "label": "join % and link your wallet",
-      "figma": [
-       32,
-       4236,
-       311,
-       64
-      ],
-      "proto": [
-       16,
-       4232,
-       284,
-       61
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "step # of #",
-      "figma": [
-       41,
-       4199,
-       67,
-       18
-      ],
-      "proto": [
-       25,
-       4195,
-       65,
-       15
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "open % through the % link and log in. then copy your wallet address from % and paste it in %. % never asks you to connect a wallet. after you sign up, confirm the % referral code on %'s referral page. cashback applies only to plus and premium accounts. standard accounts pay no fees",
-      "figma": [
-       32,
-       4316,
-       311,
-       232
-      ],
-      "proto": [
-       16,
-       4313,
-       334,
-       136
-      ],
-      "d": -16
      },
      {
       "type": "안쪽 왼쪽 여백",
@@ -43286,7 +40209,7 @@
       ],
       "proto": [
        211,
-       6417,
+       6480,
        27,
        15
       ],
@@ -43301,328 +40224,48 @@
       ],
       "pcard": [
        14,
-       6405,
+       6468,
        347,
        40
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "#cashback",
-      "figma": [
-       269,
-       6589,
-       69,
-       18
-      ],
-      "proto": [
-       262,
-       6417,
-       65,
-       15
-      ],
-      "d": -7,
-      "fv": 255,
-      "pv": 248,
-      "card": [
-       14,
-       6578,
-       347,
-       41
-      ],
-      "pcard": [
-       14,
-       6405,
-       347,
-       40
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "#cashback",
-      "figma": [
-       98,
-       7206,
-       69,
-       18
-      ],
-      "proto": [
-       97,
-       6740,
-       65,
-       15
-      ],
-      "d": -294,
-      "fv": 1358,
-      "pv": 1064,
-      "card": [
-       0,
-       5857,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5684,
-       375,
-       1519
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "#cashback",
-      "figma": [
-       98,
-       7507,
-       69,
-       18
-      ],
-      "proto": [
-       97,
-       7041,
-       65,
-       15
-      ],
-      "d": -295,
-      "fv": 1659,
-      "pv": 1364,
-      "card": [
-       0,
-       5857,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5684,
-       375,
-       1519
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "fee stage → without %",
-      "figma": [
-       138,
-       864,
-       129,
-       20
-      ],
-      "proto": [
-       70,
-       818,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 46,
-      "pv": 58,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "without % → after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       883,
-       64,
-       36
-      ],
-      "d": -27,
-      "fv": 92,
-      "pv": 65,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how much you get back → how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1969,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 38,
-      "pv": 30,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how this works → taker",
-      "figma": [
-       95,
-       1983,
-       34,
-       20
-      ],
-      "proto": [
-       93,
-       2003,
-       37,
-       16
-      ],
-      "d": 4,
-      "fv": 30,
-      "pv": 34,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "maker → trading fee",
-      "figma": [
-       32,
-       2041,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       2069,
-       75,
-       16
-      ],
-      "d": 8,
-      "fv": 58,
-      "pv": 66,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "with % → total volume",
-      "figma": [
-       32,
-       2222,
-       84,
-       20
-      ],
-      "proto": [
-       32,
-       2251,
-       83,
-       16
-      ],
-      "d": 6,
-      "fv": 39,
-      "pv": 45,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "from real reviews, summarised by ai. wording § differ from individual reviews → newest",
-      "figma": [
-       30,
-       6937,
-       51,
-       24
-      ],
-      "proto": [
-       30,
-       6472,
-       49,
-       16
-      ],
-      "d": -296,
-      "fv": 423,
-      "pv": 127,
-      "card": [
-       0,
-       5857,
-       375,
-       1815
-      ],
-      "pcard": [
-       0,
-       5684,
-       375,
-       1519
       ]
      }
     ],
-    "pairs": 119,
+    "pairs": 123,
     "cards": 14,
     "fw": 375,
     "pw": 375,
     "scope": false,
     "excepted": [
+     {
+      "type": "카드 높이",
+      "label": "% global reviews",
+      "figma": [
+       0,
+       5857,
+       375,
+       1815
+      ],
+      "proto": [
+       0,
+       5747,
+       375,
+       1519
+      ],
+      "d": -296,
+      "card": [
+       0,
+       5857,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5747,
+       375,
+       1519
+      ],
+      "rule": "EX-A40"
+     },
      {
       "type": "안쪽 세로 위치(중심)",
       "label": "# reviews",
@@ -43634,7 +40277,7 @@
       ],
       "proto": [
        152,
-       6511,
+       6574,
        71,
        16
       ],
@@ -43649,7 +40292,103 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
+       375,
+       1519
+      ],
+      "rule": "EX-A40"
+     },
+     {
+      "type": "안쪽 왼쪽 여백",
+      "label": "#cashback",
+      "figma": [
+       269,
+       6589,
+       69,
+       18
+      ],
+      "proto": [
+       262,
+       6480,
+       65,
+       15
+      ],
+      "d": -7,
+      "fv": 255,
+      "pv": 248,
+      "card": [
+       14,
+       6578,
+       347,
+       41
+      ],
+      "pcard": [
+       14,
+       6468,
+       347,
+       40
+      ],
+      "rule": "EX-A40"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "#cashback",
+      "figma": [
+       98,
+       7206,
+       69,
+       18
+      ],
+      "proto": [
+       97,
+       6803,
+       65,
+       15
+      ],
+      "d": -294,
+      "fv": 1358,
+      "pv": 1064,
+      "card": [
+       0,
+       5857,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5747,
+       375,
+       1519
+      ],
+      "rule": "EX-A40"
+     },
+     {
+      "type": "안쪽 세로 위치(중심)",
+      "label": "#cashback",
+      "figma": [
+       98,
+       7507,
+       69,
+       18
+      ],
+      "proto": [
+       97,
+       7104,
+       65,
+       15
+      ],
+      "d": -295,
+      "fv": 1659,
+      "pv": 1364,
+      "card": [
+       0,
+       5857,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5747,
        375,
        1519
       ],
@@ -43666,7 +40405,7 @@
       ],
       "proto": [
        30,
-       6472,
+       6535,
        49,
        16
       ],
@@ -43681,7 +40420,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43698,7 +40437,7 @@
       ],
       "proto": [
        111,
-       6472,
+       6535,
        43,
        16
       ],
@@ -43713,7 +40452,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43730,7 +40469,7 @@
       ],
       "proto": [
        186,
-       6472,
+       6535,
        88,
        16
       ],
@@ -43745,7 +40484,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43762,7 +40501,7 @@
       ],
       "proto": [
        186,
-       6472,
+       6535,
        88,
        16
       ],
@@ -43777,7 +40516,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43794,7 +40533,7 @@
       ],
       "proto": [
        139,
-       6575,
+       6638,
        44,
        14
       ],
@@ -43809,7 +40548,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43826,7 +40565,7 @@
       ],
       "proto": [
        139,
-       6876,
+       6939,
        44,
        14
       ],
@@ -43841,7 +40580,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43858,7 +40597,7 @@
       ],
       "proto": [
        14,
-       6612,
+       6675,
        185,
        19
       ],
@@ -43873,7 +40612,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43890,7 +40629,7 @@
       ],
       "proto": [
        14,
-       6703,
+       6766,
        64,
        15
       ],
@@ -43905,7 +40644,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43922,7 +40661,7 @@
       ],
       "proto": [
        14,
-       7004,
+       7067,
        64,
        15
       ],
@@ -43937,7 +40676,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43954,7 +40693,7 @@
       ],
       "proto": [
        14,
-       6777,
+       6840,
        48,
        15
       ],
@@ -43969,7 +40708,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -43986,7 +40725,7 @@
       ],
       "proto": [
        14,
-       7078,
+       7141,
        48,
        15
       ],
@@ -44001,7 +40740,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -44018,7 +40757,7 @@
       ],
       "proto": [
        97,
-       6777,
+       6840,
        41,
        16
       ],
@@ -44033,7 +40772,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -44050,7 +40789,7 @@
       ],
       "proto": [
        97,
-       7078,
+       7141,
        41,
        16
       ],
@@ -44065,7 +40804,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -44082,7 +40821,7 @@
       ],
       "proto": [
        14,
-       6809,
+       6872,
        138,
        14
       ],
@@ -44097,7 +40836,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -44114,7 +40853,7 @@
       ],
       "proto": [
        156,
-       6809,
+       6872,
        78,
        14
       ],
@@ -44129,7 +40868,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -44146,7 +40885,7 @@
       ],
       "proto": [
        14,
-       6913,
+       6976,
        212,
        19
       ],
@@ -44161,7 +40900,7 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
        375,
        1519
       ],
@@ -44178,7 +40917,7 @@
       ],
       "proto": [
        14,
-       7110,
+       7173,
        98,
        14
       ],
@@ -44193,7 +40932,39 @@
       ],
       "pcard": [
        0,
-       5684,
+       5747,
+       375,
+       1519
+      ],
+      "rule": "EX-A40"
+     },
+     {
+      "type": "요소 간격",
+      "label": "from real reviews, summarised by ai. wording § differ from individual reviews → newest",
+      "figma": [
+       30,
+       6937,
+       51,
+       24
+      ],
+      "proto": [
+       30,
+       6535,
+       49,
+       16
+      ],
+      "d": -296,
+      "fv": 423,
+      "pv": 127,
+      "card": [
+       0,
+       5857,
+       375,
+       1815
+      ],
+      "pcard": [
+       0,
+       5747,
        375,
        1519
       ],
@@ -44694,7 +41465,7 @@
        849,
        242,
        359,
-       160
+       140
       ]
      },
      {
@@ -44725,38 +41496,7 @@
        849,
        242,
        359,
-       160
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "without %",
-      "figma": [
-       893,
-       286,
-       129,
-       20
-      ],
-      "proto": [
-       892,
-       306,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 70,
-      "pv": 82,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       242,
-       359,
-       160
+       140
       ]
      },
      {
@@ -44770,13 +41510,13 @@
       ],
       "proto": [
        894,
-       371,
+       351,
        102,
        16
       ],
-      "d": 23,
+      "d": 3,
       "fv": 114,
-      "pv": 137,
+      "pv": 117,
       "card": [
        849,
        226,
@@ -44787,7 +41527,7 @@
        849,
        242,
        359,
-       160
+       140
       ]
      },
      {
@@ -44850,68 +41590,6 @@
        1251,
        1056,
        860
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "final maker → without %",
-      "figma": [
-       893,
-       286,
-       129,
-       20
-      ],
-      "proto": [
-       892,
-       306,
-       71,
-       36
-      ],
-      "d": 9,
-      "fv": 48,
-      "pv": 57,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       242,
-       359,
-       160
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "without % → after cashback",
-      "figma": [
-       893,
-       330,
-       103,
-       20
-      ],
-      "proto": [
-       894,
-       371,
-       102,
-       16
-      ],
-      "d": 11,
-      "fv": 44,
-      "pv": 55,
-      "card": [
-       849,
-       226,
-       359,
-       136
-      ],
-      "pcard": [
-       849,
-       242,
-       359,
-       160
       ]
      },
      {
@@ -44996,9 +41674,9 @@
        849,
        242,
        359,
-       160
+       140
       ],
-      "d": 24,
+      "d": 4,
       "card": [
        849,
        226,
@@ -45009,7 +41687,7 @@
        849,
        242,
        359,
-       160
+       140
       ],
       "rule": "EX-A41"
      },
@@ -45024,13 +41702,13 @@
       ],
       "proto": [
        849,
-       414,
+       394,
        359,
        42
       ],
-      "d": 24,
+      "d": 4,
       "fv": 290,
-      "pv": 314,
+      "pv": 294,
       "card": [
        192,
        84,
@@ -45125,35 +41803,6 @@
     "issues": [
      {
       "type": "카드 높이",
-      "label": "fee stage",
-      "figma": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "proto": [
-       33,
-       754,
-       310,
-       180
-      ],
-      "d": -52,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "카드 높이",
       "label": "how much you get back",
       "figma": [
        16,
@@ -45163,11 +41812,11 @@
       ],
       "proto": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ],
-      "d": -11,
+      "d": -20,
       "card": [
        16,
        1893,
@@ -45176,9 +41825,9 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -45192,7 +41841,7 @@
       ],
       "proto": [
        32,
-       2444,
+       2487,
        311,
        229
       ],
@@ -45205,7 +41854,7 @@
       ],
       "pcard": [
        32,
-       2444,
+       2487,
        311,
        229
       ]
@@ -45221,7 +41870,7 @@
       ],
       "proto": [
        32,
-       2681,
+       2724,
        311,
        209
       ],
@@ -45234,7 +41883,7 @@
       ],
       "pcard": [
        32,
-       2681,
+       2724,
        311,
        209
       ]
@@ -45250,7 +41899,7 @@
       ],
       "proto": [
        32,
-       2898,
+       2941,
        311,
        209
       ],
@@ -45263,38 +41912,9 @@
       ],
       "pcard": [
        32,
-       2898,
+       2941,
        311,
        209
-      ]
-     },
-     {
-      "type": "카드 폭",
-      "label": "create a web# wallet",
-      "figma": [
-       16,
-       3340,
-       320,
-       56
-      ],
-      "proto": [
-       16,
-       3331,
-       343,
-       56
-      ],
-      "d": 23,
-      "card": [
-       16,
-       3340,
-       320,
-       56
-      ],
-      "pcard": [
-       16,
-       3331,
-       343,
-       56
       ]
      },
      {
@@ -45383,240 +42003,23 @@
       "d": -114
      },
      {
-      "type": "안쪽 왼쪽 여백",
-      "label": "fee stage",
-      "figma": [
-       148,
-       816,
-       80,
-       24
-      ],
-      "proto": [
-       50,
-       769,
-       75,
-       19
-      ],
-      "d": -98,
-      "fv": 115,
-      "pv": 17,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "without %",
-      "figma": [
-       138,
-       864,
-       129,
-       20
-      ],
-      "proto": [
-       70,
-       818,
-       71,
-       36
-      ],
-      "d": -68,
-      "fv": 105,
-      "pv": 37,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
       "type": "안쪽 세로 위치(중심)",
-      "label": "without %",
+      "label": "with %",
       "figma": [
-       138,
-       864,
-       129,
+       32,
+       2183,
+       184,
        20
       ],
       "proto": [
-       70,
-       818,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 70,
-      "pv": 82,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       883,
-       64,
-       36
-      ],
-      "d": -79,
-      "fv": 118,
-      "pv": 39,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       883,
-       64,
-       36
-      ],
-      "d": -15,
-      "fv": 162,
-      "pv": 147,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "안쪽 왼쪽 여백",
-      "label": "how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1969,
-       102,
-       16
-      ],
-      "d": -4,
-      "fv": 40,
-      "pv": 36,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1969,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 70,
-      "pv": 62,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "taker",
-      "figma": [
-       95,
-       1983,
-       34,
-       20
-      ],
-      "proto": [
+       32,
+       2256,
        93,
-       2003,
-       37,
-       16
+       14
       ],
       "d": -4,
-      "fv": 100,
-      "pv": 96,
+      "fv": 300,
+      "pv": 296,
       "card": [
        16,
        1893,
@@ -45625,102 +42028,9 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "maker",
-      "figma": [
-       244,
-       1983,
-       39,
-       20
-      ],
-      "proto": [
-       243,
-       2003,
-       41,
-       16
-      ],
-      "d": -4,
-      "fv": 100,
-      "pv": 96,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "trading fee",
-      "figma": [
-       32,
-       2041,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       2069,
-       75,
-       16
-      ],
-      "d": 4,
-      "fv": 158,
-      "pv": 162,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "안쪽 세로 위치(중심)",
-      "label": "cashback",
-      "figma": [
-       32,
-       2095,
-       234,
-       20
-      ],
-      "proto": [
-       32,
-       2123,
-       65,
-       16
-      ],
-      "d": 4,
-      "fv": 212,
-      "pv": 216,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
+       1275
       ]
      },
      {
@@ -45734,13 +42044,13 @@
       ],
       "proto": [
        32,
-       2251,
+       2294,
        83,
        16
       ],
-      "d": 5,
+      "d": -4,
       "fv": 339,
-      "pv": 344,
+      "pv": 335,
       "card": [
        16,
        1893,
@@ -45749,9 +42059,9 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -45765,13 +42075,13 @@
       ],
       "proto": [
        32,
-       2368,
+       2411,
        278,
        56
       ],
-      "d": 6,
+      "d": -3,
       "fv": 475,
-      "pv": 481,
+      "pv": 472,
       "card": [
        16,
        1893,
@@ -45780,9 +42090,9 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
+       1275
       ]
      },
      {
@@ -45796,13 +42106,13 @@
       ],
       "proto": [
        56,
-       3125,
+       3168,
        280,
        56
       ],
-      "d": 5,
+      "d": -4,
       "fv": 1233,
-      "pv": 1238,
+      "pv": 1229,
       "card": [
        16,
        1893,
@@ -45811,250 +42121,13 @@
       ],
       "pcard": [
        16,
-       1915,
+       1967,
        343,
-       1284
-      ]
-     },
-     {
-      "type": "가로 위치",
-      "label": "create a web# wallet",
-      "figma": [
-       32,
-       4236,
-       311,
-       32
-      ],
-      "proto": [
-       16,
-       4232,
-       247,
-       29
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "step # of #",
-      "figma": [
-       41,
-       4199,
-       65,
-       18
-      ],
-      "proto": [
-       25,
-       4195,
-       63,
-       15
-      ],
-      "d": -16
-     },
-     {
-      "type": "가로 위치",
-      "label": "install a self-custody wallet, or sign up on % with email to get a wallet made for you. keep your #-word recovery phrase private. % never asks for a private key, recovery phrase or wallet signature",
-      "figma": [
-       32,
-       4284,
-       311,
-       100
-      ],
-      "proto": [
-       16,
-       4281,
-       332,
-       96
-      ],
-      "d": -16
-     },
-     {
-      "type": "요소 간격",
-      "label": "fee stage → without %",
-      "figma": [
-       138,
-       864,
-       129,
-       20
-      ],
-      "proto": [
-       70,
-       818,
-       71,
-       36
-      ],
-      "d": 12,
-      "fv": 46,
-      "pv": 58,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "without % → after cashback",
-      "figma": [
-       151,
-       956,
-       103,
-       20
-      ],
-      "proto": [
-       72,
-       883,
-       64,
-       36
-      ],
-      "d": -27,
-      "fv": 92,
-      "pv": 65,
-      "card": [
-       33,
-       804,
-       310,
-       232
-      ],
-      "pcard": [
-       33,
-       754,
-       310,
-       180
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how much you get back → how this works",
-      "figma": [
-       56,
-       1953,
-       102,
-       20
-      ],
-      "proto": [
-       52,
-       1969,
-       102,
-       16
-      ],
-      "d": -8,
-      "fv": 38,
-      "pv": 30,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "how this works → taker",
-      "figma": [
-       95,
-       1983,
-       34,
-       20
-      ],
-      "proto": [
-       93,
-       2003,
-       37,
-       16
-      ],
-      "d": 4,
-      "fv": 30,
-      "pv": 34,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "maker → trading fee",
-      "figma": [
-       32,
-       2041,
-       240,
-       20
-      ],
-      "proto": [
-       32,
-       2069,
-       75,
-       16
-      ],
-      "d": 8,
-      "fv": 58,
-      "pv": 66,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
-      ]
-     },
-     {
-      "type": "요소 간격",
-      "label": "with % → total volume",
-      "figma": [
-       32,
-       2222,
-       84,
-       20
-      ],
-      "proto": [
-       32,
-       2251,
-       83,
-       16
-      ],
-      "d": 6,
-      "fv": 39,
-      "pv": 45,
-      "card": [
-       16,
-       1893,
-       343,
-       1295
-      ],
-      "pcard": [
-       16,
-       1915,
-       343,
-       1284
+       1275
       ]
      }
     ],
-    "pairs": 80,
+    "pairs": 84,
     "cards": 11,
     "fw": 375,
     "pw": 375,
@@ -48474,14 +44547,6 @@
   },
   {
    "screen": "home.main",
-   "state": "newRow",
-   "label": "새 행 맨 아래 · 0.00 USDT (S4-6)",
-   "missing_vp": "mo",
-   "has": "28960:127867",
-   "group": "home"
-  },
-  {
-   "screen": "home.main",
    "state": "multi",
    "label": "같은 DEX 지갑 3개 · Aster 하위 계정",
    "missing_vp": "pc",
@@ -48756,96 +44821,6 @@
  "geom_top": [
   {
    "i": 1,
-   "node": "29360:146954",
-   "screen": "dex.detail",
-   "state": "lighter",
-   "vp": "mo",
-   "type": "요소 간격",
-   "label": "without % → after cashback",
-   "crop": [
-    33,
-    804,
-    310,
-    232
-   ]
-  },
-  {
-   "i": 2,
-   "node": "29360:142096",
-   "screen": "dex.detail",
-   "state": "step3",
-   "vp": "mo",
-   "type": "요소 간격",
-   "label": "without % → after cashback",
-   "crop": [
-    33,
-    804,
-    310,
-    232
-   ]
-  },
-  {
-   "i": 3,
-   "node": "29369:136809",
-   "screen": "dex.detail",
-   "state": "reviewsEmpty",
-   "vp": "mo",
-   "type": "요소 간격",
-   "label": "without % → after cashback",
-   "crop": [
-    33,
-    804,
-    310,
-    232
-   ]
-  },
-  {
-   "i": 4,
-   "node": "29360:145006",
-   "screen": "dex.detail",
-   "state": "aster",
-   "vp": "mo",
-   "type": "요소 간격",
-   "label": "where your cashback comes from → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-   "crop": [
-    16,
-    1673,
-    343,
-    1295
-   ]
-  },
-  {
-   "i": 5,
-   "node": "29360:145980",
-   "screen": "dex.detail",
-   "state": "apex",
-   "vp": "mo",
-   "type": "요소 간격",
-   "label": "where your cashback comes from → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-   "crop": [
-    16,
-    1673,
-    343,
-    1295
-   ]
-  },
-  {
-   "i": 6,
-   "node": "29360:144056",
-   "screen": "dex.detail",
-   "state": "edgex",
-   "vp": "mo",
-   "type": "요소 간격",
-   "label": "where your cashback comes from → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-   "crop": [
-    16,
-    1609,
-    343,
-    1295
-   ]
-  },
-  {
-   "i": 7,
    "node": "29515:146538",
    "screen": "hub.main",
    "state": "brokers",
@@ -48860,37 +44835,7 @@
    ]
   },
   {
-   "i": 8,
-   "node": "29367:137704",
-   "screen": "dex.detail",
-   "state": "reviewsEmpty",
-   "vp": "pc",
-   "type": "요소 간격",
-   "label": "your selected $#k volume on a premium account generates an estimated $# in taker fees → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-   "crop": [
-    192,
-    1083,
-    1056,
-    840
-   ]
-  },
-  {
-   "i": 9,
-   "node": "29357:144968",
-   "screen": "dex.detail",
-   "state": "step3",
-   "vp": "pc",
-   "type": "요소 간격",
-   "label": "your selected $#k volume on a premium account generates an estimated $# in taker fees → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
-   "crop": [
-    192,
-    1083,
-    1056,
-    840
-   ]
-  },
-  {
-   "i": 10,
+   "i": 2,
    "node": "29515:140513",
    "screen": "hub.main",
    "state": "dexBelowMin",
@@ -48905,22 +44850,82 @@
    ]
   },
   {
-   "i": 11,
-   "node": "29515:144188",
-   "screen": "hub.main",
-   "state": "dexPanel",
+   "i": 3,
+   "node": "29360:146954",
+   "screen": "dex.detail",
+   "state": "lighter",
    "vp": "mo",
-   "type": "요소 간격",
-   "label": "paid to your % balance → minimum # usdt",
+   "type": "안쪽 왼쪽 여백",
+   "label": "#fee",
    "crop": [
-    16,
-    522,
-    343,
-    644
+    14,
+    6414,
+    347,
+    41
    ]
   },
   {
-   "i": 12,
+   "i": 4,
+   "node": "29360:142096",
+   "screen": "dex.detail",
+   "state": "step3",
+   "vp": "mo",
+   "type": "안쪽 왼쪽 여백",
+   "label": "#fee",
+   "crop": [
+    14,
+    6578,
+    347,
+    41
+   ]
+  },
+  {
+   "i": 5,
+   "node": "29369:136809",
+   "screen": "dex.detail",
+   "state": "reviewsEmpty",
+   "vp": "mo",
+   "type": "카드 높이",
+   "label": "how much you get back",
+   "crop": [
+    16,
+    1893,
+    343,
+    1295
+   ]
+  },
+  {
+   "i": 6,
+   "node": "29367:137704",
+   "screen": "dex.detail",
+   "state": "reviewsEmpty",
+   "vp": "pc",
+   "type": "요소 간격",
+   "label": "your selected $#k volume on a premium account generates an estimated $# in taker fees → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
+   "crop": [
+    192,
+    1083,
+    1056,
+    840
+   ]
+  },
+  {
+   "i": 7,
+   "node": "29357:144968",
+   "screen": "dex.detail",
+   "state": "step3",
+   "vp": "pc",
+   "type": "요소 간격",
+   "label": "your selected $#k volume on a premium account generates an estimated $# in taker fees → cashback comes from eligible exchange partner settlements. final amounts vary by exchange, tier and trading activity",
+   "crop": [
+    192,
+    1083,
+    1056,
+    840
+   ]
+  },
+  {
+   "i": 8,
    "node": "29357:143619",
    "screen": "dex.detail",
    "state": "lighter",
@@ -48932,6 +44937,66 @@
     1083,
     1056,
     840
+   ]
+  },
+  {
+   "i": 9,
+   "node": "29515:142500",
+   "screen": "hub.main",
+   "state": "dexError",
+   "vp": "mo",
+   "type": "요소 간격",
+   "label": "cashback could not load → we could not load your cashback. please try again",
+   "crop": [
+    16,
+    522,
+    343,
+    408
+   ]
+  },
+  {
+   "i": 10,
+   "node": "29360:145006",
+   "screen": "dex.detail",
+   "state": "aster",
+   "vp": "mo",
+   "type": "안쪽 왼쪽 여백",
+   "label": "#fee",
+   "crop": [
+    14,
+    6130,
+    347,
+    41
+   ]
+  },
+  {
+   "i": 11,
+   "node": "29360:145980",
+   "screen": "dex.detail",
+   "state": "apex",
+   "vp": "mo",
+   "type": "안쪽 왼쪽 여백",
+   "label": "#fee",
+   "crop": [
+    14,
+    6130,
+    347,
+    41
+   ]
+  },
+  {
+   "i": 12,
+   "node": "28969:129666",
+   "screen": "dex.detail",
+   "state": "unlinked",
+   "vp": "pc",
+   "type": "요소 간격",
+   "label": "final taker → after cashback",
+   "crop": [
+    849,
+    226,
+    359,
+    136
    ]
   }
  ]

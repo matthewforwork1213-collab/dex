@@ -1,6 +1,6 @@
 {
  "source": "use_figma",
- "fetched": "2026-11-27T22:21",
+ "fetched": "2026-11-27T22:33",
  "nodes": {
   "22442:219830": {
    "name": "MAX1216 / detail / S6 Empty — 0 reviews / light",
@@ -38040,12 +38040,36 @@
   "29367:138679": {
    "name": "DEX / detail / D3 FAQ, reviews and terms / light · FAQ two sections open",
    "w": 1440,
-   "h": 5649,
+   "h": 5672,
    "hidden": false,
    "overlay": false,
    "texts": [
     {
+     "t": "Cashback",
+     "kind": "shell"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "shell"
+    },
+    {
+     "t": "Discover",
+     "kind": "shell"
+    },
+    {
+     "t": "Login",
+     "kind": "shell"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "shell"
+    },
+    {
      "t": "Decentralised Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "/",
      "kind": "text"
     },
     {
@@ -38129,6 +38153,10 @@
      "kind": "text"
     },
     {
+     "t": "20%",
+     "kind": "text"
+    },
+    {
      "t": "Premium",
      "kind": "button"
     },
@@ -38149,7 +38177,23 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "text"
+    },
+    {
      "t": "Without TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "0.0280%",
+     "kind": "text"
+    },
+    {
+     "t": "0.0040%",
+     "kind": "text"
+    },
+    {
+     "t": "2",
      "kind": "text"
     },
     {
@@ -38157,8 +38201,40 @@
      "kind": "text"
     },
     {
+     "t": "0.0224%",
+     "kind": "text"
+    },
+    {
+     "t": "0.0032%",
+     "kind": "text"
+    },
+    {
      "t": "Get Started",
      "kind": "button"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "text"
+    },
+    {
+     "t": "Key Features",
+     "kind": "shell"
+    },
+    {
+     "t": "Structure",
+     "kind": "shell"
+    },
+    {
+     "t": "Guide",
+     "kind": "shell"
+    },
+    {
+     "t": "Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Reviews (23)",
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Lighter",
@@ -38197,6 +38273,10 @@
      "kind": "button"
     },
     {
+     "t": "$112.00",
+     "kind": "text"
+    },
+    {
      "t": "Trading fee",
      "kind": "text"
     },
@@ -38209,11 +38289,23 @@
      "kind": "text"
     },
     {
+     "t": "$22.40",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
      "t": "Returned to you",
      "kind": "text"
     },
     {
      "t": "=",
+     "kind": "text"
+    },
+    {
+     "t": "$89.60",
      "kind": "text"
     },
     {
@@ -38289,6 +38381,10 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "shell"
+    },
+    {
      "t": "You trade on Lighter",
      "kind": "text"
     },
@@ -38297,12 +38393,20 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "shell"
+    },
+    {
      "t": "Lighter pays a settlement",
      "kind": "text"
     },
     {
      "t": "Eligible trading activity generates a settlement for the referring partner.",
      "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -38321,7 +38425,15 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "text"
+    },
+    {
      "t": "Create a Web3 wallet",
+     "kind": "text"
+    },
+    {
+     "t": "2",
      "kind": "text"
     },
     {
@@ -38329,11 +38441,23 @@
      "kind": "text"
     },
     {
+     "t": "3",
+     "kind": "text"
+    },
+    {
      "t": "Join Lighter and link your wallet",
      "kind": "text"
     },
     {
+     "t": "4",
+     "kind": "text"
+    },
+    {
      "t": "Deposit USDC into Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "5",
      "kind": "text"
     },
     {
@@ -38429,7 +38553,15 @@
      "kind": "text"
     },
     {
+     "t": "23",
+     "kind": "text"
+    },
+    {
      "t": "Sign up",
+     "kind": "text"
+    },
+    {
+     "t": "4.0",
      "kind": "text"
     },
     {
@@ -38441,7 +38573,15 @@
      "kind": "text"
     },
     {
+     "t": "(7)",
+     "kind": "text"
+    },
+    {
      "t": "4 Stars",
+     "kind": "text"
+    },
+    {
+     "t": "(13)",
      "kind": "text"
     },
     {
@@ -38449,7 +38589,15 @@
      "kind": "text"
     },
     {
+     "t": "(2)",
+     "kind": "text"
+    },
+    {
      "t": "2 Stars",
+     "kind": "text"
+    },
+    {
+     "t": "(1)",
      "kind": "text"
     },
     {
@@ -38457,11 +38605,27 @@
      "kind": "text"
     },
     {
+     "t": "(0)",
+     "kind": "text"
+    },
+    {
+     "t": "4.2",
+     "kind": "text"
+    },
+    {
      "t": "Overall experience",
      "kind": "text"
     },
     {
+     "t": "4.2",
+     "kind": "text"
+    },
+    {
      "t": "Cashback earning",
+     "kind": "text"
+    },
+    {
+     "t": "3.7",
      "kind": "text"
     },
     {
@@ -38473,6 +38637,10 @@
      "kind": "text"
     },
     {
+     "t": "·",
+     "kind": "text"
+    },
+    {
      "t": "Cashback reaches my TetherMax balance every day.",
      "kind": "text"
     },
@@ -38481,11 +38649,19 @@
      "kind": "text"
     },
     {
+     "t": "·",
+     "kind": "text"
+    },
+    {
      "t": "Frequent traders notice the cashback on Premium fees.",
      "kind": "text"
     },
     {
      "t": "(7 reviews)",
+     "kind": "text"
+    },
+    {
+     "t": "·",
      "kind": "text"
     },
     {
@@ -38553,6 +38729,14 @@
      "kind": "text"
     },
     {
+     "t": "수",
+     "kind": "text"
+    },
+    {
+     "t": "연동고민중",
+     "kind": "text"
+    },
+    {
      "t": "✓",
      "kind": "text"
     },
@@ -38569,11 +38753,35 @@
      "kind": "text"
     },
     {
+     "t": "4.7",
+     "kind": "text"
+    },
+    {
+     "t": "2026-08-28",
+     "kind": "text"
+    },
+    {
+     "t": "차",
+     "kind": "text"
+    },
+    {
+     "t": "차트보는곰",
+     "kind": "text"
+    },
+    {
      "t": "✓",
      "kind": "text"
     },
     {
      "t": "Verified",
+     "kind": "text"
+    },
+    {
+     "t": "몇 군데 비교하고 여기로 정했어요",
+     "kind": "text"
+    },
+    {
+     "t": "여러 DEX를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 들어오고 출금이 막힌 적도 없습니다.",
      "kind": "text"
     },
     {
@@ -38603,18 +38811,110 @@
     {
      "t": "Show translation",
      "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "6",
+     "kind": "button"
+    },
+    {
+     "t": "7",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@TetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
     }
    ]
   },
   "29386:137364": {
    "name": "DEX / detail / D2 Step guide / light · Step 2 selected",
    "w": 1440,
-   "h": 5619,
+   "h": 5642,
    "hidden": false,
    "overlay": false,
    "texts": [
     {
+     "t": "Cashback",
+     "kind": "shell"
+    },
+    {
+     "t": "Rewards Hub",
+     "kind": "shell"
+    },
+    {
+     "t": "Discover",
+     "kind": "shell"
+    },
+    {
+     "t": "Login",
+     "kind": "shell"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "shell"
+    },
+    {
      "t": "Decentralised Exchanges",
+     "kind": "input"
+    },
+    {
+     "t": "/",
      "kind": "input"
     },
     {
@@ -38698,6 +38998,10 @@
      "kind": "text"
     },
     {
+     "t": "20%",
+     "kind": "text"
+    },
+    {
      "t": "Premium",
      "kind": "button"
     },
@@ -38718,7 +39022,23 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "text"
+    },
+    {
      "t": "Without TetherMax",
+     "kind": "text"
+    },
+    {
+     "t": "0.0280%",
+     "kind": "text"
+    },
+    {
+     "t": "0.0040%",
+     "kind": "text"
+    },
+    {
+     "t": "2",
      "kind": "text"
     },
     {
@@ -38726,8 +39046,40 @@
      "kind": "text"
     },
     {
+     "t": "0.0224%",
+     "kind": "text"
+    },
+    {
+     "t": "0.0032%",
+     "kind": "text"
+    },
+    {
      "t": "Get Started",
      "kind": "button"
+    },
+    {
+     "t": "Sign Up",
+     "kind": "text"
+    },
+    {
+     "t": "Key Features",
+     "kind": "shell"
+    },
+    {
+     "t": "Structure",
+     "kind": "shell"
+    },
+    {
+     "t": "Guide",
+     "kind": "shell"
+    },
+    {
+     "t": "Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Reviews (23)",
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Lighter",
@@ -38766,6 +39118,10 @@
      "kind": "button"
     },
     {
+     "t": "$112.00",
+     "kind": "text"
+    },
+    {
      "t": "Trading fee",
      "kind": "text"
     },
@@ -38778,11 +39134,23 @@
      "kind": "text"
     },
     {
+     "t": "$22.40",
+     "kind": "text"
+    },
+    {
+     "t": "Cashback",
+     "kind": "text"
+    },
+    {
      "t": "Returned to you",
      "kind": "text"
     },
     {
      "t": "=",
+     "kind": "text"
+    },
+    {
+     "t": "$89.60",
      "kind": "text"
     },
     {
@@ -38858,6 +39226,10 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "shell"
+    },
+    {
      "t": "You trade on Lighter",
      "kind": "text"
     },
@@ -38866,12 +39238,20 @@
      "kind": "text"
     },
     {
+     "t": "1",
+     "kind": "shell"
+    },
+    {
      "t": "Lighter pays a settlement",
      "kind": "text"
     },
     {
      "t": "Eligible trading activity generates a settlement for the referring partner.",
      "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -38894,7 +39274,15 @@
      "kind": "text"
     },
     {
+     "t": "2",
+     "kind": "text"
+    },
+    {
      "t": "Deposit USDC into your wallet",
+     "kind": "text"
+    },
+    {
+     "t": "3",
      "kind": "text"
     },
     {
@@ -38902,7 +39290,15 @@
      "kind": "text"
     },
     {
+     "t": "4",
+     "kind": "text"
+    },
+    {
      "t": "Deposit USDC into Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "5",
      "kind": "text"
     },
     {
@@ -38990,7 +39386,15 @@
      "kind": "text"
     },
     {
+     "t": "23",
+     "kind": "text"
+    },
+    {
      "t": "Sign up",
+     "kind": "text"
+    },
+    {
+     "t": "4.0",
      "kind": "text"
     },
     {
@@ -39002,7 +39406,15 @@
      "kind": "text"
     },
     {
+     "t": "(7)",
+     "kind": "text"
+    },
+    {
      "t": "4 Stars",
+     "kind": "text"
+    },
+    {
+     "t": "(13)",
      "kind": "text"
     },
     {
@@ -39010,7 +39422,15 @@
      "kind": "text"
     },
     {
+     "t": "(2)",
+     "kind": "text"
+    },
+    {
      "t": "2 Stars",
+     "kind": "text"
+    },
+    {
+     "t": "(1)",
      "kind": "text"
     },
     {
@@ -39018,11 +39438,27 @@
      "kind": "text"
     },
     {
+     "t": "(0)",
+     "kind": "text"
+    },
+    {
+     "t": "4.2",
+     "kind": "text"
+    },
+    {
      "t": "Overall experience",
      "kind": "text"
     },
     {
+     "t": "4.2",
+     "kind": "text"
+    },
+    {
      "t": "Cashback earning",
+     "kind": "text"
+    },
+    {
+     "t": "3.7",
      "kind": "text"
     },
     {
@@ -39034,6 +39470,10 @@
      "kind": "text"
     },
     {
+     "t": "·",
+     "kind": "text"
+    },
+    {
      "t": "Cashback reaches my TetherMax balance every day.",
      "kind": "text"
     },
@@ -39042,11 +39482,19 @@
      "kind": "text"
     },
     {
+     "t": "·",
+     "kind": "text"
+    },
+    {
      "t": "Frequent traders notice the cashback on Premium fees.",
      "kind": "text"
     },
     {
      "t": "(7 reviews)",
+     "kind": "text"
+    },
+    {
+     "t": "·",
      "kind": "text"
     },
     {
@@ -39114,6 +39562,22 @@
      "kind": "input"
     },
     {
+     "t": "3.3",
+     "kind": "text"
+    },
+    {
+     "t": "2026-08-30",
+     "kind": "text"
+    },
+    {
+     "t": "수",
+     "kind": "text"
+    },
+    {
+     "t": "연동고민중",
+     "kind": "text"
+    },
+    {
      "t": "✓",
      "kind": "text"
     },
@@ -39162,11 +39626,35 @@
      "kind": "text"
     },
     {
+     "t": "4.7",
+     "kind": "text"
+    },
+    {
+     "t": "2026-08-28",
+     "kind": "text"
+    },
+    {
+     "t": "차",
+     "kind": "text"
+    },
+    {
+     "t": "차트보는곰",
+     "kind": "text"
+    },
+    {
      "t": "✓",
      "kind": "text"
     },
     {
      "t": "Verified",
+     "kind": "text"
+    },
+    {
+     "t": "몇 군데 비교하고 여기로 정했어요",
+     "kind": "text"
+    },
+    {
+     "t": "여러 DEX를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 들어오고 출금이 막힌 적도 없습니다.",
      "kind": "text"
     },
     {
@@ -39196,6 +39684,74 @@
     {
      "t": "Show translation",
      "kind": "text"
+    },
+    {
+     "t": "1",
+     "kind": "button"
+    },
+    {
+     "t": "2",
+     "kind": "button"
+    },
+    {
+     "t": "3",
+     "kind": "button"
+    },
+    {
+     "t": "4",
+     "kind": "button"
+    },
+    {
+     "t": "5",
+     "kind": "button"
+    },
+    {
+     "t": "6",
+     "kind": "button"
+    },
+    {
+     "t": "7",
+     "kind": "button"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@TetherMax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Use",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
     }
    ]
   },
@@ -44307,23 +44863,23 @@
    "texts": [
     {
      "t": "Cashback",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Rewards Hub",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Discover",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Login",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Trade onchain,\nkeep your cashback",
@@ -44919,43 +45475,43 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@TetherMax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Privacy Policy",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Terms of Use",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     }
    ]
   },
@@ -49088,29 +49644,29 @@
   "29357:143619": {
    "name": "DEX / detail / D1 Key features / light",
    "w": 1440,
-   "h": 5639,
+   "h": 5662,
    "hidden": false,
    "overlay": false,
    "texts": [
     {
      "t": "Cashback",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Rewards Hub",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Discover",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Login",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -49266,23 +49822,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Lighter",
@@ -49430,7 +49986,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on Lighter",
@@ -49442,7 +49998,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Lighter pays a settlement",
@@ -49454,7 +50010,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -49918,72 +50474,72 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@TetherMax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Privacy Policy",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Terms of Use",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     }
    ]
   },
   "29357:144968": {
    "name": "DEX / detail / D2 Step guide, step 3 / light",
    "w": 1440,
-   "h": 5731,
+   "h": 5754,
    "hidden": false,
    "overlay": false,
    "texts": [
     {
      "t": "Cashback",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Rewards Hub",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Discover",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Login",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -50139,23 +50695,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Lighter",
@@ -50303,7 +50859,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on Lighter",
@@ -50315,7 +50871,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Lighter pays a settlement",
@@ -50327,7 +50883,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -50787,43 +51343,43 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@TetherMax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Privacy Policy",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Terms of Use",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     }
    ]
   },
@@ -52538,7 +53094,7 @@
    "texts": [
     {
      "t": "9:41",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -52698,23 +53254,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Lighter",
@@ -52830,7 +53386,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on Lighter",
@@ -52842,7 +53398,7 @@
     },
     {
      "t": "2",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Lighter pays a settlement",
@@ -52854,7 +53410,7 @@
     },
     {
      "t": "3",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -53057,7 +53613,7 @@
      "kind": "text"
     },
     {
-     "t": "Write a review",
+     "t": "Sign up",
      "kind": "text"
     },
     {
@@ -53069,7 +53625,7 @@
      "kind": "text"
     },
     {
-     "t": "Cashback arrives at the same time every day.",
+     "t": "Cashback reaches my TetherMax balance every day.",
      "kind": "text"
     },
     {
@@ -53081,7 +53637,7 @@
      "kind": "text"
     },
     {
-     "t": "The fee discount is wide enough that frequent traders notice it.",
+     "t": "Frequent traders notice the cashback on Premium fees.",
      "kind": "text"
     },
     {
@@ -53158,27 +53714,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "A question about linking",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
@@ -53217,31 +53773,31 @@
      "kind": "text"
     },
     {
-     "t": "수",
-     "kind": "text"
+     "t": "차",
+     "kind": "shell"
     },
     {
-     "t": "수수료헌터",
-     "kind": "text"
+     "t": "차트보는곰",
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "몇 군데 비교하고 여기로 정했어요",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
-     "t": "여러 거래소를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 같은 시간에 들어오고 출금이 막힌 적도 없습니다.",
+     "t": "여러 DEX를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 들어오고 출금이 막힌 적도 없습니다.",
      "kind": "text"
     },
     {
@@ -53302,39 +53858,39 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@tethermax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
@@ -53838,7 +54394,7 @@
      "kind": "text"
     },
     {
-     "t": "Write a review",
+     "t": "Sign up",
      "kind": "text"
     },
     {
@@ -53850,7 +54406,7 @@
      "kind": "text"
     },
     {
-     "t": "Cashback arrives at the same time every day.",
+     "t": "Cashback reaches my TetherMax balance every day.",
      "kind": "text"
     },
     {
@@ -53862,7 +54418,7 @@
      "kind": "text"
     },
     {
-     "t": "The fee discount is wide enough that frequent traders notice it.",
+     "t": "Frequent traders notice the cashback on fees.",
      "kind": "text"
     },
     {
@@ -53998,11 +54554,11 @@
      "kind": "text"
     },
     {
-     "t": "수",
+     "t": "차",
      "kind": "shell"
     },
     {
-     "t": "수수료헌터",
+     "t": "차트보는곰",
      "kind": "shell"
     },
     {
@@ -54022,7 +54578,7 @@
      "kind": "shell"
     },
     {
-     "t": "여러 거래소를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 같은 시간에 들어오고 출금이 막힌 적도 없습니다.",
+     "t": "여러 DEX를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 들어오고 출금이 막힌 적도 없습니다.",
      "kind": "text"
     },
     {
@@ -54191,16 +54747,8 @@
      "kind": "chip"
     },
     {
-     "t": "Forex",
-     "kind": "chip"
-    },
-    {
      "t": "Deposit",
      "kind": "text"
-    },
-    {
-     "t": "Crypto",
-     "kind": "chip"
     },
     {
      "t": "Crypto",
@@ -54643,7 +55191,7 @@
      "kind": "text"
     },
     {
-     "t": "Write a review",
+     "t": "Sign up",
      "kind": "text"
     },
     {
@@ -54655,7 +55203,7 @@
      "kind": "text"
     },
     {
-     "t": "Cashback arrives at the same time every day.",
+     "t": "Cashback reaches my TetherMax balance every day.",
      "kind": "text"
     },
     {
@@ -54667,7 +55215,7 @@
      "kind": "text"
     },
     {
-     "t": "The fee discount is wide enough that frequent traders notice it.",
+     "t": "Frequent traders notice the cashback on fees.",
      "kind": "text"
     },
     {
@@ -54803,11 +55351,11 @@
      "kind": "text"
     },
     {
-     "t": "수",
+     "t": "차",
      "kind": "shell"
     },
     {
-     "t": "수수료헌터",
+     "t": "차트보는곰",
      "kind": "shell"
     },
     {
@@ -54827,7 +55375,7 @@
      "kind": "shell"
     },
     {
-     "t": "여러 거래소를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 같은 시간에 들어오고 출금이 막힌 적도 없습니다.",
+     "t": "여러 DEX를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 들어오고 출금이 막힌 적도 없습니다.",
      "kind": "text"
     },
     {
@@ -54993,10 +55541,6 @@
     },
     {
      "t": "Indices & ETFs",
-     "kind": "chip"
-    },
-    {
-     "t": "Forex",
      "kind": "chip"
     },
     {
@@ -55448,7 +55992,7 @@
      "kind": "text"
     },
     {
-     "t": "Write a review",
+     "t": "Sign up",
      "kind": "text"
     },
     {
@@ -55460,7 +56004,7 @@
      "kind": "text"
     },
     {
-     "t": "Cashback arrives at the same time every day.",
+     "t": "Cashback reaches my TetherMax balance every day.",
      "kind": "text"
     },
     {
@@ -55472,7 +56016,7 @@
      "kind": "text"
     },
     {
-     "t": "The fee discount is wide enough that frequent traders notice it.",
+     "t": "Frequent traders notice the cashback on fees.",
      "kind": "text"
     },
     {
@@ -55608,11 +56152,11 @@
      "kind": "text"
     },
     {
-     "t": "수",
+     "t": "차",
      "kind": "shell"
     },
     {
-     "t": "수수료헌터",
+     "t": "차트보는곰",
      "kind": "shell"
     },
     {
@@ -55632,7 +56176,7 @@
      "kind": "shell"
     },
     {
-     "t": "여러 거래소를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 같은 시간에 들어오고 출금이 막힌 적도 없습니다.",
+     "t": "여러 DEX를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 들어오고 출금이 막힌 적도 없습니다.",
      "kind": "text"
     },
     {
@@ -55750,7 +56294,7 @@
    "texts": [
     {
      "t": "9:41",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -55910,23 +56454,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (23)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Lighter",
@@ -56042,7 +56586,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on Lighter",
@@ -56054,7 +56598,7 @@
     },
     {
      "t": "2",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Lighter pays a settlement",
@@ -56066,7 +56610,7 @@
     },
     {
      "t": "3",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -56378,27 +56922,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "A question about linking",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "I linked my wallet already and I am not sure whether a second DEX needs a separate verification step.",
@@ -56438,27 +56982,27 @@
     },
     {
      "t": "수",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "수수료헌터",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "✓",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Verified",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "몇 군데 비교하고 여기로 정했어요",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "4.7",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "여러 거래소를 비교해보고 수수료 때문에 여기로 정했어요. 캐시백이 매일 같은 시간에 들어오고 출금이 막힌 적도 없습니다.",
@@ -56522,39 +57066,39 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@tethermax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
@@ -56573,29 +57117,29 @@
   "29367:137704": {
    "name": "DEX / detail / D3 FAQ, reviews and terms / light · Reviews 0",
    "w": 1440,
-   "h": 4673,
+   "h": 4696,
    "hidden": false,
    "overlay": false,
    "texts": [
     {
      "t": "Cashback",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Rewards Hub",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Discover",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Login",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Sign Up",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Decentralised Exchanges",
@@ -56751,23 +57295,23 @@
     },
     {
      "t": "Key Features",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Structure",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Guide",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Policy",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Reviews (0)",
-     "kind": "tab"
+     "kind": "shell"
     },
     {
      "t": "Why traders choose Lighter",
@@ -56915,7 +57459,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "You trade on Lighter",
@@ -56927,7 +57471,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Lighter pays a settlement",
@@ -56939,7 +57483,7 @@
     },
     {
      "t": "1",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "TetherMax gives cashback",
@@ -57103,43 +57647,43 @@
     },
     {
      "t": "Live Chat",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "support@TetherMax.io",
-     "kind": "button"
+     "kind": "shell"
     },
     {
      "t": "Company",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "About TetherMax",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Notices",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Affiliate Partner Inquiry",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Legal",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Privacy Policy",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "Terms of Use",
-     "kind": "text"
+     "kind": "shell"
     },
     {
      "t": "© 2026 TetherMax. All rights reserved.",
-     "kind": "text"
+     "kind": "shell"
     }
    ]
   },
@@ -65354,9 +65898,9 @@
   "29515:144188": {
    "name": "DEX / Mobile / Hub H8 EdgeX wallet linked (S4) / Light",
    "w": 375,
-   "h": 4061,
+   "h": 4105,
    "hidden": false,
-   "overlay": false,
+   "overlay": true,
    "texts": [
     {
      "t": "9:41",
@@ -65412,6 +65956,14 @@
     },
     {
      "t": "3.10 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total claimed",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
      "kind": "text"
     },
     {
@@ -66823,6 +67375,215 @@
     {
      "t": "© 2026 TetherMax. All rights reserved.",
      "kind": "shell"
+    }
+   ]
+  },
+  "29530:134341": {
+   "name": "Home / mWeb / S4 DEX · After first link (Lighter) · First link (1 row)",
+   "w": 375,
+   "h": 1945,
+   "hidden": false,
+   "overlay": false,
+   "texts": [
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Total Cashback Balance",
+     "kind": "text"
+    },
+    {
+     "t": "Auto Claim",
+     "kind": "button"
+    },
+    {
+     "t": "Linked Accounts",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Lighter",
+     "kind": "text"
+    },
+    {
+     "t": "0.00 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "0x7a3f…51e9",
+     "kind": "text"
+    },
+    {
+     "t": "Trading on multiple exchanges? Link more",
+     "kind": "text"
+    },
+    {
+     "t": "Exclusive For Members",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Guess Bitcoin Price",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Earn More Cashback",
+     "kind": "text"
+    },
+    {
+     "t": "Limited Time Offers",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Trade to win up to $100K prize pool",
+     "kind": "text"
+    },
+    {
+     "t": "Bitget",
+     "kind": "chip"
+    },
+    {
+     "t": "Rewards",
+     "kind": "text"
+    },
+    {
+     "t": "$100,000.00",
+     "kind": "text"
+    },
+    {
+     "t": "Ends in",
+     "kind": "chip"
+    },
+    {
+     "t": "45",
+     "kind": "chip"
+    },
+    {
+     "t": "M",
+     "kind": "chip"
+    },
+    {
+     "t": "37",
+     "kind": "chip"
+    },
+    {
+     "t": "S",
+     "kind": "chip"
+    },
+    {
+     "t": "Join Now",
+     "kind": "button"
+    },
+    {
+     "t": "Top Partner Exchanges",
+     "kind": "text"
+    },
+    {
+     "t": "See All",
+     "kind": "button"
+    },
+    {
+     "t": "Bitget",
+     "kind": "text"
+    },
+    {
+     "t": "54% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Bybit",
+     "kind": "text"
+    },
+    {
+     "t": "55% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Binance",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "OKX",
+     "kind": "text"
+    },
+    {
+     "t": "50% Total Savings",
+     "kind": "text"
+    },
+    {
+     "t": "Live Chat",
+     "kind": "shell"
+    },
+    {
+     "t": "support@tethermax.io",
+     "kind": "shell"
+    },
+    {
+     "t": "Company",
+     "kind": "shell"
+    },
+    {
+     "t": "About TetherMax",
+     "kind": "shell"
+    },
+    {
+     "t": "Notices",
+     "kind": "shell"
+    },
+    {
+     "t": "Affiliate Partner Inquiry",
+     "kind": "shell"
+    },
+    {
+     "t": "Legal",
+     "kind": "shell"
+    },
+    {
+     "t": "Privacy Policy",
+     "kind": "shell"
+    },
+    {
+     "t": "Terms of Service",
+     "kind": "shell"
+    },
+    {
+     "t": "© 2026 TetherMax. All rights reserved.",
+     "kind": "shell"
+    },
+    {
+     "t": "https://TetherMax.io",
+     "kind": "text"
+    },
+    {
+     "t": "9:41",
+     "kind": "shell"
+    },
+    {
+     "t": "Account linked successfully",
+     "kind": "text"
     }
    ]
   }

@@ -34,16 +34,16 @@ const mo=()=>S.vp==='mo';
 const WALLET='0x7a3f9c2e4b1d8a6f5e0c3b2a1d9e8f7c6b5a4d3e';
 
 // ---------- 공통 조각 ----------
-const rule=()=>`<img src="${A('hub-rule.svg')}" alt="" style="width:100%;height:1px;display:block">`;
+const rule=()=>`<img src="${A('hub-rule.svg')}" alt="" style="width:100%;height:1px;display:block;margin-bottom:-1px">`;   // Figma 구분선은 높이 0(선만) — 자리 차지 없음
 function logo(id,size=32){const d=HB_DEX.find(x=>x.id===id);if(d)return C.dex(d.name,size);
  return `<img src="${A(`hub-logo-${id}.png`)}" alt="" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:cover;flex:none">`}
 const plogo=(p,size)=>HB_DEX.includes(p)?logo(p.id,size):logo(p.lg,size);
 const routeList=r=>r==='DEX'?HB_DEX:r==='CEX'?HB_CEX:HB_BRK;
 const upTo=r=>r==='Brokers'?84:Math.max(...routeList(r).map(p=>p.rate)); // Brokers: INFINOX `Up to 84% off`(lot 기준이라 % 요율 레코드 없음)
-const lineKV=(k,sub,v,o={})=>`<div class="row between" style="align-items:flex-start;gap:12px"><div class="col" style="gap:2px"><span class="b1${o.kc?' '+o.kc:''}">${k}</span>${sub?`<span class="${o.subSize||'cap'} c2">${sub}</span>`:''}</div><span class="b1 tnum${o.vc?' '+o.vc:''}" style="white-space:nowrap">${v}</span></div>`;
+const lineKV=(k,sub,v,o={})=>`<div class="row between" style="align-items:flex-start;gap:12px"><div class="col" style="gap:2px"><span class="b1${o.kc?' '+o.kc:''}">${k}</span>${sub?`<span class="${o.subSize||'cap'} c2"${o.subSize==='b2'?' style="line-height:23px"':''}>${sub}</span>`:''}</div><span class="b1 tnum${o.vc?' '+o.vc:''}" style="white-space:nowrap">${v}</span></div>`;
 const bigLine=(k,v)=>mo()?`<div class="col" style="gap:4px"><span class="b1 semi">${k}</span><span class="h4 cb tnum">${v}</span></div>`
  :`<div class="row between" style="align-items:baseline;gap:12px"><span class="b1 semi">${k}</span><span class="h4 cb tnum" style="white-space:nowrap">${v}</span></div>`;
-const capRow=(a,b,o={})=>`<div class="row b2 c2" style="gap:${mo()?16:24}px;flex-wrap:wrap"><span${o.blue?' class="cb"':''}>${a}</span><span>${b}</span></div>`;
+const capRow=(a,b,o={})=>`<div class="row b2 c2" style="gap:${mo()?(o.blue?'4px 16px':'16px'):'24px'};flex-wrap:wrap"><span${o.blue?` class="cb"${mo()?' style="max-width:224px"':''}`:''}>${a}</span><span>${b}</span></div>`;   // 모바일 넛지: Figma H4 글상자 224 폭 · 아래 최소액 줄 4px
 const stars=r=>`<span class="col" style="gap:0;align-items:flex-end"><span class="row" style="gap:0">${[1,2,3,4,5].map(i=>`<img src="${A(i<=Math.floor(r[0]+.1)?'hub-star-on.svg':'hub-star-off.svg')}" alt="" style="width:18px;height:18px">`).join('')}</span><span class="cap"><b>${r[0]}</b> <span class="c2">(${r[1]})</span></span></span>`;
 
 // 라우트 세그먼트 탭 (CEX · DEX · Brokers) — 선택 = 흰 채움 + 그림자 + semibold. 모바일 라벨 CEXs · DEXs · Brokers(Figma 모바일)
@@ -51,7 +51,7 @@ function seg(route){
  const it=[['CEX','hub-ic-cex.svg',mo()?'CEXs':T('Centralised Exchanges','중앙화 거래소'),'cex'],['DEX','hub-ic-dex.svg',mo()?'DEXs':T('Decentralised Exchanges','탈중앙화 거래소'),'normal'],['Brokers','hub-ic-fx.svg','Brokers','brokers']];
  return `<div class="row" style="background:var(--action-hover);border-radius:12px;padding:4px;gap:0;justify-content:space-between">${it.map(([k,i,l,s])=>{const on=k===route;
   return `<span class="row" style="gap:8px;padding:10px 12px;border-radius:8px;white-space:nowrap;cursor:pointer;${mo()?'flex:1;justify-content:center;':''}${on?'background:#fff;box-shadow:0 4px 10px rgba(0,0,0,.1)':''}" data-go="hub.main:${s}"><img src="${A(i)}" alt="" style="width:20px;height:20px;${on?'':'opacity:.7'}"><span class="b2${on?' semi':' c2'}">${l}</span></span>`}).join('')}</div>`}
-function partnerSel(p,extra){return `<div class="col" style="gap:8px;flex:1;min-width:0"><span class="b2 med c2" style="line-height:24px">PARTNER</span><div class="row" style="gap:10px;border:1px solid var(--divider);border-radius:12px;padding:10px 12px;background:#fff;cursor:pointer">${plogo(p,28)}<span class="b1 semi grow">${esc(p.name)}${extra?`<span class="b2 c2" style="font-weight:400;margin-left:12px">${extra}</span>`:''}</span>${ic('arrow-drop-down')}</div></div>`}
+function partnerSel(p,extra){return `<div class="col" style="gap:8px;flex:1;min-width:0"><span class="b2 med c2" style="line-height:24px">PARTNER</span><div class="row" style="gap:10px;border:1px solid var(--divider);border-radius:12px;padding:10px 12px;background:#fff;cursor:pointer">${plogo(p,HB_BRK.includes(p)?32:28)}<span class="b1 semi grow">${esc(p.name)}${extra?`<span class="b2 c2" style="font-weight:400;margin-left:12px">${extra}</span>`:''}</span>${ic('arrow-drop-down')}</div></div>`}
 
 // 영수증 카드 (계산기 · 잔액 패널 공용) — 흰 카드 + 아래 찢김 + 우상단 3D 계산기
 function receipt(inner){
@@ -158,7 +158,7 @@ function hero(right,route){
 function routes(){
  // 순서 CEX → DEX → Brokers 고정(G-138 확정). Figma는 DEX → CEX → Broker(하드코딩). 강조(파란 화살표)는 Figma의 DEX 행 hover 표현
  const rows=[
-  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'hub.main:cex'},
+  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'cex.list'},
   {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
   {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:'brokers.main'},
  ];
@@ -207,7 +207,7 @@ function compare(chip,c){
   // 모바일 카드: 로고·이름 / Up to N% cashback / Final Taker · Final Maker / 카드 끝 전폭 `Join {partner}`(정책 B-5-8 모바일). 행·카드 본문 클릭과 `Join`은 모두 그 파트너 상세(현재 탭 — 결정 12차 · 사용자 2026-11-27)
   body=`<div class="col" style="gap:16px">${list.map(p=>`<div class="col" data-go="${go(p)}" style="cursor:pointer;${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px"><div class="row" style="gap:8px">${plogo(p,32)}<span class="b1 semi grow">${esc(p.name)}</span>${hp(p)}</div>
    <span class="b1 semi">${brk?`${esc(p.cb)} ${/off/.test(p.cb)?'commission':'cashback'}`:`Up to ${p.rate}% cashback`}</span><hr class="divider">
-   <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted commission':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div>${C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',full:true,go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} style="height:36px;padding-top:0;padding-bottom:0" `)}</div>`).join('')}</div>`+
+   ${brk?`<div class="col b2" style="gap:0;line-height:20px"><div class="row between"><span class="c2">Commission</span><b>${p.comm}</b></div><div class="row between"><span class="c2">Discounted commission</span><b>${p.disc}</b></div></div>`:`<div class="row between b2"><span><span class="c2">Final Taker</span> <b>${pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">Final Maker</span> <b>${pct4(p.maker*(1-p.rate/100))}</b></span></div>`}${C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',full:true,go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} style="height:36px;padding-top:0;padding-bottom:0" `)}</div>`).join('')}</div>`+
    (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정). 카드 끝 전폭 <code>Join {partner}</code>(정책 B-5-8 모바일) — 그 파트너 상세로 이동(DEX 상세 · 거래소 상세 · 브로커 상세, 현재 탭 — 사용자 결정 2026-11-27)'));
  }else if(view==='card'){
   const card=p=>`<div class="col" data-m-lift data-go="${go(p)}" style="cursor:pointer;background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">

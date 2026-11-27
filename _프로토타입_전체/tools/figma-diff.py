@@ -571,7 +571,10 @@ GEOM_JS = r"""
   let root = fr;
   if (scopeOverlay) { const s = fr.querySelector('.modal, .dialog, .sheet, .toast') || fr.querySelector('.scrim'); if (s) root = s; }
   const o = root.getBoundingClientRect();
-  const R = r => [Math.round(r.left - o.left), Math.round(r.top - o.top), Math.round(r.width), Math.round(r.height)];
+  // 아래에 붙는 고정 띠(position: sticky · bottom 0 — 모바일 게스트 가입 띠 등)는 Figma처럼 프레임 맨 아래에 놓인 것으로 잰다(브라우저에서는 뷰포트 아래에 붙어 화면 위쪽에 잡힘)
+  const sticks = scopeOverlay ? [] : [...root.querySelectorAll('[style*="sticky"]')].filter(e => { const cs = getComputedStyle(e); return cs.position === 'sticky' && cs.bottom === '0px'; });
+  const stickY = el => { const s = sticks.find(x => x.contains(el)); return s ? (o.top + o.height) - s.getBoundingClientRect().bottom : 0; };
+  const R = (r, el) => [Math.round(r.left - o.left), Math.round(r.top - o.top + (el ? stickY(el) : 0)), Math.round(r.width), Math.round(r.height)];
   const vis = el => (!el.checkVisibility || el.checkVisibility({checkVisibilityCSS: true}));
   const SKIP = '.note, .tbd, script, style, template, .pt-b, .sheet-grab';
   const SHELL = 'header.gnb, footer, .mo-top, .mo-nav';   // EXTRACT_JS와 같은 셸 — 공통 셸 화면(cmn.*)만 잰다
@@ -583,7 +586,7 @@ GEOM_JS = r"""
     let own = false; for (const c of el.childNodes) if (c.nodeType === 3 && c.textContent.trim()) { own = true; break; }
     if (own) {
       const rg = document.createRange(); rg.selectNodeContents(el); const r = rg.getBoundingClientRect();
-      if (r.width > 0 && r.height > 0) texts.push([(el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim(), R(r)]);
+      if (r.width > 0 && r.height > 0) texts.push([(el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim(), R(r, el)]);
     }
     const isCtl = el.matches('button, .btn, [role=button], .chip, .tab, input, select, textarea');
     if (isCtl) {
@@ -592,7 +595,7 @@ GEOM_JS = r"""
       let pe = el; if (!painted(el)) { const q = [...el.querySelectorAll('*')].find(painted); if (q) pe = q; }
       const r = pe.getBoundingClientRect();
       const k = el.matches('.chip') ? 'c' : el.matches('.tab') ? 't' : el.matches('input, select, textarea') ? 'i' : 'b';
-      if (r.width > 0) els.push([k, ((el.innerText || el.placeholder || el.value || '') + '').replace(/\s+/g, ' ').trim().slice(0, 40), R(r)]);
+      if (r.width > 0) els.push([k, ((el.innerText || el.placeholder || el.value || '') + '').replace(/\s+/g, ' ').trim().slice(0, 40), R(r, el)]);
     }
     const r = el.getBoundingClientRect();
     if (cards.length < 500 && r.width >= 120 && r.height >= 40 && !(Math.abs(r.width - o.width) < 2 && Math.abs(r.height - o.height) < 2)) {
@@ -600,7 +603,7 @@ GEOM_JS = r"""
       const rad = parseFloat(cs.borderTopLeftRadius) || 0;
       const bg = cs.backgroundColor; const bga = /rgba\(.*,\s*([\d.]+)\)/.exec(bg); const hasBg = bg && bg !== 'transparent' && !(bga && parseFloat(bga[1]) < 0.05);
       const bw = parseFloat(cs.borderTopWidth) || 0;
-      if (rad >= 4 && (hasBg || bw > 0)) cards.push(R(r));
+      if (rad >= 4 && (hasBg || bw > 0)) cards.push(R(r, el));
     }
   }
   return {fw: Math.round(o.width), fh: Math.round(o.height), texts, els, cards};
@@ -678,7 +681,8 @@ def geom_compare(fg, pg, tol, vp=None):
         if tuple(fc) in seen_cards: continue
         seen_cards.add(tuple(fc))
         dw, dh = pc[2] - fc[2], pc[3] - fc[3]
-        if abs(dw) > tol: issues.append({'type': '카드 폭', 'label': lab, 'figma': fc, 'proto': pc, 'd': dw, 'card': fc, 'pcard': pc})
+        # 컴포넌트 크기 프레임에서 프레임 폭을 꽉 채운 카드는 폭을 보지 않는다(캔버스에 그린 프레임 폭이라 화면 폭과 무관 — 예: 모바일 리뷰 검토 중 카드 315 프레임)
+        if abs(dw) > tol and not (vp and not screen_sized(fg['w'], fg['h'], vp) and abs(fc[0]) <= 1 and abs(fc[2] - fg['w']) <= 2): issues.append({'type': '카드 폭', 'label': lab, 'figma': fc, 'proto': pc, 'd': dw, 'card': fc, 'pcard': pc})
         if abs(dh) > tol: issues.append({'type': '카드 높이', 'label': lab, 'figma': fc, 'proto': pc, 'd': dh, 'card': fc, 'pcard': pc})
     # 카드 안 요소의 여백(왼·위·오른쪽) — 오른쪽은 버튼만(문구 폭은 글꼴 렌더링 차이가 큼)
     in_btn = [a for k, a, b in bp]

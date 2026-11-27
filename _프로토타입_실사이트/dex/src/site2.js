@@ -11,7 +11,7 @@ const short = a => a.slice(0, 6) + '…' + a.slice(-4);
 const app = document.getElementById('app');
 // Get Started · Join Now: 레퍼럴 링크는 어드민 입력값(미보유) — 프로토타입은 각 DEX 공식 사이트를 새 탭으로 연다
 const OFFICIAL = { lighter: 'https://lighter.xyz', apex: 'https://omni.apex.exchange', edgex: 'https://www.edgex.exchange', aster: 'https://www.asterdex.com' };
-const REAL_ROUTE = { '/benefits': '/en/benefits', '/events': '/en/events', '/hub': '/en/affiliated', '/dex': '/en/dex', '/summary': '/en/rewardHistory', '/account': '/en/account', '/ownership': '/en/ownership-verification' };
+const REAL_ROUTE = { '/benefits': '/en/benefits', '/events': '/en/events', '/hub': '/en/cashback', '/dex': '/en/dex', '/summary': '/en/rewardHistory', '/account': '/en/account', '/ownership': '/en/ownership-verification' };
 // 모달 모드(셸 레이어 iframe)에서 페이지 이동은 셸에 맡긴다
 function go2(path, q) {
   if (API.MODAL) { closeLayer(true); const real = REAL_ROUTE[path] || (path.startsWith('/dex/') ? '/en' + path : '/en'); return post({ nav: API.ORIGIN + real + (q && q.tab ? '?tab=' + q.tab : '') }) }
@@ -57,8 +57,9 @@ const site2 = {
     if (p === '/ownership') ownEnhance();
   },
   go(id, st, el, inLayer) {
-    if (API.MODAL && ['hub.main', 'cex.list', 'dex.overview', 'summary.main'].includes(id)) {
-      const tab = id === 'cex.list' || st === 'cex' ? 'CEX' : st === 'brokers' ? 'Brokers' : null;
+    if (API.MODAL && id === 'cex.list') { closeLayer(true); post({ nav: API.ORIGIN + '/en/affiliated' }); return true }   // 기존 CEX 거래소 목록(결정 2026-11-27)
+    if (API.MODAL && ['hub.main', 'dex.overview', 'summary.main'].includes(id)) {
+      const tab = st === 'cex' ? 'CEX' : st === 'brokers' ? 'Brokers' : null;
       go2(id === 'dex.overview' ? '/dex' : id === 'summary.main' ? '/summary' : '/hub', tab ? { tab } : null); return true;
     }
     if (API.MODAL && id === 'dex.detail' && ['lighter', 'apex', 'edgex', 'aster'].includes(st)) { go2('/dex/' + st); return true }

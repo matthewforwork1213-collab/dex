@@ -66,5 +66,5 @@ R.screen({id:'auth.signup',group:'cex',title:'회원가입 (기존 · 첫 단계
  ],
  render(st){if(st==='otp'||st==='otpGuest')return withOtp(signup(st==='otpGuest'?'guest':'normal'));if(st==='invite')return `<div style="position:relative">${signup('invite')}<div class="scrim pt-fixed center" style="align-items:center;justify-content:center">${inviteModal()}</div></div>`+C.note('초대 코드 미리 채운 가입 → 가입 완료 뒤 초대 보상 안내 모달(Figma 프레임 = 모달)');return signup(st)+C.note(st==='guest'?'게스트 복귀 가입: 가입 성공 → 조회한 거래소·계정으로 돌아가 연동(REQ-178).':'Figma 원문 그대로(PC <code>Log in</code> · 모바일 <code>Log In</code>).')}});
 
-// 거래소 목록 화면(cex.list)은 두지 않음 — 결정(사용자 2026-11-27): 거래소 목록 자리 = 캐시백 허브 CEX 탭(hub.main:cex)
+// 거래소 목록(cex.list)은 기존 실서비스 페이지(/{lang}/affiliated — 결정 2026-11-27 목록 페이지 유지) → 목록판에서는 실동작판 수집본을 새 탭으로(01-core go)
 

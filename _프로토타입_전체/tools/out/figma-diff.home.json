@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27T22:23",
+ "generated": "2026-11-27T22:33",
  "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
  "results": [
   {
@@ -609,6 +609,64 @@
    "diff": [],
    "excepted": [],
    "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "home.main",
+   "group": "home",
+   "title": "홈 (S3 · S4 · 게스트)",
+   "state": "first",
+   "label": "첫 연동 — 체크리스트 없는 S4 + 토스트 (S3-7)",
+   "vp": "mo",
+   "node": "29530:134341",
+   "src": "정밀",
+   "node_name": "Home / mWeb / S4 DEX · After first link (Lighter) · First link (1 row)",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s3",
+   "render_err": null,
+   "opaque": {},
+   "generic": 12,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 16,
+   "nP": 18,
+   "matched": 16,
+   "missing": [],
+   "added": [
+    {
+     "t": "Win Up to 1,000 USDT",
+     "kind": "text"
+    },
+    {
+     "t": "Earn extra USDT",
+     "kind": "text"
+    }
+   ],
+   "below_frame": 0,
+   "frame_cut": null,
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [],
+   "geom": {
+    "issues": [],
+    "pairs": 28,
+    "cards": 4,
+    "fw": 375,
+    "pw": 375,
+    "scope": false,
+    "excepted": []
+   },
    "scope_overlay": false
   },
   {
@@ -1618,14 +1676,6 @@
    "label": "앱·모바일웹 — Wallet 라벨 없음 · 푸터 문구",
    "missing_vp": "pc",
    "has": "8582:156599",
-   "group": "home"
-  },
-  {
-   "screen": "home.main",
-   "state": "first",
-   "label": "첫 연동 — 체크리스트 없는 S4 + 토스트 (S3-7)",
-   "missing_vp": "mo",
-   "has": "28960:127795",
    "group": "home"
   },
   {

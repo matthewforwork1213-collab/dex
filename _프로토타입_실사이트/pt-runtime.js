@@ -763,6 +763,7 @@
       if ((a.textContent || '').trim() !== 'Exchanges' || !/Dropdown/.test(a.className)) return;
       var leaf = a; while (leaf.children.length === 1) leaf = leaf.children[0];
       leaf.textContent = 'Cashback Hub';
+      a.setAttribute('href', '/en/cashback'); a.setAttribute('data-orig-href', ORIGIN + '/en/cashback');   // 허브(URL 미정 IA-Q5 — 프로토타입 경로). /en/affiliated는 기존 CEX 거래소 목록(결정 2026-11-27)
       [].forEach.call(a.parentNode.querySelectorAll('a[data-orig-href="' + ORIGIN + '/en/brokers"]'), function (b) { b.remove() });
     });
     // GNB `Rewards Hub ▾` = Exchange Events · Benefits · Points(결정 기록 「GNB Rewards Hub ▾ 항목」 — Figma 기준 3개)
