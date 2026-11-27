@@ -191,7 +191,7 @@
 | 🔴 결정 필요 48건 | 전부 권장안 |
 | 🟡 기존 서비스 동작으로 정의할 173건 | 기존 동작 그대로 문서에 정의 |
 | 상단 로고 | 홈(기존 서비스) |
-| 허브 `Learn More` · `Join {partner}` | `Learn More` = 상세, `Join` = 레퍼럴 가입 새 탭 |
+| 허브 `Learn More` · `Join {partner}` | 둘 다 **그 거래소 상세로 이동**(CEX = 거래소 상세, DEX = DEX 상세, Brokers = 브로커 상세) — 외부 레퍼럴 링크로 보내지 않음(사용자 2026-11-27) |
 | 연동 모달 `Sign up here` · `Register here` | 선택한 거래소의 레퍼럴 가입 새 탭(문서대로) |
 | 연동 모달 첫 상태 | **첫 거래소가 기본 선택**(실서비스와 같이 목록 첫 항목 `WOO X Pro`, G-379) |
 | 글로벌 리그 상금 | `Receive Prize`·수령 화면 없음 — 참가 계정으로 지급(REQ-391) |
@@ -207,5 +207,5 @@
 | 축약 지갑 주소 전체 보기 (2026-11-27) | **DEX 지갑 주소에만 적용**(CEX UID에는 툴팁 없음). 축약 주소(`0x7a3F…51e9`)를 **모바일은 탭, PC는 호버**하면 전체 주소가 **기존 어두운 툴팁**(거래소 상세 `Total Savings` ⓘ 툴팁과 같은 모양 — 제목·`Close` 없는 말풍선)으로 표시. 복사 아이콘은 그대로. 카드형 `Wallet address` 팝오버는 쓰지 않음(모바일 랭킹 주소 팝오버 포함) **행 전체가 상세로 가는 목록(홈 Linked Accounts 행 · See All 모달 행)에는 툴팁 없음**, 주소 밑줄 표시도 없음 |
 | 홈 누적 캐시백 블록(MAXOP-731) | 없음 — 이번 범위에서 제외. Figma DEX(revision) 홈·프로토타입에서 빼고 N16 캡션 결정은 효력 없음 |
 | Brokers 페이지 (2026-11-27) | `/brokers` · `/brokers/learn` · `/brokers/compare` · `/brokers/rs-finance` · `/brokers/infinox` 모두 유지(실서비스·Figma [MAX-]FX V2 그대로). 없애는 것은 GNB `Cashback ▾`의 `Brokers` 진입뿐(D4) |
-| 허브 Brokers 비교표 `Join {broker}` | 브로커 상세(`/{lang}/brokers/{slug}`, 현재 탭) — 브로커만의 예외. CEX·DEX `Join`은 레퍼럴 가입 새 탭 유지(12차) |
+| 허브 Brokers 비교표 `Join {broker}` | 브로커 상세(`/{lang}/brokers/{slug}`, 현재 탭) — 허브 `Join` 전체 규칙과 같음 |
 | 혜택 상세 상태 (2026-11-27) | 쿠폰을 주는 혜택은 상세마다 **수행 전 / 수행 후 쿠폰 미수령 / 수행 후 쿠폰 수령** 3상태를 정의. 그 밖에 텍스트가 바뀌는 상태는 모두 정의. 기존 정책 중 DEX로 바뀌어야 하는 부분(용어·조건·대상)은 반영 |

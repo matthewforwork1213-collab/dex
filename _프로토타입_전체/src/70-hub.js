@@ -194,8 +194,8 @@ function compare(chip,c){
  const es=c==='emptySearch';
  const search=`<div class="row" style="gap:12px"><div class="row grow" style="border:${es?'2px solid var(--blue)':'1px solid var(--input-border)'};border-radius:4px;padding:${es?'7px 11px':'8px 12px'};gap:8px;background:#fff"><img src="${A('hub-ic-search.svg')}" alt="" style="width:24px;height:24px"><span class="b2 grow ${es?'':'c3'}" style="line-height:20px">${es?'Crypto.com':ph}</span>${es?`<span title="Clear" style="cursor:pointer;display:inline-flex">${ic('close')}</span>`:''}</div>${toggle}</div>`;
  const go=p=>chip==='DEX'?`dex.detail:${p.id}`:chip==='CEX'?'cexd:'+p.id:'brkd:'+p.id;   // 그 파트너의 테더맥스 상세(CEX·브로커 = 기존 상세 페이지)
- const joinGo=p=>brk?go(p):'';
- const refAttr=p=>brk?'':` data-ref-signup="${esc(p.name)}"`;
+ const joinGo=p=>go(p);   // `Join {partner}` = 그 파트너 상세로 이동(현재 탭) — DEX 상세 · 거래소 상세 · 브로커 상세(사용자 결정 2026-11-27)
+ const refAttr=p=>'';
  const join=p=>C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',go:joinGo(p)}).replace('<button ',`<button${refAttr(p)}${brk?'':' style="height:36px;padding-top:0;padding-bottom:0"'} `);   // Figma 표 버튼 36
  const hp=p=>p===top?C.badge('Highest payout','blue'):'';
  const sortIc=`<img src="${A('hub-sort.svg')}" alt="" style="width:5px;height:8px;margin-left:6px;display:inline-block;vertical-align:middle">`;
@@ -204,13 +204,13 @@ function compare(chip,c){
  if(es){
   body=`<p class="b2 c2" style="margin:0;padding:6px 0">No results found for Crypto.com</p>`+C.note('[기존 MAX-22] mWeb allPartnerExchanges(5145:50887) 빈 검색 배치: 검색창(포커스 · 입력값 · 오른쪽 X로 검색어 지우기) 아래 왼쪽 정렬 한 줄. 문구 = 기존 <code>No results found for {검색어}</code>(G-151 · N13). 검색어 지우기 = 검색창 X(기존 컴포넌트) — 별도 버튼 없음. PC 빈 검색 프레임은 없어 같은 배치를 씀. V2.2 <code>hub/HUB#emptySearch</code>.');
  }else if(mo()){
-  // 모바일 카드: 로고·이름 / Up to N% cashback / Final Taker · Final Maker / 카드 끝 전폭 `Join {partner}`(정책 B-5-8 모바일 — Figma 모바일의 chevron·카드 전체 클릭은 정책과 달라 Figma 수정 대상)
-  body=`<div class="col" style="gap:16px">${list.map(p=>`<div class="col" style="${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px"><div class="row" style="gap:8px">${plogo(p,32)}<span class="b1 semi grow">${esc(p.name)}</span>${hp(p)}</div>
+  // 모바일 카드: 로고·이름 / Up to N% cashback / Final Taker · Final Maker / 카드 끝 전폭 `Join {partner}`(정책 B-5-8 모바일). 행·카드 본문 클릭과 `Join`은 모두 그 파트너 상세(현재 탭 — 결정 12차 · 사용자 2026-11-27)
+  body=`<div class="col" style="gap:16px">${list.map(p=>`<div class="col" data-go="${go(p)}" style="cursor:pointer;${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px"><div class="row" style="gap:8px">${plogo(p,32)}<span class="b1 semi grow">${esc(p.name)}</span>${hp(p)}</div>
    <span class="b1 semi">${brk?`${esc(p.cb)} ${/off/.test(p.cb)?'commission':'cashback'}`:`Up to ${p.rate}% cashback`}</span><hr class="divider">
    <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted commission':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div>${C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',full:true,go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} `)}</div>`).join('')}</div>`+
-   (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정). 카드 끝 전폭 <code>Join {partner}</code>(정책 B-5-8 모바일) — CEX·DEX는 레퍼럴 가입 새 탭, 브로커는 브로커 상세(결정 12차)'));
+   (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정). 카드 끝 전폭 <code>Join {partner}</code>(정책 B-5-8 모바일) — 그 파트너 상세로 이동(DEX 상세 · 거래소 상세 · 브로커 상세, 현재 탭 — 사용자 결정 2026-11-27)'));
  }else if(view==='card'){
-  const card=p=>`<div class="col" data-m-lift style="background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
+  const card=p=>`<div class="col" data-m-lift data-go="${go(p)}" style="cursor:pointer;background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
    <div class="row" style="align-items:center;gap:16px"><div class="col" style="gap:6px"><div class="row" style="gap:16px"><span class="row" style="gap:8px">${plogo(p,24)}<span style="font-size:20px;line-height:1.6;font-weight:700;letter-spacing:.15px">${esc(p.name)}</span></span>${hp(p)}</div>
     <span class="row" style="gap:4px"><span class="b1 semi cb">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span></span></div><span class="grow"></span>${C.btn(`Join ${esc(p.name)}`,{go:joinGo(p)}).replace('<button ',`<button${refAttr(p)} `)}</div>
    <div style="height:1px;background:var(--divider)"></div>
@@ -225,11 +225,11 @@ function compare(chip,c){
   const cell=(p,i)=>brk?[p.cb,p.comm,p.disc,usd(p.est),'-'][i]:[p.rate+'%',pct4(p.taker*(1-p.rate/100)),pct4(p.maker*(1-p.rate/100)),usd(est(p)),p.rating?stars(p.rating):'-'][i];
   const tdp=TV?'20px':'16px';
   body=`<div style="${box};padding:0 16px ${TV?20:24}px"><table class="tbl" style="table-layout:fixed"><thead><tr><th style="background:#fff;border:0;width:28px;font-size:10px;color:var(--text-secondary);font-weight:400;padding:${TV?'16px 4px 20px':'16px 4px'};${TV?'line-height:20px;box-sizing:border-box':''}">#</th>${th(chip==='DEX'?'DEX':brk?'Broker':'Exchange',brk?'200px':'168px','left')}${cols.map(([l,w,u])=>th(l,w,'right',u)).join('')}<th style="background:#fff;border:0"></th></tr></thead>
-   <tbody>${list.map((p,i)=>`<tr><td style="border:0;padding:${tdp} 4px;font-size:12px;text-align:center">${i+1}</td><td style="border:0;padding:${tdp} 8px"><span class="row" style="gap:8px">${plogo(p,24)}<span class="b2 semi">${esc(p.name)}</span>${hp(p)}</span></td>${cols.map((_,k)=>`<td class="r semi tnum" style="border:0;padding:${tdp} 8px${TV?';line-height:20px':''}">${cell(p,k)}</td>`).join('')}<td class="r" style="border:0;padding:${tdp} 8px">${join(p)}</td></tr>`).join('')}</tbody></table></div>`;
+   <tbody>${list.map((p,i)=>`<tr data-go="${go(p)}" style="cursor:pointer"><td style="border:0;padding:${tdp} 4px;font-size:12px;text-align:center">${i+1}</td><td style="border:0;padding:${tdp} 8px"><span class="row" style="gap:8px">${plogo(p,24)}<span class="b2 semi">${esc(p.name)}</span>${hp(p)}</span></td>${cols.map((_,k)=>`<td class="r semi tnum" style="border:0;padding:${tdp} 8px${TV?';line-height:20px':''}">${cell(p,k)}</td>`).join('')}<td class="r" style="border:0;padding:${tdp} 8px">${join(p)}</td></tr>`).join('')}</tbody></table></div>`;
  }
  return `<div class="col" style="gap:16px;margin-top:${mo()?40:32}px"><div class="row" style="gap:16px"><h3 class="h5 bold" style="margin:0;${mo()?'font-size:20px':'white-space:nowrap'}">${title}</h3>${mo()?'':'<span class="grow" style="height:1px;background:var(--divider)"></span>'}</div>
   <p class="b2 c2" style="margin:0">${sub}</p>${search}<div class="row wrap" style="gap:8px">${chips}</div>${body}</div>
-  ${C.note('비교표: 레코드 자동 생성. Final Taker/Maker = 레코드 수수료 × (1 − 캐시백율) 계산값, `Highest payout` = 현재 필터 최고 1개(Figma에 없음, G-150 확정), `Live Campaigns` 컬럼 삭제. Rating 리뷰 20개 미만 `-`(REQ-313). 행 끝 `Join {partner}` → 그 거래소의 테더맥스 상세(REQ-311). Figma CEX 표 Bitunix 옆 `Chip` 자리표시는 내용 없어 뺌.')}`}
+  ${C.note('비교표: 레코드 자동 생성. Final Taker/Maker = 레코드 수수료 × (1 − 캐시백율) 계산값, `Highest payout` = 현재 필터 최고 1개(Figma에 없음, G-150 확정), `Live Campaigns` 컬럼 삭제. Rating 리뷰 20개 미만 `-`(REQ-313). 행 본문 클릭 · 행 끝 `Join {partner}` → 그 파트너의 테더맥스 상세, 현재 탭(REQ-311 · 결정 12차 · 사용자 2026-11-27). Figma CEX 표 Bitunix 옆 `Chip` 자리표시는 내용 없어 뺌.')}`}
 
 // ---------- 게스트 이유 카드 (RT-7) ----------
 function why(){
@@ -253,7 +253,7 @@ R.screen({id:'hub.main',group:'hub',title:'캐시백 허브',route:'/cashback-hu
   {id:'member',label:'로그인 · 연동 0 — 이유 카드 없음 (H2)',figma:{pc:'28960:126890',mo:'28960:130800'},note:'V2.2 hub/HUB#member'},
   {id:'cexPanel',label:'CEX UID 연동 — CEX 잔액 패널 (H3)',figma:{pc:'28960:126896',mo:'28960:130806'},note:'Figma에만 있는 상태 — 정책 B-5-4 「로그인 · 선택 파트너에 연동 계정 있음 → YOUR CASHBACK」 유효'},
   {id:'cexBelowMin',label:'CEX 잔액 10 USDT 미만 (H4)',figma:{pc:'28960:126902',mo:'28960:130812'},note:'Figma에만 있는 상태 — 정책 B-5-4 유효 · 넛지 문구는 G-139'},
-  {id:'dexPanel',label:'DEX 잔액 패널 — EdgeX 지갑 연동 (H8)',figma:{pc:'28960:126926',mo:'28960:130836'},note:'V2.2 hub/HUB#dexPanel'},
+  {id:'dexPanel',label:'DEX 잔액 패널 — EdgeX 지갑 연동 (H8)',figma:{pc:'29354:139273',mo:'28960:130836'},note:'V2.2 hub/HUB#dexPanel'},
   {id:'dexPartial',label:'A=3 · B=8 — 일부만 출금',note:'V2.2 hub/HUB#dexPartial · 재사용: H5 패널 + 지갑 잔액 카드 「부분 매칭 · 최소액 미만」(29026:97704)'},
   {id:'dexBelowMin',label:'최소액 미만 — 넛지 (H4 · DEX & CEX)',figma:{pc:'28960:126902',mo:'28960:130812'},note:'V2.2 hub/HUB#dexBelowMin · H4 웹 라벨 `DEX & CEX balance under 10 USDT`(28960:126903)'},
     {id:'dexLoading',label:'패널 로딩',note:'V2.2 hub/HUB#dexLoading · 재사용: H5 패널 + 코어 스켈레톤(지갑 카드 메모 29026:97581 「조회 중에는 스켈레톤」)'},

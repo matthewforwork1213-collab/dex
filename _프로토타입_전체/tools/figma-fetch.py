@@ -139,7 +139,7 @@ if __name__ == '__main__':
             # figma-text-dump.js 압축 결과(한 줄에 하나) → 문구 캐시 + 좌표 캐시
             gpath = ROOT / 'ref' / 'figma_geom.json'
             geom = json.load(io.open(gpath, encoding='utf-8')) if gpath.exists() else {'nodes': {}}
-            kmap = {'b': 'button', 'c': 'chip', 't': 'tab', 'i': 'input', '': 'text'}
+            kmap = {'b': 'button', 'c': 'chip', 't': 'tab', 'i': 'input', 's': 'shell', '': 'text'}   # s = GNB·푸터·하단 탭 하위(공통 셸)
             for ln in raw.splitlines():
                 ln = ln.strip()
                 if not ln.startswith('{'): continue

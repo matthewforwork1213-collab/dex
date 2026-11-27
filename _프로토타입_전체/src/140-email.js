@@ -9,8 +9,9 @@ const L={ex:['Exchange','거래소'],addr:['Wallet address','지갑 주소'],net
 const kvRow=(k,v,o={})=>({kv:[k,v,o]});
 const base=(ex)=>[kvRow(L.ex,ex),kvRow(L.addr,ADDR),kvRow(L.net,NET,{koReg:true})];
 const SAFE_EN=['1. TetherMax does not contact you via phone, SMS, etc., and will not ask for authentication codes, screen sharing, or cryptocurrency transfers/withdrawals to secure accounts or secure platforms.','2. If you receive such requests, they are likely to be fraudulent. Be cautious of suspicious links sent through phishing sites, phone calls, SMS, or emails to avoid falling victim to scams.'];
+// 31 실패 메일 — Figma B2: 사유 아래 `Link Wallet`(그 DEX가 선택된 연동 모달, 결정 12차 「EMAIL 31 버튼 링크」)
 const fail31=(en,ko,koP)=>[{h:['Wallet linkage failed','지갑 연동에 실패했어요']},{p:['We couldn’t link this wallet to TetherMax. Here are the details.',koP||'지갑을 연동할 수 없었습니다. 아래에서 사유를 확인하세요.']},
- ...base('EdgeX'),kvRow(L.reason,[en,ko],{reg:true}),{p:['For assistance with this wallet, contact TetherMax customer support.','지갑 연동에 대한 도움이 필요하면 테더맥스 고객센터에 문의하세요.']}];
+ ...base('EdgeX'),kvRow(L.reason,[en,ko],{reg:true}),{btn:['Link Wallet','지갑 연동하기'],go:'link.addr:empty'},{p:['For assistance with this wallet, contact TetherMax customer support.','지갑 연동에 대한 도움이 필요하면 테더맥스 고객센터에 문의하세요.']}];
 const VIEW_WALLET={link:['View linked wallet','연동 지갑 상세 보기']};
 
 // id · 라벨 · EN 노드 · EN 모바일 · KO 노드 · KO 모바일 · 발송 조건(Figma 「발송 조건」 프레임 그대로) · 본문 블록
@@ -101,7 +102,7 @@ const EMAILS={
   {id:'t34',label:'T34 · 가입 환영',pc:'29062:9367',mo:'29064:5254',ko:'29062:9435',koMo:'29064:5317',cond:'<b>29062:9432 / 29062:9500 · T34 · 가입 환영</b><br>제목 예시 Welcome to TetherMax / TetherMax에 오신 것을 환영합니다<br>환영 메일 · DEX 지갑 연동·계정별 자동 지급 안내.',
    body:[{h:['Welcome to <span style="color:#0031c6">TetherMax</span>,<br>the most trusted Cashback platform.','<span style="color:#0031c6">TetherMax에 오신 것을 환영합니다.</span>']},
     {p:['All investment responsibilities lie with the investor.<br>However, the responsibility for commission refunds lies with TetherMax.','모든 투자 책임은 투자자에게 있습니다.<br>그러나 수수료 환급에 대한 책임은 TetherMax에 있습니다.']},
-    {p:[`You have registered as a member after agreeing to the terms of use and privacy policy.<br>Your information will be securely stored according to our privacy policy,<br>and if you wish to modify your information, you can do so on the TetherMax site > ${lnk('[My Page]')}`,'이용 약관 및 개인정보 보호정책에 동의하여 회원가입이 완료되었습니다.<br>입력하신 정보는 개인정보 보호정책에 따라 안전하게 보관됩니다.<br>회원 정보를 수정하려면, TetherMax 사이트 > [마이 페이지]에서 변경할 수 있습니다.']},
+    {p:[`You have registered as a member after agreeing to the terms of use and privacy policy.<br>Your information will be securely stored according to our privacy policy,<br>and if you wish to modify your information, you can do so on the TetherMax site > ${lnk('My Page')}`,'이용 약관 및 개인정보 보호정책에 동의하여 회원가입이 완료되었습니다.<br>입력하신 정보는 개인정보 보호정책에 따라 안전하게 보관됩니다.<br>회원 정보를 수정하려면, TetherMax 사이트 > [마이 페이지]에서 변경할 수 있습니다.']},
     {box:[['How to Get Started','시작 방법'],[['1. Sign up using the link on your exchange’s detail page.','2. Link your exchange UID or DEX wallet to TetherMax.','3. When an account’s claimable cashback reaches 10 USDT, it is paid automatically to that account.','4. Open the TetherMax app to check your cashback.'],['1. 거래소 상세 페이지의 링크를 통해 가입하세요.','2. 거래소 UID 또는 DEX 지갑을 테더맥스에 연동하세요.','3. 계정별 지급 가능액이 10 USDT 이상이면 해당 계정으로 자동 지급돼요.','4. 테더맥스 앱에서 캐시백 내역을 확인하세요.']]],c:'#222'}]},
  ]},
 };
@@ -121,7 +122,7 @@ function block(b,ko){
  if(b.bullet)return `<div style="${F}background:rgba(207,216,220,.2);border:1px solid rgba(0,0,0,.12);border-radius:12px;padding:12px;font-size:13px;font-weight:500;color:#000;line-height:1.5">• ${b.bullet}</div>`;
  if(b.hr)return `<div style="height:1px;background:rgba(0,0,0,.12)"></div>`;
  if(b.link)return `<a style="${F}font-size:14px;font-weight:500;color:#1743c6;cursor:pointer">${tx(b.link)}</a>`;
- if(b.btn)return `<button style="${F}width:100%;background:#0031c6;color:#fff;border:0;border-radius:4px;padding:8px 22px;font-size:15px;font-weight:500;line-height:26px;cursor:pointer">${b.btn}</button>`;
+ if(b.btn)return `<button${b.go?` data-go="${b.go}"`:''} style="${F}width:100%;background:#0031c6;color:#fff;border:0;border-radius:4px;padding:8px 22px;font-size:15px;font-weight:500;line-height:26px;cursor:pointer">${tx(b.btn)}</button>`;
  if(b.cap)return `<p style="${F}margin:0;font-size:12px;font-weight:500;line-height:1.66;color:${b.c||'rgba(0,0,0,.6)'}">${b.cap}</p>`;
  if(b.code)return `<div style="${F}align-self:flex-start;border:1px solid #0031c6;border-radius:4px;padding:16px;font-size:34px;font-weight:700;color:#0031c6;line-height:1.2">${b.code}</div>`;
  if(b.table)return `<table style="${F}width:100%;border-collapse:collapse;font-size:14px;font-weight:500">${b.table.map((r,i)=>`<tr>${r.map(c=>i?`<td style="padding:8px">${c}</td>`:`<th style="background:#5d6067;color:#fff;text-align:left;padding:4px 8px;font-weight:500">${c}</th>`).join('')}</tr>`).join('')}</table>`;

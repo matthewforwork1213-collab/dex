@@ -1,17 +1,17 @@
 {
- "generated": "2026-11-27T19:43",
+ "generated": "2026-11-27T20:00",
  "html": "C:\\Users\\oem\\Desktop\\tethermax_project\\DEX\\_프로토타입_전체\\_latest.html",
  "results": [
   {
-   "screen": "challenge.detail",
-   "group": "rewards",
-   "title": "캐시백 챌린지 상세",
+   "screen": "brokers.main",
+   "group": "cex",
+   "title": "Brokers (FX 소개)",
    "state": "normal",
-   "label": "레벨 1 (0%)",
+   "label": "기본 — FX 소개 · 앵커 탭 · FAQ",
    "vp": "pc",
-   "node": "10981:85015",
+   "node": "28537:492801",
    "src": "정밀",
-   "node_name": "Web",
+   "node_name": "FX Integration LP",
    "found": true,
    "fig_hidden": false,
    "full": true,
@@ -30,33 +30,146 @@
     "tab",
     "text"
    ],
-   "nF": 7,
-   "nP": 14,
-   "matched": 7,
+   "nF": 61,
+   "nP": 61,
+   "matched": 57,
    "missing": [],
    "added": [
     {
-     "t": "Claim 5 USDT Coupon",
-     "kind": "button"
+     "t": "No. A CFD (Contract for Difference) is an agreement between you and your broker to exchange the difference in price of an asset between when you open and close the trade. You never take ownership of the underlying asset. Whether that is a currency pair, index, or commodity. This is structurally different from buying spot crypto, where you hold the token directly.",
+     "kind": "text"
     }
    ],
    "unverifiable": 0,
    "diff": [],
-   "excepted": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "No. FX is based on currency pairs and different market drivers. It operates under different regulatory frameworks and is influenced by macro economic events rather than token supply mechanics. The two are structurally distinct product types.",
+     "rule": "EX-B03"
+    },
+    {
+     "type": "diff",
+     "t": "Leveraged trading can amplify both gains and losses. Before opening an account, review the product carefully and consider whether the risks fit your financial situation and experience leve. ⇄ Leveraged trading can amplify both gains and losses. Before opening an account, review the product carefully and consider whether the risks fit your financial situation and experience level.",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "Compare partner options without switching between different broker sites. See the full picture committing. ⇄ Compare partner options without switching between different broker sites. See the full picture before committing.",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "Compare in one price ⇄ Compare in one place",
+     "rule": "EX-B01"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "brokers.main",
+   "group": "cex",
+   "title": "Brokers (FX 소개)",
+   "state": "normal",
+   "label": "기본 — FX 소개 · 앵커 탭 · FAQ",
+   "vp": "mo",
+   "node": "28537:494216",
+   "src": "정밀",
+   "node_name": "fx-integration-lp-mobile",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 61,
+   "nP": 61,
+   "matched": 54,
+   "missing": [],
+   "added": [
+    {
+     "t": "FX is one of the world's largest financial markets, where currencies are traded in pairs. For active traders, it offers a different kind of market exposure shaped by macro events, interest rates, and global liquidity.",
+     "kind": "text"
+    },
+    {
+     "t": "Product terms, leverage limits, and availability differ significantly by jurisdiction. Always check local conditions.",
+     "kind": "text"
+    },
+    {
+     "t": "Whether you’re new to FX or comparing brokers for the first time, this keeps you informed before you commit to anything.",
+     "kind": "text"
+    },
+    {
+     "t": "No. A CFD (Contract for Difference) is an agreement between you and your broker to exchange the difference in price of an asset between when you open and close the trade. You never take ownership of the underlying asset. Whether that is a currency pair, index, or commodity. This is structurally different from buying spot crypto, where you hold the token directly.",
+     "kind": "text"
+    }
+   ],
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "No. FX is based on currency pairs and different market drivers. It operates under different regulatory frameworks and is influenced by macro economic events rather than token supply mechanics.",
+     "rule": "EX-B03"
+    },
+    {
+     "type": "diff",
+     "t": "Compare partner options without switching between different broker sites. See the full picture committing. ⇄ Compare partner options without switching between different broker sites. See the full picture before committing.",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "FX is the market where one currency is traded against another. A CFD lets you trade price movement without owning the underlying asset – making product structure, fees, and leverage especially important to understand. ⇄ FX is the market where one currency is traded against another. A CFD lets you trade price movement without owning the underlying asset, making product structure, commission, and leverage especially important to understand.",
+     "rule": "EX-B02"
+    },
+    {
+     "type": "diff",
+     "t": "Check fees, leverage, conditions, and all disclosures carefully before making any deposit. ⇄ Check commission fees, leverage, conditions, and all disclosures carefully before making any deposit.",
+     "rule": "EX-B02"
+    },
+    {
+     "type": "diff",
+     "t": "A CFD gives price exposure without ownership of the underlying asset. This makes product terms, leverage limits, and fee structure especially important to review before you open any account. ⇄ A Contract for Difference (CFD) gives price exposure without ownership of the underlying asset. This makes product terms, leverage limits, and fee structures especially important to review before you open any account.",
+     "rule": "EX-B02"
+    },
+    {
+     "type": "diff",
+     "t": "Compare in one price ⇄ Compare in one place",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "Leveraged trading can amplify both gains and losses. Review the product carefully before opening. ⇄ Leveraged trading can amplify both gains and losses. Before opening an account, review the product carefully and consider whether the risks fit your financial situation and experience level.",
+     "rule": "EX-B02"
+    }
+   ],
    "geom": null,
    "scope_overlay": false,
    "same_node": []
   },
   {
-   "screen": "challenge.detail",
-   "group": "rewards",
-   "title": "캐시백 챌린지 상세",
-   "state": "progress",
-   "label": "게이지 진행 (35%)",
+   "screen": "brokers.learn",
+   "group": "cex",
+   "title": "Brokers — Learn the Basics",
+   "state": "normal",
+   "label": "기본 — 목차 · 레버리지 · 용어집 · 체크리스트",
    "vp": "pc",
-   "node": "10981:85020",
+   "node": "28537:493293",
    "src": "정밀",
-   "node_name": "Web",
+   "node_name": "Learn",
    "found": true,
    "fig_hidden": false,
    "full": true,
@@ -75,16 +188,256 @@
     "tab",
     "text"
    ],
-   "nF": 7,
-   "nP": 14,
-   "matched": 7,
+   "nF": 61,
+   "nP": 52,
+   "matched": 54,
    "missing": [],
-   "added": [
+   "added": [],
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
     {
-     "t": "Claim 5 USDT Coupon",
-     "kind": "button"
+     "type": "missing",
+     "t": "JPY/USD",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "missing",
+     "t": "Quotes",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "missing",
+     "t": "Charts",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "missing",
+     "t": "History",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "missing",
+     "t": "Message",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "diff",
+     "t": "Do I fully understand that leverage can wipe out my money instantly?\nAm I using \"disposable risk capital\":money I can afford to lose without changing my lifestyle?\nDo I know the exact fees my broker is charging me?\nDo I know how to use a Stop Loss (an automatic safety switch that closes a trade before losses get too big)? ⇄ Do I fully understand that leverage can wipe out my money instantly? Am I using 'disposable risk capital': money I can afford to lose without changing my lifestyle? Do I know the exact fees my broker is charging me? Do I know how to use a Stop Loss (an automatic safety switch that closes a trade before losses get too big)?",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "Leverage lets you trade with more money than you actually deposit by \"borrowing\" from the broker. While it can magnify your profits, it magnifies your losses just as fast. ⇄ Leverage lets you trade with more money than you actually deposit by 'borrowing' from the broker. While it can magnify your profits, it magnifies your losses just as fast.",
+     "rule": "EX-B01"
     }
    ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "brokers.learn",
+   "group": "cex",
+   "title": "Brokers — Learn the Basics",
+   "state": "normal",
+   "label": "기본 — 목차 · 레버리지 · 용어집 · 체크리스트",
+   "vp": "mo",
+   "node": "28537:495560",
+   "src": "정밀",
+   "node_name": "compare-2-brokers-mobile",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 59,
+   "nP": 52,
+   "matched": 52,
+   "missing": [],
+   "added": [],
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "JPY/USD",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "missing",
+     "t": "Quotes",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "missing",
+     "t": "Charts",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "missing",
+     "t": "History",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "missing",
+     "t": "Message",
+     "rule": "EX-B04"
+    },
+    {
+     "type": "diff",
+     "t": "Do I fully understand that leverage can wipe out my money instantly?\nAm I using \"disposable risk capital\":money I can afford to lose without changing my lifestyle?\nDo I know the exact fees my broker is charging me?\nDo I know how to use a Stop Loss (an automatic safety switch that closes a trade before losses get too big)? ⇄ Do I fully understand that leverage can wipe out my money instantly? Am I using 'disposable risk capital': money I can afford to lose without changing my lifestyle? Do I know the exact fees my broker is charging me? Do I know how to use a Stop Loss (an automatic safety switch that closes a trade before losses get too big)?",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "Leverage lets you trade with more money than you actually deposit by \"borrowing\" from the broker. While it can magnify your profits, it magnifies your losses just as fast. ⇄ Leverage lets you trade with more money than you actually deposit by 'borrowing' from the broker. While it can magnify your profits, it magnifies your losses just as fast.",
+     "rule": "EX-B01"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "brokers.compare",
+   "group": "cex",
+   "title": "Brokers — Compare Brokers",
+   "state": "normal",
+   "label": "기본 — RS Finance · INFINOX 비교",
+   "vp": "pc",
+   "node": "28537:493118",
+   "src": "정밀",
+   "node_name": "Compare 2 brokers",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 48,
+   "nP": 48,
+   "matched": 47,
+   "missing": [],
+   "added": [],
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "Forex, stocks, indices, , futures, bonds, commodities, crypto CFDs ⇄ Forex, stocks, indices, futures, bonds, commodities, crypto CFDs",
+     "rule": "EX-B01"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "brokers.compare",
+   "group": "cex",
+   "title": "Brokers — Compare Brokers",
+   "state": "normal",
+   "label": "기본 — RS Finance · INFINOX 비교",
+   "vp": "mo",
+   "node": "28537:495361",
+   "src": "정밀",
+   "node_name": "compare-2-brokers-mobile",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 0,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 48,
+   "nP": 48,
+   "matched": 46,
+   "missing": [],
+   "added": [],
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "diff",
+     "t": "Forex, stocks, indices, , futures, bonds, commodities, crypto CFDs ⇄ Forex, stocks, indices, futures, bonds, commodities, crypto CFDs",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "Product Available ⇄ Products Available",
+     "rule": "EX-B01"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "brokers.detail",
+   "group": "cex",
+   "title": "Brokers — 브로커 상세",
+   "state": "rsFinance",
+   "label": "RS Finance",
+   "vp": "pc",
+   "node": "28537:493558",
+   "src": "정밀",
+   "node_name": "RS Finance",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 3,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 76,
+   "nP": 76,
+   "matched": 76,
+   "missing": [],
+   "added": [],
    "unverifiable": 0,
    "diff": [],
    "excepted": [],
@@ -92,15 +445,15 @@
    "scope_overlay": false
   },
   {
-   "screen": "challenge.detail",
-   "group": "rewards",
-   "title": "캐시백 챌린지 상세",
-   "state": "progress",
-   "label": "게이지 진행 (35%)",
+   "screen": "brokers.detail",
+   "group": "cex",
+   "title": "Brokers — 브로커 상세",
+   "state": "rsFinance",
+   "label": "RS Finance",
    "vp": "mo",
-   "node": "10739:232621",
+   "node": "28537:494735",
    "src": "정밀",
-   "node_name": "mWeb/allPartnerExchange",
+   "node_name": "compare-2-brokers-mobile",
    "found": true,
    "fig_hidden": false,
    "full": true,
@@ -109,7 +462,7 @@
    "auth": "s4",
    "render_err": null,
    "opaque": {},
-   "generic": 0,
+   "generic": 1,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -119,51 +472,42 @@
     "tab",
     "text"
    ],
-   "nF": 6,
-   "nP": 7,
-   "matched": 5,
-   "missing": [
-    {
-     "t": "Unlocks after signing up",
-     "kind": "text"
-    }
-   ],
-   "added": [
-    {
-     "t": "Complete level 1 reward to unlock",
-     "kind": "text"
-    },
-    {
-     "t": "Claim 5 USDT Coupon",
-     "kind": "button"
-    }
-   ],
+   "nF": 76,
+   "nP": 76,
+   "matched": 75,
+   "missing": [],
+   "added": [],
    "unverifiable": 0,
    "diff": [],
-   "excepted": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "View Website",
+     "rule": "EX-B06"
+    }
+   ],
    "geom": null,
-   "scope_overlay": false,
-   "same_node": []
+   "scope_overlay": false
   },
   {
-   "screen": "challenge.detail",
-   "group": "rewards",
-   "title": "캐시백 챌린지 상세",
-   "state": "pick",
-   "label": "보상 받을 계정 선택",
+   "screen": "brokers.detail",
+   "group": "cex",
+   "title": "Brokers — 브로커 상세",
+   "state": "infinox",
+   "label": "INFINOX",
    "vp": "pc",
-   "node": "10981:85017",
+   "node": "28537:493813",
    "src": "정밀",
-   "node_name": "Web",
+   "node_name": "INFINOX",
    "found": true,
    "fig_hidden": false,
-   "full": false,
-   "scoped": true,
+   "full": true,
+   "scoped": false,
    "lang": "en",
    "auth": "s4",
    "render_err": null,
    "opaque": {},
-   "generic": 0,
+   "generic": 2,
    "replaced": 0,
    "allow_added": [
     "badge",
@@ -173,57 +517,128 @@
     "tab",
     "text"
    ],
-   "nF": 4,
-   "nP": 7,
-   "matched": 3,
+   "nF": 79,
+   "nP": 79,
+   "matched": 76,
    "missing": [],
    "added": [
     {
-     "t": "Centralised Exchanges",
-     "kind": "text"
-    },
-    {
-     "t": "Decentralised Exchanges",
-     "kind": "text"
-    },
-    {
-     "t": "EdgeX · Wallet",
+     "t": "Sign up on the referral link & complete your account information for passing the KYC review.",
      "kind": "text"
     }
    ],
    "unverifiable": 0,
-   "diff": [
+   "diff": [],
+   "excepted": [
     {
-     "figma": "Select a UID to receive the reward",
-     "proto": "Select an account for the reward",
-     "ratio": 0.73,
+     "type": "missing",
+     "t": "Sign up on the referral link & complete KYC in the MY PROFILE section, under the Trader’s Menu.",
+     "rule": "EX-B06"
+    },
+    {
+     "type": "diff",
+     "t": "Discount rates displayed are indicative and subject to the current IB agreement between TetherMax and the respective broker. Rates may vary. You must register via TetherMax's IB link to activate your discount : registrations made directly with the broker will not be attributed. Past discount performance is not indicative of future rates. ⇄ Discount rates displayed are indicative and subject to the current IB agreement between TetherMax and the respective broker. Rates may vary. You must register via TetherMax`s IB link to activate your discount: registrations made directly with the broker will not be attributed. Past discount performance is not indicative of future rates.",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "84% OFF ⇄ 84%OFF",
+     "rule": "EX-B01"
+    }
+   ],
+   "geom": null,
+   "scope_overlay": false
+  },
+  {
+   "screen": "brokers.detail",
+   "group": "cex",
+   "title": "Brokers — 브로커 상세",
+   "state": "infinox",
+   "label": "INFINOX",
+   "vp": "mo",
+   "node": "28537:495010",
+   "src": "정밀",
+   "node_name": "compare-2-brokers-mobile",
+   "found": true,
+   "fig_hidden": false,
+   "full": true,
+   "scoped": false,
+   "lang": "en",
+   "auth": "s4",
+   "render_err": null,
+   "opaque": {},
+   "generic": 2,
+   "replaced": 0,
+   "allow_added": [
+    "badge",
+    "button",
+    "chip",
+    "input",
+    "tab",
+    "text"
+   ],
+   "nF": 78,
+   "nP": 79,
+   "matched": 72,
+   "missing": [],
+   "added": [
+    {
+     "t": "Sign Up for STP Account",
+     "kind": "button"
+    },
+    {
+     "t": "Sign Up for ECN Account",
+     "kind": "button"
+    },
+    {
+     "t": "4 USD per lot",
+     "kind": "text"
+    },
+    {
+     "t": "Sign up on the referral link & complete your account information for passing the KYC review.",
      "kind": "text"
     }
    ],
-   "excepted": [],
+   "unverifiable": 0,
+   "diff": [],
+   "excepted": [
+    {
+     "type": "missing",
+     "t": "View Website",
+     "rule": "EX-B06"
+    },
+    {
+     "type": "missing",
+     "t": "Sign up on the referral link & complete KYC in the MY PROFILE section, under the Trader’s Menu.",
+     "rule": "EX-B06"
+    },
+    {
+     "type": "missing",
+     "t": "STP 10/ ECN 0",
+     "rule": "EX-B06"
+    },
+    {
+     "type": "diff",
+     "t": "Discount rates displayed are indicative and subject to the current IB agreement between TetherMax and the respective broker. Rates may vary. You must register via TetherMax's IB link to activate your discount : registrations made directly with the broker will not be attributed. Past discount performance is not indicative of future rates. ⇄ Discount rates displayed are indicative and subject to the current IB agreement between TetherMax and the respective broker. Rates may vary. You must register via TetherMax`s IB link to activate your discount: registrations made directly with the broker will not be attributed. Past discount performance is not indicative of future rates.",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "84% OFF* / standard lot ⇄ 84%OFF* / standard lot",
+     "rule": "EX-B01"
+    },
+    {
+     "type": "diff",
+     "t": "84% OFF ⇄ 84%OFF",
+     "rule": "EX-B01"
+    }
+   ],
    "geom": null,
-   "scope_overlay": true,
+   "scope_overlay": false,
    "same_node": []
   }
  ],
  "nodesign": [],
- "oneside": [
-  {
-   "screen": "challenge.detail",
-   "state": "normal",
-   "label": "레벨 1 (0%)",
-   "missing_vp": "mo",
-   "has": "10981:85015",
-   "group": "rewards"
-  },
-  {
-   "screen": "challenge.detail",
-   "state": "pick",
-   "label": "보상 받을 계정 선택",
-   "missing_vp": "mo",
-   "has": "10981:85017",
-   "group": "rewards"
-  }
- ],
+ "oneside": [],
  "geom_top": []
 }

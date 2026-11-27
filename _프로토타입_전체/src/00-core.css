@@ -89,7 +89,7 @@ img{display:block;max-width:100%}
 .tf.err .in{border:2px solid rgba(244,67,54,.5);padding:0 11px}.tf.err .lbl,.tf.err .help{color:#f44336}
 .tf.ok .in{border-color:var(--success)}
 .tf.dis .in{background:var(--bg-accent);color:var(--text-disabled)}
-.tf .help{font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary);padding:0 2px}
+.tf .help{font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary);padding:0 14px}   /* MUI FormHelperText 좌우 14(Figma 연동 주소 입력 28969:126986 등) */
 .tf.sm .in{min-height:40px}.tf.sm .in input{padding:8px 0;font-size:14px}
 .sel{display:flex;align-items:center;gap:12px;border:1px solid var(--divider);border-radius:var(--r-s);padding:14px 16px;background:#fff;cursor:pointer}
 .chk{display:inline-flex;align-items:center;gap:8px;cursor:pointer}

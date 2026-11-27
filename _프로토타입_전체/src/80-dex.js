@@ -51,10 +51,10 @@ const outlinedP=(label,o={})=>`<button class="btn outlined primary ${o.size||'lg
 // =====================================================================
 function ovHero(list){
  const marks=`<div style="display:flex">${list.map((id,i)=>`<span style="margin-right:${i<list.length-1?-9:0}px;border-radius:50%;box-shadow:0 0 0 2px #fff">${C.dex(DX[id].name,37)}</span>`).join('')}</div>`;
- const copy=`<div class="col" style="gap:${mo()?24:32}px;max-width:480px">
-  <h1 style="margin:0;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;letter-spacing:-.5px">Trade onchain,${mo()?' ':'<br>'}keep your cashback</h1>
-  <p class="b1 c2" style="margin:-8px 0 0">${T('Trade with your own wallet on the DEX. Paste your wallet address into TetherMax and we pay your cashback into your TetherMax balance.','내 지갑으로 DEX에서 거래하고, 테더맥스에 지갑 주소만 붙여넣으면 캐시백을 테더맥스 잔액으로 드려요.')}</p>
-  <div class="col" style="gap:8px">${marks}<div class="col" style="gap:2px"><span class="b2 semi">${list.length} partner DEXs you can start earning Cashback with</span><span class="b2 c2">Trade on the DEX. Paste your address on TetherMax.</span></div></div>
+ // Figma 최신 OA(29361:137628 · 모바일 29363:135072): 제목 → 마크 → 파트너 수 → 설명(한 줄) → 버튼
+ const copy=`<div class="col" style="gap:${mo()?16:32}px">
+  <h1 style="margin:0;max-width:480px;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;letter-spacing:-.5px">Trade onchain,${mo()?' ':'<br>'}keep your cashback</h1>
+  <div class="col" style="gap:8px">${marks}<div class="col" style="gap:2px"><span class="b2 semi">${list.length} partner DEXs you can start earning Cashback with</span><span class="b2 c2">${T('Trade with your own wallet on the DEX. Paste your wallet address into TetherMax and we pay your cashback into your TetherMax balance.','내 지갑으로 DEX에서 거래하고, 테더맥스에 지갑 주소만 붙여넣으면 캐시백을 테더맥스 잔액으로 드려요.')}</span></div></div>
   <div class="row" style="gap:16px">${C.btn('DEX Overview',{cls:mo()?'grow':''}).replace('<button','<button data-scroll-to="dex-venues"')}${outlinedP('Guide to DEX').replace('<button','<button data-scroll-to="dex-steps"')}</div></div>`;
  const risk=`<p class="cap c2" style="margin:0;max-width:720px">※ Decentralized trading carries risks, including smart contract vulnerabilities, slippage, MEV, and potential loss of funds. Please conduct your own research prior to trading onchain.</p>`;
  if(mo())return `<section style="background:linear-gradient(180deg,#eef2f8 0%,#e6edf8 70%,#fff 100%)"><div style="height:300px;background:url(${A('dex-ov-hero.jpg')}) 78% 30%/auto 420px no-repeat"></div><div class="col" style="gap:24px;padding:0 16px 40px">${copy}${risk}</div></section>`;
@@ -63,15 +63,16 @@ function ovHero(list){
 function ovGlance(list,c){
  // Figma 최신 OA(29361:136089) glance 카드: 위 줄(로고·이름 / Up to) + TVL · 24H Vol 칸 두 개(115×69). DefiLlama 24시간 실패면 칸 숨김(REQ-323)
  const gbox=(k,v)=>`<div class="col" style="flex:1 1 0;min-width:0;gap:4px;border:1px solid var(--divider);border-radius:8px;padding:10px 12px"><span class="cap c2" style="line-height:20px">${k}</span><span class="b1 semi" style="line-height:23px">${v}</span></div>`;
- const gstat=c==='defiHidden'?'':`<div class="row" style="gap:8px">${gbox('TVL',DEFI.tvl)}${gbox('24H Vol',DEFI.vol)}</div>`;
- const card=(name,rate,mark)=>`<div style="flex:${mo()||c==='overflow'?'0 0 288px':'1 1 0'};min-width:0;background:#fff;border:1px solid var(--divider);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px">
+ // 모바일(29363:135072): 카드 230폭, TVL · 24H Vol 칸이 세로로(180×69, 간격 8), 카드 간격 12
+ const gstat=c==='defiHidden'?'':`<div class="${mo()?'col':'row'}" style="gap:8px">${gbox('TVL',DEFI.tvl)}${gbox('24H Vol',DEFI.vol)}</div>`;
+ const card=(name,rate,mark)=>`<div style="flex:${mo()?'0 0 230px':c==='overflow'?'0 0 288px':'1 1 0'};min-width:0;background:#fff;border:1px solid var(--divider);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px">
   <div style="display:flex;align-items:center;justify-content:space-between"><div class="row" style="gap:12px">${mark}<span class="b1 semi">${name}</span></div>
   <div class="col" style="gap:0;align-items:flex-end"><span class="b1 c2">Up to</span><span style="font-size:34px;line-height:1.235;font-weight:700;letter-spacing:.25px;color:var(--blue)">${rate}%</span></div></div>${gstat}</div>`;
  let cards=list.map(id=>card(DX[id].name,DX[id].rate,C.dex(DX[id].name,32)));
  if(c==='overflow')cards=cards.concat(EXTRA.map(x=>card(x.name,x.rate,C.dex(x.name,32))));
  const sub=c==='defiHidden'?'':`<span class="cap" style="font-weight:500">TVL and 24H volume from DefiLlama, as of ${c==='defiStale'?'13 Oct 2026':'14 Oct 2026'}</span>`;
  const fade=c==='overflow'&&!mo()?`<div style="position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(90deg,#fff,rgba(255,255,255,0))"></div><div style="position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(270deg,#fff,rgba(255,255,255,0))"></div>`:'';
- const row=`<div style="position:relative"><div style="display:flex;gap:16px;overflow-x:${mo()||c==='overflow'?'auto':'visible'};${c==='overflow'&&!mo()?'padding:0 40px;':''}scrollbar-width:none">${cards.join('')}</div>${fade}</div>`;
+ const row=`<div style="position:relative"><div style="display:flex;gap:${mo()?12:16}px;overflow-x:${mo()||c==='overflow'?'auto':'visible'};${c==='overflow'&&!mo()?'padding:0 40px;':''}scrollbar-width:none">${cards.join('')}</div>${fade}</div>`;
  const head=`<div style="display:flex;${mo()?'flex-direction:column;gap:4px':'align-items:flex-end;justify-content:space-between'}"><div class="col" style="gap:0"><span class="h5" style="line-height:1.334">Partner DEXs at a glance</span>${sub}</div><a class="b1 semi cb" data-go="hub.main" style="cursor:pointer">Compare monthly cashback on the Cashback Hub</a></div>`;
  return `<section style="background:#fff;padding:${mo()?'40px 0 24px':'56px 0 24px'}">${wrap(`<div class="col" style="gap:20px">${head}${row}</div>`)}</section>`;
 }
@@ -89,6 +90,7 @@ function venueCard(d,c,i){
  const box=(k,v)=>`<div style="flex:1 1 0;min-width:0;border:1px solid var(--divider);border-radius:8px;padding:10px 12px" class="col g4"><span class="cap c2">${k}</span><span class="b2 semi">${v}</span></div>`;
  const stats=[box('Final Taker',pct(fin(d,'taker'))),box('Final Maker',pct(fin(d,'maker')))];
  if(c!=='defiHidden')stats.push(box('TVL',DEFI.tvl),box('24H Vol',DEFI.vol));
+ if(mo())return venueCardMo(d,c);
  const left=i%2===0;
  const bd=mo()?'padding:24px 0;border-bottom:1px solid var(--divider)':`padding:40px ${left?'40px 40px 0':'0 40px 40px'};${left?'border-right:1px solid var(--divider);':''}`;
  return `<div class="col" data-m-lift style="gap:16px;${bd}">
@@ -97,22 +99,38 @@ function venueCard(d,c,i){
   ${c==='maint'&&d.id==='aster'?C.note('점검·일시 연동 불가(G-162 확정): 카드·상세는 그대로 노출하고 가입 링크(<code>Get Started</code>)도 유지. 연동 진입만 숨긴다 — 랜딩 카드에는 연동 버튼이 없어 화면 차이 없음'):''}
   <div class="row" style="gap:12px">${outlinedP('Learn More',{size:'md',go:'dex.detail:'+d.id,full:true})}<button class="btn contained primary md full">Get Started${ext()}</button></div></div>`;
 }
+// 리스트 행 · 모바일 카드 공통 조각 — Figma 리스트 뷰(29361:138251 · 모바일 29363:136978) · 모바일 카드(29363:135072)
+const vStars=()=>`<span class="row" style="gap:0">${[1,2,3].map(()=>`<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px" alt="">`).join('')}<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px;clip-path:inset(0 50% 0 0)" alt=""><img src="${A('dex-dt-ic-star-empty.svg')}" style="width:14px;height:14px" alt=""></span><span class="b2">4.0</span><span class="b2 c2">(23)</span>`;
+const vHead=(d,stars)=>`<div class="row" style="gap:${mo()?8:8}px">${C.dex(d.name,mo()?32:24)}<span class="${mo()?'b1':'h5'} semi">${d.name}</span>${stars?`<span class="row" style="gap:6px;margin-left:${mo()?8:12}px">${vStars()}</span>`:''}</div>`;
+const vUpTo=d=>`<span class="b1 semi cb">Up to ${d.rate}% cashback</span>`;
+const vFees=d=>`<div class="row" style="gap:24px"><span class="row" style="gap:6px"><span class="b2 c2">Final Taker</span><span class="b2 semi">${pct(fin(d,'taker'))}</span></span><span class="row" style="gap:6px"><span class="b2 c2">Final Maker</span><span class="b2 semi">${pct(fin(d,'maker'))}</span></span></div>`;
 function listRow(d){
- const stars=`<span class="row" style="gap:0">${[1,2,3].map(()=>`<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px" alt="">`).join('')}<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px;clip-path:inset(0 50% 0 0)" alt=""><img src="${A('dex-dt-ic-star-empty.svg')}" style="width:14px;height:14px" alt=""></span>`;
- const btn=`<button class="btn contained black sm" data-go="dex.detail:${d.id}">View ${d.name}</button>`;
- return `<div style="border:1px solid var(--divider);border-radius:8px;padding:12px 16px;background:#fff" class="col g8">
-  <div class="row between"><div class="col" style="gap:2px"><div class="row" style="gap:6px">${C.dex(d.name,mo()?32:20)}<span class="${mo()?'b1':'b2'} semi">${d.name}</span>${mo()?'':`${stars}<span class="cap">4.0</span><span class="cap c2">(23)</span>`}</div><span class="b2 semi cb">Up to ${d.rate}% cashback</span></div>${btn}</div>
-  <hr class="divider"><div class="row" style="gap:16px;${mo()?'justify-content:space-between':''}"><span class="cap c2">Final Taker <b style="color:var(--text-primary)">${pct(fin(d,'taker'))}</b></span><span class="cap c2">Final Maker <b style="color:var(--text-primary)">${pct(fin(d,'maker'))}</b></span></div></div>`;
+ const btn=`<button class="btn contained black lg${mo()?' full':''}" data-go="dex.detail:${d.id}">View ${d.name}</button>`;
+ if(mo())return `<div style="border:1px solid var(--divider);border-radius:8px;padding:15px;background:#fff" class="col">
+  <div class="col" style="gap:12px">${vHead(d,true)}${vUpTo(d)}</div><hr class="divider" style="margin:12px 0">${vFees(d)}<div style="height:12px"></div>${btn}</div>`;
+ return `<div style="border:1px solid var(--divider);border-radius:8px;padding:17px 19px 19px;background:#fff" class="col">
+  <div class="row between"><div class="col" style="gap:6px">${vHead(d,true)}${vUpTo(d)}</div>${btn}</div>
+  <hr class="divider" style="margin:10px 0">${vFees(d)}</div>`;
+}
+// 모바일 기본(카드) 뷰 — 29363:135072: 머리(마크·이름 / Up to) · 구분선 · Final Taker/Maker · TVL·24H Vol 칸 · Learn More / Get Started
+function venueCardMo(d,c){
+ const box=(k,v)=>`<div style="flex:1 1 0;min-width:0;border:1px solid var(--divider);border-radius:8px;padding:10px 12px" class="col g4"><span class="cap c2">${k}</span><span class="b2 semi">${v}</span></div>`;
+ return `<div class="col" data-m-lift data-dex-card="${d.id}" style="border:1px solid var(--divider);border-radius:8px;padding:15px;background:#fff">
+  <div class="col" style="gap:12px">${vHead(d,false)}${vUpTo(d)}</div><hr class="divider" style="margin:12px 0">${vFees(d)}
+  ${c==='defiHidden'?'':`<div class="row" style="gap:8px;margin-top:12px">${box('TVL',DEFI.tvl)}${box('24H Vol',DEFI.vol)}</div>`}
+  ${c==='maint'&&d.id==='aster'?C.note('점검·일시 연동 불가(G-162 확정): 카드·상세는 그대로 노출하고 가입 링크(<code>Get Started</code>)도 유지. 연동 진입만 숨긴다'):''}
+  <div class="row" style="gap:12px;margin-top:12px">${outlinedP('Learn More',{size:'md',go:'dex.detail:'+d.id,full:true})}<button class="btn contained primary md full">Get Started${ext()}</button></div></div>`;
 }
 function ovVenues(list,c){
- const isList=c==='list'||mo();
- const desc=isList?'Join through our referral and link your wallet address. TVL and 24H volume from DefiLlama.':'Pick one, join through our link, then paste your wallet address. TVL and 24H volume from DefiLlama.';
+ const isList=c==='list';   // 모바일도 기본은 카드(29363:135072), 리스트는 전환 시(29363:136978)
+ const desc=isList||mo()?'Join through our referral and link your wallet address. TVL and 24H volume from DefiLlama.':'Pick one, join through our link, then paste your wallet address. TVL and 24H volume from DefiLlama.';
  const sw=`<button class="icon-btn" title="${isList?'grid':'list'}">${isList?`<span style="display:grid;grid-template-columns:8px 8px;gap:3px">${'<i style="width:8px;height:8px;border-radius:2px;background:rgba(0,0,0,.56)"></i>'.repeat(4)}</span>`:`<img src="${A('dex-ov-ic-list.svg')}" style="width:24px;height:24px" alt="">`}</button>`;
  const head=mo()?`<div class="col" style="gap:8px"><div class="row between" style="align-items:flex-start"><h2 id="dex-venues" tabindex="-1" class="h3" style="margin:0;font-size:34px;line-height:1.235;outline:0">Our Partner Decentralised Exchanges</h2>${sw}</div><p class="b2 c2" style="margin:0">${desc}</p></div>`
   :`<div class="row" style="gap:120px;align-items:flex-end;justify-content:space-between"><h2 id="dex-venues" tabindex="-1" class="h3" style="margin:0;width:560px;outline:0">Our Partner Decentralised Exchanges</h2><div class="row" style="gap:16px"><p class="b1 c2" style="margin:0;width:460px;text-align:right">${desc}</p>${sw}</div></div>`;
  const ds=list.map(id=>DX[id]);
  let body;
  if(isList)body=`<div class="col" style="gap:${mo()?12:16}px">${ds.map(listRow).join('')}</div>`;
+ else if(mo())body=`<div class="col" style="gap:12px">${ds.map((d,i)=>venueCard(d,c,i)).join('')}</div>`;
  else{const rows=[];for(let i=0;i<ds.length;i+=2)rows.push(`<div style="display:grid;grid-template-columns:1fr 1fr;${i?'border-top:1px solid var(--divider)':''}">${venueCard(ds[i],c,0)}${ds[i+1]?venueCard(ds[i+1],c,1):'<div></div>'}</div>`);
   body=`<div style="border-top:1px solid var(--divider);border-bottom:1px solid var(--divider)">${rows.join('')}</div>`}
  const stale=c==='defiStale'?`<p class="cap c2" style="margin:0">Source: DefiLlama, as of 10. 13. 15:00.</p>${C.note('DefiLlama 실패 — 서버 캐시의 마지막 값과 기준 시각을 최대 24시간 표시(REQ-323). 문구 원문 <code>Source: DefiLlama, as of {time}.</code> · 디자인 없음')}`:'';
@@ -122,15 +140,16 @@ function ovVenues(list,c){
 }
 function ovCompare(){
  const row=(k,v,dex,chip)=>`<div class="col" style="gap:4px;border-top:1px solid var(--divider);padding:16px 0"><span class="cap c2">${k}</span><span style="${dex?'font-size:20px;line-height:1.6;font-weight:600;letter-spacing:.15px':'font-size:16px;line-height:1.5'}">${v}</span>${chip?`<span class="cap cb" style="border:1px solid var(--blue);border-radius:999px;padding:0 8px;align-self:flex-start;margin-top:4px">${chip}</span>`:''}</div>`;
- const ex=[['Who holds your funds','The exchange'],['How you sign up','Account with an identity check'],['How you link to TetherMax','Your exchange UID'],['Where cashback is paid','Your TetherMax balance'],['Where payouts go','On TetherMax, from 10 USDT'],['Event and invite rewards','Yes']];
- const dx=[['Who holds your funds','You, in your own wallet'],['How you sign up','Email or a wallet, no KYC check'],['How you link to TetherMax','Your wallet address, pasted'],['Where cashback is paid','Your TetherMax balance','Your Cashback'],['Where payouts go','To your linked wallet from 10 USDT'],['Rewards','Event and invitation rewards are available.']];
+ // 비교 행 = 정책 8-4 · REQ-327 · Figma 최신 OA(29361:137628). 최소액 10은 서버값 표본
+ const ex=[['Who holds your funds','The exchange'],['How you sign up','Account with an identity check'],['How you link to TetherMax','Your exchange UID'],['Where cashback is paid','Your TetherMax balance'],['Where you withdraw','On TetherMax, from 10 USDT'],['Event and invite rewards','Yes']];
+ const dx=[['Who holds your funds','You, in your own wallet'],['How you sign up','Email or a wallet, no KYC check'],['How you link to TetherMax','Your wallet address, pasted'],['Where cashback is paid','Your TetherMax balance','Your Cashback'],['Where you withdraw','On TetherMax, from 10 USDT, to your linked wallet'],['Event and invite rewards','Yes']];
  const panel=(dex)=>`<div style="position:relative;flex:1 1 0;min-width:0;background:#fff;border:${dex?'2px solid var(--blue)':'1px solid var(--divider)'};border-radius:8px;padding:${mo()?'40px':'40px 40px 16px'};box-shadow:${dex?'0 16px 40px rgba(26,64,217,.14)':'0 10px 20px rgba(0,0,0,.06)'};gap:0" class="col">
   <div class="col" style="gap:8px">${eyebrow(dex?'ON A DEX':'ON AN EXCHANGE',dex?'var(--blue)':'var(--text-secondary)')}<span style="font-size:${mo()?24:34}px;line-height:1.235;letter-spacing:.25px">${dex?'You hold the keys':'The exchange holds them'}</span></div><div style="height:24px"></div>
   ${(dex?dx:ex).map(r=>row(r[0],r[1],dex,r[2])).join('')}
   ${dex?`<img src="${A('dex-ov-lock.webp')}" style="position:absolute;${mo()?'right:16px;top:-24px;width:80px;height:80px':'right:-48px;top:-86px;width:278px;height:278px'};pointer-events:none" alt="">`:''}</div>`;
  const seam=`<div style="${mo()?'align-self:center;margin:-36px 0':'position:absolute;left:570px;top:330px'};z-index:2;width:60px;height:60px;border-radius:999px;background:var(--blue);display:flex;align-items:center;justify-content:center"><img src="${A('dex-ov-ic-arrow.svg')}" style="width:28px;height:28px;${mo()?'transform:rotate(90deg)':''}" alt=""></div>`;
  const stage=mo()?`<div class="col" style="gap:0">${panel(false)}${seam}${panel(true)}</div>`:`<div style="position:relative;display:flex;gap:24px">${panel(false)}${panel(true)}${seam}</div>`;
- return `<section style="background:#fff;padding:${mo()?'48px 0':'80px 0 96px'}">${wrap(`<div class="col" style="gap:56px;align-items:stretch"><div class="col center" style="gap:16px;align-items:center"><h2 style="margin:0;font-weight:400;font-size:${mo()?28:48}px;line-height:1.167">Who holds your money changes.<br>Your cashback does not.</h2><p class="b1 c2" style="margin:0;max-width:640px">On an exchange, the exchange holds your funds. On a DEX, you do. TetherMax only follows the address you paste.</p></div>${stage}</div>`)}</section>`;
+ return `<section style="background:#fff;padding:${mo()?'48px 0':'80px 0 96px'}">${wrap(`<div class="col" style="gap:56px;align-items:stretch"><div class="col center" style="gap:16px;align-items:center"><h2 style="margin:0;font-weight:400;font-size:${mo()?28:48}px;line-height:1.167">Who holds your money changes.<br>Your DEX cashback does not.</h2><p class="b1 c2" style="margin:0;max-width:640px">On an exchange, the exchange holds your funds. On a DEX, you do. TetherMax only follows the address you paste.</p></div>${stage}</div>`)}</section>`;
 }
 function ovSteps(){
  const st=[['STEP 1','Create a Web 3 Wallet','Install a self-custody wallet, or sign up on the DEX with email to get a wallet made for you.','About 2 minutes','dex-ov-step1.webp'],
@@ -189,15 +208,15 @@ function ovPage(c){
 R.screen({id:'dex.overview',group:'dex',title:'DEX 개요 (랜딩)',route:'/dex',fu:['FU-049','FU-050','FU-051','FU-052','FU-053'],
  shell:{nav:'cashback'},
  states:[
-  {id:'normal',label:'게스트 — 이유 카드 · 마지막 CTA 띠까지',figma:{pc:'28960:125521',mo:'28960:130946'},note:'V2.2 lnd/LANDING#normal · Figma는 Lighter 포함 4개, 정책상 Lighter 보류라 3개로 렌더(카드 구조 동일)'},
-  {id:'member',label:'로그인 — Learn and Earn 띠로 끝',figma:{pc:'28960:125522',mo:'28960:130952'},note:'V2.2 lnd/LANDING#member'},
-  {id:'list',label:'Venue 리스트 뷰',figma:{pc:'28960:125536',mo:'28960:130958'},note:'V2.2 lnd/LANDING#list · Figma 버튼 라벨 「Label」 → 명세 REQ-326 `View {DEX}`'},
+  {id:'normal',label:'게스트 — 이유 카드 · 마지막 CTA 띠까지',figma:{pc:'29361:137628',mo:'29363:135072'},note:'V2.2 lnd/LANDING#normal · Figma는 Lighter 포함 4개, 정책상 Lighter 보류라 3개로 렌더(카드 구조 동일)'},
+  {id:'member',label:'로그인 — Learn and Earn 띠로 끝',figma:{pc:'29361:136789',mo:'29363:136040'},note:'V2.2 lnd/LANDING#member'},
+  {id:'list',label:'Venue 리스트 뷰',figma:{pc:'29361:138251',mo:'29363:136978'},note:'V2.2 lnd/LANDING#list · Figma 버튼 라벨 「Label」 → 명세 REQ-326 `View {DEX}`'},
   {id:'defiStale',label:'DefiLlama 실패 — 마지막 캐시값 + 기준 시각',note:'V2.2 lnd/LANDING#defiStale · 재사용: OA glance 서브라인 `… as of {date}` 형식 · 상태 정의 S5_07 `24H trading volume`(29002:128485)'},
   {id:'defiHidden',label:'DefiLlama 24시간 넘게 실패 — 숨김',note:'V2.2 lnd/LANDING#defiHidden · OA 카드에서 지표 칸만 뺌 · 상태 정의 S5_07(29002:128485)'},
   {id:'noBanner',label:'게시 배너 없음 — 렌더 안 함',note:'V2.2 lnd/LANDING#noBanner'},
   {id:'empty',label:'노출 DEX 0개 — 영역 숨김 (G-160)',note:'V2.2 lnd/LANDING#empty · Figma 상태 정의 S5_02 `No DEX partners are available`(29002:128365)는 G-160(빈 상태 화면 없음)과 충돌 → 결정대로'},
   {id:'maint',label:'특정 DEX 점검·일시 연동 불가 (G-162)',note:'V2.2 lnd/LANDING#maint · Figma 상태 정의 S5_03 `Temporarily under maintenance`(29002:128385)는 G-162(카드 변화 없음)와 충돌 → 결정대로'},
-  {id:'lighter',label:'Lighter 카드 (온보딩 후 — 보류)',figma:{pc:'28960:125521',mo:'28960:130946'},note:'V2.2 lnd/LANDING#lighter · Lighter 온보딩 보류'},
+  {id:'lighter',label:'Lighter 카드 (온보딩 후 — 보류)',figma:{pc:'29361:136089',mo:'29363:135072'},note:'V2.2 lnd/LANDING#lighter · Lighter 온보딩 보류'},
   {id:'overflow',label:'파트너 8개 — glance 가로 넘침 (Figma 전용)',figma:{pc:'28960:125542'},note:'Figma 「OA DEX overview, 8 partner DEXs (overflow)」 — 레이아웃 확장 검증용(REQ-322 넘치면 가로 스크롤+페이드)'},
  ],
  render(st){return ovPage(st)}});
@@ -409,21 +428,21 @@ function dtPage(c){
 R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',route:'/dex/{slug}',fu:['FU-054','FU-055','FU-056','FU-057','FU-058','FU-059'],
  shell:{nav:'cashback',accent:true,back:'dex.overview'},
  states:[
-  {id:'normal',label:'게스트 — EdgeX',figma:{pc:'28960:127454',mo:'28960:131011'},note:'V2.2 exd/DETAIL#normal · Figma D4 EdgeX + 「DEX detail / Guest」(28969:129578) 오퍼 박스'},
-  {id:'edgex',label:'EdgeX (회원 상태는 상단 토글)',figma:{pc:'28960:127454',mo:'28960:131011'},note:'공용 템플릿 EdgeX — 회원 상태는 상단 게스트/연동0/연동 토글을 따른다'},
+  {id:'normal',label:'게스트 — EdgeX',figma:{pc:'28960:127454',mo:'29360:144056'},note:'V2.2 exd/DETAIL#normal · Figma D4 EdgeX + 「DEX detail / Guest」(28969:129578) 오퍼 박스'},
+  {id:'edgex',label:'EdgeX (회원 상태는 상단 토글)',figma:{pc:'28960:127454',mo:'29360:144056'},note:'공용 템플릿 EdgeX — 회원 상태는 상단 게스트/연동0/연동 토글을 따른다'},
   {id:'unlinked',label:'회원 · 미연동 — Link Wallet',figma:{pc:'28969:129666'},note:'V2.2 exd/DETAIL#unlinked · Figma 「DEX detail / Member without a linked wallet」(Lighter 예시) · 상태 정의 S5_14 `Link your EdgeX wallet`(29002:128667). 모바일은 회원 오퍼 프레임 없음 → 모바일 D4(28960:131011) 오퍼 박스에 PC 회원 CTA를 얹음'},
   {id:'signupReturn',label:'가입 후 복귀 — Link Wallet 주 버튼 강조',figma:{pc:'28960:127422'},note:'Figma 「Signup + Link Wallet / 3 Return」(28960:127422, 연동 담당 요청). 모바일 프레임 없음 → 모바일 D1/D4 오퍼 박스에 같은 버튼 배치'},
   {id:'linked',label:'회원 · 연동 완료 — Auto Claim · 리뷰 쓰기',figma:{pc:'28969:129751'},note:'V2.2 exd/DETAIL#linked · Figma 「DEX detail / Member with a linked wallet」 · 상태 정의 S5_15 `Your linked account`(29002:128699). 모바일 회원 오퍼 프레임 없음 → 모바일 D4 오퍼 박스 재사용'},
   {id:'maker',label:'Maker 토글 (D4 토글 선택 변형 재사용)',note:'V2.2 exd/DETAIL#maker · 재사용: D4 28960:127454 Taker/Maker 토글'},
-  {id:'aster',label:'Aster',figma:{pc:'28960:127627',mo:'28960:131017'},note:'V2.2 exd/DETAIL#aster · Figma D5'},
-  {id:'apex',label:'ApeX',figma:{pc:'28960:127633',mo:'28960:131023'},note:'V2.2 exd/DETAIL#apex · Figma D6'},
-  {id:'lighter',label:'Lighter — Premium/Plus (온보딩 후 — 보류)',figma:{pc:'28960:127443',mo:'28960:130990'},note:'V2.2 exd/DETAIL#lighter · Figma D1 · 연동 모달 배경으로도 쓰임'},
+  {id:'aster',label:'Aster',figma:{pc:'29357:147710',mo:'29360:145006'},note:'V2.2 exd/DETAIL#aster · Figma D5'},
+  {id:'apex',label:'ApeX',figma:{pc:'29357:148976',mo:'29360:145980'},note:'V2.2 exd/DETAIL#apex · Figma D6'},
+  {id:'lighter',label:'Lighter — Premium/Plus (온보딩 후 — 보류)',figma:{pc:'29357:143619',mo:'29360:146954'},note:'V2.2 exd/DETAIL#lighter · Figma D1 · 연동 모달 배경으로도 쓰임'},
   {id:'drawer',label:'How this works 드로어 (REQ-344)',figma:null,note:'디자인 없음 — [기존 MAX-1216] S21(22544:808136 · 모바일 22988:114502)은 CEX 상세 전체 페이지로 `How this works` 진입 링크만 있고 열린 모습이 없음. 내용은 V2.2 exd/DETAIL#drawer · 상태 정의 S5_12(29002:128605)'},
   {id:'step2',label:'단계 가이드 Step 2 (Lighter)',figma:{pc:'29386:137364'},note:'Figma CT-28 「Step 2 선택」 — 본문은 DEX(revision) `DEX guide / Step 2 of 5`(28981:129056) 원문(8차 결정)'},
-  {id:'step3',label:'단계 가이드 Step 3 (Lighter)',figma:{pc:'28960:127444',mo:'28960:130999'},note:'V2.2 exd/DETAIL#step3 · Figma D2'},
+  {id:'step3',label:'단계 가이드 Step 3 (Lighter)',figma:{pc:'29357:144968',mo:'29360:142096'},note:'V2.2 exd/DETAIL#step3 · Figma D2'},
   {id:'faq2',label:'FAQ 두 구역 펼침 — Withdrawals & Account Management',figma:{pc:'29367:138679'},note:'Figma CT-29 ② — 첫 구역과 `Withdrawals & Account Management` 동시 펼침. 질문·답변은 운영자 입력 예시(8차 결정)'},
   {id:'moderation',label:'리뷰 검토 중',figma:{pc:'27392:937',mo:'27392:1062'},note:'[기존 MAX-1216] Reviews / Card · State=In moderation(27392:937 · 모바일 27392:1062) · 상태 정의 S5_20(29002:128826) · V2.2 exd/DETAIL#moderation'},
-  {id:'reviewsEmpty',label:'리뷰 없음 (G-169)',figma:{pc:'22442:219830',mo:'22956:84690'},note:'[기존 MAX-1216] S6 Empty — 0 reviews · 문구는 G-169 `No reviews yet` · V2.2 exd/DETAIL#reviewsEmpty'},
+  {id:'reviewsEmpty',label:'리뷰 없음 (G-169)',figma:{pc:'29367:137704',mo:'29369:136809'},note:'Figma D3 「Reviews 0」(29367:137704 · 모바일 29369:136809) · 문구는 G-169 `No reviews yet` · V2.2 exd/DETAIL#reviewsEmpty'},
   {id:'pendingLink',label:'확인 중 지갑만 있음 — 연동 버튼 자리 비활성 「확인 중」',figma:null,note:'근거: DEX 상세 회원 오퍼 박스(28969:129666 · 28969:129751)의 버튼 자리 + 홈 행 확인 중 표기(<code>연동 시도중이에요</code>) · 결정 Q6 B. <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},
   {id:'offboarded',label:'DEX 오프보딩 — 랜딩 리다이렉트',note:'V2.2 exd/DETAIL#offboarded · 상태 정의 S5_16 `Exchange unavailable`·S5_17 자동 이동(29002:128736·128761) — 결정(301 리다이렉트)대로 별도 화면 없음'},
  ],

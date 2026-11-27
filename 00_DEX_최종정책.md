@@ -2203,9 +2203,9 @@ Lighter 화면 어디에도 `Withdraw on Lighter`·인티그레이터 승인 상
 
 ### B-1-7 외부 경로 (어트리뷰션, `AT-1`·`AT-2`)
 
-- 모든 파트너 외부 링크는 하드코딩 링크가 아니라 **하나의 어트리뷰션 서비스**로 해석: 라우트 블록·마크 · 비교표 `Join {partner}` · DEX venue 카드 · 상세 히어로·마지막 띠 · Link Account `Register here` · 앱 파트너 카드.
+- 모든 파트너 외부 링크는 하드코딩 링크가 아니라 **하나의 어트리뷰션 서비스**로 해석: 라우트 블록·마크 · DEX venue 카드 · 상세 히어로·마지막 띠 · Link Account `Register here` · 앱 파트너 카드.
 - 서비스가 **페이지·배치 위치를 식별하는 캠페인 파라미터**를 붙여 **새 탭**으로 엶. 사용자 식별자는 목적지 URL에 절대 붙이지 않음.
-- 허브 계산기 카드 `Learn More`는 외부 링크가 아니라 선택 파트너의 테더맥스 상세(현재 탭, B-5-2)로 감.
+- 허브 계산기 카드 `Learn More`와 비교표 `Join {partner}`는 외부 링크가 아니라 테더맥스 상세(현재 탭, B-5-2 · B-5-8)로 감.
 - 경로 미설정 파트너 → 외부 버튼 자체를 렌더하지 않음(G3).
 - 외부 가입 목적지에 어트리뷰션 코드가 **미리 채워진 채** 도착하고 사용자가 확인 가능해야 함. 단계 가이드에 "DEX Referral 화면에서 코드 확인" 지시 필수.
 - 카드·오퍼 박스에 실행 동작이 하나도 없으면(경로 없음 + 상세 없음) 게시 차단 (❓ 권고).
@@ -2654,10 +2654,10 @@ Per day  = 월 ÷ 30       Per year = 월 × 12      (월 전체 금액에서 �
 | 열 | `#` · `Exchange`(DEX 칩에서는 `DEX`) · `Cashback` · `Final Taker` · `Final Maker`(캐시백 후 수수료) · `Est. monthly cashback` · `Rating` |
 | 정렬 | `#` 제외 전 열 정렬, 같은 헤더 재선택 시 역순 |
 | Rating | `4.2 (23)` 형식. **리뷰 20개 미만 `-`**, 카드 뷰는 평점 생략(0 표시 아님). 거래소 목록(LS-2)과 같은 규칙·같은 값. 현재 값 있는 곳 Bitget `4.2 (23)` · OKX `4.6 (41)` · Gate `3.9 (27)` |
-| 행 끝 | `Join {partner}` → 그 거래소의 테더맥스 레퍼럴 가입(귀속 서비스 경유 새 탭, B-1-7) |
+| 행 끝 | `Join {partner}` → 그 파트너의 테더맥스 상세로 현재 탭 이동(CEX = 거래소 상세, DEX = DEX 상세, Brokers = 브로커 상세 `/{lang}/brokers/{slug}` — 허브 `Join` 전체 규칙, 사용자 2026-11-27) |
 | 배지 | Est. monthly cashback 최고 파트너에 `Highest payout` — 선정 기준(필터별/전체) ❓ |
 | 재계산 | 계산기 값 변경 시 전 행 재계산 |
-| 모바일 | 행이 카드, 카드 끝 전폭 `Join {partner}`(같은 레퍼럴 가입 새 탭) |
+| 모바일 | 행이 카드, 카드 끝 전폭 `Join {partner}`(같은 상세 이동) |
 | 미설계 | 웹 카드 뷰 · **검색 결과 없음 빈 상태** · **기본 행 순서** — Figma에 없음 ❓ |
 | 숨김 요소 | `Live Campaigns` 컬럼(용도 ❓) · `View switch` |
 | `Final Taker`/`Final Maker` | Figma 전 행 플레이스홀더, 실제 값은 레코드(할인율·자동 계산) |
@@ -3731,7 +3731,7 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 허브 CEX 탭. 허브�
 | 캐러셀 `Top Centralised Exchanges`(Top Partner 카드) | ❓ 사용자 확인 #50 — 허브에는 로고 그리드(B-5-8)가 있음 | B-5-8 |
 | 칩 `Recommended` · `All` · `Cashback Boost` · `Events` | ❓ 사용자 확인 #50 — 허브 비교표 칩은 `Centralised Exchanges` · `Decentralised Exchanges` · `Brokers`(`All` 없음) | B-5-8 |
 | 열 `Avg. Cashback` · `Live Campaigns` · `View Event` ↗ | ❓ 사용자 확인 #50 — 허브 비교표 열 구성과 다르고 `Live Campaigns`는 허브 숨김 요소 | B-5-8 |
-| 거래소 행 본문 클릭 | ❓ 사용자 확인 #50 — 기존 = 거래소 상세, 허브 행 끝은 `Join {partner}` 레퍼럴 새 탭 | B-5-8 |
+| 거래소 행 본문 클릭 | ❓ 사용자 확인 #50 — 기존 = 거래소 상세, 허브 행 끝 `Join {partner}`도 거래소 상세 | B-5-8 |
 
 ### B-21-6 라우팅 · SEO
 
@@ -3804,7 +3804,7 @@ Cashback Landing(허브) → **Centralised Exchanges**(= 허브 CEX 탭. 허브�
 | dexw3 | `webhub_partner_select` | calculator / `partner_select_{partner}` | 파트너 변경 |
 | dexw4 | `webhub_spend_slider` | calculator / `spend_slider_settle` | 슬라이더 정착, 라우트·월/일/연 |
 | dexw6 | `webhub_withdraw` | balance / `withdraw_click` | 잔액 패널 Withdraw, route(cex/dex)·활성 여부 |
-| dexw7 | `webhub_compare_join` | outbound / `compare_join_{partner}` | 비교표 Join, 활성 필터·행 위치 |
+| dexw7 | `webhub_compare_join` | navigation / `compare_join_{partner}` | 비교표 Join, 활성 필터·행 위치 |
 | dexw8 | `webhub_route_row` | navigation / `route_row_{route}` | 라우트 행 선택 |
 | dexw10 | `webhub_partner_grid` | navigation / `route_mark_{partner}` | 마크 선택 — RT-6 "마크는 개별 링크 아님"과 충돌 ❓ |
 | dexw11 | `webhub_reason_card` | navigation / `reason_{card}` | 이유 카드 링크 |
@@ -5215,7 +5215,7 @@ DEX 랜딩 glance 아래 전폭 캐러셀. 슬라이드 = 「거래소 목록 �
 | Exchange Type | 라우트 분류 · **파트너 수 계산** · 비교표 필터 · 연동 플로우 입력란(UID/지갑) · SEO 경로 |
 | maker / taker fee · 할인율 | 계산기 · 비교표 `Final Taker`/`Final Maker` · Venue 카드 · 상세 요금 단계 표 |
 | 캐시백율(%) | 비교표 `Cashback` · `UP TO {n}%` · `/payback` 카드 · `{요율}` 치환 |
-| 레퍼럴 링크 (`EXT-10`) | `Get Started` · `Join {partner}` · `Join Now` · `Register here` · 모든 아웃바운드 |
+| 레퍼럴 링크 (`EXT-10`) | `Get Started` · `Join Now` · `Register here` · 모든 아웃바운드 |
 | 노출 여부 · 연동 가능 · 순위 | 목록 노출·순서 · 연동 한도 산식 |
 | `주기` · `요일` · `업데이트(UTC)` | 연동 성공 화면 정산 배지·시각 · `/payback` 결과 `Schedule`·`Payout Time`(테더맥스 DB 계정에 금액이 적립되는 시점, 샘플 `Daily`·`07:00`, Lighter 주 1회 월) · 캐시백 타임라인. `업데이트(UTC)` = 파트너 API `update_time`과 같은 값 |
 | 제한 지역 | 국가별 노출 제어 |
@@ -6969,7 +6969,7 @@ EdgeX는 "확인을 받으면 엔드포인트·인증·서명·푸시 포맷·�
 
 | 규칙 | 내용 |
 |---|---|
-| 하나의 서비스 | 모든 파트너 외부 링크는 하드코딩 링크가 아니라 **하나의 귀속 서비스로 해석.** 대상: 라우트 패널 · 파트너 마크 그리드 · 비교표 `Join {partner}` · venue 카드 · 상세 히어로·마지막 띠 · Link Account `Register here` · 앱 파트너 카드 |
+| 하나의 서비스 | 모든 파트너 외부 링크는 하드코딩 링크가 아니라 **하나의 귀속 서비스로 해석.** 대상: 라우트 패널 · 파트너 마크 그리드 · venue 카드 · 상세 히어로·마지막 띠 · Link Account `Register here` · 앱 파트너 카드 |
 | 원천 | 파트너 레코드가 레퍼럴 링크·코드를 보관(DEX = 거래소 레코드 `테더맥스 레퍼럴 링크`, 본문 9-2). 상업 재협상 = **필드 1개 변경** |
 | 캠페인 파라미터 | 서비스가 **페이지 · 배치 위치**를 식별하는 캠페인 파라미터를 붙여 목적지 반환, **새 탭**으로 엶 |
 | 식별자 금지 | 사용자 식별자(지갑 주소·UID·회원 ID)를 목적지 URL에 **절대 붙이지 않음** |
@@ -7066,7 +7066,7 @@ EdgeX는 "확인을 받으면 엔드포인트·인증·서명·푸시 포맷·�
 | dexw3 | `webhub_partner_select` | calculator | `partner_select_{partner}` | 계산기 셀렉트에서 파트너 변경 | 유지 |
 | dexw4 | `webhub_spend_slider` | calculator | `spend_slider_settle` | 거래량 슬라이더 정착(월 거래량, 브로커는 월 로트). 라우트 · 월/일/연 수치. **정착 시 1회** | 유지 |
 | dexw6 | `webhub_withdraw` | balance | `withdraw_click` | 연동 상태에서 `Withdraw` 선택. route(cex/dex) · 컨트롤 활성 여부 | **폐기** — 버튼 항상 비활성(본문 6-1) |
-| dexw7 | `webhub_compare_join` | outbound | `compare_join_{partner}` | 파트너 비교표(RT-8) `Join {partner}`. 활성 필터 · 행 위치 | 유지 |
+| dexw7 | `webhub_compare_join` | navigation | `compare_join_{partner}` | 파트너 비교표(RT-8) `Join {partner}`. 활성 필터 · 행 위치 | 유지 |
 | dexw8 | `webhub_route_row` | navigation | `route_row_{route}` | `Pick where you trade`의 라우트 행 선택(RT-2) | 유지 |
 | dexw10 | `webhub_partner_grid` | navigation | `route_mark_{partner}` | 라우트 행 안 파트너 마크 선택(마크가 링크일 때). 라우트 · 위치 | 유지 |
 | dexw11 | `webhub_reason_card` | navigation | `reason_{card}` | `Why sign up with TetherMax` 카드 링크 | 유지 |

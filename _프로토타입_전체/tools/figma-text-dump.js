@@ -10,6 +10,7 @@ const KIND = [['b', /button|variant=|^cta/i], ['c', /chip/i], ['t', /\btabs?\b|<
 const BD = /^(backdrop|scrim|dim|overlay)\b|\/ scrim$|\bbackdrop$/i;
 // 설계 메모 레이어(화면 문구 아님): 프레임 이름 또는 글자 레이어 이름으로 판정 — 비교 대상에서 뺀다
 const MEMO = /SCREEN-LABEL|^API[- ]?\d|· 입력$|^(상태|판정) · |^(진입|금액 기준|행 기준|수정 내용·근거)$|개발 메모|정책 변경 메모|설계 메모|인계 메모/i;
+const SHELL = /webprelogin|gnb|navigation|footer|^header$|^top ?nav|bottom ?nav|tab ?bar|^frame 8100$|bottomnavigation/i;
 // 위에 겹친 불투명 레이어(나중에 그려지는 형제 · 단색 채움)에 완전히 가려진 글자는 보이지 않는 것으로 본다
 const inside = (a, c) => a.x >= c.x - 1 && a.y >= c.y - 1 && a.x + a.width <= c.x + c.width + 1 && a.y + a.height <= c.y + c.height + 1;
 const opaque = n => n.visible !== false && n.type !== 'TEXT' && !!n.absoluteBoundingBox && !('opacity' in n && n.opacity < 0.99) && !(n.blendMode && !['NORMAL', 'PASS_THROUGH'].includes(n.blendMode)) && Array.isArray(n.fills) && n.fills.some(f => f.visible !== false && (f.opacity === undefined || f.opacity >= 0.99) && f.type === 'SOLID');
@@ -38,17 +39,19 @@ for (; i < IDS.length; i++) {
   const firstText = n => { if (n.type === 'TEXT') return n.characters; if ('children' in n) for (const c of n.children) { if (c.visible === false) continue; const r = firstText(c); if (r) return r; } return ''; };
   // 화면에 실제로 보이는 글자만: 누적 불투명도 0 · 보이는 채움 없음 · 렌더 범위 없음 · 잘림(clipsContent) 밖 · 설계 메모 레이어는 뺀다
   const isect = (a, c) => !c || (a.x < c.x + c.width && a.x + a.width > c.x && a.y < c.y + c.height && a.y + a.height > c.y);
-  const walk = (n, names, d, op = 1, clip = null, covers = []) => {
+  const walk = (n, names, d, op = 1, clip = null, covers = [], shell = false) => {
+    shell = shell || (d > 0 && SHELL.test(n.name));   // GNB · 푸터 · 하단 탭 하위 = 종류 's'(figma-diff.py가 공통 셸 화면 cmn.*에서만 대조)
     if (n.visible === false || (names.length && BD.test(n.name))) return;
     if (d > 0 && MEMO.test(n.name)) return;
     op *= ('opacity' in n ? n.opacity : 1); if (op <= 0.01) return;
     const b = GEO ? n.absoluteBoundingBox : null;
     if (n.type === 'TEXT') {
+      if (d === 1 && /^state$/i.test(n.name)) return;   // 프레임 위 상태 제목 라벨(설계 메모 — 예: 주소 검증 프레임 `State`)
       const fillOk = !Array.isArray(n.fills) || n.fills.some(f => f.visible !== false && (f.opacity === undefined || f.opacity > 0.01));
       const rb = n.absoluteRenderBounds;
       const ab = n.absoluteBoundingBox, inRoot = ab && isect(ab, node.absoluteBoundingBox);   // 프레임 아래로 접힌(잘린) 내용은 그대로 둔다
       if (!fillOk || (!rb && inRoot) || (rb && !isect(rb, clip)) || ((rb || ab) && covers.some(c => inside(rb || ab, c)))) return;
-      const k = kindOf(names);
+      const k = shell ? 's' : kindOf(names);
       if (!b) { X.push(k ? [n.characters, k] : [n.characters]); return; }
       const [cy, ch] = contentBox(n, b, rb);
       X.push([n.characters, k, R(b.x - ox), R(cy - oy), R(b.width), R(ch)]); return;
@@ -66,7 +69,8 @@ for (; i < IDS.length; i++) {
       }
       if (kind) E.push([kind, (kind === 'card' || kind === 'img') ? n.name.slice(0, 30) : firstText(n).slice(0, 40), R(b.x - ox), R(b.y - oy), R(b.width), R(b.height)]);
     }
-    if ('children' in n) { const ks = n.children; for (let k = 0; k < ks.length; k++) { const later = []; for (let j = k + 1; j < ks.length; j++) if (opaque(ks[j])) later.push(ks[j].absoluteBoundingBox); walk(ks[k], [n.name, ...names].slice(0, 4), d + 1, op, clip, later.length ? covers.concat(later) : covers); } }
+    // 배경(Backdrop) 위 모달 프레임: 배경보다 먼저 그려진 형제(흐려진 뒤 화면)는 대조하지 않는다 — figma-diff.py 색인 규칙과 같음
+    if ('children' in n) { const ks = n.children; let bi = -1; ks.forEach((c, j) => { if (c.visible !== false && BD.test(c.name)) bi = j }); for (let k = bi + 1; k < ks.length; k++) { const later = []; for (let j = k + 1; j < ks.length; j++) if (opaque(ks[j])) later.push(ks[j].absoluteBoundingBox); walk(ks[k], [n.name, ...names].slice(0, 4), d + 1, op, clip, later.length ? covers.concat(later) : covers, shell); } }
   };
   walk(node, [], 0);
   const kids = 'children' in node ? node.children : [];

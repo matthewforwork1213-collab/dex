@@ -418,7 +418,10 @@ function sumData() {
   const dm = {}; Object.entries(days).forEach(([n, o]) => { dm[n] = []; if (o.any) dm[n].push(sgn(Math.round(o.v * 100) / 100)); });
   const isCur = SM.y === TODAY.y && SM.m === TODAY.m;
   const TY = SUMX.TY;
-  const dayRows = rows.filter(r => +r.d.slice(8) === SM.sel).map(r => ({ p: r.a.ex, w: r.a.type === 'DEX' ? r.a.id : null, id: r.a.type === 'CEX' ? 'UID ' + r.a.id : null, t: r.k === 'ex' ? TY.ex() : r.k === 'claim' ? TY.claim() : r.name, v: sgn(r.v) }));
+  let dayRows = rows.filter(r => +r.d.slice(8) === SM.sel).map(r => ({ p: r.a.ex, w: r.a.type === 'DEX' ? r.a.id : null, id: r.a.type === 'CEX' ? 'UID ' + r.a.id : null, t: r.k === 'ex' ? TY.ex() : r.k === 'claim' ? TY.claim() : r.name, v: sgn(r.v) }));
+  // 화면 목록판 모바일 기본 상태 표본 = Figma 모바일 캘린더(29065:6687)의 오늘 목록(이벤트 리워드 3행). 웹 CS1 표본(거래소 캐시백)과 달라 상태별로 나눈다 — 실제 동작판은 원장 그대로
+  if (window.PT_EMBED && S.vp === 'mo' && F.ex === 'all' && !F.acc && !F.ty && SM.y === TODAY.y && SM.m === TODAY.m && SM.sel === TODAY.d)
+    dayRows = [{ p: 'Bitget', id: 'UID ******7462', t: 'BTC Prediction Reward', v: '+50.00' }, { p: 'Bitget', id: 'UID ******7462', t: 'Cashback Challenge Reward', v: '+50.00' }, { p: 'EdgeX', w: '0x884B2e7f90d6a158ce0b4f7d23e9a61c58a01a69', t: 'Cashback Challenge Reward', v: '+50.00' }];
   const any = rows.some(r => r.k !== 'pending');
   const acct = F.acc && F.acc.size === 1 && !ledger().some(r => F.acc.has(r.a.key));
   return { month: `${MON[SM.m]} ${SM.y}`, y: SM.y, m: SM.m, isCur, today: TODAY.d, sel: SM.sel, days: dm, card: any ? [sgn(rec), sgn(wd).replace('+', wd === 0 ? '' : '+'), sgn(rec + wd)] : null, rows: dayRows, acct };

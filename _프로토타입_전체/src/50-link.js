@@ -406,9 +406,8 @@ R.screen({id:'link.lguide',group:'link',title:'Lighter 가이드 (보류)',route
   const panel=`<div class="col" style="flex:1;min-width:0;gap:16px;padding:${mo?0:'0 16px 16px'}">
    <img src="${A('link-lguide-step3.png')}" style="width:100%;height:${mo?190:360}px;object-fit:cover;border-radius:12px" alt="">
    <span style="align-self:flex-start;background:rgba(187,226,255,.2);color:var(--blue);border-radius:100px;padding:3px 9px;font-size:13px;line-height:18px;letter-spacing:.16px">${T('Step 3 of 5')}</span>
-   <p class="h5" style="margin:0">${T('Join the DEX through the TetherMax link and paste your wallet address')}</p>
-   <p class="b2 c2" style="margin:0">${T('After you sign up, confirm the TetherMax referral code on Lighter’s referral page. Copy your public address from Lighter and paste it on TetherMax.')}</p>
-   <div style="display:flex;align-items:center;gap:12px;background:#e5f6fd;color:#014361;border-radius:4px;padding:6px 16px"><img src="${A('link-ic-info20.svg')}" style="width:20px;height:20px;flex:none" alt=""><p class="b2" style="margin:0;padding:8px 0">${T('Cashback applies only to Plus and Premium accounts. Standard accounts pay no fees.')}</p></div></div>`;
+   <p class="h5" style="margin:0">${T('Join Lighter and link your wallet')}</p>
+   <p class="b2 c2" style="margin:0;white-space:pre-line">${T('Open Lighter through the TetherMax link and log in. Then copy your wallet address from Lighter and paste it in TetherMax. TetherMax never asks you to connect a wallet.\n\nAfter you sign up, confirm the TetherMax referral code on Lighter’s referral page.\n\nCashback applies only to Plus and Premium accounts. Standard accounts pay no fees.')}</p></div>`;
   const body=mo?`<div class="col" style="gap:4px">${rail}</div>${panel}${support}`
    :`<div style="display:flex;gap:32px;align-items:stretch"><div class="col" style="width:320px;flex:none;gap:4px">${rail}<span style="flex:1"></span>${support}</div>${panel}</div>`;
   return `<div style="padding:20px ${mo?16:0}px 48px"><div style="background:#fff;border-radius:8px;box-shadow:0 10px 20px rgba(0,0,0,.04);padding:24px;width:${mo?'auto':'1056px'};max-width:100%;margin:0 auto;display:flex;flex-direction:column;gap:24px">

@@ -9,6 +9,8 @@ const img=(f,st='')=>`<img src="${A(f)}" alt="" style="${st}">`;
 const WAL='0x7a3f9C2B41dE8806f5a1b3C9E4d2f07a6b8C51e9';
 const ACC={dex:{name:'Lighter',kind:'Wallet',short:'0x7a3F...51e9',tip:'0x7a3F9C2B…C51e9'},cex:{name:'Bitget',kind:'UID',short:'••••5687'}};
 const mark=(n,s)=>n==='Bitget'?img('lnd-bitget.png',`width:${s}px;height:${s}px;border-radius:50%;flex:none`):C.dex(n,s);
+// 모바일웹 앱 설치 배너(Figma 게스트 모바일 프레임 29035:97732 등 · 기존 mWeb 스마트 배너): 닫기 · 앱 아이콘 · 안내 · `Get the App`. 로그인 후 복귀 화면은 관리 문구
+const appBanner=(t='Sign up in the app and earn more cashback')=>mo()?`<div class="row" data-app-banner style="gap:10px;height:56px;padding:0 12px;background:#0b0b0d;color:#fff;margin:0 -16px"><button class="icon-btn" aria-label="Close" style="padding:4px;color:rgba(255,255,255,.6)" onclick="this.closest('[data-app-banner]').remove()">×</button><span style="width:32px;height:32px;border-radius:8px;background:#0031c6;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none">∞</span><span class="col grow" style="gap:0;min-width:0"><b style="font-size:13px;line-height:1.3">TetherMax</b><span style="font-size:10px;line-height:1.3;color:rgba(255,255,255,.7)">${t}</span></span><button class="btn outlined sm" style="flex:none;border-color:rgba(255,255,255,.7);color:#fff">Get the App</button></div>`:'';
 const help=()=>`<span style="width:20px;height:20px;border:1.6px solid var(--text-secondary);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text-secondary);flex:none">?</span>`;
 const DEV_RESULT='개발 메모(Figma 「조회 응답 → 화면」): API-023 FOUND → amount = 0이면 No cashback yet, 0 초과 10 미만은 최소 금액 안내, 10 이상은 기준 충족 안내. 모든 구간에서 지급 전 같은 계정을 연동해야 함. NO_PUBLIC_RESULT → 결과 없음·회원 전용 공통 안내. DATA_PENDING → 집계 대기(두 상태는 금액을 숨김). 400 → 입력 오류, 429 → Retry-After 이후 재조회, 500·503 → 같은 입력으로 재시도. 거래소 선택은 게시·조회 지원 목록. 거래소를 바꾸면 이전 입력·결과를 지움. 지갑 주소 대소문자 유지, 0x 형식 강제 안 함.';
 const DEV_AUTH='개발 메모(Figma 「인증 후 복귀」): 가입·로그인 성공 → 조회한 거래소·계정으로 복귀. 로그인만으로 연동·지급을 처리하지 않음. 인증 취소 → 조회 결과로 복귀. 이미 본인에게 연동된 계정은 회원 상세로 이동, 다른 회원의 잔액·이력은 공개하지 않음. 결과 예시 14 USDT = 거래소 캐시백 7 + 매칭된 이벤트 리워드 7(매칭 공식 A + MIN(B, A)). 연동 후 지급은 회원의 기존 잔액·최저 지급액 규칙.';
@@ -46,7 +48,7 @@ R.screen({id:'guest.search',group:'guest',title:'비회원 캐시백 조회',rou
  states:Object.entries(SEARCH).map(([id,s])=>({id,label:s.label,figma:s.fig,note:'Figma 전용 상태(V2.2 화면 없음) · REQ-175·179·180'})),
  render(st){
   const s=SEARCH[st];
-  return `<div style="padding:0 ${mo()?16:40}px;background:#f8fafc">${C.note(`<b>흐름</b> ${s.flow}<br>REQ-178: 조회에 로그인 불필요. 게스트 출금 버튼·캡차·완료 토스트 없음(REQ-175). ${st==='search'?DEV_RESULT:''}`)}</div>${searchPage(s.o,s.sub)}`;
+  return `<div style="padding:0 ${mo()?16:40}px;background:#f8fafc">${appBanner()}${C.note(`<b>흐름</b> ${s.flow}<br>REQ-178: 조회에 로그인 불필요. 게스트 출금 버튼·캡차·완료 토스트 없음(REQ-175). ${st==='search'?DEV_RESULT:''}`)}</div>${searchPage(s.o,s.sub)}`;
  }});
 
 // ---------- 조회 결과 (읽기 전용) ----------
@@ -83,7 +85,7 @@ R.screen({id:'guest.result',group:'guest',title:'비회원 조회 결과 (읽기
   const r=RES[st];
   const flow=r.handoff?`<b>흐름</b> 가입·로그인 성공 후 복귀(같은 거래 계정을 이어받음) — 로그인만 하고 미연동이면 지급 불가(REQ-178). Link account → ${r.a==='dex'?'<code>link.addr</code>(지갑 주소 미리 채움)':'<code>link.uid</code>(같은 UID — REQ-107·709 적용)'} → 기존 연동 검증. 이 상태는 회원 로그인 상태(헤더는 도구 상단 「회원」으로 확인). ${DEV_AUTH}`
    :`<b>흐름</b> Sign up to link account → <code>auth.signup</code> · 배너 「Already a member? Log in…」 → <code>auth.login</code>. 인증 성공 → guest.result:${r.a==='dex'?'handoff':'handoffcex'}, 취소 → 이 결과로 복귀. 결과에서 출금 0건(REQ-175). ${st==='above'?'14.00 = 거래소 캐시백 7 + MIN(이벤트 리워드 7, 7).':''}`;
-  return `<div style="padding:0 ${mo()?16:40}px;background:#f8fafc">${C.note(flow)}</div><section style="background:#f8fafc;padding:${mo()?'8px 16px 0':'24px 24px 56px'}"><div class="col" style="max-width:1090px;margin:0 auto;gap:${mo()?16:40}px">
+  return `<div style="padding:0 ${mo()?16:40}px;background:#f8fafc">${appBanner(r.handoff?'Manage your cashback in the TetherMax app':undefined)}${C.note(flow)}</div><section style="background:#f8fafc;padding:${mo()?'8px 16px 0':'24px 24px 56px'}"><div class="col" style="max-width:1090px;margin:0 auto;gap:${mo()?16:40}px">
    <a class="row" data-go="guest.search:dex" style="gap:16px;cursor:pointer">${img('ic-arrow-forward.svg','width:24px;height:24px;transform:scaleX(-1);opacity:.6')}${mo()?'':'<span class="h6" style="font-weight:500">Search again</span>'}</a>
    <div style="display:flex;flex-direction:${mo()?'column':'row'};gap:${mo()?16:24}px;align-items:flex-start">${acctCard(r)}${sideRecs()}</div></div></section>`;
  }});

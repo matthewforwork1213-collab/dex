@@ -12,7 +12,10 @@ Figma 쪽 문구 출처(우선순위)
   2. 색인  ref/figma_pages/*.xml    — get_metadata 원문. 텍스트 레이어 「이름」을 문구로 본다(자동 이름 = 문구).
                                       인스턴스 내부(버튼·칩 라벨 등)는 색인에 없어 「확인 불가」로 센다.
   3. 보정  05.리포트/Figma수정결과_*.md — 색인 이후 우리가 고친 것: `A` → `B` 문구 교체 · 「숨김」 · 색인에 없는 새 프레임.
-예외     tools/figma-diff-exceptions.json — 결정 기록으로 의도적으로 다르게 한 것(근거 포함). 결과에서 빼고 따로 센다.
+보이는 것만 Figma 덤프(tools/figma-text-dump.js)가 불투명도 0 · 채움 없음 · 잘림 · 위 레이어에 완전히 가려진 글자와 설계 메모 레이어를 빼고,
+         고정 높이 글상자는 실제 글줄 범위(줄 수 × 줄 높이, 세로 정렬 반영)를 좌표로 남긴다 — 측정 방식 차이는 예외가 아니라 여기서 걸러진다.
+         색인(레이어 이름) 출처는 MEMO_NAME으로 설계 메모만 뺀다(불투명도·가림은 색인으로 알 수 없어 정밀 덤프가 필요).
+예외     tools/figma-diff-exceptions.json — 결정 기록·정책 REQ로 의도적으로 다르게 한 것만(근거 위치 필수). 결과에서 빼고 따로 센다.
 결과     05.리포트/프로토타입_Figma_자동대조.md · _img/ · tools/out/figma-diff.json
 """
 import sys, os, re, io, json, glob, html, unicodedata, difflib, pathlib, datetime, collections, argparse
@@ -134,6 +137,8 @@ GENERIC_TEXT = re.compile(r'^(button|label|text|typography|title|subtitle|value|
                           r'notes?|breadcrumbs?|state|제목|수정 내용·근거|설명|내용|라벨|본문|버튼|문구|메모|lorem ipsum.*|text ?\d+|title ?\d+)$', re.I)
 ROLE_NAME = re.compile(r'\((?:[A-Z]{1,4}-?\d+[a-z]?|[A-Z]{1,3}\d*-\d+)\)$|^(headline|lede|eyebrow|kicker|subhead|cta|body copy)\b', re.I)
 ANNOT_RE = re.compile(r'^\w+_[A-Z]{1,4}-\d+|\bnote\s*\(|\(\w+ \d{4}-\d{2}-\d{2}\)')   # 설계 메모 레이어(content_CT-23_* · tier note (John 2026-10-14))
+# 설계 메모 프레임·글자(화면 문구 아님) — 이 이름의 하위는 통째로 뺀다. tools/figma-text-dump.js의 MEMO와 같은 규칙(정밀 캐시는 덤프 때 이미 빠짐)
+MEMO_NAME = re.compile(r'SCREEN-LABEL|^API[- ]?\d|· 입력$|^(상태|판정) · |^(진입|금액 기준|행 기준|수정 내용·근거)$|개발 메모|정책 변경 메모|설계 메모|인계 메모|^A = [\d.]+\s+·\s+B = ', re.I)
 ICONISH = re.compile(r'icon|avatar|logo|mark|filled|rounded|outlined$|^ic[-_ ]|^kr$|^(top|right|bottom|left|center)$|status bar|url bar|'
                      r'home indicator|backdrop|divider|scrollbar|slidermark|_elements|step icon|^#|arrow|chevron|badge|checkbox|radio|switch|'
                      r'호버|애니메이션|합체|^dark=|^image|vector|ellipse|^line', re.I)
@@ -238,20 +243,21 @@ BACKDROP = re.compile(r'^(backdrop|scrim|dim|overlay)\b|/ scrim$|\bbackdrop$', r
 # 정밀 문구 중 화면 문구가 아닌 것: 여백 표시 컴포넌트(Top·Left…·세로 글자), 모바일 브라우저 주소창, 컴포넌트 기본 글자(Chip·Tab·Label)
 PRECISE_NOISE = re.compile(r'^(top|bottom|left|right|center|chip|tab|label|button|text|title|value|placeholder)$|^https?://(www\.)?tethermax\.io/?$|^(\S\n)+\S$', re.I)
 
-def precise_texts(d):
+def precise_texts(d, keep_shell=False):
     out, gen = [], 0
     for x in d.get('texts', []):
         if x.get('hidden'): continue
+        if x.get('kind') == 'shell' and not keep_shell: gen += 1; continue   # GNB·푸터·하단 탭 — 공통 셸 화면(cmn.*)에서만 대조
         if PRECISE_NOISE.match((x['t'] or '').strip()): gen += 1; continue
         out.append({'t': x['t'], 'kind': x.get('kind', 'text')})
     return out, gen
 
-def figma_side(node_id, scope_re=None):
+def figma_side(node_id, scope_re=None, keep_shell=False):
     """→ dict(src, texts[{t,kind}], opaque Counter, generic n, hidden bool, w, h, name, found, overlay)
     scope_re: 이 이름에 맞는 하위 트리만 본다(예: 헤더 상태인데 근거가 전체 페이지 프레임일 때)"""
     if node_id in PRECISE:
         d = PRECISE[node_id]
-        tx, gen = precise_texts(d)
+        tx, gen = precise_texts(d, keep_shell)
         return {'src': '정밀', 'texts': tx,
                 'opaque': collections.Counter(), 'generic': gen, 'hidden': bool(d.get('hidden')), 'w': d.get('w', 0), 'h': d.get('h', 0),
                 'name': d.get('name', ''), 'found': True, 'replaced': 0, 'overlay': bool(d.get('overlay'))}
@@ -266,6 +272,7 @@ def figma_side(node_id, scope_re=None):
     def walk(x, chain, names):
         nonlocal generic, replaced
         if x.hidden or x.id in HIDE: return
+        if x is not n and MEMO_NAME.search(x.name): generic += 1; return   # 설계 메모(프레임·글자)
         if x.tag == 'text':
             if GENERIC_TEXT.match(x.name) or CAMEL.match(x.name) or ROLE_NAME.search(x.name) or ANNOT_RE.search(x.name) or key(x.name) in FIG_ANNOT: generic += 1; return
             t, ch = apply_repl2(chain, x.name)
@@ -486,8 +493,63 @@ if not ARGS.no_geom and os.path.exists(ARGS.geom_cache):
     except Exception as e:
         print('기하 캐시를 읽지 못함:', e)
 
+# ───────────────────────── 공통 셸(GNB·푸터) — Figma 쪽도 프로토타입과 같은 기준으로 뺀다 ─────────────────────────
+# 프로토타입 쪽은 EXTRACT_JS·GEOM_JS가 `header.gnb, footer, .mo-top, .mo-nav`를 뺀다(공통 셸 화면 cmn.*만 대조).
+# 새 Figma 프레임은 GNB·푸터까지 한 프레임에 그려져 있어, 화면 크기 프레임이면 좌표 캐시로 같은 영역을 뺀다.
+#   상단 GNB 띠  PC 64px(.gnb 높이) · 모바일 56px(.mo-top 높이) — 모바일 프레임에 상태 표시줄(9:41)이 있으면 +44px. 문구 중심이 띠 안이면 셸
+#   하단 푸터    푸터 고정 문구(FOOTER_ANCHOR)가 프레임 아래 절반에 3개 이상이면 그중 가장 위 문구부터 프레임 끝까지.
+#               그 안의 버튼·입력 중 푸터 고정 문구가 아닌 것은 화면 아래 고정 CTA(예: 모바일 게스트 Sign Up 띠)라 남긴다
+#   같은 문구가 본문에도 있으면 빼지 않는다(문구 키 단위). 좌표 캐시가 없는 화면 크기 프레임은, 좌표 캐시의 모든 프레임에서 셸에만 나온 문구(SHELL_ONLY)만 뺀다.
+SHELL_TOP = {'pc': 64, 'mo': 56}
+STATUS_BAR_H = 44
+FOOTER_ANCHOR = re.compile(r'^(live chat|support@tethermax\.io|company|about tethermax|notices|affiliate partner inquiry|legal|privacy policy|terms of use|'
+                           r'© \d{4} tethermax\. all rights reserved\.?)$', re.I)
+CTL_KIND = {'button', 'chip', 'tab', 'input', 'b', 'c', 't', 'i'}
+
+def shell_band(fg, vp):
+    """좌표 캐시 프레임 → (GNB 띠 높이, 푸터 시작 y 또는 None)"""
+    top = SHELL_TOP[vp]
+    if vp == 'mo' and any(re.match(r'^\d{1,2}:\d{2}$', norm(t[0])) and t[3] < 30 for t in fg['texts']): top += STATUS_BAR_H
+    an = [t[3] for t in fg['texts'] if FOOTER_ANCHOR.match(norm(t[0])) and t[3] > fg['h'] * 0.5]
+    return top, (min(an) - 8 if len(an) >= 3 else None)
+
+def in_shell(r, kind, label, band):
+    """r = (x, y, w, h). kind = 문구 종류(text·button…) 또는 요소 종류(b·c·t·i·card·img)"""
+    top, ftop = band
+    if r[1] + r[3] / 2 < top: return True
+    if ftop is not None and r[1] >= ftop:
+        return kind not in CTL_KIND or FOOTER_ANCHOR.match(norm(label)) is not None
+    return False
+
+def shell_split(fg, vp):
+    """→ (셸에만 있는 문구 키 집합, 본문 문구 키 집합)"""
+    band = shell_band(fg, vp)
+    sh, body = set(), set()
+    for t, k, *r in fg['texts']:
+        (sh if in_shell(r, k, t, band) else body).add(akey(t))
+    return sh - body, body
+
+SHELL_ONLY, _body_any = set(), set()
+for _nid, _fg in GEOM.items():
+    _vp = 'pc' if _fg['w'] >= 1000 else 'mo'
+    if not screen_sized(_fg['w'], _fg['h'], _vp): continue
+    _s, _b = shell_split(_fg, _vp)
+    SHELL_ONLY |= _s; _body_any |= _b
+for _fg in GEOM.values():
+    _body_any |= {akey(t[0]) for t in _fg['texts'] if not screen_sized(_fg['w'], _fg['h'], 'pc' if _fg['w'] >= 1000 else 'mo')}
+SHELL_ONLY -= _body_any
+
+def drop_shell(fs, nid, vp):
+    """Figma 문구에서 GNB·푸터 문구를 뺀다 → 뺀 개수"""
+    if not screen_sized(fs['w'], fs['h'], vp): return 0   # 배경 위 모달 프레임이어도 화면 크기면 GNB·푸터는 뺀다(프로토타입은 모달만 봄)
+    fg = GEOM.get(nid)
+    drop = shell_split(fg, vp)[0] if fg and screen_sized(fg['w'], fg['h'], vp) else SHELL_ONLY
+    before = len(fs['texts'])
+    fs['texts'] = [x for x in fs['texts'] if akey(x['t']) not in drop]
+    return before - len(fs['texts'])
+
 GEOM_JS = r"""
-([scopeOverlay]) => {
+([scopeOverlay, withShell]) => {
   const fr = document.getElementById('pt-frame');
   let root = fr;
   if (scopeOverlay) { const s = fr.querySelector('.modal, .dialog, .sheet, .toast') || fr.querySelector('.scrim'); if (s) root = s; }
@@ -495,9 +557,11 @@ GEOM_JS = r"""
   const R = r => [Math.round(r.left - o.left), Math.round(r.top - o.top), Math.round(r.width), Math.round(r.height)];
   const vis = el => (!el.checkVisibility || el.checkVisibility({checkVisibilityCSS: true}));
   const SKIP = '.note, .tbd, script, style, template, .pt-b, .sheet-grab';
+  const SHELL = 'header.gnb, footer, .mo-top, .mo-nav';   // EXTRACT_JS와 같은 셸 — 공통 셸 화면(cmn.*)만 잰다
   const texts = [], els = [], cards = [];
   for (const el of root.querySelectorAll('*')) {
     if (el.closest(SKIP) || !vis(el)) continue;
+    if (!withShell && el.closest(SHELL)) continue;
     let own = false; for (const c of el.childNodes) if (c.nodeType === 3 && c.textContent.trim()) { own = true; break; }
     if (own) {
       const rg = document.createRange(); rg.selectNodeContents(el); const r = rg.getBoundingClientRect();
@@ -541,11 +605,14 @@ def _pair(F, P):
         for a, b in zip(sorted(fl, key=lambda r: (r[1], r[0])), sorted(pl, key=lambda r: (r[1], r[0]))): out.append((k, a, b))
     return out
 
-def geom_compare(fg, pg, tol):
-    """→ 이슈 목록 [{type, label, figma, proto, d}] · 짝지은 수"""
+def geom_compare(fg, pg, tol, vp=None):
+    """→ 이슈 목록 [{type, label, figma, proto, d}] · 짝지은 수. vp를 주면 Figma 쪽 GNB·푸터 영역(shell_band)을 뺀다"""
     issues = []
     vis_f = lambda r: r[1] < fg['h'] and r[0] < fg['w'] and r[1] + r[3] > 0   # 프레임 밖(잘려 안 보이는) Figma 요소는 뺀다
-    fg = {**fg, 'texts': [t for t in fg['texts'] if vis_f(t[2:6])], 'els': [e for e in fg['els'] if vis_f(e[2:6])]}
+    band = shell_band(fg, vp) if vp and screen_sized(fg['w'], fg['h'], vp) else None
+    keep_t = lambda t: vis_f(t[2:6]) and not (vp and t[1] in ('shell', 's')) and not (band and in_shell(t[2:6], t[1], t[0], band))
+    keep_e = lambda e: vis_f(e[2:6]) and not (vp and e[0] in ('shell', 's')) and not (band and in_shell(e[2:6], e[0], e[1], band))
+    fg = {**fg, 'texts': [t for t in fg['texts'] if keep_t(t)], 'els': [e for e in fg['els'] if keep_e(e)]}
     ok = lambda t: not is_data(t) and len(re.findall(r'[a-z가-힣]', akey(t))) >= 3   # 숫자·금액 같은 표본 값은 짝이 모호해서 뺌
     ft = [(akey(t), r) for t, k, *r in fg['texts'] if ok(t)]
     pt = [(akey(t), r) for t, r in pg['texts'] if ok(t)]
@@ -673,8 +740,10 @@ def main():
                         oneside.append({'screen': sc['id'], 'state': st['id'], 'label': st['label'], 'missing_vp': vp, 'has': fig['pc'] or fig['mo'], 'group': sc['group']})
                         continue
                     fsc = next((x for x in EXC.get('figmaScope', []) if sc['id'] == x['scope'] or (x['scope'].endswith('.') and sc['id'].startswith(x['scope']))), None)
-                    fs = figma_side(nid, re.compile(fsc['match'], re.I) if fsc else None)
-                    lang = 'ko' if hangul_ratio([x['t'] for x in fs['texts']]) > 0.5 else 'en'
+                    fs = figma_side(nid, re.compile(fsc['match'], re.I) if fsc else None, keep_shell=sc['id'].startswith('cmn.'))
+                    if fs['src'] == '정밀' and not sc['id'].startswith('cmn.'):   # 셸 종류 표시가 없는 덤프 → 좌표로 GNB·푸터 영역 문구를 뺀다
+                        fs['generic'] += drop_shell(fs, nid, vp)
+                    lang ='ko' if hangul_ratio([x['t'] for x in fs['texts']]) > 0.5 else 'en'
                     if lang == 'en':   # 영문 화면 안의 국문 = 설계 메모·상태 카드 라벨(화면 문구 아님)
                         ann = [x for x in fs['texts'] if re.search(r'[가-힣]', x['t'])]
                         fs['texts'] = [x for x in fs['texts'] if not re.search(r'[가-힣]', x['t'])]
@@ -691,8 +760,8 @@ def main():
                         gpage.evaluate(EXTRACT_JS, [sc['id'], st['id'], vp, lang, False, with_shell])
                         gpage.wait_for_timeout(50)
                         g_scope = not screen_sized(GEOM[nid]['w'], GEOM[nid]['h'], vp)
-                        pgm = gpage.evaluate(GEOM_JS, [g_scope])
-                        gi, npair, ncard = geom_compare(GEOM[nid], pgm, ARGS.geom_tol)
+                        pgm = gpage.evaluate(GEOM_JS, [g_scope, with_shell])
+                        gi, npair, ncard = geom_compare(GEOM[nid], pgm, ARGS.geom_tol, None if with_shell else vp)
                         geo = {'issues': gi, 'pairs': npair, 'cards': ncard, 'fw': GEOM[nid]['w'], 'pw': pgm['fw'], 'scope': g_scope}
                         gx = [(i, geom_rule(sc['id'], st['id'], vp, i)) for i in gi]
                         geo['issues'] = [i for i, r in gx if not r]; geo['excepted'] = [dict(i, rule=r['id']) for i, r in gx if r]
@@ -885,7 +954,7 @@ def write_report(reg, results, nodesign, oneside, top, shots):
          '| 누락 | Figma 프레임에 보이는 문구인데 프로토타입 그 상태에 없음 | 프로토타입에 넣거나, 의도적이면 예외 파일에 근거와 함께 등록 |',
          '| 문구 다름 | 비슷하지만 다른 문구(유사도 0.6 이상 짝) | `Figma` ⇄ `프로토타입` |',
          '| 추가 | 프로토타입에만 있음 | Figma 쪽에 같은 종류의 요소가 인스턴스로 가려져 있으면 판정하지 않고 「확인 불가」로 셈 |',
-         '| 제외 | 숫자·금액·날짜·주소·마스킹 ID·거래소 이름 같은 표본 값, Figma의 이름뿐인 레이어(`Button`·`Label`·`Description`·`h6`·`headline (DX-1)` 등), GNB·푸터(공통 셸 화면 `cmn.*`에서만 대조) | — |',
+         '| 제외 | 숫자·금액·날짜·주소·마스킹 ID·거래소 이름 같은 표본 값, Figma의 이름뿐인 레이어(`Button`·`Label`·`Description`·`h6`·`headline (DX-1)` 등), GNB·푸터(공통 셸 화면 `cmn.*`에서만 대조 — 프로토타입은 `header.gnb`·`footer`·`.mo-top`·`.mo-nav`, Figma는 셸 레이어 하위 또는 좌표 캐시의 상단 GNB 띠(PC 64px · 모바일 56px, 상태 표시줄 있으면 +44px)·하단 푸터 영역. 문구·위치 대조 모두) | — |',
          '| 출처 | 정밀 = Figma 실제 문구 · 색인 = 텍스트 레이어 이름(자동 이름 = 문구라서 대부분 맞지만, 이름을 바꾼 레이어는 틀릴 수 있음) · 보정 = 색인 이후 새 프레임이라 수정결과 문서의 문구로만 대조(누락만 판정) | — |',
          '',
          (f'> 정밀 모드: Figma 쪽 문구는 정밀 캐시({PRECISE_META.get("fetched", "")} 수신, {len(PRECISE)}노드 — 인스턴스 안 버튼·칩·탭 라벨까지 실제 문구)를 우선 쓰고, 캐시에 없는 노드만 색인(레이어 이름)으로 대조합니다. 출처별 수는 위 「대조한 상태×뷰」. 색인으로 남은 노드는 인스턴스 내부를 못 봐서 「확인 불가」로 셉니다.'
