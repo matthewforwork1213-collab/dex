@@ -89,7 +89,7 @@
 
 | HTTP | 에러 코드 | 조건 |
 |---|---|---|
-| 422 | `COUPON_ACCOUNT_NOT_ELIGIBLE` | 쿠폰 적용 계정이 `연동 완료`가 아니거나 이슈 계정. 챌린지 계열 쿠폰과 첫 연동 쿠폰(`LINK ACCOUNT`, 기존 쿠폰 유형 `LINK UID` — G-326)은 DEX 지갑에도 적용 가능(REQ-397) |
+| 422 | `COUPON_ACCOUNT_NOT_ELIGIBLE` | 쿠폰 적용 계정이 `연동 완료`가 아니거나 이슈 계정. 챌린지 계열 쿠폰과 첫 연동 쿠폰(`LINK UID`, 기존 쿠폰 유형·이름 그대로 — G-326)은 DEX 지갑에도 적용 가능(REQ-397) |
 | 403 | `REVIEW_NOT_ELIGIBLE` | 해당 거래소 `연동 완료` 계정 없음 |
 
 ## 공통 Enum
@@ -169,7 +169,7 @@ POST 본문에 거래소와 CEX UID 또는 DEX 지갑 주소 중 하나를 전�
 |---|---|
 | 200 · `FOUND` | `data.amount`는 확정된 USDT 십진 문자열. `0`은 적립 없음, 0 초과 10 미만은 최소 금액 안내, 정확히 10부터는 기준 충족 안내. 세 경우 모두 가입·로그인 및 같은 계정 연동으로 이어진다 |
 | 200 · `NO_PUBLIC_RESULT` | 공개 결과가 없거나 회원 전용인 경우 동일한 응답과 안내. `amount`와 금액 상세를 생략한다 |
-| 200 · `DATA_PENDING` | 집계 대기 안내. `amount`와 금액 상세를 생략한다 |
+| 200 · `DATA_PENDING` | 화면에 집계 대기 안내를 두지 않는다 — `FOUND`와 같게 `amount`(없으면 `0.00 USDT`)를 표시한다(반영 지연 표시 없음, 사용자 2026-11-27) |
 | 400 · `VALIDATION_ERROR` | 입력 필드에 오류 표시. 거래소와 입력값을 유지한다 |
 | 429 · `RATE_LIMITED` | `Retry-After`에 따라 재조회 허용 |
 | 500 · `INTERNAL_ERROR` / 503 · `SERVICE_UNAVAILABLE` | 일시 오류 안내. 같은 거래소와 입력값으로 다시 조회 |

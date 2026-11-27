@@ -97,7 +97,6 @@ const MODAL={
  picker:{label:'거래소 선택',bg:'guest.search:search',fig:{pc:'29035:98030',mo:'29035:98094'},
   flow:'거래소 선택 목록 = 서비스에 게시되고 조회가 지원되는 거래소(프로토타입 예시 Lighter · Bitget). CEX 선택 → guest.search:emptycex, DEX 선택 → guest.search:emptydex. 거래소를 바꾸면 이전 입력·결과를 지움.'},
  none:{label:'공개 조회 결과 없음',bg:'guest.search:dex',fig:{pc:'29035:98877',mo:'29035:98933'},flow:'NO_PUBLIC_RESULT — 결과 없음·회원 전용 계정 공통 안내. 금액 숨김(0으로 표시하지 않음).'},
- delay:{label:'거래 데이터 집계 중',bg:'guest.search:dex',fig:{pc:'29035:98986',mo:'29035:99040'},flow:'DATA_PENDING — 집계 대기. 금액 숨김.'},
  error:{label:'일시 오류 · 재조회',bg:'guest.search:dex',fig:{pc:'29035:99091',mo:'29035:99147'},flow:'500·503 — 입력값 유지, Try again → 같은 거래소·계정으로 재조회.'},
  limit:{label:'조회 제한 · 대기',bg:'guest.search:dex',fig:{pc:'29035:99200',mo:'29035:99256'},flow:'429 — Retry-After 이후 재조회. 대기 시간 표기는 Figma에 없음.'},
 };

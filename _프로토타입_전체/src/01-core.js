@@ -60,7 +60,7 @@ const shIc=(f,cls='ic')=>`<img class="${cls}" src="${A(f)}" alt="">`;
 // gnb(active, {open:'cashback'|'rewards'|'discover'}) — open이면 그 드롭다운을 펼친 상태로 그린다(hover 상태 화면용). 실제 hover에서도 펼쳐진다.
 function gnb(active,o={}){
  const authed=S.auth!=='guest';
- const nav=Object.entries(NAV).map(([k,n])=>`<div class="ni${o.open===k?' open':''}"><a class="${active===k||o.open===k?'on':''}" data-go="${n.items[0][0]}">${T(n.en,n.ko)}${ic('arrow-drop-down')}</a><div class="gnb-dd">${n.items.map(([go,en,ko])=>`<a data-go="${go}">${T(en,ko)}</a>`).join('')}</div></div>`).join('');
+ const nav=Object.entries(NAV).map(([k,n])=>`<div class="ni${o.open===k?' open':''}"><a class="${active===k||o.open===k?'on':''}" data-nav-toggle role="button" aria-haspopup="true">${T(n.en,n.ko)}${ic('arrow-drop-down')}</a><div class="gnb-dd">${n.items.map(([go,en,ko])=>`<a data-go="${go}">${T(en,ko)}</a>`).join('')}</div></div>`).join('');
  const right=authed?`<button class="icon-btn" data-go="${o.bellGo||'cmn.header:unread'}" title="Notifications">${shIc('cmn-ic-bell.svg')}</button><button class="icon-btn" data-go="my.main" title="My">${shIc('cmn-ic-account.svg')}</button>`
   :`${C.btn(T('Login','로그인'),{v:'outlined',go:'auth.login'})}${C.btn(T('Sign Up','회원가입'),{go:'auth.signup'})}`;
  return `<header class="gnb"><div class="row g24"><img src="${A('logo.svg')}" style="width:142px;height:16px;cursor:pointer" data-go="${authed?'home.main':'landing.main'}" alt="TetherMax"><nav class="nav">${nav}</nav></div><div class="right">${right}<button class="icon-btn">${ic('light-mode')}</button><button class="icon-btn" data-lang>${ic('language')}</button></div></header>`}
@@ -144,6 +144,11 @@ function render(){
 window.ptFilter=q=>{q=q.trim().toLowerCase();document.querySelectorAll('.pt-s').forEach(a=>{a.style.display=!q||a.textContent.toLowerCase().includes(q)?'':'none'});document.querySelectorAll('.pt-g').forEach(d=>{if(q)d.open=true})};
 function go(key){if(!key)return;const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}S.screen=id;S.state=st||null;render();document.getElementById('pt-frame').scrollTop=0;window.scrollTo(0,0)}
 window.go=go;
+// GNB 큰 메뉴: 클릭하면 이동하지 않고 아래로 펼침(펼친 채 유지) · 다시 클릭·바깥 클릭·Esc로 닫힘 — 실사이트와 같음
+document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-nav-toggle]');
+ if(t){e.preventDefault();e.stopPropagation();const ni=t.parentNode;document.querySelectorAll('.gnb .nav .ni.open').forEach(n=>{if(n!==ni)n.classList.remove('open')});ni.classList.toggle('open');return}
+ if(!(e.target.closest&&e.target.closest('.gnb-dd')))document.querySelectorAll('.gnb .nav .ni.open').forEach(n=>n.classList.remove('open'))},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.gnb .nav .ni.open').forEach(n=>n.classList.remove('open'))});
 document.addEventListener('click',e=>{
  const g=e.target.closest('[data-go]');if(g&&g.dataset.go!==undefined){e.preventDefault();if(g.dataset.go)go(g.dataset.go);else if(S.screen){const sc=R.byId[S.screen];if(sc.closeTo)go(sc.closeTo)}return}
  if(e.target.closest('[data-lang]')){S.lang=S.lang==='en'?'ko':'en';save();render()}});
