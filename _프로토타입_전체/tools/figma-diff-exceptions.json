@@ -1,0 +1,36 @@
+{
+ "about": "figma-diff.py 예외 — 결정 기록으로 의도적으로 Figma와 다르게 한 것만 넣는다. ref(결정 기록 위치)가 없는 규칙은 넣지 않는다. scope: * · 화면id · 화면id:상태 · 그룹접두사. · 접두사* / type: missing(Figma에만) · added(프로토타입에만) · diff(문구 다름) · any / figma·proto: 정규화 후 같거나 포함(6자 이상), /정규식/i 가능 / equiv: diff에서 Figma 문구의 앞 단어를 뒤 단어로 바꾸면 프로토타입과 같아지면 예외",
+ "brands": [],
+ "figmaAnnotations": [
+  {"name": "link / hub compare", "reason": "DEX 개요 프레임 안 설계 메모 레이어"},
+  {"name": "Selected answer", "reason": "퀴즈 프레임의 역할 이름 레이어(문구 아님)"},
+  {"name": "Explanation", "reason": "퀴즈 결과 프레임의 역할 이름 레이어"},
+  {"name": "Reward detail", "reason": "퀴즈 결과 프레임의 역할 이름 레이어"},
+  {"name": "Feedback", "reason": "퀴즈 프레임의 역할 이름 레이어"},
+  {"name": "Section title", "reason": "푸터 컴포넌트의 역할 이름 레이어"},
+  {"name": "Review heading", "reason": "DEX 상세 리뷰 영역의 역할 이름 레이어"},
+  {"name": "Message", "reason": "퀴즈 결과 프레임의 역할 이름 레이어"}
+ ],
+ "figmaScope": [
+  {"scope": "cmn.header", "match": "gnb|header|navigation|top ?nav|webprelogin", "reason": "헤더 상태의 근거가 전체 페이지 프레임이라 헤더 부분만 대조"}
+ ],
+ "rules": [
+  {"id": "EX-01", "scope": "calc.", "type": "any", "figma": "/.*/", "proto": "/.*/", "reason": "계산기(/payback)는 실서비스 계산기 화면의 흐름·문구·동작을 그대로 채택", "ref": "_Figma수정_결정.md 9차 「계산기(/payback) 프로토타입 (2026-11-27)」"},
+  {"id": "EX-02", "scope": "*", "type": "diff", "equiv": [["linked uid", "linked accounts"], ["uids", "accounts"], ["uid", "account"]], "reason": "CEX·DEX 공통 문맥은 UID 대신 Account", "ref": "_Figma수정_결정.md 용어 규칙(2026-11-26) · N5 · N10 · Q4 G-451"},
+  {"id": "EX-03", "scope": "*", "type": "diff", "proto": "Using multiple platforms? Link more accounts", "reason": "홈·마이 연동 유도 문구 확정", "ref": "_Figma수정_결정.md Q3 G-451"},
+  {"id": "EX-04", "scope": "home.wallet", "type": "added", "proto": "/^(Earning Timeline|Start Trading|Cut-off Time|Updated)$/i", "reason": "UID·지갑 상세는 기존 Earning Timeline 3단계 디자인 그대로", "ref": "_Figma수정_결정.md N16·N17·N19 · A6"},
+  {"id": "EX-05", "scope": "home.wallet", "type": "added", "proto": "Top Partner Exchanges", "reason": "지갑 상세 하단은 기존 디자인 Top Partner Exchanges(CEX·DEX 공통)", "ref": "_Figma수정_결정.md 「지갑 상세 하단」"},
+  {"id": "EX-06", "scope": "*", "type": "missing", "figma": "Top Partner DEXs", "reason": "Top Partner DEXs 폐기", "ref": "_Figma수정_결정.md 「지갑 상세 하단」"},
+  {"id": "EX-07", "scope": "link.", "type": "added", "proto": "/^Don.t have an account yet\\? Register here$/i", "reason": "연동 모달 가입 링크 문구는 실서비스 문구", "ref": "_Figma수정_결정.md 12차 「연동 모달 가입 링크 문구」"},
+  {"id": "EX-08", "scope": "*", "type": "missing", "figma": "/^Start by signing up for /i", "reason": "연동 모달 가입 중간 안내 없음", "ref": "_Figma수정_결정.md 12차 「연동 모달 가입 중간 안내」"},
+  {"id": "EX-09", "scope": "quiz.", "type": "diff", "equiv": [["withdraw", "claim"]], "reason": "요청·동작은 Claim(Cashback Basics 소제목 등)", "ref": "_Figma수정_결정.md 11차 · 용어 규칙(2026-11-26) D2"},
+  {"id": "EX-10", "scope": "cmn.", "type": "diff", "equiv": [["exchanges events", "exchange events"]], "reason": "GNB Rewards Hub 항목 Exchange Events", "ref": "_Figma수정_결정.md 9차 「GNB Rewards Hub ▾ 항목」"},
+  {"id": "EX-11", "scope": "*", "type": "missing", "figma": "/^(data delayed|delayed|dex data pending|cashback update delayed|last updated\\b.*)$/i", "reason": "반영 지연 표시 없음 원칙", "ref": "_Figma수정_결정.md 10차 「반영 지연 · 오프보딩」 · 11차"},
+  {"id": "EX-12", "scope": "home.", "type": "missing", "figma": "/^(no cashback yet|inactive|trying to link|verifying ownership)$/i", "reason": "홈 연동 행은 칩이 아니라 기존 디자인(상태 점·시계·배너)", "ref": "_Figma수정_결정.md 10차 「홈 연동 계정 행 상태 표시」"},
+  {"id": "EX-13", "scope": "*", "type": "missing", "figma": "/^(receive league prize|receive prize)$/i", "reason": "글로벌 리그 상금 수령 화면 없음 — 참가 계정으로 지급", "ref": "_Figma수정_결정.md 12차 · REQ-391"},
+  {"id": "EX-14", "scope": "*", "type": "missing", "figma": "/milestone/i", "reason": "Cashback Milestone은 없어진 기능", "ref": "_Figma수정_결정.md A-18"},
+  {"id": "EX-15", "scope": "*", "type": "missing", "figma": "/verification limit reached/i", "reason": "시도 한도 미도입", "ref": "G-063 · _프로토타입_전체/README.md 반영 원칙"},
+  {"id": "EX-16", "scope": "*", "type": "missing", "figma": "/^real-time ranking$/i", "reason": "TP 화면 Real-Time Ranking 칩 없음(현행에 없음)", "ref": "Figma수정결과_6차.md 🔴 #47·#48"},
+  {"id": "EX-17", "scope": "cmn.header", "type": "any", "figma": "/^(events|benefits|point|cashback preview|cashback hub|discover|rewards hub|exchanges?)$/i", "proto": "/^(cashback|rewards hub|discover)$/i", "reason": "새 GNB 구성(Cashback ▾ · Rewards Hub ▾ · Discover ▾). 근거 프레임은 옛 GNB 페이지라 메뉴 이름이 다름", "ref": "_Figma수정_결정.md D4 · A1"}
+ ]
+}

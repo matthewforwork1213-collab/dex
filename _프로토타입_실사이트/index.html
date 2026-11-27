@@ -55,7 +55,7 @@ var S={key:'en',auth:'guest',state:'',view:'auto',dr:''};
 var $=function(id){return document.getElementById(id)};
 try{var h=new URLSearchParams(location.hash.slice(1));['key','auth','state','view','dr'].forEach(function(k){if(h.get(k)!==null)S[k]=h.get(k)})}catch(e){}
 // ---- DEX 연결 (README 「DEX 연결」): /en/affiliated = 캐시백 허브, /en/dex · /en/dex/{slug} = DEX 앱(dex/app.html)
-var DEXR={en__affiliated:['/hub','캐시백 허브'],en__dex:['/dex','DEX 개요'],en__dex__lighter:['/dex/lighter','Lighter 상세'],en__dex__apex:['/dex/apex','ApeX 상세'],en__dex__edgex:['/dex/edgex','EdgeX 상세'],en__dex__aster:['/dex/aster','Aster 상세'],en__rewardHistory:['/summary','캐시백 요약'],en__payback:['/payback','캐시백 계산기'],en__account:['/account','지갑·UID 상세'],'en__ownership-verification':['/ownership','소유권 인증'],en__benefits:['/benefits','혜택']};
+var DEXR={en__affiliated:['/hub','캐시백 허브'],'en__tethermax-point-introduction':['/tp-intro','테더맥스 포인트 소개'],en__dex:['/dex','DEX 개요'],en__dex__lighter:['/dex/lighter','Lighter 상세'],en__dex__apex:['/dex/apex','ApeX 상세'],en__dex__edgex:['/dex/edgex','EdgeX 상세'],en__dex__aster:['/dex/aster','Aster 상세'],en__rewardHistory:['/summary','캐시백 요약'],en__payback:['/payback','캐시백 계산기'],en__account:['/account','지갑·UID 상세'],'en__ownership-verification':['/ownership','소유권 인증'],en__benefits:['/benefits','혜택']};
 Object.keys(DEXR).forEach(function(k){var u=ORIGIN+'/'+k.replace(/__/g,'/');if(!D.pages[k])D.pages[k]={url:u,auth:{guest:{vp:{pc:{},mo:{}}},member:{vp:{pc:{},mo:{}}}}};D.pages[k].dex=DEXR[k][0];D.pages[k].label=DEXR[k][1]+' (DEX 앱) · '+u.replace(ORIGIN,'');D.urlmap[u]=k});
 function dexKeyOf(r){var p=r.split('?')[0];for(var k in DEXR)if(DEXR[k][0]===p)return k;return 'en'+p.replace(/\//g,'__')}
 if(!D.pages[S.key])S.key='en';
@@ -76,6 +76,8 @@ function keyOf(url){
 }
 function go(key,opt){opt=opt||{};S.key=key;S.state=opt.state||'';S.dr=opt.dr||'';closeDexModal();render()}
 function render(){
+  // 게스트가 회원 포인트 페이지를 열면 소개 페이지로(dev 동작, 결정 2026-11-27)
+  if(S.key==='en__tethermax-point'&&S.auth!=='member')S.key='en__tethermax-point-introduction';
   if(D.pages[S.key]&&D.pages[S.key].dex)return renderDex(D.pages[S.key]);
   renderDex.base=null;
   var v=vp(), A=pageFor(S.key,S.auth), note='';

@@ -29,7 +29,7 @@ function memberOf(slug) {
 }
 function withSD(o, f) { window.SITED = o; try { return f() } finally { window.SITED = null } }
 const site2 = {
-  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/benefits': 'Benefits | TetherMax' }[p] },
+  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/tp-intro': 'TetherMax Point | TetherMax', '/benefits': 'Benefits | TetherMax' }[p] },
   dexLanding() { S.auth = isMember() ? 's3' : 'guest'; return withSD({ guest: !isMember(), list: SD.list }, () => renderInner('dex.overview:' + (isMember() ? 'member' : 'normal'))) },
   dexDetail(slug) {
     if (SD.slug !== slug) Object.assign(SD, { slug, maker: false, vol: 400000, step: 0, faq: new Set([0]), sort: 0 });
@@ -39,6 +39,7 @@ const site2 = {
   },
   render(p, q) {
     if (p === '/payback') return calcHTML(q || {});
+    if (p === '/tp-intro') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('tp.intro:normal') }   // TP 소개(dev 기준) — 게스트·회원 같은 화면, CTA만 다름
     if (p === '/benefits') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('benefits.list:' + (isMember() ? 'normal' : 'guestOn')) }   // GNB Rewards Hub ▾ Benefits (사용자 2026-11-27)
     if (p === '/summary') { if (!isMember()) { navReal('/en/login'); return '' } S.auth = 's4'; return withSum(() => renderInner('summary.main:normal')) }
     if (p === '/account') { if (!isMember()) { navReal('/en/login'); return '' } return accountHTML() }
@@ -219,7 +220,7 @@ function rerenderSec(n, f) {
 }
 function openHow() {
   const d = DEXX.DX[SD.slug || 'edgex'];
-  openCustom(() => withSD({ id: SD.slug, vol: SD.vol, maker: SD.maker }, () => DEXX.dtDrawer(d, SD.maker)), 'center');
+  openCustom(() => withSD({ id: SD.slug, vol: SD.vol, maker: SD.maker }, () => DEXX.dtDrawer(d, SD.maker)), 'side');   // 드로어(REQ-344 · B-7-4)
 }
 
 // ---------------- 클릭 위임(2회차 화면) ----------------
@@ -602,7 +603,7 @@ const CK = { step: 'p1', pid: null, chip: 'All', lev: 10, bal: 1000, ratio: 100,
 const CK0 = { step: 'p1', pid: null, chip: 'All', lev: 10, bal: 1000, ratio: 100, freq: null, how: false };
 const CK_FILL = { p1: .2, p2: .4, p3: .6, p4: .8, p5: 1 };
 function calcHTML(q) {
-  if (q.step === 'result') { if (!CK.pid || CK.freq == null) { CK.step = 'p1'; history.replaceState(null, '', '#/payback') } else if (!['p4', 'p5'].includes(CK.step)) CK.step = 'p4' }
+  if (q.step === 'result') { if (!CK.pid || CK.freq == null) { CK.step = 'p1'; (window.PT_EMBED ? { replaceState() { } } : history).replaceState(null, '', '#/payback') } else if (!['p4', 'p5'].includes(CK.step)) CK.step = 'p4' }
   else if (['p4', 'p5'].includes(CK.step)) CK.step = 'p3';
   window.SITEC_LIVE = 1;
   window.SITEC = { pid: CK.pid, chip: CK.chip, lev: CK.lev, bal: CK.bal, ratio: CK.ratio, freq: CK.freq, how: CK.how };

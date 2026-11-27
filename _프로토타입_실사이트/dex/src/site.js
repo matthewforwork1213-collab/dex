@@ -3,20 +3,22 @@
 // 실제 사이트처럼 경로(#/hub · #/dex · #/dex/{slug})로 열고 입력·연동 흐름에 실제 동작을 붙인다.
 (function () {
 'use strict';
-const Q = new URLSearchParams(location.search);
-const EMB = window.parent !== window;          // 실사이트 셸(iframe) 안에서 열렸나
+// 화면 목록판(full.html)에 들어가 있으면 EMBED — 같은 코드로 목록판의 해당 화면을 그리고 동작시킨다(결정 12차: 두 판 같은 코드)
+const EMBED = !!window.PT_EMBED;
+const Q = new URLSearchParams(EMBED ? '' : location.search);
+const EMB = !EMBED && window.parent !== window;          // 실사이트 셸(iframe) 안에서 열렸나
 const MODAL = Q.get('modal') === '1';           // 셸이 연 연동 모달 전용 모드(배경 투명)
 const SITE = { auth: Q.get('auth') === 'member' ? 'member' : 'guest' };
 const ORIGIN = 'https://tethermax.io';
 const BP = 1024;                                 // 실사이트 분기점
 let ST = DEXSTATE.load();
-const persist = () => DEXSTATE.save(ST);
+const persist = () => { if (!ST.transient) DEXSTATE.save(ST) };
 window.SITEL = { cex: false };
 
-S.lang = 'en'; S.design = true;
-document.body.classList.add('design', 'site');
+if (!EMBED) { S.lang = 'en'; S.design = true; document.body.classList.add('design', 'site') }
 if (MODAL) { document.body.classList.add('site-modal'); document.documentElement.classList.add('site-modal') }
-const vpNow = () => (window.innerWidth <= BP ? 'mo' : 'pc');
+const vpNow = () => (EMBED ? PT_EMBED.vp() : window.innerWidth <= BP ? 'mo' : 'pc');
+const HX = EMBED ? { replaceState() { }, pushState() { } } : history;   // 목록판에서는 주소를 건드리지 않는다
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const post = m => { m.pt = 1; if (EMB) parent.postMessage(m, '*'); };
@@ -26,7 +28,8 @@ const isMember = () => SITE.auth === 'member';
 const app = $('#app'), layer = $('#layer');
 
 // 셸 화면(C.overlay)은 사이트 모드에서 배경 화면을 그리지 않는다 — 레이어가 실제 현재 화면 위에 뜬다
-C.overlay = (bg, inner) => inner;
+const OV0 = C.overlay;
+C.overlay = (bg, inner, o) => (EMBED && !PT_EMBED.on() ? OV0(bg, inner, o) : inner);
 
 // ---------------- 토스트 (MUI Snackbar 모양 · 실사이트 전환 .3s) ----------------
 function toast(msg, o = {}) {
@@ -45,6 +48,7 @@ window.siteErr = errToast;
 
 // ---------------- 실사이트 페이지로 이동 ----------------
 function navReal(path) {
+  if (EMBED) return PT_EMBED.nav(ORIGIN + path);
   if (EMB) return post({ nav: ORIGIN + path });
   const key = path.replace(/^\//, '').replace(/\//g, '__') || 'en';
   location.href = '../index.html#key=' + encodeURIComponent(key) + '&auth=' + SITE.auth;
@@ -67,11 +71,12 @@ function parseHash() {
   return { path: p || '/hub', q: Object.fromEntries(new URLSearchParams(qs || '')) };
 }
 const hashOf = r => { const qs = new URLSearchParams(r.q).toString(); return r.path + (qs ? '?' + qs : '') };
-let route = parseHash();
+let route = EMBED ? { path: '/hub', q: {} } : parseHash();
 function goRoute(path, q = {}, o = {}) {
+  if (EMBED && PT_EMBED.route(path, q)) return;   // 목록판: 다른 화면이면 목록판이 그 화면으로 이동
   route = { path, q };
   const h = '#' + hashOf(route);
-  if (location.hash !== h) history[o.replace ? 'replaceState' : 'pushState'](null, '', h);
+  if (!EMBED && location.hash !== h) history[o.replace ? 'replaceState' : 'pushState'](null, '', h);
   renderPage({ keepScroll: o.keepScroll });
   if (!o.keepScroll) window.scrollTo(0, 0);
   post({ dexRoute: hashOf(route) });
@@ -121,7 +126,9 @@ function siteGo(key) {
     return goRoute('/dex/edgex');
   }
   if (id.startsWith('cexd')) { const s = CEX_SLUG[st] || st; return navReal('/en/exchangeDetail/' + s + '-referral') }
-  if (id === 'tp.main') return navReal(isMember() ? '/en/tethermax-point' : '/en/tethermax-point-introduction');
+  if (id.startsWith('brkd')) return navReal('/en/brokers/' + ({ rs: 'rs-finance' }[st] || st));
+  if (id === 'tp.intro') { closeLayer(true); return goRoute('/tp-intro') }   // TP로 가는 모든 진입 = 소개(게스트 포함, 결정 2026-11-27)
+  if (id === 'tp.main') { if (isMember()) return navReal('/en/tethermax-point'); closeLayer(true); return goRoute('/tp-intro') }   // 포인트 페이지 = 회원 전용, 게스트는 소개(dev 동작)
   if (id === 'invite.main') return navReal(isMember() ? '/en/mypage/invitefriend/invitefriend' : '/en/login');
   if (id === 'support.main') return window.ptSupport ? ptSupport() : toast('Live Chat');
   if (id === 'my.main') return toast('마이 페이지는 실사이트 상단 프로필 메뉴 (프로토타입)');
@@ -132,8 +139,10 @@ function siteGo(key) {
   if (NEXT[id]) return toast(NEXT[id] + ' — 다음 회차에 연결');
   toast('준비 중인 화면: ' + id);
 }
-window.go = siteGo;
-window.render = () => { renderPage({ keepScroll: true }); if (L.open) renderLayer() };
+if (!EMBED) {
+  window.go = siteGo;
+  window.render = () => { renderPage({ keepScroll: true }); if (L.open) renderLayer() };
+}
 
 // ---------------- 페이지 렌더 ----------------
 let lastVp = vpNow();
@@ -149,14 +158,15 @@ function renderPage(o = {}) {
   else if (p === '/dex') { S.auth = isMember() ? 's3' : 'guest'; html = window.SITE2 && SITE2.dexLanding ? SITE2.dexLanding() : renderInner('dex.overview:' + (isMember() ? 'member' : 'normal')) }
   else if (/^\/dex\/(lighter|apex|edgex|aster)$/.test(p)) html = dexDetailHTML(p.split('/')[2]);
   else if (window.SITE2 && (html = SITE2.render(p, route.q)) != null) { }
-  else { route = { path: '/hub', q: {} }; history.replaceState(null, '', '#/hub'); html = hubHTML() }
+  else { route = { path: '/hub', q: {} }; HX.replaceState(null, '', '#/hub'); html = hubHTML() }
   app.innerHTML = html;
   app.classList.remove('enter'); void app.offsetWidth; if (!o.keepScroll) app.classList.add('enter');
   if (p === '/hub') hubEnhance();
   pageEnhance();
   if (window.SITE2) SITE2.enhance(p, route.q, o);
   if (o.keepScroll) window.scrollTo(0, y);
-  if (window.SITE2 && SITE2.title(p)) document.title = SITE2.title(p); else document.title = p === '/hub' ? 'Cashback Hub | TetherMax' : p === '/dex' ? 'DEX | TetherMax' : (p.split('/')[2] || '') + ' | TetherMax';
+  if (EMBED) { }
+  else if (window.SITE2 && SITE2.title(p)) document.title = SITE2.title(p); else document.title = p === '/hub' ? 'Cashback Hub | TetherMax' : p === '/dex' ? 'DEX | TetherMax' : (p.split('/')[2] || '') + ' | TetherMax';
 }
 function dexDetailHTML(slug) {
   if (window.SITE2 && SITE2.dexDetail) return SITE2.dexDetail(slug);
@@ -281,7 +291,7 @@ function updateCalc(o = {}) {
 function applyFilter() {
   const q = H.q.trim().toLowerCase(); let n = 0;
   $$('[data-hub-row]').forEach(r => { const ok = !q || r.dataset.hubRow.toLowerCase().includes(q); r.style.display = ok ? '' : 'none'; if (ok) n++ });
-  const em = $('[data-hub-empty]'); if (em) em.style.display = n ? 'none' : 'block';
+  const em = $('[data-hub-empty]'); if (em) { em.style.display = n ? 'none' : 'block'; em.textContent = H.q.trim() ? `No results found for “${H.q.trim()}”` : 'No results found' }   // G-151 · N13
   const tb = $('[data-compare-body] table'); if (tb) tb.closest('[data-compare-body]>div').style.display = n ? '' : 'none';
   const cards = $('[data-compare-body]>.col'); if (cards) cards.style.display = n ? '' : 'none';
   const clr = $('[data-hub-clear]'); if (clr) clr.style.display = q ? 'inline-flex' : 'none';
@@ -299,7 +309,7 @@ document.addEventListener('click', e => {
   const tab = t.closest('[data-hub-tab]');
   if (tab) { e.preventDefault(); return switchTab(tab.dataset.hubTab, tab) }
   const vw = t.closest('[data-hub-view]');
-  if (vw) { e.preventDefault(); const q = Object.assign({}, route.q); if (vw.dataset.hubView === 'card') q.view = 'cards'; else delete q.view; route.q = q; history.replaceState(null, '', '#' + hashOf(route)); post({ dexRoute: hashOf(route) }); renderPage({ keepScroll: true }); return UI.swapFx($('[data-compare-body]')) }
+  if (vw) { e.preventDefault(); const q = Object.assign({}, route.q); if (vw.dataset.hubView === 'card') q.view = 'cards'; else delete q.view; route.q = q; HX.replaceState(null, '', '#' + hashOf(route)); post({ dexRoute: hashOf(route) }); renderPage({ keepScroll: true }); return UI.swapFx($('[data-compare-body]')) }
   const th = t.closest('[data-hub-sort]');
   if (th) { const i = th.cellIndex; H.sort = H.sort && H.sort.col === i ? { col: i, dir: -H.sort.dir } : { col: i, dir: i === 1 ? 1 : -1 }; applySort(); return UI.swapFx($$('[data-compare-body] tbody tr').filter(r => r.style.display !== 'none'), { dur: UI.T.base, shift: 4, stagger: 20 }) }   // 정렬: 행이 짧게 떠오름(실사이트에 정렬 없음 → 토큰)
   const clr = t.closest('[data-hub-clear]');
@@ -331,7 +341,7 @@ function switchTab(k, el) {
   const olds = box0 ? leafNums(box0).map(e => ({ t: e.textContent.trim(), n: numParts(e.textContent.trim()).n })) : [];
   const badges0 = badgeRects(), ORD = ['CEX', 'DEX', 'Brokers'], dir = ORD.indexOf(k) > ORD.indexOf(H.route) ? 1 : -1;
   const q = Object.assign({}, route.q); if (k === 'DEX') delete q.tab; else q.tab = k;
-  route.q = q; history.replaceState(null, '', '#' + hashOf(route)); post({ dexRoute: hashOf(route) });
+  route.q = q; HX.replaceState(null, '', '#' + hashOf(route)); post({ dexRoute: hashOf(route) });
   H.sort = null;
   renderPage({ keepScroll: true });
   if (oldRect) pillFlip(oldRect);
@@ -424,7 +434,7 @@ function setExchange(name, type) {
 function linkGo(id, st, el) {
   if (!L.open) {
     if (id === 'link.addr' && st && DEXES.some(d => d.toLowerCase() === st)) return openLink({ ex: DEXES.find(d => d.toLowerCase() === st), type: 'DEX' });
-    if (id === 'link.signup') { openLink(); L.step = 'signup'; return renderLayer() }
+    if (id === 'link.signup') { if (window.ptRefSignup) ptRefSignup('Lighter'); return openLink({ ex: 'Lighter', type: 'DEX' }) }
     return openLink();
   }
   const v = pendingVenue; pendingVenue = null;
@@ -433,7 +443,7 @@ function linkGo(id, st, el) {
     if (L.ex !== v.n) { L.val = ''; L.err = null; L.touched = false }  // 거래소를 바꾸면 입력값을 지운다(REQ-057)
     setExchange(v.n, v.t); return renderLayer();
   }
-  if (id === 'link.signup' && st === 'return') { setExchange('Lighter', 'DEX'); toast('Lighter 가입 페이지는 새 탭으로 열려요 (프로토타입)'); return renderLayer() }
+  if (id === 'link.signup') { setExchange('Lighter', 'DEX'); return renderLayer() }
   if (id === 'link.addr' || id === 'link.uid') {
     // 시트 닫기(X) · 결과 화면 Close/X → 이전 단계 · 입력 유지(REQ-064 · REQ-093)
     if (L.step === 'select' && L.prev && L.prev !== 'select') { L.step = L.prev; return renderLayer() }
@@ -451,7 +461,6 @@ function stepHTML() {
   S.vp = vpNow(); S.auth = 's4';
   const ex = L.ex;
   if (L.step === 'select') return R.byId['link.select'].render('normal');
-  if (L.step === 'signup') return R.byId['link.signup'].render('prompt');
   if (L.step === 'addr') return R.byId['link.addr'].render(ex.toLowerCase());
   if (L.step === 'uid') { LINKX.setSel(ex); return LINKX.uidLinkForm('empty') }
   if (L.step === 'proc') return R.byId['link.proc'].render('normal');
@@ -477,7 +486,7 @@ function renderLayer(o = {}) {
   // 모바일 시트는 아래 단계(입력 화면) 위에 겹친다
   let under = '';
   if (k === 'sheet' && L.prev && L.prev !== 'select') { const s = L.step; L.step = L.prev; under = `<div class="site-under">${stepHTML()}</div>`; L.step = s }
-  layer.className = 'site-layer open k-' + k + (S.vp === 'mo' ? ' vp-mo' : ' vp-pc') + (L.step === 'drawer' ? ' drawer' : '');
+  layer.className = 'site-layer open k-' + k + (S.vp === 'mo' ? ' vp-mo' : ' vp-pc') + (L.step === 'drawer' || k === 'side' ? ' drawer' : '');
   layer.innerHTML = `${under}<div class="site-scrim" data-site="scrim"></div><div class="site-box" data-site="box">${html}</div>${testHelp()}`;
   if (!wasOpen || o.enter) { layer.classList.add('enter'); requestAnimationFrame(() => requestAnimationFrame(() => layer.classList.remove('enter'))) }
   else if (o.swap) UI.swapFx($(o.swap, layer), { dur: UI.T.base, shift: 6 });
@@ -579,7 +588,7 @@ function bindField(box) {
 function doPaste() {
   const inp = $('.site-box .tf:not(.sm) input', layer);
   const put = t => { inp.value = t; inp.dispatchEvent(new Event('input')); inp.focus() };
-  try { navigator.clipboard.readText().then(t => t ? put(t) : inp.focus(), () => { inp.focus(); toast('붙여넣기 권한이 없어요. 직접 붙여넣어 주세요 (프로토타입)') }) } catch (e) { inp.focus() }
+  try { navigator.clipboard.readText().then(t => t ? put(t) : inp.focus(), () => inp.focus()) } catch (e) { inp.focus() }
 }
 function onNext(b) {
   if (L.busy) return errToast();   // 처리 중 다시 누름 = 중복 요청
@@ -708,12 +717,24 @@ window.addEventListener('resize', () => { const v = vpNow(); if (v !== lastVp) {
 
 // ---------------- 시작 ----------------
 S.vp = vpNow();
-queueMicrotask(() => {   // site2.js(같은 스크립트 뒤쪽)가 등록된 뒤 시작
+// 목록판이 이 화면을 그릴 때 부른다: 경로 · 로그인(guest | s3 | s4)
+function mount(path, q, auth) {
+  SITE.auth = auth === 'guest' ? 'guest' : 'member';
+  ST = auth === 's3' ? Object.assign(DEXSTATE.load(), { accounts: [], transient: true }) : DEXSTATE.load();
+  // 목록판 「회원·연동」으로 DEX 상세를 열면 그 DEX가 연동된 상태(상태 linked)로 보인다 — 화면 보기용 임시 계정(저장 안 함)
+  const m = /^\/dex\/(\w+)$/.exec(path), DXN = { edgex: 'EdgeX', apex: 'ApeX', lighter: 'Lighter', aster: 'Aster' };
+  if (auth === 's4' && m && DXN[m[1]] && !ST.accounts.some(a => a.ex === DXN[m[1]] && a.st === 'ok')) ST = Object.assign({}, ST, { accounts: ST.accounts.concat([{ ex: DXN[m[1]], type: 'DEX', id: '0x5b2E8c1D4f7A9036b1C8e2D5F4a7B9c0E3d6A21f', a: 12, b: 0, st: 'ok', seed: true }]), transient: true });
+  L.open = false; layer.className = 'site-layer'; layer.innerHTML = ''; document.documentElement.classList.remove('site-lock');
+  route = { path, q: q || {} }; lastVp = vpNow();
+  renderPage();
+}
+window.SITE_API.mount = mount; window.SITE_API.go = siteGo; window.SITE_API.layer = layer; window.SITE_API.closeNow = () => { L.open = false; layer.className = 'site-layer'; layer.innerHTML = ''; document.documentElement.classList.remove('site-lock') };
+if (!EMBED) queueMicrotask(() => {   // site2.js(같은 스크립트 뒤쪽)가 등록된 뒤 시작
 if (MODAL) {
   document.body.classList.toggle('vp-mo', S.vp === 'mo');
   if (Q.get('mode') && window.SITE2) SITE2.modal(Q.get('mode'), Object.fromEntries(Q));
   else openLink({ ex: Q.get('ex') || null, type: Q.get('type') || null });
-} else { renderPage(); if (route.q.link === '1') { const q = Object.assign({}, route.q); delete q.link; route.q = q; history.replaceState(null, '', '#' + hashOf(route)); if (isMember()) openLink(); else navReal('/en/login') } }   // 목록판 「실제 동작」에서 연동 모달 바로 열기
+} else { renderPage(); if (route.q.link === '1') { const q = Object.assign({}, route.q); delete q.link; route.q = q; HX.replaceState(null, '', '#' + hashOf(route)); if (isMember()) openLink(); else navReal('/en/login') } }   // 목록판 「실제 동작」에서 연동 모달 바로 열기
 post({ dexReady: hashOf(route) });
 });
 })();

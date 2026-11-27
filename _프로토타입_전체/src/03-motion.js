@@ -120,3 +120,6 @@ if ('IntersectionObserver' in window && window.requestAnimationFrame) {
 }
 M.scan = scan;
 })();
+
+// TP 소개 고정 CTA `Check My TP` — 맨 위에서는 없고 스크롤하면 나타남(dev 측정)
+if (typeof window !== 'undefined' && window.addEventListener) window.addEventListener('scroll', () => { const c = document.querySelector('[data-tp-cta]'); if (c) c.classList.toggle('on', window.scrollY > 120) }, { passive: true });

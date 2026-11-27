@@ -75,6 +75,7 @@
 | 54 | 캐시백 요약 · 연동 전 출금 행 | 유형명 | Claim Amount (before linking) | 연동 전 출금 | 신규(STG 유형값 `Claim Amount` 바탕) | G-426 · G-418 |
 | 96 | 허브 계산기 · DEX 상세 계산기 · 수수료 없는 등급(Lighter Standard · Aster maker) | 수치 자리 안내 | {DEX} charges no fee on this trade type, so there's nothing to return. | {DEX}는 이 거래 유형에 수수료가 없어 돌려드릴 캐시백이 없어요. | EN 정책 권고 원문(EC-CALC-6) · KO 신규 | G-145 · REQ-296 · 결정 11차 |
 | 96 | 허브 계산기 · DEX 상세 계산기 · 수수료 없는 등급(Lighter Standard · Aster maker) | 수치 자리 안내 | {DEX} charges no fee on this trade type, so there's nothing to return. | {DEX}는 이 거래 유형에 수수료가 없어 돌려드릴 캐시백이 없어요. | EN 정책 권고 원문(EC-CALC-6) · KO 신규 | G-145 · REQ-296 · 결정 11차 |
+| 96 | 허브 계산기 · DEX 상세 계산기 · 수수료 없는 등급(Lighter Standard · Aster maker) | 수치 자리 안내 | {DEX} charges no fee on this trade type, so there's nothing to return. | {DEX}는 이 거래 유형에 수수료가 없어 돌려드릴 캐시백이 없어요. | EN 정책 권고 원문(EC-CALC-6) · KO 신규 | G-145 · REQ-296 · 결정 11차 |
 
 ## 3. 리워드 · 초대 · 쿠폰 · 맥스보드 · 콘텐츠 · 메일
 
@@ -108,6 +109,12 @@
 | 80 | EMAIL 31 지갑 연동 실패 · 연동 전 잔액 출금 실패 사유 | 메일 본문 | We couldn’t send your previous cashback, so this account wasn’t linked. The amount is back in this account’s balance. You can try linking again. | 연동 전에 쌓인 캐시백을 송금하지 못해 연동이 완료되지 않았습니다. 금액은 해당 거래 계정의 잔액으로 복원되었으며, 다시 연동을 신청할 수 있습니다. | 신규(#21과 같은 뜻, 메일 말투) | R-26 · G-426 |
 | 81 | EMAIL T14 출금 실패 · 잔액 복원 줄 | 메일 본문 | The amount is back in your balance. | 출금 금액은 잔액으로 복원되었습니다. | EN 정책 A-31 원문 · KO 신규 | 이메일템플릿 T14 |
 | 82 | 출금 완료 메일 제목 | 메일 제목 | Cashback withdrawal completed | 캐시백 출금이 완료되었습니다. | 기존 템플릿 T13 | G-405 · U9 |
+| 97 | FCM 101 · EMAIL 31 · 사유 = 레퍼럴 아님 | 사유 문구 | This wallet isn't registered with TetherMax's referral, so it can't earn cashback. | 테더맥스 레퍼럴로 가입한 지갑이 아니라 캐시백을 받을 수 없어요. | 신규 | G-285 · REQ-662 · 결정 11차 |
+| 98 | FCM 101 · EMAIL 31 · 사유 = 이미 사용 중 | 사유 문구 | This wallet is already linked to another account. | 다른 계정에 이미 연동된 지갑이에요. | 신규 | G-285 · REQ-662 · 결정 11차 |
+| 99 | FCM 101 · EMAIL 31 · 사유 = 확인 불가 | 사유 문구 | We couldn't verify this wallet. Please contact support. | 지갑을 확인할 수 없어요. 고객센터로 문의해 주세요. | 신규 | G-285 · REQ-662 · 결정 11차 |
+| 100 | 맥스보드 · 자격 없음(참여 계정이 끊긴 뒤) | 본문 | You have no eligible {exchange} account. Link a new account to participate again. | 참여할 수 있는 {거래소} 거래 계정이 없어요. 새 거래 계정을 연동하면 다시 참여할 수 있어요. | EN 원본 `[EN draft]`의 UID → account · KO 정책 D-1-6 원문 | G-323 · REQ-655 · 결정 11차 |
+| 101 | 혜택 상세(맥스보드) · 리워드 영역 | 안내 | Board rewards are paid together with your exchange cashback, so they can't be withdrawn on their own. | 보드 리워드는 거래소 캐시백과 함께 지급돼요. 리워드만 따로 출금할 수는 없어요. | 신규 | G-324 · REQ-645 · 결정 11차 |
+| 102 | Cashback Basics · 소제목 | 소제목 | Claim cashback and rewards | 국문 언어팩 확인 | 기존 아티클 소제목 `Withdraw cashback and rewards`의 동작어를 Claim으로(요청·동작 = Claim) | REQ-714 · 정책 8-24 S-10 · 결정 11차 |
 | 97 | FCM 101 · EMAIL 31 · 사유 = 레퍼럴 아님 | 사유 문구 | This wallet isn't registered with TetherMax's referral, so it can't earn cashback. | 테더맥스 레퍼럴로 가입한 지갑이 아니라 캐시백을 받을 수 없어요. | 신규 | G-285 · REQ-662 · 결정 11차 |
 | 98 | FCM 101 · EMAIL 31 · 사유 = 이미 사용 중 | 사유 문구 | This wallet is already linked to another account. | 다른 계정에 이미 연동된 지갑이에요. | 신규 | G-285 · REQ-662 · 결정 11차 |
 | 99 | FCM 101 · EMAIL 31 · 사유 = 확인 불가 | 사유 문구 | We couldn't verify this wallet. Please contact support. | 지갑을 확인할 수 없어요. 고객센터로 문의해 주세요. | 신규 | G-285 · REQ-662 · 결정 11차 |

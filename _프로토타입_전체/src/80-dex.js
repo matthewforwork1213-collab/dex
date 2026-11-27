@@ -96,8 +96,8 @@ function venueCard(d,c,i){
 }
 function listRow(d){
  const stars=`<span class="row" style="gap:0">${[1,2,3].map(()=>`<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px" alt="">`).join('')}<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px;clip-path:inset(0 50% 0 0)" alt=""><img src="${A('dex-dt-ic-star-empty.svg')}" style="width:14px;height:14px" alt=""></span>`;
- const btn=mo()?`<img src="${A('ic-chevron-right.svg')}" style="width:20px;height:20px" alt="">`:`<button class="btn contained black sm" data-go="dex.detail:${d.id}">View ${d.name}</button>`;
- return `<div style="border:1px solid var(--divider);border-radius:8px;padding:12px 16px;background:#fff;cursor:pointer" data-go="dex.detail:${d.id}" class="col g8">
+ const btn=`<button class="btn contained black sm" data-go="dex.detail:${d.id}">View ${d.name}</button>`;
+ return `<div style="border:1px solid var(--divider);border-radius:8px;padding:12px 16px;background:#fff" class="col g8">
   <div class="row between"><div class="col" style="gap:2px"><div class="row" style="gap:6px">${C.dex(d.name,mo()?32:20)}<span class="${mo()?'b1':'b2'} semi">${d.name}</span>${mo()?'':`${stars}<span class="cap">4.0</span><span class="cap c2">(23)</span>`}</div><span class="b2 semi cb">Up to ${d.rate}% cashback</span></div>${btn}</div>
   <hr class="divider"><div class="row" style="gap:16px;${mo()?'justify-content:space-between':''}"><span class="cap c2">Final Taker <b style="color:var(--text-primary)">${pct(fin(d,'taker'))}</b></span><span class="cap c2">Final Maker <b style="color:var(--text-primary)">${pct(fin(d,'maker'))}</b></span></div></div>`;
 }
@@ -162,7 +162,7 @@ function ovWhy(){
  return `<section style="background:#fff;padding:${mo()?'0 0 48px':'24px 0 96px'}">${wrap(`<div class="col" style="gap:32px"><span class="h5">Why sign up with TetherMax?</span><div style="display:flex;${mo()?'flex-direction:column;gap:12px':'gap:24px'}">${r.map(card).join('')}</div></div>`)}</section>`;
 }
 function ovCta(){
- const call=`<div class="col" style="gap:28px;max-width:620px"><h2 style="margin:0;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;color:#fff;${mo()?'':'white-space:nowrap'}">Your keys. Your trades.<br>Your Cashback.</h2><p class="b1" style="margin:0;color:rgba(255,255,255,.7);max-width:446px">Join TetherMax, pick a partner Decentralised Exchange, and the Cashback starts with your next trade.</p><div>${C.btn('Sign Up Now',{go:'auth.signup'})}</div></div>`;
+ const call=`<div class="col" style="gap:28px;max-width:620px"><h2 style="margin:0;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;color:#fff;${mo()?'':'white-space:nowrap'}">Your keys. Your trades.<br>Your Cashback.</h2><p class="b1" style="margin:0;color:rgba(255,255,255,.7);max-width:446px">Join TetherMax, pick a partner Decentralised Exchange, and the Cashback starts with your next trade.</p><div>${C.btn('Sign Up Now',{go:'auth.signup'}).replace('<button ','<button data-after="dex.overview" ')}</div></div>`;
  const bg='linear-gradient(180deg,#a7aab0,#acb0b6)';
  if(mo())return `<section style="background:${bg}"><div style="height:340px;background:url(${A('dex-ov-keychain.jpg')}) center/cover"></div><div style="padding:24px 16px 48px">${call}</div></section>`;
  return `<section style="position:relative;height:640px;background:${bg};overflow:hidden"><img src="${A('dex-ov-keychain.jpg')}" style="position:absolute;right:0;top:0;width:746px;height:640px;object-fit:cover" alt=""><div style="position:absolute;left:120px;top:175px">${call}</div></section>`;
@@ -217,7 +217,7 @@ function offerBox(d,member,maker){
    ${stageRows(d,maker).map((r,i,a)=>{const last=i===a.length-1;return `<div class="row between" data-stage-row="${r.key}" style="border-top:1px solid var(--divider);padding:12px 16px"><span class="row b2 med${last?' cb':i===0?' c2':''}" style="gap:8px">${numBadge(i+1,last?1:0)}${r.label}</span>${r.strike?`<s class="b2 semi c3">${pct(r.v)}</s>`:`<span class="b2 semi${last?' cb':''}">${pct(r.v)}</span>`}</div>`}).join('')}</div>`;
  const ret=member==='return';
  const linkWallet=`link.addr:${d.name.toLowerCase()}`;
- const cta={guest:mo()?'':outlinedP(T('Sign Up','회원가입'),{full:true,go:'auth.signup'}),
+ const cta={guest:mo()?'':outlinedP(T('Sign Up','회원가입'),{full:true,go:'auth.signup'}).replace('<button ',`<button data-after="${linkWallet}" `),
   return:C.btn(T('Link Wallet','연동하기'),{full:true,go:linkWallet}),
   unlinked:outlinedP(T('Link Wallet','연동하기'),{full:true,go:linkWallet}),
   linked:`<button class="btn outlined black lg full" disabled>Auto Claim</button>`,
@@ -242,7 +242,7 @@ function dtHero(d,member,maker){
 function dtTabs(c){
  const n=c==='reviewsEmpty'?0:23;
  const tabs=['Key Features','Structure','Guide','Policy',`Reviews (${n})`];
- return `<div style="background:var(--bg-accent);border-bottom:1px solid var(--divider);${mo()?'overflow-x:auto':''}"><div style="max-width:1056px;margin:0 auto;display:flex;${mo()?'padding:0 16px':''}">${tabs.map((t,i)=>`<span style="padding:9px 16px;font-size:14px;font-weight:500;white-space:nowrap;${i===0?'color:var(--blue);border-bottom:2px solid var(--blue)':'color:var(--text-secondary);border-bottom:2px solid transparent'}">${t}</span>`).join('')}</div></div>`;
+ return `<div data-dt-tabs style="background:var(--bg-accent);${mo()?'overflow-x:auto':''}"><div style="max-width:1056px;margin:0 auto;display:flex;border-bottom:1px solid var(--divider);${mo()?'padding:0 16px':''}">${tabs.map((t,i)=>`<span style="padding:9px 16px;font-size:14px;font-weight:500;white-space:nowrap;${i===0?'color:var(--blue);border-bottom:2px solid var(--blue)':'color:var(--text-secondary);border-bottom:2px solid transparent'}">${t}</span>`).join('')}</div></div>`;
 }
 function dtWhy(d){
  const card=(t,i)=>`<div class="row" style="flex:1 1 0;min-width:0;gap:12px;border:1px solid var(--divider);border-radius:8px;padding:16px;background:#fff"><img src="${A('dex-dt-why-'+(i+1)+'.png')}" style="width:92px;height:92px;border-radius:16px;flex:none" alt=""><span class="b1 semi">${esc(t)}</span></div>`;
@@ -278,7 +278,7 @@ function dtStructure(d,maker){
   const bar=`<div style="display:flex;height:40px;border-radius:4px;overflow:hidden"><span style="width:${d.rate}%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center" class="b2 semi">${d.rate}%</span><span style="flex:1;background:#e0e0e0;color:#fff;display:flex;align-items:center;justify-content:center" class="b2">${100-d.rate}%</span></div>`;
   const leg=(c,t,s)=>`<div class="row" style="gap:8px;align-items:flex-start"><i style="width:12px;height:12px;background:${c};border-radius:2px;margin-top:4px"></i><div class="col" style="gap:0"><span class="b2">${t}</span><span class="cap c2">${s}</span></div></div>`;
   return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider">${kv('Normal trading fee','Without TetherMax',usd(x.fee))}${kv('Cashback','Returned to you','−'+usd(x.cb))}<hr class="divider">${kv('Effective fee','With TetherMax',usd(x.eff),1)}${slider}
-   <span class="h6" style="margin-top:16px">Where your cashback comes from</span>${bar}${leg('var(--blue)',`Returned to you — ${usd(x.cb)}`,'Paid to your TetherMax balance.')}${leg('#e0e0e0',`Stays with the fee — ${usd(x.eff)}`,`Split between ${d.name} and TetherMax.`)}
+   <span class="h6" id="dex-flow" style="margin-top:16px">Where your cashback comes from</span>${bar}${leg('var(--blue)',`Returned to you — ${usd(x.cb)}`,'Paid to your TetherMax balance.')}${leg('#e0e0e0',`Stays with the fee — ${usd(x.eff)}`,`Split between ${d.name} and TetherMax.`)}
    <div class="col" style="gap:8px">${steps.map(stepCard).join('')}</div>${disc}</div>`,{outer:'padding:20px 16px',style:'border-radius:8px;padding:16px'});
  }
  return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider">${fees}${slider}
@@ -375,7 +375,7 @@ function dtDrawer(d,maker){
   <hr class="divider" style="margin:0">
   <div class="col" style="gap:24px;padding:24px">${cap('WHAT YOU CHOOSE')}<div class="col" style="gap:16px">${row('Total volume','$400K','How much you trade in a month. Drag the slider to match your own trading.')}${row('Taker or Maker',maker?'Maker':'Taker','Exchanges charge two different fees. Taker is when you take an order that is already there. Maker is when you place one that waits.')}</div>
    ${cap('WHAT WE WORK OUT')}${echo}<div class="col" style="gap:16px">${row('Normal trading fee',usd(x.fee),'What the exchange would charge you on that volume, without TetherMax.')}${row('Cashback',usd(x.cb),'The part of that fee TetherMax sends back to your account.')}${row('Effective fee',usd(x.eff),'What the trade really costs you once the cashback arrives.')}</div>
-   <div class="col" style="gap:8px"><span class="b2 med c2">WHERE THE MONEY COMES FROM</span><div class="col" style="gap:8px;background:var(--action-hover);border-radius:10px;padding:12px 14px;font-size:13px"><span style="line-height:18px;letter-spacing:.16px">The exchange pays TetherMax a partner settlement for your trading. TetherMax returns most of it to you. Nothing is added to your fee.</span><span class="cb" style="font-weight:500;line-height:1.5">See the full flow&nbsp; ↓</span></div></div>
+   <div class="col" style="gap:8px"><span class="b2 med c2">WHERE THE MONEY COMES FROM</span><div class="col" style="gap:8px;background:var(--action-hover);border-radius:10px;padding:12px 14px;font-size:13px"><span style="line-height:18px;letter-spacing:.16px">The exchange pays TetherMax a partner settlement for your trading. TetherMax returns most of it to you. Nothing is added to your fee.</span><span class="cb" role="button" tabindex="0" data-full-flow style="font-weight:500;line-height:1.5;cursor:pointer">See the full flow&nbsp; ↓</span></div></div>
    ${cap('These are estimates. Final amounts vary by exchange, tier and trading activity.')}</div>
   <hr class="divider" style="margin:0"></div>`;
 }
@@ -395,7 +395,7 @@ function dtPage(c){
  if(member==='linked')notes.push('연동 완료 — 출금 자리는 비활성 <code>Auto Claim</code>(10분 주기 자동 지급), 리뷰 쓰기. V2.2 <code>exd/DETAIL#linked</code>');
  if(c==='offboarded')return `<div style="padding:8px 16px">${C.note('DEX 오프보딩 — 상세 URL <code>/dex/{slug}</code>는 DEX 랜딩으로 301 리다이렉트(REQ-121·358). 아래는 리다이렉트된 랜딩 · 디자인 없음. V2.2 <code>exd/DETAIL#offboarded</code>')}</div>${ovPage('normal')}`;
  const top=`${notes.length?`<div style="padding:8px 16px">${notes.map(C.note).join('')}</div>`:''}`;
- const sticky=mo()&&member==='guest'?`<div style="position:sticky;bottom:0;z-index:5;background:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -1px 0 var(--divider)"><button class="btn contained primary lg full" data-go="auth.signup">Sign Up${ext()}</button><button class="btn outlined black lg full" data-go="auth.login">Already have an account?</button></div>${C.note('모바일 게스트 하단 고정 CTA — DEX(revision) 모바일 D4 「sticky bottom CTA (guest)」(I28960:131011;27610:306639): <code>Sign Up</code> + <code>Already have an account?</code>. 모바일 오퍼 박스에는 <code>Get Started</code>만 있다.')}`:'';
+ const sticky=mo()&&member==='guest'?`<div style="position:sticky;bottom:0;z-index:5;background:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -1px 0 var(--divider)"><button class="btn contained primary lg full" data-go="auth.signup" data-after="link.addr:${d.name.toLowerCase()}">Sign Up${ext()}</button><button class="btn outlined black lg full" data-go="auth.login" data-after="link.addr:${d.name.toLowerCase()}">Already have an account?</button></div>${C.note('모바일 게스트 하단 고정 CTA — DEX(revision) 모바일 D4 「sticky bottom CTA (guest)」(I28960:131011;27610:306639): <code>Sign Up</code> + <code>Already have an account?</code>. 모바일 오퍼 박스에는 <code>Get Started</code>만 있다.')}`:'';
  return `${top}${dtHero(d,member,maker)}${member==='linked'?dtMyReview():''}${dtTabs(c)}${dtWhy(d)}${dtStructure(d,maker)}${dtGuide(d,c)}${dtClosing(d)}${dtFaq(d,c)}${dtReviews(d,member,c)}${sticky}`;
 }
 
@@ -411,7 +411,7 @@ R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',rout
   {id:'aster',label:'Aster',figma:{pc:'28960:127627',mo:'28960:131017'},note:'V2.2 exd/DETAIL#aster · Figma D5'},
   {id:'apex',label:'ApeX',figma:{pc:'28960:127633',mo:'28960:131023'},note:'V2.2 exd/DETAIL#apex · Figma D6'},
   {id:'lighter',label:'Lighter — Premium/Plus (온보딩 후 — 보류)',figma:{pc:'28960:127443',mo:'28960:130990'},note:'V2.2 exd/DETAIL#lighter · Figma D1 · 연동 모달 배경으로도 쓰임'},
-  {id:'drawer',label:'How this works 모달',figma:{pc:'22544:808136',mo:'22988:114502'},note:'[기존 MAX-1216] S21 How this works modal · 컴포넌트 Modal / How this works / mobile 343(22985:103042) 값 그대로 · 상태 정의 S5_12(29002:128605) · V2.2 exd/DETAIL#drawer(드로어 → 기존 제품 모달로 바꿈)'},
+  {id:'drawer',label:'How this works 드로어 (REQ-344)',figma:{pc:'22544:808136',mo:'22988:114502'},note:'[기존 MAX-1216] S21 How this works modal · 컴포넌트 Modal / How this works / mobile 343(22985:103042) 값 그대로 · 상태 정의 S5_12(29002:128605) · V2.2 exd/DETAIL#drawer(드로어 → 기존 제품 모달로 바꿈)'},
   {id:'step2',label:'단계 가이드 Step 2 (Lighter)',figma:{pc:'29386:137364'},note:'Figma CT-28 「Step 2 선택」 — 본문은 DEX(revision) `DEX guide / Step 2 of 5`(28981:129056) 원문(8차 결정)'},
   {id:'step3',label:'단계 가이드 Step 3 (Lighter)',figma:{pc:'28960:127444',mo:'28960:130999'},note:'V2.2 exd/DETAIL#step3 · Figma D2'},
   {id:'faq2',label:'FAQ 두 구역 펼침 — Withdrawals & Account Management',figma:{pc:'29367:138679'},note:'Figma CT-29 ② — 첫 구역과 `Withdrawals & Account Management` 동시 펼침. 질문·답변은 운영자 입력 예시(8차 결정)'},
@@ -421,6 +421,6 @@ R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',rout
   {id:'offboarded',label:'DEX 오프보딩 — 랜딩 리다이렉트',note:'V2.2 exd/DETAIL#offboarded · 상태 정의 S5_16 `Exchange unavailable`·S5_17 자동 이동(29002:128736·128761) — 결정(301 리다이렉트)대로 별도 화면 없음'},
  ],
  render(st,ctx){
-  if(st==='drawer'&&!ctx.asBg)return `<div style="position:relative">${dtPage('edgex')}<div class="scrim center" style="align-items:flex-start;padding-top:${mo()?24:96}px">${dtDrawer(DX.edgex,false)}</div></div>`;
+  if(st==='drawer'&&!ctx.asBg)return `<div style="position:relative">${dtPage('edgex')}<div class="scrim pt-fixed" data-drawer-scrim style="display:block;padding:0"><div class="pt-side-drawer" style="position:absolute;top:0;right:0;bottom:0;width:${mo()?'100%':'420px'};background:#fff;overflow:auto;box-shadow:-8px 0 24px rgba(0,0,0,.2)">${dtDrawer(DX.edgex,false).replace('width:343px;max-width:100%;background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.24)','width:100%;background:#fff;border-radius:0;box-shadow:none')}</div></div></div>`;
   return dtPage(st);
  }});

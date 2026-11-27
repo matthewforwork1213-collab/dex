@@ -46,6 +46,16 @@ function support() {
 function closeSupport() { const w = document.getElementById('bh-chat'); if (!w) return; w.classList.remove('in'); setTimeout(() => w.remove(), 240) }
 window.ptSupport = support;
 
+// ---- 가입 링크 `Register here` = 선택 거래소의 테더맥스 레퍼럴 가입 새 탭(REQ-053 · 결정 2026-11-27) ----
+// 레퍼럴 주소는 어드민 거래소 데이터 값. 프로토타입 소스에 있는 값만 쓰고, 없는 거래소는 주소를 지어내지 않는다
+const REF = { Lighter: 'https://app.lighter.xyz/?referral=TETHERMAX' };
+function refSignup(ex) {
+  if (REF[ex]) return open(REF[ex]);
+  window.PT_LAST_OPEN = 'referral:' + (ex || '');
+  toast((ex ? ex + ' ' : '') + '레퍼럴 가입 페이지가 새 탭으로 열려요 — 주소는 어드민 거래소 값 (프로토타입)');
+}
+window.ptRefSignup = refSignup;
+
 // ---- 공통 목적지: 캡처 단계에서 먼저 처리(두 판의 다른 클릭 처리보다 앞) ----
 window.addEventListener('click', e => {
   const t = e.target; if (!t || !t.closest) return;
@@ -58,6 +68,13 @@ window.addEventListener('click', e => {
     stop(); if (n && URLS.sns[n]) open(URLS.sns[n]); else toast('기존 푸터에 없는 소셜 — 링크 없음 (프로토타입)'); return;
   }
   if (t.closest('.fmail')) { stop(); return copy('support@tethermax.io') }
+  if (t.closest('[data-full-flow]')) {
+    stop(); const toFlow = () => { const f = document.getElementById('dex-flow'); if (!f) return; const off = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pt-bar-h')) || 0) + 80; const rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - off, behavior: rm ? 'auto' : 'smooth' }) };
+    if (SITE() && window.SITE_API) { SITE_API.closeLayer(); setTimeout(toFlow, 320) } else if (!SITE() && window.go && S.screen === 'dex.detail') { go('dex.detail:' + (S.auth === 'guest' ? 'normal' : S.auth === 's3' ? 'unlinked' : 'linked'), { noPush: true }); setTimeout(toFlow, 50) }
+    return;
+  }
+  const rs = t.closest('[data-ref-signup]');
+  if (rs) { stop(); return refSignup(rs.dataset.refSignup || (window.LINKX && LINKX.sel && LINKX.sel()) || '') }
   const el = t.closest('[data-go],button,a,[role="button"],span,div');
   if (!el) return;
   const go = el.closest('[data-go]') && el.closest('[data-go]').dataset.go;
@@ -92,6 +109,23 @@ document.addEventListener('click', e => {
     const v = (host.dataset && host.dataset.copy) || txt(host) || txt(host.parentElement);
     e.preventDefault(); return copy(v);
   }
+  // 주소 Paste(목록판) — 클립보드 주소로 바로 채움 → 형식 통과 상태
+  if (t.closest('[data-paste]')) { e.preventDefault(); return go('link.addr:valid') }
+  // 이메일 인증 Paste(목록판) — 6칸을 채우고 Verify 활성
+  if (t.closest('[data-otp-paste]')) { e.preventDefault(); fr.querySelectorAll('[data-otp-i]').forEach((x, i) => x.value = '123456'[i]); const v = fr.querySelector('[data-otp-verify]'); if (v) v.disabled = false; return }
+  // 거래소 이벤트 필터(Figma 29069:6595): 칩 = 그룹 거르기 · 체크 = 선택 · 셀렉트 `{첫 거래소}+{n}` · 모바일 Apply (n)
+  const evc = t.closest('[data-ev-chip]');
+  if (evc) { const box = evc.closest('[data-ev-filter]'), k = evc.dataset.evChip; box.querySelectorAll('[data-ev-chip]').forEach(x => x.classList.toggle('on', x === evc));
+    const apply = () => box.querySelectorAll('[data-ev-grp]').forEach(g => { g.hidden = k !== 'All' && g.dataset.evGrp !== k });
+    if (window.UI && UI.heightFx) UI.heightFx(() => box, apply); else apply(); return }
+  const evk = t.closest('[data-ev-check]');
+  if (evk) { const box = evk.closest('[data-ev-filter]'), n = evk.dataset.evCheck, set = (row, on) => { row.querySelector('.chk').classList.toggle('on', on); row.setAttribute('aria-checked', on) };
+    const items = [...box.querySelectorAll('[data-ev-grp] [data-ev-check]')], allRow = box.querySelector('[data-ev-check="All Exchanges"]');
+    if (n === 'All Exchanges') { const on = !allRow.querySelector('.chk').classList.contains('on'); items.forEach(r => set(r, on)); set(allRow, on) }
+    else { set(evk, !evk.querySelector('.chk').classList.contains('on')); set(allRow, items.every(r => r.querySelector('.chk').classList.contains('on'))) }
+    const sel = items.filter(r => r.querySelector('.chk').classList.contains('on')).map(r => r.dataset.evCheck);
+    const lab = fr.querySelector('[data-ev-label]'); if (lab) lab.textContent = sel.length ? sel[0] + (sel.length > 1 ? '+' + (sel.length - 1) : '') : 'All Exchanges';
+    const ap = fr.querySelector('[data-ev-apply]'); if (ap) ap.textContent = 'Apply (' + sel.length + ')'; return }
   // 라디오(퀴즈 보기 등): 같은 묶음 안 단일 선택
   const rd = t.closest('label.radio');
   if (rd) { const g = rd.parentElement; g.querySelectorAll(':scope > label.radio').forEach(x => x.classList.toggle('on', x === rd)); return }
@@ -130,3 +164,4 @@ css.textContent = `#bh-chat{position:fixed;right:24px;bottom:24px;width:340px;ma
 @media (prefers-reduced-motion:reduce){#bh-chat,.bh-toast{transition:none}}`;
 (document.head || document.documentElement).appendChild(css);
 })();
+

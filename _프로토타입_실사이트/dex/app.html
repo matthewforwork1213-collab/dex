@@ -263,6 +263,10 @@ body.design .note{display:none!important}
 /* 툴팁 — 실사이트 MUI Tooltip */
 .ui-tip{position:fixed;z-index:3000;max-width:300px;background:rgba(97,97,97,.92);color:#fff;font-size:11px;line-height:1.4;font-weight:500;padding:4px 8px;border-radius:4px;white-space:pre-line;pointer-events:none;opacity:0;transform:scale(.75);transition:opacity var(--m-base) var(--e-std),transform var(--m-tip) var(--e-std)}
 
+.m-rv[data-m-reveal="x"]{transform:translateX(var(--m-reveal-shift))}
+[data-tp-cta]{opacity:0;pointer-events:none;transition:opacity var(--m-std,.3s) var(--e-out,ease-out)}
+[data-tp-cta].on{opacity:1;pointer-events:auto}
+
 /* ===== 사이트 모드 (도구 UI 없음) — 전환 시간·이징은 실사이트 스냅숏 CSS(.2s~.3s · cubic-bezier(.65,0,.35,1))에 맞춘다 ===== */
 :root{--site-ease:var(--e-io);--site-t:var(--m-std)}
 html,body{margin:0;background:#fff}
@@ -348,6 +352,11 @@ tr[data-hub-row]:hover td{background:#f6f8fb}
 .site-layer.k-full.drawer .site-box{transition:transform var(--m-drawer) var(--e-io)}
 .site-layer.k-full.drawer.enter .site-box,.site-layer.k-full.drawer.leave .site-box{opacity:1;transform:translateX(100%)}
 .site-layer.leave{pointer-events:none}
+/* How this works 드로어(REQ-344) — 오른쪽 전체 높이 */
+.site-layer.k-side .site-box{position:fixed;top:0;right:0;bottom:0;left:auto;width:420px;max-width:100vw;margin:0;overflow:auto;background:#fff;border-radius:0;box-shadow:-8px 0 24px rgba(0,0,0,.2);transition:transform var(--m-drawer) var(--e-io)}
+.site-layer.k-side.vp-mo .site-box{width:100vw}
+.site-layer.k-side .site-box>div{width:100%!important;border-radius:0!important;box-shadow:none!important}
+.site-layer.k-side.enter .site-box,.site-layer.k-side.leave .site-box{opacity:1;transform:translateX(100%)}
 .site-box.swap{opacity:0;transform:translateY(30px);transition:none}
 .site-layer .modal{max-height:none;overflow:visible}
 .site-layer.vp-mo .modal{width:100%}
@@ -461,7 +470,7 @@ const FIGMA_FILE='hsa3bSV9QmFTe2jsf6tzTm';
 const figmaUrl=id=>`https://www.figma.com/design/${FIGMA_FILE}/UI-UX-Design?node-id=${String(id).replace(':','-')}`;
 const S={lang:'en',vp:'pc',auth:'s4',design:false,screen:null,state:null,live:false};
 try{Object.assign(S,JSON.parse(localStorage.getItem('tm-full-proto')||'{}'))}catch(e){}
-const save=()=>{try{localStorage.setItem('tm-full-proto',JSON.stringify({lang:S.lang,vp:S.vp,auth:S.auth,design:S.design,live:S.live}))}catch(e){}};
+const save=()=>{try{localStorage.setItem('tm-full-proto',JSON.stringify({lang:S.lang,vp:S.vp,auth:S.auth,design:S.design}))}catch(e){}};
 const T=(en,ko)=>S.lang==='ko'&&ko!=null?ko:en;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const A=n=>(window.ASSETS&&ASSETS[n])||('assets/'+n);
@@ -510,7 +519,7 @@ window.C=C;
 // 드롭다운 — Cashback: 결정 D4(Cashback Hub · Cashback Calculator, 단독 Calculator 메뉴 없음) / Rewards Hub · Discover: 기존 GNB 드롭다운 항목 그대로
 const NAV={
  cashback:{en:'Cashback',ko:'캐시백',items:[['hub.main','Cashback Hub','Cashback Hub'],['calc.p1','Cashback Calculator','Cashback Calculator']]},
- rewards:{en:'Rewards Hub',ko:'리워드 허브',items:[['events.list','Exchange Events','거래소 이벤트'],['benefits.list','Benefits','혜택'],['tp.main','Points','포인트']]},
+ rewards:{en:'Rewards Hub',ko:'리워드 허브',items:[['events.list','Exchange Events','거래소 이벤트'],['benefits.list','Benefits','혜택'],['tp.intro','Points','포인트']]},
  discover:{en:'Discover',ko:'둘러보기',items:[['quiz.list','Beginner’s Guide','초보자 가이드'],['about.intro','About TetherMax','테더맥스 소개']]},
 };
 const shIc=(f,cls='ic')=>`<img class="${cls}" src="${A(f)}" alt="">`;
@@ -543,7 +552,7 @@ function moTop(title,back){
  return bar+tt}
 // 앱 하단 탭 — <BottomNavigation> 8582:155585 (Home · Events · Benefits · Exchanges · Point). 앱(mAPP) 전용
 function moNav(active,o={}){if(!o.app)return '';
- const it=[['home','home.main','Home','홈','cmn-tab-home.svg'],['events','events.list','Events','이벤트','cmn-tab-event.svg'],['benefits','benefits.list','Benefits','혜택','cmn-tab-benefit.svg'],['exchange','cex.list','Exchanges','거래소','cmn-tab-exchange.svg'],['point','tp.main','Point','포인트','']];
+ const it=[['home','home.main','Home','홈','cmn-tab-home.svg'],['events','events.list','Events','이벤트','cmn-tab-event.svg'],['benefits','benefits.list','Benefits','혜택','cmn-tab-benefit.svg'],['exchange','hub.main:cex','Exchanges','거래소','cmn-tab-exchange.svg'],['point','tp.intro','Point','포인트','']];
  const icon=(k,f)=>k==='point'?`<span class="tp"><img src="${A('cmn-tab-point-b.svg')}" alt=""></span>`:`<img src="${A(f)}" alt="">`;
  return `<nav class="mo-nav">${it.map(([k,go,en,ko,f])=>`<a class="${active===k?'on':''}${k==='home'?' home':''}" data-go="${go}">${icon(k,f)}<span>${T(en,ko)}</span></a>`).join('')}</nav>`}
 
@@ -573,8 +582,9 @@ function sidebar(){
  const gs=[...R.groups].sort((x,y)=>x.order-y.order);
  return gs.map(g=>{const list=R.screens.filter(s=>s.group===g.id);if(!list.length)return '';
   return `<details class="pt-g" ${list.some(s=>s.id===S.screen)?'open':''}><summary>${g.label} <span>${list.length}</span></summary>${list.map(s=>{const n=s.states.length,d=s.states.filter(x=>x.figma).length;
-   return `<a class="pt-s ${s.id===S.screen?'on':''}" data-go="${s.id}"><span>${s.title}</span><em class="${d===n?'ok':d?'mid':'no'}">${d}/${n}</em></a>`}).join('')}</details>`}).join('')}
+   return `<a class="pt-s ${s.id===S.screen?'on':''}" data-pt-go="${s.id}"><span>${s.title}</span><em class="${d===n?'ok':d?'mid':'no'}">${d}/${n}</em></a>`}).join('')}</details>`}).join('')}
 function render(){
+ if(window.PT_EMBED)PT_EMBED.restore();
  const sc=R.byId[S.screen]||R.screens[0];S.screen=sc.id;
  const state=sc.states.find(s=>s.id===S.state)||sc.states[0];S.state=state.id;
  document.body.classList.toggle('design',S.design);
@@ -587,20 +597,21 @@ function render(){
  <span class="pt-seg">${[['pc','PC'],['mo','모바일']].map(([k,l])=>`<span data-vp="${k}" class="${S.vp===k?'on':''}">${l}</span>`).join('')}</span>
  <span class="pt-seg">${[['en','EN'],['ko','KO']].map(([k,l])=>`<span data-lg="${k}" class="${S.lang===k?'on':''}">${l}</span>`).join('')}</span>
  <span class="pt-seg">${[['guest','게스트'],['s3','회원·연동0'],['s4','회원·연동']].map(([k,l])=>`<span data-au="${k}" class="${S.auth===k?'on':''}">${l}</span>`).join('')}</span>
- ${appRoute(sc.id,state.id)?`<span class="pt-seg" title="실제 동작 = 실제 동작판(dex/app.html)을 이 자리에서 조작">${[[0,'화면 상태'],[1,'실제 동작']].map(([k,l])=>`<span data-live="${k}" class="${(+S.live)===k?'on':''}">${l}</span>`).join('')}</span>`:''}
  <label class="pt-ck"><input type="checkbox" id="pt-design" ${S.design?'checked':''}> 디자인 보기(주석 숨김)</label></div>
  <div class="pt-d">${designBadge(sc,state)}${state.note?`<span class="pt-n">${state.note}</span>`:''}</div>`;
  const fr=document.getElementById('pt-frame');fr.className='pt-frame vp-'+S.vp;
- const ar=S.live&&appRoute(sc.id,state.id);
- fr.innerHTML=ar?liveFrame(ar):renderInner(sc.id+':'+state.id);
+ // 허브 · DEX 랜딩 · DEX 상세 · 계산기 · 요약 · 소유권의 기본 상태는 실제 동작판과 같은 코드(site 런타임)로 그리고 동작한다(결정 12차)
+ const EM=window.PT_EMBED,mt=EM&&EM.target(sc.id,state.id);
+ if(EM)EM.unmount();
+ if(mt)EM.mount(fr,mt);
+ else{const k=EM?EM.stash():null;fr.innerHTML=renderInner(sc.id+':'+state.id);if(k)EM.unstash(k)}
  const h=`#${sc.id}/${state.id}`;if(location.hash!==h)history.replaceState(null,'',h);
- document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;render()};
+ document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;if(AUTH_ONLY_GUEST.includes(S.screen)&&S.auth!=='guest'){S.auth='guest';save()}else if((AUTH_ONLY_MEMBER.includes(S.screen)||/^(link|own)\./.test(S.screen))&&S.auth==='guest'){S.auth='s4';save()}render()};   // 상태를 직접 고르면 로그인 상태를 그 화면에 맞춤
  document.getElementById('pt-design').onchange=e=>{S.design=e.target.checked;save();render()};
  document.querySelectorAll('[data-vp]').forEach(x=>x.onclick=()=>{S.vp=x.dataset.vp;save();render()});
  document.querySelectorAll('[data-lg]').forEach(x=>x.onclick=()=>{S.lang=x.dataset.lg;save();render()});
- document.querySelectorAll('[data-au]').forEach(x=>x.onclick=()=>{const a=x.dataset.au;if(a===S.auth)return;const to=authTarget(S.screen,S.state,a);S.auth=a;save();if(to){S.screen=to[0];S.state=to[1]}render();window.scrollTo(0,0)});
+ document.querySelectorAll('[data-au]').forEach(x=>x.onclick=()=>{if(window.PT_EMBED)PT_EMBED.restore();const a=x.dataset.au;if(a===S.auth)return;const to=authTarget(S.screen,S.state,a);S.auth=a;save();if(to){S.screen=to[0];S.state=to[1]}render();window.scrollTo(0,0)});
  document.getElementById('pt-menu').onclick=()=>document.body.classList.toggle('pt-side-open');
- document.querySelectorAll('[data-live]').forEach(x=>x.onclick=()=>{S.live=x.dataset.live==='1';save();render()});
  document.documentElement.style.setProperty('--pt-bar-h',document.getElementById('pt-bar').offsetHeight+'px');
  const on=document.querySelector('.pt-s.on');if(on)on.scrollIntoView({block:'nearest'});
 }
@@ -608,7 +619,10 @@ window.ptFilter=q=>{q=q.trim().toLowerCase();document.querySelectorAll('.pt-s').
 // 뒤로(이전 화면, 없으면 지정 화면) — data-go="back:{대체 화면}" (기존 mWeb 제목 행 · REQ-276 · REQ-726)
 const HIST=[];
 function go(key,o={}){if(!key)return;
+ if(key==='@authdone'){const from=S.screen,st=S.state;S.auth=from==='auth.signup'?'s3':'s4';save();const k=S.after||(st==='guest'?'guest.result:handoff':S.auth==='s3'?'home.main:s3':'home.main');S.after=null;return go(k,{noPush:true})}
+ if(window.PT_EMBED)PT_EMBED.restore();
  if(key.startsWith('back:')){const p=HIST.pop();return go(p||key.slice(5),{noPush:true})}
+ if(/^(cexd|brkd):/.test(key)){const [k,id]=key.split(':');const CS={blockfin:'blofin',biofin:'blofin',woox:'woo-x-pro'},BS={rs:'rs-finance'};window.open('https://tethermax.io/en/'+(k==='cexd'?'exchangeDetail/'+(CS[id]||id)+'-referral':'brokers/'+(BS[id]||id)),'_blank','noopener');window.PT_LAST_OPEN=key;return}
  if(!o.noPush&&S.screen)HIST.push(S.screen+(S.state?':'+S.state:''));if(HIST.length>50)HIST.shift();
  const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}document.body.classList.remove('pt-side-open');S.screen=id;S.state=st||(AUTH_STATE[id]?AUTH_STATE[id][S.auth]:null);   // 상태를 안 정하면 지금 로그인 상태의 화면
  // 지금 로그인 상태로는 볼 수 없는 화면이면 실제로 보게 되는 화면으로(게스트 전용 ↔ 회원 전용)
@@ -622,6 +636,7 @@ function authTarget(id,st,a){
  const member=a!=='guest';
  if(!member&&id==='home.main')return ['landing.main','normal'];   // 게스트가 /en에 오면 랜딩(실사이트)
  if(member&&(id==='auth.login'||id==='auth.signup')&&S.after){const k=S.after.split(':');S.after=null;if(!(a==='s3'&&(k[0]==='home.wallet'||k[0]==='home.timeline')))return [k[0],k[1]||(AUTH_STATE[k[0]]?AUTH_STATE[k[0]][a]:null)]}
+ if(!member&&id==='tp.main')return ['tp.intro','normal'];   // 게스트가 포인트 페이지를 열면 소개(dev 동작)
  if(!member&&(AUTH_ONLY_MEMBER.includes(id)||/^(link|own)./.test(id)))S.after=id+(st?':'+st:'');
  if(member&&AUTH_ONLY_GUEST.includes(id))return ['home.main',a==='s3'?'s3':'normal'];
  if(!member&&(AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id)))return ['auth.login','normal'];
@@ -646,7 +661,8 @@ function appRoute(id,st){
  return null}
 function appBase(){return '../_프로토타입_실사이트/dex/app.html'}   // _프로토타입_전체/_latest.html · prototype/full.html 모두 DEX 바로 아래
 function liveFrame(r){const au=S.auth==='guest'?'guest':'member';return `<iframe id="pt-live" title="실제 동작판" src="${appBase()}?auth=${au}${r}" style="display:block;width:100%;height:calc(100vh - var(--pt-bar-h,48px));border:0;background:#fff"></iframe>`}
-const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/exchangeDetail\//,'cex.list'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'hub.main'],[/^\/en\/dex\/?$/,'dex.overview']];
+const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point-introduction/,'tp.intro'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'hub.main'],[/^\/en\/dex\/?$/,'dex.overview']];
+window.PT_REAL_NAV=url=>{let p='';try{p=new URL(url).pathname}catch(x){p=String(url)}const hit=REAL2SCREEN.find(([re])=>re.test(p));if(hit){const t=typeof hit[1]==='function'?hit[1]():hit[1];go(t);return}window.open(url,'_blank','noopener');window.PT_LAST_OPEN=url};
 window.addEventListener('message',e=>{const m=e.data||{};if(!m.pt||!S.live)return;
  if(m.auth){S.auth=m.auth==='member'?(S.auth==='guest'?'s4':S.auth):'guest';save()}
  if(m.nav){let p='';try{p=new URL(m.nav).pathname}catch(x){p=String(m.nav)}
@@ -661,10 +677,13 @@ document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest
  if(!(e.target.closest&&e.target.closest('.gnb-dd')))document.querySelectorAll('.gnb .nav .ni.open').forEach(n=>n.classList.remove('open'))},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.gnb .nav .ni.open').forEach(n=>n.classList.remove('open'))});
 document.addEventListener('click',e=>{
- const g=e.target.closest('[data-go]');if(g&&g.dataset.go!==undefined){e.preventDefault();if(g.dataset.go)go(g.dataset.go);else if(S.screen){const sc=R.byId[S.screen];if(sc.closeTo)go(sc.closeTo)}return}
+ const pt=e.target.closest('[data-pt-go]');if(pt){e.preventDefault();go(pt.dataset.ptGo);return}   // 도구 서랍(화면 목록) — 화면 안 data-go와 섞이지 않게
+ const g=e.target.closest('[data-go]');if(g&&window.PT_EMBED&&PT_EMBED.on()&&PT_EMBED.owns(g)){e.preventDefault();if(g.dataset.go)PT_EMBED.go(g.dataset.go);return}if(g&&g.dataset.go!==undefined){e.preventDefault();if(g.dataset.after)S.after=g.dataset.after;if(g.dataset.go)go(g.dataset.go);else if(S.screen){const sc=R.byId[S.screen];if(sc.closeTo)go(sc.closeTo)}return}
  if(e.target.closest('[data-lang]')){S.lang=S.lang==='en'?'ko':'en';save();render()}});
-window.addEventListener('hashchange',()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]&&(m[0]!==S.screen||m[1]!==S.state)){S.screen=m[0];S.state=m[1]||null;render()}});
-window.PT_START=()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]){S.screen=m[0];S.state=m[1]||null}render()};
+// 주소(#)로 직접 연 화면도 지금 로그인 상태로 볼 수 없으면 실제로 보게 되는 화면으로(결정 12차 — 게스트 전용 랜딩을 회원 상태로 그리지 않음)
+function fixAuthView(){const id=S.screen,st=S.state;if(!id)return;const to=(AUTH_ONLY_GUEST.includes(id)&&S.auth!=='guest')||((AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id))&&S.auth==='guest')?authTarget(id,st,S.auth):null;if(to){if(to[0]==='auth.login')S.after=id+(st?':'+st:'');S.screen=to[0];S.state=to[1]}}
+window.addEventListener('hashchange',()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]&&(m[0]!==S.screen||m[1]!==S.state)){S.screen=m[0];S.state=m[1]||null;fixAuthView();render()}});
+window.PT_START=()=>{const m=location.hash.slice(1).split('/');if(m[0]&&R.byId[m[0]]){S.screen=m[0];S.state=m[1]||null}fixAuthView();render()};
 
 </script>
 <script>// ===== 02-groups.js =====
@@ -814,6 +833,9 @@ if ('IntersectionObserver' in window && window.requestAnimationFrame) {
 M.scan = scan;
 })();
 
+// TP 소개 고정 CTA `Check My TP` — 맨 위에서는 없고 스크롤하면 나타남(dev 측정)
+if (typeof window !== 'undefined' && window.addEventListener) window.addEventListener('scroll', () => { const c = document.querySelector('[data-tp-cta]'); if (c) c.classList.toggle('on', window.scrollY > 120) }, { passive: true });
+
 })()}catch(e){console.error('03-motion.js',e);(window.PT_ERR=window.PT_ERR||[]).push('03-motion.js: '+e.message)}
 </script>
 <script>// ===== 04-behave.js =====
@@ -866,6 +888,16 @@ function support() {
 function closeSupport() { const w = document.getElementById('bh-chat'); if (!w) return; w.classList.remove('in'); setTimeout(() => w.remove(), 240) }
 window.ptSupport = support;
 
+// ---- 가입 링크 `Register here` = 선택 거래소의 테더맥스 레퍼럴 가입 새 탭(REQ-053 · 결정 2026-11-27) ----
+// 레퍼럴 주소는 어드민 거래소 데이터 값. 프로토타입 소스에 있는 값만 쓰고, 없는 거래소는 주소를 지어내지 않는다
+const REF = { Lighter: 'https://app.lighter.xyz/?referral=TETHERMAX' };
+function refSignup(ex) {
+  if (REF[ex]) return open(REF[ex]);
+  window.PT_LAST_OPEN = 'referral:' + (ex || '');
+  toast((ex ? ex + ' ' : '') + '레퍼럴 가입 페이지가 새 탭으로 열려요 — 주소는 어드민 거래소 값 (프로토타입)');
+}
+window.ptRefSignup = refSignup;
+
 // ---- 공통 목적지: 캡처 단계에서 먼저 처리(두 판의 다른 클릭 처리보다 앞) ----
 window.addEventListener('click', e => {
   const t = e.target; if (!t || !t.closest) return;
@@ -878,6 +910,13 @@ window.addEventListener('click', e => {
     stop(); if (n && URLS.sns[n]) open(URLS.sns[n]); else toast('기존 푸터에 없는 소셜 — 링크 없음 (프로토타입)'); return;
   }
   if (t.closest('.fmail')) { stop(); return copy('support@tethermax.io') }
+  if (t.closest('[data-full-flow]')) {
+    stop(); const toFlow = () => { const f = document.getElementById('dex-flow'); if (!f) return; const off = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pt-bar-h')) || 0) + 80; const rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - off, behavior: rm ? 'auto' : 'smooth' }) };
+    if (SITE() && window.SITE_API) { SITE_API.closeLayer(); setTimeout(toFlow, 320) } else if (!SITE() && window.go && S.screen === 'dex.detail') { go('dex.detail:' + (S.auth === 'guest' ? 'normal' : S.auth === 's3' ? 'unlinked' : 'linked'), { noPush: true }); setTimeout(toFlow, 50) }
+    return;
+  }
+  const rs = t.closest('[data-ref-signup]');
+  if (rs) { stop(); return refSignup(rs.dataset.refSignup || (window.LINKX && LINKX.sel && LINKX.sel()) || '') }
   const el = t.closest('[data-go],button,a,[role="button"],span,div');
   if (!el) return;
   const go = el.closest('[data-go]') && el.closest('[data-go]').dataset.go;
@@ -912,6 +951,23 @@ document.addEventListener('click', e => {
     const v = (host.dataset && host.dataset.copy) || txt(host) || txt(host.parentElement);
     e.preventDefault(); return copy(v);
   }
+  // 주소 Paste(목록판) — 클립보드 주소로 바로 채움 → 형식 통과 상태
+  if (t.closest('[data-paste]')) { e.preventDefault(); return go('link.addr:valid') }
+  // 이메일 인증 Paste(목록판) — 6칸을 채우고 Verify 활성
+  if (t.closest('[data-otp-paste]')) { e.preventDefault(); fr.querySelectorAll('[data-otp-i]').forEach((x, i) => x.value = '123456'[i]); const v = fr.querySelector('[data-otp-verify]'); if (v) v.disabled = false; return }
+  // 거래소 이벤트 필터(Figma 29069:6595): 칩 = 그룹 거르기 · 체크 = 선택 · 셀렉트 `{첫 거래소}+{n}` · 모바일 Apply (n)
+  const evc = t.closest('[data-ev-chip]');
+  if (evc) { const box = evc.closest('[data-ev-filter]'), k = evc.dataset.evChip; box.querySelectorAll('[data-ev-chip]').forEach(x => x.classList.toggle('on', x === evc));
+    const apply = () => box.querySelectorAll('[data-ev-grp]').forEach(g => { g.hidden = k !== 'All' && g.dataset.evGrp !== k });
+    if (window.UI && UI.heightFx) UI.heightFx(() => box, apply); else apply(); return }
+  const evk = t.closest('[data-ev-check]');
+  if (evk) { const box = evk.closest('[data-ev-filter]'), n = evk.dataset.evCheck, set = (row, on) => { row.querySelector('.chk').classList.toggle('on', on); row.setAttribute('aria-checked', on) };
+    const items = [...box.querySelectorAll('[data-ev-grp] [data-ev-check]')], allRow = box.querySelector('[data-ev-check="All Exchanges"]');
+    if (n === 'All Exchanges') { const on = !allRow.querySelector('.chk').classList.contains('on'); items.forEach(r => set(r, on)); set(allRow, on) }
+    else { set(evk, !evk.querySelector('.chk').classList.contains('on')); set(allRow, items.every(r => r.querySelector('.chk').classList.contains('on'))) }
+    const sel = items.filter(r => r.querySelector('.chk').classList.contains('on')).map(r => r.dataset.evCheck);
+    const lab = fr.querySelector('[data-ev-label]'); if (lab) lab.textContent = sel.length ? sel[0] + (sel.length > 1 ? '+' + (sel.length - 1) : '') : 'All Exchanges';
+    const ap = fr.querySelector('[data-ev-apply]'); if (ap) ap.textContent = 'Apply (' + sel.length + ')'; return }
   // 라디오(퀴즈 보기 등): 같은 묶음 안 단일 선택
   const rd = t.closest('label.radio');
   if (rd) { const g = rd.parentElement; g.querySelectorAll(':scope > label.radio').forEach(x => x.classList.toggle('on', x === rd)); return }
@@ -951,6 +1007,7 @@ css.textContent = `#bh-chat{position:fixed;right:24px;bottom:24px;width:340px;ma
 (document.head || document.documentElement).appendChild(css);
 })();
 
+
 })()}catch(e){console.error('04-behave.js',e);(window.PT_ERR=window.PT_ERR||[]).push('04-behave.js: '+e.message)}
 </script>
 <script>// ===== 10-common.js =====
@@ -983,7 +1040,7 @@ function lsBanner(){
    <div class="col" style="gap:0"><span style="font-size:${mo()?18:24}px;line-height:1.334;font-weight:700;color:#fff">Bitget 2026 King of Traders (KOT)</span><span style="font-size:${mo()?14:20}px;line-height:1.6;letter-spacing:.15px;font-weight:500;color:#bcbfc3">Win up to 2,000,000 USDT</span></div>
    <div>${C.btn('Join Now',{size:mo()?'md':'lg',go:'events.list'})}</div></div></div>
   ${lsImg('cmn-ls-dots.svg','width:44px;height:6px')}</div>`}
-const lsHead=(t,btn)=>`<div class="row" style="gap:16px"><span style="font-size:${mo()?20:24}px;line-height:1.334;font-weight:700;white-space:nowrap">${t}</span><i style="flex:1;height:1px;background:var(--divider)"></i>${btn?`<button class="btn text primary lg" style="padding:8px 11px" data-go="cex.list">See All</button>`:''}</div>`;
+const lsHead=(t,btn)=>`<div class="row" style="gap:16px"><span style="font-size:${mo()?20:24}px;line-height:1.334;font-weight:700;white-space:nowrap">${t}</span><i style="flex:1;height:1px;background:var(--divider)"></i>${btn?`<button class="btn text primary lg" style="padding:8px 11px" data-go="hub.main:cex">See All</button>`:''}</div>`;
 function lsTop(){
  const T4=[['bitget','#00f0ff','54%'],['bybit','#15192a','55%'],['binance','#181a20','50%'],['okx','#000','65%']];
  const n={bitget:'Bitget',bybit:'Bybit',binance:'Binance',okx:'OKX'};
@@ -1033,7 +1090,7 @@ const drRow=(icon,t,go,end='')=>`<div class="row" style="justify-content:space-b
 const drCard=rows=>`<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 2.5px rgba(93,96,103,.05)">${rows}</div>`;
 function drawer(member,o={}){
  const P={ex:[drIc('cmn-dr-candle.svg'),'Cashback Hub','hub.main'],br:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-broker.svg')}" alt="" style="width:16.67px;height:16.66px;transform:scaleY(-1)"></span>`,'Brokers','hub.main:brokers'],
-  ev:[drIc('cmn-dr-event.svg'),'Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.main']};
+  ev:[drIc('cmn-dr-event.svg'),'Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.intro']};
  const prod=(member?['ex','ev','bn','calc','pt']:['ex','ev','bn','calc','pt']).map(k=>drRow(...P[k])).join('');
  const theme=`<span style="background:#e6e7e9;border-radius:5000px;height:28px;padding:2px;display:flex"><span style="background:#fff;border-radius:5000px;padding:6px 4px;display:flex">${drIc('cmn-dr-light.svg','width:16px;height:16px')}</span><span style="width:24px"></span></span>`;
  const welcome=member?'':`<div style="padding:0 16px"><div style="background:#fff;border:.5px solid rgba(0,0,0,.05);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:24px"><div class="col center" style="gap:4px;font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:600"><span>Welcome to TetherMax!</span><span class="c2">Create an account or log in to start<br>earning Cashback.</span></div><div class="row" style="gap:12px">${C.btn('Log In',{v:'outlined',full:true,go:'auth.login'})}${C.btn('Sign Up',{full:true,go:'auth.signup'})}</div></div></div>`;
@@ -1042,7 +1099,7 @@ function drawer(member,o={}){
   <div class="col" style="gap:8px;padding:0 16px 16px">${drCard(prod)}${drCard(drRow(drIc('cmn-dr-palette.svg'),'Theme','',theme)+drRow(drIc('cmn-dr-language.svg'),'Language','cmn.lang:sheet',`<span style="font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:600;color:var(--text-secondary)">English</span>`))}
    ${drCard(drRow(drIc('cmn-dr-info.svg'),'Terms of Use','terms.use')+drRow(drIc('cmn-dr-feed.svg'),'Privacy Policy','terms.privacy'))}
    ${drCard(drRow(`<span style="width:20px;display:flex;justify-content:center;flex:none"><img src="${A('cmn-dr-tm.svg')}" alt="" style="width:20px;height:10.63px"></span>`,'About TetherMax','about.intro')+drRow(drIc('cmn-dr-signpost.svg'),'Beginner’s Guide','quiz.list')+drRow(drIc('cmn-dr-campaign.svg'),'Notices','notice.list')+drRow(drIc('cmn-dr-supervisor.svg'),'Affiliate Partner Inquiry','partner.apply'))}</div>
-  <button class="icon-btn" style="position:absolute;right:24px;bottom:24px;background:var(--blue);padding:8px"><img src="${A('cmn-ic-headset-w.svg')}" class="ic" alt=""></button></div>`;
+  <button class="icon-btn" data-go="support.main" aria-label="Live Chat" style="position:absolute;right:24px;bottom:24px;background:var(--blue);padding:8px"><img src="${A('cmn-ic-headset-w.svg')}" class="ic" alt=""></button></div>`;
  return body}
 const moFrame=inner=>S.vp==='pc'?`<div style="background:#e9ecef;padding:24px;display:flex;justify-content:center"><div style="width:375px;box-shadow:var(--elev8);overflow:hidden">${inner}</div></div>`:inner;
 R.screen({id:'cmn.drawer',group:'common',title:'모바일 웹 드로어',route:'모바일 웹 ☰',fu:['FU-083'],shell:false,
@@ -1095,7 +1152,7 @@ R.screen({id:'cmn.listing',group:'common',title:'Exchange Listings Page (CEX만)
  render(st){return listing(st==='cards'?'cards':'table')+C.note('CEX만 나열 — DEX 추가 안 함(REQ-466 · 475). 명세의 <code>Rating</code> 열(Avg. Cashback과 Live Campaigns 사이)은 Figma 표에 없음 → 질문_common.md. 모바일은 [MAX-22] 5145:52544 배치(행 = 번호 · 로고 · 이름 · 배지 · Total Savings).')}});
 
 // ---------- 공지 (웹 목록 디자인 없음 → [MAX-1244] Newsletter 목록 컴포넌트 재사용) ----------
-R.screen({id:'notice.list',group:'common',title:'공지',route:'/notice',fu:['FU-086'],shell:{nav:'discover',accent:true,moTitle:['Notices','공지'],back:'home.main'},
+R.screen({id:'notice.list',group:'common',title:'공지',route:'/notice',fu:['FU-086'],shell:{nav:'discover',accent:true,moTitle:['Notices','공지'],back:'back:home.main'},
  states:[{id:'normal',label:'카테고리 · 신규 거래소 추가',figma:{pc:'23102:1009753',mo:'23102:1010436'},note:'재사용: [기존 MAX-1244] Newsletter / List (공지 목록 자체 디자인 없음 — 기존 앱은 Zendesk Help Center) · V2.2 cmn/NOTICE#normal'}],
  render(){
   const cats=['거래소 이벤트','테더맥스 이벤트','신규 거래소 추가','거래소 지원 종료','업데이트 소식','점검','신규 서비스','안내'];
@@ -1191,7 +1248,7 @@ for(const f of RULES.R){
   states:[{id:'normal',label:'규칙 원문 ('+f.rows.map(r=>r[0]).join(' · ')+')',figma:null}],
   render(){
    const tbl=`<div class="tblwrap" style="background:#fff"><table class="tbl"><thead><tr><th>REQ</th><th>구분</th><th>내용</th><th>인수 기준</th><th>우선순위</th><th>상태</th></tr></thead><tbody>${f.rows.map(r=>`<tr>${r.slice(0,5).map(c=>`<td style="vertical-align:top">${rmd(c)}</td>`).join('')}<td style="vertical-align:top">${statusCell(r[5])}</td></tr>`).join('')}</tbody></table></div>`;
-   return docWrap(`${f.id}. ${esc(f.title)}`,`<div class="note" style="border:0;background:none;color:inherit;padding:0;margin:0;font-size:inherit"><p class="b2 c2" style="margin:0">${rmd(f.desc)}</p>${C.note('화면이 아니라 규칙인 기능 — 기능명세서 원문(V2.2 rule/'+f.id+'). 상태 열의 G-nnn은 2026-11-25 확정 결정이 있으면 확정값으로 표시. 디자인 대상 아님.'+(f.id==='FU-089'?' <b>CEX 회귀 방지</b>: CEX 배지 추가 없음 · CEX 이메일 템플릿·UID 마스킹·알림 17행 그대로 — 이 프로토타입의 CEX 화면(<a data-go="cex.list">cex.list</a> · <a data-go="cmn.listing">cmn.listing</a>)에도 DEX를 넣지 않는다.':''))}${tbl}</div>`);
+   return docWrap(`${f.id}. ${esc(f.title)}`,`<div class="note" style="border:0;background:none;color:inherit;padding:0;margin:0;font-size:inherit"><p class="b2 c2" style="margin:0">${rmd(f.desc)}</p>${C.note('화면이 아니라 규칙인 기능 — 기능명세서 원문(V2.2 rule/'+f.id+'). 상태 열의 G-nnn은 2026-11-25 확정 결정이 있으면 확정값으로 표시. 디자인 대상 아님.'+(f.id==='FU-089'?' <b>CEX 회귀 방지</b>: CEX 배지 추가 없음 · CEX 이메일 템플릿·UID 마스킹·알림 17행 그대로 — 이 프로토타입의 CEX 화면(<a data-go="hub.main:cex">허브 CEX 탭</a> · <a data-go="cmn.listing">cmn.listing</a>)에도 DEX를 넣지 않는다.':''))}${tbl}</div>`);
   }});
 }
 
@@ -2056,22 +2113,25 @@ R.screen({id:'challenge.detail',group:'rewards',title:'캐시백 챌린지 상�
 // 이벤트 (FU-072)
 // =====================================================================
 function evCard(o){return `<div style="background:#fff;border-radius:8px;box-shadow:0 4px 5px rgba(0,0,0,.1);padding:16px" class="col g16"><div style="position:relative;height:140px;border-radius:4px;overflow:hidden;background:${o.img?'#000':'#1f2a3c'}">${o.img?`<img src="${A(o.img)}" style="width:100%;height:100%;object-fit:cover" alt="">`:''}<div style="position:absolute;left:0;top:0;width:180px;height:140px;padding:24px 16px 16px;color:${o.img?'#fff':'#26364d'};font-weight:600;font-size:16px;line-height:1.5">${o.title}</div><span class="row" style="position:absolute;left:0;top:0;background:#1c1c1e;border-radius:4px 0 4px 0;padding:4px 8px;gap:4px;color:#fff;font-size:11px">${logo(o.ex,14)}${o.ex}</span></div><div class="row between b2"><span class="row g4 c2"><img src="${A('rw-ic-reward.svg')}" style="width:16px" alt="">Rewards</span><span>${o.reward}</span></div><div class="row g8"><img src="${A('rw-ic-clock.svg')}" style="width:16px" alt=""><span class="row g4" style="font-size:12px">${[['121','D'],['02','H'],['00','M'],['30','S']].map(([n,u])=>`<span style="background:rgba(207,216,220,.3);border-radius:4px;padding:4px;font-weight:500">${n}</span><span class="c2">${u}</span>`).join('')}</span></div>${C.btn('Join Now',{size:'md',full:true})}</div>`}
-function evFilterList(checked){const row=(n,on,isLogo=true)=>`<div class="row between" style="height:54px"><span class="row g8 b1">${isLogo?logo(n,20):''}${n}</span><span class="chk${on?' on':''}"><i></i></span></div>`;
- return `${row('All Exchanges',false,false)}<div class="b2 semi" style="color:#3c4a5c;padding:4px 0">${T('Centralised Exchanges','중앙화 거래소')}</div>${row('Bitget',checked)}${row('Bybit')}${row('Binance')}${row('OKX')}<div class="b2 semi" style="color:#3c4a5c;padding:4px 0">${T('Decentralised Exchanges','탈중앙화 거래소')}</div>${row('EdgeX')}`}
+const EV_SEL=['Bitget','EdgeX'];   // Figma 표본: 2곳 선택 → 셀렉트 `Bitget+1`
+const evLabel=sel=>sel.length?sel[0]+(sel.length>1?'+'+(sel.length-1):''):'All Exchanges';
+function evFilterList(sel=EV_SEL){const row=(n,on,isLogo=true)=>`<div class="row between" data-ev-check="${n}" role="checkbox" aria-checked="${!!on}" tabindex="0" style="height:54px;cursor:pointer"><span class="row g8 b1">${isLogo?logo(n,20):''}${n}</span><span class="chk${on?' on':''}"><i></i></span></div>`;
+ const cex=['Bitget','Bybit','Binance','OKX'],dex=['EdgeX'],all=cex.concat(dex);
+ return `<div data-ev-filter><div class="row g8" data-ev-chips style="padding:8px 0 4px">${['All','CEX','DEX'].map(k=>C.chip(k,k==='All').replace('<span class="chip',`<span data-ev-chip="${k}" role="button" tabindex="0" class="chip`)).join('')}</div>${row('All Exchanges',sel.length===all.length,false)}<div data-ev-grp="CEX"><div class="b2 semi" style="color:#3c4a5c;padding:4px 0">${T('Centralised Exchanges','중앙화 거래소')}</div>${cex.map(n=>row(n,sel.includes(n))).join('')}</div><div data-ev-grp="DEX"><div class="b2 semi" style="color:#3c4a5c;padding:4px 0">${T('Decentralised Exchanges','탈중앙화 거래소')}</div>${dex.map(n=>row(n,sel.includes(n))).join('')}</div></div>`}
 function evPage(o={}){const mo=MO();
- const sel=`<div style="position:relative"><div class="row between" style="width:${mo?'100%':'280px'};height:36px;border:1px solid var(--input-border);border-radius:4px;padding:0 8px 0 12px;background:#fff;cursor:pointer" data-go="events.list:${mo?'filterMo':'filterPc'}"><span class="b2">${o.selLabel||'All Exchanges'}</span>${ic('arrow-drop-down')}</div>${o.dropdown?`<div style="position:absolute;right:0;top:40px;width:335px;background:#fff;border-radius:8px;box-shadow:var(--elev8);padding:8px 20px;z-index:5">${evFilterList(true)}</div>`:''}</div>`;
+ const sel=`<div style="position:relative"><div class="row between" style="width:${mo?'100%':'280px'};height:36px;border:1px solid var(--input-border);border-radius:4px;padding:0 8px 0 12px;background:#fff;cursor:pointer" data-go="events.list:${mo?'filterMo':'filterPc'}"><span class="b2" data-ev-label>${o.selLabel||'All Exchanges'}</span>${ic('arrow-drop-down')}</div>${o.dropdown?`<div style="position:absolute;right:0;top:40px;width:335px;background:#fff;border-radius:8px;box-shadow:var(--elev8);padding:8px 20px;z-index:5">${evFilterList()}</div>`:''}</div>`;
  const cards=[{ex:'EdgeX',title:'EdgeX trading event',reward:'5.00 USDT'},{ex:'MEXC',img:'rw-ev-mexc.jpg',title:'Gold, Silver, Oil &amp; Stock Futures Zero Fees',reward:'0-Fee Mega Cash Reward'},{ex:'Kucoin',img:'rw-ev-kucoin.jpg',title:'Trade to earn $500,000 prize pool',reward:'$500,000.00'},{ex:'Kucoin',img:'rw-ev-kucoin.jpg',title:'Trade to earn $500,000 prize pool',reward:'$500,000.00'}];
  return wrap(`<div class="col" style="gap:${mo?24:40}px;padding:${mo?'16px 0 48px':'40px 0 80px'}"><div class="col g16"><div style="position:relative;height:${mo?220:350}px;border-radius:8px;overflow:hidden;background:#000"><img src="${A('rw-ev-banner.jpg')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right" alt=""><div class="col" style="position:relative;justify-content:center;height:100%;padding:${mo?'0 16px':'0 48px'};gap:24px"><span class="row" style="align-self:flex-start;background:rgba(255,255,255,.1);border-radius:16px;padding:4px 8px;gap:4px;color:#fff;font-size:13px"><span style="width:20px;height:20px;border-radius:50%;background:#000;color:#fff;font-size:11px;display:inline-flex;align-items:center;justify-content:center;font-weight:700">B</span>BioFin</span><div><div class="h5" style="color:#fff;font-weight:700">BioFin Cashback Boost</div><div class="h6" style="color:rgba(255,255,255,.8);font-weight:400">Up to 85% cashback</div></div>${`<button class="btn contained primary lg" style="align-self:flex-start">Join Now</button>`}</div></div><div class="row center g4"><span style="width:24px;height:6px;border-radius:3px;background:var(--blue)"></span><span style="width:6px;height:6px;border-radius:3px;background:var(--divider)"></span><span style="width:6px;height:6px;border-radius:3px;background:var(--divider)"></span></div></div>
  <div class="col g24"><div class="row between wrap" style="gap:12px">${tabBar([['s','Special Events'],['x','Exclusive'],['e','Exchange Events']],'e',{style:'border-bottom:0'})}${sel}</div><div style="display:grid;grid-template-columns:${mo?'1fr':'repeat(3,minmax(0,1fr))'};gap:24px">${cards.map(evCard).join('')}</div></div></div>`,1056)}
 R.screen({id:'events.list',group:'rewards',title:'이벤트',route:'/events',fu:['FU-072'],shell:{nav:'rewards',moTitle:['Events','이벤트'],moNav:'events'},
  states:[
   {id:'exchange',label:'거래소 이벤트 탭',figma:{pc:'29062:112586',mo:'29062:112729'},note:'V2.2에 별도 화면 없음(FU-072) — Figma대로. 거래소 이벤트 탭에 DEX 이벤트 노출(REQ-437)'},
-  {id:'filterPc',label:'거래소 필터 (PC 셀렉트·목록)',figma:{pc:'29069:6595'},note:'그룹 드롭다운 + 범위 선택, 배지 없음, 이벤트가 등록된 거래소만(REQ-437). 셀렉트 29069:6626'},
+  {id:'filterPc',label:'거래소 필터 (PC 셀렉트·목록)',figma:{pc:'29069:6595'},note:'칩 All · CEX · DEX(CEX = 중앙화 그룹만 · DEX = 탈중앙화 그룹만) → All Exchanges → 그룹. 여러 개 선택 시 셀렉트 <code>{첫 거래소}+{n}</code>. 그룹 드롭다운 + 범위 선택, 배지 없음, 이벤트가 등록된 거래소만(REQ-437). 셀렉트 29069:6626'},
   {id:'filterMo',label:'거래소 필터 (모바일 시트)',figma:{mo:'29069:6544'},note:'모바일 바텀시트 <code>Select Exchanges</code> · <code>Apply (n)</code>'},
  ],
  render(st){
-  if(st==='filterPc')return evPage({dropdown:!MO(),selLabel:'Bitget'})+(MO()?C.note('PC 전용 프레임 — 모바일은 <code>filterMo</code>'):'');
-  if(st==='filterMo'){const sheet=`<div style="background:#fff;border-radius:16px 16px 0 0;width:100%;${MO()?'':'max-width:375px'};padding:8px 20px 16px;align-self:flex-end"><div class="sheet-grab" style="margin:0 auto 16px"></div><div class="b1 semi center" style="margin-bottom:12px">Select Exchanges</div>${evFilterList(true)}<div class="row g8" style="margin-top:16px">${greyBtn('Close','events.list:exchange')}${C.btn('Apply (1)',{full:true,go:'events.list:exchange'})}</div></div>`;
+  if(st==='filterPc')return evPage({dropdown:!MO(),selLabel:evLabel(EV_SEL)})+(MO()?C.note('PC 전용 프레임 — 모바일은 <code>filterMo</code>'):'');
+  if(st==='filterMo'){const sheet=`<div style="background:#fff;border-radius:16px 16px 0 0;width:100%;${MO()?'':'max-width:375px'};padding:8px 20px 16px;align-self:flex-end"><div class="sheet-grab" style="margin:0 auto 16px"></div><div class="b1 semi center" style="margin-bottom:12px">Select Exchanges</div>${evFilterList()}<div class="row g8" style="margin-top:16px">${greyBtn('Close','events.list:exchange')}${C.btn(`Apply (${EV_SEL.length})`,{full:true,go:'events.list:exchange'}).replace('<button ','<button data-ev-apply ')}</div></div>`;
    return ovSelf('events.list','exchange',sheet,false)+(MO()?'':C.note('모바일 전용 프레임 — PC는 <code>filterPc</code>'))}
   return evPage()+C.note('Figma 탭은 <code>Special Events</code> · <code>Exclusive</code> · <code>Exchange Events</code> 3개. 정책 REQ-437은 <code>테더맥스 전용 이벤트</code> · <code>거래소 이벤트</code> 두 탭 기준 — 질문 목록 참고. EdgeX 카드 이미지는 Figma에서도 자리표시(어두운 배경 + 제목)');
  }});
@@ -2079,6 +2139,35 @@ R.screen({id:'events.list',group:'rewards',title:'이벤트',route:'/events',fu:
 // =====================================================================
 // TP (FU-074) — 포인트 화면은 수정하지 않음(REQ-451). Figma대로.
 // =====================================================================
+// =====================================================================
+// 테더맥스 포인트 소개 (tp.intro) — 기준: dev 실사이트 https://www-dev.tethermax.io/en/tethermax-point-introduction (2026-11-27 채집)
+// 게스트·회원 같은 화면. 아래 고정 CTA `Check My TP`(스크롤하면 나타남): 회원 → 포인트 페이지(tp.main) · 게스트 → 가입(가입 후 포인트 페이지)
+// 섹션 등장 = 불투명도 0→1 + 100px 이동 ≈0.6s ease-out(dev 측정). 문구·이미지는 dev 원문·원본 그대로
+// =====================================================================
+function tpIntro(){const mo=MO(),guest=S.auth==='guest';
+ const rv=(dir,inner,st='')=>`<div data-m-reveal${dir==='x'?'="x"':''} style="--m-reveal:.6s;--m-reveal-shift:100px;--e-reveal:ease-out;${st}">${inner}</div>`;
+ const h=(t,fs)=>`<div style="font-size:${fs}px;line-height:1.3;font-weight:700;color:#fff">${t}</div>`;
+ const p=(t,fs,fw=500)=>`<div style="font-size:${fs}px;line-height:1.45;font-weight:${fw};color:#fff">${t}</div>`;
+ const glow=(top,h0)=>`<div aria-hidden="true" style="position:absolute;left:50%;top:${top}px;width:${mo?720:1700}px;height:${h0}px;transform:translateX(-50%);border-radius:50% 50% 0 0;background:radial-gradient(ellipse at 50% 100%,rgba(0,49,198,.95) 0%,rgba(11,122,255,.55) 38%,rgba(13,150,220,.35) 55%,rgba(0,0,0,0) 72%);filter:blur(${mo?24:40}px);pointer-events:none"></div>`;
+ const sec=(inner,o={})=>`<section style="position:relative;overflow:hidden;padding:${o.pad||(mo?'80px 20px':'120px 24px')};text-align:${o.left?'left':'center'}">${o.glow?glow(o.glowTop||0,o.glowH||700):''}<div style="position:relative;max-width:1100px;margin:0 auto">${inner}</div></section>`;
+ const hero=`<section style="position:relative;overflow:hidden;background:#000;padding:${mo?'40px 20px 48px':'60px 24px 64px'};text-align:center">
+  <div aria-hidden="true" style="position:absolute;left:50%;top:${mo?150:200}px;width:${mo?900:2100}px;height:${mo?900:2100}px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 50% 30%,#2a7bff 0%,#0b5cff 22%,#0031c6 38%,#000 60%)"></div>
+  <div style="position:relative">${rv('',`<img src="${A('logo.svg')}" alt="TetherMax" style="height:${mo?16:20}px;filter:brightness(0) invert(1)">`)}
+   ${rv('',`<div style="margin:${mo?120:200}px auto 0;max-width:1100px;font-size:${mo?32:56}px;line-height:1.3;font-weight:700;color:#fff">Your TetherMax Point,<br>growing into a wider asset ecosystem.</div>`)}
+   ${rv('',`<div class="${mo?'col':'row'}" style="margin:${mo?120:200}px auto 0;max-width:1100px;background:rgba(255,255,255,.06);border-radius:20px;padding:${mo?'20px':'28px 24px'};gap:${mo?20:0}px;justify-content:space-around">${[['The standard chosen by the world.','90+ countries'],['Unrivaled liquidity.','Monthly $80B+'],['Overwhelming Cashback.','Cumulative $321M+']].map(([a,b])=>`<div class="col" style="gap:6px;align-items:center;flex:1">${p(a,15,400)}<div style="font-size:28px;font-weight:700;color:#fff">${b}</div></div>`).join('')}</div>`)}</div></section>`;
+ const s2=sec(rv('',`<img src="${A('tp-intro-coin.webp')}" alt="" style="width:120px;height:120px">${h('Adding new value<br>on top of familiar benefits.',mo?28:40)}<div style="height:20px"></div>${p('The Cashback you&#39;ve enjoyed remains exactly the same,<br>while TetherMax Point follows the flow of benefits to you.',mo?16:22)}`),{glow:1,glowTop:mo?260:420,glowH:mo?500:900});
+ const step=(i,t)=>rv('x',`<div style="background:#1c1d21;border-radius:24px;overflow:hidden;text-align:left;width:${mo?'100%':'300px'}"><div style="height:279px;display:flex;align-items:center;justify-content:center"><img src="${A('tp-intro-frame'+i+'.webp')}" alt="" style="width:300px;height:279px;object-fit:cover"></div><div style="background:#202226;padding:24px"><div style="font-size:16px;color:#8b94a9">Step ${i}</div><div style="font-size:24px;font-weight:700;color:#fff;margin-top:8px">${t}</div></div></div>`);
+ const s3=sec(`${rv('',h('Link once, earn every moment.',mo?28:40))}<div class="${mo?'col':'row'}" style="gap:28px;justify-content:center;margin-top:${mo?40:72}px">${step(1,'Trade.')}${step(2,'Get Cashback.')}${step(3,'Earn points.')}</div>`);
+ const s4=sec(rv('',`<div style="position:relative;background:rgba(88,140,255,.35);border-radius:24px;padding:${mo?'32px 16px':'56px 72px 40px'}">${h('Beyond Cashback into assets,<br>an unrivaled Cashback experience.',mo?24:36)}<div style="position:relative;display:grid;grid-template-columns:repeat(${mo?2:4},minmax(0,1fr));gap:16px;margin-top:36px">${[1,2,3,4].map(i=>`<img src="${A('tp-intro-card'+i+'.webp')}" alt="" style="width:100%;aspect-ratio:1;border-radius:24px;object-fit:cover">`).join('')}<img src="${A('tp-intro-coming.webp')}" alt="Coming Soon" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:${mo?260:416}px"></div><div style="margin-top:32px;background:rgba(255,255,255,.12);border-radius:12px;padding:20px 24px">${p('TetherMax Point is reviewing the possibility of token linkage upon future reward system expansion.',mo?15:17,700)}<div style="height:8px"></div>${p('Token issuance and the possibility of linking TetherMax Point with tokens<br>are not finalized and are subject to change.',13,400)}</div></div>`,''),{glow:1,glowTop:mo?60:120,glowH:mo?500:800});
+ const s5=sec(rv('',`<img src="${A('tp-intro-letter.webp')}" alt="" style="width:165px;height:144px">${h('More invites, bigger TP.',mo?28:40)}<div style="height:20px"></div>${p('Every moment with friends is a benefit.<br>Experience how your connections expand into value beyond TP.',mo?16:22)}`),{glow:1,glowTop:mo?220:300,glowH:mo?500:900});
+ const s6=sec(rv('',`<div class="${mo?'col':'row'}" style="gap:40px;align-items:center;justify-content:space-between;text-align:${mo?'center':'left'}"><div class="col" style="gap:20px">${h('The future of advanced assets,<br>stand at its starting point.',mo?28:40)}${p('TetherMax Point is ready to leap to greater value.<br>Get ahead of others and seize the ecosystem early.',mo?16:22)}</div><img src="${A('tp-intro-pipe.webp')}" alt="" style="width:240px;height:240px"></div>`),{glow:1,glowTop:mo?40:80,glowH:mo?600:900,pad:mo?'80px 20px 160px':'140px 24px 200px'});
+ const cta=`<button type="button" data-tp-cta data-go="${guest?'auth.signup':'tp.main'}"${guest?' data-after="tp.main"':''} style="position:fixed;left:50%;bottom:32px;transform:translateX(-50%);z-index:20;background:#fff;border:0;border-radius:1000px;padding:${mo?'16px 20px':'20px 32px'};box-shadow:0 0 40px #0b7aff;font:inherit;font-size:${mo?15:18}px;font-weight:700;color:var(--blue);cursor:pointer">Check My TP</button>`;
+ return `<div data-tp-intro style="background:#000;color:#fff">${hero}${s2}${s3}${s4}${s5}${s6}${cta}</div>`;
+}
+R.screen({id:'tp.intro',group:'rewards',title:'테더맥스 포인트 소개',route:'/tethermax-point-introduction',fu:['FU-074'],shell:{nav:'rewards',noFooter:true,moTitle:null},
+ states:[{id:'normal',label:'소개 — 게스트·회원 같은 화면 (dev 기준)',note:'기준 = dev 실사이트 www-dev.tethermax.io/en/tethermax-point-introduction(2026-11-27 채집). 아래 고정 <code>Check My TP</code>: 회원 → 포인트 페이지 · 게스트 → 가입(가입 후 포인트 페이지) — 결정 기록(사용자 2026-11-27)'}],
+ render(){return tpIntro()}});
+
 R.screen({id:'tp.main',group:'rewards',title:'테더맥스 포인트 (TP)',route:'/point',fu:['FU-074'],shell:{nav:'rewards',moTitle:['TetherMax Point','테더맥스 포인트'],moNav:'my'},
  states:[{id:'tp',label:'TP 탭',figma:{pc:'29062:114041',mo:'29062:114572'},note:'V2.2에 별도 화면 없음 — DEX 출금도 TP 적립 트리거(REQ-451), 화면 변경 없음'}],
  render(st){const mo=MO();
@@ -2087,7 +2176,7 @@ R.screen({id:'tp.main',group:'rewards',title:'테더맥스 포인트 (TP)',route
   return wrap(`<div class="col g24" style="padding:${mo?'16px 0 48px':'40px 0 80px'}">${tabBar([['tp','TetherMax Point (TP)'],['inv','Invite Friends','invite.main']],'tp')}
    <div style="background:#fff;border-radius:8px;padding:16px"><div class="cap c2">Available TP</div><b class="b1">0.00 TP</b></div>
    <div class="row g8"><span class="chip sm" style="background:var(--blue);border-color:var(--blue);color:#fff">TP</span>${C.chip('Earning History',false,{sm:1})}</div>
-   <div style="position:relative;border-radius:16px;overflow:hidden;padding:${mo?'48px 16px':'80px 0'};display:flex;flex-direction:column;align-items:center;gap:16px;background:#000"><img src="${A('rw-tp-banner.jpg')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" alt=""><img src="${A('rw-ic-tm.svg')}" style="position:relative;width:40px" alt=""><div class="h6 center" style="position:relative;color:#fff;font-weight:700">Join the TetherMax Rewards Ecosystem</div><button class="btn contained black lg" style="position:relative;width:${mo?'100%':'311px'};box-shadow:var(--elev2)">Learn More</button></div>
+   <div style="position:relative;border-radius:16px;overflow:hidden;padding:${mo?'48px 16px':'80px 0'};display:flex;flex-direction:column;align-items:center;gap:16px;background:#000"><img src="${A('rw-tp-banner.jpg')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" alt=""><img src="${A('rw-ic-tm.svg')}" style="position:relative;width:40px" alt=""><div class="h6 center" style="position:relative;color:#fff;font-weight:700">Join the TetherMax Rewards Ecosystem</div><button class="btn contained black lg" style="position:relative;width:${mo?'100%':'311px'};box-shadow:var(--elev2)" data-go="tp.intro">Learn More</button></div>
    <div class="b2 semi center" style="margin-top:16px">How To Earn TetherMax Point (TP)?</div>
    <div class="col g8">${how.map(([t,s])=>`<div class="row between" style="background:#fff;border-radius:4px;padding:8px 16px;min-height:56px"><div class="col" style="gap:0"><span class="b2 semi">${t}</span><span class="cap c2">${s}</span></div>${ic('chevron-right','ic20')}</div>`).join('')}</div>
    <div class="h5" style="font-weight:700;margin-top:16px">FAQs</div>
@@ -2386,7 +2475,7 @@ function banner(mo){
   <img src="${A('email-banner-coin.png')}" style="position:absolute;left:${mo?147:299}px;top:${mo?6:-24}px;width:${mo?219:283}px;height:${mo?134:173}px;max-width:none;object-fit:cover" alt="">
   <img src="${A('email-logo.svg')}" style="position:absolute;left:24px;top:${mo?53:50}px;width:${mo?128:177}px;height:${mo?14.5:20}px" alt="TetherMax"></div>`}
 function footer(ko,sns4){
- const icons=[1,2,3,4,5].filter(n=>!(sns4&&n===1)).map(n=>`<img src="${A('email-sns-'+n+'.svg')}" style="width:${n===4?23:32}px;height:${n===4?24:n===5?28:32}px${sns4?';opacity:.45':''}" alt="">`).join('');
+ const icons=[2,3,4,5].map(n=>`<img src="${A('email-sns-'+n+'.svg')}" style="width:${n===4?23:32}px;height:${n===4?24:n===5?28:32}px${sns4?';opacity:.45':''}" alt="">`).join('');   // 공용 소셜 4종(정책 D-6-2)
  const F='font-family:Inter,var(--font);font-size:12px;line-height:1.33;letter-spacing:.2px;color:rgba(0,0,0,.6)';
  return `<div style="padding:24px;display:flex;flex-direction:column;gap:24px"><div class="row" style="gap:16px">${icons}</div>
   <div style="${F}">${ko?`이 이메일은 발신 전용입니다.<br><br>TetherMax 계정 관련하여 궁금한 점이 있으시면 ${lnk('고객센터')}<span style="color:rgba(0,0,0,.87)">에 문의해 주세요.</span>`:`Please note that this email is for outgoing communication only.<br><br>If you have any questions regarding your TetherMax account, ${lnk('contact our customer support')}`}</div>
@@ -2436,7 +2525,10 @@ if(!window.__tfBound){window.__tfBound=1;
  document.addEventListener('focusout',e=>{if(e.target.classList&&e.target.classList.contains('tf-in'))e.target.closest('.tf-box').style.borderColor=''});
  document.addEventListener('click',e=>{const eye=e.target.closest&&e.target.closest('.tf-eye');if(!eye)return;e.preventDefault();const i=eye.parentNode.querySelector('.tf-in');i.type=i.type==='password'?'text':'password';eye.style.opacity=i.type==='text'?'.6':'1'});
 }
-const cont=`<button class="btn contained lg full tf-cont" disabled data-go="home.main" style="height:42px">Continue</button>`;
+const contFor=(id,st)=>`<button class="btn contained lg full tf-cont" disabled data-go="${id}:otp${st==='guest'?'Guest':''}" style="height:42px">Continue</button>`;
+// 이메일 인증 모달 — 실사이트판 pt-runtime otpOpen과 같은 문구(결정 11차). 6칸 아무 숫자 → Verify
+const otpModal=()=>{const m=mo();return `<div role="dialog" aria-modal="true" data-otp-box style="position:relative;box-sizing:border-box;width:${m?'calc(100% - 32px)':'504px'};background:#fff;border-radius:8px;padding:${m?'24px 16px':'32px'};box-shadow:var(--elev24)"><button class="icon-btn" aria-label="close" data-go="${S.screen}:normal" style="position:absolute;right:${m?12:20}px;top:${m?12:20}px">${ic('close')}</button><h2 style="margin:0 48px 8px 0;font-size:${m?20:24}px;line-height:1.33;font-weight:700">Email Verification</h2><p style="margin:0 0 24px;font-size:14px;line-height:1.43;color:rgba(0,0,0,.6)">We've sent a code to name@example.com</p><div style="display:flex;gap:8px;justify-content:space-between">${[0,1,2,3,4,5].map(i=>`<input data-otp-i="${i}" inputmode="numeric" maxlength="1" aria-label="Digit ${i+1}" style="box-sizing:border-box;width:${m?'calc((100% - 40px) / 6)':'64px'};aspect-ratio:1;border:1px solid rgba(0,0,0,.23);border-radius:4px;text-align:center;font-size:24px">`).join('')}</div><div style="display:flex;justify-content:flex-end;margin-top:12px"><button type="button" data-otp-paste style="border:0;background:transparent;padding:4px 0;color:#0031c6;font:inherit;font-size:14px;font-weight:600;cursor:pointer">Paste</button></div><button class="btn contained primary lg full" data-otp-verify data-go="@authdone" disabled style="margin-top:16px">Verify</button><p style="margin:16px 0 0;text-align:center;font-size:14px;line-height:1.43;color:rgba(0,0,0,.6)">Resend code in 01:00</p></div>`};
+const withOtp=(page)=>`<div style="position:relative">${page}<div class="scrim pt-fixed center" style="align-items:center;justify-content:center">${otpModal()}</div></div>`;
 const alt=(q,l,go)=>`<button class="btn text black lg full" data-go="${go}" style="height:42px">${q} <u style="margin-left:4px">${l}</u></button>`;
 const toast=t=>`<div style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;background:#1c1c1e;color:#fff;border-radius:8px;padding:14px 16px;box-shadow:var(--elev8);font-size:14px;white-space:nowrap"><span style="width:20px;height:20px;border-radius:50%;background:#2e7d32;display:inline-flex;align-items:center;justify-content:center;font-size:12px">✓</span>${t}</div>`;
 
@@ -2445,45 +2537,39 @@ function login(st){
  const body=`${title('Hi, welcome back!')}
   ${promo(cap('Log in now to complete missions'),blue('to earn more USDT'),'cex-promo-login.png',{img:'left:243px;top:-21px;width:100px;height:96px;object-fit:cover',top:6})}
   <div class="col" style="gap:16px"><div class="col" style="gap:16px">${tf('Email')}${tf('Password',{eye:1,err:pwErr})}</div><a style="font-size:14px;line-height:1.43;letter-spacing:.17px;text-decoration:underline;cursor:pointer">${st==='reset'?'Forgot password?':'Forgot Password?'}</a></div>
-  <div class="col" style="gap:8px">${cont}${alt('Don’t have an account?','Sign Up Now','auth.signup')}</div>`;
+  <div class="col" style="gap:8px">${contFor('auth.login',st)}${alt('Don’t have an account?','Sign Up Now','auth.signup')}</div>`;
  return `<div style="position:relative" data-tf-form>${guestHead()}${wrap(body)}${st==='reset'?toast('Password reset successfully.'):''}</div>`}
 R.screen({id:'auth.login',group:'cex',title:'로그인 (기존)',route:'/login',fu:[],shell:false,
  states:[
   {id:'normal',label:'기본 — 빈 입력',figma:{pc:'10548:210709',mo:'10548:207012'},note:'[기존 MAX-508] Login (V2.2 상태 없음)'},
   {id:'guest',label:'게스트 조회 결과에서 로그인',figma:{pc:'29037:110849',mo:'29037:110880'},note:'DEX(revision) Web / Guest auth / login — 기존 로그인과 같은 화면. 성공 → guest.result:handoff, 취소 → 직전 조회 결과'},
   {id:'error',label:'입력 오류 — This field is required',figma:{pc:'11049:154170',mo:'10548:215467'},note:'[기존 MAX-508] Error states'},
+  {id:'otp',label:'Continue → 이메일 인증 모달',note:'결정 11차 — 6칸 코드 · Paste · Verify · Resend code in 01:00. Verify = 로그인 완료 → 돌아갈 화면(없으면 홈)'},
+  {id:'otpGuest',label:'게스트 조회에서 로그인 → 이메일 인증',note:'인증 후 조회한 계정을 이어받아 연동 단계(FU-012)'},
   {id:'reset',label:'비밀번호 재설정 완료 토스트',figma:{pc:'11073:165120'},note:'[기존 MAX-508] Forget Password (Reset Password) 마지막 — 모바일 재설정 흐름 11073:163739 · 11049:97669~97673(재설정 단계 화면은 마이·비밀번호 담당 범위)'},
  ],
- render(st){return login(st)+C.note(st==='guest'?'게스트 복귀: 조회한 거래 계정을 이어받음. 로그인만으로 연동·지급하지 않음(REQ-178). 성공 → <a data-go="guest.result:handoff">guest.result:handoff</a>.':'Figma 원문 그대로. 프로모 일러스트 = Figma 에셋.')}});
+ render(st){if(st==='otp'||st==='otpGuest')return withOtp(login(st==='otpGuest'?'guest':'normal'));return login(st)+C.note(st==='guest'?'게스트 복귀: 조회한 거래 계정을 이어받음. 로그인만으로 연동·지급하지 않음(REQ-178). 성공 → <a data-go="guest.result:handoff">guest.result:handoff</a>.':'Figma 원문 그대로. 프로모 일러스트 = Figma 에셋.')}});
 
 function signup(st){
  const banner=promo(blue('Up to 100 USDT'),cap('Sign up and trade to earn rewards'),'cex-promo-signup.png',{img:'left:268px;top:-15px;width:84px;height:84px;object-fit:cover'});
  const body=`${title('Create Account','We’ll send you a code to verify this email')}${banner}
   <div class="col" style="gap:16px">${tf('Email',{ph:1,err:st==='error'?'This field is required':null})}${tf('Password',{eye:1})}${tf(st==='invite'?'TM8K2Q':'Referral Code (optional)')}</div>
   <label class="row" style="gap:0;align-items:flex-start;cursor:pointer"><span style="padding:0 9px 9px 0"><span class="chk on"><i></i></span></span><span style="padding-top:2px;font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">I have read and agree to the <u data-go="terms.use" style="color:var(--text-primary);font-weight:500">Terms of Use</u> and <u data-go="terms.privacy" style="color:var(--text-primary);font-weight:500">Privacy Policy</u></span></label>
-  <div class="col" style="gap:8px">${cont}${alt('Already have an account?',mo()?'Log In':'Log in','auth.login')}</div>`;
+  <div class="col" style="gap:8px">${contFor('auth.signup',st)}${alt('Already have an account?',mo()?'Log In':'Log in','auth.login')}</div>`;
  return `<div data-tf-form>${guestHead()}${wrap(body)}</div>`}
 R.screen({id:'auth.signup',group:'cex',title:'회원가입 (기존 · 첫 단계)',route:'/signup',fu:[],shell:false,
  states:[
   {id:'normal',label:'기본 — 첫 단계',figma:{pc:'10548:103656',mo:'10542:101933'},note:'[기존 MAX-508] Sign up (V2.2 상태 없음) · 문구 개정 MAXOP-696 23327:1124738 / 23327:1124323 미반영'},
   {id:'guest',label:'게스트 조회 결과에서 가입',figma:{pc:'29037:110754',mo:'29037:110789'},note:'DEX(revision) Web / Guest auth / signup — 기존 가입과 같은 화면. 성공 → 조회한 거래 계정으로 복귀'},
+  {id:'otp',label:'Continue → Email Verification 모달',note:'결정 11차 — 인증 → 가입 완료 → 회원 홈(연동 0)'},
+  {id:'otpGuest',label:'게스트 조회에서 가입 → 이메일 인증',note:'인증 후 같은 계정 연동 단계(FU-012)'},
   {id:'invite',label:'초대 코드로 가입',figma:{pc:'10548:199108',mo:'10548:191334'},note:'[기존 MAX-508] If there is Invitation Reward · Signing up with Invition Code — 추천 코드 미리 채움(세부 대조 필요)'},
   {id:'error',label:'입력 오류',figma:{pc:'11049:147536',mo:'10548:205271'},note:'[기존 MAX-508] Error states'},
  ],
- render(st){return signup(st)+C.note(st==='guest'?'게스트 복귀 가입: 가입 성공 → 조회한 거래소·계정으로 돌아가 연동(REQ-178).':'Figma 원문 그대로(PC <code>Log in</code> · 모바일 <code>Log In</code>).')}});
+ render(st){if(st==='otp'||st==='otpGuest')return withOtp(signup(st==='otpGuest'?'guest':'normal'));return signup(st)+C.note(st==='guest'?'게스트 복귀 가입: 가입 성공 → 조회한 거래소·계정으로 돌아가 연동(REQ-178).':'Figma 원문 그대로(PC <code>Log in</code> · 모바일 <code>Log In</code>).')}});
 
-R.screen({id:'cex.list',group:'cex',title:'거래소 목록 (CEX · 기존)',route:'/exchange',fu:['FU-084'],shell:{nav:'cashback',accent:true,moTitle:['All Partner Exchanges','전체 파트너 거래소'],back:'hub.main'},
- states:[
-  {id:'normal',label:'기본 — 표 (Recommended)',figma:{pc:'22598:410917',mo:'5145:52544'},note:'[기존 MAXOP-692] Figma (Updated) · 모바일 [기존 MAX-22] list view'},
-  {id:'search',label:'검색 결과',figma:{mo:'5145:51653'},note:'[기존 MAX-22] Search Results — PC 검색 결과 프레임 없음(같은 표에 필터)'},
-  {id:'empty',label:'검색 결과 없음',figma:null,note:'디자인 없음 — 빈 검색 문구는 기존 제품 문구(언어팩 <code>no results found for</code>, 결정 N13)'},
- ],
- render(st){
-  const L=window.CMN_LISTING;if(!L)return '';
-  if(st==='search')return L('table',{q:'bit',chip:'all'})+C.note('검색어 입력 시 표가 즉시 필터(기존 화면).');
-  if(st==='empty')return L('table',{q:'abcd',chip:'all',empty:`<div class="empty">${T('No results found for <strong>abcd</strong>','<strong>abcd</strong>에 대한 검색 결과가 없습니다')}</div>`});
-  return L('table')+C.note('CEX만 — DEX를 넣지 않는다(REQ-466 · FU-089). 카드 뷰는 <a data-go="cmn.listing:cards">cmn.listing</a>.');
- }});
+// 거래소 목록 화면(cex.list)은 두지 않음 — 결정(사용자 2026-11-27): 거래소 목록 자리 = 캐시백 허브 CEX 탭(hub.main:cex)
+
 
 })()}catch(e){console.error('150-cex.js',e);(window.PT_ERR=window.PT_ERR||[]).push('150-cex.js: '+e.message)}
 </script>
@@ -2548,7 +2634,7 @@ function lndPartners(st){
   <span class="h6 bold" style="position:relative">Most popular exchange</span>
   <div class="col" style="gap:20px;align-items:center;justify-content:center;height:218px;position:relative">${hd?C.dex('EdgeX',80):img('lnd-bitget.png','width:80px;height:80px;border-radius:20px')}
    <div class="col" style="gap:8px;align-items:center"><span class="cap c3">Official Partner Exchanges</span><div class="col" style="gap:0;align-items:center"><span class="b2">${hd?'EdgeX':'Bitget'}</span><span style="font-size:34px;line-height:1.235;font-weight:700;color:var(--blue)">${hd?'30%':'77%'} <span style="color:#1c1c1e">Total Savings</span></span></div></div></div>
-  <button class="btn contained primary lg full" style="position:relative" data-go="${hd?'dex.detail:edgex':'cex.list'}">Browse Partner Exchange</button></div>`;
+  <button class="btn contained primary lg full" style="position:relative" data-go="${hd?'dex.detail:edgex':'hub.main:cex'}">Browse Partner Exchange</button></div>`;
  const top=card(`<div class="col" style="gap:4px"><span class="h6 bold">TOP 5 Traders in December</span><span class="cap c3" style="line-height:12px">As of Aug 5, 2026 (Cashback)</span></div>
   <div class="col" style="gap:0;margin-top:4px">${[['Bitget','Bitget trader','4,051.38'],['Bitunix','BingX trader','4,561.12'],['Lighter','Lighter trader','4,561.12'],['OKX','Bitmart trader','3,051.38'],['EdgeX','EdgeX trader','2,051.38']].map(([l,n,v])=>`<div class="row" style="gap:12px;height:56px;padding:8px">${logo(l,32)}<div class="col" style="gap:4px"><span class="cap c2">${n}</span><span class="b2 semi">${v} USDT</span></div></div>`).join('')}</div>`,'flex:1;min-width:0;height:424px');
  const days=['8/11','8/12','8/13','8/14','8/15','8/16','8/17','8/18','8/19','8/20','8/21','8/22','8/23','8/24','8/25'];
@@ -2716,7 +2802,7 @@ function searchCard(o){
   ${coin('guest-coin-a.png',mo()?'left:-60px;top:10px;width:130px':'left:-120px;top:-62px;width:210px')}${coin('guest-coin-b.png',mo()?'right:-52px;top:20px;width:100px':'left:262px;top:-66px;width:150px')}
   <div class="col" style="position:relative;gap:8px;padding:8px;border-radius:8px;background:rgba(255,255,255,.35);border:1px solid rgba(0,49,198,.08);backdrop-filter:blur(12px)">${sel}${field}${o.err?`<span class="cap ce" style="padding:0 2px">${o.err}</span>`:''}${btn}</div>
   ${coin('guest-coin-c.png',mo()?'right:-70px;bottom:-80px;width:140px':'left:280px;top:100px;width:200px')}
-  <a class="row center b1" data-go="cex.list" style="gap:8px;margin-top:${mo()?24:28}px;position:relative;cursor:pointer">No account? Join our partner exchange <span style="font-size:18px">⟶</span></a></div>`}
+  <a class="row center b1" data-go="hub.main:cex" style="gap:8px;margin-top:${mo()?24:28}px;position:relative;cursor:pointer">No account? Join our partner exchange <span style="font-size:18px">⟶</span></a></div>`}
 function band(){
  return `<section style="background:#cfe0fb url('${A('guest-band.jpg')}') center/cover;padding:${mo()?'64px 16px':'56px 24px'};text-align:center"><div class="col" style="gap:8px;align-items:center"><p style="margin:0;font-size:24px;line-height:1.334;font-weight:700">Don't leave your cashback behind.</p><p class="b2 c2" style="margin:0">Sign up or log in and link this trading account to receive your cashback.</p>
   <div style="position:relative;width:100%;max-width:400px;margin-top:32px;background:#fff;border-radius:1000px"><div style="border:1px solid var(--input-border);border-radius:5000px;padding:16px;text-align:left"><span class="b1 c2">Email address</span></div><button class="btn contained primary lg" data-go="auth.signup" style="position:absolute;right:7px;top:50%;transform:translateY(-50%);border-radius:1000px">Sign Up Now</button></div></div></section>`}
@@ -2759,7 +2845,7 @@ function acctCard(r){
 function sideRecs(){
  const tile=(n,bg,inner,pct)=>`<div class="col" style="gap:4px;flex:none;width:${mo()?106:155}px"><div style="height:${mo()?60:80}px;background:${bg};display:flex;align-items:center;justify-content:center;overflow:hidden">${inner}</div><span class="cap" style="color:var(--text-secondary)">${n}</span><span class="cap med">${pct} Total Savings</span></div>`;
  const tiles=[tile('Bitget','#00f0ff',img('lnd-bitget.png','width:40px;height:40px'),'54%'),tile('Bybit','#171a26',img('guest-bybit.png','height:100%'),'55%'),tile('Binance','#1e2026',`<span class="b2 bold" style="color:#f0b90b">${C.tbd('Binance 로고','에셋 미수신')}</span>`,'50%'),tile('OKX','#000',img('guest-okx.png','height:100%'),'65%')];
- const head=t=>`<div class="row between"><span class="${mo()?'b1 semi':'h5 bold'}" style="${mo()?'':'font-size:24px'}">${t}</span><button class="btn text primary sm" data-go="${t==='Top Partner Exchanges'?'cex.list':'benefits.list'}">See All</button></div>`;
+ const head=t=>`<div class="row between"><span class="${mo()?'b1 semi':'h5 bold'}" style="${mo()?'':'font-size:24px'}">${t}</span><button class="btn text primary sm" data-go="${t==='Top Partner Exchanges'?'hub.main:cex':'benefits.list'}">See All</button></div>`;
  const evPc=(f,t,v)=>`<div style="flex:1;background:#fff;border-radius:8px;box-shadow:0 4px 5px rgba(0,0,0,.1);padding:12px;display:flex;flex-direction:column;gap:12px"><div style="height:140px;position:relative;background:#000;border-radius:4px;overflow:hidden">${img(f,'position:absolute;right:0;top:0;height:100%')}<span class="row" style="position:absolute;left:4px;top:4px;gap:4px;background:#1c1c1e;border-radius:4px;padding:2px 8px">${img('lnd-chip-bitget.png','width:14px;height:14px')}<span style="font-size:11px;color:#fff">Bitget</span></span><span style="position:absolute;left:16px;top:28px;width:150px;color:#fff;font-weight:600;font-size:15px;line-height:1.6">${t}</span></div><div class="row between b2"><span class="row c2" style="gap:4px">${img('lnd-ic-redeem.svg','width:20px;height:20px')}Rewards</span><span>${v}</span></div>${'<span class="cap c2" style="align-self:flex-start;background:#e6e7e9;border-radius:4px;padding:4px;line-height:12px">Ongoing</span>'}<button class="btn contained primary md full" data-go="benefits.list">Join Now</button></div>`;
  const evMo=(f,t,d)=>`<div class="col" style="gap:4px;flex:none;width:160px"><div style="height:155px;position:relative;background:#000;border-radius:8px;overflow:hidden">${img(f,'position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);width:150%')}<span class="row" style="position:absolute;left:6px;top:6px;gap:4px;background:#1c1c1e;border-radius:4px;padding:2px 8px">${img('lnd-chip-bitget.png','width:14px;height:14px')}<span style="font-size:11px;color:#fff">Bitget</span></span></div><span class="b2 semi">${t}</span><span class="cap c2">${d}</span></div>`;
  const evs=mo()?evMo('guest-ev-btc.png','Guess Bitcoin Price','Win Up to 1,000 USDT')+evMo('guest-ev-cash.png','Earn More Cashback','Earn extra USDT')
@@ -2865,6 +2951,7 @@ const ST={
  fail:{get lb(){return T('Linking failed','연동 실패했어요')},tone:'err',pri:5,linked:false,noChip:true},
  ownfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'err',pri:6,linked:false,noChip:true},
  unlinked:{get lb(){return T('Unlinked','연동 해제되었어요')},tone:'warn',pri:7,linked:false,noChip:true},
+ reclaimfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'err',pri:6,linked:false,noChip:true},
 };
 const DOT={done:'#2e7d32',prog:'#ed6b03',warn:'#ef6c00',off:'rgba(0,0,0,0.38)',err:'#d32f2f',proc:'#fecdd2',own:'#0031c6'};
 // 시계 아이콘(MUI AccessTimeRounded) — 확인 중 · 소유 확인 중 행 오른쪽
@@ -2878,8 +2965,9 @@ const svgI=(d,s=20)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" aria-h
 function rowBanner(a){
  const cex=isCex(a.ex);
  const b={fail:['err',cex?T('UID Linking was unsuccessful. View reason.'):T('Wallet linking was unsuccessful. View reason.'),cex?'home.main:linkFail':'home.main:linkFailWallet'],
-  ownfail:['err',T('Ownership verification was unsuccessful. View reason.'),'own.home:reclaimRejected'],
-  unlinked:['warn',cex?T('This UID has been unlinked. Tap to verify ownership and reclaim it.'):T('This wallet has been unlinked. Tap to verify ownership and reclaim it.'),'own.home:reclaim']}[a.st];
+  ownfail:['err',T('Ownership verification was unsuccessful. Please try again.'),'own.home:rejected'],
+  reclaimfail:['err',T('Ownership verification was unsuccessful. View reason.'),'own.home:reclaimRejected'],
+  unlinked:['warn',cex?T('This UID has been unlinked. Tap to verify ownership and reclaim it.'):T('This wallet has been unlinked. Tap to verify ownership and reclaim it.'),cex?'own.home:reclaimUid':'own.home:reclaim']}[a.st];
  if(!b)return '';
  const [bg,fg]=b[0]==='err'?['#fdeded','#5f2120']:['#fff4e5','#663c00'];
  return `<div data-row-banner="${a.st}" data-go="${b[2]}" style="display:flex;align-items:center;border-radius:4px;padding:0 10px;margin:0 0 8px;overflow:hidden;cursor:pointer;background:${bg};color:${fg}"><span style="flex:none;display:flex;align-self:flex-start;padding:8px 8px 7px 0;color:${b[0]==='err'?'#d32f2f':'#ed6c02'}">${svgI(b[0]==='err'?SVG_ERR:SVG_WARN)}</span><p style="margin:0;flex:1;min-width:0;font-size:12px;line-height:1.33;letter-spacing:.2px;padding:8px 0">${b[1]}</p><span style="flex:none;display:flex;margin-left:8px">${svgI(SVG_CHEV)}</span></div>`}
@@ -2923,10 +3011,10 @@ function balanceCard(o={}){
 // 행: 로고 · 이름 · (상태 점 + 식별자) · 칩 · 금액. 웹은 `Wallet` 라벨, 앱·모바일웹은 주소만(REQ-271)
 function accRow(a,o={}){
  const st=ST[a.st||'ok'];const cex=isCex(a.ex);const app=o.app;
- const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:short(a.id)}`;
+ const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:`<span data-addr="${esc(a.id)}" role="button" tabindex="0" style="cursor:pointer;text-decoration:underline dotted">${short(a.id)}</span>`}`;
  const amt=a.amt==null?'-':a.amt;
  const amtHtml=amt==='-'?`<span class="b1 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi">${n2(amt)}</span><span class="b2 c2">USDT</span></span>`;
- const go=a.st==='issue'?` data-go="home.main:${cex?'issue':'issueWallet'}" style="cursor:pointer;`:cex||st.noChip?'':` data-go="home.wallet:${a.st==='pend'?'pending':'normal'}" style="cursor:pointer;`;
+ const go=a.st==='issue'?` data-go="home.main:${cex?'issue':'issueWallet'}" style="cursor:pointer;`:a.st==='unlinked'?` data-go="${cex?'own.home:reclaimUid':'own.home:reclaim'}" style="cursor:pointer;`:cex||a.st!=='ok'&&a.st!=null?'':` data-go="home.wallet:normal" style="cursor:pointer;`;
  return `<div class="row g12"${go||' style="'}display:flex;padding:10px 12px;border-radius:12px;align-items:center">
   ${mark(a.ex,32)}
   <div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${a.ex}</span>
@@ -2937,8 +3025,8 @@ function linkedCard(rows,o={}){
  const app=o.app||S.vp==='mo';
  const foot=app?'Trading on multiple exchanges? Link more':'Using multiple platforms? Link more accounts';
  const list=o.loading?[1,2,3].map(()=>`<div class="row g12" style="padding:10px 12px"><span class="skel" style="width:32px;height:32px;border-radius:50%"></span><div class="col grow" style="gap:6px">${C.skel('40%',12)}${C.skel('70%',10)}</div>${C.skel('64px',14)}</div>`).join('')
-  :(o.max?rows.slice(0,o.max):rows).map(a=>accRow(a,{app,full:o.full})).join('');
- const more=o.max&&rows.length>o.max?`<button class="btn text black sm full">${T('See more','더보기')} (${rows.length-o.max})</button>`:'';
+  :rows.map((a,i)=>o.max&&i>=o.max?`<div data-more-row hidden>${accRow(a,{app,full:o.full})}</div>`:accRow(a,{app,full:o.full})).join('');
+ const more=o.max&&rows.length>o.max?`<button class="btn text black sm full" data-more>${T('Show More','더보기')}</button>`:'';
  const line=`<hr class="divider" style="margin:0">`;
  const cum=o.cum===false||o.loading||S.vp==='mo'?'':`${line}${cumulative(rows)}`;
  return `<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:12px">
@@ -2995,7 +3083,7 @@ function homeMainMo(tag='Bitget'){
   <div style="background:#fff;padding:16px;display:flex;flex-direction:column;gap:32px">
    ${moMemberCards(tag)}
    <div class="col" style="gap:16px;align-items:center">${`<div style="width:100%">${head('Limited Time Offers','events.list',true)}</div>`}<div style="width:100%">${comp}</div><img src="${HA('mo-dots.svg')}" style="width:44px;height:6px" alt=""></div></div>
-  <div style="background:var(--bg-accent);padding:16px" class="col g16">${head('Top Partner Exchanges','cex.list',true)}
+  <div style="background:var(--bg-accent);padding:16px" class="col g16">${head('Top Partner Exchanges','hub.main:cex',true)}
    <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:100px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500;letter-spacing:.14px">${p} Cashback</span></div>`).join('')}</div></div></div>`}
 function homeMain(){
  if(S.vp==='mo')return homeMainMo();
@@ -3009,7 +3097,7 @@ function homeMain(){
   <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Limited Time Offers','events.list')}<div style="${grid}">
    ${evCard(evBanner('ev-comp.jpg','Trade to win up to $100K prize pool','Bitget'),evRow('trophy','Rewards','$100,000.00')+ends,joinBtn())}
    ${evCard(evBanner('ev-vip.jpg','Become a VIP &amp; enjoy the benefits.','Bitget'),evRow('voucher','Voucher','Claim VIP2 Trial')+timer,joinBtn())}</div></div>
-  <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Top Partner Exchanges','cex.list')}<div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">
+  <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Top Partner Exchanges','hub.main:cex')}<div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">
    ${partners.map(([n,bg,p])=>`<div class="col" style="gap:4px"><div style="background:${bg};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div></div>`}
 
 // 홈 2열 레이아웃(347 + 24 + 717) · 모바일 1열
@@ -3142,7 +3230,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    let rows=[R_BITGET,R_LIGHTER,R_APEX],x={},lc={app};
    if(st==='s3Pending')rows=[{ex:'EdgeX',id:WAL.edgex,amt:null,st:'pend'}];
    if(st==='hw1')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'}];
-   if(st==='statuses')rows=Object.entries(ST).filter(([,v])=>v.pri).sort((a,b)=>a[1].pri-b[1].pri).map(([k],i)=>({ex:['Bitget','Bybit','Bitget','OKX','OKX','Bybit','Binance'][i],id:['685432171','512093847','685432179','734305240','734305277','512093855','40213377'][i],amt:k==='ok'?120:null,st:k}));
+   if(st==='statuses')rows=Object.entries(ST).filter(([,v])=>v.pri).sort((a,b)=>a[1].pri-b[1].pri).map(([k],i)=>({ex:['Bitget','Bybit','Bitget','OKX','OKX','Bybit','Binance','Binance'][i],id:['685432171','512093847','685432179','734305240','734305277','512093855','40213377','40213391'][i],amt:k==='ok'?120:null,st:k}));
    if(st==='loading'){x={loading:true};lc.loading=true}
    if(st==='error')x={error:true};
    if(st==='many'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'},...['Bybit','OKX','EdgeX','ApeX','Aster','Bitget','EdgeX','OKX','Binance'].map((e,i)=>({ex:e,id:isCex(e)?String(70001230+i):[WAL.edgex,WAL.w2][i%2],amt:5+i,st:'ok'}))];lc.max=10}
@@ -3153,7 +3241,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    if(st==='transferred')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:4,st:'ok'}];
    if(st==='pending')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
    if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'}];
-   if(st==='walletStates')rows=[R_LIGHTER,{ex:'EdgeX',id:WAL.edgex,amt:null,st:'fail'},{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'},{ex:'Aster',id:WAL.aster,amt:null,st:'unlinked'},{ex:'Lighter',id:WAL.w2,amt:null,st:'ownfail'}];
+   if(st==='walletStates')rows=[R_LIGHTER,{ex:'EdgeX',id:WAL.edgex,amt:null,st:'fail'},{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'},{ex:'Aster',id:WAL.aster,amt:null,st:'unlinked'},{ex:'Lighter',id:WAL.w2,amt:null,st:'ownfail'},{ex:'EdgeX',id:WAL.w2,amt:null,st:'reclaimfail'}];
    if(st==='multi')rows=[R_BITGET,...[[WAL.lighter,3.2],[WAL.w2,0],[WAL.edgex,11.05]].map(([w,a])=>({ex:'Lighter',id:w,amt:a,st:'ok'})),...[WAL.aster,WAL.apex].map(w=>({ex:'Aster',id:w,amt:0,st:'ok'}))];
    if(st==='rejected')rows=[R_BITGET,R_LIGHTER,R_APEX];
    left=card(rows,x)+linkedCard(rows,lc);
@@ -3178,7 +3266,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
 function match(A,B){const m=B?Math.min(A,B):0;const claim=Math.floor((A+m)*100+1e-6)/100;const req=(B||0)>=5?5:10-(B||0);return {m,claim,need:claim>=10?0:Math.max(0,req-A)}}
 function walletBalance(A,B,o={}){
  if(o.loading)return `<div style="background:#fff;border-radius:8px;padding:16px" class="col g16">${C.skel('100%',22)}${C.skel('100%',12)}${C.skel('100%',12)}${C.skel('100%',40)}</div>`;
- if(o.error)return `<div style="background:#fff;border-radius:8px;padding:16px" class="col g12">${C.alert('warn','',"We can't load your balance right now.")}${C.btn('Try again',{v:'outlined',size:'sm'})}</div>`;
+ if(o.error){A=0;B=0}
  const {m,claim,need}=match(A,B);
  const small=(k,v)=>`<div class="row between" style="color:var(--text-secondary)"><span style="font-size:12px;line-height:1.33;letter-spacing:.2px">${k}</span><span style="font-size:12px;line-height:1.4;font-weight:500">${v}</span></div>`;
  const pending=o.pending;
@@ -3192,11 +3280,11 @@ function walletBalance(A,B,o={}){
    <div style="font-size:10px;line-height:14px;letter-spacing:.15px;color:var(--text-secondary)">${cap.join('<br>')}</div>`}
    </div>
   <button class="btn contained lg full" disabled>Auto Claim</button></div>`}
-function earningTimeline(){
+function earningTimeline(ex,times){const tt=times||['Mar 17 00:00','Mar 18 00:00','Mar 18 10:50'];
  const step=(ic,k,v)=>`<div class="col" style="gap:8px;align-items:center;width:80px;position:relative;z-index:1"><span style="background:#f2f2f5;padding:16px;border-radius:8px;display:flex">${hic(ic,24)}</span><span style="font-size:10px;line-height:10px;color:var(--text-secondary);white-space:nowrap">${k}</span><span style="font-size:10px;line-height:12px;font-weight:500;white-space:nowrap">${v}</span></div>`;
  return `<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:16px">
-  <div class="row" style="gap:4px"><span class="b1 semi">Earning Timeline</span>${hic('star',36)}</div>
-  <div class="row between" style="position:relative;align-items:flex-start"><span style="position:absolute;left:40px;right:40px;top:28px;border-top:1px dashed var(--divider)"></span>${step('candle','Start Trading','Mar 17 00:00')}${step('clock','Cut-off Time','Mar 18 00:00')}${step('checkc','Updated','Mar 18 10:50')}</div></div>`}
+  <div class="row" style="gap:4px"><span class="b1 semi">Earning Timeline${ex?' · '+ex:''}</span>${hic('star',36)}</div>
+  <div class="row between" style="position:relative;align-items:flex-start"><span style="position:absolute;left:40px;right:40px;top:28px;border-top:1px dashed var(--divider)"></span>${step('candle','Start Trading',tt[0])}${step('clock','Cut-off Time',tt[1])}${step('checkc','Updated',tt[2])}</div></div>`}
 function walletRight(o={}){
  const days=[['20'],['21'],['22'],['23'],['24'],['25'],['26','+25.00','-20.00']];
  const week=`<div style="background:#fff;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">
@@ -3208,13 +3296,13 @@ function walletRight(o={}){
   <button class="btn md" style="background:#f2f2f5" data-go="dex.detail:lighter">Write a review, get 2 USDT</button></div>`;
  // 하단 = 기존 디자인 `Top Partner Exchanges`(CEX·DEX 공통 — 결정 「지갑 상세 하단」, 홈 HW1과 같은 블록)
  const parts=[['Bitget','#00f0ff','54%'],['Bybit','#15192a','55%'],['Binance','#181a20','50%'],['OKX','#000','65%']];
- const top=`<div style="background:#fff;border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:16px">${secHead('Top Partner Exchanges','cex.list')}
+ const top=`<div style="background:#fff;border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:16px">${secHead('Top Partner Exchanges','hub.main:cex')}
   <div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px"><div style="background:${bg};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div>`;
  if(S.vp==='mo'){ // 기존 UID 상세 모바일(26047:1348691 · 25867:1348700) 순서: 리뷰 유도 → Top Partner(가로) → Exclusive For Members(2열)
-  const topMo=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Top Partner Exchanges</span><button class="btn text primary sm" style="padding:4px 5px" data-go="cex.list">See All</button></div>
+  const topMo=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Top Partner Exchanges</span><button class="btn text primary sm" style="padding:4px 5px" data-go="hub.main:cex">See All</button></div>
    <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:100px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div>`;
-  return `<div class="col" style="gap:16px;width:100%">${week.replace('padding:24px','padding:16px')}${review.replace('padding:16px 16px 16px 124px','padding:16px 16px 16px 112px')}${topMo}<div style="background:#fff;border-radius:8px;padding:16px" class="col g16">${moMemberCards('Lighter','Exclusive Benefit')}</div></div>`}
- return `<div style="display:flex;flex-direction:column;gap:24px;width:${S.vp==='mo'?'100%':'717px'}">${week}${review}
+  return `<div class="col" style="gap:16px;width:100%">${review.replace('padding:16px 16px 16px 124px','padding:16px 16px 16px 112px')}${topMo}<div style="background:#fff;border-radius:8px;padding:16px" class="col g16">${moMemberCards('Lighter','Exclusive Benefit')}</div></div>`}
+ return `<div style="display:flex;flex-direction:column;gap:24px;width:${S.vp==='mo'?'100%':'717px'}">${review}
   <div style="background:#fff;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">${secHead('Exclusive Benefit','benefits.list')}${memberEvents('Lighter',true)}</div>${top}</div>`}
 const WALLET_FIG='29026:97581';
 const WALLET_STATES=[
@@ -3229,13 +3317,13 @@ const WALLET_STATES=[
  {id:'fullAbove',label:'전액 매칭 · 최소액 초과',figma:{pc:WALLET_FIG},ab:[12,4],note:'Figma 매칭 상태 프레임에만 있음. A=12.00 · B=4.00'},
  {id:'edge',label:'소수점 절삭 · 기준 직전',figma:{pc:WALLET_FIG},ab:[9.999,0],note:'Figma 매칭 상태 프레임에만 있음. A=9.999 · B=0 → 9.99, 필요액 0.01'},
  {id:'loading',label:'잔액 로딩 — 스켈레톤',ab:[7,100],note:'Figma 매칭 상태 프레임 하단 메모(REQ-145) — 화면 프레임 없음'},
- {id:'error',label:'잔액 조회 실패 — 오류 · 재시도',ab:[7,100],note:'Figma 매칭 상태 프레임 하단 메모(REQ-149) — 화면 프레임 없음'},
+ {id:'error',label:'잔액 조회 실패 — 기존 빈 상태',ab:[7,100],note:'G-459 — 조회 실패는 기존 빈 상태(0 표시), 재시도 버튼 없음'},
  {id:'reviewed',label:'리뷰 작성 후 — 리뷰 유도 없음',figma:{pc:'25867:1348199',mo:'25867:1348944'},ab:[7,100],note:'[기존 MAX-7] MAX-1216 UID detail / Review already written (Plain). V2.2 home/LKD#reviewed · REQ-278'},
  {id:'pending',label:'연동 시도중',ab:[0,null],note:'V2.2 home/LKD#pending · REQ-098'},
  {id:'totalClaimed',label:'Total Claimed 행',figma:{pc:'26047:1349155',mo:'8582:157676'},ab:[7,100],note:'[기존 MAX-7] UID 상세 잔액 카드의 Total Claimed 행(Web 26047:1349155 · mAPP 8582:157676). V2.2 home/LKD#totalClaimed · REQ-281 · G-053 확정: 유지(테더맥스 경유 출금 누계)'},
  {id:'subaccounts',label:'하위 계정 나열 안 함 (Lighter)',figma:{pc:'28960:125943'},ab:[7,100],note:'V2.2 home/LKD#subaccounts · REQ-281 · G-178 확정: 미표시 — 정상 화면과 같음'},
 ];
-R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wallet (지갑 상세)',fu:['FU-040'],shell:{accent:true,back:'home.main',moTitle:['Lighter','Lighter'],moNav:'home'},
+R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wallet (지갑 상세)',fu:['FU-040'],shell:{accent:true,back:'back:home.main',moTitle:['Lighter','Lighter'],moNav:'home'},
  states:WALLET_STATES,
  render(st,ctx){
   const SW=window.SITEW;const [A0,B0]=SW?[SW.a,SW.b]:ctx.state.ab;const pending=SW?SW.st==='pend':st==='pending';
@@ -3253,31 +3341,19 @@ R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wa
  }});
 
 // ---------- 캐시백 타임라인 · 누적 캐시백 (FU-041) — 디자인 없음, V2.2 내용 ----------
-R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 · 누적 캐시백',route:'/ (홈 · 지갑 상세 섹션)',fu:['FU-041'],shell:{accent:true,back:'home.main',moTitle:['Cashback timeline','캐시백 타임라인']},
+R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 · 누적 캐시백 (섹션)',route:'/ (홈 · 지갑 상세 안 섹션)',fu:['FU-041'],shell:{accent:true,moNav:'home'},
  states:[
-  {id:'normal',label:'EdgeX Daily D+1',figma:{pc:'26047:56579',mo:'26047:56579'},note:'[기존 MAX-7] MAXOP-783 Earning Timeline 캐러셀(26047:56685, Step=1 26047:56579) + MAXOP-731 누적 카드(22913:1054295). V2.2 home/TL#normal · REQ-282·289'},
-  {id:'apex',label:'ApeX D+2',figma:{pc:'26047:56615',mo:'26047:56615'},note:'[기존 MAX-7] MAXOP-783 Step=2 26047:56615. V2.2 home/TL#apex · REQ-282 · G-192 확정: ApeX도 같은 4단계'},
-  {id:'lighter',label:'Lighter Weekly W+1 (온보딩 후)',figma:{pc:'26047:56650',mo:'26047:56650'},note:'[기존 MAX-7] MAXOP-783 Step=3 26047:56650. V2.2 home/TL#lighter · REQ-282'},
-  {id:'compact',label:'compact 단계',figma:{pc:'26047:56579',mo:'26047:56579'},note:'[기존 MAX-7] MAXOP-783 탭 줄만 사용. V2.2 home/TL#compact · REQ-289'},
+  {id:'normal',label:'EdgeX Daily D+1',figma:{pc:'26047:56579',mo:'26047:56579'},note:'기존 Earning Timeline 3단계(Start Trading · Cut-off Time · Updated), 캐러셀 없음 — 결정 N16·N17·N19 · REQ-282 · 289. 홈·지갑 상세 안의 섹션(별도 화면 아님 · 뒤로 없음)'},
+  {id:'apex',label:'ApeX D+2',note:'같은 3단계 — 날짜만 주기대로'},
+  {id:'lighter',label:'Lighter Weekly W+1 (온보딩 후)',note:'같은 3단계 — 주간 집계'},
   {id:'warning',label:'순차 지급 경고',note:'V2.2 home/TL#warning · REQ-289. 경고 자리 디자인 없음 — 기존 MUI Alert(warning) 재사용'},
  ],
  render(st){
-  const ex={normal:['EdgeX','Daily D+1',1],apex:['ApeX','D+2',2],lighter:['Lighter','Weekly W+1',3],compact:['EdgeX','Daily D+1',0],warning:['EdgeX','Daily D+1',1]}[st];
-  const labels=st==='compact'?['거래 집계','거래소 정산 확인','테더맥스 확인','캐시백 반영 완료']:['거래 집계 중','지급 대기','지급 처리 중','지급 완료'];
-  const cur=ex[2];
-  const t=h=>new Intl.DateTimeFormat(S.lang==='en'?'en-US':'ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date('2026-10-23T'+h+':00Z'));
-  const blue='filter:invert(13%) sepia(90%) saturate(5000%) hue-rotate(226deg)';
-  const arrow=(f,dis)=>`<span style="width:32px;height:32px;border-radius:16px;background:#f2f2f5;display:flex;align-items:center;justify-content:center"><img src="${HA(f)}" style="width:24px;height:24px;${dis?'opacity:.38':''}" alt=""></span>`;
-  const tabs=`<div class="row" style="gap:8px;align-items:flex-start">${labels.map((l,i)=>{const on=i+1===cur,done=i+1<cur;return `<div class="col grow" style="gap:6px;min-width:0"><span class="b2 med" style="color:${on?'#0031c6':done?'var(--text-primary)':'var(--text-secondary)'};white-space:nowrap">Step ${i+1}</span><span style="height:4px;border-radius:2px;background:${on?'#0031c6':done?'rgba(0,49,198,.4)':'#f2f2f5'}"></span></div>`}).join('')}</div>`;
-  const icons=[['candle-b.svg',''],['clock.svg',blue],['checkc.svg',blue],['checkc.svg',blue]];
-  const stepCard=cur?`<div style="background:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.1);padding:16px" class="col g12"><div class="row" style="gap:12px"><span style="width:48px;height:48px;border-radius:24px;background:rgba(187,226,255,.2);display:flex;align-items:center;justify-content:center;flex:none"><img src="${HA('ic-'+icons[cur-1][0])}" style="width:24px;height:24px;${icons[cur-1][1]}" alt=""></span>
-    <div class="col grow" style="gap:2px"><span class="b2 semi" style="color:#0031c6">10/22 ${t('01:00')}</span><span class="b1 semi">${labels[cur-1]}</span></div></div>
-    <div>${C.kv('대상 거래 기간',ex[0]==='Lighter'?'월 ~ 일':`10/21 ${t('00:00')} ~ 10/22 ${t('00:00')}`)}${C.kv('지급 주기',ex[1]+(ex[0]==='ApeX'?' '+C.tbd('ApeX 주기','G-025'):''))}${C.kv('지급 시각',t('01:00'))}${C.kv('지급처',T('Account','거래 계정'))}</div></div>`:`<div class="row" style="gap:8px">${labels.map(l=>`<span class="grow cap c2" style="text-align:center">${l}</span>`).join('')}</div>`;
-  const tl=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Earning Timeline · ${ex[0]}</span><span class="row g4">${arrow('ic-chev-l.svg',cur<=1)}${arrow('ic-chev-r2.svg',cur>=4)}</span></div>${tabs}${stepCard}
-   ${st==='warning'?C.alert('warn','','거래소별로 순차 지급하고 있어서 몇 분 더 걸릴 수 있어요.'):''}</div>`;
+  const ex={normal:['EdgeX',['Oct 21 00:00','Oct 22 00:00','Oct 22 01:00']],apex:['ApeX',['Oct 20 00:00','Oct 21 00:00','Oct 22 01:00']],lighter:['Lighter',['Oct 13 00:00','Oct 20 00:00','Oct 20 01:00']],warning:['EdgeX',['Oct 21 00:00','Oct 22 00:00','Oct 22 01:00']]}[st]||['EdgeX'];
+  const tl=earningTimeline(ex[0],ex[1])+(st==='warning'?C.alert('warn','','거래소별로 순차 지급하고 있어서 몇 분 더 걸릴 수 있어요.'):'');
   const cum=`<div style="background:#fff;border-radius:8px;padding:16px">${cumulative([R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'}])}</div>`;
   const w=S.vp==='mo'?'100%':'343px';
-  return `<div style="padding:${S.vp==='mo'?'16px':'40px 0 80px'};display:flex;justify-content:center"><div class="col g16" style="width:${w}">${tl}${cum}${C.note('MAXOP-783은 3단계(Start Trading · Cut-off Time · Cashback Accumulated)이지만 정책(REQ-282 · G-192)은 4단계라 탭을 4개로 두고 단계명은 V2.2 국문(영문 원문 없음 — EN 보기에서도 국문). 카드 안 상세 행은 V2.2 내용. 누적 카드 = MAXOP-731 컴포넌트, 캡션은 G-191 확정 문구')}</div></div>`;
+  return `<div style="padding:${S.vp==='mo'?'16px':'40px 0 80px'};display:flex;justify-content:center"><div class="col g16" style="width:${w}">${tl}${cum}</div></div>`;
  }});
 
 // ---------- 선차감 · 복원 반영 위치 (FU-034 · 035) ----------
@@ -3294,7 +3370,7 @@ R.screen({id:'wd.reflect',group:'home',title:'선차감 · 복원 반영 위치'
   const feed=st==='normal'?row('EdgeX','120.00 USDT'):`<p class="b2 c2" style="margin:0">—</p>`;
   const sec=(t,b,go)=>`<div style="background:#fff;border-radius:8px;padding:16px" class="col g12"><div class="row between"><span class="b1 semi">${t}</span>${go?`<button class="btn text primary sm" data-go="${go}">See All</button>`:''}</div>${b}</div>`;
   const body=`${balanceCard({amount:bal,sub:st==='deducted'?`<div class="cap c2">출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다</div>`:''})}
-   ${sec(T('Cashback Summary','캐시백 요약'),sum,'summary.main')}${sec(T('Live withdrawals','실시간 출금'),feed,'about.feed')}
+   ${sec(T('Cashback Summary','캐시백 요약'),sum)}${sec(T('Live withdrawals','실시간 출금'),feed)}
    ${C.note({normal:'지급 완료된 건만 피드에 표시',deducted:'처리 중 — 피드에 아직 없음(자동 지급 완료 = 출금일 때만 표시). 영문 선차감 문구는 G-112 문구표 확정분(원문 없음)',restored:'실패해 복원된 건은 피드에 Sent 항목이 생기지 않음. 잔액은 복원 후 다시 같은 조건으로 판정'}[st]+' · 홈 · 캐시백 요약 · 실시간 출금 피드가 같은 레코드에서 같은 새로고침에 반영. 결과를 보여 주는 회원 화면은 없음(REQ-163)')}`;
   return `<div style="padding:${S.vp==='mo'?16:40}px 16px 80px;display:flex;justify-content:center"><div class="col g16" style="width:${S.vp==='mo'?'100%':'480px'}">${body}</div></div>`;
  }});
@@ -3354,7 +3430,7 @@ function moForm(title,body,actions,back='home.main'){
   <div style="background:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;position:sticky;bottom:0">${actions}</div></div>`}
 const moHint=t=>`<p style="margin:0;font-size:12px;color:#545a63;text-align:center">${t}</p>`;
 const trust=()=>`<p class="b2 c2" style="margin:0">${T('No wallet connection or signature required.','지갑 연결이나 서명은 필요하지 않아요.')}</p>`;
-const signUp=()=>`<button class="btn text black lg full" data-go="auth.signup">${T('Don’t have an account yet? Sign up here','아직 계정이 없으신가요? 여기서 가입하세요')}</button>`;
+const signUp=(ex)=>`<p class="b1 med" style="margin:0;text-align:center;padding:8px 0">${T('Don’t have an account yet?','아직 계정이 없으신가요?')} <a class="cb" style="cursor:pointer" data-ref-signup="${esc(ex||selectedExchange||'')}">${T('Register here','여기서 가입하세요')}</a></p>`;
 const help=()=>C.btn(T('Need help? Contact Support'),{v:'text',c:'black',full:true,go:'support.main'});
 const dexSel=(d,s=32)=>S.vp==='mo'
  ? `<button type="button" class="sel" data-go="link.select:normal">${C.dex(d,s)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`
@@ -3378,6 +3454,7 @@ function guide(d){
 // 연동 결과 · 전체 화면 모달 — 웹: 상단 바 72(닫기 48) · 본문 좌우 480 · 버튼이 본문 안 / 모바일: 상단 바 56 · 본문 좌우 32 · 버튼이 하단(패딩 16)
 // sev = info(InfoRounded) · success(CheckCircleRounded) · warning(WarningRounded) · error(ErrorRounded), 플레이트 = 같은 색 12% 원
 const SEV={info:'#0288D1',success:'#2E7D32',warning:'#EF6C00',error:'#D32F2F'};
+window.LINK_SPLASH=(...a)=>splash(...a);
 function splash(sev,title,msg,btns,o={}){
  const mo=S.vp==='mo';
  const lines=[].concat(msg||[]).map(l=>`<p class="b1 c2" style="margin:0 0 8px;text-align:center;word-break:break-word">${l||'&nbsp;'}</p>`).join('');
@@ -3457,7 +3534,7 @@ function filterExchanges(picker){
  const popular=picker.querySelector('[data-link-popular]');
  if(popular)popular.style.display=q||type==='dex'?'none':'flex';
  const empty=picker.querySelector('[data-link-empty]');
- if(empty)empty.style.display=count?'none':'block';
+ if(empty){empty.style.display=count?'none':'block';const raw=picker.querySelector('[data-link-search]').value.trim();empty.textContent=raw?`No results found for “${raw}”`:'No results found'}
  const caption=picker.querySelector('[data-link-count]');
  if(caption)caption.textContent=pickerCount(type,q,count);
  for(const badge of picker.querySelectorAll('[data-picker-badge]'))badge.style.display=type==='all'?'inline':'none';
@@ -3549,7 +3626,7 @@ function uidLinkForm(st,openPicker){
  const d=WEB_CEX.includes(selectedExchange)||cexBy(selectedExchange)?selectedExchange:WEB_CEX[0];   // 첫 상태 = 목록 첫 거래소 기본 선택(WOO X Pro, G-379 · 결정 12차)
  const sel=mo?`<button type="button" class="sel" style="border-color:var(--input-border);padding:16px 12px" data-go="link.select:${filled?'uidFilled':'uid'}">${webMark(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`:webExchangeField(d,openPicker);
  const field=C.field({label:null,value:filled?'1234567':fmtErr?'12345abc':null,ph:T('Enter your UID'),focus:filled,error:null});
- const reg=`<p class="b1 med" style="margin:0;text-align:center;padding:8px 0">${T('Don’t have an account yet?')} <a class="cb" style="cursor:pointer" data-go="auth.signup">${T('Register here')}</a></p>`;
+ const reg=signUp(d);
  const next=C.btn(T('Next'),{full:true,size:'md',disabled:!filled});
  if(mo)return moForm(T('Link your exchange UID'),`${sel}${field}${uidGuide(true,d)}`,`${next}${reg}`);
  const modal=`<div style="background:var(--paper);border-radius:4px;box-shadow:var(--elev24);width:600px;max-width:100%;height:800px;display:flex;flex-direction:column">
@@ -3583,7 +3660,6 @@ R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link 
  states:[
   {id:'empty',label:'빈 값 — 안내 보임, Next 비활성 (L2)',figma:{pc:'28960:127275',mo:'28969:126986'},note:'V2.2 <code>link/ADDR#normal</code> · <code>link/SEL#detail</code>(DEX 상세 진입 = 그 DEX 선택 상태로 바로 주소 입력, 배경 D1 상세) · <code>link/SHEET#screen</code>(모바일 전체 화면 Link Account — Next 항상 닿음)'},
   {id:'valid',label:'유효 주소 — Next 활성 (L3)',figma:{pc:'28960:127279',mo:'28969:126996'},note:'V2.2 <code>link/ADDR#valid</code>. 안내는 유효 주소에서도 유지(REQ-069 · Figma L3)'},
-  {id:'paste',label:'Paste 권한 거부',figma:null,note:'V2.2 <code>link/ADDR#paste</code> — 디자인 없음'},
   {id:'e2',label:'빈 값 제출 — Enter your wallet address.',figma:{pc:'28980:132144'},note:'V2.2 <code>link/ADDR#e2</code> · Figma Address validation / Empty'},
   {id:'ws',label:'주소 안 공백 — Remove spaces… (L4)',figma:{pc:'28980:132242',mo:'28969:127006'},note:'Figma Address validation / Internal whitespace · L4 Format error(28960:127283)도 같은 화면 · 모바일 Invalid address · REQ-067'},
   {id:'case',label:'다른 형식 · 대소문자 원문 유지 — 오류 없음',figma:{pc:'28980:132193'},note:'V2.2 <code>link/ADDR#e3</code>(base58) · <code>#e4</code>(0X·길이·문자) · <code>#e5</code>(체크섬)을 대신함 — REQ-065: 공통 0x 접두어·42자·16진수·EIP-55 검사로 거부하지 않고 서버·파트너가 최종 판정. Figma Address input / Preserve original case'},
@@ -3603,31 +3679,30 @@ R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link 
   const extra='';
   const nt=st==='kept'?C.note('실패 다이얼로그를 닫거나 새로고침해도 선택 거래소·입력 주소 유지(REQ-064 · G-380)'):'';
   const hintTxt=T('Paste a valid wallet address to continue.','올바른 지갑 주소를 붙여넣으면 계속할 수 있어요.');
+  const paste=preset||st==='empty'||st==='paste'||st==='hub'?`<button class="btn contained primary sm" data-paste style="position:absolute;right:12px;top:${mo?12:16}px">${T('Paste','붙여넣기')}</button>`:'';
   if(mo){
    const sel=`<div class="sel" style="border-color:var(--input-border);padding:16px 12px;cursor:pointer" data-go="link.select:normal">${C.dex(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</div>`;
-   const acts=`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:!ok,go:ok?'link.captcha:normal':''})}${ok?'':moHint(hintTxt)}${signUp()}`;
-   return moForm(T('Link Account','거래 계정 연동하기'),`${sel}${fld}${extra}${nt}${guide(d)}`,acts,st==='hub'?'hub.main':'home.main');
+   const acts=`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:!ok,go:ok?'link.captcha:normal':''})}${ok?'':moHint(hintTxt)}${signUp(d)}`;
+   return moForm(T('Link Account','거래 계정 연동하기'),`${sel}<div style="position:relative">${fld}${paste}</div>${extra}${nt}${guide(d)}`,acts,st==='hub'?'hub.main':'home.main');
   }
-  const paste=preset||st==='empty'||st==='paste'?`<button class="btn contained primary sm" style="position:absolute;right:12px;top:16px">${T('Paste','붙여넣기')}</button>`:'';
   const body=`${trust()}${dexSel(d)}<div style="position:relative">${fld}${paste}</div>${extra}${nt}${guide(d)}`;
   const hint=preset||st==='empty'||st==='paste'||st==='hub'?`<p class="cap c2 center" style="margin:0">${hintTxt}</p>`:'';
-  const actions=`${C.btn(T('Next','다음'),{full:true,disabled:!ok,go:ok?'link.captcha:normal':''})}${hint}${signUp()}`;
+  const actions=`${C.btn(T('Next','다음'),{full:true,disabled:!ok,go:ok?'link.captcha:normal':''})}${hint}${signUp(d)}`;
   const origin=preset?`dex.detail:${preset.toLowerCase()}`:st==='hub'?'hub.main':BG;
   return C.overlay(origin,linkModal(body,actions,{close:preset||st==='hub'?origin:'home.main'}));
  }});
 
 // ---------- G-402 가입 후 복귀 (Signup + Link Wallet) ----------
 // Figma 1 Entry(28960:127416, DEX 상세 — Get Started 주 버튼) → 2 Signup(28960:127418, 모달 「DEX / Signup before redirect」) → 3 Return(28960:127422, 상세 — Link Wallet 주 버튼)
-R.screen({id:'link.signup',group:'link',title:'가입 후 연동 복귀 (G-402)',route:'/exchange/{dex} (모달)',fu:['FU-013'],shell:false,
+R.screen({id:'link.signup',group:'link',title:'가입 후 연동 복귀 (G-402) — 중간 안내 없음',route:'/exchange/{dex} (모달)',fu:['FU-013'],shell:false,
  states:[
-  {id:'prompt',label:'2 Signup — Start by signing up for Lighter?',figma:{pc:'28960:127418'},note:'G-402 확정: 가입 후 그 DEX가 미리 선택된 연동 모달로 복귀. 진입 = 상세 <code>Get Started</code>(1 Entry 28960:127416 — DEX 담당 <code>dex.detail:lighter</code>). 버튼 = 그 DEX 레퍼럴 가입 링크 새 탭(REQ-053). 마지막 단계 = <code>Link your wallet</code>.'},
   {id:'return',label:'3 Return — 상세로 돌아와 Link Wallet → 미리 선택된 연동 모달',figma:{pc:'28960:127422'},note:'Figma 3 Return: 상세 페이지에서 <code>Link Wallet</code>이 주 버튼(파랑)으로, <code>Get Started</code>가 보조로 바뀜 — 상세 화면은 DEX 담당(<code>dex.detail:lighter</code>)이라 버튼 강조는 그쪽 반영 필요. 여기서는 복귀 후 열리는 연동 모달(G-402: 그 DEX 미리 선택)을 보여 줌. 복귀 안내 문구는 문구표'},
  ],
  render(st){
-  if(st==='return'){
+  {
    const body=`${trust()}${dexSel('Lighter')}${C.field({ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')})}<p class="cap c2" style="margin:0">${T('Signed up on Lighter? Paste your Lighter wallet address to link it.','Lighter 가입을 마쳤다면 Lighter 지갑 주소를 붙여넣어 연동해 주세요.')}</p>${guide('Lighter')}`;
    if(S.vp==='mo')return renderInner('link.addr:empty');
-   return C.overlay(BG,linkModal(body,`${C.btn(T('Next','다음'),{full:true,disabled:true})}${signUp()}`));
+   return C.overlay(BG,linkModal(body,`${C.btn(T('Next','다음'),{full:true,disabled:true})}${signUp('Lighter')}`));
   }
   const step=(icon,t)=>`<div class="col" style="flex:1;min-width:0;align-items:center;gap:12px">${icon}<span class="b1 semi" style="text-align:center">${t}</span></div>`;
   const arr=ic('arrow-forward','ic20');
@@ -3648,13 +3723,12 @@ function puzzle(){
   <div style="height:1px;background:var(--divider)"></div><span class="cap c3" style="text-align:right">${T('Powered by GEETEST')}</span></div>`}
 function addrModal(extra,nextOn){
  const field=C.field({label:T('Wallet address','지갑 주소'),value:ADDR,help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')});
- return linkModal(`${trust()}${dexSel('Lighter')}${field}${extra||''}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,disabled:!nextOn})}${signUp()}`)}
+ return linkModal(`${trust()}${dexSel('Lighter')}${field}${extra||''}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,disabled:!nextOn})}${signUp('Lighter')}`)}
 R.screen({id:'link.captcha',group:'link',title:'캡차',route:'/link (모달)',fu:['FU-017'],shell:false,
  states:[
   {id:'normal',label:'GEETEST 퍼즐 (L5)',figma:{pc:'28960:127287',mo:'28969:127016'},note:'V2.2 <code>link/CAPTCHA#normal</code>. 퍼즐 배경 = [기존 MAX-792] Captcha 1(13992:429798, 테더맥스 캡차 이미지). 퍼즐은 GEETEST 라이브 위젯(퍼즐 이미지·닫기/새로고침/도움 아이콘은 위젯이 그림 — 에셋 아님)'},
   {id:'success',label:'Verification Success',figma:{pc:'28966:124154',mo:'28969:127073'},note:'V2.2 <code>link/CAPTCHA#success</code> · <code>link/DONE#app</code>. Figma: 웹 <code>Back to Home</code> · 모바일 <code>Close</code>'},
   {id:'retry',label:'퍼즐 실패·만료 — 주소 유지 재시도',figma:null,note:'V2.2 <code>link/CAPTCHA#retry</code>. 연동을 시도하지 않고 같은 거래소·주소 유지(REQ-072). 문구는 Figma API 상태 보드 S1_14 원문'},
-  {id:'scriptFail',label:'캡차 스크립트 로드 실패 — Retry',figma:null,note:'V2.2 <code>link/CAPTCHA#scriptFail</code>. 캡차 없이 절대 제출하지 않음(REQ-072). 문구는 Figma API 상태 보드 S1_13 원문'},
  ],
  render(st){
   const mo=S.vp==='mo';
@@ -3666,7 +3740,7 @@ R.screen({id:'link.captcha',group:'link',title:'캡차',route:'/link (모달)',f
   }
   const [t,m,b]=st==='retry'?['Verification expired','Complete a new puzzle to continue.','Retry verification']:['Verification could not load','Your wallet address has been kept.','Retry'];
   const box=`<div class="alert err"><span class="ai">!</span><div class="ab"><b>${T(t)}</b>${T(m)}<div class="mt8">${C.btn(T(b),{v:'outlined',c:'black',size:'sm',go:st==='retry'?'link.captcha:normal':''})}</div></div></div>`;
-  if(mo)return moForm(T('Link Account','거래 계정 연동하기'),`<div class="sel" style="border-color:var(--input-border);padding:16px 12px">${C.dex('Lighter',24)}<span class="b1 grow">Lighter</span>${ic('arrow-drop-down')}</div>${C.field({label:T('Wallet address','지갑 주소'),value:ADDR})}${box}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:true})}${signUp()}`);
+  if(mo)return moForm(T('Link Account','거래 계정 연동하기'),`<div class="sel" style="border-color:var(--input-border);padding:16px 12px">${C.dex('Lighter',24)}<span class="b1 grow">Lighter</span>${ic('arrow-drop-down')}</div>${C.field({label:T('Wallet address','지갑 주소'),value:ADDR})}${box}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:true})}${signUp('Lighter')}`);
   return C.overlay(BG,addrModal(box,false));
  }});
 
@@ -3791,7 +3865,9 @@ R.screen({id:'own.inuse',group:'own',title:'이미 사용 중 · 신청 불가(3
   {id:'normal',label:'Account Already in Use (O1)',figma:{pc:'28960:127644',mo:'28969:127109'},note:'V2.2 <code>own/O1#normal</code>. DEX(revision) O1 = 결과 스플래시(error) — <code>Verify Ownership</code>은 인증 화면, <code>Try a different wallet</code>은 주소 입력으로(SCREEN-LABEL 원문). 연동 결과 <code>link.result:inuse</code>와 같은 화면. 기존 [MAX-561] UID already in use(웹 12792:59661 · mWeb 12874:18663)의 DEX판'},
   {id:'cooldown',label:'Ownership Claim Unavailable — 30일 쿨다운 (O2)',figma:{pc:'28960:127650',mo:'28982:126298'},note:'V2.2 <code>own/O2#normal</code> · REQ-724. DEX(revision) O2 = 결과 스플래시(warning) — O1 대신 표시(최근 30일 안에 다른 회원이 인증). 기존 [MAX-561] Ownership cooldown time(웹 12792:61035 · mWeb 12783:405465)의 DEX판. 「DEX는 소유권 인증을 지원하지 않습니다」류 문구 금지(REQ-125)'},
  ],
- render(st){return renderInner(st==='cooldown'?'link.result:cooldown':'link.result:inuse')}});
+ render(st){
+  if(st==='cooldown')return window.LINK_SPLASH('warning',T('Ownership Claim Unavailable'),[`<span class="row" style="gap:8px;justify-content:center;align-items:center">${C.dex(OWN_DEX,24)}<span class="b1 semi" style="color:var(--text-primary)">${OWN_DEX}</span><span>${T('Wallet','지갑')} ${OWN_SHORT}</span></span>`,T('This wallet address was recently verified by another user. Ownership claims will be available after 30 days.')],C.btn(T('Try a different wallet'),{full:true,go:'link.addr:empty'})+C.btn(T('Close','닫기'),{v:'outlined',c:'black',full:true,go:'link.addr:kept'}),{close:'link.addr:kept'});
+  return renderInner('link.result:inuse')}});
 
 // ---------- O3~O10 : 인증 화면 ----------
 const STEPS=[
@@ -3807,10 +3883,10 @@ function vGuide(st){const i=stepIdx(st),s=STEPS[i];
  return `<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:16px"><span class="b1 semi">${T('Ownership Video Recording Guide')}</span>
   <div style="border-radius:8px;display:flex;flex-direction:column;gap:8px"><div style="position:relative;border-radius:8px 8px 0 0;overflow:hidden;cursor:pointer" data-go="own.verify:${NEXT[['normal','s2','s3'][i]]}"><img src="${A('own-guide-lighter.png')}" style="width:100%;aspect-ratio:1280/929;object-fit:cover"><span style="position:absolute;left:16px;top:16px;background:#0031c6;color:#fff;border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">${T(`Step ${i+1} of 3`)}</span></div>
   <div class="col" style="gap:4px;padding:8px"><span class="b2 med">${T(s.t)}</span><span class="b2 c2">${T(s.b,s.ko)}</span></div></div>
-  <img src="${A('own-mo-step'+(i+1)+'.svg')}" style="width:100%;height:6px" alt=""></div>`}
+  <div class="row between" style="align-items:center;gap:8px">${i>0?`<button class="icon-btn" aria-label="Previous step" data-go="own.verify:${['normal','s2','s3'][i-1]}">${ic('chevron-left')}</button>`:'<button class="icon-btn" aria-label="Previous step" disabled style="opacity:.38">'+ic('chevron-left')+'</button>'}<img src="${A('own-mo-step'+(i+1)+'.svg')}" style="flex:1;min-width:0;height:6px" alt="">${i<2?`<button class="icon-btn" aria-label="Next step" data-go="own.verify:${['normal','s2','s3'][i+1]}">${ic('chevron-right')}</button>`:'<button class="icon-btn" aria-label="Next step" disabled style="opacity:.38">'+ic('chevron-right')+'</button>'}</div></div>`}
 function vZone(file){
  return file
-  ?`<div style="border:1px dashed rgba(0,0,0,.12);border-radius:4px;padding:24px 16px;display:flex;align-items:center;gap:16px"><span style="width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;flex:none">${oic('videocam',24)}</span><div class="col grow" style="gap:0"><span class="b1">lighter-ownership.mp4</span><span class="row b2 c2" style="gap:8px">3.2 MB<span>•</span>${T('Complete')}</span></div><button class="icon-btn" data-go="own.verify:s3" style="width:36px;height:36px" title="Remove">${oic('x',20)}</button></div>`
+  ?`<div style="border:1px dashed rgba(0,0,0,.12);border-radius:4px;padding:24px 16px;display:flex;align-items:center;gap:16px"><span style="width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;flex:none">${oic('videocam',24)}</span><div class="col grow" style="gap:0"><span class="b1">lighter-ownership.mp4</span><span class="row b2 c2" style="gap:8px">3.2 MB<span>•</span>${T('Complete')}</span></div><button class="icon-btn" data-go="own.verify:uploading" style="width:36px;height:36px" title="Replace" aria-label="Replace file">${oic('x',20)}</button></div>`
   :`<div style="border:1px dashed rgba(0,0,0,.12);border-radius:4px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;cursor:pointer" data-go="own.verify:uploading">${oic('upload')}<span class="b2">${T('Upload your screen recording')}</span><span class="b2 c2">${T('MP4 or MOV (max. 1GB)')}</span></div>`}
 const vAlert=(tone,lines)=>{const [bg,c,icn]=tone==='info'?['#e5f6fd','#014361','info']:['#fff4e5','#663c00','warn'];
  return `<div style="display:flex;gap:12px;background:${bg};color:${c};border-radius:4px;padding:6px 16px"><span style="padding:8px 0 7px;display:flex">${oic(icn,20)}</span><div class="col" style="gap:8px;padding:8px 0;font-size:14px;line-height:1.43;letter-spacing:.17px">${lines.map(l=>`<span>${l}</span>`).join('')}</div></div>`};
@@ -3823,14 +3899,14 @@ function verifyPage(st){
  const upload=`<div style="background:#fff;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px"><p style="margin:0;font-size:24px;line-height:1.334;font-weight:700">${T('Upload Recording')}</p>
   <div class="col" style="gap:8px">${vZone(file)}${vAlerts()}</div>${C.btn(T('Submit Claim'),{full:true,disabled:!file,go:file?'own.verify:confirm':''})}</div>`;
  return `<div style="width:1248px;max-width:100%;margin:0 auto;padding:40px 80px 64px;display:flex;flex-direction:column;gap:40px">
-  <div class="row" style="gap:8px"><button class="icon-btn" data-go="home.main">${oic('back')}</button><span style="font-size:20px;line-height:1.6;font-weight:500;letter-spacing:.15px">${T('Ownership Verification')}</span></div>
+  <div class="row" style="gap:8px"><button class="icon-btn" data-go="back:home.main">${oic('back')}</button><span style="font-size:20px;line-height:1.6;font-weight:500;letter-spacing:.15px">${T('Ownership Verification')}</span></div>
   <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px;align-items:start"><div class="col g16">${vWallet()}${vGuide(st)}</div>${upload}</div></div>`;
 }
 // 모바일(Figma 28982:126103~ · 기존 [MAX-561] mWeb): mWeb 헤더(로고 · 계정 · 메뉴) → 제목 줄 → 카드 → 업로드 → 제출
 const moHead=()=>`<div style="height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#f8fafc"><img src="${A('logo.svg')}" style="width:142px;height:16px" alt="TetherMax"><div class="row" style="gap:6px"><span style="width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.04);display:inline-flex;align-items:center;justify-content:center"><img src="${A('own-mo-account.svg')}" style="width:20px;height:20px" alt=""></span><span style="width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.04);display:inline-flex;align-items:center;justify-content:center"><img src="${A('own-mo-menu.svg')}" style="width:20px;height:20px" alt=""></span></div></div>`;
 function verifyPageMo(st){
  const file=fileOf(st);
- return `${moHead()}<div style="padding:16px 16px 0;display:flex;align-items:center;gap:4px"><button class="icon-btn" data-go="home.main">${oic('back')}</button><span style="font-size:20px;font-weight:500;line-height:1.6">${T('Ownership Verification')}</span></div>
+ return `${moHead()}<div style="padding:16px 16px 0;display:flex;align-items:center;gap:4px"><button class="icon-btn" data-go="back:home.main">${oic('back')}</button><span style="font-size:20px;font-weight:500;line-height:1.6">${T('Ownership Verification')}</span></div>
   <div style="padding:16px;display:flex;flex-direction:column;gap:24px">${vWallet()}${vGuide(st)}
   <div class="col" style="gap:8px"><span class="b1 semi">${T('Upload Recording')}</span><div style="background:#fff;border-radius:8px;padding:16px">${vZone(file)}</div>${vAlerts()}</div>
   ${C.btn(T('Submit Claim'),{full:true,disabled:!file,go:file?'own.verify:confirm':''})}</div>`;
@@ -3916,6 +3992,7 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
   {id:'rejected',label:'거절 — Ownership Verification Unsuccessful (O13)',figma:{pc:'29205:124663',mo:'28982:126283'},note:'V2.2 <code>own/O11#rejected</code>'},
   {id:'unlinked',label:'이전 보유자 · 연동 해제 행 (O14)',figma:{pc:'28960:127727',mo:'12783:404139'},note:'V2.2 <code>own/O14#normal</code>. 모바일 = [기존 MAX-561] mWeb Unlinked and UID claim by others(행 아래 경고 Alert + 오른쪽 화살표) — DEX 모바일 프레임 없음'},
   {id:'reclaim',label:'재청구 다이얼로그 (O15)',figma:{pc:'29202:120092',mo:'28982:126318'},note:'V2.2 <code>own/O14#reclaim</code>'},
+  {id:'reclaimUid',label:'재청구 다이얼로그 — CEX UID (기존 MAX-561)',note:'CEX 해제 행은 기존 UID 문구 — 지갑 문구(O15)를 쓰지 않음'},
   {id:'reclaimRejectedRow',label:'재청구 거절 · 홈 계정 행',figma:{pc:'29202:120644',mo:'28982:126338'}},
   {id:'reclaimRejected',label:'재청구 거절 · 사유 (O16)',figma:{pc:'29202:120644',mo:'28982:126338'},note:'V2.2 <code>own/O14#rejected</code>'},
  ],
@@ -3932,7 +4009,7 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
   }[st]);
   const ntWrap=`<div style="${mo?'padding:0 16px 24px':'width:1088px;max-width:100%;margin:8px auto 24px'}">${nt}</div>`;
   const page=ownHome(st==='reclaimRejectedRow'?'reclaimRejected':st);
-  if(!['approved','rejected','reclaim','reclaimRejected'].includes(st)||ctx.asBg)return page+ntWrap;
+  if(!['approved','rejected','reclaim','reclaimUid','reclaimRejected'].includes(st)||ctx.asBg)return page+ntWrap;
   const account=`<div class="row g8" style="margin:16px 24px 0;padding:8px 16px;border:1px solid var(--divider);border-radius:4px">${C.dex(OWN_DEX,24)}<span class="b2 med">${OWN_DEX}</span><span class="cap c2">${T('Wallet','지갑')} ${OWN_SHORT}</span></div>`;
   const ok=mBtn(T('OK'),'home.main');
   const remove=mBtn(T('Remove Wallet'),'home.main','white');
@@ -3942,11 +4019,11 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
    approved:{title:T('Ownership Verification Complete'),extra:account,body:T('Your wallet ownership has been successfully verified.'),actions:ok},
    rejected:{title:T('Ownership Verification Unsuccessful'),extra:account,body:T('We were unable to verify your wallet ownership. Please review your submission and try again.'),actions:ok},
    reclaim:{title:T('Verify Ownership to Reclaim This Wallet'),body:T('This wallet address was unlinked after another user verified ownership. If it belongs to you, submit a new claim.'),actions:mo?submit+remove:remove+submit,close:'own.home:unlinked'},
+   reclaimUid:{title:T('Verify Ownership to Reclaim This UID'),body:T('This UID was unlinked after another user verified ownership. If it belongs to you, submit a new claim.'),actions:mo?mBtn(T('Submit UID Ownership'),'own.verify:normal')+mBtn(T('Remove UID'),'home.main','white'):mBtn(T('Remove UID'),'home.main','white')+mBtn(T('Submit UID Ownership'),'own.verify:normal'),close:'home.main:statuses'},
    reclaimRejected:{title:T('Ownership Verification Unsuccessful'),body:`${T('We were unable to verify your wallet ownership.')}<br><br>${T('Reason from review')}: ${T('The full wallet address is not visible in the recording.')}`,actions:mo?apply+remove:remove+apply,close:'own.home:reclaimRejectedRow'},
   }[st];
   if(window.SITEL&&window.SITEO_DLG)return muiDialog(dlg);
-  const height=mo?812:900;
-  return `<div style="position:relative;height:${height}px;overflow:hidden">${page}<div class="scrim center" style="align-items:center;justify-content:center;bottom:auto;height:${height}px;padding:16px">${muiDialog(dlg)}</div></div>${ntWrap}`;
+  return `<div style="position:relative">${page}<div class="scrim pt-fixed center" style="align-items:center;justify-content:center;padding:16px">${muiDialog(dlg)}</div></div>${ntWrap}`;
  }});
 
 ;window.OWNX={muiDialog,mBtn,oAlert,setOwn:(d,s)=>{OWN_DEX=d;OWN_SHORT=s}};
@@ -4037,7 +4114,7 @@ function calcCard(route,o={}){
    ${capRow(`Per day ${usd(cb/30)}`,`Per year ${usd(cb*12)}`)}`;
  }
  const member=o.member?capRow(T('Paid to your TetherMax balance','테더맥스 잔액으로 적립돼요'),'Minimum 10 USDT'):'';
- const learn=C.btn('Learn More',{v:'outlined',c:'primary',full:true,go:route==='DEX'?`dex.detail:${p.id}`:route==='CEX'?'cexd:'+p.id:''});
+ const learn=C.btn('Learn More',{v:'outlined',c:'primary',full:true,go:route==='DEX'?`dex.detail:${p.id}`:route==='CEX'?'cexd:'+p.id:'brkd:'+p.id});
  return receipt(`${rHead('CASHBACK ESTIMATE')}${rule()}${seg(route)}${inputs}${slider}${rule()}<div data-calc-body class="col" style="gap:24px">${body}${member}</div>${o.rateFail?'':learn}`)+
   C.note(o.rateFail?'요율 서비스 실패: 숫자 대신 `Estimate unavailable` + `Try again`(G-144 확정 · DEX(revision) 상태 정의 S5_11 29002:128580 전환 「다시 불러오기」). `$0` 표시 금지, 탭은 계속 사용 가능(REQ-296). 영수증·버튼은 H1 계산기 컴포넌트 재사용(실패 화면 프레임 없음). V2.2 `hub/HUB#rateFail`.':
    `계산식: Trading fees = 월 거래량 × taker fee · Cashback = fees × 캐시백율 · 일 = 월 ÷ 30, 연 = 월 × 12, 2자리 <b>절삭</b>(REQ-293·317 — Figma의 반올림 값 \`Per day $0.19\`·\`$0.83\` 대신 \`$0.18\`·\`$0.82\`). 슬라이더 범위는 Spending Estimate 설정값(Figma: DEX $1K~$250K · CEX $10K~$500K · Brokers $10K~$20M). 계산기 각주 문구 원문 없음(REQ-292).${route==='Brokers'?' Brokers는 lot 기준 수수료(Figma H1-Broker 표본).':''}`)}
@@ -4112,7 +4189,7 @@ function hero(right,route){
 function routes(){
  // 순서 CEX → DEX → Brokers 고정(G-138 확정). Figma는 DEX → CEX → Broker(하드코딩). 강조(파란 화살표)는 Figma의 DEX 행 hover 표현
  const rows=[
-  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'cex.list'},
+  {k:'CEX',ic:'hub-3d-dex.png',name:'Centralised exchanges',sub:'For futures traders on exchanges',logos:HB_CEX_LOGOS.map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'futures cashback',go:'hub.main:cex'},
   {k:'DEX',ic:'hub-3d-cex.png',name:'Decentralised exchanges',sub:'For traders who keep their own keys',logos:['lighter','apex','edgex','aster'].map(id=>logo(id)),cap:'Claimed automatically from 10 USDT',unit:'trading fee cashback',go:'dex.overview'},
   {k:'Brokers',ic:'hub-3d-fx.png',name:'Brokers',sub:'For forex and CFD traders',logos:HB_BRK.map(p=>logo(p.lg)),cap:'Forex, commodities and indices',unit:'cashback',go:'brokers.list'},
  ];
@@ -4147,20 +4224,20 @@ function compare(chip,c){
  const toggle=mo()?'':`<div class="row" style="border:1px solid var(--divider);border-radius:8px;padding:2px;gap:0">${[['table','hub-ic-list.svg','normal'],['card','hub-ic-grid.svg','cards']].map(([k,i,s])=>`<span style="width:36px;height:36px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;${k===view?'background:var(--divider)':''}" data-hub-view="${k}"><img src="${A(i)}" alt="" style="width:20px;height:20px"></span>`).join('')}</div>`;
  const es=c==='emptySearch';
  const search=`<div class="row" style="gap:12px"><div class="row grow" data-hub-sbox style="border:${es?'2px solid var(--blue)':'1px solid var(--input-border)'};border-radius:4px;padding:${es?'7px 11px':'8px 12px'};gap:8px;background:#fff"><img src="${A('hub-ic-search.svg')}" alt="" style="width:24px;height:24px">${window.SITEH?`<input data-hub-search class="b2 grow hub-search" placeholder="${ph}" aria-label="${ph}"><span data-hub-clear title="Clear" style="cursor:pointer;display:none">${ic('close')}</span>`:`<span class="b2 grow ${es?'':'c3'}" style="line-height:20px">${es?'Hyperliquid':ph}</span>${es?`<span title="Clear" style="cursor:pointer;display:inline-flex">${ic('close')}</span>`:''}`}</div>${toggle}</div>`;
- const go=p=>chip==='DEX'?`dex.detail:${p.id}`:chip==='CEX'?'cexd:'+p.id:'';
+ const go=p=>chip==='DEX'?`dex.detail:${p.id}`:chip==='CEX'?'cexd:'+p.id:'brkd:'+p.id;   // 그 파트너의 테더맥스 상세(CEX·브로커 = 기존 상세 페이지)
  const join=p=>C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',go:go(p)});
  const hp=p=>p===top?C.badge('Highest payout','blue'):'';
  const sortIc=`<img src="${A('hub-sort.svg')}" alt="" style="width:5px;height:8px;margin-left:6px;display:inline-block;vertical-align:middle">`;
  const box='background:#fff;border-radius:8px;box-shadow:0 10px 20px rgba(0,0,0,.06)';
  let body;
  if(es){
-  body=`<p class="b2 c2" style="margin:0;padding:6px 0">No exchanges match your search</p>`+C.note('[기존 MAX-22] mWeb allPartnerExchanges(5145:50887) 빈 검색 배치: 검색창(포커스 · 입력값 · 오른쪽 X로 검색어 지우기) 아래 왼쪽 정렬 한 줄. 기존 문구 <code>No results found for {검색어}</code> 대신 G-151 확정 <code>No exchanges match your search</code>. 검색어 지우기 = 검색창 X(기존 컴포넌트) — 별도 버튼 없음. PC 빈 검색 프레임은 없어 같은 배치를 씀. V2.2 <code>hub/HUB#emptySearch</code>.');
+  body=`<p class="b2 c2" style="margin:0;padding:6px 0">No results found for “Hyperliquid”</p>`+C.note('[기존 MAX-22] mWeb allPartnerExchanges(5145:50887) 빈 검색 배치: 검색창(포커스 · 입력값 · 오른쪽 X로 검색어 지우기) 아래 왼쪽 정렬 한 줄. 기존 문구 <code>No results found for {검색어}</code> 대신 G-151 확정 <code>No exchanges match your search</code>. 검색어 지우기 = 검색창 X(기존 컴포넌트) — 별도 버튼 없음. PC 빈 검색 프레임은 없어 같은 배치를 씀. V2.2 <code>hub/HUB#emptySearch</code>.');
  }else if(mo()){
   // Figma 모바일 카드: 로고·이름·chevron / Up to N% cashback ⓘ / Final Taker · Final Maker
-  body=`<div class="col" style="gap:16px">${list.map(p=>`<div class="col" data-hub-row="${esc(p.name)}" data-go="${go(p)}" style="${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px;cursor:pointer"><div class="row" style="gap:8px">${plogo(p,32)}<span class="b1 semi grow">${esc(p.name)}</span>${hp(p)}${ic('chevron-right','ic20')}</div>
-   <span class="b1 semi">${brk?esc(p.cb):`Up to ${p.rate}% cashback`} <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid var(--text-secondary);border-radius:50%;font-size:10px;align-items:center;justify-content:center;color:var(--text-secondary);vertical-align:middle">i</span></span><hr class="divider">
-   <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div></div>`).join('')}</div>`+
-   (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정 · Figma 모바일 H1). 카드 전체가 그 거래소 상세로 이동(정책 B-5-8).'));
+  body=`<div class="col" style="gap:16px">${list.map(p=>`<div class="col" data-hub-row="${esc(p.name)}" style="${box};border:1px solid var(--divider);box-shadow:none;padding:16px;gap:12px"><div class="row" style="gap:8px">${plogo(p,32)}<span class="b1 semi grow">${esc(p.name)}</span>${hp(p)}</div>
+   <span class="b1 semi">${brk?esc(p.cb):`Up to ${p.rate}% cashback`}</span><hr class="divider">
+   <div class="row between b2"><span><span class="c2">${brk?'Commission':'Final Taker'}</span> <b>${brk?p.comm:pct4(p.taker*(1-p.rate/100))}</b></span><span><span class="c2">${brk?'Discounted':'Final Maker'}</span> <b>${brk?p.disc:pct4(p.maker*(1-p.rate/100))}</b></span></div>${C.btn(`Join ${esc(p.name)}`,{v:'outlined',c:'primary',size:'md',full:true,go:go(p)})}</div>`).join('')}</div>`+
+   (view==='card'?C.note('카드 뷰: 모바일은 원래 카드(G-151). 평점 생략(REQ-313).'):C.note('모바일 비교표 = 카드(G-151 확정). 카드 끝 전폭 <code>Join {partner}</code> → 그 파트너 상세(정책 B-5-8)'));
  }else if(view==='card'){
   const card=p=>`<div class="col" data-m-lift data-hub-row="${esc(p.name)}" style="background:#fff;border:1px solid var(--divider);border-radius:14px;padding:18px 20px 20px;gap:10px">
    <div class="row" style="align-items:center;gap:16px"><div class="col" style="gap:6px"><div class="row" style="gap:16px"><span class="row" style="gap:8px">${plogo(p,24)}<span style="font-size:20px;line-height:1.6;font-weight:700;letter-spacing:.15px">${esc(p.name)}</span></span>${hp(p)}</div>
@@ -4177,7 +4254,7 @@ function compare(chip,c){
    <tbody>${list.map((p,i)=>`<tr data-hub-row="${esc(p.name)}"><td style="border:0;padding:16px 4px;font-size:12px;text-align:center">${i+1}</td><td style="border:0;padding:16px 8px"><span class="row" style="gap:8px">${plogo(p,24)}<span class="b2 semi">${esc(p.name)}</span>${hp(p)}</span></td>${cols.map((_,k)=>`<td class="r semi tnum" style="border:0;padding:16px 8px">${cell(p,k)}</td>`).join('')}<td class="r" style="border:0;padding:16px 8px">${join(p)}</td></tr>`).join('')}</tbody></table></div>`;
  }
  return `<div class="col" style="gap:16px;margin-top:${mo()?40:32}px"><div class="row" style="gap:16px"><h3 class="h5 bold" style="margin:0;${mo()?'font-size:20px':'white-space:nowrap'}">${title}</h3>${mo()?'':'<span class="grow" style="height:1px;background:var(--divider)"></span>'}</div>
-  <p class="b2 c2" data-compare-sub style="margin:0">${sub}</p>${search}<div class="row wrap" style="gap:8px">${chips}</div><div data-compare-body>${body}</div><p data-hub-empty class="b2 c2" style="margin:0;padding:6px 0;display:none">No exchanges match your search</p></div>
+  <p class="b2 c2" data-compare-sub style="margin:0">${sub}</p>${search}<div class="row wrap" style="gap:8px">${chips}</div><div data-compare-body>${body}</div><p data-hub-empty class="b2 c2" style="margin:0;padding:6px 0;display:none">No results found</p></div>
   ${C.note('비교표: 레코드 자동 생성. Final Taker/Maker = 레코드 수수료 × (1 − 캐시백율) 계산값, `Highest payout` = 현재 필터 최고 1개(Figma에 없음, G-150 확정), `Live Campaigns` 컬럼 삭제. Rating 리뷰 20개 미만 `-`(REQ-313). 행 끝 `Join {partner}` → 그 거래소의 테더맥스 상세(REQ-311). Figma CEX 표 Bitunix 옆 `Chip` 자리표시는 내용 없어 뺌.')}`}
 
 // ---------- 게스트 이유 카드 (RT-7) ----------
@@ -4331,8 +4408,8 @@ function venueCard(d,c,i){
 }
 function listRow(d){
  const stars=`<span class="row" style="gap:0">${[1,2,3].map(()=>`<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px" alt="">`).join('')}<img src="${A('dex-dt-ic-star-full.svg')}" style="width:14px;height:14px;clip-path:inset(0 50% 0 0)" alt=""><img src="${A('dex-dt-ic-star-empty.svg')}" style="width:14px;height:14px" alt=""></span>`;
- const btn=mo()?`<img src="${A('ic-chevron-right.svg')}" style="width:20px;height:20px" alt="">`:`<button class="btn contained black sm" data-go="dex.detail:${d.id}">View ${d.name}</button>`;
- return `<div style="border:1px solid var(--divider);border-radius:8px;padding:12px 16px;background:#fff;cursor:pointer" data-go="dex.detail:${d.id}" class="col g8">
+ const btn=`<button class="btn contained black sm" data-go="dex.detail:${d.id}">View ${d.name}</button>`;
+ return `<div style="border:1px solid var(--divider);border-radius:8px;padding:12px 16px;background:#fff" class="col g8">
   <div class="row between"><div class="col" style="gap:2px"><div class="row" style="gap:6px">${C.dex(d.name,mo()?32:20)}<span class="${mo()?'b1':'b2'} semi">${d.name}</span>${mo()?'':`${stars}<span class="cap">4.0</span><span class="cap c2">(23)</span>`}</div><span class="b2 semi cb">Up to ${d.rate}% cashback</span></div>${btn}</div>
   <hr class="divider"><div class="row" style="gap:16px;${mo()?'justify-content:space-between':''}"><span class="cap c2">Final Taker <b style="color:var(--text-primary)">${pct(fin(d,'taker'))}</b></span><span class="cap c2">Final Maker <b style="color:var(--text-primary)">${pct(fin(d,'maker'))}</b></span></div></div>`;
 }
@@ -4397,7 +4474,7 @@ function ovWhy(){
  return `<section style="background:#fff;padding:${mo()?'0 0 48px':'24px 0 96px'}">${wrap(`<div class="col" style="gap:32px"><span class="h5">Why sign up with TetherMax?</span><div style="display:flex;${mo()?'flex-direction:column;gap:12px':'gap:24px'}">${r.map(card).join('')}</div></div>`)}</section>`;
 }
 function ovCta(){
- const call=`<div class="col" style="gap:28px;max-width:620px"><h2 style="margin:0;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;color:#fff;${mo()?'':'white-space:nowrap'}">Your keys. Your trades.<br>Your Cashback.</h2><p class="b1" style="margin:0;color:rgba(255,255,255,.7);max-width:446px">Join TetherMax, pick a partner Decentralised Exchange, and the Cashback starts with your next trade.</p><div>${C.btn('Sign Up Now',{go:'auth.signup'})}</div></div>`;
+ const call=`<div class="col" style="gap:28px;max-width:620px"><h2 style="margin:0;font-weight:400;font-size:${mo()?34:60}px;line-height:1.2;color:#fff;${mo()?'':'white-space:nowrap'}">Your keys. Your trades.<br>Your Cashback.</h2><p class="b1" style="margin:0;color:rgba(255,255,255,.7);max-width:446px">Join TetherMax, pick a partner Decentralised Exchange, and the Cashback starts with your next trade.</p><div>${C.btn('Sign Up Now',{go:'auth.signup'}).replace('<button ','<button data-after="dex.overview" ')}</div></div>`;
  const bg='linear-gradient(180deg,#a7aab0,#acb0b6)';
  if(mo())return `<section style="background:${bg}"><div style="height:340px;background:url(${A('dex-ov-keychain.jpg')}) center/cover"></div><div style="padding:24px 16px 48px">${call}</div></section>`;
  return `<section style="position:relative;height:640px;background:${bg};overflow:hidden"><img src="${A('dex-ov-keychain.jpg')}" style="position:absolute;right:0;top:0;width:746px;height:640px;object-fit:cover" alt=""><div style="position:absolute;left:120px;top:175px">${call}</div></section>`;
@@ -4452,7 +4529,7 @@ function offerBox(d,member,maker){
    ${stageRows(d,maker).map((r,i,a)=>{const last=i===a.length-1;return `<div class="row between" data-stage-row="${r.key}" style="border-top:1px solid var(--divider);padding:12px 16px"><span class="row b2 med${last?' cb':i===0?' c2':''}" style="gap:8px">${numBadge(i+1,last?1:0)}${r.label}</span>${r.strike?`<s class="b2 semi c3">${pct(r.v)}</s>`:`<span class="b2 semi${last?' cb':''}">${pct(r.v)}</span>`}</div>`}).join('')}</div>`;
  const ret=member==='return';
  const linkWallet=`link.addr:${d.name.toLowerCase()}`;
- const cta={guest:mo()?'':outlinedP(T('Sign Up','회원가입'),{full:true,go:'auth.signup'}),
+ const cta={guest:mo()?'':outlinedP(T('Sign Up','회원가입'),{full:true,go:'auth.signup'}).replace('<button ',`<button data-after="${linkWallet}" `),
   return:C.btn(T('Link Wallet','연동하기'),{full:true,go:linkWallet}),
   unlinked:outlinedP(T('Link Wallet','연동하기'),{full:true,go:linkWallet}),
   linked:`<button class="btn outlined black lg full" disabled>Auto Claim</button>`,
@@ -4477,7 +4554,7 @@ function dtHero(d,member,maker){
 function dtTabs(c){
  const n=c==='reviewsEmpty'?0:23;
  const tabs=['Key Features','Structure','Guide','Policy',`Reviews (${n})`];
- return `<div data-dt-tabs style="background:var(--bg-accent);border-bottom:1px solid var(--divider);${mo()?'overflow-x:auto':''}"><div style="max-width:1056px;margin:0 auto;display:flex;${mo()?'padding:0 16px':''}">${tabs.map((t,i)=>`<span data-dt-tab="${i}" style="cursor:pointer;padding:9px 16px;font-size:14px;font-weight:500;white-space:nowrap;${i===0?'color:var(--blue);border-bottom:2px solid var(--blue)':'color:var(--text-secondary);border-bottom:2px solid transparent'}">${t}</span>`).join('')}</div></div>`;
+ return `<div data-dt-tabs style="background:var(--bg-accent);${mo()?'overflow-x:auto':''}"><div style="max-width:1056px;margin:0 auto;display:flex;border-bottom:1px solid var(--divider);${mo()?'padding:0 16px':''}">${tabs.map((t,i)=>`<span data-dt-tab="${i}" style="cursor:pointer;padding:9px 16px;font-size:14px;font-weight:500;white-space:nowrap;${i===0?'color:var(--blue);border-bottom:2px solid var(--blue)':'color:var(--text-secondary);border-bottom:2px solid transparent'}">${t}</span>`).join('')}</div></div>`;
 }
 function dtWhy(d){
  const card=(t,i)=>`<div class="row" style="flex:1 1 0;min-width:0;gap:12px;border:1px solid var(--divider);border-radius:8px;padding:16px;background:#fff"><img src="${A('dex-dt-why-'+(i+1)+'.png')}" style="width:92px;height:92px;border-radius:16px;flex:none" alt=""><span class="b1 semi">${esc(t)}</span></div>`;
@@ -4517,7 +4594,7 @@ function dtStructure(d,maker){
   const bar=`<div style="display:flex;height:40px;border-radius:4px;overflow:hidden"><span style="width:${d.rate}%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center" class="b2 semi">${d.rate}%</span><span style="flex:1;background:#e0e0e0;color:#fff;display:flex;align-items:center;justify-content:center" class="b2">${100-d.rate}%</span></div>`;
   const leg=(c,t,s)=>`<div class="row" style="gap:8px;align-items:flex-start"><i style="width:12px;height:12px;background:${c};border-radius:2px;margin-top:4px"></i><div class="col" style="gap:0"><span class="b2">${t}</span><span class="cap c2">${s}</span></div></div>`;
   return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider">${kv('Normal trading fee','Without TetherMax',usd(x.fee))}${kv('Cashback','Returned to you','−'+usd(x.cb))}<hr class="divider">${kv('Effective fee','With TetherMax',usd(x.eff),1)}${slider}
-   <span class="h6" style="margin-top:16px">Where your cashback comes from</span>${bar}${leg('var(--blue)',`Returned to you — ${usd(x.cb)}`,'Paid to your TetherMax balance.')}${leg('#e0e0e0',`Stays with the fee — ${usd(x.eff)}`,`Split between ${d.name} and TetherMax.`)}
+   <span class="h6" id="dex-flow" style="margin-top:16px">Where your cashback comes from</span>${bar}${leg('var(--blue)',`Returned to you — ${usd(x.cb)}`,'Paid to your TetherMax balance.')}${leg('#e0e0e0',`Stays with the fee — ${usd(x.eff)}`,`Split between ${d.name} and TetherMax.`)}
    <div class="col" style="gap:8px">${steps.map(stepCard).join('')}</div>${disc}</div>`,{outer:'padding:20px 16px',style:'border-radius:8px;padding:16px'});
  }
  return box1056(`<div class="col" style="gap:16px">${head}<hr class="divider">${fees}${slider}
@@ -4614,7 +4691,7 @@ function dtDrawer(d,maker){
   <hr class="divider" style="margin:0">
   <div class="col" style="gap:24px;padding:24px">${cap('WHAT YOU CHOOSE')}<div class="col" style="gap:16px">${row('Total volume',volK(x.vol),'How much you trade in a month. Drag the slider to match your own trading.')}${row('Taker or Maker',maker?'Maker':'Taker','Exchanges charge two different fees. Taker is when you take an order that is already there. Maker is when you place one that waits.')}</div>
    ${cap('WHAT WE WORK OUT')}${echo}<div class="col" style="gap:16px">${row('Normal trading fee',usd(x.fee),'What the exchange would charge you on that volume, without TetherMax.')}${row('Cashback',usd(x.cb),'The part of that fee TetherMax sends back to your account.')}${row('Effective fee',usd(x.eff),'What the trade really costs you once the cashback arrives.')}</div>
-   <div class="col" style="gap:8px"><span class="b2 med c2">WHERE THE MONEY COMES FROM</span><div class="col" style="gap:8px;background:var(--action-hover);border-radius:10px;padding:12px 14px;font-size:13px"><span style="line-height:18px;letter-spacing:.16px">The exchange pays TetherMax a partner settlement for your trading. TetherMax returns most of it to you. Nothing is added to your fee.</span><span class="cb" style="font-weight:500;line-height:1.5">See the full flow&nbsp; ↓</span></div></div>
+   <div class="col" style="gap:8px"><span class="b2 med c2">WHERE THE MONEY COMES FROM</span><div class="col" style="gap:8px;background:var(--action-hover);border-radius:10px;padding:12px 14px;font-size:13px"><span style="line-height:18px;letter-spacing:.16px">The exchange pays TetherMax a partner settlement for your trading. TetherMax returns most of it to you. Nothing is added to your fee.</span><span class="cb" role="button" tabindex="0" data-full-flow style="font-weight:500;line-height:1.5;cursor:pointer">See the full flow&nbsp; ↓</span></div></div>
    ${cap('These are estimates. Final amounts vary by exchange, tier and trading activity.')}</div>
   <hr class="divider" style="margin:0"></div>`;
 }
@@ -4634,7 +4711,7 @@ function dtPage(c){
  if(member==='linked')notes.push('연동 완료 — 출금 자리는 비활성 <code>Auto Claim</code>(10분 주기 자동 지급), 리뷰 쓰기. V2.2 <code>exd/DETAIL#linked</code>');
  if(c==='offboarded')return `<div style="padding:8px 16px">${C.note('DEX 오프보딩 — 상세 URL <code>/dex/{slug}</code>는 DEX 랜딩으로 301 리다이렉트(REQ-121·358). 아래는 리다이렉트된 랜딩 · 디자인 없음. V2.2 <code>exd/DETAIL#offboarded</code>')}</div>${ovPage('normal')}`;
  const top=`${notes.length?`<div style="padding:8px 16px">${notes.map(C.note).join('')}</div>`:''}`;
- const sticky=mo()&&member==='guest'?`<div style="position:sticky;bottom:0;z-index:5;background:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -1px 0 var(--divider)"><button class="btn contained primary lg full" data-go="auth.signup">Sign Up${ext()}</button><button class="btn outlined black lg full" data-go="auth.login">Already have an account?</button></div>${C.note('모바일 게스트 하단 고정 CTA — DEX(revision) 모바일 D4 「sticky bottom CTA (guest)」(I28960:131011;27610:306639): <code>Sign Up</code> + <code>Already have an account?</code>. 모바일 오퍼 박스에는 <code>Get Started</code>만 있다.')}`:'';
+ const sticky=mo()&&member==='guest'?`<div style="position:sticky;bottom:0;z-index:5;background:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -1px 0 var(--divider)"><button class="btn contained primary lg full" data-go="auth.signup" data-after="link.addr:${d.name.toLowerCase()}">Sign Up${ext()}</button><button class="btn outlined black lg full" data-go="auth.login" data-after="link.addr:${d.name.toLowerCase()}">Already have an account?</button></div>${C.note('모바일 게스트 하단 고정 CTA — DEX(revision) 모바일 D4 「sticky bottom CTA (guest)」(I28960:131011;27610:306639): <code>Sign Up</code> + <code>Already have an account?</code>. 모바일 오퍼 박스에는 <code>Get Started</code>만 있다.')}`:'';
  return `${top}${dtHero(d,member,maker)}${member==='linked'?dtMyReview():''}${dtTabs(c)}<div data-dt-sec="0">${dtWhy(d)}</div><div data-dt-sec="1">${dtStructure(d,maker)}</div><div data-dt-sec="2">${dtGuide(d,c)}</div>${dtClosing(d)}<div data-dt-sec="3">${dtFaq(d,c)}</div><div data-dt-sec="4">${dtReviews(d,member,c)}</div>${sticky}`;
 }
 
@@ -4650,7 +4727,7 @@ R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',rout
   {id:'aster',label:'Aster',figma:{pc:'28960:127627',mo:'28960:131017'},note:'V2.2 exd/DETAIL#aster · Figma D5'},
   {id:'apex',label:'ApeX',figma:{pc:'28960:127633',mo:'28960:131023'},note:'V2.2 exd/DETAIL#apex · Figma D6'},
   {id:'lighter',label:'Lighter — Premium/Plus (온보딩 후 — 보류)',figma:{pc:'28960:127443',mo:'28960:130990'},note:'V2.2 exd/DETAIL#lighter · Figma D1 · 연동 모달 배경으로도 쓰임'},
-  {id:'drawer',label:'How this works 모달',figma:{pc:'22544:808136',mo:'22988:114502'},note:'[기존 MAX-1216] S21 How this works modal · 컴포넌트 Modal / How this works / mobile 343(22985:103042) 값 그대로 · 상태 정의 S5_12(29002:128605) · V2.2 exd/DETAIL#drawer(드로어 → 기존 제품 모달로 바꿈)'},
+  {id:'drawer',label:'How this works 드로어 (REQ-344)',figma:{pc:'22544:808136',mo:'22988:114502'},note:'[기존 MAX-1216] S21 How this works modal · 컴포넌트 Modal / How this works / mobile 343(22985:103042) 값 그대로 · 상태 정의 S5_12(29002:128605) · V2.2 exd/DETAIL#drawer(드로어 → 기존 제품 모달로 바꿈)'},
   {id:'step2',label:'단계 가이드 Step 2 (Lighter)',figma:{pc:'29386:137364'},note:'Figma CT-28 「Step 2 선택」 — 본문은 DEX(revision) `DEX guide / Step 2 of 5`(28981:129056) 원문(8차 결정)'},
   {id:'step3',label:'단계 가이드 Step 3 (Lighter)',figma:{pc:'28960:127444',mo:'28960:130999'},note:'V2.2 exd/DETAIL#step3 · Figma D2'},
   {id:'faq2',label:'FAQ 두 구역 펼침 — Withdrawals & Account Management',figma:{pc:'29367:138679'},note:'Figma CT-29 ② — 첫 구역과 `Withdrawals & Account Management` 동시 펼침. 질문·답변은 운영자 입력 예시(8차 결정)'},
@@ -4660,7 +4737,7 @@ R.screen({id:'dex.detail',group:'dex',title:'DEX 상세 (공용 템플릿)',rout
   {id:'offboarded',label:'DEX 오프보딩 — 랜딩 리다이렉트',note:'V2.2 exd/DETAIL#offboarded · 상태 정의 S5_16 `Exchange unavailable`·S5_17 자동 이동(29002:128736·128761) — 결정(301 리다이렉트)대로 별도 화면 없음'},
  ],
  render(st,ctx){
-  if(st==='drawer'&&!ctx.asBg)return `<div style="position:relative">${dtPage('edgex')}<div class="scrim center" style="align-items:flex-start;padding-top:${mo()?24:96}px">${dtDrawer(DX.edgex,false)}</div></div>`;
+  if(st==='drawer'&&!ctx.asBg)return `<div style="position:relative">${dtPage('edgex')}<div class="scrim pt-fixed" data-drawer-scrim style="display:block;padding:0"><div class="pt-side-drawer" style="position:absolute;top:0;right:0;bottom:0;width:${mo()?'100%':'420px'};background:#fff;overflow:auto;box-shadow:-8px 0 24px rgba(0,0,0,.2)">${dtDrawer(DX.edgex,false).replace('width:343px;max-width:100%;background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.24)','width:100%;background:#fff;border-radius:0;box-shadow:none')}</div></div></div>`;
   return dtPage(st);
  }});
 
@@ -5201,20 +5278,22 @@ UI.toggleFx = function (items, prevIndex) {
 // 실제 사이트처럼 경로(#/hub · #/dex · #/dex/{slug})로 열고 입력·연동 흐름에 실제 동작을 붙인다.
 (function () {
 'use strict';
-const Q = new URLSearchParams(location.search);
-const EMB = window.parent !== window;          // 실사이트 셸(iframe) 안에서 열렸나
+// 화면 목록판(full.html)에 들어가 있으면 EMBED — 같은 코드로 목록판의 해당 화면을 그리고 동작시킨다(결정 12차: 두 판 같은 코드)
+const EMBED = !!window.PT_EMBED;
+const Q = new URLSearchParams(EMBED ? '' : location.search);
+const EMB = !EMBED && window.parent !== window;          // 실사이트 셸(iframe) 안에서 열렸나
 const MODAL = Q.get('modal') === '1';           // 셸이 연 연동 모달 전용 모드(배경 투명)
 const SITE = { auth: Q.get('auth') === 'member' ? 'member' : 'guest' };
 const ORIGIN = 'https://tethermax.io';
 const BP = 1024;                                 // 실사이트 분기점
 let ST = DEXSTATE.load();
-const persist = () => DEXSTATE.save(ST);
+const persist = () => { if (!ST.transient) DEXSTATE.save(ST) };
 window.SITEL = { cex: false };
 
-S.lang = 'en'; S.design = true;
-document.body.classList.add('design', 'site');
+if (!EMBED) { S.lang = 'en'; S.design = true; document.body.classList.add('design', 'site') }
 if (MODAL) { document.body.classList.add('site-modal'); document.documentElement.classList.add('site-modal') }
-const vpNow = () => (window.innerWidth <= BP ? 'mo' : 'pc');
+const vpNow = () => (EMBED ? PT_EMBED.vp() : window.innerWidth <= BP ? 'mo' : 'pc');
+const HX = EMBED ? { replaceState() { }, pushState() { } } : history;   // 목록판에서는 주소를 건드리지 않는다
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const post = m => { m.pt = 1; if (EMB) parent.postMessage(m, '*'); };
@@ -5224,7 +5303,8 @@ const isMember = () => SITE.auth === 'member';
 const app = $('#app'), layer = $('#layer');
 
 // 셸 화면(C.overlay)은 사이트 모드에서 배경 화면을 그리지 않는다 — 레이어가 실제 현재 화면 위에 뜬다
-C.overlay = (bg, inner) => inner;
+const OV0 = C.overlay;
+C.overlay = (bg, inner, o) => (EMBED && !PT_EMBED.on() ? OV0(bg, inner, o) : inner);
 
 // ---------------- 토스트 (MUI Snackbar 모양 · 실사이트 전환 .3s) ----------------
 function toast(msg, o = {}) {
@@ -5243,6 +5323,7 @@ window.siteErr = errToast;
 
 // ---------------- 실사이트 페이지로 이동 ----------------
 function navReal(path) {
+  if (EMBED) return PT_EMBED.nav(ORIGIN + path);
   if (EMB) return post({ nav: ORIGIN + path });
   const key = path.replace(/^\//, '').replace(/\//g, '__') || 'en';
   location.href = '../index.html#key=' + encodeURIComponent(key) + '&auth=' + SITE.auth;
@@ -5265,11 +5346,12 @@ function parseHash() {
   return { path: p || '/hub', q: Object.fromEntries(new URLSearchParams(qs || '')) };
 }
 const hashOf = r => { const qs = new URLSearchParams(r.q).toString(); return r.path + (qs ? '?' + qs : '') };
-let route = parseHash();
+let route = EMBED ? { path: '/hub', q: {} } : parseHash();
 function goRoute(path, q = {}, o = {}) {
+  if (EMBED && PT_EMBED.route(path, q)) return;   // 목록판: 다른 화면이면 목록판이 그 화면으로 이동
   route = { path, q };
   const h = '#' + hashOf(route);
-  if (location.hash !== h) history[o.replace ? 'replaceState' : 'pushState'](null, '', h);
+  if (!EMBED && location.hash !== h) history[o.replace ? 'replaceState' : 'pushState'](null, '', h);
   renderPage({ keepScroll: o.keepScroll });
   if (!o.keepScroll) window.scrollTo(0, 0);
   post({ dexRoute: hashOf(route) });
@@ -5319,7 +5401,9 @@ function siteGo(key) {
     return goRoute('/dex/edgex');
   }
   if (id.startsWith('cexd')) { const s = CEX_SLUG[st] || st; return navReal('/en/exchangeDetail/' + s + '-referral') }
-  if (id === 'tp.main') return navReal(isMember() ? '/en/tethermax-point' : '/en/tethermax-point-introduction');
+  if (id.startsWith('brkd')) return navReal('/en/brokers/' + ({ rs: 'rs-finance' }[st] || st));
+  if (id === 'tp.intro') { closeLayer(true); return goRoute('/tp-intro') }   // TP로 가는 모든 진입 = 소개(게스트 포함, 결정 2026-11-27)
+  if (id === 'tp.main') { if (isMember()) return navReal('/en/tethermax-point'); closeLayer(true); return goRoute('/tp-intro') }   // 포인트 페이지 = 회원 전용, 게스트는 소개(dev 동작)
   if (id === 'invite.main') return navReal(isMember() ? '/en/mypage/invitefriend/invitefriend' : '/en/login');
   if (id === 'support.main') return window.ptSupport ? ptSupport() : toast('Live Chat');
   if (id === 'my.main') return toast('마이 페이지는 실사이트 상단 프로필 메뉴 (프로토타입)');
@@ -5330,8 +5414,10 @@ function siteGo(key) {
   if (NEXT[id]) return toast(NEXT[id] + ' — 다음 회차에 연결');
   toast('준비 중인 화면: ' + id);
 }
-window.go = siteGo;
-window.render = () => { renderPage({ keepScroll: true }); if (L.open) renderLayer() };
+if (!EMBED) {
+  window.go = siteGo;
+  window.render = () => { renderPage({ keepScroll: true }); if (L.open) renderLayer() };
+}
 
 // ---------------- 페이지 렌더 ----------------
 let lastVp = vpNow();
@@ -5347,14 +5433,15 @@ function renderPage(o = {}) {
   else if (p === '/dex') { S.auth = isMember() ? 's3' : 'guest'; html = window.SITE2 && SITE2.dexLanding ? SITE2.dexLanding() : renderInner('dex.overview:' + (isMember() ? 'member' : 'normal')) }
   else if (/^\/dex\/(lighter|apex|edgex|aster)$/.test(p)) html = dexDetailHTML(p.split('/')[2]);
   else if (window.SITE2 && (html = SITE2.render(p, route.q)) != null) { }
-  else { route = { path: '/hub', q: {} }; history.replaceState(null, '', '#/hub'); html = hubHTML() }
+  else { route = { path: '/hub', q: {} }; HX.replaceState(null, '', '#/hub'); html = hubHTML() }
   app.innerHTML = html;
   app.classList.remove('enter'); void app.offsetWidth; if (!o.keepScroll) app.classList.add('enter');
   if (p === '/hub') hubEnhance();
   pageEnhance();
   if (window.SITE2) SITE2.enhance(p, route.q, o);
   if (o.keepScroll) window.scrollTo(0, y);
-  if (window.SITE2 && SITE2.title(p)) document.title = SITE2.title(p); else document.title = p === '/hub' ? 'Cashback Hub | TetherMax' : p === '/dex' ? 'DEX | TetherMax' : (p.split('/')[2] || '') + ' | TetherMax';
+  if (EMBED) { }
+  else if (window.SITE2 && SITE2.title(p)) document.title = SITE2.title(p); else document.title = p === '/hub' ? 'Cashback Hub | TetherMax' : p === '/dex' ? 'DEX | TetherMax' : (p.split('/')[2] || '') + ' | TetherMax';
 }
 function dexDetailHTML(slug) {
   if (window.SITE2 && SITE2.dexDetail) return SITE2.dexDetail(slug);
@@ -5479,7 +5566,7 @@ function updateCalc(o = {}) {
 function applyFilter() {
   const q = H.q.trim().toLowerCase(); let n = 0;
   $$('[data-hub-row]').forEach(r => { const ok = !q || r.dataset.hubRow.toLowerCase().includes(q); r.style.display = ok ? '' : 'none'; if (ok) n++ });
-  const em = $('[data-hub-empty]'); if (em) em.style.display = n ? 'none' : 'block';
+  const em = $('[data-hub-empty]'); if (em) { em.style.display = n ? 'none' : 'block'; em.textContent = H.q.trim() ? `No results found for “${H.q.trim()}”` : 'No results found' }   // G-151 · N13
   const tb = $('[data-compare-body] table'); if (tb) tb.closest('[data-compare-body]>div').style.display = n ? '' : 'none';
   const cards = $('[data-compare-body]>.col'); if (cards) cards.style.display = n ? '' : 'none';
   const clr = $('[data-hub-clear]'); if (clr) clr.style.display = q ? 'inline-flex' : 'none';
@@ -5497,7 +5584,7 @@ document.addEventListener('click', e => {
   const tab = t.closest('[data-hub-tab]');
   if (tab) { e.preventDefault(); return switchTab(tab.dataset.hubTab, tab) }
   const vw = t.closest('[data-hub-view]');
-  if (vw) { e.preventDefault(); const q = Object.assign({}, route.q); if (vw.dataset.hubView === 'card') q.view = 'cards'; else delete q.view; route.q = q; history.replaceState(null, '', '#' + hashOf(route)); post({ dexRoute: hashOf(route) }); renderPage({ keepScroll: true }); return UI.swapFx($('[data-compare-body]')) }
+  if (vw) { e.preventDefault(); const q = Object.assign({}, route.q); if (vw.dataset.hubView === 'card') q.view = 'cards'; else delete q.view; route.q = q; HX.replaceState(null, '', '#' + hashOf(route)); post({ dexRoute: hashOf(route) }); renderPage({ keepScroll: true }); return UI.swapFx($('[data-compare-body]')) }
   const th = t.closest('[data-hub-sort]');
   if (th) { const i = th.cellIndex; H.sort = H.sort && H.sort.col === i ? { col: i, dir: -H.sort.dir } : { col: i, dir: i === 1 ? 1 : -1 }; applySort(); return UI.swapFx($$('[data-compare-body] tbody tr').filter(r => r.style.display !== 'none'), { dur: UI.T.base, shift: 4, stagger: 20 }) }   // 정렬: 행이 짧게 떠오름(실사이트에 정렬 없음 → 토큰)
   const clr = t.closest('[data-hub-clear]');
@@ -5529,7 +5616,7 @@ function switchTab(k, el) {
   const olds = box0 ? leafNums(box0).map(e => ({ t: e.textContent.trim(), n: numParts(e.textContent.trim()).n })) : [];
   const badges0 = badgeRects(), ORD = ['CEX', 'DEX', 'Brokers'], dir = ORD.indexOf(k) > ORD.indexOf(H.route) ? 1 : -1;
   const q = Object.assign({}, route.q); if (k === 'DEX') delete q.tab; else q.tab = k;
-  route.q = q; history.replaceState(null, '', '#' + hashOf(route)); post({ dexRoute: hashOf(route) });
+  route.q = q; HX.replaceState(null, '', '#' + hashOf(route)); post({ dexRoute: hashOf(route) });
   H.sort = null;
   renderPage({ keepScroll: true });
   if (oldRect) pillFlip(oldRect);
@@ -5622,7 +5709,7 @@ function setExchange(name, type) {
 function linkGo(id, st, el) {
   if (!L.open) {
     if (id === 'link.addr' && st && DEXES.some(d => d.toLowerCase() === st)) return openLink({ ex: DEXES.find(d => d.toLowerCase() === st), type: 'DEX' });
-    if (id === 'link.signup') { openLink(); L.step = 'signup'; return renderLayer() }
+    if (id === 'link.signup') { if (window.ptRefSignup) ptRefSignup('Lighter'); return openLink({ ex: 'Lighter', type: 'DEX' }) }
     return openLink();
   }
   const v = pendingVenue; pendingVenue = null;
@@ -5631,7 +5718,7 @@ function linkGo(id, st, el) {
     if (L.ex !== v.n) { L.val = ''; L.err = null; L.touched = false }  // 거래소를 바꾸면 입력값을 지운다(REQ-057)
     setExchange(v.n, v.t); return renderLayer();
   }
-  if (id === 'link.signup' && st === 'return') { setExchange('Lighter', 'DEX'); toast('Lighter 가입 페이지는 새 탭으로 열려요 (프로토타입)'); return renderLayer() }
+  if (id === 'link.signup') { setExchange('Lighter', 'DEX'); return renderLayer() }
   if (id === 'link.addr' || id === 'link.uid') {
     // 시트 닫기(X) · 결과 화면 Close/X → 이전 단계 · 입력 유지(REQ-064 · REQ-093)
     if (L.step === 'select' && L.prev && L.prev !== 'select') { L.step = L.prev; return renderLayer() }
@@ -5649,7 +5736,6 @@ function stepHTML() {
   S.vp = vpNow(); S.auth = 's4';
   const ex = L.ex;
   if (L.step === 'select') return R.byId['link.select'].render('normal');
-  if (L.step === 'signup') return R.byId['link.signup'].render('prompt');
   if (L.step === 'addr') return R.byId['link.addr'].render(ex.toLowerCase());
   if (L.step === 'uid') { LINKX.setSel(ex); return LINKX.uidLinkForm('empty') }
   if (L.step === 'proc') return R.byId['link.proc'].render('normal');
@@ -5675,7 +5761,7 @@ function renderLayer(o = {}) {
   // 모바일 시트는 아래 단계(입력 화면) 위에 겹친다
   let under = '';
   if (k === 'sheet' && L.prev && L.prev !== 'select') { const s = L.step; L.step = L.prev; under = `<div class="site-under">${stepHTML()}</div>`; L.step = s }
-  layer.className = 'site-layer open k-' + k + (S.vp === 'mo' ? ' vp-mo' : ' vp-pc') + (L.step === 'drawer' ? ' drawer' : '');
+  layer.className = 'site-layer open k-' + k + (S.vp === 'mo' ? ' vp-mo' : ' vp-pc') + (L.step === 'drawer' || k === 'side' ? ' drawer' : '');
   layer.innerHTML = `${under}<div class="site-scrim" data-site="scrim"></div><div class="site-box" data-site="box">${html}</div>${testHelp()}`;
   if (!wasOpen || o.enter) { layer.classList.add('enter'); requestAnimationFrame(() => requestAnimationFrame(() => layer.classList.remove('enter'))) }
   else if (o.swap) UI.swapFx($(o.swap, layer), { dur: UI.T.base, shift: 6 });
@@ -5777,7 +5863,7 @@ function bindField(box) {
 function doPaste() {
   const inp = $('.site-box .tf:not(.sm) input', layer);
   const put = t => { inp.value = t; inp.dispatchEvent(new Event('input')); inp.focus() };
-  try { navigator.clipboard.readText().then(t => t ? put(t) : inp.focus(), () => { inp.focus(); toast('붙여넣기 권한이 없어요. 직접 붙여넣어 주세요 (프로토타입)') }) } catch (e) { inp.focus() }
+  try { navigator.clipboard.readText().then(t => t ? put(t) : inp.focus(), () => inp.focus()) } catch (e) { inp.focus() }
 }
 function onNext(b) {
   if (L.busy) return errToast();   // 처리 중 다시 누름 = 중복 요청
@@ -5906,12 +5992,24 @@ window.addEventListener('resize', () => { const v = vpNow(); if (v !== lastVp) {
 
 // ---------------- 시작 ----------------
 S.vp = vpNow();
-queueMicrotask(() => {   // site2.js(같은 스크립트 뒤쪽)가 등록된 뒤 시작
+// 목록판이 이 화면을 그릴 때 부른다: 경로 · 로그인(guest | s3 | s4)
+function mount(path, q, auth) {
+  SITE.auth = auth === 'guest' ? 'guest' : 'member';
+  ST = auth === 's3' ? Object.assign(DEXSTATE.load(), { accounts: [], transient: true }) : DEXSTATE.load();
+  // 목록판 「회원·연동」으로 DEX 상세를 열면 그 DEX가 연동된 상태(상태 linked)로 보인다 — 화면 보기용 임시 계정(저장 안 함)
+  const m = /^\/dex\/(\w+)$/.exec(path), DXN = { edgex: 'EdgeX', apex: 'ApeX', lighter: 'Lighter', aster: 'Aster' };
+  if (auth === 's4' && m && DXN[m[1]] && !ST.accounts.some(a => a.ex === DXN[m[1]] && a.st === 'ok')) ST = Object.assign({}, ST, { accounts: ST.accounts.concat([{ ex: DXN[m[1]], type: 'DEX', id: '0x5b2E8c1D4f7A9036b1C8e2D5F4a7B9c0E3d6A21f', a: 12, b: 0, st: 'ok', seed: true }]), transient: true });
+  L.open = false; layer.className = 'site-layer'; layer.innerHTML = ''; document.documentElement.classList.remove('site-lock');
+  route = { path, q: q || {} }; lastVp = vpNow();
+  renderPage();
+}
+window.SITE_API.mount = mount; window.SITE_API.go = siteGo; window.SITE_API.layer = layer; window.SITE_API.closeNow = () => { L.open = false; layer.className = 'site-layer'; layer.innerHTML = ''; document.documentElement.classList.remove('site-lock') };
+if (!EMBED) queueMicrotask(() => {   // site2.js(같은 스크립트 뒤쪽)가 등록된 뒤 시작
 if (MODAL) {
   document.body.classList.toggle('vp-mo', S.vp === 'mo');
   if (Q.get('mode') && window.SITE2) SITE2.modal(Q.get('mode'), Object.fromEntries(Q));
   else openLink({ ex: Q.get('ex') || null, type: Q.get('type') || null });
-} else { renderPage(); if (route.q.link === '1') { const q = Object.assign({}, route.q); delete q.link; route.q = q; history.replaceState(null, '', '#' + hashOf(route)); if (isMember()) openLink(); else navReal('/en/login') } }   // 목록판 「실제 동작」에서 연동 모달 바로 열기
+} else { renderPage(); if (route.q.link === '1') { const q = Object.assign({}, route.q); delete q.link; route.q = q; HX.replaceState(null, '', '#' + hashOf(route)); if (isMember()) openLink(); else navReal('/en/login') } }   // 목록판 「실제 동작」에서 연동 모달 바로 열기
 post({ dexReady: hashOf(route) });
 });
 })();
@@ -5947,7 +6045,7 @@ function memberOf(slug) {
 }
 function withSD(o, f) { window.SITED = o; try { return f() } finally { window.SITED = null } }
 const site2 = {
-  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/benefits': 'Benefits | TetherMax' }[p] },
+  title(p) { return { '/summary': 'Cashback Summary | TetherMax', '/account': 'Account | TetherMax', '/ownership': 'Ownership Verification | TetherMax', '/payback': 'Cashback Calculator | TetherMax', '/tp-intro': 'TetherMax Point | TetherMax', '/benefits': 'Benefits | TetherMax' }[p] },
   dexLanding() { S.auth = isMember() ? 's3' : 'guest'; return withSD({ guest: !isMember(), list: SD.list }, () => renderInner('dex.overview:' + (isMember() ? 'member' : 'normal'))) },
   dexDetail(slug) {
     if (SD.slug !== slug) Object.assign(SD, { slug, maker: false, vol: 400000, step: 0, faq: new Set([0]), sort: 0 });
@@ -5957,6 +6055,7 @@ const site2 = {
   },
   render(p, q) {
     if (p === '/payback') return calcHTML(q || {});
+    if (p === '/tp-intro') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('tp.intro:normal') }   // TP 소개(dev 기준) — 게스트·회원 같은 화면, CTA만 다름
     if (p === '/benefits') { S.auth = isMember() ? 's4' : 'guest'; return renderInner('benefits.list:' + (isMember() ? 'normal' : 'guestOn')) }   // GNB Rewards Hub ▾ Benefits (사용자 2026-11-27)
     if (p === '/summary') { if (!isMember()) { navReal('/en/login'); return '' } S.auth = 's4'; return withSum(() => renderInner('summary.main:normal')) }
     if (p === '/account') { if (!isMember()) { navReal('/en/login'); return '' } return accountHTML() }
@@ -6137,7 +6236,7 @@ function rerenderSec(n, f) {
 }
 function openHow() {
   const d = DEXX.DX[SD.slug || 'edgex'];
-  openCustom(() => withSD({ id: SD.slug, vol: SD.vol, maker: SD.maker }, () => DEXX.dtDrawer(d, SD.maker)), 'center');
+  openCustom(() => withSD({ id: SD.slug, vol: SD.vol, maker: SD.maker }, () => DEXX.dtDrawer(d, SD.maker)), 'side');   // 드로어(REQ-344 · B-7-4)
 }
 
 // ---------------- 클릭 위임(2회차 화면) ----------------
@@ -6520,7 +6619,7 @@ const CK = { step: 'p1', pid: null, chip: 'All', lev: 10, bal: 1000, ratio: 100,
 const CK0 = { step: 'p1', pid: null, chip: 'All', lev: 10, bal: 1000, ratio: 100, freq: null, how: false };
 const CK_FILL = { p1: .2, p2: .4, p3: .6, p4: .8, p5: 1 };
 function calcHTML(q) {
-  if (q.step === 'result') { if (!CK.pid || CK.freq == null) { CK.step = 'p1'; history.replaceState(null, '', '#/payback') } else if (!['p4', 'p5'].includes(CK.step)) CK.step = 'p4' }
+  if (q.step === 'result') { if (!CK.pid || CK.freq == null) { CK.step = 'p1'; (window.PT_EMBED ? { replaceState() { } } : history).replaceState(null, '', '#/payback') } else if (!['p4', 'p5'].includes(CK.step)) CK.step = 'p4' }
   else if (['p4', 'p5'].includes(CK.step)) CK.step = 'p3';
   window.SITEC_LIVE = 1;
   window.SITEC = { pid: CK.pid, chip: CK.chip, lev: CK.lev, bal: CK.bal, ratio: CK.ratio, freq: CK.freq, how: CK.how };

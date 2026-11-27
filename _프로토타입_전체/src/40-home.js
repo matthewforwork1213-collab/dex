@@ -33,6 +33,7 @@ const ST={
  fail:{get lb(){return T('Linking failed','연동 실패했어요')},tone:'err',pri:5,linked:false,noChip:true},
  ownfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'err',pri:6,linked:false,noChip:true},
  unlinked:{get lb(){return T('Unlinked','연동 해제되었어요')},tone:'warn',pri:7,linked:false,noChip:true},
+ reclaimfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'err',pri:6,linked:false,noChip:true},
 };
 const DOT={done:'#2e7d32',prog:'#ed6b03',warn:'#ef6c00',off:'rgba(0,0,0,0.38)',err:'#d32f2f',proc:'#fecdd2',own:'#0031c6'};
 // 시계 아이콘(MUI AccessTimeRounded) — 확인 중 · 소유 확인 중 행 오른쪽
@@ -46,8 +47,9 @@ const svgI=(d,s=20)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" aria-h
 function rowBanner(a){
  const cex=isCex(a.ex);
  const b={fail:['err',cex?T('UID Linking was unsuccessful. View reason.'):T('Wallet linking was unsuccessful. View reason.'),cex?'home.main:linkFail':'home.main:linkFailWallet'],
-  ownfail:['err',T('Ownership verification was unsuccessful. View reason.'),'own.home:reclaimRejected'],
-  unlinked:['warn',cex?T('This UID has been unlinked. Tap to verify ownership and reclaim it.'):T('This wallet has been unlinked. Tap to verify ownership and reclaim it.'),'own.home:reclaim']}[a.st];
+  ownfail:['err',T('Ownership verification was unsuccessful. Please try again.'),'own.home:rejected'],
+  reclaimfail:['err',T('Ownership verification was unsuccessful. View reason.'),'own.home:reclaimRejected'],
+  unlinked:['warn',cex?T('This UID has been unlinked. Tap to verify ownership and reclaim it.'):T('This wallet has been unlinked. Tap to verify ownership and reclaim it.'),cex?'own.home:reclaimUid':'own.home:reclaim']}[a.st];
  if(!b)return '';
  const [bg,fg]=b[0]==='err'?['#fdeded','#5f2120']:['#fff4e5','#663c00'];
  return `<div data-row-banner="${a.st}" data-go="${b[2]}" style="display:flex;align-items:center;border-radius:4px;padding:0 10px;margin:0 0 8px;overflow:hidden;cursor:pointer;background:${bg};color:${fg}"><span style="flex:none;display:flex;align-self:flex-start;padding:8px 8px 7px 0;color:${b[0]==='err'?'#d32f2f':'#ed6c02'}">${svgI(b[0]==='err'?SVG_ERR:SVG_WARN)}</span><p style="margin:0;flex:1;min-width:0;font-size:12px;line-height:1.33;letter-spacing:.2px;padding:8px 0">${b[1]}</p><span style="flex:none;display:flex;margin-left:8px">${svgI(SVG_CHEV)}</span></div>`}
@@ -91,10 +93,10 @@ function balanceCard(o={}){
 // 행: 로고 · 이름 · (상태 점 + 식별자) · 칩 · 금액. 웹은 `Wallet` 라벨, 앱·모바일웹은 주소만(REQ-271)
 function accRow(a,o={}){
  const st=ST[a.st||'ok'];const cex=isCex(a.ex);const app=o.app;
- const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:short(a.id)}`;
+ const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:`<span data-addr="${esc(a.id)}" role="button" tabindex="0" style="cursor:pointer;text-decoration:underline dotted">${short(a.id)}</span>`}`;
  const amt=a.amt==null?'-':a.amt;
  const amtHtml=amt==='-'?`<span class="b1 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi">${n2(amt)}</span><span class="b2 c2">USDT</span></span>`;
- const go=a.st==='issue'?` data-go="home.main:${cex?'issue':'issueWallet'}" style="cursor:pointer;`:cex||st.noChip?'':` data-go="home.wallet:${a.st==='pend'?'pending':'normal'}" style="cursor:pointer;`;
+ const go=a.st==='issue'?` data-go="home.main:${cex?'issue':'issueWallet'}" style="cursor:pointer;`:a.st==='unlinked'?` data-go="${cex?'own.home:reclaimUid':'own.home:reclaim'}" style="cursor:pointer;`:cex||a.st!=='ok'&&a.st!=null?'':` data-go="home.wallet:normal" style="cursor:pointer;`;
  return `<div class="row g12"${go||' style="'}display:flex;padding:10px 12px;border-radius:12px;align-items:center">
   ${mark(a.ex,32)}
   <div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${a.ex}</span>
@@ -105,8 +107,8 @@ function linkedCard(rows,o={}){
  const app=o.app||S.vp==='mo';
  const foot=app?'Trading on multiple exchanges? Link more':'Using multiple platforms? Link more accounts';
  const list=o.loading?[1,2,3].map(()=>`<div class="row g12" style="padding:10px 12px"><span class="skel" style="width:32px;height:32px;border-radius:50%"></span><div class="col grow" style="gap:6px">${C.skel('40%',12)}${C.skel('70%',10)}</div>${C.skel('64px',14)}</div>`).join('')
-  :(o.max?rows.slice(0,o.max):rows).map(a=>accRow(a,{app,full:o.full})).join('');
- const more=o.max&&rows.length>o.max?`<button class="btn text black sm full">${T('See more','더보기')} (${rows.length-o.max})</button>`:'';
+  :rows.map((a,i)=>o.max&&i>=o.max?`<div data-more-row hidden>${accRow(a,{app,full:o.full})}</div>`:accRow(a,{app,full:o.full})).join('');
+ const more=o.max&&rows.length>o.max?`<button class="btn text black sm full" data-more>${T('Show More','더보기')}</button>`:'';
  const line=`<hr class="divider" style="margin:0">`;
  const cum=o.cum===false||o.loading||S.vp==='mo'?'':`${line}${cumulative(rows)}`;
  return `<div style="background:#fff;border-radius:8px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.1));padding:16px;display:flex;flex-direction:column;gap:12px">
@@ -163,7 +165,7 @@ function homeMainMo(tag='Bitget'){
   <div style="background:#fff;padding:16px;display:flex;flex-direction:column;gap:32px">
    ${moMemberCards(tag)}
    <div class="col" style="gap:16px;align-items:center">${`<div style="width:100%">${head('Limited Time Offers','events.list',true)}</div>`}<div style="width:100%">${comp}</div><img src="${HA('mo-dots.svg')}" style="width:44px;height:6px" alt=""></div></div>
-  <div style="background:var(--bg-accent);padding:16px" class="col g16">${head('Top Partner Exchanges','cex.list',true)}
+  <div style="background:var(--bg-accent);padding:16px" class="col g16">${head('Top Partner Exchanges','hub.main:cex',true)}
    <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:100px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500;letter-spacing:.14px">${p} Cashback</span></div>`).join('')}</div></div></div>`}
 function homeMain(){
  if(S.vp==='mo')return homeMainMo();
@@ -177,7 +179,7 @@ function homeMain(){
   <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Limited Time Offers','events.list')}<div style="${grid}">
    ${evCard(evBanner('ev-comp.jpg','Trade to win up to $100K prize pool','Bitget'),evRow('trophy','Rewards','$100,000.00')+ends,joinBtn())}
    ${evCard(evBanner('ev-vip.jpg','Become a VIP &amp; enjoy the benefits.','Bitget'),evRow('voucher','Voucher','Claim VIP2 Trial')+timer,joinBtn())}</div></div>
-  <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Top Partner Exchanges','cex.list')}<div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">
+  <div class="col" style="padding:${S.vp==='mo'?16:24}px;gap:16px">${secHead('Top Partner Exchanges','hub.main:cex')}<div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">
    ${partners.map(([n,bg,p])=>`<div class="col" style="gap:4px"><div style="background:${bg};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div></div>`}
 
 // 홈 2열 레이아웃(347 + 24 + 717) · 모바일 1열
@@ -310,7 +312,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    let rows=[R_BITGET,R_LIGHTER,R_APEX],x={},lc={app};
    if(st==='s3Pending')rows=[{ex:'EdgeX',id:WAL.edgex,amt:null,st:'pend'}];
    if(st==='hw1')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'}];
-   if(st==='statuses')rows=Object.entries(ST).filter(([,v])=>v.pri).sort((a,b)=>a[1].pri-b[1].pri).map(([k],i)=>({ex:['Bitget','Bybit','Bitget','OKX','OKX','Bybit','Binance'][i],id:['685432171','512093847','685432179','734305240','734305277','512093855','40213377'][i],amt:k==='ok'?120:null,st:k}));
+   if(st==='statuses')rows=Object.entries(ST).filter(([,v])=>v.pri).sort((a,b)=>a[1].pri-b[1].pri).map(([k],i)=>({ex:['Bitget','Bybit','Bitget','OKX','OKX','Bybit','Binance','Binance'][i],id:['685432171','512093847','685432179','734305240','734305277','512093855','40213377','40213391'][i],amt:k==='ok'?120:null,st:k}));
    if(st==='loading'){x={loading:true};lc.loading=true}
    if(st==='error')x={error:true};
    if(st==='many'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'},...['Bybit','OKX','EdgeX','ApeX','Aster','Bitget','EdgeX','OKX','Binance'].map((e,i)=>({ex:e,id:isCex(e)?String(70001230+i):[WAL.edgex,WAL.w2][i%2],amt:5+i,st:'ok'}))];lc.max=10}
@@ -321,7 +323,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    if(st==='transferred')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:4,st:'ok'}];
    if(st==='pending')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:null,st:'pend'}];
    if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'}];
-   if(st==='walletStates')rows=[R_LIGHTER,{ex:'EdgeX',id:WAL.edgex,amt:null,st:'fail'},{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'},{ex:'Aster',id:WAL.aster,amt:null,st:'unlinked'},{ex:'Lighter',id:WAL.w2,amt:null,st:'ownfail'}];
+   if(st==='walletStates')rows=[R_LIGHTER,{ex:'EdgeX',id:WAL.edgex,amt:null,st:'fail'},{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'},{ex:'Aster',id:WAL.aster,amt:null,st:'unlinked'},{ex:'Lighter',id:WAL.w2,amt:null,st:'ownfail'},{ex:'EdgeX',id:WAL.w2,amt:null,st:'reclaimfail'}];
    if(st==='multi')rows=[R_BITGET,...[[WAL.lighter,3.2],[WAL.w2,0],[WAL.edgex,11.05]].map(([w,a])=>({ex:'Lighter',id:w,amt:a,st:'ok'})),...[WAL.aster,WAL.apex].map(w=>({ex:'Aster',id:w,amt:0,st:'ok'}))];
    if(st==='rejected')rows=[R_BITGET,R_LIGHTER,R_APEX];
    left=card(rows,x)+linkedCard(rows,lc);
@@ -346,7 +348,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
 function match(A,B){const m=B?Math.min(A,B):0;const claim=Math.floor((A+m)*100+1e-6)/100;const req=(B||0)>=5?5:10-(B||0);return {m,claim,need:claim>=10?0:Math.max(0,req-A)}}
 function walletBalance(A,B,o={}){
  if(o.loading)return `<div style="background:#fff;border-radius:8px;padding:16px" class="col g16">${C.skel('100%',22)}${C.skel('100%',12)}${C.skel('100%',12)}${C.skel('100%',40)}</div>`;
- if(o.error)return `<div style="background:#fff;border-radius:8px;padding:16px" class="col g12">${C.alert('warn','',"We can't load your balance right now.")}${C.btn('Try again',{v:'outlined',size:'sm'})}</div>`;
+ if(o.error){A=0;B=0}
  const {m,claim,need}=match(A,B);
  const small=(k,v)=>`<div class="row between" style="color:var(--text-secondary)"><span style="font-size:12px;line-height:1.33;letter-spacing:.2px">${k}</span><span style="font-size:12px;line-height:1.4;font-weight:500">${v}</span></div>`;
  const pending=o.pending;
@@ -360,11 +362,11 @@ function walletBalance(A,B,o={}){
    <div style="font-size:10px;line-height:14px;letter-spacing:.15px;color:var(--text-secondary)">${cap.join('<br>')}</div>`}
    </div>
   <button class="btn contained lg full" disabled>Auto Claim</button></div>`}
-function earningTimeline(){
+function earningTimeline(ex,times){const tt=times||['Mar 17 00:00','Mar 18 00:00','Mar 18 10:50'];
  const step=(ic,k,v)=>`<div class="col" style="gap:8px;align-items:center;width:80px;position:relative;z-index:1"><span style="background:#f2f2f5;padding:16px;border-radius:8px;display:flex">${hic(ic,24)}</span><span style="font-size:10px;line-height:10px;color:var(--text-secondary);white-space:nowrap">${k}</span><span style="font-size:10px;line-height:12px;font-weight:500;white-space:nowrap">${v}</span></div>`;
  return `<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:16px">
-  <div class="row" style="gap:4px"><span class="b1 semi">Earning Timeline</span>${hic('star',36)}</div>
-  <div class="row between" style="position:relative;align-items:flex-start"><span style="position:absolute;left:40px;right:40px;top:28px;border-top:1px dashed var(--divider)"></span>${step('candle','Start Trading','Mar 17 00:00')}${step('clock','Cut-off Time','Mar 18 00:00')}${step('checkc','Updated','Mar 18 10:50')}</div></div>`}
+  <div class="row" style="gap:4px"><span class="b1 semi">Earning Timeline${ex?' · '+ex:''}</span>${hic('star',36)}</div>
+  <div class="row between" style="position:relative;align-items:flex-start"><span style="position:absolute;left:40px;right:40px;top:28px;border-top:1px dashed var(--divider)"></span>${step('candle','Start Trading',tt[0])}${step('clock','Cut-off Time',tt[1])}${step('checkc','Updated',tt[2])}</div></div>`}
 function walletRight(o={}){
  const days=[['20'],['21'],['22'],['23'],['24'],['25'],['26','+25.00','-20.00']];
  const week=`<div style="background:#fff;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">
@@ -376,13 +378,13 @@ function walletRight(o={}){
   <button class="btn md" style="background:#f2f2f5" data-go="dex.detail:lighter">Write a review, get 2 USDT</button></div>`;
  // 하단 = 기존 디자인 `Top Partner Exchanges`(CEX·DEX 공통 — 결정 「지갑 상세 하단」, 홈 HW1과 같은 블록)
  const parts=[['Bitget','#00f0ff','54%'],['Bybit','#15192a','55%'],['Binance','#181a20','50%'],['OKX','#000','65%']];
- const top=`<div style="background:#fff;border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:16px">${secHead('Top Partner Exchanges','cex.list')}
+ const top=`<div style="background:#fff;border-radius:8px;padding:24px 20px;display:flex;flex-direction:column;gap:16px">${secHead('Top Partner Exchanges','hub.main:cex')}
   <div style="display:grid;grid-template-columns:repeat(${S.vp==='mo'?2:4},minmax(0,1fr));gap:16px">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px"><div style="background:${bg};height:80px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div>`;
  if(S.vp==='mo'){ // 기존 UID 상세 모바일(26047:1348691 · 25867:1348700) 순서: 리뷰 유도 → Top Partner(가로) → Exclusive For Members(2열)
-  const topMo=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Top Partner Exchanges</span><button class="btn text primary sm" style="padding:4px 5px" data-go="cex.list">See All</button></div>
+  const topMo=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Top Partner Exchanges</span><button class="btn text primary sm" style="padding:4px 5px" data-go="hub.main:cex">See All</button></div>
    <div class="row" style="gap:12px;overflow:hidden;align-items:flex-start">${parts.map(([n,bg,p])=>`<div class="col" style="gap:4px;width:100px;flex:none"><div style="background:${bg};height:60px;border-radius:4px;display:flex;align-items:center;justify-content:center">${mark(n,48)}</div><span style="font-size:12px;line-height:1.4;color:var(--text-secondary);font-weight:500">${n}</span><span style="font-size:12px;line-height:20px;font-weight:500">${p} Total Savings</span></div>`).join('')}</div></div>`;
-  return `<div class="col" style="gap:16px;width:100%">${week.replace('padding:24px','padding:16px')}${review.replace('padding:16px 16px 16px 124px','padding:16px 16px 16px 112px')}${topMo}<div style="background:#fff;border-radius:8px;padding:16px" class="col g16">${moMemberCards('Lighter','Exclusive Benefit')}</div></div>`}
- return `<div style="display:flex;flex-direction:column;gap:24px;width:${S.vp==='mo'?'100%':'717px'}">${week}${review}
+  return `<div class="col" style="gap:16px;width:100%">${review.replace('padding:16px 16px 16px 124px','padding:16px 16px 16px 112px')}${topMo}<div style="background:#fff;border-radius:8px;padding:16px" class="col g16">${moMemberCards('Lighter','Exclusive Benefit')}</div></div>`}
+ return `<div style="display:flex;flex-direction:column;gap:24px;width:${S.vp==='mo'?'100%':'717px'}">${review}
   <div style="background:#fff;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">${secHead('Exclusive Benefit','benefits.list')}${memberEvents('Lighter',true)}</div>${top}</div>`}
 const WALLET_FIG='29026:97581';
 const WALLET_STATES=[
@@ -397,13 +399,13 @@ const WALLET_STATES=[
  {id:'fullAbove',label:'전액 매칭 · 최소액 초과',figma:{pc:WALLET_FIG},ab:[12,4],note:'Figma 매칭 상태 프레임에만 있음. A=12.00 · B=4.00'},
  {id:'edge',label:'소수점 절삭 · 기준 직전',figma:{pc:WALLET_FIG},ab:[9.999,0],note:'Figma 매칭 상태 프레임에만 있음. A=9.999 · B=0 → 9.99, 필요액 0.01'},
  {id:'loading',label:'잔액 로딩 — 스켈레톤',ab:[7,100],note:'Figma 매칭 상태 프레임 하단 메모(REQ-145) — 화면 프레임 없음'},
- {id:'error',label:'잔액 조회 실패 — 오류 · 재시도',ab:[7,100],note:'Figma 매칭 상태 프레임 하단 메모(REQ-149) — 화면 프레임 없음'},
+ {id:'error',label:'잔액 조회 실패 — 기존 빈 상태',ab:[7,100],note:'G-459 — 조회 실패는 기존 빈 상태(0 표시), 재시도 버튼 없음'},
  {id:'reviewed',label:'리뷰 작성 후 — 리뷰 유도 없음',figma:{pc:'25867:1348199',mo:'25867:1348944'},ab:[7,100],note:'[기존 MAX-7] MAX-1216 UID detail / Review already written (Plain). V2.2 home/LKD#reviewed · REQ-278'},
  {id:'pending',label:'연동 시도중',ab:[0,null],note:'V2.2 home/LKD#pending · REQ-098'},
  {id:'totalClaimed',label:'Total Claimed 행',figma:{pc:'26047:1349155',mo:'8582:157676'},ab:[7,100],note:'[기존 MAX-7] UID 상세 잔액 카드의 Total Claimed 행(Web 26047:1349155 · mAPP 8582:157676). V2.2 home/LKD#totalClaimed · REQ-281 · G-053 확정: 유지(테더맥스 경유 출금 누계)'},
  {id:'subaccounts',label:'하위 계정 나열 안 함 (Lighter)',figma:{pc:'28960:125943'},ab:[7,100],note:'V2.2 home/LKD#subaccounts · REQ-281 · G-178 확정: 미표시 — 정상 화면과 같음'},
 ];
-R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wallet (지갑 상세)',fu:['FU-040'],shell:{accent:true,back:'home.main',moTitle:['Lighter','Lighter'],moNav:'home'},
+R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wallet (지갑 상세)',fu:['FU-040'],shell:{accent:true,back:'back:home.main',moTitle:['Lighter','Lighter'],moNav:'home'},
  states:WALLET_STATES,
  render(st,ctx){
   const [A0,B0]=ctx.state.ab;const pending=st==='pending';
@@ -421,31 +423,19 @@ R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wa
  }});
 
 // ---------- 캐시백 타임라인 · 누적 캐시백 (FU-041) — 디자인 없음, V2.2 내용 ----------
-R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 · 누적 캐시백',route:'/ (홈 · 지갑 상세 섹션)',fu:['FU-041'],shell:{accent:true,back:'home.main',moTitle:['Cashback timeline','캐시백 타임라인']},
+R.screen({id:'home.timeline',group:'home',title:'캐시백 타임라인 · 누적 캐시백 (섹션)',route:'/ (홈 · 지갑 상세 안 섹션)',fu:['FU-041'],shell:{accent:true,moNav:'home'},
  states:[
-  {id:'normal',label:'EdgeX Daily D+1',figma:{pc:'26047:56579',mo:'26047:56579'},note:'[기존 MAX-7] MAXOP-783 Earning Timeline 캐러셀(26047:56685, Step=1 26047:56579) + MAXOP-731 누적 카드(22913:1054295). V2.2 home/TL#normal · REQ-282·289'},
-  {id:'apex',label:'ApeX D+2',figma:{pc:'26047:56615',mo:'26047:56615'},note:'[기존 MAX-7] MAXOP-783 Step=2 26047:56615. V2.2 home/TL#apex · REQ-282 · G-192 확정: ApeX도 같은 4단계'},
-  {id:'lighter',label:'Lighter Weekly W+1 (온보딩 후)',figma:{pc:'26047:56650',mo:'26047:56650'},note:'[기존 MAX-7] MAXOP-783 Step=3 26047:56650. V2.2 home/TL#lighter · REQ-282'},
-  {id:'compact',label:'compact 단계',figma:{pc:'26047:56579',mo:'26047:56579'},note:'[기존 MAX-7] MAXOP-783 탭 줄만 사용. V2.2 home/TL#compact · REQ-289'},
+  {id:'normal',label:'EdgeX Daily D+1',figma:{pc:'26047:56579',mo:'26047:56579'},note:'기존 Earning Timeline 3단계(Start Trading · Cut-off Time · Updated), 캐러셀 없음 — 결정 N16·N17·N19 · REQ-282 · 289. 홈·지갑 상세 안의 섹션(별도 화면 아님 · 뒤로 없음)'},
+  {id:'apex',label:'ApeX D+2',note:'같은 3단계 — 날짜만 주기대로'},
+  {id:'lighter',label:'Lighter Weekly W+1 (온보딩 후)',note:'같은 3단계 — 주간 집계'},
   {id:'warning',label:'순차 지급 경고',note:'V2.2 home/TL#warning · REQ-289. 경고 자리 디자인 없음 — 기존 MUI Alert(warning) 재사용'},
  ],
  render(st){
-  const ex={normal:['EdgeX','Daily D+1',1],apex:['ApeX','D+2',2],lighter:['Lighter','Weekly W+1',3],compact:['EdgeX','Daily D+1',0],warning:['EdgeX','Daily D+1',1]}[st];
-  const labels=st==='compact'?['거래 집계','거래소 정산 확인','테더맥스 확인','캐시백 반영 완료']:['거래 집계 중','지급 대기','지급 처리 중','지급 완료'];
-  const cur=ex[2];
-  const t=h=>new Intl.DateTimeFormat(S.lang==='en'?'en-US':'ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date('2026-10-23T'+h+':00Z'));
-  const blue='filter:invert(13%) sepia(90%) saturate(5000%) hue-rotate(226deg)';
-  const arrow=(f,dis)=>`<span style="width:32px;height:32px;border-radius:16px;background:#f2f2f5;display:flex;align-items:center;justify-content:center"><img src="${HA(f)}" style="width:24px;height:24px;${dis?'opacity:.38':''}" alt=""></span>`;
-  const tabs=`<div class="row" style="gap:8px;align-items:flex-start">${labels.map((l,i)=>{const on=i+1===cur,done=i+1<cur;return `<div class="col grow" style="gap:6px;min-width:0"><span class="b2 med" style="color:${on?'#0031c6':done?'var(--text-primary)':'var(--text-secondary)'};white-space:nowrap">Step ${i+1}</span><span style="height:4px;border-radius:2px;background:${on?'#0031c6':done?'rgba(0,49,198,.4)':'#f2f2f5'}"></span></div>`}).join('')}</div>`;
-  const icons=[['candle-b.svg',''],['clock.svg',blue],['checkc.svg',blue],['checkc.svg',blue]];
-  const stepCard=cur?`<div style="background:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.1);padding:16px" class="col g12"><div class="row" style="gap:12px"><span style="width:48px;height:48px;border-radius:24px;background:rgba(187,226,255,.2);display:flex;align-items:center;justify-content:center;flex:none"><img src="${HA('ic-'+icons[cur-1][0])}" style="width:24px;height:24px;${icons[cur-1][1]}" alt=""></span>
-    <div class="col grow" style="gap:2px"><span class="b2 semi" style="color:#0031c6">10/22 ${t('01:00')}</span><span class="b1 semi">${labels[cur-1]}</span></div></div>
-    <div>${C.kv('대상 거래 기간',ex[0]==='Lighter'?'월 ~ 일':`10/21 ${t('00:00')} ~ 10/22 ${t('00:00')}`)}${C.kv('지급 주기',ex[1]+(ex[0]==='ApeX'?' '+C.tbd('ApeX 주기','G-025'):''))}${C.kv('지급 시각',t('01:00'))}${C.kv('지급처',T('Account','거래 계정'))}</div></div>`:`<div class="row" style="gap:8px">${labels.map(l=>`<span class="grow cap c2" style="text-align:center">${l}</span>`).join('')}</div>`;
-  const tl=`<div style="background:#fff;border-radius:8px;padding:16px" class="col g16"><div class="row between"><span class="b1 semi">Earning Timeline · ${ex[0]}</span><span class="row g4">${arrow('ic-chev-l.svg',cur<=1)}${arrow('ic-chev-r2.svg',cur>=4)}</span></div>${tabs}${stepCard}
-   ${st==='warning'?C.alert('warn','','거래소별로 순차 지급하고 있어서 몇 분 더 걸릴 수 있어요.'):''}</div>`;
+  const ex={normal:['EdgeX',['Oct 21 00:00','Oct 22 00:00','Oct 22 01:00']],apex:['ApeX',['Oct 20 00:00','Oct 21 00:00','Oct 22 01:00']],lighter:['Lighter',['Oct 13 00:00','Oct 20 00:00','Oct 20 01:00']],warning:['EdgeX',['Oct 21 00:00','Oct 22 00:00','Oct 22 01:00']]}[st]||['EdgeX'];
+  const tl=earningTimeline(ex[0],ex[1])+(st==='warning'?C.alert('warn','','거래소별로 순차 지급하고 있어서 몇 분 더 걸릴 수 있어요.'):'');
   const cum=`<div style="background:#fff;border-radius:8px;padding:16px">${cumulative([R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'}])}</div>`;
   const w=S.vp==='mo'?'100%':'343px';
-  return `<div style="padding:${S.vp==='mo'?'16px':'40px 0 80px'};display:flex;justify-content:center"><div class="col g16" style="width:${w}">${tl}${cum}${C.note('MAXOP-783은 3단계(Start Trading · Cut-off Time · Cashback Accumulated)이지만 정책(REQ-282 · G-192)은 4단계라 탭을 4개로 두고 단계명은 V2.2 국문(영문 원문 없음 — EN 보기에서도 국문). 카드 안 상세 행은 V2.2 내용. 누적 카드 = MAXOP-731 컴포넌트, 캡션은 G-191 확정 문구')}</div></div>`;
+  return `<div style="padding:${S.vp==='mo'?'16px':'40px 0 80px'};display:flex;justify-content:center"><div class="col g16" style="width:${w}">${tl}${cum}</div></div>`;
  }});
 
 // ---------- 선차감 · 복원 반영 위치 (FU-034 · 035) ----------
@@ -462,7 +452,7 @@ R.screen({id:'wd.reflect',group:'home',title:'선차감 · 복원 반영 위치'
   const feed=st==='normal'?row('EdgeX','120.00 USDT'):`<p class="b2 c2" style="margin:0">—</p>`;
   const sec=(t,b,go)=>`<div style="background:#fff;border-radius:8px;padding:16px" class="col g12"><div class="row between"><span class="b1 semi">${t}</span>${go?`<button class="btn text primary sm" data-go="${go}">See All</button>`:''}</div>${b}</div>`;
   const body=`${balanceCard({amount:bal,sub:st==='deducted'?`<div class="cap c2">출금 신청한 금액은 결과가 나올 때까지 잔액에서 제외됩니다</div>`:''})}
-   ${sec(T('Cashback Summary','캐시백 요약'),sum,'summary.main')}${sec(T('Live withdrawals','실시간 출금'),feed,'about.feed')}
+   ${sec(T('Cashback Summary','캐시백 요약'),sum)}${sec(T('Live withdrawals','실시간 출금'),feed)}
    ${C.note({normal:'지급 완료된 건만 피드에 표시',deducted:'처리 중 — 피드에 아직 없음(자동 지급 완료 = 출금일 때만 표시). 영문 선차감 문구는 G-112 문구표 확정분(원문 없음)',restored:'실패해 복원된 건은 피드에 Sent 항목이 생기지 않음. 잔액은 복원 후 다시 같은 조건으로 판정'}[st]+' · 홈 · 캐시백 요약 · 실시간 출금 피드가 같은 레코드에서 같은 새로고침에 반영. 결과를 보여 주는 회원 화면은 없음(REQ-163)')}`;
   return `<div style="padding:${S.vp==='mo'?16:40}px 16px 80px;display:flex;justify-content:center"><div class="col g16" style="width:${S.vp==='mo'?'100%':'480px'}">${body}</div></div>`;
  }});

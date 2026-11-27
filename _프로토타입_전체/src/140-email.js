@@ -136,7 +136,7 @@ function banner(mo){
   <img src="${A('email-banner-coin.png')}" style="position:absolute;left:${mo?147:299}px;top:${mo?6:-24}px;width:${mo?219:283}px;height:${mo?134:173}px;max-width:none;object-fit:cover" alt="">
   <img src="${A('email-logo.svg')}" style="position:absolute;left:24px;top:${mo?53:50}px;width:${mo?128:177}px;height:${mo?14.5:20}px" alt="TetherMax"></div>`}
 function footer(ko,sns4){
- const icons=[1,2,3,4,5].filter(n=>!(sns4&&n===1)).map(n=>`<img src="${A('email-sns-'+n+'.svg')}" style="width:${n===4?23:32}px;height:${n===4?24:n===5?28:32}px${sns4?';opacity:.45':''}" alt="">`).join('');
+ const icons=[2,3,4,5].map(n=>`<img src="${A('email-sns-'+n+'.svg')}" style="width:${n===4?23:32}px;height:${n===4?24:n===5?28:32}px${sns4?';opacity:.45':''}" alt="">`).join('');   // 공용 소셜 4종(정책 D-6-2)
  const F='font-family:Inter,var(--font);font-size:12px;line-height:1.33;letter-spacing:.2px;color:rgba(0,0,0,.6)';
  return `<div style="padding:24px;display:flex;flex-direction:column;gap:24px"><div class="row" style="gap:16px">${icons}</div>
   <div style="${F}">${ko?`이 이메일은 발신 전용입니다.<br><br>TetherMax 계정 관련하여 궁금한 점이 있으시면 ${lnk('고객센터')}<span style="color:rgba(0,0,0,.87)">에 문의해 주세요.</span>`:`Please note that this email is for outgoing communication only.<br><br>If you have any questions regarding your TetherMax account, ${lnk('contact our customer support')}`}</div>

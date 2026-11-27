@@ -23,7 +23,7 @@ function moForm(title,body,actions,back='home.main'){
   <div style="background:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;position:sticky;bottom:0">${actions}</div></div>`}
 const moHint=t=>`<p style="margin:0;font-size:12px;color:#545a63;text-align:center">${t}</p>`;
 const trust=()=>`<p class="b2 c2" style="margin:0">${T('No wallet connection or signature required.','지갑 연결이나 서명은 필요하지 않아요.')}</p>`;
-const signUp=()=>`<button class="btn text black lg full" data-go="auth.signup">${T('Don’t have an account yet? Sign up here','아직 계정이 없으신가요? 여기서 가입하세요')}</button>`;
+const signUp=(ex)=>`<p class="b1 med" style="margin:0;text-align:center;padding:8px 0">${T('Don’t have an account yet?','아직 계정이 없으신가요?')} <a class="cb" style="cursor:pointer" data-ref-signup="${esc(ex||selectedExchange||'')}">${T('Register here','여기서 가입하세요')}</a></p>`;
 const help=()=>C.btn(T('Need help? Contact Support'),{v:'text',c:'black',full:true,go:'support.main'});
 const dexSel=(d,s=32)=>S.vp==='mo'
  ? `<button type="button" class="sel" data-go="link.select:normal">${C.dex(d,s)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`
@@ -47,6 +47,7 @@ function guide(d){
 // 연동 결과 · 전체 화면 모달 — 웹: 상단 바 72(닫기 48) · 본문 좌우 480 · 버튼이 본문 안 / 모바일: 상단 바 56 · 본문 좌우 32 · 버튼이 하단(패딩 16)
 // sev = info(InfoRounded) · success(CheckCircleRounded) · warning(WarningRounded) · error(ErrorRounded), 플레이트 = 같은 색 12% 원
 const SEV={info:'#0288D1',success:'#2E7D32',warning:'#EF6C00',error:'#D32F2F'};
+window.LINK_SPLASH=(...a)=>splash(...a);
 function splash(sev,title,msg,btns,o={}){
  const mo=S.vp==='mo';
  const lines=[].concat(msg||[]).map(l=>`<p class="b1 c2" style="margin:0 0 8px;text-align:center;word-break:break-word">${l||'&nbsp;'}</p>`).join('');
@@ -126,7 +127,7 @@ function filterExchanges(picker){
  const popular=picker.querySelector('[data-link-popular]');
  if(popular)popular.style.display=q||type==='dex'?'none':'flex';
  const empty=picker.querySelector('[data-link-empty]');
- if(empty)empty.style.display=count?'none':'block';
+ if(empty){empty.style.display=count?'none':'block';const raw=picker.querySelector('[data-link-search]').value.trim();empty.textContent=raw?`No results found for “${raw}”`:'No results found'}
  const caption=picker.querySelector('[data-link-count]');
  if(caption)caption.textContent=pickerCount(type,q,count);
  for(const badge of picker.querySelectorAll('[data-picker-badge]'))badge.style.display=type==='all'?'inline':'none';
@@ -218,7 +219,7 @@ function uidLinkForm(st,openPicker){
  const d=WEB_CEX.includes(selectedExchange)||cexBy(selectedExchange)?selectedExchange:WEB_CEX[0];   // 첫 상태 = 목록 첫 거래소 기본 선택(WOO X Pro, G-379 · 결정 12차)
  const sel=mo?`<button type="button" class="sel" style="border-color:var(--input-border);padding:16px 12px" data-go="link.select:${filled?'uidFilled':'uid'}">${webMark(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</button>`:webExchangeField(d,openPicker);
  const field=C.field({label:null,value:filled?'1234567':fmtErr?'12345abc':null,ph:T('Enter your UID'),focus:filled,error:null});
- const reg=`<p class="b1 med" style="margin:0;text-align:center;padding:8px 0">${T('Don’t have an account yet?')} <a class="cb" style="cursor:pointer" data-go="auth.signup">${T('Register here')}</a></p>`;
+ const reg=signUp(d);
  const next=C.btn(T('Next'),{full:true,size:'md',disabled:!filled});
  if(mo)return moForm(T('Link your exchange UID'),`${sel}${field}${uidGuide(true,d)}`,`${next}${reg}`);
  const modal=`<div style="background:var(--paper);border-radius:4px;box-shadow:var(--elev24);width:600px;max-width:100%;height:800px;display:flex;flex-direction:column">
@@ -252,7 +253,6 @@ R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link 
  states:[
   {id:'empty',label:'빈 값 — 안내 보임, Next 비활성 (L2)',figma:{pc:'28960:127275',mo:'28969:126986'},note:'V2.2 <code>link/ADDR#normal</code> · <code>link/SEL#detail</code>(DEX 상세 진입 = 그 DEX 선택 상태로 바로 주소 입력, 배경 D1 상세) · <code>link/SHEET#screen</code>(모바일 전체 화면 Link Account — Next 항상 닿음)'},
   {id:'valid',label:'유효 주소 — Next 활성 (L3)',figma:{pc:'28960:127279',mo:'28969:126996'},note:'V2.2 <code>link/ADDR#valid</code>. 안내는 유효 주소에서도 유지(REQ-069 · Figma L3)'},
-  {id:'paste',label:'Paste 권한 거부',figma:null,note:'V2.2 <code>link/ADDR#paste</code> — 디자인 없음'},
   {id:'e2',label:'빈 값 제출 — Enter your wallet address.',figma:{pc:'28980:132144'},note:'V2.2 <code>link/ADDR#e2</code> · Figma Address validation / Empty'},
   {id:'ws',label:'주소 안 공백 — Remove spaces… (L4)',figma:{pc:'28980:132242',mo:'28969:127006'},note:'Figma Address validation / Internal whitespace · L4 Format error(28960:127283)도 같은 화면 · 모바일 Invalid address · REQ-067'},
   {id:'case',label:'다른 형식 · 대소문자 원문 유지 — 오류 없음',figma:{pc:'28980:132193'},note:'V2.2 <code>link/ADDR#e3</code>(base58) · <code>#e4</code>(0X·길이·문자) · <code>#e5</code>(체크섬)을 대신함 — REQ-065: 공통 0x 접두어·42자·16진수·EIP-55 검사로 거부하지 않고 서버·파트너가 최종 판정. Figma Address input / Preserve original case'},
@@ -272,31 +272,30 @@ R.screen({id:'link.addr',group:'link',title:'지갑 주소 입력',route:'/link 
   const extra='';
   const nt=st==='kept'?C.note('실패 다이얼로그를 닫거나 새로고침해도 선택 거래소·입력 주소 유지(REQ-064 · G-380)'):'';
   const hintTxt=T('Paste a valid wallet address to continue.','올바른 지갑 주소를 붙여넣으면 계속할 수 있어요.');
+  const paste=preset||st==='empty'||st==='paste'||st==='hub'?`<button class="btn contained primary sm" data-paste style="position:absolute;right:12px;top:${mo?12:16}px">${T('Paste','붙여넣기')}</button>`:'';
   if(mo){
    const sel=`<div class="sel" style="border-color:var(--input-border);padding:16px 12px;cursor:pointer" data-go="link.select:normal">${C.dex(d,24)}<span class="b1 grow">${d}</span>${ic('arrow-drop-down')}</div>`;
-   const acts=`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:!ok,go:ok?'link.captcha:normal':''})}${ok?'':moHint(hintTxt)}${signUp()}`;
-   return moForm(T('Link Account','거래 계정 연동하기'),`${sel}${fld}${extra}${nt}${guide(d)}`,acts,st==='hub'?'hub.main':'home.main');
+   const acts=`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:!ok,go:ok?'link.captcha:normal':''})}${ok?'':moHint(hintTxt)}${signUp(d)}`;
+   return moForm(T('Link Account','거래 계정 연동하기'),`${sel}<div style="position:relative">${fld}${paste}</div>${extra}${nt}${guide(d)}`,acts,st==='hub'?'hub.main':'home.main');
   }
-  const paste=preset||st==='empty'||st==='paste'?`<button class="btn contained primary sm" style="position:absolute;right:12px;top:16px">${T('Paste','붙여넣기')}</button>`:'';
   const body=`${trust()}${dexSel(d)}<div style="position:relative">${fld}${paste}</div>${extra}${nt}${guide(d)}`;
   const hint=preset||st==='empty'||st==='paste'||st==='hub'?`<p class="cap c2 center" style="margin:0">${hintTxt}</p>`:'';
-  const actions=`${C.btn(T('Next','다음'),{full:true,disabled:!ok,go:ok?'link.captcha:normal':''})}${hint}${signUp()}`;
+  const actions=`${C.btn(T('Next','다음'),{full:true,disabled:!ok,go:ok?'link.captcha:normal':''})}${hint}${signUp(d)}`;
   const origin=preset?`dex.detail:${preset.toLowerCase()}`:st==='hub'?'hub.main':BG;
   return C.overlay(origin,linkModal(body,actions,{close:preset||st==='hub'?origin:'home.main'}));
  }});
 
 // ---------- G-402 가입 후 복귀 (Signup + Link Wallet) ----------
 // Figma 1 Entry(28960:127416, DEX 상세 — Get Started 주 버튼) → 2 Signup(28960:127418, 모달 「DEX / Signup before redirect」) → 3 Return(28960:127422, 상세 — Link Wallet 주 버튼)
-R.screen({id:'link.signup',group:'link',title:'가입 후 연동 복귀 (G-402)',route:'/exchange/{dex} (모달)',fu:['FU-013'],shell:false,
+R.screen({id:'link.signup',group:'link',title:'가입 후 연동 복귀 (G-402) — 중간 안내 없음',route:'/exchange/{dex} (모달)',fu:['FU-013'],shell:false,
  states:[
-  {id:'prompt',label:'2 Signup — Start by signing up for Lighter?',figma:{pc:'28960:127418'},note:'G-402 확정: 가입 후 그 DEX가 미리 선택된 연동 모달로 복귀. 진입 = 상세 <code>Get Started</code>(1 Entry 28960:127416 — DEX 담당 <code>dex.detail:lighter</code>). 버튼 = 그 DEX 레퍼럴 가입 링크 새 탭(REQ-053). 마지막 단계 = <code>Link your wallet</code>.'},
   {id:'return',label:'3 Return — 상세로 돌아와 Link Wallet → 미리 선택된 연동 모달',figma:{pc:'28960:127422'},note:'Figma 3 Return: 상세 페이지에서 <code>Link Wallet</code>이 주 버튼(파랑)으로, <code>Get Started</code>가 보조로 바뀜 — 상세 화면은 DEX 담당(<code>dex.detail:lighter</code>)이라 버튼 강조는 그쪽 반영 필요. 여기서는 복귀 후 열리는 연동 모달(G-402: 그 DEX 미리 선택)을 보여 줌. 복귀 안내 문구는 문구표'},
  ],
  render(st){
-  if(st==='return'){
+  {
    const body=`${trust()}${dexSel('Lighter')}${C.field({ph:T('Paste your wallet address','지갑 주소를 붙여넣으세요'),help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')})}<p class="cap c2" style="margin:0">${T('Signed up on Lighter? Paste your Lighter wallet address to link it.','Lighter 가입을 마쳤다면 Lighter 지갑 주소를 붙여넣어 연동해 주세요.')}</p>${guide('Lighter')}`;
    if(S.vp==='mo')return renderInner('link.addr:empty');
-   return C.overlay(BG,linkModal(body,`${C.btn(T('Next','다음'),{full:true,disabled:true})}${signUp()}`));
+   return C.overlay(BG,linkModal(body,`${C.btn(T('Next','다음'),{full:true,disabled:true})}${signUp('Lighter')}`));
   }
   const step=(icon,t)=>`<div class="col" style="flex:1;min-width:0;align-items:center;gap:12px">${icon}<span class="b1 semi" style="text-align:center">${t}</span></div>`;
   const arr=ic('arrow-forward','ic20');
@@ -317,13 +316,12 @@ function puzzle(){
   <div style="height:1px;background:var(--divider)"></div><span class="cap c3" style="text-align:right">${T('Powered by GEETEST')}</span></div>`}
 function addrModal(extra,nextOn){
  const field=C.field({label:T('Wallet address','지갑 주소'),value:ADDR,help:T('Paste the wallet address you use on this exchange.','이 거래소에서 쓰는 지갑 주소를 붙여넣으세요.')});
- return linkModal(`${trust()}${dexSel('Lighter')}${field}${extra||''}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,disabled:!nextOn})}${signUp()}`)}
+ return linkModal(`${trust()}${dexSel('Lighter')}${field}${extra||''}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,disabled:!nextOn})}${signUp('Lighter')}`)}
 R.screen({id:'link.captcha',group:'link',title:'캡차',route:'/link (모달)',fu:['FU-017'],shell:false,
  states:[
   {id:'normal',label:'GEETEST 퍼즐 (L5)',figma:{pc:'28960:127287',mo:'28969:127016'},note:'V2.2 <code>link/CAPTCHA#normal</code>. 퍼즐 배경 = [기존 MAX-792] Captcha 1(13992:429798, 테더맥스 캡차 이미지). 퍼즐은 GEETEST 라이브 위젯(퍼즐 이미지·닫기/새로고침/도움 아이콘은 위젯이 그림 — 에셋 아님)'},
   {id:'success',label:'Verification Success',figma:{pc:'28966:124154',mo:'28969:127073'},note:'V2.2 <code>link/CAPTCHA#success</code> · <code>link/DONE#app</code>. Figma: 웹 <code>Back to Home</code> · 모바일 <code>Close</code>'},
   {id:'retry',label:'퍼즐 실패·만료 — 주소 유지 재시도',figma:null,note:'V2.2 <code>link/CAPTCHA#retry</code>. 연동을 시도하지 않고 같은 거래소·주소 유지(REQ-072). 문구는 Figma API 상태 보드 S1_14 원문'},
-  {id:'scriptFail',label:'캡차 스크립트 로드 실패 — Retry',figma:null,note:'V2.2 <code>link/CAPTCHA#scriptFail</code>. 캡차 없이 절대 제출하지 않음(REQ-072). 문구는 Figma API 상태 보드 S1_13 원문'},
  ],
  render(st){
   const mo=S.vp==='mo';
@@ -335,7 +333,7 @@ R.screen({id:'link.captcha',group:'link',title:'캡차',route:'/link (모달)',f
   }
   const [t,m,b]=st==='retry'?['Verification expired','Complete a new puzzle to continue.','Retry verification']:['Verification could not load','Your wallet address has been kept.','Retry'];
   const box=`<div class="alert err"><span class="ai">!</span><div class="ab"><b>${T(t)}</b>${T(m)}<div class="mt8">${C.btn(T(b),{v:'outlined',c:'black',size:'sm',go:st==='retry'?'link.captcha:normal':''})}</div></div></div>`;
-  if(mo)return moForm(T('Link Account','거래 계정 연동하기'),`<div class="sel" style="border-color:var(--input-border);padding:16px 12px">${C.dex('Lighter',24)}<span class="b1 grow">Lighter</span>${ic('arrow-drop-down')}</div>${C.field({label:T('Wallet address','지갑 주소'),value:ADDR})}${box}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:true})}${signUp()}`);
+  if(mo)return moForm(T('Link Account','거래 계정 연동하기'),`<div class="sel" style="border-color:var(--input-border);padding:16px 12px">${C.dex('Lighter',24)}<span class="b1 grow">Lighter</span>${ic('arrow-drop-down')}</div>${C.field({label:T('Wallet address','지갑 주소'),value:ADDR})}${box}${guide('Lighter')}`,`${C.btn(T('Next','다음'),{full:true,size:'md',disabled:true})}${signUp('Lighter')}`);
   return C.overlay(BG,addrModal(box,false));
  }});
 

@@ -201,3 +201,4 @@
 | 허브 CEX 라우트 행 목적지 | 허브 CEX 탭(별도 Exchange Listings 페이지 없음) |
 | REQ-039 비활성 버튼 조건 안내 예외 | 계산기 `Next`·`Check Results`, 소유권 `Submit Claim` — 조건 안내 없이 비활성만(기존 화면) |
 | EMAIL 31 버튼 링크 | 해당 DEX가 선택된 연동 모달로(문서대로, Figma 메일에 링크 추가) |
+| 테더맥스 포인트(TP) 진입 (2026-11-27) | 소개 페이지(`/en/tethermax-point-introduction`)는 게스트·회원 모두 볼 수 있음. CTA = 스크롤하면 나타나는 고정 버튼 `Check My TP` — 회원 → 포인트 페이지(`/en/tethermax-point`), 게스트 → 가입(`/en/signup`). 게스트가 포인트 페이지를 직접 열면 소개 페이지로. 근거 www-dev 실측 · Figma [MAX-659] TetherMax Point(13033:27246) |

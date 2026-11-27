@@ -21,7 +21,10 @@ if(!window.__tfBound){window.__tfBound=1;
  document.addEventListener('focusout',e=>{if(e.target.classList&&e.target.classList.contains('tf-in'))e.target.closest('.tf-box').style.borderColor=''});
  document.addEventListener('click',e=>{const eye=e.target.closest&&e.target.closest('.tf-eye');if(!eye)return;e.preventDefault();const i=eye.parentNode.querySelector('.tf-in');i.type=i.type==='password'?'text':'password';eye.style.opacity=i.type==='text'?'.6':'1'});
 }
-const cont=`<button class="btn contained lg full tf-cont" disabled data-go="home.main" style="height:42px">Continue</button>`;
+const contFor=(id,st)=>`<button class="btn contained lg full tf-cont" disabled data-go="${id}:otp${st==='guest'?'Guest':''}" style="height:42px">Continue</button>`;
+// 이메일 인증 모달 — 실사이트판 pt-runtime otpOpen과 같은 문구(결정 11차). 6칸 아무 숫자 → Verify
+const otpModal=()=>{const m=mo();return `<div role="dialog" aria-modal="true" data-otp-box style="position:relative;box-sizing:border-box;width:${m?'calc(100% - 32px)':'504px'};background:#fff;border-radius:8px;padding:${m?'24px 16px':'32px'};box-shadow:var(--elev24)"><button class="icon-btn" aria-label="close" data-go="${S.screen}:normal" style="position:absolute;right:${m?12:20}px;top:${m?12:20}px">${ic('close')}</button><h2 style="margin:0 48px 8px 0;font-size:${m?20:24}px;line-height:1.33;font-weight:700">Email Verification</h2><p style="margin:0 0 24px;font-size:14px;line-height:1.43;color:rgba(0,0,0,.6)">We've sent a code to name@example.com</p><div style="display:flex;gap:8px;justify-content:space-between">${[0,1,2,3,4,5].map(i=>`<input data-otp-i="${i}" inputmode="numeric" maxlength="1" aria-label="Digit ${i+1}" style="box-sizing:border-box;width:${m?'calc((100% - 40px) / 6)':'64px'};aspect-ratio:1;border:1px solid rgba(0,0,0,.23);border-radius:4px;text-align:center;font-size:24px">`).join('')}</div><div style="display:flex;justify-content:flex-end;margin-top:12px"><button type="button" data-otp-paste style="border:0;background:transparent;padding:4px 0;color:#0031c6;font:inherit;font-size:14px;font-weight:600;cursor:pointer">Paste</button></div><button class="btn contained primary lg full" data-otp-verify data-go="@authdone" disabled style="margin-top:16px">Verify</button><p style="margin:16px 0 0;text-align:center;font-size:14px;line-height:1.43;color:rgba(0,0,0,.6)">Resend code in 01:00</p></div>`};
+const withOtp=(page)=>`<div style="position:relative">${page}<div class="scrim pt-fixed center" style="align-items:center;justify-content:center">${otpModal()}</div></div>`;
 const alt=(q,l,go)=>`<button class="btn text black lg full" data-go="${go}" style="height:42px">${q} <u style="margin-left:4px">${l}</u></button>`;
 const toast=t=>`<div style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;background:#1c1c1e;color:#fff;border-radius:8px;padding:14px 16px;box-shadow:var(--elev8);font-size:14px;white-space:nowrap"><span style="width:20px;height:20px;border-radius:50%;background:#2e7d32;display:inline-flex;align-items:center;justify-content:center;font-size:12px">✓</span>${t}</div>`;
 
@@ -30,42 +33,36 @@ function login(st){
  const body=`${title('Hi, welcome back!')}
   ${promo(cap('Log in now to complete missions'),blue('to earn more USDT'),'cex-promo-login.png',{img:'left:243px;top:-21px;width:100px;height:96px;object-fit:cover',top:6})}
   <div class="col" style="gap:16px"><div class="col" style="gap:16px">${tf('Email')}${tf('Password',{eye:1,err:pwErr})}</div><a style="font-size:14px;line-height:1.43;letter-spacing:.17px;text-decoration:underline;cursor:pointer">${st==='reset'?'Forgot password?':'Forgot Password?'}</a></div>
-  <div class="col" style="gap:8px">${cont}${alt('Don’t have an account?','Sign Up Now','auth.signup')}</div>`;
+  <div class="col" style="gap:8px">${contFor('auth.login',st)}${alt('Don’t have an account?','Sign Up Now','auth.signup')}</div>`;
  return `<div style="position:relative" data-tf-form>${guestHead()}${wrap(body)}${st==='reset'?toast('Password reset successfully.'):''}</div>`}
 R.screen({id:'auth.login',group:'cex',title:'로그인 (기존)',route:'/login',fu:[],shell:false,
  states:[
   {id:'normal',label:'기본 — 빈 입력',figma:{pc:'10548:210709',mo:'10548:207012'},note:'[기존 MAX-508] Login (V2.2 상태 없음)'},
   {id:'guest',label:'게스트 조회 결과에서 로그인',figma:{pc:'29037:110849',mo:'29037:110880'},note:'DEX(revision) Web / Guest auth / login — 기존 로그인과 같은 화면. 성공 → guest.result:handoff, 취소 → 직전 조회 결과'},
   {id:'error',label:'입력 오류 — This field is required',figma:{pc:'11049:154170',mo:'10548:215467'},note:'[기존 MAX-508] Error states'},
+  {id:'otp',label:'Continue → 이메일 인증 모달',note:'결정 11차 — 6칸 코드 · Paste · Verify · Resend code in 01:00. Verify = 로그인 완료 → 돌아갈 화면(없으면 홈)'},
+  {id:'otpGuest',label:'게스트 조회에서 로그인 → 이메일 인증',note:'인증 후 조회한 계정을 이어받아 연동 단계(FU-012)'},
   {id:'reset',label:'비밀번호 재설정 완료 토스트',figma:{pc:'11073:165120'},note:'[기존 MAX-508] Forget Password (Reset Password) 마지막 — 모바일 재설정 흐름 11073:163739 · 11049:97669~97673(재설정 단계 화면은 마이·비밀번호 담당 범위)'},
  ],
- render(st){return login(st)+C.note(st==='guest'?'게스트 복귀: 조회한 거래 계정을 이어받음. 로그인만으로 연동·지급하지 않음(REQ-178). 성공 → <a data-go="guest.result:handoff">guest.result:handoff</a>.':'Figma 원문 그대로. 프로모 일러스트 = Figma 에셋.')}});
+ render(st){if(st==='otp'||st==='otpGuest')return withOtp(login(st==='otpGuest'?'guest':'normal'));return login(st)+C.note(st==='guest'?'게스트 복귀: 조회한 거래 계정을 이어받음. 로그인만으로 연동·지급하지 않음(REQ-178). 성공 → <a data-go="guest.result:handoff">guest.result:handoff</a>.':'Figma 원문 그대로. 프로모 일러스트 = Figma 에셋.')}});
 
 function signup(st){
  const banner=promo(blue('Up to 100 USDT'),cap('Sign up and trade to earn rewards'),'cex-promo-signup.png',{img:'left:268px;top:-15px;width:84px;height:84px;object-fit:cover'});
  const body=`${title('Create Account','We’ll send you a code to verify this email')}${banner}
   <div class="col" style="gap:16px">${tf('Email',{ph:1,err:st==='error'?'This field is required':null})}${tf('Password',{eye:1})}${tf(st==='invite'?'TM8K2Q':'Referral Code (optional)')}</div>
   <label class="row" style="gap:0;align-items:flex-start;cursor:pointer"><span style="padding:0 9px 9px 0"><span class="chk on"><i></i></span></span><span style="padding-top:2px;font-size:12px;line-height:1.33;letter-spacing:.2px;color:var(--text-secondary)">I have read and agree to the <u data-go="terms.use" style="color:var(--text-primary);font-weight:500">Terms of Use</u> and <u data-go="terms.privacy" style="color:var(--text-primary);font-weight:500">Privacy Policy</u></span></label>
-  <div class="col" style="gap:8px">${cont}${alt('Already have an account?',mo()?'Log In':'Log in','auth.login')}</div>`;
+  <div class="col" style="gap:8px">${contFor('auth.signup',st)}${alt('Already have an account?',mo()?'Log In':'Log in','auth.login')}</div>`;
  return `<div data-tf-form>${guestHead()}${wrap(body)}</div>`}
 R.screen({id:'auth.signup',group:'cex',title:'회원가입 (기존 · 첫 단계)',route:'/signup',fu:[],shell:false,
  states:[
   {id:'normal',label:'기본 — 첫 단계',figma:{pc:'10548:103656',mo:'10542:101933'},note:'[기존 MAX-508] Sign up (V2.2 상태 없음) · 문구 개정 MAXOP-696 23327:1124738 / 23327:1124323 미반영'},
   {id:'guest',label:'게스트 조회 결과에서 가입',figma:{pc:'29037:110754',mo:'29037:110789'},note:'DEX(revision) Web / Guest auth / signup — 기존 가입과 같은 화면. 성공 → 조회한 거래 계정으로 복귀'},
+  {id:'otp',label:'Continue → Email Verification 모달',note:'결정 11차 — 인증 → 가입 완료 → 회원 홈(연동 0)'},
+  {id:'otpGuest',label:'게스트 조회에서 가입 → 이메일 인증',note:'인증 후 같은 계정 연동 단계(FU-012)'},
   {id:'invite',label:'초대 코드로 가입',figma:{pc:'10548:199108',mo:'10548:191334'},note:'[기존 MAX-508] If there is Invitation Reward · Signing up with Invition Code — 추천 코드 미리 채움(세부 대조 필요)'},
   {id:'error',label:'입력 오류',figma:{pc:'11049:147536',mo:'10548:205271'},note:'[기존 MAX-508] Error states'},
  ],
- render(st){return signup(st)+C.note(st==='guest'?'게스트 복귀 가입: 가입 성공 → 조회한 거래소·계정으로 돌아가 연동(REQ-178).':'Figma 원문 그대로(PC <code>Log in</code> · 모바일 <code>Log In</code>).')}});
+ render(st){if(st==='otp'||st==='otpGuest')return withOtp(signup(st==='otpGuest'?'guest':'normal'));return signup(st)+C.note(st==='guest'?'게스트 복귀 가입: 가입 성공 → 조회한 거래소·계정으로 돌아가 연동(REQ-178).':'Figma 원문 그대로(PC <code>Log in</code> · 모바일 <code>Log In</code>).')}});
 
-R.screen({id:'cex.list',group:'cex',title:'거래소 목록 (CEX · 기존)',route:'/exchange',fu:['FU-084'],shell:{nav:'cashback',accent:true,moTitle:['All Partner Exchanges','전체 파트너 거래소'],back:'hub.main'},
- states:[
-  {id:'normal',label:'기본 — 표 (Recommended)',figma:{pc:'22598:410917',mo:'5145:52544'},note:'[기존 MAXOP-692] Figma (Updated) · 모바일 [기존 MAX-22] list view'},
-  {id:'search',label:'검색 결과',figma:{mo:'5145:51653'},note:'[기존 MAX-22] Search Results — PC 검색 결과 프레임 없음(같은 표에 필터)'},
-  {id:'empty',label:'검색 결과 없음',figma:null,note:'디자인 없음 — 빈 검색 문구는 기존 제품 문구(언어팩 <code>no results found for</code>, 결정 N13)'},
- ],
- render(st){
-  const L=window.CMN_LISTING;if(!L)return '';
-  if(st==='search')return L('table',{q:'bit',chip:'all'})+C.note('검색어 입력 시 표가 즉시 필터(기존 화면).');
-  if(st==='empty')return L('table',{q:'abcd',chip:'all',empty:`<div class="empty">${T('No results found for <strong>abcd</strong>','<strong>abcd</strong>에 대한 검색 결과가 없습니다')}</div>`});
-  return L('table')+C.note('CEX만 — DEX를 넣지 않는다(REQ-466 · FU-089). 카드 뷰는 <a data-go="cmn.listing:cards">cmn.listing</a>.');
- }});
+// 거래소 목록 화면(cex.list)은 두지 않음 — 결정(사용자 2026-11-27): 거래소 목록 자리 = 캐시백 허브 CEX 탭(hub.main:cex)
+

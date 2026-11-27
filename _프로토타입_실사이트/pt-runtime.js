@@ -172,6 +172,8 @@
     var lrow = PT.key === 'en' && PT.auth === 'member' && t.closest('[class*="__LinkedUidRow"]');
     var ban = PT.key === 'en' && PT.auth === 'member' && t.closest('[data-dex-ban]');
     if (ban) { e.preventDefault(); e.stopPropagation(); return rowBannerClick(ban.getAttribute('data-dex-ban')) }
+    var addr = lrow && t.closest('[class*="__LinkedUidNumber"]');
+    if (addr && /^Wallet /.test(addr.textContent)) { e.preventDefault(); e.stopPropagation(); return addrPop(addr, lrow.getAttribute('data-dex-row')) }
     if (lrow) { e.preventDefault(); e.stopPropagation(); return dexRowOpen(lrow) }
     var nm = t.closest('[class*="__NavMenu"]');   // GNB 드롭다운(Cashback · Rewards Hub · Discover) — 모든 페이지·회원/게스트에서 펼침/접힘
     if (nm && navToggle(nm)) { e.preventDefault(); e.stopPropagation(); return }
@@ -766,7 +768,7 @@
   function dexRowOpen(r) {
     var Sx = window.DEXSTATE; if (!Sx) return;
     var st = Sx.load(), id = r.getAttribute('data-dex-row');
-    if (id) { var a = st.accounts.filter(function (x) { return x.id === id })[0]; if (!a) return; if (a.st === 'issue') return rowIssue(a); st.view = { ex: a.ex, type: a.type, id: a.id, a: a.a || 0, b: a.b || null, st: a.st }; st.viewLogo = null }
+    if (id) { var a = st.accounts.filter(function (x) { return x.id === id })[0]; if (!a) return; if (a.st === 'issue') return rowIssue(a); if (a.st === 'unlinked') return rowBannerClick(a.id); if (a.st !== 'ok' && a.st !== 'zero') return; st.view = { ex: a.ex, type: a.type, id: a.id, a: a.a || 0, b: a.b || null, st: a.st }; st.viewLogo = null }
     else {
       var num = r.querySelector('[class*="__LinkedUidNumber"]');
       if (!num) return post({ dexLink: { mode: 'seeAll' } });
@@ -784,11 +786,12 @@
     pend: { dot: 'proc', clock: 1 },                 // 확인 중 = 분홍 점 + 시계(Figma 29447:141189 · 기존 9401:87675)
     own: { dot: 'own', clock: 1, line: 1 },          // 소유 확인 중 = 파란 점 + 시계 + 「Ownership verification in progress · 경과 시간」(MAX-561 12792:231646)
     fail: { dot: 'err', ban: 'Error', text: { CEX: 'UID Linking was unsuccessful. View reason.', DEX: 'Wallet linking was unsuccessful. View reason.' } },
-    ownfail: { dot: 'err', ban: 'Error', text: 'Ownership verification was unsuccessful. View reason.' },
+    ownfail: { dot: 'err', ban: 'Error', text: 'Ownership verification was unsuccessful. Please try again.' },
+    reclaimfail: { dot: 'err', ban: 'Error', text: 'Ownership verification was unsuccessful. View reason.' },
     unlinked: { dot: 'warn', ban: 'Warning', text: { CEX: 'This UID has been unlinked. Tap to verify ownership and reclaim it.', DEX: 'This wallet has been unlinked. Tap to verify ownership and reclaim it.' } },
     issue: { dot: 'err' }
   };
-  var ROWST_KO = { ok: '정상', zero: '캐시백 0', pend: '확인 중', own: '소유권 심사 중', fail: '연동 실패', ownfail: '소유권 인증 실패', unlinked: '연동 해제(되찾기)', issue: '이슈(오프보딩)' };
+  var ROWST_KO = { ok: '정상', zero: '캐시백 0', pend: '확인 중', own: '소유권 심사 중', fail: '연동 실패', ownfail: '소유권 인증 실패(신청자)', reclaimfail: '재청구 거절', unlinked: '연동 해제(되찾기)', issue: '이슈(오프보딩)' };
   var ALERT = 'SelectMyExchangePopup-module-scss-module__IotxDq__';
   var ICO_ALERT = '<svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-r6rqcb" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1m1 4h-2v-2h2z"></path></svg>';
   var ICO_NEXT = '<svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1q2r1cx" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01"></path></svg>';
@@ -818,14 +821,26 @@
     var Sx = window.DEXSTATE, st = Sx.load(), a = popAcc && st.accounts.filter(function (y) { return y.id === popAcc.id && y.ex === popAcc.ex })[0];
     if (act === 'remove' && a) { st.accounts = st.accounts.filter(function (y) { return y !== a }); Sx.save(st); dexInject({ quiet: 1 }); post({ dexChanged: 1 }); return }
     if (act === 'relink' && a) return post({ dexLink: { ex: a.ex, type: a.type } });
-    if (act === 'support') return generic({ innerText: 'Contact Support' });
+    if (act === 'support') return window.ptSupport ? ptSupport() : generic({ innerText: 'Contact Support' });
+    if (act === 'reclaim' && a) { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return nav(ORIGIN + '/en/ownership-verification') }
+    if (act === 'close') return;
   }
   function rowBannerClick(id) {
     var Sx = window.DEXSTATE, st = Sx.load(), a = st.accounts.filter(function (y) { return y.id === id })[0]; if (!a) return;
     popAcc = a; var dex = a.type === 'DEX';
     if (a.st === 'fail') return centerPopup(dex ? 'Wallet Linking Unsuccessful' : 'UID Linking Unsuccessful', a.reason || (dex ? '{Reason provided by backend}' : 'UID is not found in the tetherMax database. Please contact customer service for assistance.'), [[dex ? 'Remove Wallet' : 'Remove UID', 'remove'], [dex ? 'Link Wallet' : 'UID Link', 'relink']]);
-    if (a.st === 'ownfail') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return post({ dexLink: { mode: 'own', r: 'rejected' } }) }
-    if (a.st === 'unlinked') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return nav(ORIGIN + '/en/ownership-verification') }
+    if (a.st === 'ownfail') return centerPopup('Ownership Verification Unsuccessful', 'We were unable to verify your wallet ownership. Please review your submission and try again.', [['OK', 'close']]);
+    if (a.st === 'reclaimfail') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return post({ dexLink: { mode: 'own', r: 'rejected' } }) }
+    if (a.st === 'unlinked') return dex ? centerPopup('Verify Ownership to Reclaim This Wallet', 'This wallet address was unlinked after another user verified ownership. If it belongs to you, submit a new claim.', [['Submit Wallet Ownership', 'reclaim'], ['Remove Wallet', 'remove']])
+      : centerPopup('Verify Ownership to Reclaim This UID', 'This UID was unlinked after another user verified ownership. If it belongs to you, submit a new claim.', [['Submit UID Ownership', 'reclaim'], ['Remove UID', 'remove']]);   // O15(REQ-729)
+  }
+  function addrPop(el, id) {
+    var old = document.getElementById('pt-addr'); if (old) { old.remove(); if (old.getAttribute('data-id') === id) return }
+    var p = document.createElement('div'); p.id = 'pt-addr'; p.setAttribute('data-id', id); var r = el.getBoundingClientRect();
+    p.style.cssText = 'position:fixed;z-index:2147483000;left:' + Math.max(8, r.left) + 'px;top:' + (r.bottom + 6) + 'px;max-width:320px;background:#fff;border-radius:4px;box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);padding:8px 12px;font:12px/1.5 inherit;word-break:break-all;display:flex;gap:8px;align-items:flex-start';
+    p.innerHTML = '<span>' + id + '</span><button type="button" style="border:0;background:none;color:#0031c6;cursor:pointer;font:inherit;font-weight:600;flex:none">Copy</button>';
+    p.querySelector('button').onclick = function (ev) { ev.stopPropagation(); try { navigator.clipboard.writeText(id) } catch (x) { } p.remove(); toast('Copied.') };
+    document.body.appendChild(p); setTimeout(function () { document.addEventListener('click', function h() { p.remove(); document.removeEventListener('click', h, true) }, true) }, 0);
   }
   function rowIssue(a) { popAcc = a; centerPopup(a.type === 'DEX' ? 'There is a problem with this wallet.' : 'There is a problem with this UID.', 'Please contact our support team for assistance.', [['Contact Support', 'support']]) }   // Figma 29447:144506 · 144810 — 파란 버튼 1개 + 닫기 X
   // 테스트용 도움말(왼쪽 아래): 연동 계정 행 상태 바꿔 보기 · 소유권 심사 결과(승인/거절)

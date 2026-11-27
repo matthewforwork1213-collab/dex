@@ -4,7 +4,7 @@ const FIGMA_FILE='hsa3bSV9QmFTe2jsf6tzTm';
 const figmaUrl=id=>`https://www.figma.com/design/${FIGMA_FILE}/UI-UX-Design?node-id=${String(id).replace(':','-')}`;
 const S={lang:'en',vp:'pc',auth:'s4',design:false,screen:null,state:null,live:false};
 try{Object.assign(S,JSON.parse(localStorage.getItem('tm-full-proto')||'{}'))}catch(e){}
-const save=()=>{try{localStorage.setItem('tm-full-proto',JSON.stringify({lang:S.lang,vp:S.vp,auth:S.auth,design:S.design,live:S.live}))}catch(e){}};
+const save=()=>{try{localStorage.setItem('tm-full-proto',JSON.stringify({lang:S.lang,vp:S.vp,auth:S.auth,design:S.design}))}catch(e){}};
 const T=(en,ko)=>S.lang==='ko'&&ko!=null?ko:en;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const A=n=>(window.ASSETS&&ASSETS[n])||('assets/'+n);
@@ -53,7 +53,7 @@ window.C=C;
 // 드롭다운 — Cashback: 결정 D4(Cashback Hub · Cashback Calculator, 단독 Calculator 메뉴 없음) / Rewards Hub · Discover: 기존 GNB 드롭다운 항목 그대로
 const NAV={
  cashback:{en:'Cashback',ko:'캐시백',items:[['hub.main','Cashback Hub','Cashback Hub'],['calc.p1','Cashback Calculator','Cashback Calculator']]},
- rewards:{en:'Rewards Hub',ko:'리워드 허브',items:[['events.list','Exchange Events','거래소 이벤트'],['benefits.list','Benefits','혜택'],['tp.main','Points','포인트']]},
+ rewards:{en:'Rewards Hub',ko:'리워드 허브',items:[['events.list','Exchange Events','거래소 이벤트'],['benefits.list','Benefits','혜택'],['tp.intro','Points','포인트']]},
  discover:{en:'Discover',ko:'둘러보기',items:[['quiz.list','Beginner’s Guide','초보자 가이드'],['about.intro','About TetherMax','테더맥스 소개']]},
 };
 const shIc=(f,cls='ic')=>`<img class="${cls}" src="${A(f)}" alt="">`;
@@ -86,7 +86,7 @@ function moTop(title,back){
  return bar+tt}
 // 앱 하단 탭 — <BottomNavigation> 8582:155585 (Home · Events · Benefits · Exchanges · Point). 앱(mAPP) 전용
 function moNav(active,o={}){if(!o.app)return '';
- const it=[['home','home.main','Home','홈','cmn-tab-home.svg'],['events','events.list','Events','이벤트','cmn-tab-event.svg'],['benefits','benefits.list','Benefits','혜택','cmn-tab-benefit.svg'],['exchange','cex.list','Exchanges','거래소','cmn-tab-exchange.svg'],['point','tp.main','Point','포인트','']];
+ const it=[['home','home.main','Home','홈','cmn-tab-home.svg'],['events','events.list','Events','이벤트','cmn-tab-event.svg'],['benefits','benefits.list','Benefits','혜택','cmn-tab-benefit.svg'],['exchange','hub.main:cex','Exchanges','거래소','cmn-tab-exchange.svg'],['point','tp.intro','Point','포인트','']];
  const icon=(k,f)=>k==='point'?`<span class="tp"><img src="${A('cmn-tab-point-b.svg')}" alt=""></span>`:`<img src="${A(f)}" alt="">`;
  return `<nav class="mo-nav">${it.map(([k,go,en,ko,f])=>`<a class="${active===k?'on':''}${k==='home'?' home':''}" data-go="${go}">${icon(k,f)}<span>${T(en,ko)}</span></a>`).join('')}</nav>`}
 
@@ -116,8 +116,9 @@ function sidebar(){
  const gs=[...R.groups].sort((x,y)=>x.order-y.order);
  return gs.map(g=>{const list=R.screens.filter(s=>s.group===g.id);if(!list.length)return '';
   return `<details class="pt-g" ${list.some(s=>s.id===S.screen)?'open':''}><summary>${g.label} <span>${list.length}</span></summary>${list.map(s=>{const n=s.states.length,d=s.states.filter(x=>x.figma).length;
-   return `<a class="pt-s ${s.id===S.screen?'on':''}" data-go="${s.id}"><span>${s.title}</span><em class="${d===n?'ok':d?'mid':'no'}">${d}/${n}</em></a>`}).join('')}</details>`}).join('')}
+   return `<a class="pt-s ${s.id===S.screen?'on':''}" data-pt-go="${s.id}"><span>${s.title}</span><em class="${d===n?'ok':d?'mid':'no'}">${d}/${n}</em></a>`}).join('')}</details>`}).join('')}
 function render(){
+ if(window.PT_EMBED)PT_EMBED.restore();
  const sc=R.byId[S.screen]||R.screens[0];S.screen=sc.id;
  const state=sc.states.find(s=>s.id===S.state)||sc.states[0];S.state=state.id;
  document.body.classList.toggle('design',S.design);
@@ -130,20 +131,21 @@ function render(){
  <span class="pt-seg">${[['pc','PC'],['mo','모바일']].map(([k,l])=>`<span data-vp="${k}" class="${S.vp===k?'on':''}">${l}</span>`).join('')}</span>
  <span class="pt-seg">${[['en','EN'],['ko','KO']].map(([k,l])=>`<span data-lg="${k}" class="${S.lang===k?'on':''}">${l}</span>`).join('')}</span>
  <span class="pt-seg">${[['guest','게스트'],['s3','회원·연동0'],['s4','회원·연동']].map(([k,l])=>`<span data-au="${k}" class="${S.auth===k?'on':''}">${l}</span>`).join('')}</span>
- ${appRoute(sc.id,state.id)?`<span class="pt-seg" title="실제 동작 = 실제 동작판(dex/app.html)을 이 자리에서 조작">${[[0,'화면 상태'],[1,'실제 동작']].map(([k,l])=>`<span data-live="${k}" class="${(+S.live)===k?'on':''}">${l}</span>`).join('')}</span>`:''}
  <label class="pt-ck"><input type="checkbox" id="pt-design" ${S.design?'checked':''}> 디자인 보기(주석 숨김)</label></div>
  <div class="pt-d">${designBadge(sc,state)}${state.note?`<span class="pt-n">${state.note}</span>`:''}</div>`;
  const fr=document.getElementById('pt-frame');fr.className='pt-frame vp-'+S.vp;
- const ar=S.live&&appRoute(sc.id,state.id);
- fr.innerHTML=ar?liveFrame(ar):renderInner(sc.id+':'+state.id);
+ // 허브 · DEX 랜딩 · DEX 상세 · 계산기 · 요약 · 소유권의 기본 상태는 실제 동작판과 같은 코드(site 런타임)로 그리고 동작한다(결정 12차)
+ const EM=window.PT_EMBED,mt=EM&&EM.target(sc.id,state.id);
+ if(EM)EM.unmount();
+ if(mt)EM.mount(fr,mt);
+ else{const k=EM?EM.stash():null;fr.innerHTML=renderInner(sc.id+':'+state.id);if(k)EM.unstash(k)}
  const h=`#${sc.id}/${state.id}`;if(location.hash!==h)history.replaceState(null,'',h);
  document.getElementById('pt-state').onchange=e=>{S.state=e.target.value;if(AUTH_ONLY_GUEST.includes(S.screen)&&S.auth!=='guest'){S.auth='guest';save()}else if((AUTH_ONLY_MEMBER.includes(S.screen)||/^(link|own)\./.test(S.screen))&&S.auth==='guest'){S.auth='s4';save()}render()};   // 상태를 직접 고르면 로그인 상태를 그 화면에 맞춤
  document.getElementById('pt-design').onchange=e=>{S.design=e.target.checked;save();render()};
  document.querySelectorAll('[data-vp]').forEach(x=>x.onclick=()=>{S.vp=x.dataset.vp;save();render()});
  document.querySelectorAll('[data-lg]').forEach(x=>x.onclick=()=>{S.lang=x.dataset.lg;save();render()});
- document.querySelectorAll('[data-au]').forEach(x=>x.onclick=()=>{const a=x.dataset.au;if(a===S.auth)return;const to=authTarget(S.screen,S.state,a);S.auth=a;save();if(to){S.screen=to[0];S.state=to[1]}render();window.scrollTo(0,0)});
+ document.querySelectorAll('[data-au]').forEach(x=>x.onclick=()=>{if(window.PT_EMBED)PT_EMBED.restore();const a=x.dataset.au;if(a===S.auth)return;const to=authTarget(S.screen,S.state,a);S.auth=a;save();if(to){S.screen=to[0];S.state=to[1]}render();window.scrollTo(0,0)});
  document.getElementById('pt-menu').onclick=()=>document.body.classList.toggle('pt-side-open');
- document.querySelectorAll('[data-live]').forEach(x=>x.onclick=()=>{S.live=x.dataset.live==='1';save();render()});
  document.documentElement.style.setProperty('--pt-bar-h',document.getElementById('pt-bar').offsetHeight+'px');
  const on=document.querySelector('.pt-s.on');if(on)on.scrollIntoView({block:'nearest'});
 }
@@ -151,7 +153,10 @@ window.ptFilter=q=>{q=q.trim().toLowerCase();document.querySelectorAll('.pt-s').
 // 뒤로(이전 화면, 없으면 지정 화면) — data-go="back:{대체 화면}" (기존 mWeb 제목 행 · REQ-276 · REQ-726)
 const HIST=[];
 function go(key,o={}){if(!key)return;
+ if(key==='@authdone'){const from=S.screen,st=S.state;S.auth=from==='auth.signup'?'s3':'s4';save();const k=S.after||(st==='guest'?'guest.result:handoff':S.auth==='s3'?'home.main:s3':'home.main');S.after=null;return go(k,{noPush:true})}
+ if(window.PT_EMBED)PT_EMBED.restore();
  if(key.startsWith('back:')){const p=HIST.pop();return go(p||key.slice(5),{noPush:true})}
+ if(/^(cexd|brkd):/.test(key)){const [k,id]=key.split(':');const CS={blockfin:'blofin',biofin:'blofin',woox:'woo-x-pro'},BS={rs:'rs-finance'};window.open('https://tethermax.io/en/'+(k==='cexd'?'exchangeDetail/'+(CS[id]||id)+'-referral':'brokers/'+(BS[id]||id)),'_blank','noopener');window.PT_LAST_OPEN=key;return}
  if(!o.noPush&&S.screen)HIST.push(S.screen+(S.state?':'+S.state:''));if(HIST.length>50)HIST.shift();
  const [id,st]=key.split(':');if(!R.byId[id]){alert('아직 없는 화면입니다: '+id);return}document.body.classList.remove('pt-side-open');S.screen=id;S.state=st||(AUTH_STATE[id]?AUTH_STATE[id][S.auth]:null);   // 상태를 안 정하면 지금 로그인 상태의 화면
  // 지금 로그인 상태로는 볼 수 없는 화면이면 실제로 보게 되는 화면으로(게스트 전용 ↔ 회원 전용)
@@ -165,6 +170,7 @@ function authTarget(id,st,a){
  const member=a!=='guest';
  if(!member&&id==='home.main')return ['landing.main','normal'];   // 게스트가 /en에 오면 랜딩(실사이트)
  if(member&&(id==='auth.login'||id==='auth.signup')&&S.after){const k=S.after.split(':');S.after=null;if(!(a==='s3'&&(k[0]==='home.wallet'||k[0]==='home.timeline')))return [k[0],k[1]||(AUTH_STATE[k[0]]?AUTH_STATE[k[0]][a]:null)]}
+ if(!member&&id==='tp.main')return ['tp.intro','normal'];   // 게스트가 포인트 페이지를 열면 소개(dev 동작)
  if(!member&&(AUTH_ONLY_MEMBER.includes(id)||/^(link|own)./.test(id)))S.after=id+(st?':'+st:'');
  if(member&&AUTH_ONLY_GUEST.includes(id))return ['home.main',a==='s3'?'s3':'normal'];
  if(!member&&(AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id)))return ['auth.login','normal'];
@@ -189,7 +195,8 @@ function appRoute(id,st){
  return null}
 function appBase(){return '../_프로토타입_실사이트/dex/app.html'}   // _프로토타입_전체/_latest.html · prototype/full.html 모두 DEX 바로 아래
 function liveFrame(r){const au=S.auth==='guest'?'guest':'member';return `<iframe id="pt-live" title="실제 동작판" src="${appBase()}?auth=${au}${r}" style="display:block;width:100%;height:calc(100vh - var(--pt-bar-h,48px));border:0;background:#fff"></iframe>`}
-const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/exchangeDetail\//,'cex.list'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'hub.main'],[/^\/en\/dex\/?$/,'dex.overview']];
+const REAL2SCREEN=[[/^\/en\/?$/,()=>S.auth==='guest'?'landing.main':'home.main'],[/^\/en\/login/,'auth.login'],[/^\/en\/signup/,'auth.signup'],[/^\/en\/benefits/,'benefits.list'],[/^\/en\/events/,'events.list'],[/^\/en\/beginner-guide\/cashback-basics/,'quiz.basics'],[/^\/en\/beginner-guide/,'quiz.list'],[/^\/en\/rewardHistory/,'summary.main'],[/^\/en\/tethermax-point-introduction/,'tp.intro'],[/^\/en\/tethermax-point/,'tp.main'],[/^\/en\/mypage\/invitefriend/,'invite.main'],[/^\/en\/payback/,'calc.p1'],[/^\/en\/service-intro/,'about.intro'],[/^\/en\/notice/,'notice.list'],[/^\/en\/terms\/use/,'terms.use'],[/^\/en\/terms\/privacy/,'terms.privacy'],[/^\/en\/search/,'guest.search'],[/^\/en\/coupon/,'coupon.box'],[/^\/en\/affiliated/,'hub.main'],[/^\/en\/dex\/?$/,'dex.overview']];
+window.PT_REAL_NAV=url=>{let p='';try{p=new URL(url).pathname}catch(x){p=String(url)}const hit=REAL2SCREEN.find(([re])=>re.test(p));if(hit){const t=typeof hit[1]==='function'?hit[1]():hit[1];go(t);return}window.open(url,'_blank','noopener');window.PT_LAST_OPEN=url};
 window.addEventListener('message',e=>{const m=e.data||{};if(!m.pt||!S.live)return;
  if(m.auth){S.auth=m.auth==='member'?(S.auth==='guest'?'s4':S.auth):'guest';save()}
  if(m.nav){let p='';try{p=new URL(m.nav).pathname}catch(x){p=String(m.nav)}
@@ -204,7 +211,8 @@ document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest
  if(!(e.target.closest&&e.target.closest('.gnb-dd')))document.querySelectorAll('.gnb .nav .ni.open').forEach(n=>n.classList.remove('open'))},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.gnb .nav .ni.open').forEach(n=>n.classList.remove('open'))});
 document.addEventListener('click',e=>{
- const g=e.target.closest('[data-go]');if(g&&g.dataset.go!==undefined){e.preventDefault();if(g.dataset.go)go(g.dataset.go);else if(S.screen){const sc=R.byId[S.screen];if(sc.closeTo)go(sc.closeTo)}return}
+ const pt=e.target.closest('[data-pt-go]');if(pt){e.preventDefault();go(pt.dataset.ptGo);return}   // 도구 서랍(화면 목록) — 화면 안 data-go와 섞이지 않게
+ const g=e.target.closest('[data-go]');if(g&&window.PT_EMBED&&PT_EMBED.on()&&PT_EMBED.owns(g)){e.preventDefault();if(g.dataset.go)PT_EMBED.go(g.dataset.go);return}if(g&&g.dataset.go!==undefined){e.preventDefault();if(g.dataset.after)S.after=g.dataset.after;if(g.dataset.go)go(g.dataset.go);else if(S.screen){const sc=R.byId[S.screen];if(sc.closeTo)go(sc.closeTo)}return}
  if(e.target.closest('[data-lang]')){S.lang=S.lang==='en'?'ko':'en';save();render()}});
 // 주소(#)로 직접 연 화면도 지금 로그인 상태로 볼 수 없으면 실제로 보게 되는 화면으로(결정 12차 — 게스트 전용 랜딩을 회원 상태로 그리지 않음)
 function fixAuthView(){const id=S.screen,st=S.state;if(!id)return;const to=(AUTH_ONLY_GUEST.includes(id)&&S.auth!=='guest')||((AUTH_ONLY_MEMBER.includes(id)||/^(link|own)\./.test(id))&&S.auth==='guest')?authTarget(id,st,S.auth):null;if(to){if(to[0]==='auth.login')S.after=id+(st?':'+st:'');S.screen=to[0];S.state=to[1]}}

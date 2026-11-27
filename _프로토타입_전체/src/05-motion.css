@@ -18,3 +18,7 @@
 .m-roll-track{display:flex;flex-direction:column;will-change:transform}
 /* 툴팁 — 실사이트 MUI Tooltip */
 .ui-tip{position:fixed;z-index:3000;max-width:300px;background:rgba(97,97,97,.92);color:#fff;font-size:11px;line-height:1.4;font-weight:500;padding:4px 8px;border-radius:4px;white-space:pre-line;pointer-events:none;opacity:0;transform:scale(.75);transition:opacity var(--m-base) var(--e-std),transform var(--m-tip) var(--e-std)}
+
+.m-rv[data-m-reveal="x"]{transform:translateX(var(--m-reveal-shift))}
+[data-tp-cta]{opacity:0;pointer-events:none;transition:opacity var(--m-std,.3s) var(--e-out,ease-out)}
+[data-tp-cta].on{opacity:1;pointer-events:auto}

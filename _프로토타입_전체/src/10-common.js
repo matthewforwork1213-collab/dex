@@ -26,7 +26,7 @@ function lsBanner(){
    <div class="col" style="gap:0"><span style="font-size:${mo()?18:24}px;line-height:1.334;font-weight:700;color:#fff">Bitget 2026 King of Traders (KOT)</span><span style="font-size:${mo()?14:20}px;line-height:1.6;letter-spacing:.15px;font-weight:500;color:#bcbfc3">Win up to 2,000,000 USDT</span></div>
    <div>${C.btn('Join Now',{size:mo()?'md':'lg',go:'events.list'})}</div></div></div>
   ${lsImg('cmn-ls-dots.svg','width:44px;height:6px')}</div>`}
-const lsHead=(t,btn)=>`<div class="row" style="gap:16px"><span style="font-size:${mo()?20:24}px;line-height:1.334;font-weight:700;white-space:nowrap">${t}</span><i style="flex:1;height:1px;background:var(--divider)"></i>${btn?`<button class="btn text primary lg" style="padding:8px 11px" data-go="cex.list">See All</button>`:''}</div>`;
+const lsHead=(t,btn)=>`<div class="row" style="gap:16px"><span style="font-size:${mo()?20:24}px;line-height:1.334;font-weight:700;white-space:nowrap">${t}</span><i style="flex:1;height:1px;background:var(--divider)"></i>${btn?`<button class="btn text primary lg" style="padding:8px 11px" data-go="hub.main:cex">See All</button>`:''}</div>`;
 function lsTop(){
  const T4=[['bitget','#00f0ff','54%'],['bybit','#15192a','55%'],['binance','#181a20','50%'],['okx','#000','65%']];
  const n={bitget:'Bitget',bybit:'Bybit',binance:'Binance',okx:'OKX'};
@@ -76,7 +76,7 @@ const drRow=(icon,t,go,end='')=>`<div class="row" style="justify-content:space-b
 const drCard=rows=>`<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 2.5px rgba(93,96,103,.05)">${rows}</div>`;
 function drawer(member,o={}){
  const P={ex:[drIc('cmn-dr-candle.svg'),'Cashback Hub','hub.main'],br:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-broker.svg')}" alt="" style="width:16.67px;height:16.66px;transform:scaleY(-1)"></span>`,'Brokers','hub.main:brokers'],
-  ev:[drIc('cmn-dr-event.svg'),'Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.main']};
+  ev:[drIc('cmn-dr-event.svg'),'Events','events.list'],bn:[drIc('cmn-dr-celebration.svg'),'Benefits','benefits.list'],calc:[drIc('cmn-dr-tableview.svg'),'Cashback Calculator','calc.p1'],pt:[`<span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex:none"><img src="${A('cmn-dr-coins.svg')}" alt="" style="width:18px;height:18px"></span>`,'Point','tp.intro']};
  const prod=(member?['ex','ev','bn','calc','pt']:['ex','ev','bn','calc','pt']).map(k=>drRow(...P[k])).join('');
  const theme=`<span style="background:#e6e7e9;border-radius:5000px;height:28px;padding:2px;display:flex"><span style="background:#fff;border-radius:5000px;padding:6px 4px;display:flex">${drIc('cmn-dr-light.svg','width:16px;height:16px')}</span><span style="width:24px"></span></span>`;
  const welcome=member?'':`<div style="padding:0 16px"><div style="background:#fff;border:.5px solid rgba(0,0,0,.05);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:24px"><div class="col center" style="gap:4px;font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:600"><span>Welcome to TetherMax!</span><span class="c2">Create an account or log in to start<br>earning Cashback.</span></div><div class="row" style="gap:12px">${C.btn('Log In',{v:'outlined',full:true,go:'auth.login'})}${C.btn('Sign Up',{full:true,go:'auth.signup'})}</div></div></div>`;
@@ -85,7 +85,7 @@ function drawer(member,o={}){
   <div class="col" style="gap:8px;padding:0 16px 16px">${drCard(prod)}${drCard(drRow(drIc('cmn-dr-palette.svg'),'Theme','',theme)+drRow(drIc('cmn-dr-language.svg'),'Language','cmn.lang:sheet',`<span style="font-size:14px;line-height:1.43;letter-spacing:.17px;font-weight:600;color:var(--text-secondary)">English</span>`))}
    ${drCard(drRow(drIc('cmn-dr-info.svg'),'Terms of Use','terms.use')+drRow(drIc('cmn-dr-feed.svg'),'Privacy Policy','terms.privacy'))}
    ${drCard(drRow(`<span style="width:20px;display:flex;justify-content:center;flex:none"><img src="${A('cmn-dr-tm.svg')}" alt="" style="width:20px;height:10.63px"></span>`,'About TetherMax','about.intro')+drRow(drIc('cmn-dr-signpost.svg'),'Beginner’s Guide','quiz.list')+drRow(drIc('cmn-dr-campaign.svg'),'Notices','notice.list')+drRow(drIc('cmn-dr-supervisor.svg'),'Affiliate Partner Inquiry','partner.apply'))}</div>
-  <button class="icon-btn" style="position:absolute;right:24px;bottom:24px;background:var(--blue);padding:8px"><img src="${A('cmn-ic-headset-w.svg')}" class="ic" alt=""></button></div>`;
+  <button class="icon-btn" data-go="support.main" aria-label="Live Chat" style="position:absolute;right:24px;bottom:24px;background:var(--blue);padding:8px"><img src="${A('cmn-ic-headset-w.svg')}" class="ic" alt=""></button></div>`;
  return body}
 const moFrame=inner=>S.vp==='pc'?`<div style="background:#e9ecef;padding:24px;display:flex;justify-content:center"><div style="width:375px;box-shadow:var(--elev8);overflow:hidden">${inner}</div></div>`:inner;
 R.screen({id:'cmn.drawer',group:'common',title:'모바일 웹 드로어',route:'모바일 웹 ☰',fu:['FU-083'],shell:false,
@@ -138,7 +138,7 @@ R.screen({id:'cmn.listing',group:'common',title:'Exchange Listings Page (CEX만)
  render(st){return listing(st==='cards'?'cards':'table')+C.note('CEX만 나열 — DEX 추가 안 함(REQ-466 · 475). 명세의 <code>Rating</code> 열(Avg. Cashback과 Live Campaigns 사이)은 Figma 표에 없음 → 질문_common.md. 모바일은 [MAX-22] 5145:52544 배치(행 = 번호 · 로고 · 이름 · 배지 · Total Savings).')}});
 
 // ---------- 공지 (웹 목록 디자인 없음 → [MAX-1244] Newsletter 목록 컴포넌트 재사용) ----------
-R.screen({id:'notice.list',group:'common',title:'공지',route:'/notice',fu:['FU-086'],shell:{nav:'discover',accent:true,moTitle:['Notices','공지'],back:'home.main'},
+R.screen({id:'notice.list',group:'common',title:'공지',route:'/notice',fu:['FU-086'],shell:{nav:'discover',accent:true,moTitle:['Notices','공지'],back:'back:home.main'},
  states:[{id:'normal',label:'카테고리 · 신규 거래소 추가',figma:{pc:'23102:1009753',mo:'23102:1010436'},note:'재사용: [기존 MAX-1244] Newsletter / List (공지 목록 자체 디자인 없음 — 기존 앱은 Zendesk Help Center) · V2.2 cmn/NOTICE#normal'}],
  render(){
   const cats=['거래소 이벤트','테더맥스 이벤트','신규 거래소 추가','거래소 지원 종료','업데이트 소식','점검','신규 서비스','안내'];
@@ -234,7 +234,7 @@ for(const f of RULES.R){
   states:[{id:'normal',label:'규칙 원문 ('+f.rows.map(r=>r[0]).join(' · ')+')',figma:null}],
   render(){
    const tbl=`<div class="tblwrap" style="background:#fff"><table class="tbl"><thead><tr><th>REQ</th><th>구분</th><th>내용</th><th>인수 기준</th><th>우선순위</th><th>상태</th></tr></thead><tbody>${f.rows.map(r=>`<tr>${r.slice(0,5).map(c=>`<td style="vertical-align:top">${rmd(c)}</td>`).join('')}<td style="vertical-align:top">${statusCell(r[5])}</td></tr>`).join('')}</tbody></table></div>`;
-   return docWrap(`${f.id}. ${esc(f.title)}`,`<div class="note" style="border:0;background:none;color:inherit;padding:0;margin:0;font-size:inherit"><p class="b2 c2" style="margin:0">${rmd(f.desc)}</p>${C.note('화면이 아니라 규칙인 기능 — 기능명세서 원문(V2.2 rule/'+f.id+'). 상태 열의 G-nnn은 2026-11-25 확정 결정이 있으면 확정값으로 표시. 디자인 대상 아님.'+(f.id==='FU-089'?' <b>CEX 회귀 방지</b>: CEX 배지 추가 없음 · CEX 이메일 템플릿·UID 마스킹·알림 17행 그대로 — 이 프로토타입의 CEX 화면(<a data-go="cex.list">cex.list</a> · <a data-go="cmn.listing">cmn.listing</a>)에도 DEX를 넣지 않는다.':''))}${tbl}</div>`);
+   return docWrap(`${f.id}. ${esc(f.title)}`,`<div class="note" style="border:0;background:none;color:inherit;padding:0;margin:0;font-size:inherit"><p class="b2 c2" style="margin:0">${rmd(f.desc)}</p>${C.note('화면이 아니라 규칙인 기능 — 기능명세서 원문(V2.2 rule/'+f.id+'). 상태 열의 G-nnn은 2026-11-25 확정 결정이 있으면 확정값으로 표시. 디자인 대상 아님.'+(f.id==='FU-089'?' <b>CEX 회귀 방지</b>: CEX 배지 추가 없음 · CEX 이메일 템플릿·UID 마스킹·알림 17행 그대로 — 이 프로토타입의 CEX 화면(<a data-go="hub.main:cex">허브 CEX 탭</a> · <a data-go="cmn.listing">cmn.listing</a>)에도 DEX를 넣지 않는다.':''))}${tbl}</div>`);
   }});
 }
 

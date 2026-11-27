@@ -31,7 +31,9 @@ R.screen({id:'own.inuse',group:'own',title:'이미 사용 중 · 신청 불가(3
   {id:'normal',label:'Account Already in Use (O1)',figma:{pc:'28960:127644',mo:'28969:127109'},note:'V2.2 <code>own/O1#normal</code>. DEX(revision) O1 = 결과 스플래시(error) — <code>Verify Ownership</code>은 인증 화면, <code>Try a different wallet</code>은 주소 입력으로(SCREEN-LABEL 원문). 연동 결과 <code>link.result:inuse</code>와 같은 화면. 기존 [MAX-561] UID already in use(웹 12792:59661 · mWeb 12874:18663)의 DEX판'},
   {id:'cooldown',label:'Ownership Claim Unavailable — 30일 쿨다운 (O2)',figma:{pc:'28960:127650',mo:'28982:126298'},note:'V2.2 <code>own/O2#normal</code> · REQ-724. DEX(revision) O2 = 결과 스플래시(warning) — O1 대신 표시(최근 30일 안에 다른 회원이 인증). 기존 [MAX-561] Ownership cooldown time(웹 12792:61035 · mWeb 12783:405465)의 DEX판. 「DEX는 소유권 인증을 지원하지 않습니다」류 문구 금지(REQ-125)'},
  ],
- render(st){return renderInner(st==='cooldown'?'link.result:cooldown':'link.result:inuse')}});
+ render(st){
+  if(st==='cooldown')return window.LINK_SPLASH('warning',T('Ownership Claim Unavailable'),[`<span class="row" style="gap:8px;justify-content:center;align-items:center">${C.dex(OWN_DEX,24)}<span class="b1 semi" style="color:var(--text-primary)">${OWN_DEX}</span><span>${T('Wallet','지갑')} ${OWN_SHORT}</span></span>`,T('This wallet address was recently verified by another user. Ownership claims will be available after 30 days.')],C.btn(T('Try a different wallet'),{full:true,go:'link.addr:empty'})+C.btn(T('Close','닫기'),{v:'outlined',c:'black',full:true,go:'link.addr:kept'}),{close:'link.addr:kept'});
+  return renderInner('link.result:inuse')}});
 
 // ---------- O3~O10 : 인증 화면 ----------
 const STEPS=[
@@ -47,11 +49,11 @@ function vGuide(st){const i=stepIdx(st),s=STEPS[i];
  return `<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:16px"><span class="b1 semi">${T('Ownership Video Recording Guide')}</span>
   <div style="border-radius:8px;display:flex;flex-direction:column;gap:8px"><div style="position:relative;border-radius:8px 8px 0 0;overflow:hidden;cursor:pointer" data-go="own.verify:${NEXT[['normal','s2','s3'][i]]}"><img src="${A('own-guide-lighter.png')}" style="width:100%;aspect-ratio:1280/929;object-fit:cover"><span style="position:absolute;left:16px;top:16px;background:#0031c6;color:#fff;border-radius:100px;padding:2px 7px;font-size:11px;line-height:1.38;letter-spacing:.16px">${T(`Step ${i+1} of 3`)}</span></div>
   <div class="col" style="gap:4px;padding:8px"><span class="b2 med">${T(s.t)}</span><span class="b2 c2">${T(s.b,s.ko)}</span></div></div>
-  <img src="${A('own-mo-step'+(i+1)+'.svg')}" style="width:100%;height:6px" alt=""></div>`}
+  <div class="row between" style="align-items:center;gap:8px">${i>0?`<button class="icon-btn" aria-label="Previous step" data-go="own.verify:${['normal','s2','s3'][i-1]}">${ic('chevron-left')}</button>`:'<button class="icon-btn" aria-label="Previous step" disabled style="opacity:.38">'+ic('chevron-left')+'</button>'}<img src="${A('own-mo-step'+(i+1)+'.svg')}" style="flex:1;min-width:0;height:6px" alt="">${i<2?`<button class="icon-btn" aria-label="Next step" data-go="own.verify:${['normal','s2','s3'][i+1]}">${ic('chevron-right')}</button>`:'<button class="icon-btn" aria-label="Next step" disabled style="opacity:.38">'+ic('chevron-right')+'</button>'}</div></div>`}
 function vZone(file){
  return file
-  ?`<div style="border:1px dashed rgba(0,0,0,.12);border-radius:4px;padding:24px 16px;display:flex;align-items:center;gap:16px"><span style="width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;flex:none">${oic('videocam',24)}</span><div class="col grow" style="gap:0"><span class="b1">lighter-ownership.mp4</span><span class="row b2 c2" style="gap:8px">3.2 MB<span>•</span>${T('Complete')}</span></div><button class="icon-btn" data-go="own.verify:s3" style="width:36px;height:36px" title="Remove">${oic('x',20)}</button></div>`
-  :`<div style="border:1px dashed rgba(0,0,0,.12);border-radius:4px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;cursor:pointer" data-go="own.verify:uploading">${oic('upload')}<span class="b2">${T('Upload your screen recording')}</span><span class="b2 c2">${T('MP4 or MOV (max. 100MB)')}</span></div>`}
+  ?`<div style="border:1px dashed rgba(0,0,0,.12);border-radius:4px;padding:24px 16px;display:flex;align-items:center;gap:16px"><span style="width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;flex:none">${oic('videocam',24)}</span><div class="col grow" style="gap:0"><span class="b1">lighter-ownership.mp4</span><span class="row b2 c2" style="gap:8px">3.2 MB<span>•</span>${T('Complete')}</span></div><button class="icon-btn" data-go="own.verify:uploading" style="width:36px;height:36px" title="Replace" aria-label="Replace file">${oic('x',20)}</button></div>`
+  :`<div style="border:1px dashed rgba(0,0,0,.12);border-radius:4px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;cursor:pointer" data-go="own.verify:uploading">${oic('upload')}<span class="b2">${T('Upload your screen recording')}</span><span class="b2 c2">${T('MP4 or MOV (max. 1GB)')}</span></div>`}
 const vAlert=(tone,lines)=>{const [bg,c,icn]=tone==='info'?['#e5f6fd','#014361','info']:['#fff4e5','#663c00','warn'];
  return `<div style="display:flex;gap:12px;background:${bg};color:${c};border-radius:4px;padding:6px 16px"><span style="padding:8px 0 7px;display:flex">${oic(icn,20)}</span><div class="col" style="gap:8px;padding:8px 0;font-size:14px;line-height:1.43;letter-spacing:.17px">${lines.map(l=>`<span>${l}</span>`).join('')}</div></div>`};
 const vAlerts=()=>vAlert('info',[T('It must be a screen recording file showing the navigation path, not a captured image.'),T('The process from the start of the recording to the wallet address verification must be visible without interruption.'),T('Please log in to the affiliated exchange account for ownership verification, record the screen so the wallet address is visible, then attach the recording file and click the [Submit Claim] button to submit.'),T('Most requests are reviewed within 5 minutes.')])
@@ -63,14 +65,14 @@ function verifyPage(st){
  const upload=`<div style="background:#fff;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px"><p style="margin:0;font-size:24px;line-height:1.334;font-weight:700">${T('Upload Recording')}</p>
   <div class="col" style="gap:8px">${vZone(file)}${vAlerts()}</div>${C.btn(T('Submit Claim'),{full:true,disabled:!file,go:file?'own.verify:confirm':''})}</div>`;
  return `<div style="width:1248px;max-width:100%;margin:0 auto;padding:40px 80px 64px;display:flex;flex-direction:column;gap:40px">
-  <div class="row" style="gap:8px"><button class="icon-btn" data-go="home.main">${oic('back')}</button><span style="font-size:20px;line-height:1.6;font-weight:500;letter-spacing:.15px">${T('Ownership Verification')}</span></div>
+  <div class="row" style="gap:8px"><button class="icon-btn" data-go="back:home.main">${oic('back')}</button><span style="font-size:20px;line-height:1.6;font-weight:500;letter-spacing:.15px">${T('Ownership Verification')}</span></div>
   <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px;align-items:start"><div class="col g16">${vWallet()}${vGuide(st)}</div>${upload}</div></div>`;
 }
 // 모바일(Figma 28982:126103~ · 기존 [MAX-561] mWeb): mWeb 헤더(로고 · 계정 · 메뉴) → 제목 줄 → 카드 → 업로드 → 제출
 const moHead=()=>`<div style="height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#f8fafc"><img src="${A('logo.svg')}" style="width:142px;height:16px" alt="TetherMax"><div class="row" style="gap:6px"><span style="width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.04);display:inline-flex;align-items:center;justify-content:center"><img src="${A('own-mo-account.svg')}" style="width:20px;height:20px" alt=""></span><span style="width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.04);display:inline-flex;align-items:center;justify-content:center"><img src="${A('own-mo-menu.svg')}" style="width:20px;height:20px" alt=""></span></div></div>`;
 function verifyPageMo(st){
  const file=fileOf(st);
- return `${moHead()}<div style="padding:16px 16px 0;display:flex;align-items:center;gap:4px"><button class="icon-btn" data-go="home.main">${oic('back')}</button><span style="font-size:20px;font-weight:500;line-height:1.6">${T('Ownership Verification')}</span></div>
+ return `${moHead()}<div style="padding:16px 16px 0;display:flex;align-items:center;gap:4px"><button class="icon-btn" data-go="back:home.main">${oic('back')}</button><span style="font-size:20px;font-weight:500;line-height:1.6">${T('Ownership Verification')}</span></div>
   <div style="padding:16px;display:flex;flex-direction:column;gap:24px">${vWallet()}${vGuide(st)}
   <div class="col" style="gap:8px"><span class="b1 semi">${T('Upload Recording')}</span><div style="background:#fff;border-radius:8px;padding:16px">${vZone(file)}</div>${vAlerts()}</div>
   ${C.btn(T('Submit Claim'),{full:true,disabled:!file,go:file?'own.verify:confirm':''})}</div>`;
@@ -155,6 +157,7 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
   {id:'rejected',label:'거절 — Ownership Verification Unsuccessful (O13)',figma:{pc:'29205:124663',mo:'28982:126283'},note:'V2.2 <code>own/O11#rejected</code>'},
   {id:'unlinked',label:'이전 보유자 · 연동 해제 행 (O14)',figma:{pc:'28960:127727',mo:'12783:404139'},note:'V2.2 <code>own/O14#normal</code>. 모바일 = [기존 MAX-561] mWeb Unlinked and UID claim by others(행 아래 경고 Alert + 오른쪽 화살표) — DEX 모바일 프레임 없음'},
   {id:'reclaim',label:'재청구 다이얼로그 (O15)',figma:{pc:'29202:120092',mo:'28982:126318'},note:'V2.2 <code>own/O14#reclaim</code>'},
+  {id:'reclaimUid',label:'재청구 다이얼로그 — CEX UID (기존 MAX-561)',note:'CEX 해제 행은 기존 UID 문구 — 지갑 문구(O15)를 쓰지 않음'},
   {id:'reclaimRejectedRow',label:'재청구 거절 · 홈 계정 행',figma:{pc:'29202:120644',mo:'28982:126338'}},
   {id:'reclaimRejected',label:'재청구 거절 · 사유 (O16)',figma:{pc:'29202:120644',mo:'28982:126338'},note:'V2.2 <code>own/O14#rejected</code>'},
  ],
@@ -171,7 +174,7 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
   }[st]);
   const ntWrap=`<div style="${mo?'padding:0 16px 24px':'width:1088px;max-width:100%;margin:8px auto 24px'}">${nt}</div>`;
   const page=ownHome(st==='reclaimRejectedRow'?'reclaimRejected':st);
-  if(!['approved','rejected','reclaim','reclaimRejected'].includes(st)||ctx.asBg)return page+ntWrap;
+  if(!['approved','rejected','reclaim','reclaimUid','reclaimRejected'].includes(st)||ctx.asBg)return page+ntWrap;
   const account=`<div class="row g8" style="margin:16px 24px 0;padding:8px 16px;border:1px solid var(--divider);border-radius:4px">${C.dex(OWN_DEX,24)}<span class="b2 med">${OWN_DEX}</span><span class="cap c2">${T('Wallet','지갑')} ${OWN_SHORT}</span></div>`;
   const ok=mBtn(T('OK'),'home.main');
   const remove=mBtn(T('Remove Wallet'),'home.main','white');
@@ -181,8 +184,8 @@ R.screen({id:'own.home',group:'own',title:'홈 · 심사 상태 · 이전 보유
    approved:{title:T('Ownership Verification Complete'),extra:account,body:T('Your wallet ownership has been successfully verified.'),actions:ok},
    rejected:{title:T('Ownership Verification Unsuccessful'),extra:account,body:T('We were unable to verify your wallet ownership. Please review your submission and try again.'),actions:ok},
    reclaim:{title:T('Verify Ownership to Reclaim This Wallet'),body:T('This wallet address was unlinked after another user verified ownership. If it belongs to you, submit a new claim.'),actions:mo?submit+remove:remove+submit,close:'own.home:unlinked'},
+   reclaimUid:{title:T('Verify Ownership to Reclaim This UID'),body:T('This UID was unlinked after another user verified ownership. If it belongs to you, submit a new claim.'),actions:mo?mBtn(T('Submit UID Ownership'),'own.verify:normal')+mBtn(T('Remove UID'),'home.main','white'):mBtn(T('Remove UID'),'home.main','white')+mBtn(T('Submit UID Ownership'),'own.verify:normal'),close:'home.main:statuses'},
    reclaimRejected:{title:T('Ownership Verification Unsuccessful'),body:`${T('We were unable to verify your wallet ownership.')}<br><br>${T('Reason from review')}: ${T('The full wallet address is not visible in the recording.')}`,actions:mo?apply+remove:remove+apply,close:'own.home:reclaimRejectedRow'},
   }[st];
-  const height=mo?812:900;
-  return `<div style="position:relative;height:${height}px;overflow:hidden">${page}<div class="scrim center" style="align-items:center;justify-content:center;bottom:auto;height:${height}px;padding:16px">${muiDialog(dlg)}</div></div>${ntWrap}`;
+  return `<div style="position:relative">${page}<div class="scrim pt-fixed center" style="align-items:center;justify-content:center;padding:16px">${muiDialog(dlg)}</div></div>${ntWrap}`;
  }});

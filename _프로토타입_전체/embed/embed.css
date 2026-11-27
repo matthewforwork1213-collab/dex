@@ -1,0 +1,8 @@
+/* 목록판 전용 — 위 도구줄(고정) 아래로 실사이트 고정 요소를 내린다 */
+.pt-frame .gnb,.pt-frame .mo-top{top:var(--pt-bar-h,48px)}
+.pt-frame [data-dt-tabs]{top:calc(var(--pt-bar-h,48px) + 64px)}
+.pt-frame.vp-mo [data-dt-tabs]{top:calc(var(--pt-bar-h,48px) + 56px)}
+body.pt-embed .site-layer.open{top:var(--pt-bar-h,48px)}
+body.pt-mo.pt-embed .site-layer.open{left:50%;right:auto;width:390px;max-width:100%;transform:translateX(-50%)}
+body.pt-mo.pt-embed .site-layer.k-side .site-box{width:390px;max-width:100%}
+body.pt-embed:not(.pt-mo) .site-layer.k-side .site-box{top:var(--pt-bar-h,48px)}
