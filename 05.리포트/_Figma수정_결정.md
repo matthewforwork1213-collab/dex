@@ -179,3 +179,4 @@
 | Cashback Basics 소제목 `Withdraw cashback and rewards` | `Claim cashback and rewards`(요청·동작 = Claim) |
 | 가입·로그인 이메일 인증 | 실서비스 모달: `Email Verification` · `We've sent a code to {email}` · 6칸 코드 · `Paste` · `Verify` · `Resend code in 01:00` |
 | 허브 `YOUR CASHBACK` 패널 · 지갑 상세 금액 카드의 송금 완료 누계 라벨 | `Total Claimed`(허브 패널은 `Total claimed`) 유지 — G-053 |
+| 캐시백 요약 `DEX data pending`(달력 `P`) · 맥스보드 `Cashback Update Delayed` 안내 | 없음 — 실서비스에 없는 표시(반영 지연 표시 없음 원칙) |

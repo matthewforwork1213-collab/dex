@@ -89,7 +89,7 @@
 
 | HTTP | 에러 코드 | 조건 |
 |---|---|---|
-| 422 | `COUPON_ACCOUNT_NOT_ELIGIBLE` | 쿠폰 적용 계정이 `연동 완료`가 아니거나 이슈 계정. 챌린지 계열 쿠폰과 `LINK UID` 첫 연동 쿠폰은 DEX 지갑에도 적용 가능(REQ-397) |
+| 422 | `COUPON_ACCOUNT_NOT_ELIGIBLE` | 쿠폰 적용 계정이 `연동 완료`가 아니거나 이슈 계정. 챌린지 계열 쿠폰과 첫 연동 쿠폰(`LINK ACCOUNT`, 기존 쿠폰 유형 `LINK UID` — G-326)은 DEX 지갑에도 적용 가능(REQ-397) |
 | 403 | `REVIEW_NOT_ELIGIBLE` | 해당 거래소 `연동 완료` 계정 없음 |
 
 ## 공통 Enum
@@ -101,7 +101,7 @@
 | `LinkStatus` | 기존 UID 상태 값 그대로 + DEX는 `LINKED`(`연동 완료`) · `MANUAL_LINK_PENDING`(기존 `manual_link_pending`, `연동 시도중이에요`) · `INACTIVE`(DEX 오프보딩) | DEX용 신규 상태 없음(REQ-098). 실제 키 문자열은 기존 상태 키를 따른다 |
 | `LinkResult` | `LINKED` / `PROCESSING` | API-007 성공 응답의 결과(실패는 에러 코드) |
 | `ProcessingReason` | `PARTNER_LOOKUP` / `PRELINK_PAYOUT` | `PROCESSING`의 이유 — 파트너 귀속 확인 대기 / 연동 전 잔액 출금 대기(REQ-107) |
-| `SettlementStatus` | `CREDITED` · `WITHHELD` · `PENDING` · `DATA_PENDING` | DEX 정산 상태 라벨(REQ-047). 전체 enum·전이 G-059 확정: 회원 화면 상태 = `DEX data pending`(미수신, 0 아님) · `Credited` · `Withheld`. Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 |
+| `SettlementStatus` | `CREDITED` · `WITHHELD` · `PENDING` · `DATA_PENDING` | DEX 정산 상태 라벨(REQ-047). 전체 enum·전이 G-059 확정: 회원 화면 상태 = `Credited` · `Withheld`(원장 미수신 `DATA_PENDING`은 서버 상태 — 화면 표시 없음). Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 |
 | `PayoutStatus` | `SENT` | 출금 피드(API-015)에 나오는 값. 피드는 성공 확정 건만 준다 |
 | `SummaryRowType` | `EXCHANGE_CASHBACK` · `EVENT_REWARD` · `WITHDRAWAL` · `WITHDRAWAL_RETURNED` | 캐시백 요약 행 유형 |
 | `ExchangeScope` | `ALL` / `CEX` / `DEX` / 거래소 코드 | 그룹 드롭다운 범위 선택 값(REQ-030) |
@@ -119,11 +119,11 @@
 | API-004 | GET | `/api/exchanges/{slug}/detail` | 거래소 상세(Venue) 콘텐츠 | FU-010 · FU-054 · FU-055 · FU-056 · FU-057 · FU-058 · FU-059 · FU-084 · BU-010 · BU-047 · BU-048 · BU-049 · BU-050 · BU-051 · BU-052 | 신규 | G-270 확정: PRD 구조 — Guide Title 100 · 단계 1~5 · Step Title 80 · Description 500 · 데스크톱 2:1 + 모바일 1:1 .mp4 필수 · G-272 · G-439 확정: 섹션 단위 — Section Name 40자 + 질문·답변 쌍(섹션 합계 2,000자) |
 | API-005 | 기존 | `/exchange/get-exchange-guide-info` | 연동 가이드 (DEX = 지갑 주소 찾기) | FU-016 · FU-027 · BU-016 | 기존·변경 | 확정 |
 | API-006 | GET | `/api/link/precheck` | 연동 사전 확인 (한도·연동 가능) | FU-013 · FU-014 · BU-013 · BU-014 | 기존·변경 ⚠경로 | 확정 |
-| API-007 | POST | `/api/accounts/dex-wallets` | DEX 지갑 연동 신청 | FU-003 · FU-009 · FU-012 · FU-014 · FU-015 · FU-017 · FU-018 · FU-019 · FU-020 · FU-021 · FU-022 · FU-023 · FU-024 · FU-025 · FU-027 · BU-003 · BU-009 · BU-012 · BU-014 · BU-015 · BU-017 · BU-018 · BU-019 · BU-020 · BU-021 · BU-022 · BU-023 · BU-024 · BU-025 · BU-027 | 신규 | ❓ G-098 · G-350 확정 |
+| API-007 | POST | `/api/accounts/dex-wallets` | DEX 지갑 연동 신청 | FU-003 · FU-009 · FU-012 · FU-014 · FU-015 · FU-017 · FU-018 · FU-019 · FU-020 · FU-021 · FU-022 · FU-023 · FU-024 · FU-025 · FU-027 · BU-003 · BU-009 · BU-012 · BU-014 · BU-015 · BU-017 · BU-018 · BU-019 · BU-020 · BU-021 · BU-022 · BU-023 · BU-024 · BU-025 · BU-027 | 신규 | G-098 확정(기존 CEX 캡차 판단 · 1회용 토큰 · 주소 바인딩) · G-350 확정 |
 | API-008 | 기존 | `/uid/get-my-uid-list` | 내 거래 계정 목록 (CEX UID + DEX 지갑) | FU-002 · FU-003 · FU-007 · FU-023 · FU-025 · FU-037 · FU-039 · FU-054 · FU-070 · BU-002 · BU-003 · BU-007 · BU-023 · BU-025 · BU-032 · BU-034 · BU-047 · BU-063 | 기존·변경 | 확정 |
-| API-009 | GET | `/api/accounts/dex-wallets/{accountId}` | DEX 지갑 상세 | FU-002 · FU-011 · FU-040 · BU-002 · BU-011 · BU-035 | 신규 | G-053 확정: 유지 — V2에서는 테더맥스를 통해 출금한 누계라 데이터가 있음 · G-059 확정: 회원 화면 상태 = `DEX data pending`(미수신, 0 아님) · `Credited` · `Withheld`. Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 |
-| API-010 | 기존 | `/payback/payback-availability-withdrawal` | 캐시백 잔액 (계정별 매칭·출금 가능) | FU-002 · FU-004 · FU-007 · FU-011 · FU-030 · FU-031 · FU-032 · FU-033 · FU-036 · FU-037 · FU-038 · FU-039 · FU-040 · FU-046 · BU-002 · BU-004 · BU-007 · BU-011 · BU-029 · BU-030 · BU-032 · BU-033 · BU-034 · BU-035 · BU-040 | 기존·변경 | G-059 확정: 회원 화면 상태 = `DEX data pending`(미수신, 0 아님) · `Credited` · `Withheld`. Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 · G-100: Lighter도 일 1회 원장이라 주중 표시 문제 없음(G-428) |
-| API-012 | GET | `/api/cashback/summary` | 캐시백 요약 (월간 카드·일별 목록) | FU-004 · FU-005 · FU-006 · FU-007 · FU-011 · FU-035 · FU-041 · FU-060 · FU-061 · FU-062 · BU-004 · BU-005 · BU-006 · BU-007 · BU-011 · BU-036 · BU-053 · BU-054 · BU-055 | 기존·변경 ⚠경로 | G-059 확정: 회원 화면 상태 = `DEX data pending`(미수신, 0 아님) · `Credited` · `Withheld`. Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 |
+| API-009 | GET | `/api/accounts/dex-wallets/{accountId}` | DEX 지갑 상세 | FU-002 · FU-011 · FU-040 · BU-002 · BU-011 · BU-035 | 신규 | G-053 확정: 유지 — V2에서는 테더맥스를 통해 출금한 누계라 데이터가 있음 · G-059 확정: 회원 화면 상태 = `Credited` · `Withheld`(원장 미수신 `DATA_PENDING`은 서버 상태 — 화면 표시 없음). Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 |
+| API-010 | 기존 | `/payback/payback-availability-withdrawal` | 캐시백 잔액 (계정별 매칭·출금 가능) | FU-002 · FU-004 · FU-007 · FU-011 · FU-030 · FU-031 · FU-032 · FU-033 · FU-036 · FU-037 · FU-038 · FU-039 · FU-040 · FU-046 · BU-002 · BU-004 · BU-007 · BU-011 · BU-029 · BU-030 · BU-032 · BU-033 · BU-034 · BU-035 · BU-040 | 기존·변경 | G-059 확정: 회원 화면 상태 = `Credited` · `Withheld`(원장 미수신 `DATA_PENDING`은 서버 상태 — 화면 표시 없음). Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 · G-100: Lighter도 일 1회 원장이라 주중 표시 문제 없음(G-428) |
+| API-012 | GET | `/api/cashback/summary` | 캐시백 요약 (월간 카드·일별 목록) | FU-004 · FU-005 · FU-006 · FU-007 · FU-011 · FU-035 · FU-041 · FU-060 · FU-061 · FU-062 · BU-004 · BU-005 · BU-006 · BU-007 · BU-011 · BU-036 · BU-053 · BU-054 · BU-055 | 기존·변경 ⚠경로 | G-059 확정: 회원 화면 상태 = `Credited` · `Withheld`(원장 미수신 `DATA_PENDING`은 서버 상태 — 화면 표시 없음). Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용 |
 | API-013 | GET | `/api/cashback/calendar` | 캘린더용 일별 합계 (회원 시간대) | FU-004 · FU-005 · FU-061 · BU-004 · BU-005 · BU-054 | 신규 | 확정 |
 | API-014 | 기존 | `/rank/get-my-ranking-list` | 캐시백 랭킹 | FU-004 · FU-006 · FU-007 · FU-063 · BU-004 · BU-006 · BU-007 · BU-056 | 기존·변경 | 일부 미정 |
 | API-015 | GET | `/api/feed/withdrawals` | 완료 출금 통합 피드 | FU-002 · FU-042 · BU-002 · BU-037 | 기존·변경 ⚠경로 | G-137 확정: 완료 건만(원본) — 실패 사유 미표시 |
@@ -134,7 +134,7 @@
 | API-021 | 기존 | `/guest/get-total-event-list` (+ `/guest/get-exchange-event-list`) | 이벤트 목록 (거래소 그룹 필터) | FU-006 · FU-072 · BU-006 · BU-065 | 기존·변경 | 확정 |
 | API-022 | POST | `/api/details/{id}/comments` | 거래소 리뷰(댓글) 작성 — 작성 자격 | FU-058 · BU-051 | 기존·변경 | 확정 |
 | API-023 | POST | 기존 공개 조회 경로 확인 필요 | 비회원 캐시백 조회(읽기 전용) | FU-012 · BU-012 | 기존·변경 ⚠경로 | 공개 조회와 게스트 출금 차단 분리 |
-| API-025 | POST | `/possession/init-possession-request` | 소유권 신청 — DEX 지갑 (녹화 업로드·제출) | FU-026 · FU-027 · BU-026 · BU-027 | 기존·변경 | G-434 확정 · ❓ G-435 |
+| API-025 | POST | `/possession/init-possession-request` | 소유권 신청 — DEX 지갑 (녹화 업로드·제출) | FU-026 · FU-027 · BU-026 · BU-027 | 기존·변경 | G-434 확정 · G-435 확정(확인 중 판정 후에만 신청) |
 | API-026 | GET | `/possession/get-possession-status` | 소유권 신청 상태 조회 (DEX 지갑 포함) | FU-026 · FU-027 · FU-028 · BU-026 · BU-027 · BU-028 | 기존·변경 | 확정 |
 | MB-API-002 | GET | `/api/maxboard/boards/{boardId}` | 맥스보드 상세 (DEX 보드) | FU-065 · FU-066 · FU-068 · BU-058 · BU-059 · BU-061 | 기존·변경 | G-318 확정: `LIGHTER` · `APEX` · `EDGEX` · `ASTER`(기존 대문자 규칙) |
 | MB-API-003 | GET | `/api/maxboard/boards/{boardId}/eligibility` | 맥스보드 참여 자격 (지갑) | FU-067 · FU-068 · BU-060 · BU-061 | 기존·변경 | G-314 확정: ② 연동 시점(G-436 「연동 후」와 같은 기준) · G-315 확정: 이름 유지 + 값만 지갑(하위 호환) |
@@ -542,7 +542,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 | Idempotency-Key | string(header) | 필수 | UUID |
 | exchangeNo | integer | 필수 | DEX 거래소 |
 | walletAddress | string | 필수 | 붙여넣은 주소. 서버가 trim 후 검증, 저장은 trim 결과 그대로(대소문자 보존) |
-| captchaToken | string | 필수 | GEETEST 결과. 1회용·주소 바인딩 여부 ❓ G-098 |
+| captchaToken | string | 조건부 | GEETEST 결과. 1회용이며 제출 `walletAddress`에 묶임 — 통과 후 주소가 바뀌면 서버가 재검증. 필요 여부는 기존 CEX처럼 서버가 판단(auto-link면 생략) (G-098) |
 | entryPoint | string | 선택 | `checklist` · `empty_state` · `home` · `hub` · `venue` · `maxboard`(분석용, 식별자 아님) |
 
 ```json
@@ -701,7 +701,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 
 - `eventReward: null`이면 행 미표시. `withdrawable` = 매칭 후, 절삭.
 - API-009 지갑 상세 카드에서 `exchangeCashback`은 이 지갑의 확정 캐시백 A, `eventReward`는 매칭 전 이벤트 보유액 B다. B가 0인 경우에도 행을 숨긴다. B > 0이면 리워드 행에 min(A, B), 보조 설명에 매칭액 / B를 표시한다. 예: A=7, B=100 → 행 7.00, 설명 7.00 / 100.00 USDT, 상세 합계와 진행 줄은 `withdrawable` 14.00. A=2, B=8이면 상세 합계 4.00으로 최소액 미달이다. API-010 홈의 매칭 전 합계와 구분한다.
-- `settlement.status`는 기능 플래그(G-100: Lighter도 일 1회 원장이라 주중 표시 문제 없음(G-428)·G-127 확정: ApeX가 원장 전 배치를 노출할 때만 `Pending` 줄 표시·G-059 확정: 회원 화면 상태 = `DEX data pending`(미수신, 0 아님) · `Credited` · `Withheld`. Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용). 수집 상태 `DEGRADED`면 `lastUpdatedAt` 채움.
+- `settlement.status`는 기능 플래그(G-100: Lighter도 일 1회 원장이라 주중 표시 문제 없음(G-428)·G-127 확정: ApeX가 원장 전 배치를 노출할 때만 `Pending` 줄 표시·G-059 확정: 회원 화면 상태 = `Credited` · `Withheld`(원장 미수신 `DATA_PENDING`은 서버 상태 — 화면 표시 없음). Lighter 주중 추정치(`Accruing`)는 회원 화면에 두지 않는다(G-100). 원장의 `Pending`·`Paid`·`Final`은 어드민 전용). 수집 상태 `DEGRADED`면 `lastUpdatedAt` 채움 — 화면 표시 없음(반영 지연 표시 없음).
 - `weeklyHistory.date`는 UTC 날짜가 아니라 **시간 단위 원천을 회원 로컬 기준으로 묶은 값이 필요**하므로, 프론트가 API-013으로 재집계하는 방식도 허용(같은 결과여야 함). `Total Claimed`·하위 계정 G-053 확정: 유지 — V2에서는 테더맥스를 통해 출금한 누계라 데이터가 있음(결정 전 미포함).
 
 **에러 Response**
@@ -823,7 +823,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 ```
 
 - `identifier`는 전체 주소를 보내고 화면 폭 축약은 프론트가 한다(위 예시는 표기 예). 금액은 USDT(USDC 1:1).
-- `dexPendingDates`: DEX 원장 미수신 날짜 → `DEX data pending`(0과 구분, REQ-373). `range.dexFrom` = 최근 180일 경계.
+- `dexPendingDates`: DEX 원장 미수신 날짜 — 화면 표시 없음(`DEX data pending` 행·달력 `P` 없음). 프론트는 그 날짜에 그 DEX 0 행을 만들지 않는 데만 쓴다(REQ-373). `collection[].status`·`lastUpdatedAt`도 화면 표시 없음. `range.dexFrom` = 최근 180일 경계.
 - `WITHDRAWAL` = 자동 지급 출금 행, `WITHDRAWAL_RETURNED` = 최종 실패 복원 행(G-113 확정: 복원된 날 `+` 부호 행(`Withdrawal returned`)). 출금 행에 tx 해시·익스플로러 링크를 넣지 않는다(회원 화면에 결과·tx 해시 없음, REQ-163).
 
 **에러 Response**
@@ -893,7 +893,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |---|---|---|---|
-| month | string | 필수 | `YYYY-MM`(월 경계 ❓ G-185) |
+| month | string | 필수 | `YYYY-MM`(UTC 월, G-185) |
 | exchangeType | string | 선택 | `ALL` / `CEX` / `DEX` |
 
 **Response (200 OK)**
@@ -911,7 +911,7 @@ DEX 조회 성공 예시. `breakdown`은 두 항목을 공개할 수 있을 때�
 ```
 
 - 정렬값 = 그달 커미션 캐시백 적립액(USDT, USDC 1:1). 0.01 USDT 미만·`연동 완료` 아닌 계정은 제외(`rank: null` → `–`). 행에 금액 없음.
-- 동점(❓ G-182)·고정 시점(❓ G-183)·월중 출금 영향(❓ G-184).
+- 동점 · 고정 시점 · 월중 출금 영향은 기존 랭킹 로직 그대로. 기존에 규칙이 없으면 동점 = 같은 순위·먼저 연동한 계정 먼저(G-182), 월 마감 + 48시간까지 재계산 후 고정(G-183), 출금해도 순위 하락 없음(G-184) — 개발 확인.
 
 **에러 Response**
 
@@ -1234,7 +1234,7 @@ DEX 요청 예시. 보기 ID는 설명용이며 실제 값은 퀴즈 콘텐츠�
 | 409 | `FAILED_RECENT_POSSESSION` | 그 지갑의 마지막 소유권 승인 후 30일 이내(기존 코드) → `Ownership Claim Unavailable` |
 | 409 | `INTEGRATION_MAX_COUNT_OVER` | 통합 연동 한도 도달(기존 코드) |
 | 409 | 기존 중복 제출 코드 | 같은 신청 연타 · 진행 중 신청 있음 — 제한 규칙은 기존 그대로(G-434) |
-| 422 | 기존 코드 | 지갑이 다른 회원의 `확인 중` 상태 — 허용 여부 ❓ G-435 |
+| 422 | 기존 코드 | 지갑이 다른 회원의 `확인 중` 상태 — 확인 중 판정이 끝난 뒤에만 신청 가능 (G-435) |
 | 500 | `INTERNAL_ERROR` | 업로드·바이러스 검사 실패 → `Something Went Wrong`, 신청 생성 안 함 |
 
 #### API-026. 소유권 신청 상태 조회 (DEX 지갑 포함)
@@ -1281,7 +1281,7 @@ DEX 요청 예시. 보기 ID는 설명용이며 실제 값은 퀴즈 콘텐츠�
 |---|---|
 | Method | GET |
 | URL | `/api/maxboard/boards/{boardId}` |
-| 설명 | DEX 보드에서 `exchange.code`·`exchange.name`이 DEX 값이 된다. `batchDelayed`는 DEX 원장 완료 상태(JOB-D14)로 판정 |
+| 설명 | DEX 보드에서 `exchange.code`·`exchange.name`이 DEX 값이 된다. `batchDelayed`는 DEX 원장 완료 상태(JOB-D14)로 판정 — 화면 표시 없음(지연 안내 없음, REQ-640) |
 | 구분 | 기존·변경 |
 | 권한 | 공개 |
 | 관련 기능 | FU-065 · FU-066 · FU-068 · BU-058 · BU-059 · BU-061 |
@@ -1330,7 +1330,7 @@ DEX 요청 예시. 보기 ID는 설명용이며 실제 값은 퀴즈 콘텐츠�
 { "status": "success", "data": { "state": "NOT_REGISTERED", "eligibleUids": [ { "uid": "0x7a3F9c1b2D4e5F60718293a4B5c6D7e8F90151E9" } ], "eligibilityRule": { "uidRegisteredOnOrAfter": "2026-10-09" }, "resetUid": null, "resetAt": null, "resetReason": null }, "meta": { "requestId": "req_…" } }
 ```
 
-- 확인 중 지갑은 `eligibleUids`에 없음. 다른 DEX에 연동된 같은 주소는 제외. `resetReason`은 CEX와 같음(`OWNERSHIP_TRANSFER` · `ISSUE_UID`) — 소유권 이전 시 이전 회원 참여는 `RESET`, 새 회원에게 승계되지 않음. 최초 등록일 정의 G-314 확정: ② 연동 시점(G-436 「연동 후」와 같은 기준).
+- 확인 중 지갑은 `eligibleUids`에 없음. 다른 DEX에 연동된 같은 주소는 제외. `resetReason`은 CEX와 같음(`OWNERSHIP_TRANSFER` · `ISSUE_UID`) + 운영자 해제 · DEX 서비스 종료로 끊긴 지갑은 `ISSUE_UID`와 같은 처리의 새 값(G-388, 값 이름은 개발 정의) — 소유권 이전 시 이전 회원 참여는 `RESET`, 새 회원에게 승계되지 않음. 최초 등록일 정의 G-314 확정: ② 연동 시점(G-436 「연동 후」와 같은 기준).
 
 **에러 Response**
 

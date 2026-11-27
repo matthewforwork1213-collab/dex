@@ -8,7 +8,7 @@
 
 | 구분 | 수 | 내용 |
 |---|---|---|
-| 처리한 항목 | **17** | 10차 결정 홈 행 상태 1(기존 디자인으로 다시 그림 + 칩 정리 + 0원 안내 숨김) · 우선 1 CEX UID 상세 1 · 결정 위반 4 · 우선 2 상위 4 · 추가 결정(0원 안내 없음) 1 · 기존 노드·원문 조사 2(배너·모달 원본 · 행 상태 표시 방식) · 반영 지연 숨김 1(요약 · 허브 H6 · 홈 · 지갑 상세 · 메모) · 처리 중 행 기존 디자인 1 · Cashback Basics 소제목 1 |
+| 처리한 항목 | **18** | 10차 결정 홈 행 상태 1(기존 디자인으로 다시 그림 + 칩 정리 + 0원 안내 숨김) · 우선 1 CEX UID 상세 1 · 결정 위반 4 · 우선 2 상위 4 · 추가 결정(0원 안내 없음) 1 · 기존 노드·원문 조사 2(배너·모달 원본 · 행 상태 표시 방식) · 반영 지연 숨김 1(요약 · 허브 H6 · 홈 · 지갑 상세 · 메모) · 처리 중 행 기존 디자인 1 · Cashback Basics 소제목 1 · `DEX data pending`·맥스보드 지연 숨김 1 |
 | 새 프레임 | **7** | 홈 행 상태 1 · 배너를 누른 모달 4(수동 연동 실패 CEX·DEX · 이슈 CEX·DEX) · 공통 오류 토스트 1 · 모바일 `See All` 꽉 찬 모달 1 (아래 「새 프레임 목록」) |
 | 숨김 | 프레임 8 · 라벨 4 · 칩 13 · 보조 문구 3 | 4차 「Issue and failed」 29418:141446 · 4차 「Zero balance」 29423:139494 · 반영 지연 프레임 6(요약 `Delayed` · 허브 H6 PC·모바일 라이트·다크 · 홈 `Balance delayed` · 지갑 상세 `Delayed`) + 라벨 4 · `Trying to link` · `Verifying ownership` 칩(점 + 시계로) · 홈·`See All` 모달의 `No cashback yet` · `Data delayed` · `Inactive` 칩 · `Last updated …` 2 · `No longer supported …` 1 |
 | ✏️ 문구표 승인 대상 | **6** | DEX 행 배너·모달의 `Wallet` 표기(아래 「DEX 행 문구」) |
@@ -126,6 +126,27 @@
 
 ---
 
+## 7. 실서비스에 없는 표시 숨김 — `DEX data pending` · `Cashback Update Delayed` (추가 결정)
+
+검색: DEX(revision) 전 섹션(섹션 단위) 보이는 TEXT `DEX data pending|data pending|Cashback Update Delayed|^P$`, 요약 섹션 1글자 대문자 텍스트.
+
+| 화면(노드) | 바꾼 것 | 전/후 |
+|---|---|---|
+| 캐시백 요약 PC — CS1 [28960:127133](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=28960-127133) · CS2 28960:127139 · CS1 Withdrawal returned 29327:118685 · CS1 Claim before linking 29424:139723 | 달력 25일 칸의 `DEX data pending` 표시 숨김(인스턴스 오버라이드 …;27610:203315, 4곳). 일 금액 `+5.00`은 그대로 | `r5_07_CS1_before` · `_after` |
+| 요약 라벨 CS1 28960:127132 | ` Day 25 shows the DEX data pending mark (CS-6).` 삭제 | — |
+| 달력 `P` 표시 | PC 요약 · Mobile 섹션 검색 0건(요일 머리글 `S M T W T F S`만) — 숨길 노드 없음 | — |
+| 모바일 요약 `DEX data pending` | Mobile 섹션 검색 0건 | — |
+| 맥스보드 `Cashback Update Delayed` — 「맥스보드 · 정산 지연」 PC [29062:111741](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29062-111741) · 모바일 [29062:112159](https://www.figma.com/design/hsa3bSV9QmFTe2jsf6tzTm/UI-UX-Design?node-id=29062-112159) · 라벨 29062:112583 | 프레임·라벨 숨김(배너가 보이는 곳은 이 두 프레임뿐) | `r5_07_mbDelayed_before` · `r5_07_mbDelayedM_before` |
+| 인계 메모 FU-065 29066:977 · FU-066 29066:980 · FU-067 29066:983 · FU-068 29066:986 | ` · 지연 — 캐시백 반영이 지연되고 있어요` 삭제 | `r5_07_FU065_before` · `_after` |
+
+숨긴 프레임을 가리키는 메모 링크 없음(인계 · 사용자 기능 · 요약 · 허브 · 잔액 섹션 하이퍼링크 검사).
+
+| 전 | 후 |
+|---|---|
+| ![전](Figma수정결과_img/r5_07_CS1_before.jpg) | ![후](Figma수정결과_img/r5_07_CS1_after.jpg) |
+| ![전](Figma수정결과_img/r5_07_mbDelayed_before.jpg) | (숨김) |
+| ![전](Figma수정결과_img/r5_07_FU065_before.jpg) | ![후](Figma수정결과_img/r5_07_FU065_after.jpg) |
+
 ## 새 프레임 목록
 
 | 노드 | 이름 | 섹션 |
@@ -200,6 +221,7 @@
 | (점검 이후 결정) 10차 홈 행 상태 · 칩 | 처리 — 0장 |
 | (점검 이후 결정) 캐시백 0원 안내 없음 | 처리 — 4장 |
 | (점검 이후 결정) 요약 반영 지연 없음 · 처리 중 행 기존 디자인 | 처리 — 5장 |
+| (점검 이후 결정) `DEX data pending` · `Cashback Update Delayed` 없음 | 처리 — 7장 |
 | 4 · ❓8 · Cashback Basics `Withdraw cashback and rewards` | 처리 — 11차 결정으로 `Claim cashback and rewards`(6장) |
 
 ## 프로토타입에 반영할 것
@@ -217,6 +239,7 @@
 | 9 | `Trying to link` 칩 → 분홍 점 + 시계 아이콘, `Verifying ownership` 칩 → 파란 점 + 시계 + 행 아래 `Ownership verification in progress · {경과 시간}`(DEX 상세 오퍼 박스 비활성 `Trying to link` 버튼은 그대로) | 29328:142352 · 29453:143874 |
 | 10 | 반영 지연(`Delayed` · `DEX data delayed` · `Last updated`) 표시 제거 — 요약 · 허브 H6 · 홈 잔액 · 지갑 상세 | 29327:126239 · 28960:126914 · 29327:411242 · 29330:199016(숨김) |
 | 11 | Cashback Basics 소제목 `Claim cashback and rewards`(본문 · 목차, PC · 모바일) | 29328:132715 · 29381:137257 |
+| 12 | 캐시백 요약 달력 `DEX data pending` 표시 · 맥스보드 `Cashback Update Delayed` 안내 제거 | 28960:127133 · 29062:111741 |
 
 ---
 

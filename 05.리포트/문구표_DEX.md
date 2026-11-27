@@ -8,10 +8,10 @@
 
 | 구분 | 행 수 | 설명 |
 |---|---|---|
-| 총 행 | **89** | 같은 뜻의 빈칸은 한 행으로 묶음 |
+| 총 행 | **96** | 같은 뜻의 빈칸은 한 행으로 묶음 |
 | 언어팩 재사용 | **8** | 키의 국문·영문을 그대로 씀(`페이백`→`캐시백` 치환만 허용) |
 | 기존 문구 재사용 | **12** | STG · 기존 Figma · 이메일 템플릿 · 확정 정책 원문 · 기존 홈 행 배너·모달(DEX 행은 `UID`→`wallet` ✏️) |
-| 신규 작성 | **55** | 언어팩 키를 UID→Account 등으로 고친 것(출처 칸에 바탕 키 표기)과, 영문은 정책 원문이 있고 국문만 새로 쓴 것(G-367 등) 포함 |
+| 신규 작성 | **62** | 언어팩 키를 UID→Account 등으로 고친 것(출처 칸에 바탕 키 표기)과, 영문은 정책 원문이 있고 국문만 새로 쓴 것(G-367 등) 포함 |
 | 표시 없음(결정) | **9** | 사용자 결정으로 문구·상태를 두지 않음 |
 | 운영 입력값 | **3** | 어드민·레코드가 채우는 값 — 문구표 대상 아님(프로토타입은 표본) |
 | 값 미정 | **2** | G-425(법무 문안) · G-025 · G-036(정산 주기) · G-089(지역 판정) — 4장 |
@@ -49,7 +49,7 @@
 
 | # | 위치(화면 · 상태) | 쓰임 | EN | KO | 출처 | 근거 |
 |---|---|---|---|---|---|---|
-| 30 | 허브 CEX 패널 · `Total event reward` 하위 줄 | 캡션 | From events. Invitation rewards are separate. | 이벤트에서 받은 리워드예요. 초대 리워드는 따로 쌓여요. | 신규 | G-140 |
+| 30 | 허브 CEX 패널 · `Total event reward` 하위 줄 | 캡션 | Events and invites (CEX only) | 이벤트 · 초대 리워드 (CEX 전용) | 신규 | G-140 · 결정 11차 |
 | 31 | 허브 DEX 패널 · 출금 가능액 줄 | 라벨 | Claimable {amount} USDT | 출금 가능 {amount} USDT | 신규(STG `Total Claimable Cashback` 계열) | REQ-300 · G-418 |
 | 32 | 허브 DEX 패널 · 각주 | 캡션 | Cashback is sent automatically to your linked {DEX} wallet. | 캐시백은 연동한 {DEX} 지갑으로 자동 지급돼요. | 신규 | REQ-300 · 정책 2350줄(국문 재작성) · G-419 |
 | 33 | 허브 DEX 패널 · 10 USDT 미만 | 캡션 | Cashback is claimed automatically once your claimable amount reaches 10 USDT. | 출금 가능액이 10 USDT가 되면 자동으로 출금돼요. | 신규 | REQ-301 · G-419 |
@@ -73,6 +73,7 @@
 | 52 | 랭킹 목록 아래 | 캡션 | Cashback under 0.01 USDT isn’t included in the rankings. | 캐시백 0.01 USDT 미만은 순위에 포함되지 않습니다. | KO 기존(계획 원문) · EN 신규 | balance #36 |
 | 53 | 랭킹 목록 아래 | 캡션 | Ranking rewards can’t be claimed on their own. They’re matched 1:1 with the same account’s cashback. | 랭킹 리워드만으로는 출금할 수 없어요. 같은 계정의 캐시백과 1:1로 매칭돼요. | 신규 | balance #36 · 정책 4-1 |
 | 54 | 캐시백 요약 · 연동 전 출금 행 | 유형명 | Claim Amount (before linking) | 연동 전 출금 | 신규(STG 유형값 `Claim Amount` 바탕) | G-426 · G-418 |
+| 96 | 허브 계산기 · DEX 상세 계산기 · 수수료 없는 등급(Lighter Standard · Aster maker) | 수치 자리 안내 | {DEX} charges no fee on this trade type, so there's nothing to return. | {DEX}는 이 거래 유형에 수수료가 없어 돌려드릴 캐시백이 없어요. | EN 정책 권고 원문(EC-CALC-6) · KO 신규 | G-145 · REQ-296 · 결정 11차 |
 
 ## 3. 리워드 · 초대 · 쿠폰 · 맥스보드 · 콘텐츠 · 메일
 
@@ -106,6 +107,12 @@
 | 80 | EMAIL 31 지갑 연동 실패 · 연동 전 잔액 출금 실패 사유 | 메일 본문 | We couldn’t send your previous cashback, so this account wasn’t linked. The amount is back in this account’s balance. You can try linking again. | 연동 전에 쌓인 캐시백을 송금하지 못해 연동이 완료되지 않았습니다. 금액은 해당 거래 계정의 잔액으로 복원되었으며, 다시 연동을 신청할 수 있습니다. | 신규(#21과 같은 뜻, 메일 말투) | R-26 · G-426 |
 | 81 | EMAIL T14 출금 실패 · 잔액 복원 줄 | 메일 본문 | The amount is back in your balance. | 출금 금액은 잔액으로 복원되었습니다. | EN 정책 A-31 원문 · KO 신규 | 이메일템플릿 T14 |
 | 82 | 출금 완료 메일 제목 | 메일 제목 | Cashback withdrawal completed | 캐시백 출금이 완료되었습니다. | 기존 템플릿 T13 | G-405 · U9 |
+| 97 | FCM 101 · EMAIL 31 · 사유 = 레퍼럴 아님 | 사유 문구 | This wallet isn't registered with TetherMax's referral, so it can't earn cashback. | 테더맥스 레퍼럴로 가입한 지갑이 아니라 캐시백을 받을 수 없어요. | 신규 | G-285 · REQ-662 · 결정 11차 |
+| 98 | FCM 101 · EMAIL 31 · 사유 = 이미 사용 중 | 사유 문구 | This wallet is already linked to another account. | 다른 계정에 이미 연동된 지갑이에요. | 신규 | G-285 · REQ-662 · 결정 11차 |
+| 99 | FCM 101 · EMAIL 31 · 사유 = 확인 불가 | 사유 문구 | We couldn't verify this wallet. Please contact support. | 지갑을 확인할 수 없어요. 고객센터로 문의해 주세요. | 신규 | G-285 · REQ-662 · 결정 11차 |
+| 100 | 맥스보드 · 자격 없음(참여 계정이 끊긴 뒤) | 본문 | You have no eligible {exchange} account. Link a new account to participate again. | 참여할 수 있는 {거래소} 거래 계정이 없어요. 새 거래 계정을 연동하면 다시 참여할 수 있어요. | EN 원본 `[EN draft]`의 UID → account · KO 정책 D-1-6 원문 | G-323 · REQ-655 · 결정 11차 |
+| 101 | 혜택 상세(맥스보드) · 리워드 영역 | 안내 | Board rewards are paid together with your exchange cashback, so they can't be withdrawn on their own. | 보드 리워드는 거래소 캐시백과 함께 지급돼요. 리워드만 따로 출금할 수는 없어요. | 신규 | G-324 · REQ-645 · 결정 11차 |
+| 102 | Cashback Basics · 소제목 | 소제목 | Claim cashback and rewards | 국문 언어팩 확인 | 기존 아티클 소제목 `Withdraw cashback and rewards`의 동작어를 Claim으로(요청·동작 = Claim) | REQ-714 · 정책 8-24 S-10 · 결정 11차 |
 
 ## 4. 표시 없음(결정) · 운영 입력값 · 값 미정
 
