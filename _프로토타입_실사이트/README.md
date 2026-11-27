@@ -195,6 +195,8 @@
 
 **검증** — 자동 테스트(Playwright, PC 1440 · 모바일 390 × 게스트 · 회원 + See All · 소유권 · 셸 경로) 248개 항목 전부 통과, 페이지 오류 0. 전환 시간은 매 프레임 샘플링으로 기준표 값과 비교.
 
+**Figma 5차 · 결정 10차 반영 (2026-11-27)** — 홈 행(`pt-runtime.js`) · See All · 전체 프로토타입 홈 상태를 Figma 29447:141189 기준으로: 칩 전부 없음, 상태 점(초록 정상 · 빨강 이슈/실패 · 주황 연동 해제 · 분홍 확인 중 + 시계 · 파랑 소유 확인 중 + 시계 + `Ownership verification in progress · 경과 시간`), 행 아래 배너(분홍 Error · 주황 Warning). 수동 연동 실패 모달 CEX/DEX(29447:143890 · 144198) · 이슈 모달 CEX/DEX(144506 · 144810), 공통 오류 토스트 `Something went wrong. Please try again.`(29449:145568 — 연동 `Next`·소유권 제출 중복 요청), 모바일 See All 꽉 찬 모달(29449:145601), 캐시백 요약·지갑 상세 반영 지연 표시 없음, Cashback Basics `Claim cashback and rewards`. 가입 `Continue` · 로그인 `Log in` 제출 뒤 이메일 인증 모달(`Email Verification` · 입력한 이메일 · 6칸 코드 · `Paste` · `Verify` · `Resend code in 01:00`, 어떤 6자리든 통과). 스크린샷 `7_*.png`.
+
 ## 클릭 전수 점검 (2026-11-27)
 
 수집 스냅숏 페이지(`pages/*` · `pt-runtime.js` · 셸 `index.html`)의 보이는 클릭 요소를 전부 눌러 결과를 분류하고, 빈 동작을 실제 사이트처럼 고쳤다. 결과·전후 수치·「근거 없음」 목록은 `05.리포트/실동작프로토타입_클릭점검.md`, 스크린샷 `05.리포트/실동작프로토타입_img/4_*.png`. DEX 앱 화면(`dex/*`)은 이 점검 범위가 아니다.

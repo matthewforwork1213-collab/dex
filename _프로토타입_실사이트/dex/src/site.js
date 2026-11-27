@@ -31,13 +31,17 @@ C.overlay = (bg, inner) => inner;
 // ---------------- 토스트 (MUI Snackbar 모양 · 실사이트 전환 .3s) ----------------
 function toast(msg, o = {}) {
   const el = document.createElement('div');
-  el.className = 'site-toast' + (o.blue ? ' blue' : '');
-  el.innerHTML = (o.blue ? `<img src="${A('home-ic-toast-check.svg')}" alt="">` : '') + `<span>${msg}</span>`;
+  el.className = 'site-toast' + (o.blue ? ' blue' : '') + (o.err ? ' err' : '');
+  el.setAttribute('role', o.err ? 'alert' : 'status');
+  el.innerHTML = (o.blue ? `<img src="${A('home-ic-toast-check.svg')}" alt="">` : o.err ? '<span class="site-toast-x"><i>×</i></span>' : '') + `<span>${msg}</span>`;
   document.body.appendChild(el);
   requestAnimationFrame(() => el.classList.add('in'));
   setTimeout(() => { el.classList.remove('in'); setTimeout(() => el.remove(), 320) }, o.ms || 2400);
 }
 window.siteToast = toast;
+// 공통 오류 토스트(Figma 29449:145568) — 429 · 중복 요청 · 잘못된 값
+const errToast = () => toast('Something went wrong. Please try again.', { err: 1 });
+window.siteErr = errToast;
 
 // ---------------- 실사이트 페이지로 이동 ----------------
 function navReal(path) {
@@ -551,7 +555,8 @@ function doPaste() {
   try { navigator.clipboard.readText().then(t => t ? put(t) : inp.focus(), () => { inp.focus(); toast('붙여넣기 권한이 없어요. 직접 붙여넣어 주세요 (프로토타입)') }) } catch (e) { inp.focus() }
 }
 function onNext(b) {
-  if (L.busy || b.disabled) return;
+  if (L.busy) return errToast();   // 처리 중 다시 누름 = 중복 요청
+  if (b.disabled) return;
   L.val = L.val.trim();
   b.disabled = true;                // 중복 클릭 방지
   openCaptcha();

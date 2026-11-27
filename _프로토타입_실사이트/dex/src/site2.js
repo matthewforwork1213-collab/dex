@@ -331,14 +331,14 @@ function cexSnapshot(cb) {
   sc.onerror = () => { SEE.rows = []; cb() }; document.head.appendChild(sc);
 }
 function seeAllRows() {
-  const dex = API.ST.accounts.map(a => ({ ex: a.ex, id: a.id, type: a.type, amt: DEXSTATE.amt(a), st: a.st === 'zero' ? 'ok' : a.st }));
+  const dex = API.ST.accounts.map(a => ({ ex: a.ex, id: a.id, type: a.type, amt: DEXSTATE.amt(a), st: a.st === 'zero' ? 'ok' : a.st, ts: a.ts }));
   const all = SEE.rows.concat(dex);
   return SEE.chip === 'All' ? all : all.filter(r => (isDex(r.ex) ? 'DEX' : 'CEX') === SEE.chip);
 }
 function openSeeAll() {
   cexSnapshot(() => {
     window.SITELOGO = Object.assign({}, SEE.logos);
-    openCustom(() => { window.SITEA = seeAllRows(); window.SITEAF = SEE.chip; try { return HOMEX.seeAllModal() } finally { window.SITEA = null } }, 'center', {
+    openCustom(() => { window.SITEA = seeAllRows(); window.SITEAF = SEE.chip; try { return HOMEX.seeAllModal() } finally { window.SITEA = null } }, S.vp === 'mo' ? 'full' : 'center', {   // 모바일 = 꽉 찬 모달(Figma 29449:145601)
       bind(box) {
         $$('.chip', box).forEach(c => { const k = c.textContent.trim(); if (!['All', 'CEX', 'DEX'].includes(k)) return; c.dataset.site = 'chip'; c.onclick = e => { e.stopPropagation(); SEE.chip = k; const y = ($('[style*="overflow-y:auto"]', box) || {}).scrollTop; API.renderLayer(); } });
         // 계정 행 → 지갑/UID 상세
@@ -569,7 +569,7 @@ function ownHomeGo(st) {
   if (st === 'reclaimRejected') { ownResult('rejected'); return true }   // 배너 「Ownership verification was unsuccessful. View reason.」
   if (st === 'reclaim') { SO.step = 0; SO.file = null; go2('/ownership'); return true }
   if (st === 'review') {
-    if (submitting) return true; submitting = true;           // 연타해도 1건(REQ-727)
+    if (submitting) { window.siteErr && siteErr(); return true } submitting = true;           // 연타해도 1건(REQ-727)
     const o = API.ST.own; const accs = API.ST.accounts;
     const ex = accs.find(a => a.ex === o.ex && a.id.toLowerCase() === o.id.toLowerCase());
     if (ex) ex.st = 'own'; else accs.push({ ex: o.ex, type: o.type, id: o.id, a: 0, b: 0, st: 'own', ts: Date.now() });
@@ -702,4 +702,6 @@ function calcSet(k, v, fromChip) {
     $$('[data-calc-chipv]', card).forEach(c => { const on = +c.dataset.calcChipv.split(':')[1] === v; c.setAttribute('aria-pressed', on); c.style.border = on ? '1px solid #0031c6' : '.5px solid var(--divider)'; c.style.color = on ? '#0031c6' : 'var(--text-secondary)' });
   }
 }
+// 소유 확인 중 경과 시간(행 아래 「Ownership verification in progress · mm:ss」) — 1초마다 갱신
+setInterval(() => { document.querySelectorAll('[data-own-elapsed]').forEach(el => { const ts = +el.dataset.ownElapsed; if (!ts) return; const t = el.querySelector('.tnum'); if (!t) return; const x = Math.max(0, Math.floor((Date.now() - ts) / 1000)), h = Math.floor(x / 3600), m = Math.floor(x % 3600 / 60), sc = x % 60, p = n => String(n).padStart(2, '0'); t.textContent = h ? h + ':' + p(m) + ':' + p(sc) : p(m) + ':' + p(sc) }) }, 1000);
 })();

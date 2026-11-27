@@ -119,12 +119,11 @@ R.screen({id:'summary.main',group:'summary',title:'캐시백 요약',route:'/cas
   {id:'noMonth',label:'활동 없는 달 (CS5)',figma:{pc:'28960:127157'},note:'V2.2 hist/SUM#noMonth · REQ-375'},
   {id:'noDay',label:'활동 없는 날 · 큰 금액 (CS4)',figma:{pc:'28960:127151'},note:'V2.2 hist/SUM#noDay · REQ-375'},
   {id:'oneEmpty',label:'계정 1개 선택 빈 상태',note:'V2.2 hist/SUM#oneEmpty · G-180 확정 문구'},
-  {id:'delayed',label:'데이터 지연',note:'V2.2 hist/SUM#delayed · REQ-376 — 문구는 허브 H6 각주와 같게(V2.2 국문 배너의 「출금할 수 있어요」는 자동 지급과 맞지 않아 쓰지 않음)'},
   {id:'old',label:'180일 넘은 달',note:'V2.2 hist/SUM#old · REQ-374'},
  ],
  render(st){
   const d=sumData(st);
-  const delayed=st==='delayed'?C.alert('warn','',`EdgeX has not sent new data yet. Amounts show the last update.`):'';
+  const delayed='';   // 반영 지연 표시 없음(결정 10차 「캐시백 요약 반영 지연」)
   const old=st==='old'?`<p class="cap c2" style="margin:8px 0 0">${T('DEX data covers the last 180 days and is not backfilled.','DEX 데이터 조회 범위는 최근 180일 — 백필 안 함')}</p>`:'';
   const monthHead=`<div class="row between"><span class="row g4 b2 semi">${d.month}${ic('arrow-drop-down','ic20')}</span><span class="row g4"><button class="icon-btn" style="padding:6px">${ic('chevron-left','ic20')}</button><button class="icon-btn" style="padding:6px">${ic('chevron-right','ic20')}</button></span></div>`;
   const cal=`${monthHead}${calendar(d)}${old}`;

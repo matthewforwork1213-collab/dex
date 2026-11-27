@@ -301,6 +301,97 @@
   }, true);
   document.addEventListener('DOMContentLoaded', formInit);
 
+  // ---- 이메일 인증 모달(가입 `Continue` · 로그인 `Log in` 제출 뒤) — 라이브 화면 구성·문구 그대로
+  // 제목 `Email Verification` · `We've sent a code to {입력한 이메일}` · X · 6칸 코드(자동 이동 · 백스페이스 이전 칸) · `Paste` · `Verify`(6자리 전 비활성) · `Resend code in 01:00`(0이 되면 `Resend code`)
+  // 배경막·컨테이너는 수집본 PopupManager 클래스 재사용. 오류 원문을 몰라 어떤 6자리든 통과
+  function otpOpen(email, done) {
+    var old = document.getElementById('pt-otp'); if (old) old.remove();
+    var mo = window.innerWidth <= 1024;
+    var box = mo ? 'calc((100% - 40px) / 6)' : '64px';
+    var w = document.createElement('div'); w.id = 'pt-otp';
+    w.className = 'PopupManager-module-scss-module__xOdNVW__PopupContainer';
+    w.style.cssText = 'position:fixed;inset:0;z-index:2147483600;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(30px);transition:opacity .22s cubic-bezier(.42,0,.58,1),transform .22s cubic-bezier(.42,0,.58,1)';
+    var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] }) };
+    w.innerHTML = '<div class="PopupManager-module-scss-module__xOdNVW__Dimmed PopupManager-module-scss-module__xOdNVW__open" style="position:absolute;inset:0;background:rgba(0,0,0,.7)"></div>'
+      + '<div role="dialog" aria-modal="true" aria-labelledby="pt-otp-t" class="MuiPaper-root MuiDialog-paper" style="position:relative;box-sizing:border-box;width:' + (mo ? 'calc(100% - 32px)' : '504px') + ';background:#fff;border-radius:8px;padding:' + (mo ? '24px 16px' : '32px') + ';box-shadow:0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);font-family:inherit;color:rgba(0,0,0,.87)">'
+      + '<button type="button" data-otp="close" aria-label="close" style="position:absolute;right:' + (mo ? 12 : 20) + 'px;top:' + (mo ? 12 : 20) + 'px;width:40px;height:40px;border:0;background:transparent;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4" fill="rgba(0,0,0,.56)"/></svg></button>'
+      + '<h2 id="pt-otp-t" style="margin:0 48px 8px 0;font-size:' + (mo ? 20 : 24) + 'px;line-height:1.33;font-weight:700">Email Verification</h2>'
+      + '<p style="margin:0 0 24px;font-size:14px;line-height:1.43;color:rgba(0,0,0,.6);word-break:break-all">We\'ve sent a code to ' + esc(email) + '</p>'
+      + '<div data-otp="cells" style="display:flex;gap:8px;justify-content:space-between">' + [0, 1, 2, 3, 4, 5].map(function (i) { return '<input data-otp-i="' + i + '" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="Digit ' + (i + 1) + '" style="box-sizing:border-box;width:' + box + ';height:' + (mo ? 'auto' : '64px') + ';aspect-ratio:1;border:1px solid rgba(0,0,0,.23);border-radius:8px;text-align:center;font:inherit;font-size:24px;font-weight:600;outline:0;padding:0;transition:border-color .2s,box-shadow .2s">' }).join('') + '</div>'
+      + '<div style="display:flex;justify-content:flex-end;margin-top:12px"><button type="button" data-otp="paste" style="border:0;background:transparent;padding:4px 0;color:#0031c6;font:inherit;font-size:14px;font-weight:600;cursor:pointer">Paste</button></div>'
+      + '<button type="button" data-otp="verify" disabled style="margin-top:16px;width:100%;height:48px;border:0;border-radius:4px;font:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:background-color .3s,color .3s">Verify</button>'
+      + '<p data-otp="resend" style="margin:16px 0 0;text-align:center;font-size:14px;line-height:1.43;color:rgba(0,0,0,.6)"></p></div>';
+    document.body.appendChild(w);
+    requestAnimationFrame(function () { w.style.opacity = '1'; w.style.transform = 'none' });
+    var cells = [].slice.call(w.querySelectorAll('[data-otp-i]')), vb = w.querySelector('[data-otp="verify"]'), rs = w.querySelector('[data-otp="resend"]');
+    var paint = function () {
+      var full = cells.every(function (c) { return /^\d$/.test(c.value) });
+      vb.disabled = !full; vb.style.background = full ? '#0031c6' : 'rgba(0,0,0,.12)'; vb.style.color = full ? '#fff' : 'rgba(0,0,0,.38)'; vb.style.cursor = full ? 'pointer' : 'default';
+      cells.forEach(function (c) { var f = document.activeElement === c; c.style.borderColor = f ? '#0031c6' : 'rgba(0,0,0,.23)'; c.style.boxShadow = f ? 'inset 0 0 0 1px #0031c6' : 'none' });
+    };
+    var fill = function (digits, from) { digits.split('').forEach(function (d, k) { if (cells[from + k]) cells[from + k].value = d }); var nx = cells[Math.min(5, from + digits.length)]; nx.focus(); paint() };
+    cells.forEach(function (c, i) {
+      c.addEventListener('input', function () {
+        var d = c.value.replace(/\D/g, '');
+        if (d.length > 1) return fill(d.slice(0, 6 - i), i);
+        c.value = d; if (d && i < 5) cells[i + 1].focus(); paint();
+      });
+      c.addEventListener('keydown', function (e) {
+        if (e.key === 'Backspace' && !c.value && i > 0) { e.preventDefault(); cells[i - 1].value = ''; cells[i - 1].focus(); paint() }
+        if (e.key === 'ArrowLeft' && i > 0) cells[i - 1].focus();
+        if (e.key === 'ArrowRight' && i < 5) cells[i + 1].focus();
+        if (e.key === 'Enter' && !vb.disabled) vb.click();
+      });
+      c.addEventListener('paste', function (e) { var t = ((e.clipboardData || window.clipboardData).getData('text') || '').replace(/\D/g, ''); if (t) { e.preventDefault(); fill(t.slice(0, 6), 0) } });
+      c.addEventListener('focus', paint); c.addEventListener('blur', function () { setTimeout(paint, 0) });
+    });
+    var left = 60, timer = null;
+    var tick = function () {
+      if (left > 0) { rs.innerHTML = 'Resend code in ' + '0' + Math.floor(left / 60) + ':' + ('0' + left % 60).slice(-2); left--; }
+      else { clearInterval(timer); rs.innerHTML = '<button type="button" data-otp="again" style="border:0;background:transparent;padding:0;color:#0031c6;font:inherit;font-weight:600;cursor:pointer">Resend code</button>' }
+    };
+    var start = function () { left = 60; clearInterval(timer); tick(); timer = setInterval(tick, 1000) };
+    start();
+    var close = function () { clearInterval(timer); w.style.opacity = '0'; w.style.transform = 'translateY(-30px)'; setTimeout(function () { w.remove() }, 220) };
+    // 모달 안 클릭은 수집본 런타임의 문서 클릭 처리(「처리됨」 토스트 등)보다 먼저 받는다
+    var onClick = function (e) {
+      if (!w.isConnected) return window.removeEventListener('click', onClick, true);
+      if (!w.contains(e.target)) return;
+      e.stopImmediatePropagation();
+      var b = e.target.closest('[data-otp]'); if (!b) return;
+      e.preventDefault();
+      var k = b.getAttribute('data-otp');
+      if (k === 'close') return close();
+      if (k === 'again') return start();
+      if (k === 'paste') {
+        var put = function (t) { t = (t || '').replace(/\D/g, '').slice(0, 6); if (t) fill(t, 0); else cells[0].focus() };
+        try { navigator.clipboard.readText().then(put, function () { cells[0].focus() }) } catch (x) { cells[0].focus() }
+        return;
+      }
+      if (k === 'verify' && !b.disabled) { clearInterval(timer); w.remove(); window.removeEventListener('click', onClick, true); done() }
+    };
+    window.addEventListener('click', onClick, true);
+    w.addEventListener('keydown', function (e) { if (e.key === 'Escape') close() });
+    setTimeout(function () { cells[0].focus(); paint() }, 30);
+  }
+  window.PT_OTP = otpOpen;   // 자동 점검용
+  // 가입 `Continue` · 로그인 `Log in` — 입력이 맞으면 이메일 인증 모달, `Verify` 뒤에 원래 처리(회원 전환 → 홈)
+  function otpSubmit(e) {
+    if (FORM !== 'signup' && FORM !== 'login') return;
+    var f = e.target.closest && e.target.closest('[data-pt-form]'); if (!f) return;
+    if (e.type === 'click' && !e.target.closest('button[type=submit]')) return;
+    var sb = f.querySelector('button[type=submit]'); if (!sb || sb.disabled) return;
+    if (!formCheck(f, true)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    var em = f.querySelector('input[name=email]');
+    otpOpen(em ? em.value : '', function () {
+      if (FORM === 'login') post({ auth: 'member', nav: ORIGIN + '/en', toast: '로그인 완료 (프로토타입)' });
+      else post({ auth: 'member', nav: ORIGIN + '/en', toast: '가입 완료 (프로토타입)' });
+    });
+  }
+  window.addEventListener('click', otpSubmit, true);
+  window.addEventListener('submit', otpSubmit, true);
+
   // ================= 클릭 전수 점검 보완 (README 「클릭 전수 점검」) =================
   // 수집 HTML에 이미 들어 있는 마크업(접힌 답변·탭 대상 구역·숨은 단계 이미지)을 DOM으로 펼치고 옮긴다. 근거 없는 결과는 만들지 않는다
   var GOOD = /^(nav|state|overlay|ext)$/;
@@ -664,17 +755,20 @@
   // 배너·점 클래스 = 실사이트 수집본(연동 계정 목록 팝업 SelectMyExchangePopup · 홈 LinkedUidDot*) 그대로
   var ROWST = {
     ok: {}, zero: {},
-    pend: { dot: 'proc', ban: 'Info', text: 'Trying to link' },
-    own: { dot: 'proc', ban: 'Info', text: 'Verifying ownership' },
+    pend: { dot: 'proc', clock: 1 },                 // 확인 중 = 분홍 점 + 시계(Figma 29447:141189 · 기존 9401:87675)
+    own: { dot: 'own', clock: 1, line: 1 },          // 소유 확인 중 = 파란 점 + 시계 + 「Ownership verification in progress · 경과 시간」(MAX-561 12792:231646)
     fail: { dot: 'err', ban: 'Error', text: { CEX: 'UID Linking was unsuccessful. View reason.', DEX: 'Wallet linking was unsuccessful. View reason.' } },
     ownfail: { dot: 'err', ban: 'Error', text: 'Ownership verification was unsuccessful. View reason.' },
-    unlinked: { dot: 'err', ban: 'Warning', text: { CEX: 'This UID has been unlinked. Tap to verify ownership and reclaim it.', DEX: 'This wallet has been unlinked. Tap to verify ownership and reclaim it.' } },
+    unlinked: { dot: 'warn', ban: 'Warning', text: { CEX: 'This UID has been unlinked. Tap to verify ownership and reclaim it.', DEX: 'This wallet has been unlinked. Tap to verify ownership and reclaim it.' } },
     issue: { dot: 'err' }
   };
   var ROWST_KO = { ok: '정상', zero: '캐시백 0', pend: '확인 중', own: '소유권 심사 중', fail: '연동 실패', ownfail: '소유권 인증 실패', unlinked: '연동 해제(되찾기)', issue: '이슈(오프보딩)' };
   var ALERT = 'SelectMyExchangePopup-module-scss-module__IotxDq__';
   var ICO_ALERT = '<svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-r6rqcb" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1m1 4h-2v-2h2z"></path></svg>';
   var ICO_NEXT = '<svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1q2r1cx" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01"></path></svg>';
+  var ICO_CLOCK = '<svg viewBox="0 0 24 24" width="20" height="20" aria-label="In progress" style="display:block;fill:rgba(0,0,0,.56)"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8m-.22-13h-.06c-.4 0-.72.32-.72.72v4.72c0 .35.18.68.49.86l4.15 2.49c.34.2.78.1.98-.24.21-.34.1-.79-.25-.99l-3.87-2.3V7.72c0-.4-.32-.72-.72-.72"/></svg>';
+  function elapsed(ts) { if (!ts) return '06:46'; var x = Math.max(0, Math.floor((Date.now() - ts) / 1000)), h = Math.floor(x / 3600), m = Math.floor(x % 3600 / 60), sc = x % 60, p = function (n) { return (n < 10 ? '0' : '') + n }; return h ? h + ':' + p(m) + ':' + p(sc) : p(m) + ':' + p(sc) }
+  setInterval(function () { [].forEach.call(document.querySelectorAll('[data-own-elapsed]'), function (el) { var ts = +el.getAttribute('data-own-elapsed'), t = el.querySelector('.tnum'); if (ts && t) t.textContent = elapsed(ts) }) }, 1000);
   function rowBanner(x, RS) {
     var d = document.createElement('div'), txt = typeof RS.text === 'string' ? RS.text : RS.text[x.type === 'DEX' ? 'DEX' : 'CEX'];
     d.className = ALERT + 'StatusAlert ' + ALERT + 'StatusAlert' + RS.ban; d.setAttribute('data-dex-ban', x.id);
@@ -703,11 +797,11 @@
   function rowBannerClick(id) {
     var Sx = window.DEXSTATE, st = Sx.load(), a = st.accounts.filter(function (y) { return y.id === id })[0]; if (!a) return;
     popAcc = a; var dex = a.type === 'DEX';
-    if (a.st === 'fail') return centerPopup(dex ? 'Wallet Linking Unsuccessful' : 'UID Linking Unsuccessful', a.reason || '', [[dex ? 'Remove Wallet' : 'Remove UID', 'remove'], [dex ? 'Link Wallet' : 'UID Link', 'relink']]);
+    if (a.st === 'fail') return centerPopup(dex ? 'Wallet Linking Unsuccessful' : 'UID Linking Unsuccessful', a.reason || (dex ? '{Reason provided by backend}' : 'UID is not found in the tetherMax database. Please contact customer service for assistance.'), [[dex ? 'Remove Wallet' : 'Remove UID', 'remove'], [dex ? 'Link Wallet' : 'UID Link', 'relink']]);
     if (a.st === 'ownfail') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return post({ dexLink: { mode: 'own', r: 'rejected' } }) }
     if (a.st === 'unlinked') { st.own = { ex: a.ex, type: a.type, id: a.id }; Sx.save(st); return nav(ORIGIN + '/en/ownership-verification') }
   }
-  function rowIssue(a) { popAcc = a; centerPopup(a.type === 'DEX' ? 'There is a problem with this wallet.' : 'There is a problem with this UID.', '', [['Contact Support', 'support'], ['Close', 'close']]) }
+  function rowIssue(a) { popAcc = a; centerPopup(a.type === 'DEX' ? 'There is a problem with this wallet.' : 'There is a problem with this UID.', 'Please contact our support team for assistance.', [['Contact Support', 'support']]) }   // Figma 29447:144506 · 144810 — 파란 버튼 1개 + 닫기 X
   // 테스트용 도움말(왼쪽 아래): 연동 계정 행 상태 바꿔 보기 · 소유권 심사 결과(승인/거절)
   function rowHelp(accs) {
     if (!accs.length) return;
@@ -760,9 +854,13 @@
       var dot = q('[class*="__LinkedUidDot"]', r), RS = ROWST[x.st] || {};
       if (dot && RS.dot === 'err' && errCls) dot.classList.add(errCls);
       if (dot && RS.dot === 'proc' && procCls) dot.classList.add(procCls);
+      if (dot && RS.dot === 'own') dot.style.background = '#0031c6';
+      if (dot && RS.dot === 'warn') dot.style.background = '#ef6c00';
+      if (RS.clock) { var am = q('[class*="__LinkedUidAmount"]', r), ck = document.createElement('span'); ck.setAttribute('data-dex-clock', ''); ck.style.cssText = 'display:inline-flex;margin-left:8px;vertical-align:middle;flex:none'; ck.innerHTML = ICO_CLOCK; am.after(ck) }
       var before = rows.filter(function (e) { return amtOf(e) < (amt || 0) })[0];
       if (before) top.insertBefore(r, before); else top.appendChild(r);
       if (RS.ban) { var bn = rowBanner(x, RS); r.after(bn) }
+      if (RS.line) { var ln = document.createElement('p'); ln.setAttribute('data-dex-ban', x.id); ln.setAttribute('data-own-elapsed', x.ts || ''); ln.style.cssText = 'margin:-4px 0 8px 44px;font-size:12px;line-height:1.66;letter-spacing:.4px;color:rgba(0,0,0,.6)'; ln.innerHTML = 'Ownership verification in progress · <span class="tnum">' + elapsed(x.ts) + '</span>'; r.after(ln) }
       if (x.id === st.justLinked) mark = r;
     });
     rowHelp(st.accounts);

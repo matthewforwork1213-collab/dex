@@ -21,20 +21,25 @@ const CEXLOGO={Bitget:'logo-bitget.png',Bybit:'logo-bybit.png',Binance:'logo-bin
 const mark=(name,s=32)=>CEXLOGO[name]?`<img src="${HA(CEXLOGO[name])}" style="width:${s}px;height:${s}px;border-radius:50%;flex:none;object-fit:cover" alt="${name}">`:C.dex(name,s);
 const isCex=n=>!!CEXLOGO[n];
 
-// 행 상태(REQ-272) + DEX 칩(REQ-273). 색은 의미별 4토큰(G-058): done 완료 · prog 진행 · warn 주의 · off 실패/해제
+// 행 상태(REQ-272) — Figma 29447:141189(기존 디자인 9401:87675 · MAX-561 계열): 칩 없음. 상태 점 색 = 초록 정상 · 빨강 이슈/실패 · 주황 연동 해제 · 분홍 확인 중(+시계) · 파랑 소유 확인 중(+시계 · 경과 시간)
 // 결정 10차: 자동 연동 실패는 홈 목록에 없음(연동 결과 화면에서 끝남) · 수동 연동 실패 = 빨간 점 + 분홍 배너 → 사유 모달 · 캐시백 0은 칩 없이 `0.00 USDT`
 //   이슈·오프보딩 = 빨간 점, 행 탭 → 문제 안내 모달 · 소유 확인 실패·연동 해제 = 점 + 행 아래 배너 · `Data delayed`·`Inactive` 칩 없음
 //   배너·모달의 계정 표기: CEX 행 = `UID` 문구, DEX 행 = `Wallet`/`wallet`
 const ST={
- own:{get lb(){return T('Verifying ownership','소유 확인중이에요')},tone:'prog',pri:1,linked:false},
- pend:{get lb(){return T('Trying to link','연동 시도중이에요')},tone:'prog',pri:2,linked:false},
+ own:{get lb(){return T('Verifying ownership','소유 확인중이에요')},tone:'own',pri:1,linked:false,clock:true},
+ pend:{get lb(){return T('Trying to link','연동 시도중이에요')},tone:'proc',pri:2,linked:false,clock:true},
  issue:{get lb(){return T('There’s an issue','문제가 있어요')},tone:'err',pri:3,linked:false,noChip:true},
  ok:{get lb(){return T('Linked','연동 완료')},tone:'done',pri:4,linked:true},
  fail:{get lb(){return T('Linking failed','연동 실패했어요')},tone:'err',pri:5,linked:false,noChip:true},
  ownfail:{get lb(){return T('Ownership verification failed','소유 확인에 실패했어요')},tone:'err',pri:6,linked:false,noChip:true},
- unlinked:{get lb(){return T('Unlinked','연동 해제되었어요')},tone:'off',pri:7,linked:false,noChip:true},
+ unlinked:{get lb(){return T('Unlinked','연동 해제되었어요')},tone:'warn',pri:7,linked:false,noChip:true},
 };
-const DOT={done:'#2ea652',prog:'#ed6b03',warn:'#ed6b03',off:'rgba(0,0,0,0.38)',err:'#d32f2f'};
+const DOT={done:'#2e7d32',prog:'#ed6b03',warn:'#ef6c00',off:'rgba(0,0,0,0.38)',err:'#d32f2f',proc:'#fecdd2',own:'#0031c6'};
+// 시계 아이콘(MUI AccessTimeRounded) — 확인 중 · 소유 확인 중 행 오른쪽
+const CLOCK=`<svg viewBox="0 0 24 24" width="20" height="20" aria-label="In progress" style="display:block;fill:rgba(0,0,0,.56)"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8m-.22-13h-.06c-.4 0-.72.32-.72.72v4.72c0 .35.18.68.49.86l4.15 2.49c.34.2.78.1.98-.24.21-.34.1-.79-.25-.99l-3.87-2.3V7.72c0-.4-.32-.72-.72-.72"/></svg>`;
+// 소유 확인 중 경과 시간(표본 06:46 — Figma MAX-561 12866:10182). 사이트 모드는 신청 시각에서 계산
+const ownElapsed=a=>{if(!a.ts)return '06:46';const s=Math.max(0,Math.floor((Date.now()-a.ts)/1000));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;const p=n=>String(n).padStart(2,'0');return h?`${h}:${p(m)}:${p(x)}`:`${p(m)}:${p(x)}`};
+const ownLine=a=>`<div data-own-elapsed="${a.ts||''}" style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)">${T('Ownership verification in progress')} · <span class="tnum">${ownElapsed(a)}</span></div>`;
 // 행 아래 상태 배너 — 실서비스 연동 계정 목록(SelectMyExchangePopup StatusAlert): 모서리 4 · 좌우 10 · 12px 글자 · 오류 #fdeded/#5f2120 · 주의 #fff4e5/#663c00 · 오른쪽 화살표
 const SVG_ERR='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1m1 4h-2v-2h2z',SVG_WARN='M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z',SVG_CHEV='M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01';
 const svgI=(d,s=20)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" aria-hidden="true" style="display:block;fill:currentColor"><path d="${d}"/></svg>`;
@@ -45,15 +50,15 @@ function rowBanner(a){
   unlinked:['warn',cex?T('This UID has been unlinked. Tap to verify ownership and reclaim it.'):T('This wallet has been unlinked. Tap to verify ownership and reclaim it.'),'own.home:reclaim']}[a.st];
  if(!b)return '';
  const [bg,fg]=b[0]==='err'?['#fdeded','#5f2120']:['#fff4e5','#663c00'];
- return `<div data-row-banner="${a.st}" data-go="${b[2]}" style="display:flex;align-items:center;border-radius:4px;padding:0 10px;margin:0 12px 4px 56px;overflow:hidden;cursor:pointer;background:${bg};color:${fg}"><span style="flex:none;display:flex;align-self:flex-start;padding:8px 8px 7px 0;color:${b[0]==='err'?'#d32f2f':'#ed6c02'}">${svgI(b[0]==='err'?SVG_ERR:SVG_WARN)}</span><p style="margin:0;flex:1;min-width:0;font-size:12px;line-height:1.33;letter-spacing:.2px;padding:8px 0">${b[1]}</p><span style="flex:none;display:flex;margin-left:8px">${svgI(SVG_CHEV)}</span></div>`}
+ return `<div data-row-banner="${a.st}" data-go="${b[2]}" style="display:flex;align-items:center;border-radius:4px;padding:0 10px;margin:0 0 8px;overflow:hidden;cursor:pointer;background:${bg};color:${fg}"><span style="flex:none;display:flex;align-self:flex-start;padding:8px 8px 7px 0;color:${b[0]==='err'?'#d32f2f':'#ed6c02'}">${svgI(b[0]==='err'?SVG_ERR:SVG_WARN)}</span><p style="margin:0;flex:1;min-width:0;font-size:12px;line-height:1.33;letter-spacing:.2px;padding:8px 0">${b[1]}</p><span style="flex:none;display:flex;margin-left:8px">${svgI(SVG_CHEV)}</span></div>`}
 // 행 모달(결정 10차) — MUI Dialog(웹 480 · 모바일 343). 이슈: 문제 안내 + Contact Support / 수동 연동 실패: 사유 + Remove · Link
-function rowDialog(title,body,actions){
+function rowDialog(title,body,actions,close){
  const mo=S.vp==='mo';
- return `<div role="dialog" aria-modal="true" style="background:var(--paper);border-radius:4px;box-shadow:0 6px 30px 5px rgba(0,0,0,.12),0 16px 24px 2px rgba(0,0,0,.14),0 8px 10px -5px rgba(0,0,0,.2);width:${mo?343:480}px;max-width:100%"><div style="padding:24px 24px 0;font-size:20px;font-weight:500;line-height:1.6;letter-spacing:.15px">${title}</div><div style="padding:16px 24px 0;font-size:14px;line-height:1.43;font-weight:500;letter-spacing:.17px;color:var(--text-secondary)">${body}</div><div style="padding:24px;display:flex;${mo?'flex-direction:column;':''}gap:8px">${actions}</div></div>`}
+ return `<div role="dialog" aria-modal="true" style="background:var(--paper);border-radius:4px;box-shadow:0 6px 30px 5px rgba(0,0,0,.12),0 16px 24px 2px rgba(0,0,0,.14),0 8px 10px -5px rgba(0,0,0,.2);width:${mo?343:480}px;max-width:100%"><div style="padding:24px 24px 0;font-size:20px;font-weight:500;line-height:1.6;letter-spacing:.15px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><span>${title}</span>${close?`<button class="icon-btn" type="button" aria-label="Close" style="margin:-4px -8px 0 0" data-go="${close}">${ic('close')}</button>`:''}</div><div style="padding:16px 24px 0;font-size:14px;line-height:1.43;font-weight:500;letter-spacing:.17px;color:var(--text-secondary)">${body}</div><div style="padding:24px;display:flex;${mo?'flex-direction:column;':''}gap:8px">${actions}</div></div>`}
 const dBtn=(label,go,white)=>`<button class="btn lg" style="${white?'background:#f2f2f5;color:var(--text-primary)':'background:var(--blue);color:#fff'};${S.vp==='mo'?'width:100%':'flex:1;min-width:0'}" data-go="${go}">${label}</button>`;
-const issueDialog=dex=>rowDialog(dex?T('There is a problem with this wallet.'):T('There is a problem with this UID.'),T('Please contact our support team for assistance.'),dBtn(T('Contact Support'),'support.main'));
+const issueDialog=dex=>rowDialog(dex?T('There is a problem with this wallet.'):T('There is a problem with this UID.'),T('Please contact our support team for assistance.'),dBtn(T('Contact Support'),'support.main'),'home.main:normal');
 // 사유 문구는 거래소 응답별 — CEX는 결정 기록 예시 문구, DEX 사유 원문은 아직 없음
-const failDialog=dex=>rowDialog(dex?T('Wallet Linking Unsuccessful'):T('UID Linking Unsuccessful'),dex?C.tbd('연동 실패 사유 — 거래소 응답별 원문 없음',''):T('UID is not found in the tetherMax database. Please contact customer service for assistance.'),
+const failDialog=dex=>rowDialog(dex?T('Wallet Linking Unsuccessful'):T('UID Linking Unsuccessful'),dex?'{Reason provided by backend}':T('UID is not found in the tetherMax database. Please contact customer service for assistance.'),
  dBtn(dex?T('Remove Wallet'):T('Remove UID'),'home.main:normal',true)+dBtn(dex?T('Link Wallet'):T('UID Link'),dex?'link.addr:lighter':'link.uid:empty'));
 // 칩: Figma HW1(주의 = 채움 #e65100) · S4-6(진행 = 파랑 외곽선) · PW1(완료 = 연녹 채움). 실패/해제는 MUI 기본 칩
 function hChip(label,tone){
@@ -69,6 +74,8 @@ function hChip(label,tone){
 function hShell(body,o={}){
  if(S.vp==='mo')return `${moTop(o.moTitle||'',o.back)}<div class="page accent">${body}</div>${moNav(o.moNav||'home',{app:o.app})}${footer()}`;
  return `${gnb(o.nav)}<div class="page accent">${body}</div>${footer()}`}
+// 공통 오류 토스트(Figma 29449:145568 · 기존 [MAX-426] Error 토스트 — 실사이트 ToastPopup 모양): 429 · 중복 요청 · 잘못된 값
+const toastErr=()=>{const mo=S.vp==='mo';return `<div role="alert" style="position:absolute;left:50%;top:${mo?72:88}px;transform:translateX(-50%);width:${mo?343:360}px;z-index:15;border-radius:8px;background:#1c1c1e;box-shadow:0 16px 24px rgba(0,0,0,.14),0 6px 30px rgba(0,0,0,.12),0 8px 10px rgba(0,0,0,.2);display:flex;align-items:center;gap:16px;padding:12px 16px;color:#fff;font-size:13px;line-height:1.8;letter-spacing:-.13px"><span style="width:28px;height:28px;border-radius:50%;background:rgba(94,36,41,.55);display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:16px;height:16px;border-radius:50%;background:#e5484d;color:#1c1c1e;font-size:12px;font-weight:700;line-height:16px;text-align:center">×</span></span><span>${T('Something went wrong. Please try again.')}</span></div>`};
 const toastLinked=()=>`<div style="position:absolute;left:50%;top:${S.vp==='mo'?72:88}px;transform:translateX(-50%);width:${S.vp==='mo'?343:360}px;z-index:15;border-radius:8px;box-shadow:0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px rgba(0,0,0,.14),0 1px 18px rgba(0,0,0,.12);background:var(--blue);display:flex;align-items:center;padding:6px 16px"><span style="padding:7px 12px 7px 0;display:flex">${hic('toast-check',20)}</span><span class="b2 med" style="color:#fff;padding:8px 0;letter-spacing:.15px">Account linked successfully</span></div>`;
 
 // ---------- 홈 왼쪽 열: 총액 카드 · Linked Accounts (Figma HW1 · S4-1) ----------
@@ -85,7 +92,6 @@ function balanceCard(o={}){
 function accRow(a,o={}){
  const st=ST[a.st||'ok'];const cex=isCex(a.ex);const app=o.app;
  const id=cex?`UID ${esc(a.id)}`:`${app?'':'Wallet '}${o.full?`<span style="word-break:break-all">${esc(a.id)}</span>`:short(a.id)}`;
- const showChip=a.st&&a.st!=='ok'&&!st.noChip;
  const amt=a.amt==null?'-':a.amt;
  const amtHtml=amt==='-'?`<span class="b1 semi">-</span>`:`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi">${n2(amt)}</span><span class="b2 c2">USDT</span></span>`;
  const go=a.st==='issue'?` data-go="home.main:${cex?'issue':'issueWallet'}" style="cursor:pointer;`:cex||st.noChip?'':` data-go="home.wallet:${a.st==='pend'?'pending':'normal'}" style="cursor:pointer;`;
@@ -93,8 +99,8 @@ function accRow(a,o={}){
   ${mark(a.ex,32)}
   <div class="col grow" style="gap:2px;min-width:0"><span class="b2 semi">${a.ex}</span>
    <span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary)"><span style="color:${DOT[st.tone]}">●</span>&nbsp; ${id}</span>
-   ${showChip?`<span>${hChip(st.lb,st.tone)}</span>`:''}${a.extra?`<span style="font-size:12px;line-height:1.5;color:var(--text-secondary)">${a.extra}</span>`:''}</div>
-  <div style="flex:none">${amtHtml}</div></div>${rowBanner(a)}`}
+   ${a.st==='own'?ownLine(a):''}${a.extra?`<span style="font-size:12px;line-height:1.5;color:var(--text-secondary)">${a.extra}</span>`:''}</div>
+  <div class="row" style="flex:none;gap:8px">${amtHtml}${st.clock?CLOCK:''}</div></div>${rowBanner(a)}`}
 function linkedCard(rows,o={}){
  const app=o.app||S.vp==='mo';
  const foot=app?'Trading on multiple exchanges? Link more':'Using multiple platforms? Link more accounts';
@@ -177,8 +183,8 @@ function homeMain(){
 // 홈 2열 레이아웃(347 + 24 + 717) · 모바일 1열
 function homeLayout(left,o={}){
  const right=o.right??homeMain();
- if(S.vp==='mo')return `<div style="position:relative;padding:8px 0 16px;display:flex;flex-direction:column;gap:16px">${o.toast?toastLinked():''}<div class="col" style="gap:16px;padding:0 16px">${left}</div>${right}</div>`;
- return `<div style="position:relative;padding:40px 0 80px;display:flex;justify-content:center">${o.toast?toastLinked():''}<div style="display:flex;gap:24px;align-items:flex-start"><div style="width:347px;display:flex;flex-direction:column;gap:16px;flex:none">${left}</div>${right}</div></div>`}
+ if(S.vp==='mo')return `<div style="position:relative;padding:8px 0 16px;display:flex;flex-direction:column;gap:16px">${o.toast?toastLinked():''}${o.errToast?toastErr():''}<div class="col" style="gap:16px;padding:0 16px">${left}</div>${right}</div>`;
+ return `<div style="position:relative;padding:40px 0 80px;display:flex;justify-content:center">${o.toast?toastLinked():''}${o.errToast?toastErr():''}<div style="display:flex;gap:24px;align-items:flex-start"><div style="width:347px;display:flex;flex-direction:column;gap:16px;flex:none">${left}</div>${right}</div></div>`}
 
 // ---------- 표본 계정 ----------
 const R_BITGET={ex:'Bitget',id:'685432171',amt:14,st:'ok'};
@@ -244,10 +250,9 @@ function seeAllModal(){
  const grp=g=>{const sum=g.rows.reduce((a,r)=>a+(ST[r.st].linked&&r.amt?r.amt:0),0);
   return `<div class="col" style="gap:4px;padding:12px 0">
    <div class="row g12">${mark(g.ex,32)}<div class="col grow" style="gap:0;min-width:0"><span class="b2 semi">${g.ex}</span><span class="cap c2">${g.rows.length} ${g.rows.length===1?'account':'accounts'}</span></div>${g.rows.some(r=>ST[r.st].linked)?`<span class="row" style="gap:4px;align-items:baseline;white-space:nowrap"><span class="b1 semi tnum">${n2(sum)}</span><span class="b2 c2">USDT</span></span>`:`<span class="b1 semi">-</span>`}</div>
-   ${g.rows.map(r=>`<div class="row between" style="padding:6px 0 6px 44px;gap:12px"><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary);min-width:0"><span style="color:${DOT[ST[r.st].tone]}">●</span>&nbsp; ${idTxt(r)}</span>${amt(r.st==='ok'?r.amt:null)}</div>${rowBanner(r).replace('margin:0 12px 4px 56px','margin:0 0 4px 44px')}`).join('')}</div>`};
+   ${g.rows.map(r=>`<div class="row between" style="padding:6px 0 6px 44px;gap:12px"><span style="font-size:12px;line-height:1.66;letter-spacing:.4px;color:var(--text-secondary);min-width:0"><span style="color:${DOT[ST[r.st].tone]}">●</span>&nbsp; ${idTxt(r)}</span><span class="row" style="gap:8px">${amt(r.st==='ok'?r.amt:null)}${ST[r.st].clock?CLOCK:''}</span></div>${r.st==='own'?ownLine(r).replace('style="','style="padding:0 0 4px 44px;'):''}${rowBanner(r).replace('margin:0 12px 4px 56px','margin:0 0 4px 44px')}`).join('')}</div>`};
  const list=groups.map(grp).join('<hr class="divider" style="margin:0">');
- const box=`<div style="background:#fff;border-radius:${mob?'16px 16px 0 0':'8px'};box-shadow:var(--elev24);width:${mob?'100%':'444px'};max-width:100%;display:flex;flex-direction:column;${mob?'align-self:flex-end;':''}max-height:${mob?'640px':'680px'}">
-  ${mob?'<div class="sheet-grab"></div>':''}
+ const box=`<div data-see-all style="background:#fff;border-radius:${mob?'0':'8px'};box-shadow:${mob?'none':'var(--elev24)'};width:${mob?'100%':'444px'};max-width:100%;display:flex;flex-direction:column;${mob?'height:100%;min-height:100vh;':''}max-height:${mob?'none':'680px'}">
   <div class="row between" style="padding:${mob?'16px 16px 8px':'24px 24px 8px'}"><span class="row" style="gap:8px"><span class="h6">Linked Accounts</span><span style="min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center">${rows.length}</span></span><span class="b2 c2">${rows.length} Total</span></div>
   <div class="row g8" style="padding:4px ${mob?16:24}px 8px">${C.chip('All',true,{sm:false})}${C.chip('CEX',false)}${C.chip('DEX',false)}</div>
   <div style="overflow-y:auto;padding:0 ${mob?16:24}px;flex:1;min-height:0">${list}</div>
@@ -266,12 +271,13 @@ const HOME_STATES=[
  {id:'s3Pending',label:'확인 중 계정만 있음 → S4 전환',note:'V2.2 home/S3#pendingOnly · G-070 확정: S4로 전환하고 행에 확인 중 표시'},
  {id:'normal',label:'S4 연동 있음 — CEX·DEX 한 목록 (S4-1)',figma:{pc:'28960:127837',mo:'22913:1051713'},note:'페이지 전체 = [기존 MAX-7] MAXOP-731 Web 22913:1052131 · mWeb 22913:1051713(누적 캐시백 카드 22913:1054295 포함) + DEX S4-1. V2.2 home/S4#normal · REQ-268·271. L17(연동 화면 배경)도 이 화면. 총액은 행 합계(매칭 전) — Figma 표본 5,137.70은 행 합계와 달라 합계로 씀'},
  {id:'hw1',label:'총액 카드 · 4행 (HW1)',figma:{pc:'28960:126108'},note:'Figma HW1. Figma의 Aster 칩 자리는 결정 10차(`Data delayed` 칩 없음)로 비움'},
- {id:'statuses',label:'상태 행(CEX) — 확인 중 칩 · 빨간 점(이슈) · 점+배너(수동 연동 실패 · 소유 확인 실패 · 해제)',note:'V2.2 home/S4#statuses · REQ-272 · 결정 10차: 자동 연동 실패 행 없음, 칩 대신 기존 디자인(9401:87675 계열 행 점 + 행 아래 배너). '+N_FIG},
+ {id:'statuses',label:'상태 행(CEX) — 점 색 · 시계(확인 중 · 소유 확인 중) · 배너(수동 연동 실패 · 소유 확인 실패 · 해제), 칩 없음',note:'V2.2 home/S4#statuses · REQ-272 · 결정 10차: 자동 연동 실패 행 없음, 칩 대신 기존 디자인(9401:87675 계열 행 점 + 행 아래 배너). '+N_FIG},
  {id:'walletStates',label:'상태 행(DEX 지갑) — wallet 문구 분기',note:'결정 10차 — DEX 행은 `UID` 자리를 `Wallet`/`wallet`로'},
  {id:'linkFail',label:'수동 연동 실패 배너 탭 → UID Linking Unsuccessful',note:'결정 10차 — 사유 문구는 거래소 응답별(예시 문구) · `Remove UID` · `UID Link`'},
  {id:'linkFailWallet',label:'수동 연동 실패(DEX) → Wallet Linking Unsuccessful',note:'결정 10차 — `Remove Wallet` · `Link Wallet`. DEX 사유 원문 없음'},
  {id:'issue',label:'이슈 행 탭 → 문제 안내 모달',note:'결정 10차 — `There is a problem with this UID.` / `Please contact our support team for assistance.` / `Contact Support`'},
  {id:'issueWallet',label:'이슈(DEX) → There is a problem with this wallet.',note:'결정 10차 — DEX 행 문구 분기'},
+ {id:'errToast',label:'공통 오류 토스트 — Something went wrong. Please try again.',figma:{pc:'29449:145568'},note:'Figma 29449:145568([MAX-426, MAX-498] Error 토스트) · 429 · 중복 요청 · 잘못된 값 공통(결정 3차 #10 · G-459)'},
  {id:'loading',label:'로딩 — 스켈레톤',note:'V2.2 home/S4#loading · REQ-269·271'},
  {id:'error',label:'잔액 로드 실패',note:'V2.2 home/S4#error · REQ-269'},
  {id:'many',label:'계정 11개 이상 — 10개 + 더보기',note:'V2.2 home/S4#many · REQ-271'},
@@ -284,7 +290,6 @@ const HOME_STATES=[
  {id:'inactive',label:'DEX 오프보딩 — 이슈 처리(빨간 점 → 문제 안내 모달)',note:'V2.2 link/HOME#inactive · REQ-121 · 결정 10차: `Inactive` 칩 없음, 오프보딩 계정은 이슈 처리'},
  {id:'multi',label:'같은 DEX 지갑 3개 · Aster 하위 계정',figma:{mo:'7633:92140'},note:'[기존 MAX-7] mWeb [2 or more UID per exchange] 7633:92140 · 7633:90865(거래소별 묶음 패턴). V2.2 link/HOME#multi · REQ-118·084 · G-087 확정: 하위 계정마다 따로 연동'},
  {id:'rejected',label:'확인 중 거절 — 행 제거',note:'V2.2 link/HOME#rejected · REQ-102 · G-069 확정: 거절되면 홈 행 제거(한도 점유 해제)'},
- {id:'labels',label:'DEX 정산 상태 라벨 (홈 행 칩)',note:'V2.2 cmn/LABELS · FU-011 · REQ-047'},
  {id:'faq',label:'홈 FAQ — 회원 답변',note:'V2.2 home/FAQ · FU-044 · REQ-711'},
  {id:'seeAll',label:'See All — 연동 계정 목록 모달',figma:null,note:'All · CEX · DEX 칩(사용자 결정 2026-11-26, 쿠폰 계정 선택과 같은 칩) · 근거: 기존 9401:160223 연동 UID 목록 모달(거래소별 묶음 · 계정 수 · 거래소 합계 · 계정별 금액 · 상태 점 · <code>Close</code>) — 표기는 Accounts(결정 Q3 · N5). 행 표기는 홈 Linked Accounts 행과 같게(CEX <code>UID</code> · DEX <code>Wallet</code> 축약). 모바일은 바텀시트. <b>Figma 미반영 — 승인 후 Figma에 추가</b>'},
 ];
@@ -310,6 +315,7 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    if(st==='error')x={error:true};
    if(st==='many'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:3.2,st:'ok'},...['Bybit','OKX','EdgeX','ApeX','Aster','Bitget','EdgeX','OKX','Binance'].map((e,i)=>({ex:e,id:isCex(e)?String(70001230+i):[WAL.edgex,WAL.w2][i%2],amt:5+i,st:'ok'}))];lc.max=10}
    if(st==='full')lc.full=true;
+   if(st==='errToast')o.errToast=true;
    if(st==='first'){rows=[{ex:'Lighter',id:WAL.lighter,amt:0,st:'ok'}];o.toast=true}
    if(st==='newRow'){rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:0,st:'ok'}];o.toast=true}
    if(st==='transferred')rows=[R_BITGET,R_LIGHTER,R_APEX,{ex:'Aster',id:WAL.aster,amt:4,st:'ok'}];
@@ -317,19 +323,9 @@ const hm=R.screen({id:'home.main',group:'home',title:'홈 (S3 · S4 · 게스트
    if(st==='inactive')rows=[R_BITGET,R_LIGHTER,{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'}];
    if(st==='walletStates')rows=[R_LIGHTER,{ex:'EdgeX',id:WAL.edgex,amt:null,st:'fail'},{ex:'ApeX',id:WAL.apex,amt:null,st:'issue'},{ex:'Aster',id:WAL.aster,amt:null,st:'unlinked'},{ex:'Lighter',id:WAL.w2,amt:null,st:'ownfail'}];
    if(st==='multi')rows=[R_BITGET,...[[WAL.lighter,3.2],[WAL.w2,0],[WAL.edgex,11.05]].map(([w,a])=>({ex:'Lighter',id:w,amt:a,st:'ok'})),...[WAL.aster,WAL.apex].map(w=>({ex:'Aster',id:w,amt:0,st:'ok'}))];
-   if(st==='labels')rows=[
-    {ex:'Lighter',id:WAL.lighter,amt:120,st:'ok',extra:hChip(T('Not yet tallied','집계 전'),'prog')},
-    {ex:'Lighter',id:WAL.w2,amt:14,st:'ok',extra:hChip('Credited','done')},
-    {ex:'Lighter',id:WAL.edgex,amt:0,st:'ok',extra:hChip('Withheld by Lighter after review','off')},
-    {ex:'Lighter',id:WAL.apex,amt:0,st:'ok',extra:hChip('Under the $1 minimum, not credited','off')},
-    {ex:'ApeX',id:WAL.apex,amt:14,st:'ok',extra:`${hChip('Pending','prog')} 2.10 USDT`},
-    {ex:'EdgeX',id:WAL.edgex,amt:120,st:'ok',extra:hChip('DEX data pending','prog')}];
    if(st==='rejected')rows=[R_BITGET,R_LIGHTER,R_APEX];
-   const banner=st==='delayed'?C.alert('warn','','신규 적립 내역 반영이 지연되고 있습니다. 기존 확정 잔액은 그대로이며 출금할 수 있어요.'):'';
-   left=card(rows,x)+banner+linkedCard(rows,lc);
-   if(st==='statuses')left+=C.note('상태 우선순위 = 기존 UID 7단계(소유 확인중 1 → 연동 해제 7). 데이터 지연·로드 실패는 G-060 확정대로 그 뒤 번호(8·9)로 이어 붙임. 금액은 연동 완료만 표시, 나머지 <code>-</code>. 한국어 상태 라벨만 원문이 있어 EN 보기에서도 한국어로 표시(영문 라벨 원문 없음)');
-   if(st==='chips')left+=C.note('칩 명칭은 REQ-273 그대로(G-058). 색 = 의미별 4토큰: 완료 연녹 · 진행 파랑 외곽선 · 주의 주황 채움 · 실패/해제 회색. ApeX Account ID 미반환은 회원에게 칩 없이 연동 완료(G-177)');
-   if(st==='labels')left+=C.note('FU-011 라벨 세트(V2.2 cmn/LABELS): Lighter 주중 = 금액 없이 「집계 전」, 추정치 줄 없음(G-100) · Credited = 월요일 원장 수신 후 Available Cashback에 가산 · Withheld by Lighter after review = 어뷰징 심사 보류, 미적립 · Under the $1 minimum, not credited = 주 $1 미만 미적립 · Pending = ApeX 일 원장 전 시간당 배치, 합계 미포함(G-127: ApeX가 노출할 때만) · DEX data pending = 원장 미수신 날짜 — 0 표시 금지. Lighter 줄은 온보딩 후. Lighter 등급을 못 받으면 추측하지 않고 연동 완료');
+   left=card(rows,x)+linkedCard(rows,lc);
+   if(st==='statuses')left+=C.note('상태 우선순위 = 기존 UID 순서(소유 확인 중 → 연동 해제). 표시는 칩 없이 점 색 · 시계 · 행 아래 배너(Figma 29447:141189). 반영 지연·오프보딩 표시는 두지 않음(결정 10차)');
    if(st==='rejected')left+=C.note('거절된 확인 중 행(Aster)은 홈에서 사라짐 — G-069');
    if(st==='s3Pending')left+=C.note('확인 중 계정만 있어도 체크리스트(S3) 대신 S4 목록 — G-070');
    if(st==='newRow'||st==='first')left+=C.note('새로고침 없이 새 행을 맨 아래에 추가. 금액 = 연동 시 이관된 금액(REQ-094). 사용자 셀프 해제 버튼 없음(REQ-113). DEX 첫 연동은 3 USDT 안내 없음(REQ-097)');
@@ -358,7 +354,6 @@ function walletBalance(A,B,o={}){
  return `<div style="background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:16px">
   <div class="row between"><span class="b2">Available Cashback</span><span class="b1 semi">${pending?'-':n2(claim)+' USDT'}</span></div>
   ${o.totalClaimed?'<div class="row between" style="color:var(--text-secondary);margin-top:-8px"><span class="b2">Total Claimed</span><span class="b2 tnum">240.00 USDT</span></div>':''}
-  ${o.updated?`<span style="font-size:12px;color:var(--text-secondary);margin-top:-10px">Last updated ${o.updated}</span>`:''}
   <hr class="divider">
   <div class="col" style="gap:8px">${small('Exchange Cashback',pending?'-':n2(A)+' USDT')}${B>0&&!pending?small('Event Reward',n2(m)+' USDT'):''}
    ${pending?'':`<div style="height:4px;border-radius:4px;background:rgba(187,226,255,.2);overflow:hidden"><div style="height:100%;width:${Math.min(100,claim*10)}%;background:#2453f0;border-radius:4px"></div></div>
@@ -403,7 +398,6 @@ const WALLET_STATES=[
  {id:'edge',label:'소수점 절삭 · 기준 직전',figma:{pc:WALLET_FIG},ab:[9.999,0],note:'Figma 매칭 상태 프레임에만 있음. A=9.999 · B=0 → 9.99, 필요액 0.01'},
  {id:'loading',label:'잔액 로딩 — 스켈레톤',ab:[7,100],note:'Figma 매칭 상태 프레임 하단 메모(REQ-145) — 화면 프레임 없음'},
  {id:'error',label:'잔액 조회 실패 — 오류 · 재시도',ab:[7,100],note:'Figma 매칭 상태 프레임 하단 메모(REQ-149) — 화면 프레임 없음'},
- {id:'delayed',label:'파트너 지연 — 마지막 확정 금액 · Last updated',ab:[7,100],note:'V2.2 home/LKD#delayed · REQ-277'},
  {id:'reviewed',label:'리뷰 작성 후 — 리뷰 유도 없음',figma:{pc:'25867:1348199',mo:'25867:1348944'},ab:[7,100],note:'[기존 MAX-7] MAX-1216 UID detail / Review already written (Plain). V2.2 home/LKD#reviewed · REQ-278'},
  {id:'pending',label:'연동 시도중',ab:[0,null],note:'V2.2 home/LKD#pending · REQ-098'},
  {id:'totalClaimed',label:'Total Claimed 행',figma:{pc:'26047:1349155',mo:'8582:157676'},ab:[7,100],note:'[기존 MAX-7] UID 상세 잔액 카드의 Total Claimed 행(Web 26047:1349155 · mAPP 8582:157676). V2.2 home/LKD#totalClaimed · REQ-281 · G-053 확정: 유지(테더맥스 경유 출금 누계)'},
@@ -416,7 +410,7 @@ R.screen({id:'home.wallet',group:'home',title:'DEX 지갑 상세',route:'/dex/wa
   const head=`<div style="background:#fff;border-radius:8px;padding:12px 16px" class="row between">
    <div class="row" style="gap:8px">${C.dex('Lighter',30)}<div class="col" style="gap:0"><span class="b2 semi">Lighter</span><span class="row" style="gap:4px"><span style="font-size:12px;line-height:12px;color:var(--text-secondary)">${short(WAL.lighter)}</span><button class="icon-btn" style="padding:2px">${hic('copy',16)}</button></span></div></div>
    ${pending?hChip('연동 시도중이에요','prog'):hChip(T('Active','연동 완료'),'done')}</div>`;
-  const left=`${head}${walletBalance(A0,B0,{loading:st==='loading',error:st==='error',pending,totalClaimed:st==='totalClaimed',updated:st==='delayed'?clk('2026-10-22T00:00:00Z'):null})}${earningTimeline()}
+  const left=`${head}${walletBalance(A0,B0,{loading:st==='loading',error:st==='error',pending,totalClaimed:st==='totalClaimed'})}${earningTimeline()}
    ${st==='totalClaimed'?C.note('Total Claimed = 테더맥스를 통해 지급된 누계(G-053). 디자인 없음 — 잔액 카드 작은 행으로 둠'):''}
    ${st==='subaccounts'?C.note('Lighter 하위 계정(account_index)은 나열하지 않음 — G-178'):''}
    ${st==='normal'?C.note('테더맥스를 지급자로 씀 — paid by {DEX} · withdraw on {DEX} 없음(REQ-279). 요율은 실제 레코드 값, 트레이더 0% 미표시(REQ-280). 마일스톤 진행바 없음(REQ-278) — 막대는 계정별 지급 기준(10 USDT)까지의 진행률. Figma 헤더 칩 <code>Active</code>는 KO에서 REQ-273 라벨 <code>연동 완료</code>. 리뷰 버튼 Figma 자리표시 <code>Label</code> → V2.2 문구'):''}

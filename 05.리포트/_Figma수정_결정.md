@@ -167,3 +167,15 @@
 | 반영 지연 · 오프보딩 | `Data delayed` 칩 없음(거래소 API 응답을 바로 받음). `Inactive` 칩 없음 — 오프보딩 계정은 **이슈 처리**(빨간 점, 누르면 `There is a problem with this UID.` 모달) |
 | 행 배너·모달 문구의 계정 표기 | 행 하나는 CEX 또는 DEX 하나이므로 용어 규칙대로 분기: CEX 행 = 기존 `UID` 문구 그대로, DEX 행 = `UID` 자리를 `Wallet`/`wallet`로(문구표에서 확정) |
 | 캐시백 0원 안내 | 없음 — CEX와 같이 `0.00 USDT`만 표시. 지갑 상세 0원 배너(G-110 문구)·홈 0원 칩 모두 두지 않음 |
+| 캐시백 요약 반영 지연 | `Delayed` 상태·`Last updated` 지연 표시 없음(반영 지연 표시 없음 원칙과 같음) |
+| 확인 중 · 소유 확인 중 행 표시 | 칩이 아니라 기존 디자인: 확인 중 = 분홍 점 + 시계 아이콘, 소유 확인 중 = 파란 점 + 시계 + `Ownership verification in progress · {경과 시간}`(9401:87675 계열). DEX 상세 오퍼 박스 비활성 `Trying to link` 버튼(Q6)은 그대로 |
+
+## 남은 결정 (2026-11-27 11차)
+
+| 항목 | 결정 |
+|---|---|
+| 미정 항목 결정안 98건(`05.리포트/미정항목_결정안.md`) | 결정안대로 채택 |
+| 맥스보드·리그 약관 `based on UTC` | 기존 약관 원문 유지 |
+| Cashback Basics 소제목 `Withdraw cashback and rewards` | `Claim cashback and rewards`(요청·동작 = Claim) |
+| 가입·로그인 이메일 인증 | 실서비스 모달: `Email Verification` · `We've sent a code to {email}` · 6칸 코드 · `Paste` · `Verify` · `Resend code in 01:00` |
+| 허브 `YOUR CASHBACK` 패널 · 지갑 상세 금액 카드의 송금 완료 누계 라벨 | `Total Claimed`(허브 패널은 `Total claimed`) 유지 — G-053 |
